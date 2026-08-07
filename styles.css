@@ -1,0 +1,897 @@
+/* ============================================================
+   THE SEILER GROUP — RAYMOND JAMES
+   Pixel-accurate match to reference screenshot
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Raleway:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+body {
+    background: #0b0b0b;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+    font-family: 'Montserrat', sans-serif;
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 100px;
+    background: #000000;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease, border-bottom 0.3s ease, height 0.3s ease;
+}
+
+.site-header.scrolled {
+    height: 84px;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile Hamburger Toggle Button */
+.mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 600;
+}
+
+.mobile-nav-toggle span {
+    width: 100%;
+    height: 2.5px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Mobile Drawer Overlay */
+.mobile-drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.mobile-drawer-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Mobile Drawer */
+.mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 300px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #0d0e12;
+    z-index: 999;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.8);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-drawer.active {
+    left: 0;
+}
+
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drawer-logo {
+    height: 48px;
+    width: auto;
+}
+
+.drawer-close {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 32px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.drawer-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    padding: 10px 0;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.drawer-link:hover,
+.drawer-link.active {
+    color: #ffffff;
+    padding-left: 6px;
+}
+
+.drawer-link.btn-highlight {
+    margin-top: 12px;
+    text-align: center;
+    border: 1px solid #7888e8;
+    background: rgba(120, 136, 232, 0.15);
+    color: #9aaaf4;
+    padding: 12px 20px;
+    border-radius: 4px;
+}
+
+/* Left & Right nav */
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex: 1;
+}
+
+.nav-right {
+    justify-content: flex-end;
+}
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+    transition: color .2s, opacity .2s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #fff;
+    opacity: 1;
+}
+
+/* Center logo */
+.header-logo {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-anchor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Official logo image in header */
+.header-logo-img {
+    display: block;
+    height: 100px;
+    width: auto;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7));
+}
+
+/* ============================================================
+   SPLIT HERO
+   ============================================================ */
+.split-hero {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 100px);
+    min-height: 550px;
+    overflow: hidden;
+}
+
+/* ── Hero Panels ── */
+/* ── Hero Panels ── */
+.hero-panel {
+    position: relative;
+    flex: 0 0 50%;
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: 52px;
+    cursor: pointer;
+    transition: flex .6s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Background image layer */
+.panel-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    transition: transform .7s ease;
+}
+
+.hero-panel:hover .panel-bg {
+    transform: scale(1.04);
+}
+
+.bg-athletes {
+    background-image: url('assets/athlete_hero.png');
+    background-position: center 32%;
+    background-size: cover;
+}
+
+.bg-titans {
+    background-image: url('assets/titans_hero.png');
+    background-position: center top;
+    background-size: cover;
+}
+
+/* ── COLOUR TINT LAYERS ───────────────────────────────────────── */
+.panel-tint {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+/* ATHLETES — minimal tint overlay for maximum jersey number visibility */
+.tint-athletes {
+    background: rgba(10, 18, 55, 0.12);
+    mix-blend-mode: multiply;
+}
+
+/* TITANS — warm amber-sienna tint */
+.tint-titans {
+    background: rgba(60, 25, 4, 0.50);
+    mix-blend-mode: multiply;
+}
+
+/* Vignette layer (z-index:2) */
+.panel-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+/* ATHLETES — clear top-middle gradient so jersey number shines bright */
+.ov-athletes {
+    background: linear-gradient(to bottom,
+            rgba(5, 10, 35, 0.0) 0%,
+            rgba(5, 10, 35, 0.05) 50%,
+            rgba(5, 10, 35, 0.65) 82%,
+            rgba(3, 6, 22, 0.94) 100%);
+}
+
+/* TITANS — warm dark amber gradient: clear top, dark bottom */
+.ov-titans {
+    background: linear-gradient(to bottom,
+            rgba(20, 8, 2, 0.05) 0%,
+            rgba(20, 8, 2, 0.20) 40%,
+            rgba(20, 8, 2, 0.60) 75%,
+            rgba(8, 3, 0, 0.92) 100%);
+}
+
+/* Panel content */
+.panel-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 48px;
+    width: 100%;
+}
+
+/* LEFT panel — text pushed RIGHT (toward center) */
+.content-left {
+    text-align: right;
+}
+
+/* RIGHT panel — text pushed LEFT (toward center) */
+.content-right {
+    text-align: left;
+    padding-left: 44px;
+}
+
+/* Hero headlines — base */
+.hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(40px, 3.8vw, 54px);
+    font-weight: 800;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.70));
+}
+
+.title-athletes,
+.title-titans {
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    filter: none;
+}
+
+/* Bright, vibrant per-line gradients matching reference screenshot */
+.line-ath {
+    display: inline-block;
+    background: linear-gradient(90deg, #8fa4ea 0%, #8fa4ea 42%, #ebd7b9 68%, #ebd7b9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.line-tit {
+    display: inline-block;
+    background: linear-gradient(90deg, #ebd7b9 0%, #ebd7b9 42%, #ffffff 68%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Subtitles */
+.hero-sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(21px, 1.8vw, 26px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+    margin-bottom: 14px;
+}
+
+/* Blue-indigo subtitle */
+.sub-athletes {
+    color: #9aaaf4;
+    text-shadow: 0 0 16px rgba(142, 164, 234, 0.50);
+}
+
+/* Gold-amber subtitle */
+.sub-titans {
+    color: #f5a623;
+    text-shadow: 0 0 16px rgba(245, 166, 35, 0.50);
+}
+
+/* Description paragraphs — compact & smaller */
+.hero-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #b8c4d8;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    max-width: 360px;
+    margin-left: auto;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+}
+
+.content-right .hero-desc {
+    max-width: 360px;
+    margin-left: 0;
+}
+
+/* CTA Buttons — compact */
+.hero-btn {
+    display: inline-block;
+    padding: 10px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+/* Athletes button — blue periwinkle border + text matching headline */
+.btn-athletes {
+    border: 1.5px solid #7888e8;
+    background: rgba(5, 9, 22, 0.70);
+    color: #9aaaf4;
+}
+
+.btn-athletes:hover {
+    background: rgba(120, 136, 232, 0.25);
+    border-color: #b8c8ff;
+    color: #b8c8ff;
+}
+
+/* Titans button — amber/gold text + amber border + dark box */
+.btn-titans {
+    border: 1.5px solid #d4940c;
+    background: rgba(18, 12, 4, 0.70);
+    color: #d4940c;
+}
+
+.btn-titans:hover {
+    background: rgba(212, 148, 12, 0.30);
+    border-color: #f0b030;
+    color: #f0b030;
+}
+
+/* ── Center Shield Badge ── */
+.center-badge {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
+    pointer-events: none;
+}
+
+.shield-svg {
+    width: 95px;
+    height: 90px;
+    display: block;
+    mix-blend-mode: normal;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.85));
+}
+
+/* ============================================================
+   CHAMPION STRIP
+   ============================================================ */
+.champion-strip {
+    background: #0d0e10;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 48px 60px;
+    max-width: 100%;
+}
+
+/* Brand left (centered logo & social icons stack) */
+.champ-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex: 0 0 auto;
+    min-width: 190px;
+}
+
+/* Official logo image in champion strip */
+.champ-logo-img {
+    display: block;
+    height: 52px;
+    width: auto;
+}
+
+.champ-socials {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: center;
+}
+
+.champ-socials a {
+    color: #888888;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.champ-socials a:hover {
+    color: #ffffff;
+}
+
+/* Center quote */
+.champ-quote {
+    flex: 1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 740px;
+    margin: 0 auto;
+}
+
+/* Right CTA */
+.champ-cta {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 12px;
+    min-width: 170px;
+    text-align: right;
+}
+
+.champ-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+/* LEARN MORE underlined text link matching exact reference image */
+.champ-link {
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    border: none;
+    background: transparent;
+    padding: 0;
+    transition: color .2s;
+}
+
+.champ-link:hover {
+    color: #8ea4ea;
+    background: transparent;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+    background: #000000;
+    padding: 55px 60px 45px;
+    text-align: center;
+}
+
+.footer-addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+}
+
+.addr-row {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.75;
+}
+
+.addr-row p {
+    margin: 0;
+}
+
+.addr-row strong {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.addr-row .slash {
+    color: #666666;
+    font-weight: 300;
+    margin: 0 4px;
+}
+
+.addr-row a {
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .2s, opacity .2s;
+}
+
+.addr-row a:hover {
+    color: #ffffff;
+    opacity: 0.85;
+}
+
+.footer-legal {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.footer-legal p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px;
+    color: #50595f;
+    line-height: 1.72;
+}
+
+.footer-copy {
+    margin-top: 4px;
+}
+
+.footer-legal a {
+    color: #50595f;
+    text-decoration: underline;
+    transition: color .2s;
+}
+
+.footer-legal a:hover {
+    color: #a8b2bc;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (DESKTOP, TABLET, MOBILE, ALL BROWSERS)
+   ============================================================ */
+
+/* ── Large Tablet / Small Desktop Breakpoint (max-width: 1100px) ── */
+@media (max-width: 1100px) {
+    .site-header {
+        padding: 0 28px;
+    }
+
+    .nav-left,
+    .nav-right {
+        gap: 16px;
+    }
+
+    .nav-link {
+        font-size: 9.5px;
+        letter-spacing: 1.2px;
+    }
+
+    .panel-content {
+        padding: 0 32px;
+    }
+
+    .content-right {
+        padding-left: 28px;
+    }
+}
+
+/* ── Tablet & Mobile Breakpoint (max-width: 900px) ── */
+@media (max-width: 900px) {
+    .site-header {
+        position: relative;
+        flex-direction: row;
+        height: 75px;
+        padding: 0 20px;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(10px);
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .nav-left,
+    .nav-right {
+        display: none;
+    }
+
+    .mobile-nav-toggle {
+        display: flex;
+        z-index: 550;
+    }
+
+    .header-logo {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: auto;
+    }
+
+    .header-logo-img {
+        height: 52px;
+    }
+
+    .split-hero {
+        flex-direction: column;
+        height: auto;
+        min-height: unset;
+    }
+
+    .hero-panel {
+        width: 100%;
+        flex: unset;
+        min-height: 480px;
+        padding-top: 60px;
+        padding-bottom: 48px;
+        justify-content: center;
+    }
+
+    .panel-content {
+        padding: 0 24px;
+    }
+
+    .content-left,
+    .content-right {
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .hero-title {
+        font-size: clamp(30px, 7vw, 42px);
+        margin-bottom: 14px;
+    }
+
+    .hero-sub {
+        font-size: clamp(17px, 4vw, 22px);
+        letter-spacing: 2px;
+        margin-top: 8px;
+        margin-bottom: 12px;
+    }
+
+    .hero-desc {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 12.5px;
+        line-height: 1.6;
+    }
+
+    .content-right .hero-desc {
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-btn {
+        padding: 12px 34px;
+        font-size: 11px;
+    }
+
+    .center-badge {
+        display: none;
+    }
+
+    .champion-strip {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 24px;
+        gap: 32px;
+    }
+
+    .champ-cta {
+        align-items: center;
+        text-align: center;
+        min-width: unset;
+    }
+
+    .champ-heading {
+        text-align: center;
+        font-size: 17px;
+    }
+
+    .champ-socials {
+        justify-content: center;
+    }
+
+    .footer-addresses {
+        gap: 32px;
+        padding: 0 12px;
+    }
+
+    .addr-row {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .site-footer {
+        padding: 44px 20px 36px;
+    }
+}
+
+/* ── Mobile Phone Breakpoint (max-width: 480px) ── */
+@media (max-width: 480px) {
+    .site-header {
+        padding: 16px 14px 12px;
+    }
+
+    .header-logo-img {
+        height: 75px;
+    }
+
+    .nav-left,
+    .nav-right {
+        gap: 8px 12px;
+    }
+
+    .nav-link {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    .hero-panel {
+        min-height: 420px;
+        padding-bottom: 36px;
+    }
+
+    .hero-title {
+        font-size: clamp(26px, 8vw, 34px);
+    }
+
+    .hero-sub {
+        font-size: clamp(15px, 4.5vw, 19px);
+        letter-spacing: 1.5px;
+    }
+
+    .hero-desc {
+        font-size: 11.5px;
+    }
+
+    .champion-strip {
+        padding: 32px 16px;
+    }
+
+    .champ-quote {
+        font-size: 14.5px;
+        line-height: 1.65;
+    }
+
+    .addr-row {
+        font-size: 12px;
+    }
+}

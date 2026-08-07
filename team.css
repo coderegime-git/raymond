@@ -1,0 +1,553 @@
+/* ============================================================
+   TEAM PAGE — team.css
+   ============================================================ */
+
+/* ── Team Header (solid dark, not transparent) ── */
+.team-header {
+    position: relative !important;
+    background: #0b0b0b !important;
+    height: 80px !important;
+}
+
+/* ── Team Hero ── */
+.team-hero {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background: #000000;
+}
+.team-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('assets/team/team-hero.png');
+    background-size: cover;
+    background-position: center center;
+    z-index: 0;
+}
+.team-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.85) 30%,
+        rgba(0, 0, 0, 0.20) 50%,
+        rgba(0, 0, 0, 0.0) 75%
+    );
+    z-index: 1;
+}
+.team-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 20px 48px;
+}
+.team-hero-text { max-width: 440px; }
+
+.team-hero-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1.0;
+    color: #ffffff;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+.gold-text { color: #ebd7b9; }
+
+.team-hero-desc {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #c4ceea;
+    line-height: 1.65;
+    max-width: 410px;
+}
+
+/* ── Team Grid Section ── */
+.team-section {
+    background: #060708;
+    padding: 36px 40px 50px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: 1280px;
+    margin: 0 auto 32px;
+}
+
+/* ── Team Cards ── */
+.team-card {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: #090a0d;
+    border: 1px solid #9c783e;
+    transition: all .25s ease;
+}
+.team-card:hover {
+    border-color: #ebd7b9;
+    box-shadow: 0 0 18px rgba(235, 215, 185, 0.25);
+    transform: translateY(-2px);
+}
+
+.card-img-wrap {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1.15;
+    background: #0d0e12;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+    transition: transform .45s ease;
+}
+.team-card:hover .card-img-wrap img { transform: scale(1.03); }
+
+.card-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        transparent 55%,
+        rgba(0,0,0,0.85) 100%
+    );
+    z-index: 1;
+}
+
+.card-info {
+    padding: 12px 10px 14px;
+    background: #0a0b0e;
+    border-top: 1px solid rgba(156, 120, 62, 0.3);
+    min-height: 85px;
+    text-align: center;
+}
+.card-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #ebd7b9;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    line-height: 1.25;
+}
+.card-certs {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 9.5px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+    line-height: 1.35;
+    min-height: 14px;
+}
+.card-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 9.5px;
+    color: #a8b4c2;
+    line-height: 1.4;
+}
+
+/* ── Meet Your Team button ── */
+.meet-btn-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 8px;
+}
+.meet-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #ebd7b9;
+    background: transparent;
+    border: 1px solid #9c783e;
+    padding: 12px 40px;
+    cursor: pointer;
+    transition: all .3s;
+}
+.meet-btn:hover {
+    background: #9c783e;
+    color: #000000;
+}
+
+/* ============================================================
+   BIO MODAL
+   ======================/* ============================================================
+   BIO MODAL
+   ============================================================ */
+.bio-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.88);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    backdrop-filter: blur(5px);
+}
+.bio-overlay.active { display: flex; }
+
+.bio-modal {
+    position: relative;
+    background: #000000;
+    border: 1.5px solid #d4940c;
+    border-radius: 2px;
+    width: 94vw;
+    max-width: 1000px;
+    max-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-shadow: 0 0 50px rgba(0,0,0,0.95), 0 20px 60px rgba(212,148,12,0.25);
+    animation: modalIn .25s ease;
+}
+@keyframes modalIn {
+    from { opacity:0; transform: scale(0.96) translateY(10px); }
+    to   { opacity:1; transform: scale(1) translateY(0); }
+}
+
+/* Close button */
+.bio-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 20;
+    line-height: 1;
+    transition: color .2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.bio-close:hover { color: #d4940c; }
+
+/* Inner layout */
+.bio-inner {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+}
+
+/* LEFT column */
+.bio-left {
+    flex: 0 0 295px;
+    width: 295px;
+    background: #060708;
+    border-right: 1.5px solid #d4940c;
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.bio-logo {
+    width: 145px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.bio-photo-wrap {
+    width: 100%;
+    height: 215px;
+    flex-shrink: 0;
+    border-bottom: 1.5px solid #d4940c;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.bio-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+.bio-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    color: #d4940c;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.bio-certs {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 3px;
+    flex-shrink: 0;
+}
+
+.bio-role {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10.5px;
+    color: #a0acbc;
+    line-height: 1.35;
+    margin-bottom: 10px;
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+.bio-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.bio-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10.5px;
+    color: #ffffff;
+    line-height: 1.35;
+}
+
+.bio-contact-list li i {
+    color: #d4940c;
+    font-size: 13px;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 15px;
+}
+
+.bio-contact-list a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.bio-contact-list a:hover { color: #d4940c; }
+
+/* RIGHT column */
+.bio-right {
+    flex: 1;
+    background: #000000;
+    padding: 20px 28px 20px 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.bio-intro {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #dde4ee;
+    line-height: 1.55;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d4940c;
+}
+
+.bio-section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 800;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: #d4940c;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.bio-paras-wrap {
+    margin-bottom: 10px;
+}
+
+.bio-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11.5px;
+    color: #c8d2df;
+    line-height: 1.55;
+    margin-bottom: 8px;
+}
+
+.bio-des-section {
+    margin-top: 8px;
+    margin-bottom: 10px;
+    border-top: 1px solid #d4940c;
+    padding-top: 10px;
+}
+
+.bio-designations {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 11.5px;
+    color: #ffffff;
+    line-height: 1.5;
+    margin-bottom: 3px;
+}
+
+.des-bullet {
+    color: #d4940c;
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+.des-item {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.bio-des-note {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    font-style: italic;
+    color: #788494;
+    margin-top: 4px;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+/* Contact button */
+.bio-contact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 22px;
+    background: transparent;
+    border: 1.5px solid #d4940c;
+    color: #d4940c;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .25s ease;
+    width: fit-content;
+    margin-top: auto;
+}
+
+.bio-contact-btn:hover {
+    background: #d4940c;
+    color: #000000;
+}
+
+.bio-contact-btn i {
+    color: #d4940c;
+    font-size: 14px;
+    transition: color .25s ease;
+}
+
+.bio-contact-btn:hover i {
+    color: #000000;
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN (TEAM PAGE)
+   ============================================================ */
+
+@media (max-width: 1200px) {
+    .team-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+}
+
+@media (max-width: 900px) {
+    .team-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+    }
+    .team-hero-title {
+        font-size: clamp(28px, 6vw, 36px);
+    }
+    .team-hero-content {
+        padding: 36px 24px;
+    }
+    .team-section {
+        padding: 32px 20px 44px;
+    }
+}
+
+@media (max-width: 650px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .card-info {
+        padding: 10px 8px 12px;
+        min-height: 80px;
+    }
+    .card-name {
+        font-size: 10px;
+    }
+    .card-certs, .card-title {
+        font-size: 9px;
+    }
+    .bio-inner {
+        flex-direction: column;
+    }
+    .bio-left {
+        width: 100%;
+        flex: unset;
+        border-right: none;
+        border-bottom: 1.5px solid #d4940c;
+        align-items: center;
+        text-align: center;
+    }
+    .bio-photo-wrap {
+        height: 180px;
+        width: 180px;
+        border-radius: 50%;
+        margin-bottom: 14px;
+    }
+    .bio-modal {
+        width: 96vw;
+        max-height: 94vh;
+    }
+    .bio-right {
+        padding: 18px 16px;
+    }
+}
+
+@media (max-width: 440px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    .team-hero-title {
+        font-size: 26px;
+    }
+    .team-hero-desc {
+        font-size: 11.5px;
+    }
+    .meet-btn {
+        padding: 10px 24px;
+        font-size: 10px;
+    }
+}
