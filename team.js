@@ -5,21 +5,21 @@
 
 const MEMBERS = {
   'thomas-seiler': {
-    name: 'THOMAS A. SEILER',
+    name: 'TOM SEILER',
     certs: 'WMS™',
     role: 'Managing Director\nSenior Vice President, Investments',
-    phone: '(215) 860-7823',
+    phone: '(212) 350-0100',
     email: 'tom.seiler@raymondjames.com',
-    address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
+    address: 'The Seiler Group\nRaymond James & Associates\n420 Lexington Avenue, New York, NY 10170',
     photo: 'assets/team/thomas.png',
-    intro: 'As a founding member of The Seiler Group of Raymond James, Thomas Seiler has been dedicated to meeting the sophisticated needs of today\'s high-net-worth individuals with a specialized focus on professional athletes and business titans. He began his career in 1990 with Merrill Lynch, concentrating on high-net-worth clients.',
+    intro: 'As a founding member of The Seiler Group of Raymond James, Thomas Seiler<br>has been dedicated to meeting the sophisticated needs of today\'s high-net-<br>worth individuals with a specialized focus on professional athletes and business<br>titans. He began his career in 1990 with Merrill Lynch, concentrating on<br>high-net-worth clients.',
     bio: [
-      'Tom Seiler is a Managing Director, Senior Vice President of Investments and founder of The Seiler Group at Raymond James & Associates. Since establishing the firm in 2001, Tom has led a dedicated team of professionals committed to delivering customized wealth management strategies to individuals, families, and businesses.',
-      'With more than 30 years of experience in the financial services industry, Tom focuses on comprehensive financial planning, investment management, and wealth preservation strategies. He takes pride in building long-term relationships and delivering exceptional service with integrity and transparency.',
-      'Tom earned his Bachelor of Science degree in Finance from Lehigh University. He is passionate about giving back to the community and actively supports several charitable organizations.'
+      'Tom Seiler is a Managing Director, Senior Vice President of Investments and founder<br>of The Seiler Group at Raymond James & Associates. Since establishing the firm in<br>2001, Tom has led a dedicated team of professionals committed to delivering<br>customized wealth management strategies to individuals, families, and businesses.',
+      'With more than 30 years of experience in the financial services industry, Tom focuses<br>on comprehensive financial planning, investment management, and wealth<br>preservation strategies. He takes pride in building long-term relationships and<br>delivering exceptional service with integrity and transparency.',
+      'Tom earned his Bachelor of Science degree in Finance from Lehigh University.<br>He is passionate about giving back to the community and actively supports<br>several charitable organizations.'
     ],
     designations: ['WMS™', 'CMFA®', 'CRPC™', 'CFP®', 'CIMA®', 'AIF®', 'CPFA'],
-    desNote: 'Visit raymondjames.com/sm/disclosures for information on Raymond James ratings and designations.'
+    desNote: 'Visit raymondjames.com/sm/disclosures for information on Raymond James<br>ratings and designations.'
   },
   'patrick-seiler': {
     name: 'PATRICK M. SEILER',
@@ -212,14 +212,16 @@ function openModal(memberId) {
       <div class="bio-photo-wrap">
         <img src="${m.photo}" alt="${m.name}" class="bio-photo">
       </div>
-      <h2 class="bio-name">${m.name}</h2>
-      ${certsHtml}
-      <p class="bio-role">${roleLines}</p>
-      <ul class="bio-contact-list">
-        <li><i class="fas fa-phone"></i> <span>${m.phone}</span></li>
-        <li><i class="far fa-envelope"></i> <a href="mailto:${m.email}">${m.email}</a></li>
-        <li><i class="fas fa-map-marker-alt"></i> <span>${addressLines}</span></li>
-      </ul>
+      <div class="bio-left-details">
+        <h2 class="bio-name">${m.name}</h2>
+        ${certsHtml}
+        <p class="bio-role">${roleLines}</p>
+        <ul class="bio-contact-list">
+          <li><i class="fas fa-phone"></i> <span>${m.phone}</span></li>
+          <li><i class="far fa-envelope"></i> <a href="mailto:${m.email}">${m.email}</a></li>
+          <li><i class="fas fa-map-marker-alt"></i> <span>${addressLines}</span></li>
+        </ul>
+      </div>
     </div>
     <div class="bio-right">
       <p class="bio-intro">${m.intro}</p>
