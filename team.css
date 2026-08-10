@@ -707,6 +707,27 @@
 }
 
 @media (max-width: 650px) {
+    .champion-strip {
+        flex-direction: column;
+        text-align: center;
+        padding: 36px 20px;
+        gap: 28px;
+    }
+
+    .champ-quote {
+        font-size: 13.5px;
+        line-height: 1.65;
+        max-width: 340px;
+        margin: 0 auto;
+        padding: 0 10px;
+        text-anchor: middle;
+        text-align: center;
+    }
+
+    .champ-quote br {
+        display: none;
+    }
+
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
@@ -726,6 +747,16 @@
         font-size: 9px;
     }
 
+    /* Modal Mobile Layout */
+    .bio-overlay {
+        padding: 10px;
+    }
+
+    .bio-modal {
+        width: 96vw;
+        max-height: 94vh;
+    }
+
     .bio-inner {
         flex-direction: column;
     }
@@ -735,24 +766,100 @@
         flex: unset;
         border-right: none;
         border-bottom: 1.5px solid #d4940c;
+        border-image: none;
+        padding: 20px 16px;
         align-items: center;
         text-align: center;
     }
 
-    .bio-photo-wrap {
-        height: 180px;
-        width: 180px;
-        border-radius: 50%;
-        margin-bottom: 14px;
+    .bio-logo {
+        width: 130px;
+        margin-bottom: 12px;
     }
 
-    .bio-modal {
-        width: 96vw;
-        max-height: 94vh;
+    .bio-photo-wrap {
+        height: 160px;
+        width: 160px;
+        border-radius: 50%;
+        margin: 0 auto 14px;
+        border: 2px solid #d4940c;
+    }
+
+    .bio-left-details {
+        padding: 0;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    .bio-contact-list {
+        align-items: center;
+        margin-top: 14px;
+    }
+
+    .bio-contact-list li {
+        justify-content: center;
+        text-align: center;
     }
 
     .bio-right {
-        padding: 18px 16px;
+        flex: unset;
+        width: 100%;
+        padding: 20px 18px 24px;
+    }
+
+    .bio-contact-btn {
+        align-self: center;
+        margin: 16px auto 0;
+        width: 100%;
+        max-width: 280px;
+    }
+
+    /* Footer Mobile Addresses Alignment */
+    .footer-addresses {
+        gap: 36px;
+        padding: 0 16px;
+    }
+
+    .addr-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+        font-size: 13px;
+    }
+
+    .addr-row p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 3px;
+        margin: 0;
+        line-height: 1.55;
+    }
+
+    .addr-row strong,
+    .addr-row a {
+        display: block;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .addr-row p .slash {
+        display: none;
+    }
+
+    .addr-row p:first-child .slash:nth-of-type(2) {
+        display: block;
+        color: #777777;
+        font-size: 11px;
+        margin: 2px 0;
+    }
+
+    .addr-row a {
+        margin-top: 2px;
     }
 }
 
@@ -773,5 +880,17 @@
     .meet-btn {
         padding: 10px 24px;
         font-size: 10px;
+    }
+
+    .footer-addresses {
+        gap: 28px;
+    }
+
+    .addr-row {
+        font-size: 12px;
+    }
+
+    .addr-row p {
+        gap: 2px;
     }
 }
