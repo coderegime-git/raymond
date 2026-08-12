@@ -27,30 +27,30 @@
 .team-header .nav-left {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important;
+    justify-content: flex-end !important;
     margin: 0 !important;
-    padding-left: clamp(24px, 10vw, 148px) !important;
-    gap: clamp(14px, 2vw, 28px) !important;
+    padding-right: clamp(16px, 2.5vw, 36px) !important;
+    gap: clamp(14px, 1.8vw, 24px) !important;
     flex: 1 1 0% !important;
 }
 
 .team-header .nav-right {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-end !important;
+    justify-content: flex-start !important;
     margin: 0 !important;
-    padding-right: clamp(24px, 10vw, 148px) !important;
-    gap: clamp(14px, 2vw, 28px) !important;
+    padding-left: clamp(16px, 2.5vw, 36px) !important;
+    gap: clamp(14px, 1.8vw, 24px) !important;
     flex: 1 1 0% !important;
 }
 
 .team-header .header-logo-img {
     display: block !important;
-    height: 140px !important;
+    height: 132px !important;
     width: auto !important;
     max-width: 100% !important;
     object-fit: contain !important;
-    margin-top: 0 !important;
+    margin-top: 26px !important;
     filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.7)) !important;
 }
 
@@ -66,21 +66,22 @@
 
 .champion-strip .champ-quote {
     font-family: 'Open Sans', sans-serif !important;
-    font-size: 14.5px !important;
+    font-size: 11.5px !important;
     font-weight: 400 !important;
-    color: #c8d6e5 !important;
-    line-height: 1.55 !important;
-    max-width: 650px !important;
+    color: #b8c8d8 !important;
+    line-height: 1.5 !important;
+    max-width: 620px !important;
     text-align: center !important;
-    letter-spacing: 0.2px !important;
+    letter-spacing: 0.1px !important;
 }
 
 /* ── Team Hero ── */
 .team-hero {
     position: relative;
     width: 100%;
-    height: 380px;
-    padding-top: 115px;
+    min-height: 620px;
+    padding-top: 130px;
+    padding-bottom: 120px;
     overflow: visible;
     display: flex;
     align-items: flex-start;
@@ -92,7 +93,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 480px;
+    bottom: 0;
     background-image: url('assets/logos/team-hero.png');
     background-size: cover;
     background-position: right 10%;
@@ -105,12 +106,12 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 480px;
+    bottom: 0;
     background: linear-gradient(to right,
-            rgba(0, 0, 0, 0.95) 0%,
-            rgba(0, 0, 0, 0.82) 32%,
-            rgba(0, 0, 0, 0.15) 55%,
-            rgba(0, 0, 0, 0.0) 80%);
+            rgba(0, 0, 0, 0.96) 0%,
+            rgba(0, 0, 0, 0.88) 45%,
+            rgba(0, 0, 0, 0.3) 70%,
+            rgba(0, 0, 0, 0.0) 88%);
     z-index: 1;
     pointer-events: none;
 }
@@ -125,16 +126,16 @@
 }
 
 .team-hero-text {
-    max-width: 440px;
+    max-width: 580px;
 }
 
 .team-hero-title {
     font-family: 'Montserrat', sans-serif;
-    font-size: 40px;
+    font-size: 38px;
     font-weight: 900;
-    line-height: 1.0;
+    line-height: 1.05;
     color: #ffffff;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: -0.5px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
@@ -146,11 +147,62 @@
 
 .team-hero-desc {
     font-family: 'Open Sans', sans-serif;
-    font-size: 12.5px;
+    font-size: 13px;
     font-weight: 400;
     color: #c4ceea;
     line-height: 1.65;
-    max-width: 410px;
+    max-width: 540px;
+    margin-bottom: 0;
+}
+
+.hero-affluent-block {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.affluent-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 2.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.affluent-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    color: #d4940c;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.affluent-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
+    line-height: 1.65;
+    color: #b8c8d8;
+    margin-bottom: 10px;
+}
+
+.affluent-text.intro {
+    font-style: italic;
+    color: #e8f0f8;
+    font-weight: 500;
+}
+
+.affluent-text.highlight {
+    background: rgba(212, 148, 12, 0.08);
+    border-left: 3.5px solid #d4940c;
+    padding: 12px 16px;
+    color: #e0ecf8;
+    margin-top: 12px;
+    margin-bottom: 0;
+    border-radius: 0 4px 4px 0;
 }
 
 /* ── Team Grid Section (Overlapping Hero) ── */
@@ -234,7 +286,7 @@
 .card-info {
     position: relative;
     z-index: 2;
-    padding: 6px 4px 10px;
+    padding: 10px 6px 14px;
     background: transparent;
     border-top: none;
     text-align: center;
@@ -247,31 +299,31 @@
 
 .card-name {
     font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
+    font-size: 13.5px;
     font-weight: 800;
     letter-spacing: 0.6px;
     color: #d4940c;
     text-transform: uppercase;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     line-height: 1.2;
 }
 
 .card-certs {
     font-family: 'Open Sans', sans-serif;
-    font-size: 9.5px;
-    font-weight: 500;
-    color: #d0dae5;
-    margin-bottom: 3px;
-    line-height: 1.3;
-    min-height: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 4px;
+    line-height: 1.35;
+    min-height: 14px;
 }
 
 .card-title {
     font-family: 'Open Sans', sans-serif;
-    font-size: 9.5px;
-    font-weight: 400;
-    color: #96a5b8;
-    line-height: 1.3;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #d4e2f0;
+    line-height: 1.35;
 }
 
 /* ── Meet Your Team button ── */
@@ -299,6 +351,11 @@
     background: #d4940c;
     color: #000000;
 }
+
+/* ============================================================
+   IDEALLY SUITED SECTION
+   ============================================================ */
+
 
 /* ============================================================
    BIO MODAL
@@ -792,39 +849,96 @@ html.modal-open {
         gap: 14px;
     }
 
-    .team-hero-title {
-        font-size: clamp(28px, 6vw, 36px);
+    .team-hero {
+        height: auto;
+        min-height: auto;
+        padding-top: 100px;
+        padding-bottom: 40px;
+    }
+
+    .team-hero-bg {
+        height: 100% !important;
+        background-image: url('assets/logos/team-hero.png') !important;
+        background-position: right center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        opacity: 1 !important;
+    }
+
+    .team-hero-overlay {
+        height: 100% !important;
+        background: linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.72) 0%,
+                rgba(0, 0, 0, 0.45) 45%,
+                rgba(0, 0, 0, 0.88) 100%) !important;
     }
 
     .team-hero-content {
-        padding: 36px 24px;
+        padding: 20px 24px;
+    }
+
+    .team-hero-text {
+        max-width: 100%;
+    }
+
+    .affluent-subtitle {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .affluent-title {
+        font-size: 22px;
+        line-height: 1.25;
+        margin-bottom: 12px;
+    }
+
+    .affluent-text {
+        font-size: 12px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+    }
+
+    .affluent-text.highlight {
+        padding: 10px 14px;
+        margin-top: 10px;
     }
 
     .team-section {
-        padding: 32px 20px 44px;
+        margin-top: 0;
+        padding: 24px 20px 44px;
     }
 }
 
 @media (max-width: 650px) {
-    .champion-strip {
-        flex-direction: column;
-        text-align: center;
-        padding: 36px 20px;
-        gap: 28px;
+    .team-hero {
+        padding-top: 90px;
+        padding-bottom: 30px;
     }
 
-    .champ-quote {
-        font-size: 13.5px;
-        line-height: 1.65;
-        max-width: 340px;
-        margin: 0 auto;
-        padding: 0 10px;
-        text-anchor: middle;
-        text-align: center;
+    .team-hero-content {
+        padding: 10px 16px;
     }
 
-    .champ-quote br {
-        display: none;
+    .affluent-subtitle {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+    }
+
+    .affluent-title {
+        font-size: 19px;
+        line-height: 1.25;
+        margin-bottom: 10px;
+    }
+
+    .affluent-text {
+        font-size: 11.5px;
+        line-height: 1.55;
+        margin-bottom: 8px;
+    }
+
+    .affluent-text.highlight {
+        padding: 10px 12px;
+        font-size: 11.5px;
     }
 
     .team-grid {
@@ -838,12 +952,22 @@ html.modal-open {
     }
 
     .card-name {
-        font-size: 10px;
+        font-size: 11.5px;
+        margin-bottom: 3px;
     }
 
-    .card-certs,
+    .card-certs {
+        font-size: 10.5px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.3;
+    }
+
     .card-title {
-        font-size: 9px;
+        font-size: 10px;
+        font-weight: 500;
+        color: #d4e2f0;
+        line-height: 1.3;
     }
 
     /* Modal Mobile Layout */
@@ -974,6 +1098,31 @@ html.modal-open {
 }
 
 @media (max-width: 440px) {
+    .team-hero {
+        padding-top: 85px;
+        padding-bottom: 24px;
+    }
+
+    .team-hero-content {
+        padding: 0 12px;
+    }
+
+    .affluent-subtitle {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .affluent-title {
+        font-size: 16px;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    .affluent-text {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
     .team-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
