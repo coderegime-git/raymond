@@ -11,16 +11,33 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="team.css">
+    <link rel="stylesheet" href="athletes.css">
 </head>
 <body>
 
 <!-- ============================================================
      HEADER
      ============================================================ -->
-<header class="site-header team-header" id="main-header">
+<header class="site-header" id="main-header">
     <nav class="nav-left">
         <a href="index.html" class="nav-link">HOME</a>
-        <a href="#" class="nav-link">ATHLETES</a>
+        
+        <!-- Dropdown for ATHLETES -->
+        <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+            <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                <span>ATHLETES</span>
+                <i class="fas fa-chevron-down nav-caret"></i>
+            </a>
+            <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                    EMPOWERING PRO ATHLETES
+                </a>
+                <a href="javascript:void(0)" class="nav-dropdown-item" id="nav-item-difference">
+                    OUR DIFFERENCE
+                </a>
+            </div>
+        </div>
+
         <a href="#" class="nav-link">BUSINESS TITANS</a>
         <a href="#" class="nav-link">INDIVIDUALS</a>
     </nav>
@@ -35,7 +52,7 @@
         <a href="#" class="nav-link">CONTACT US</a>
         <a href="#" class="nav-link">CLIENT ACCESS</a>
     </nav>
-    <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+    <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
         <span></span>
@@ -43,15 +60,30 @@
 </header>
 
 <!-- Mobile Navigation Drawer Overlay -->
-<div class="mobile-drawer-overlay" id="drawer-overlay"></div>
+<div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
 <div class="mobile-drawer" id="mobile-drawer">
     <div class="drawer-header">
         <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-        <button class="drawer-close" id="drawer-close" aria-label="Close navigation">&times;</button>
+        <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
     </div>
     <nav class="drawer-nav">
         <a href="index.html" class="drawer-link">HOME</a>
-        <a href="#" class="drawer-link">ATHLETES</a>
+        
+        <div class="drawer-accordion-item">
+            <button class="drawer-accordion-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)">
+                <span>ATHLETES</span>
+                <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+            </button>
+            <div class="drawer-accordion-content" id="drawer-athletes-content">
+                <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                    <span>EMPOWERING PRO ATHLETES</span>
+                </a>
+                <a href="athletes.html" class="drawer-sublink" id="mob-difference">
+                    <span>OUR DIFFERENCE</span>
+                </a>
+            </div>
+        </div>
+
         <a href="#" class="drawer-link">BUSINESS TITANS</a>
         <a href="#" class="drawer-link">INDIVIDUALS</a>
         <a href="team.html" class="drawer-link active">YOUR TEAM</a>
@@ -351,6 +383,93 @@
         <p class="footer-copy">© 2025 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a></p>
     </div>
 </footer>
+
+<!-- ============================================================
+     MODALS FOR ATHLETES DROPDOWN
+     ============================================================ -->
+<!-- MODAL: EMPOWERING PRO ATHLETES -->
+<div class="ath-modal-overlay" id="modal-empowering-overlay">
+    <div class="ath-modal-card">
+        <button class="ath-modal-close" id="modal-empowering-close" aria-label="Close modal">&times;</button>
+        <div class="ath-modal-header">
+            <span class="ath-modal-tag">SPECIALIZED ATHLETE PRACTICE</span>
+            <h3 class="ath-modal-title">EMPOWERING PROFESSIONAL ATHLETES</h3>
+        </div>
+        <div class="ath-modal-body">
+            <p class="ath-modal-lead">Professional sports careers bring extraordinary earnings compressed into short windows. We empower athletes across NFL, NBA, MLB, PGA, and international leagues to convert peak career momentum into lasting financial freedom.</p>
+            <div class="ath-pillars-grid">
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4 class="ath-pillar-title">Peak-Earning Cash Flow</h4>
+                    <p class="ath-pillar-desc">Strategic budgeting and escrow management to smooth income spikes across multi-year contracts and off-seasons.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-landmark"></i></div>
+                    <h4 class="ath-pillar-title">NIL & Endorsement Management</h4>
+                    <p class="ath-pillar-desc">Protecting and investing endorsement revenues, licensing income, and personal brand monetization.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-bullseye"></i></div>
+                    <h4 class="ath-pillar-title">Career Transition Strategy</h4>
+                    <p class="ath-pillar-desc">Designing seamless financial paths for life after professional sports, venture investments, and secondary careers.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-shield-cat"></i></div>
+                    <h4 class="ath-pillar-title">Asset Protection & Family Legacy</h4>
+                    <p class="ath-pillar-desc">Fiduciary structures, trusts, and risk mitigation guarding your wealth against unforeseen liabilities.</p>
+                </div>
+            </div>
+        </div>
+        <div class="ath-modal-footer">
+            <a href="team.html" class="ath-modal-btn ath-modal-btn-primary">
+                <span>EXPLORE ATHLETE TEAM</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL: OUR DIFFERENCE -->
+<div class="ath-modal-overlay" id="modal-difference-overlay">
+    <div class="ath-modal-card gold-theme">
+        <button class="ath-modal-close" id="modal-difference-close" aria-label="Close modal">&times;</button>
+        <div class="ath-modal-header">
+            <span class="ath-modal-tag">THE SEILER GROUP ADVANTAGE</span>
+            <h3 class="ath-modal-title">OUR DIFFERENCE IN SPORTS WEALTH</h3>
+        </div>
+        <div class="ath-modal-body">
+            <p class="ath-modal-lead">We aren't typical financial advisors looking at numbers on a screen. With decades of direct experience advising high-net-worth athletes, business titans, and their agents, we understand the real business of sports.</p>
+            <div class="ath-pillars-grid">
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-handshake-angle"></i></div>
+                    <h4 class="ath-pillar-title">Fiduciary Excellence</h4>
+                    <p class="ath-pillar-desc">Always acting strictly in your best interest with complete transparency, independence, and zero conflict of interest.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-user-shield"></i></div>
+                    <h4 class="ath-pillar-title">Agent & Advisor Synergy</h4>
+                    <p class="ath-pillar-desc">We collaborate directly with your sports agents, CPAs, and legal counsel so your financial ecosystem is synchronized.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-building-columns"></i></div>
+                    <h4 class="ath-pillar-title">Raymond James Backing</h4>
+                    <p class="ath-pillar-desc">Combining boutique, personalized family-office service with the institutional strength of Raymond James.</p>
+                </div>
+                <div class="ath-pillar-box">
+                    <div class="ath-pillar-icon"><i class="fas fa-infinity"></i></div>
+                    <h4 class="ath-pillar-title">Multi-Generational Wealth</h4>
+                    <p class="ath-pillar-desc">Preserving wealth beyond your playing years to ensure your family, children, and passions thrive forever.</p>
+                </div>
+            </div>
+        </div>
+        <div class="ath-modal-footer">
+            <a href="team.html" class="ath-modal-btn ath-modal-btn-primary">
+                <span>MEET YOUR ADVISORS</span>
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
 
 <script src="team.js"></script>
 </body>
