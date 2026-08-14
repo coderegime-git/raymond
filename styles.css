@@ -251,7 +251,7 @@ h6 {
 
 .drawer-link:hover,
 .drawer-link.active {
-    color: #ffffff;
+    color: #d89e1b !important;
     padding-left: 6px;
 }
 
@@ -369,34 +369,18 @@ h6 {
     transition: color 0.25s ease, opacity 0.25s ease;
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: #d89e1b;
-    transition: width 0.3s ease, left 0.3s ease;
-    border-radius: 2px;
-    box-shadow: 0 0 8px rgba(216, 158, 27, 0.6);
-}
-
 .nav-link:hover,
 .nav-link.active {
-    color: #ffffff;
+    color: #d89e1b !important;
     opacity: 1;
 }
 
-.nav-link:hover::after,
-.nav-link.active::after {
-    width: 100%;
-    left: 0;
-}
-
-/* Gold highlight for YOUR TEAM nav link */
+/* Gold highlight for active nav links */
+.nav-link[href="business-titans.html"].active,
+.nav-link[href="business-titans.html"]:hover,
 .nav-link[href="team.html"]:hover,
-.nav-link[href="team.html"].active {
+.nav-link[href="team.html"].active,
+.nav-dropdown-trigger.active {
     color: #d89e1b !important;
     opacity: 1 !important;
 }
