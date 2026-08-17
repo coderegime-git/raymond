@@ -1077,43 +1077,91 @@ img[src*="gold_trophy"] {
    ──────────────────────────────────────────── */
 .titans-hero-sec {
     padding-top: 95px !important;
+    background: #000000 !important;
+    border-bottom: 1px solid rgba(125, 80, 27, 0.6) !important;
 }
 
 .titans-hero-grid {
     grid-template-columns: 46% 54% !important;
-    min-height: 540px !important;
+    min-height: 640px !important;
 }
 
 .titans-hero-text {
-    padding: 44px 36px 44px clamp(48px, 6vw, 96px) !important;
+    padding: clamp(48px, 6vh, 80px) clamp(28px, 3vw, 56px) clamp(48px, 6vh, 80px) clamp(48px, 5.5vw, 92px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #000000 !important;
 }
 
 .titans-hero-title {
     font-family: 'Prata', 'Playfair Display', Georgia, serif !important;
-    font-size: clamp(48px, 4.2vw, 58px) !important;
-    line-height: 1.08 !important;
-    margin-bottom: 24px !important;
+    font-size: clamp(56px, 5vw, 76px) !important;
+    line-height: 1.05 !important;
+    margin: 0 0 clamp(24px, 2.8vh, 34px) 0 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.5px !important;
+    font-weight: 400 !important;
+}
+
+.titans-hero-title .emp-gold-heading {
+    color: #c98226 !important;
+    display: block !important;
 }
 
 .titans-hero-paragraphs {
-    max-width: 520px !important;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    max-width: 580px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
 }
 
 .titans-hero-paragraphs p {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 13.8px;
-    font-weight: 300;
-    line-height: 1.62;
-    color: #c2cbd4;
-    margin: 0;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 15.5px !important;
+    font-weight: 300 !important;
+    line-height: 1.72 !important;
+    color: #c2cbd4 !important;
+    letter-spacing: 0.15px !important;
+    margin: 0 !important;
+}
+
+.titans-hero-media {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 520px !important;
+    background: #000000 !important;
+    overflow: hidden !important;
+}
+
+.titans-hero-media img,
+.titans-hero-media .emp-hero-img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
+}
+
+.titans-stat-experience-sec {
+    background: #000000;
+    width: 100%;
+    border-bottom: 1px solid rgba(125, 80, 27, 0.6);
 }
 
 .titans-grid-experience {
     grid-template-columns: 46% 1px 1fr !important;
-    min-height: 380px !important;
+    min-height: 240px !important;
+}
+
+.titans-grid-experience .ath-v-divider {
+    height: 110px !important;
+    background: #7d501b !important;
+    align-self: center !important;
 }
 
 .titans-col-stat {
@@ -1122,107 +1170,224 @@ img[src*="gold_trophy"] {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 48px 48px;
+    padding: 32px clamp(24px, 4vw, 48px);
     background: #000000;
 }
 
 .titans-big-stat {
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
-    font-size: clamp(48px, 4.5vw, 64px);
+    font-size: clamp(52px, 4.6vw, 68px);
     color: #c98226;
     font-weight: 400;
-    line-height: 1;
-    margin-bottom: 12px;
+    line-height: 1.05;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
 }
 
 .titans-stat-label {
     font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
+    font-size: 11.5px;
     font-weight: 700;
     color: #ffffff;
-    letter-spacing: 2.2px;
+    letter-spacing: 2.6px;
     text-transform: uppercase;
     text-align: center;
+    white-space: nowrap;
+}
+
+.titans-col-pen {
+    min-height: 240px !important;
+    position: relative;
+    overflow: hidden;
+    background: #000000;
+}
+
+.titans-col-pen .ath-feature-img,
+.titans-col-pen img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 68% !important;
+    display: block !important;
+}
+
+.titans-capabilities-sec,
+.titans-exclusive-sec {
+    background: #000000;
+    width: 100%;
+    border-bottom: 1px solid rgba(125, 80, 27, 0.6);
 }
 
 .titans-grid-capabilities {
     grid-template-columns: 46% 1px 1fr !important;
-    min-height: 440px !important;
+    min-height: 520px !important;
 }
 
-.titans-capabilities-content,
+.titans-grid-capabilities .ath-v-divider,
+.titans-grid-exclusive .ath-v-divider {
+    height: 220px !important;
+    background: #7d501b !important;
+    align-self: center !important;
+}
+
+.titans-capabilities-content {
+    padding: clamp(48px, 6vh, 80px) clamp(32px, 3.5vw, 60px) clamp(48px, 6vh, 80px) clamp(48px, 5.5vw, 92px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #000000 !important;
+}
+
 .titans-exclusive-content {
-    padding: 44px clamp(36px, 4vw, 56px) !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 44px clamp(32px, 3.5vw, 60px) 44px clamp(48px, 5.5vw, 92px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #000000 !important;
 }
 
 .titans-section-heading {
     font-family: 'Prata', 'Playfair Display', Georgia, serif !important;
-    font-size: clamp(34px, 3.2vw, 42px) !important;
+    font-size: clamp(42px, 3.8vw, 54px) !important;
     color: #c98226 !important;
-    margin-bottom: 20px !important;
+    line-height: 1.1 !important;
+    margin: 0 0 clamp(20px, 2.4vh, 28px) 0 !important;
+    letter-spacing: -0.3px !important;
+    font-weight: 400 !important;
+}
+
+.titans-exclusive-content .titans-section-heading {
+    font-size: clamp(38px, 3.5vw, 48px) !important;
+    margin-bottom: 16px !important;
+}
+
+.titans-exclusive-content .titans-section-heading::after {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 2px;
+    background: #c98226;
+    margin-top: 14px;
 }
 
 .titans-paragraphs {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    max-width: 600px;
+    max-width: 560px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 22px !important;
+}
+
+.titans-exclusive-content .titans-paragraphs {
+    max-width: 500px !important;
+    gap: 20px !important;
 }
 
 .titans-paragraphs .ath-body-text {
-    font-size: 14.5px;
-    line-height: 1.68;
-    color: #c2cbd4;
-    margin: 0;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 300 !important;
+    line-height: 1.7 !important;
+    color: #c2cbd4 !important;
+    letter-spacing: 0.15px !important;
+    margin: 0 !important;
+}
+
+.titans-exclusive-content .titans-paragraphs .ath-body-text {
+    font-size: 14.5px !important;
+    line-height: 1.68 !important;
+}
+
+.titans-col-boardroom {
+    min-height: 520px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+}
+
+.titans-col-portfolio {
+    min-height: 460px !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #000000 !important;
+}
+
+.titans-col-boardroom .ath-feature-img,
+.titans-col-boardroom img,
+.titans-col-portfolio .ath-feature-img,
+.titans-col-portfolio img {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    display: block !important;
 }
 
 .titans-grid-exclusive {
-    grid-template-columns: 54% 1px 46% !important;
-    min-height: 440px !important;
+    grid-template-columns: 46% 1px 54% !important;
+    min-height: 460px !important;
+}
+
+.titans-grid-exclusive .ath-v-divider {
+    height: 190px !important;
+    background: #7d501b !important;
+    align-self: center !important;
 }
 
 /* ── Titans Award Cards ── */
 .titans-award-sec {
-    padding: 32px clamp(24px, 5vw, 60px);
+    padding: 40px clamp(20px, 4vw, 60px);
     width: 100%;
     background: #000000;
+    border-bottom: 1px solid rgba(125, 80, 27, 0.6);
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
 }
 
 .titans-award-card {
-    border: 1px solid rgba(125, 80, 27, 0.7);
+    border: 1px solid #7d501b;
     background: #000000;
-    padding: 32px 48px;
+    padding: 24px clamp(36px, 4.5vw, 72px);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 48px;
-    max-width: 1200px;
+    gap: clamp(44px, 5vw, 68px);
+    max-width: 1140px;
+    width: 100%;
+    min-height: 280px;
     margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .titans-award-media {
-    width: 120px;
-    height: 120px;
+    width: 280px;
+    height: 260px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .titans-award-img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 12px rgba(201, 130, 38, 0.2));
+    display: block;
+    transform: scale(1.85);
+    filter: drop-shadow(0 8px 24px rgba(201, 130, 38, 0.4));
 }
 
 .titans-award-v-divider {
     width: 1px;
-    height: 80px;
+    height: 140px;
     background: #7d501b;
     flex-shrink: 0;
 }
@@ -1235,19 +1400,22 @@ img[src*="gold_trophy"] {
 
 .titans-award-title {
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
-    font-size: 52px;
+    font-size: clamp(56px, 5.2vw, 76px);
     color: #c98226;
     font-weight: 400;
-    line-height: 1.1;
+    line-height: 1.04;
     margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
 }
 
 .titans-award-desc {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: 15px;
     color: #c2cbd4;
     font-weight: 300;
+    line-height: 1.55;
     margin: 0;
+    letter-spacing: 0.15px;
 }
 
 /* ── Empowering Pro Athletes Page Footer ── */
@@ -1818,10 +1986,34 @@ img[src*="gold_trophy"] {
 }
 
 /* ────────────────────────────────────────────
-   BUSINESS TITANS — MOBILE & TABLET
+   BUSINESS TITANS — MOBILE & TABLET RESPONSIVENESS
    ──────────────────────────────────────────── */
 
+@media (max-width: 1024px) {
+    .titans-hero-grid {
+        grid-template-columns: 50% 50% !important;
+    }
+
+    .titans-grid-experience,
+    .titans-grid-capabilities,
+    .titans-grid-exclusive {
+        grid-template-columns: 50% 1px 50% !important;
+    }
+
+    .titans-hero-text,
+    .titans-capabilities-content,
+    .titans-exclusive-content {
+        padding: 36px 28px !important;
+    }
+
+    .titans-award-card {
+        max-width: 95% !important;
+        padding: 24px 32px !important;
+    }
+}
+
 @media (max-width: 768px) {
+    /* Stack all 2-column feature grids vertically on mobile */
     .titans-hero-grid,
     .titans-grid-experience,
     .titans-grid-capabilities,
@@ -1833,12 +2025,79 @@ img[src*="gold_trophy"] {
         width: 100% !important;
     }
 
+    /* Capabilities: Show boardroom image on top, text below */
     .titans-grid-capabilities {
         flex-direction: column-reverse !important;
     }
 
-    .titans-hero-text,
-    .titans-col-stat,
+    /* Hide desktop vertical divider lines on mobile */
+    .titans-grid-experience .ath-v-divider,
+    .titans-grid-capabilities .ath-v-divider,
+    .titans-grid-exclusive .ath-v-divider,
+    .titans-award-v-divider {
+        display: none !important;
+    }
+
+    /* Hero Section Mobile */
+    .titans-hero-sec {
+        padding-top: 105px !important;
+    }
+
+    .titans-hero-text {
+        padding: 32px 20px 28px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .titans-hero-title {
+        font-size: clamp(34px, 8.5vw, 44px) !important;
+        line-height: 1.08 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .titans-hero-paragraphs {
+        max-width: 100% !important;
+        gap: 16px !important;
+    }
+
+    .titans-hero-paragraphs p {
+        font-size: 14.5px !important;
+        line-height: 1.65 !important;
+    }
+
+    .titans-hero-media {
+        width: 100% !important;
+        height: 280px !important;
+        min-height: 280px !important;
+        position: relative !important;
+    }
+
+    .titans-hero-media img {
+        object-fit: cover !important;
+        object-position: center center !important;
+    }
+
+    /* Section 1: 100+ Years Stat on Mobile */
+    .titans-col-stat {
+        padding: 36px 20px 28px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+
+    .titans-big-stat {
+        font-size: clamp(44px, 11vw, 56px) !important;
+        margin-bottom: 8px !important;
+    }
+
+    .titans-stat-label {
+        font-size: 10.5px !important;
+        letter-spacing: 1.8px !important;
+        white-space: normal !important;
+        max-width: 280px !important;
+        line-height: 1.45 !important;
+    }
+
+    /* Content areas for Capabilities and Exclusive Services */
     .titans-capabilities-content,
     .titans-exclusive-content {
         padding: 36px 20px 32px !important;
@@ -1846,53 +2105,112 @@ img[src*="gold_trophy"] {
         box-sizing: border-box !important;
     }
 
-    .titans-hero-title {
-        font-size: clamp(34px, 8vw, 44px) !important;
-    }
-
-    .titans-big-stat {
-        font-size: clamp(40px, 10vw, 54px) !important;
-    }
-
     .titans-section-heading {
         font-size: clamp(28px, 7vw, 36px) !important;
+        line-height: 1.15 !important;
         margin-bottom: 14px !important;
     }
 
+    .titans-paragraphs {
+        max-width: 100% !important;
+        gap: 16px !important;
+    }
+
+    .titans-paragraphs .ath-body-text {
+        font-size: 14px !important;
+        line-height: 1.65 !important;
+    }
+
+    /* Image Columns on Mobile */
+    .titans-col-pen {
+        width: 100% !important;
+        height: 240px !important;
+        min-height: 240px !important;
+        position: relative !important;
+    }
+
+    .titans-col-pen img {
+        object-fit: cover !important;
+        object-position: center 68% !important;
+    }
+
+    .titans-col-boardroom,
+    .titans-col-portfolio {
+        width: 100% !important;
+        height: 260px !important;
+        min-height: 260px !important;
+        position: relative !important;
+    }
+
+    .titans-col-boardroom img,
+    .titans-col-portfolio img {
+        object-fit: cover !important;
+        object-position: center center !important;
+    }
+
+    /* Award Cards on Mobile */
     .titans-award-sec {
-        padding: 20px !important;
+        padding: 24px 16px !important;
     }
 
     .titans-award-card {
         flex-direction: column !important;
         text-align: center !important;
-        padding: 28px 20px !important;
+        padding: 28px 20px 24px !important;
         gap: 16px !important;
-    }
-
-    .titans-award-v-divider {
-        display: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: auto !important;
     }
 
     .titans-award-media {
-        width: 90px !important;
-        height: 90px !important;
+        width: 180px !important;
+        height: 170px !important;
+        overflow: hidden !important;
+        margin: 0 auto !important;
+    }
+
+    .titans-award-img {
+        transform: scale(1.7) !important;
     }
 
     .titans-award-title {
-        font-size: 38px !important;
+        font-size: clamp(38px, 9vw, 48px) !important;
+        line-height: 1.05 !important;
+        margin-bottom: 6px !important;
     }
 
     .titans-award-desc {
         font-size: 13.5px !important;
+        line-height: 1.5 !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .titans-hero-sec {
+        padding-top: 100px !important;
     }
 
-    .titans-col-pen,
-    .titans-col-boardroom,
-    .titans-col-portfolio {
-        width: 100% !important;
-        height: 250px !important;
-        min-height: 250px !important;
-        position: relative !important;
+    .titans-hero-title {
+        font-size: 32px !important;
+    }
+
+    .titans-big-stat {
+        font-size: 42px !important;
+    }
+
+    .titans-section-heading {
+        font-size: 27px !important;
+    }
+
+    .titans-award-media {
+        width: 160px !important;
+        height: 150px !important;
+    }
+
+    .titans-award-img {
+        transform: scale(1.6) !important;
     }
 }
