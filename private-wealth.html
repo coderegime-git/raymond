@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Wealth | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Exceptional wealth deserves notable service. Total wealth coordination and holistic financial counsel tailored for significant wealth.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="athletes.css">
+    <link rel="stylesheet" href="private-wealth.css">
+</head>
+
+<body class="athletes-page private-wealth-page">
+
+    <!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header class="site-header" id="main-header">
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
+
+            <!-- Dropdown for INDIVIDUALS -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger active" id="individuals-trigger">
+                    <span>INDIVIDUALS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item active" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
+            </a>
+        </div>
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+            <a href="resources.html" class="nav-link">RESOURCES</a>
+            <a href="contact.html" class="nav-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" class="nav-link" target="_blank">CLIENT ACCESS</a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+
+            <div class="drawer-accordion-item">
+                <button class="drawer-accordion-btn" id="drawer-athletes-btn"
+                    onclick="toggleMobileAthletesAccordion(event)">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                </button>
+                <div class="drawer-accordion-content" id="drawer-athletes-content">
+                    <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                        <span>EMPOWERING PRO ATHLETES</span>
+                    </a>
+                    <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+
+            <div class="drawer-accordion-item">
+                <button class="drawer-accordion-btn active" id="drawer-individuals-btn"
+                    onclick="toggleMobileIndividualsAccordion(event)">
+                    <span>INDIVIDUALS</span>
+                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                </button>
+                <div class="drawer-accordion-content open" id="drawer-individuals-content">
+                    <a href="private-wealth.html" class="drawer-sublink active" id="mob-private-wealth">
+                        <span>PRIVATE WEALTH</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" class="drawer-link btn-highlight" target="_blank">CLIENT ACCESS</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     HERO SECTION — EXCEPTIONAL WEALTH DESERVES NOTABLE SERVICE
+     ============================================================ -->
+    <section class="pw-hero-sec">
+        <div class="pw-hero-grid">
+            <div class="pw-hero-text">
+                <h1 class="pw-hero-title">
+                    Exceptional wealth<br>
+                    deserves<br>
+                    <span class="pw-gold-heading">notable service</span>
+                </h1>
+                <div class="pw-hero-paragraphs">
+                    <p>We’ve curated an exclusive tier of service with the intent to provide you with truly bespoke, personalized attention. That exemplifies total wealth coordination and holistic financial counsel tailored for significant wealth. From complex assets, from tax optimization strategies and generational wealth preservation to liquidity events and philanthropic giving strategies.</p>
+                    <p>As a trusted partner, we can help implement a wealth strategy worthy of your unique position. You can rely on us to manage your well-earned prosperity – to protect the future.</p>
+                </div>
+                <div class="pw-hero-cta-row">
+                    <a href="#solutions" class="pw-hero-link">DISCOVER THE WAYS WE CAN HELP</a>
+                    <a href="contact.html" class="pw-btn-white">GET IN TOUCH</a>
+                </div>
+            </div>
+            <div class="pw-hero-media">
+                <img src="assets/private-wealth/pw_hero.png" alt="Two executives in evening private wealth consultation" class="pw-hero-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 1 — DELIVERING SOPHISTICATED SOLUTIONS + 4 CARDS
+     ============================================================ -->
+    <section class="pw-solutions-sec" id="solutions">
+        <div class="pw-solutions-banner">
+            <div class="pw-solutions-bg-wrap">
+                <img src="assets/private-wealth/pw_solutions.png" alt="Financial documents, fountain pen and whiskey glass" class="pw-solutions-bg-img">
+                <div class="pw-solutions-gradient-overlay"></div>
+            </div>
+            
+            <div class="pw-container" style="position: relative; z-index: 2; height: 100%;">
+                <div class="pw-solutions-flex-content">
+                    <div class="pw-solutions-text-wrap">
+                        <h2 class="pw-solutions-title">
+                            Delivering Sophisticated<br>
+                            Solutions
+                        </h2>
+                        <p class="pw-solutions-desc">
+                            The astute wealth counsel we provide incorporates a wide range of layered financial strategies designed to fully address the complexities of exceptional wealth in a holistic and highly coordinated manner.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Center Concentric Gold Ring Carousel Indicators -->
+            <div class="pw-solutions-bottom-indicators">
+                <button class="pw-concentric-dot active" aria-label="Slide 1">
+                    <span class="pw-dot-outer"></span>
+                    <span class="pw-dot-inner"></span>
+                </button>
+                <button class="pw-concentric-dot" aria-label="Slide 2">
+                    <span class="pw-dot-outer"></span>
+                    <span class="pw-dot-inner"></span>
+                </button>
+                <button class="pw-concentric-dot" aria-label="Slide 3">
+                    <span class="pw-dot-outer"></span>
+                    <span class="pw-dot-inner"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 4 Service Cards Container -->
+        <div class="pw-container">
+            <div class="pw-services-grid">
+                <!-- Card 1 -->
+                <div class="pw-service-card">
+                    <div>
+                        <div class="pw-card-eyebrow">SERVICES</div>
+                        <h3 class="pw-service-title">Investment management solutions</h3>
+                        <p class="pw-service-desc">Personalized, strategic offerings including private market opportunities.</p>
+                    </div>
+                    <a href="contact.html" class="pw-card-link">READ MORE</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="pw-service-card">
+                    <div>
+                        <div class="pw-card-eyebrow">SERVICES</div>
+                        <h3 class="pw-service-title">Estate &amp; Charitable planning</h3>
+                        <p class="pw-service-desc">Help preserve your values and legacy for family and causes important to you.</p>
+                    </div>
+                    <a href="contact.html" class="pw-card-link">READ MORE</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="pw-service-card">
+                    <div>
+                        <div class="pw-card-eyebrow">SERVICES</div>
+                        <h3 class="pw-service-title">Intergenerational wealth planning</h3>
+                        <p class="pw-service-desc">Strategies and support for legacy planning for future generations.</p>
+                    </div>
+                    <a href="contact.html" class="pw-card-link">READ MORE</a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="pw-service-card">
+                    <div>
+                        <div class="pw-card-eyebrow">SERVICES</div>
+                        <h3 class="pw-service-title">Risk management solutions</h3>
+                        <p class="pw-service-desc">Protecting the wealth accumulated through specialized insurance solutions and trusts.</p>
+                    </div>
+                    <a href="contact.html" class="pw-card-link">READ MORE</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 2 — TIMES 400 AWARD CARD
+     ============================================================ -->
+    <section class="pw-award-sec">
+        <div class="pw-container">
+            <div class="pw-award-card">
+                <div class="pw-award-media">
+                    <img src="assets/private-wealth/pw_ft_award.png" alt="Financial Times 400 Top Financial Advisers Award" class="pw-award-img">
+                </div>
+                <div class="pw-award-v-divider"></div>
+                <div class="pw-award-content">
+                    <h3 class="pw-award-title">Times 400</h3>
+                    <p class="pw-award-desc">Tom Seiler – Financial Times 400 Top Financial Advisers, 2020**</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 3 — A CENTRAL PARTNER — AND STRATEGY
+     ============================================================ -->
+    <section class="pw-feature-sec">
+        <div class="pw-feature-grid">
+            <div class="pw-feature-media">
+                <img src="assets/private-wealth/pw_central_partner.png" alt="Executives seated around boardroom table overlooking night skyline" class="pw-feature-img">
+            </div>
+            <div class="pw-feature-content">
+                <h2 class="pw-feature-title">A Central Partner – and Strategy</h2>
+                <p class="pw-feature-desc">
+                    Managing persistent wealth takes a coordinated effort, and we act as the central point of contact for all your financial affairs. We will work closely with your other professional advisors to ensure that all the pieces of your financial life move in strategic harmony.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 4 — THE PRIVATE WEALTH ADVISOR DIFFERENCE
+     ============================================================ -->
+    <section class="pw-feature-sec">
+        <div class="pw-diff-grid">
+            <div class="pw-feature-content">
+                <h2 class="pw-feature-title">
+                    The Private Wealth Advisor<br>
+                    difference
+                </h2>
+                <p class="pw-feature-desc">
+                    Your significant wealth requires specialized knowledge and resources. As Private Wealth Advisors, we have the experience to guide you through the intricacies of all your financial matters.
+                </p>
+                <a href="contact.html" class="pw-gold-link">
+                    <span>SEE HOW WE CAN BE AN ASSET</span>
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </div>
+            <div class="pw-feature-media">
+                <img src="assets/private-wealth/pw_advisor_difference.png" alt="Leather portfolio notebook, fountain pen and whiskey tumbler" class="pw-feature-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 5 — PENTHOUSE SKYLINE FULL-WIDTH
+     ============================================================ -->
+    <section class="pw-skyline-sec">
+        <img src="assets/private-wealth/pw_skyline_penthouse.png" alt="Luxury penthouse study with illuminated New York skyline" class="pw-skyline-img">
+        <div class="pw-skyline-overlay"></div>
+        <div class="pw-solutions-bottom-indicators">
+            <button class="pw-concentric-dot active" aria-label="Slide 1">
+                <span class="pw-dot-outer"></span>
+                <span class="pw-dot-inner"></span>
+            </button>
+            <button class="pw-concentric-dot" aria-label="Slide 2">
+                <span class="pw-dot-outer"></span>
+                <span class="pw-dot-inner"></span>
+            </button>
+            <button class="pw-concentric-dot" aria-label="Slide 3">
+                <span class="pw-dot-outer"></span>
+                <span class="pw-dot-inner"></span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 6 — WEALTH CONSIDERATIONS (3 Cards)
+     ============================================================ -->
+    <section class="pw-considerations-sec">
+        <div class="pw-container">
+            <h2 class="pw-section-center-title">Wealth considerations</h2>
+
+            <div class="pw-considerations-grid">
+                <!-- Card 1 -->
+                <div class="pw-consider-card">
+                    <div>
+                        <h3 class="pw-consider-title">Custom guidance for business owners</h3>
+                        <p class="pw-consider-subtitle">You want to maximize financial success, we can help you:</p>
+                        <ul class="pw-bullet-list">
+                            <li class="pw-bullet-item">Navigate the complexities of transitioning your business.</li>
+                            <li class="pw-bullet-item">Identify financing opportunities for new opportunities.</li>
+                            <li class="pw-bullet-item">Achieve an advantageous exit or succession strategy.</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="pw-consider-link">
+                        <span>MORE GUIDANCE FOR THE CAPTAINS OF INDUSTRY</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="pw-consider-card">
+                    <div>
+                        <h3 class="pw-consider-title">Planning for charitable giving</h3>
+                        <p class="pw-consider-subtitle">You want to continue your heroic pursuits, we can help you:</p>
+                        <ul class="pw-bullet-list">
+                            <li class="pw-bullet-item">Make a powerful mark through your charitable giving.</li>
+                            <li class="pw-bullet-item">Seek to maintain giving goals for the causes you champion.</li>
+                            <li class="pw-bullet-item">Set up private foundation and donor-advised funds.</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="pw-consider-link">
+                        <span>GUIDANCE FOR THE PHILANTHROPISTS OF TOMORROW</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="pw-consider-card">
+                    <div>
+                        <h3 class="pw-consider-title">Preserving wealth for generations</h3>
+                        <p class="pw-consider-subtitle">You want to pass on your legacy, who can help you:</p>
+                        <ul class="pw-bullet-list">
+                            <li class="pw-bullet-item">Implement smart strategies and vehicles that protect your legacy.</li>
+                            <li class="pw-bullet-item">Navigate complex estate laws impacting family prosperity.</li>
+                            <li class="pw-bullet-item">Establish the right avenues to gift more effectively.</li>
+                        </ul>
+                    </div>
+                    <a href="contact.html" class="pw-consider-link">
+                        <span>MORE GUIDANCE ON PRESERVING YOUR FAMILY LEGACY</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 7 — RELATED RESOURCES (3 Cards)
+     ============================================================ -->
+    <section class="pw-resources-sec">
+        <div class="pw-container">
+            <h2 class="pw-resources-header">Related Resources</h2>
+
+            <div class="pw-resources-grid">
+                <!-- Card 1 -->
+                <div class="pw-resource-card">
+                    <div>
+                        <div class="pw-card-eyebrow">EXECUTIVE &amp; CORPORATE</div>
+                        <h3 class="pw-res-title">Crafting a retirement that evolves with you</h3>
+                        <p class="pw-res-desc">How a high-net-worth individual can build a tailored roadmap of investments that can evolve to meet target milestones for life and retirement.</p>
+                    </div>
+                    <a href="resources.html" class="pw-res-link">READ</a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="pw-resource-card">
+                    <div>
+                        <div class="pw-card-eyebrow">LEGACY &amp; CHARITABLE</div>
+                        <h3 class="pw-res-title">Giving conditionally</h3>
+                        <p class="pw-res-desc">How to help maximize charitable giving while keeping control of your assets.</p>
+                    </div>
+                    <a href="resources.html" class="pw-res-link">READ</a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="pw-resource-card">
+                    <div>
+                        <div class="pw-card-eyebrow">EXECUTIVE &amp; CORPORATE</div>
+                        <h3 class="pw-res-title">What is Qualified Small Business Stock?</h3>
+                        <p class="pw-res-desc">Evaluate risks and explore strategies to minimize emerging and potential capital gains.</p>
+                    </div>
+                    <a href="resources.html" class="pw-res-link">READ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <section class="champion-strip">
+
+        <!-- Brand / Social -->
+        <div class="champ-brand">
+            <!-- Official logo -->
+            <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            <!-- Social icons -->
+            <div class="champ-socials">
+                <a href="#" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Center Quote -->
+        <div class="champ-quote">
+            Whether you wear a team uniform or a pin-striped suit, we<br>
+            believe you deserve a personalized wealth management<br>
+            experience and an experienced financial team to help you<br>
+            champion your future.
+        </div>
+
+        <!-- CTA -->
+        <div class="champ-cta">
+            <h3 class="champ-heading">CHAMPION<br>YOUR FUTURE</h3>
+            <a href="team.html" class="champ-link" id="learn-more-btn">LEARN MORE</a>
+        </div>
+
+    </section>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="site-footer">
+
+        <div class="footer-addresses">
+            <div class="addr-row">
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2025 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+    <script>
+        function toggleMobileMenu(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var drawer = document.getElementById('mobile-drawer');
+            var overlay = document.getElementById('drawer-overlay');
+            var toggleBtn = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+
+            if (drawer.classList.contains('active')) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggleBtn) toggleBtn.classList.remove('active');
+                document.body.style.overflow = '';
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggleBtn) toggleBtn.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function toggleMobileAthletesAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-athletes-btn');
+            var content = document.getElementById('drawer-athletes-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
+        function toggleMobileIndividualsAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-individuals-btn');
+            var content = document.getElementById('drawer-individuals-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const drawer = document.getElementById('mobile-drawer');
+
+            // Close drawer on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
+                    toggleMobileMenu(e);
+                }
+            });
+
+            // Desktop Athletes Dropdown Click Toggle
+            const athWrapper = document.getElementById('athletes-dropdown');
+            const athMenu = document.getElementById('athletes-menu');
+
+            if (athWrapper && athMenu) {
+                document.addEventListener('click', (e) => {
+                    if (!athWrapper.contains(e.target)) {
+                        athMenu.classList.remove('show');
+                        athWrapper.classList.remove('active');
+                    }
+                });
+            }
+
+            // Desktop Individuals Dropdown Click Toggle
+            const indWrapper = document.getElementById('individuals-dropdown');
+            const indMenu = document.getElementById('individuals-menu');
+
+            if (indWrapper && indMenu) {
+                document.addEventListener('click', (e) => {
+                    if (!indWrapper.contains(e.target)) {
+                        indMenu.classList.remove('show');
+                        indWrapper.classList.remove('active');
+                    }
+                });
+            }
+
+            // Concentric Gold Dots Click Switch
+            const concentricDots = document.querySelectorAll('.pw-concentric-dot');
+            concentricDots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    concentricDots.forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                });
+            });
+
+            // Skyline Dots Click Switch
+            const skylineDots = document.querySelectorAll('.pw-skyline-dot');
+            skylineDots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    skylineDots.forEach(d => d.classList.remove('active'));
+                    dot.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

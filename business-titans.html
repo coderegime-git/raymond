@@ -47,7 +47,19 @@
             </div>
 
             <a href="business-titans.html" class="nav-link active">BUSINESS TITANS</a>
-            <a href="individuals.html" class="nav-link">INDIVIDUALS</a>
+            
+            <!-- Dropdown for INDIVIDUALS -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>INDIVIDUALS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
         </nav>
 
         <!-- Center Logo -->
@@ -102,7 +114,20 @@
             </div>
 
             <a href="business-titans.html" class="drawer-link active">BUSINESS TITANS</a>
-            <a href="individuals.html" class="drawer-link">INDIVIDUALS</a>
+
+            <div class="drawer-accordion-item">
+                <button class="drawer-accordion-btn" id="drawer-individuals-btn"
+                    onclick="toggleMobileIndividualsAccordion(event)">
+                    <span>INDIVIDUALS</span>
+                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                </button>
+                <div class="drawer-accordion-content" id="drawer-individuals-content">
+                    <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
+                        <span>PRIVATE WEALTH</span>
+                    </a>
+                </div>
+            </div>
+
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
             <a href="resources.html" class="drawer-link">RESOURCES</a>
             <a href="contact.html" class="drawer-link">CONTACT US</a>
@@ -322,23 +347,55 @@
             }
         }
 
-        function toggleMobileAthletesAccordion(e) {
+        function toggleMobileIndividualsAccordion(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
                 if (e.stopPropagation) e.stopPropagation();
             }
-            var btn = document.getElementById('drawer-athletes-btn');
-            var content = document.getElementById('drawer-athletes-content');
-            if (!btn || !content) return;
-
-            if (content.classList.contains('open')) {
-                content.classList.remove('open');
-                btn.classList.remove('active');
-            } else {
-                content.classList.add('open');
-                btn.classList.add('active');
+            var btn = document.getElementById('drawer-individuals-btn');
+            var content = document.getElementById('drawer-individuals-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
             }
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const drawer = document.getElementById('mobile-drawer');
+
+            // Close drawer on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
+                    toggleMobileMenu(e);
+                }
+            });
+
+            // Desktop Athletes Dropdown Click Toggle
+            const athWrapper = document.getElementById('athletes-dropdown');
+            const athMenu = document.getElementById('athletes-menu');
+
+            if (athWrapper && athMenu) {
+                document.addEventListener('click', (e) => {
+                    if (!athWrapper.contains(e.target)) {
+                        athMenu.classList.remove('show');
+                        athWrapper.classList.remove('active');
+                    }
+                });
+            }
+
+            // Desktop Individuals Dropdown Click Toggle
+            const indWrapper = document.getElementById('individuals-dropdown');
+            const indMenu = document.getElementById('individuals-menu');
+
+            if (indWrapper && indMenu) {
+                document.addEventListener('click', (e) => {
+                    if (!indWrapper.contains(e.target)) {
+                        indMenu.classList.remove('show');
+                        indWrapper.classList.remove('active');
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
