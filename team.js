@@ -326,20 +326,20 @@ function openModal(memberId) {
   const addressLines = m.address.split('\n').join('<br>');
 
   const desHtml = m.designations.length
-    ? m.designations.map(d => `<span class="des-bullet">•</span> <span class="des-item">${d}</span>`).join('&nbsp;&nbsp;&nbsp;')
+    ? m.designations.map(d => '<span class="des-bullet">•</span> <span class="des-item">' + d + '</span>').join('&nbsp;&nbsp;&nbsp;')
     : '';
 
   const desNoteHtml = m.desNote
-    ? `<p class="bio-des-note">${m.desNote}</p>`
+    ? '<p class="bio-des-note">' + m.desNote + '</p>'
     : '';
 
   const bioParas = m.bio.map(p => {
     if (p.startsWith('<')) return p;
-    return `<p class="bio-text">${p}</p>`;
+    return '<p class="bio-text">' + p + '</p>';
   }).join('');
 
   const certsHtml = m.certs
-    ? `<p class="bio-certs">${m.certs}</p>`
+    ? '<p class="bio-certs">' + m.certs + '</p>'
     : '';
 
   const firstName = m.name.split(' ')[0];
@@ -388,15 +388,15 @@ function openModal(memberId) {
     </div>
   `;
 
-  overlay.classList.add('active');
+  if (overlay) overlay.classList.add('active');
   document.body.classList.add('modal-open');
   document.documentElement.classList.add('modal-open');
   document.body.style.overflow = 'hidden';
-  modal.scrollTop = 0;
+  if (modal) modal.scrollTop = 0;
 }
 
 function closeModal() {
-  overlay.classList.remove('active');
+  if (overlay) overlay.classList.remove('active');
   document.body.classList.remove('modal-open');
   document.documentElement.classList.remove('modal-open');
   document.body.style.overflow = '';
@@ -410,25 +410,27 @@ document.querySelectorAll('.team-card').forEach(card => {
 });
 
 /* Close on button */
-closeBtn.addEventListener('click', closeModal);
+if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
 /* Close on overlay background click */
-overlay.addEventListener('click', e => {
-  if (e.target === overlay) closeModal();
-});
+if (overlay) {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) closeModal();
+  });
 
-/* Prevent background page scroll on wheel / touch outside modal panels */
-overlay.addEventListener('wheel', e => {
-  if (!e.target.closest('.bio-right') && !e.target.closest('.bio-left')) {
-    e.preventDefault();
-  }
-}, { passive: false });
+  /* Prevent background page scroll on wheel / touch outside modal panels */
+  overlay.addEventListener('wheel', e => {
+    if (!e.target.closest('.bio-right') && !e.target.closest('.bio-left')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 
-overlay.addEventListener('touchmove', e => {
-  if (!e.target.closest('.bio-right') && !e.target.closest('.bio-left')) {
-    e.preventDefault();
-  }
-}, { passive: false });
+  overlay.addEventListener('touchmove', e => {
+    if (!e.target.closest('.bio-right') && !e.target.closest('.bio-left')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+}
 
 function toggleMobileMenu(e) {
   if (e) {
@@ -444,12 +446,18 @@ function toggleMobileMenu(e) {
     drawer.classList.remove('active');
     if (overlay) overlay.classList.remove('active');
     if (toggleBtn) toggleBtn.classList.remove('active');
+    document.documentElement.classList.remove('menu-open');
+    document.body.classList.remove('menu-open');
     document.body.style.overflow = '';
+    document.documentElement.style.overflow = '';
   } else {
     drawer.classList.add('active');
     if (overlay) overlay.classList.add('active');
     if (toggleBtn) toggleBtn.classList.add('active');
+    document.documentElement.classList.add('menu-open');
+    document.body.classList.add('menu-open');
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
   }
 }
 
@@ -466,52 +474,33 @@ function toggleMobileAthletesAccordion(e) {
   }
 }
 
+function toggleMobileIndividualsAccordion(e) {
+  if (e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+  }
+  var btn = document.getElementById('drawer-individuals-btn');
+  var content = document.getElementById('drawer-individuals-content');
+  if (btn && content) {
+    btn.classList.toggle('active');
+    content.classList.toggle('open');
+  }
+}
+
 /* Close on Escape key */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Escape') {
+    closeModal();
+    var drawer = document.getElementById('mobile-drawer');
+    if (drawer && drawer.classList.contains('active')) {
+      toggleMobileMenu(e);
+    }
+  }
 });
 
-/* Mobile Drawer & Sticky Header Handlers */
+/* Sticky Header and Dropdown Click-Outside */
 document.addEventListener('DOMContentLoaded', () => {
-  const toggleBtn = document.getElementById('mobile-toggle');
-  const closeBtn = document.getElementById('drawer-close');
-  const drawer = document.getElementById('mobile-drawer');
-  const overlay = document.getElementById('drawer-overlay');
   const header = document.getElementById('main-header');
-
-  function openDrawer() {
-    if (drawer) drawer.classList.add('active');
-    if (overlay) overlay.classList.add('active');
-    if (toggleBtn) toggleBtn.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeDrawer() {
-    if (drawer) drawer.classList.remove('active');
-    if (overlay) overlay.classList.remove('active');
-    if (toggleBtn) toggleBtn.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  if (toggleBtn) {
-    toggleBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (drawer && drawer.classList.contains('active')) {
-        closeDrawer();
-      } else {
-        openDrawer();
-      }
-    });
-  }
-  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-  if (overlay) overlay.addEventListener('click', closeDrawer);
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
-      closeDrawer();
-    }
-  });
 
   window.addEventListener('scroll', () => {
     if (header) {
@@ -523,29 +512,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Desktop Athletes Dropdown Click Outside Toggle
-  const athTrigger = document.getElementById('athletes-trigger');
   const athWrapper = document.getElementById('athletes-dropdown');
   const athMenu = document.getElementById('athletes-menu');
+  const indWrapper = document.getElementById('individuals-dropdown');
+  const indMenu = document.getElementById('individuals-menu');
 
-  if (athWrapper && athMenu) {
-    document.addEventListener('click', (e) => {
-      if (!athWrapper.contains(e.target)) {
-        athMenu.classList.remove('show');
-        athWrapper.classList.remove('active');
-      }
-    });
-  }
-
-  // Mobile Drawer Accordion Toggle
-  const drawerAccordionBtn = document.getElementById('drawer-athletes-btn');
-  const drawerAccordionContent = document.getElementById('drawer-athletes-content');
-
-  if (drawerAccordionBtn && drawerAccordionContent) {
-    drawerAccordionBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      drawerAccordionBtn.classList.toggle('active');
-      drawerAccordionContent.classList.toggle('open');
-    });
-  }
+  document.addEventListener('click', (e) => {
+    if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
+      athMenu.classList.remove('show');
+      athWrapper.classList.remove('active');
+    }
+    if (indWrapper && indMenu && !indWrapper.contains(e.target)) {
+      indMenu.classList.remove('show');
+      indWrapper.classList.remove('active');
+    }
+  });
 });

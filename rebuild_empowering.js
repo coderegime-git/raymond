@@ -1,46 +1,42 @@
-<!DOCTYPE html>
+const fs = require('fs');
+
+const completeHtml = `<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Individuals &amp; Families | The Seiler Group of Raymond James</title>
+    <title>Empowering Pro Athletes | The Seiler Group of Raymond James</title>
     <meta name="description"
-        content="A steadfast financial partner for families and individuals. Customized wealth management and financial planning to tackle everyday challenges and major milestones.">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+        content="Empowering pro athletes with dedicated wealth management, contract guidance, and post-career financial planning by The Seiler Group.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css?v=20">
-    <link rel="stylesheet" href="athletes.css?v=20">
-    <link rel="stylesheet" href="individuals.css?v=20">
+    <link rel="stylesheet" href="styles.css?v=25">
+    <link rel="stylesheet" href="athletes.css?v=25">
 </head>
 
-<body class="athletes-page individuals-page">
+<body class="athletes-page">
 
     <!-- ============================================================
      HEADER
      ============================================================ -->
     <header class="site-header" id="main-header">
-        <!-- Left Navigation -->
         <nav class="nav-left">
             <a href="index.html" class="nav-link">HOME</a>
 
             <!-- Dropdown for ATHLETES -->
-            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
-                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+            <div class="nav-dropdown-wrapper active" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger active" id="athletes-trigger">
                     <span>ATHLETES</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
-                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item active" id="nav-item-empowering">
                         EMPOWERING PRO ATHLETES
                     </a>
                     <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
@@ -53,7 +49,7 @@
 
             <!-- Dropdown for INDIVIDUALS -->
             <div class="nav-dropdown-wrapper" id="individuals-dropdown">
-                <a href="individuals.html" class="nav-link nav-dropdown-trigger active" id="individuals-trigger">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
                     <span>INDIVIDUALS</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
@@ -65,14 +61,12 @@
             </div>
         </nav>
 
-        <!-- Center Logo -->
         <div class="header-logo">
             <a href="index.html" class="logo-anchor">
                 <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
         </div>
 
-        <!-- Right Navigation -->
         <nav class="nav-right">
             <a href="team.html" class="nav-link">YOUR TEAM</a>
             <a href="resources.html" class="nav-link">RESOURCES</a>
@@ -80,7 +74,7 @@
             <a href="https://clientaccess.rjf.com" class="nav-link" target="_blank">CLIENT ACCESS</a>
         </nav>
 
-        <!-- Mobile Hamburger Button -->
+        <!-- Mobile Nav Toggle -->
         <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
             aria-label="Toggle navigation menu">
             <span></span>
@@ -107,8 +101,8 @@
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
                 </div>
-                <div class="drawer-accordion-content" id="drawer-athletes-content">
-                    <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                <div class="drawer-accordion-content open" id="drawer-athletes-content">
+                    <a href="empowering-pro-athletes.html" class="drawer-sublink active" id="mob-empowering">
                         <span>EMPOWERING PRO ATHLETES</span>
                     </a>
                     <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
@@ -126,7 +120,7 @@
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
                 </div>
-                <div class="drawer-accordion-content open" id="drawer-individuals-content">
+                <div class="drawer-accordion-content" id="drawer-individuals-content">
                     <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
                         <span>PRIVATE WEALTH</span>
                     </a>
@@ -141,166 +135,129 @@
     </div>
 
     <!-- ============================================================
-     HERO SECTION — A STEADFAST FINANCIAL PARTNER
+     HERO SECTION — EMPOWERING PRO ATHLETES
      ============================================================ -->
-    <section class="ind-hero-sec emp-hero-sec">
-        <div class="ind-hero-grid emp-hero-grid">
-            <div class="ind-hero-text emp-hero-text">
-                <h1 class="ind-hero-title emp-hero-title">
-                    A steadfast<br>
-                    financial partner for<br>
-                    <span class="ind-gold-heading emp-gold-heading">families and individuals</span>
+    <section class="emp-hero-sec">
+        <div class="emp-hero-grid">
+            <div class="emp-hero-text">
+                <h1 class="emp-hero-title">
+                    Empowering<br>
+                    <span class="emp-gold-heading">pro athletes</span>
                 </h1>
-                <div class="ind-hero-paragraphs emp-hero-paragraphs">
-                    <p>For true financial well-being, you should feel secure in where you<br class="ath-desktop-br">are and sure of how well you've planned for the future. We can<br class="ath-desktop-br">help you get there. Through customized wealth management and<br class="ath-desktop-br">financial planning, we partner with you to tackle everyday<br class="ath-desktop-br">challenges and major milestones.</p>
+                <div class="emp-hero-paragraphs">
+                    <p>While your college and pro coaches help you make the most <br class="ath-desktop-br">of your athletic talent and ability, we are here to help you <br class="ath-desktop-br">manage the financial rewards that come with a pro career. <br class="ath-desktop-br">We know how to work within the special circumstances <br class="ath-desktop-br">of professional athletes.</p>
+                    <p>We want you to see The Seiler Group as your financial <br class="ath-desktop-br">quarterback, here to help you make informed and confident <br class="ath-desktop-br">financial decisions throughout your life and career. We place <br class="ath-desktop-br">a high value on a relationship based on integrity, accountability <br class="ath-desktop-br">and an in-depth understanding of your goals and needs.</p>
+                    <p>With our combination of experience and skill, we can deliver <br class="ath-desktop-br">tailored investment strategies designed to help you manage <br class="ath-desktop-br">and preserve your wealth.</p>
                 </div>
             </div>
-            <div class="ind-hero-media emp-hero-media">
-                <img src="assets/individuals/individuals_hero.png" alt="Couple sitting together warmly in modern living room" class="ind-hero-img emp-hero-img">
+            <div class="emp-hero-media">
+                <img src="assets/athletes/emp_hero_player.png" alt="Pro Football Player in Stadium Lights"
+                    class="emp-hero-img">
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-     SECTION 1 — WHAT DOES YOUR FINANCIAL FUTURE LOOK LIKE?
+     SECTION 1 — WHILE YOU'RE STILL IN COLLEGE
      ============================================================ -->
-    <section class="ind-future-sec ath-feature-sec">
-        <div class="ind-future-grid">
-            <div class="ind-future-media">
-                <img src="assets/individuals/notebook_pen.png" alt="Executive fountain pen resting on leather notebook"
-                    class="ind-future-img">
+    <section class="ath-feature-sec">
+        <div class="ath-grid-2col-divider">
+            <div class="ath-col-img">
+                <img src="assets/athletes/emp_college_studying.png" alt="Student Athlete Studying at Desk"
+                    class="ath-feature-img">
             </div>
-            <div class="ind-v-divider"></div>
-            <div class="ind-future-content">
-                <h2 class="ind-future-title ath-section-heading">
-                    What does your<br>
-                    <span class="ind-gold-heading emp-gold-heading">financial future look like?</span>
-                </h2>
-                <p class="ind-future-desc ath-body-text">
-                    Our wealth management resources can help you visualize it.<br class="ath-desktop-br">They can also help in creating a financial plan that's designed<br class="ath-desktop-br">to grow with you, from planning to send your child to college<br class="ath-desktop-br">to planning your retirement income.
-                </p>
+            <div class="ath-v-divider"></div>
+            <div class="ath-col-content emp-college-content">
+                <h2 class="ath-section-heading">While you're still in college</h2>
+                <p class="ath-body-text">We help student-athletes navigate the name, image and likeness <br class="ath-desktop-br">policy that allows Division I, II and III student-athletes to be <br class="ath-desktop-br">compensated for having their name, image and likeness used. <br class="ath-desktop-br">We then help them manage and invest their earnings.</p>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-     SECTION 2 — CASE STUDY (PURSUING A PLAN TO RETIRE EARLY)
+     SECTION 2 — YOUR PLAYING CAREER
      ============================================================ -->
-    <section class="ind-card-sec-wrap">
-        <div class="ind-case-card">
-            <div class="ind-case-left">
-                <span class="ind-eyebrow">CASE STUDY</span>
-                <h3 class="ind-case-title">Pursuing a plan to retire early</h3>
-                <p class="ind-case-desc">
-                    Joe enjoys setting audacious goals for himself when it comes to his career achievements and his retirement savings. In fact, he came to us with a goal of retiring early. We created a diversified asset allocation plan that includes his employer-sponsored and personal retirement savings accounts to help him pursue his goal of financial independence.
-                </p>
-                <a href="#" class="ind-gold-link">
-                    <span>7 Ways to Boost Your Savings</span>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-                <div class="ind-case-disclaimers">
-                    <p>This case study is for illustrative purposes only. Individual cases will vary. Any information is not a complete summary or statement of all available data necessary for making an investment decision and does not constitute a recommendation. Prior to making any investment decision, you should consult with your financial advisor about your individual situation.</p>
-                    <p>Investing involves risk and you may incur a profit or loss regardless of strategy selected, including diversification and asset allocation.</p>
-                </div>
+    <section class="ath-feature-sec">
+        <div class="ath-grid-2col-divider emp-grid-career">
+            <div class="ath-col-content emp-career-content">
+                <h2 class="ath-section-heading">Your playing career</h2>
+                <p class="ath-body-text">Before you are even drafted, we will be hard at work to help you develop good
+                    financial habits, teaching you about budgeting, the prudent use of credit and being mindful of
+                    spending habits and expenses – even down to the basic tools in helping you set up and manage
+                    checking and savings accounts.</p>
+                <p class="ath-body-text">The reality is a pro career, on average, lasts between three and seven years,
+                    so you need a financial plan designed to provide post-career income throughout your life. You must
+                    also consider the "what if" scenarios, because you never know if you will be derailed by an injury
+                    or if your career as a professional athlete will come to an end.</p>
+                <p class="ath-body-text">That's why it is crucial to have an experienced financial team that specializes
+                    in serving professional athletes on your side – to know the challenges you face and, most
+                    importantly, to have the knowledge and experience to properly address them.</p>
+                <p class="ath-body-text">Tom Seiler is not a typical financial advisor watching just investment account
+                    statements, but rather he is someone who is involved and by your side for all of the financial
+                    details – the million things that are in motion at the same time, all subject to upheaval and change
+                    with the next contract and new season.</p>
+                <p class="ath-body-text">In fact, this is how the entire Seiler team is markedly different. It's our
+                    level of skin in the game – your game, your life. We'll always be involved and work with you to help
+                    you make the best financial decisions for all of it.</p>
+                <p class="ath-body-text">We're not just here to help manage the short game but the long game of how your
+                    financial actions and habits today will help you establish your lifestyle for the future. We're here
+                    to provide financial counsel for matters you may not even have considered, related to the dynamic
+                    life you live – like a new contract landing you in a new city and helping you with the details of
+                    selling your home and buying a new one, looking for the best loan rate and addressing all moving
+                    expenses.</p>
+                <p class="ath-body-text">We can collaborate with your agent to review any potential contract changes and
+                    evaluate potential income from other sources, such as endorsements and promotional appearances.
+                    Having such a connected and savvy team as The Seiler Group by your side can help you make the right
+                    play when it's go time.</p>
             </div>
-            <div class="ind-case-right">
-                <div class="ind-case-media-wrap">
-                    <img src="assets/individuals/retire_early_hiker.png" alt="Man standing on mountain peak overlooking sunset" class="ind-case-img">
-                    <!-- 50% Circular Progress Gauge (Pure HTML/CSS/SVG) -->
-                    <div class="ind-gauge-overlay">
-                        <div class="ind-gauge-circle">
-                            <svg class="ind-gauge-svg" viewBox="0 0 180 180">
-                                <defs>
-                                    <linearGradient id="goldArcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#f5c258" />
-                                        <stop offset="60%" stop-color="#d89e1b" />
-                                        <stop offset="100%" stop-color="#b87b14" />
-                                    </linearGradient>
-                                    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
-                                        <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#d89e1b" flood-opacity="0.6" />
-                                    </filter>
-                                </defs>
-                                <!-- Faint track ring -->
-                                <circle class="ind-gauge-bg-circle" cx="90" cy="90" r="76"></circle>
-                                <!-- Glowing Gold Progress Arc -->
-                                <circle class="ind-gauge-progress-circle" cx="90" cy="90" r="76" filter="url(#goldGlow)"></circle>
-                            </svg>
-                            <div class="ind-gauge-text">
-                                <span class="ind-gauge-num">50%</span>
-                                <span class="ind-gauge-label">Goal savings rate</span>
-                            </div>
-                        </div>
+            <div class="ath-col-img">
+                <img src="assets/athletes/emp_basketball_player.png" alt="Pro Basketball Player Driving"
+                    class="ath-feature-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 3 — YOUR POST-PLAYING CAREER
+     ============================================================ -->
+    <section class="ath-feature-sec">
+        <div class="ath-grid-2col-divider">
+            <div class="ath-col-img">
+                <img src="assets/athletes/emp_post_career.png" alt="Former Athlete at Luxury Villa Sunset"
+                    class="ath-feature-img">
+            </div>
+            <div class="ath-v-divider"></div>
+            <div class="ath-col-content emp-post-content">
+                <h2 class="ath-section-heading">Your post-playing career</h2>
+                <p class="ath-body-text" style="margin-bottom: 16px;">Once your pro career is over, you still have a lot of living to do. <br class="ath-desktop-br">What you want to do next is wide open and up to you, perhaps <br class="ath-desktop-br">owning a business, running a charitable foundation, engaging <br class="ath-desktop-br">in promotional activities and sponsorships or even pursuing a <br class="ath-desktop-br">career in the entertainment industry.</p>
+                <p class="ath-body-text">We will provide the same prudent financial guidance to your <br class="ath-desktop-br">new opportunities that we did during your playing career. <br class="ath-desktop-br">It's our lifetime commitment to you and your financial well-being.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     SECTION 4 — 3.3 YEARS STAT CALLOUT
+     ============================================================ -->
+    <section class="ath-feature-sec emp-stat-sec">
+        <div class="ath-grid-2col emp-stat-grid">
+            <div class="ath-col-img emp-stat-img-col">
+                <img src="assets/athletes/helmet.png" alt="Metallic Football Helmet on Field" class="ath-feature-img">
+            </div>
+            <div class="emp-stat-container">
+                <div class="emp-stat-row">
+                    <div class="emp-stat-number-stack">
+                        <span class="emp-stat-3-3">3.3</span>
+                        <span class="emp-stat-years-serif">years</span>
+                    </div>
+                    <div class="emp-stat-divider-line"></div>
+                    <div class="emp-stat-desc-wrap">
+                        <p class="emp-stat-heading-desc">Average length of<br>player careers in the NFL</p>
+                        <div class="emp-stat-source-text">Source: statista.com, 2022</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- ============================================================
-     SECTION 3 — MILESTONES (GETTING MARRIED)
-     ============================================================ -->
-    <section class="ind-card-sec-wrap" style="padding-top: 0;">
-        <div class="ind-milestones-card">
-            <div class="ind-milestones-left">
-                <span class="ind-eyebrow">MILESTONES</span>
-                <div class="ind-milestones-media">
-                    <img src="assets/individuals/wedding_rings.png" alt="Diamond wedding rings" class="ind-milestones-img">
-                </div>
-            </div>
-            <div class="ind-milestones-divider"></div>
-            <div class="ind-milestones-right">
-                <h3 class="ind-milestones-title">Getting Married</h3>
-                <p class="ind-milestones-subtitle">We'll help you think beyond the wedding day to your future as a couple.</p>
-                <ul class="ind-checklist">
-                    <li class="ind-checklist-item">
-                        <span class="ind-check-icon">
-                            <i class="far fa-check-circle"></i>
-                        </span>
-                        <span class="ind-check-text">Combining finances and accounts</span>
-                    </li>
-                    <li class="ind-checklist-item">
-                        <span class="ind-check-icon">
-                            <i class="far fa-check-circle"></i>
-                        </span>
-                        <span class="ind-check-text">Working toward shared financial goals</span>
-                    </li>
-                    <li class="ind-checklist-item">
-                        <span class="ind-check-icon">
-                            <i class="far fa-check-circle"></i>
-                        </span>
-                        <span class="ind-check-text">Taking your union into account in your legacy plan</span>
-                    </li>
-                </ul>
-                <a href="#" class="ind-gold-link ind-checklist-cta">
-                    <span>Want to share your values? See our family meeting checklist</span>
-                    <i class="fas fa-chevron-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-     SECTION 4 — RELATED RESOURCES
-     ============================================================ -->
-    <section class="ind-resources-sec">
-        <div class="ind-resources-bg" style="background-image: url('assets/individuals/guidance_couple_sunset.png');">
-            <div class="ind-resources-overlay"></div>
-            <div class="ind-resources-content">
-                <span class="ind-eyebrow" style="margin-bottom: 16px;">RELATED RESOURCES</span>
-                <h2 class="ind-resources-title">
-                    Whatever your priorities are in life,<br>
-                    we're here to offer the guidance you seek.
-                </h2>
-                <div class="ind-resources-btn-wrap">
-                    <a href="contact.html" class="ind-btn-primary">
-                        <span>LET'S GET STARTED</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
     <!-- ============================================================
      CHAMPION STRIP
@@ -337,27 +294,49 @@
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
-
         <div class="footer-addresses">
             <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
+                <span class="addr-bold">5 Caufield Place</span>
+                <span class="addr-sep">//</span>
+                <span>Suite 201</span>
+                <span class="addr-sep">//</span>
+                <span>Newtown, PA 18940-9434</span>
             </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
+            <div class="addr-row addr-contacts">
+                <span>T: 215.860.7823</span>
+                <span class="addr-sep">//</span>
+                <span>TF: +1.855.473.4537</span>
+                <span class="addr-sep">//</span>
+                <span>F: 215.860.7829</span>
+                <span class="addr-sep">//</span>
+                <a href="#" class="map-link">Map &amp; Directions</a>
             </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
+            <div class="addr-row addr-secondary">
+                <span class="addr-bold">201 East Las Olas Boulevard</span>
+                <span class="addr-sep">//</span>
+                <span>Suite 1630</span>
+                <span class="addr-sep">//</span>
+                <span>Fort Lauderdale, FL 33301-4439</span>
+            </div>
+            <div class="addr-row addr-secondary-map">
+                <a href="#" class="map-link">Map &amp; Directions</a>
+            </div>
+            <div class="addr-row addr-secondary">
+                <span class="addr-bold">14541 Hope Center Loop</span>
+                <span class="addr-sep">//</span>
+                <span>Suite 100</span>
+                <span class="addr-sep">//</span>
+                <span>Fort Myers, FL 33912</span>
+            </div>
+            <div class="addr-row addr-secondary-map">
+                <a href="#" class="map-link">Map &amp; Directions</a>
             </div>
         </div>
 
         <div class="footer-legal">
+            <p>Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC. Investment advisory
+                services offered through Raymond James Financial Services Advisors, Inc. The Seiler Group is not a
+                registered broker/dealer and is independent of Raymond James Financial Services.</p>
             <p>Raymond James financial advisors may only conduct business with residents of the states and/or
                 jurisdictions for which they are properly registered. Therefore, a response to a request for information
                 may be delayed. Please note that not all of the investments and services mentioned are available in
@@ -368,17 +347,14 @@
                 endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
                 not responsible for the content of any website or the collection or use of information regarding any
                 website's users and/or members.</p>
-            <p class="footer-copy">© 2025 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
+            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a href="#">New York Stock
+                    Exchange</a> / <a href="#">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
                     href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
             </p>
         </div>
     </footer>
 
-    <!-- ============================================================
-     SCRIPTS
-     ============================================================ -->
+    <!-- Scripts -->
     <script>
         function toggleMobileMenu(e) {
             if (e) {
@@ -437,6 +413,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const drawer = document.getElementById('mobile-drawer');
+            const header = document.getElementById('main-header');
 
             // Close drawer on escape key
             document.addEventListener('keydown', (e) => {
@@ -445,7 +422,17 @@
                 }
             });
 
-            // Desktop Athletes Dropdown Click Toggle
+            // Sticky Header Glass Effect on Scroll
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Desktop Athletes Dropdown Click Outside Toggle
+            const athTrigger = document.getElementById('athletes-trigger');
             const athWrapper = document.getElementById('athletes-dropdown');
             const athMenu = document.getElementById('athletes-menu');
 
@@ -458,7 +445,8 @@
                 });
             }
 
-            // Desktop Individuals Dropdown Click Toggle
+            // Desktop Individuals Dropdown Click Outside Toggle
+            const indTrigger = document.getElementById('individuals-trigger');
             const indWrapper = document.getElementById('individuals-dropdown');
             const indMenu = document.getElementById('individuals-menu');
 
@@ -474,4 +462,7 @@
     </script>
 </body>
 
-</html>
+</html>`;
+
+fs.writeFileSync('empowering-pro-athletes.html', completeHtml, 'utf8');
+console.log('Successfully wrote empowering-pro-athletes.html');

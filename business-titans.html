@@ -16,8 +16,8 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="athletes.css">
+    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="athletes.css?v=20">
 </head>
 
 <body class="athletes-page">
@@ -98,11 +98,12 @@
             <a href="index.html" class="drawer-link">HOME</a>
 
             <div class="drawer-accordion-item">
-                <button class="drawer-accordion-btn" id="drawer-athletes-btn"
-                    onclick="toggleMobileAthletesAccordion(event)">
-                    <span>ATHLETES</span>
-                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
-                </button>
+                <div class="drawer-accordion-header">
+                    <a href="athletes.html" class="drawer-link drawer-accordion-main-link">ATHLETES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
                 <div class="drawer-accordion-content" id="drawer-athletes-content">
                     <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
                         <span>EMPOWERING PRO ATHLETES</span>
@@ -116,11 +117,12 @@
             <a href="business-titans.html" class="drawer-link active">BUSINESS TITANS</a>
 
             <div class="drawer-accordion-item">
-                <button class="drawer-accordion-btn" id="drawer-individuals-btn"
-                    onclick="toggleMobileIndividualsAccordion(event)">
-                    <span>INDIVIDUALS</span>
-                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
-                </button>
+                <div class="drawer-accordion-header">
+                    <a href="individuals.html" class="drawer-link drawer-accordion-main-link">INDIVIDUALS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn" onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
                 <div class="drawer-accordion-content" id="drawer-individuals-content">
                     <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
                         <span>PRIVATE WEALTH</span>
@@ -265,10 +267,7 @@
 
         <!-- Center Quote -->
         <div class="champ-quote">
-            Whether you wear a team uniform or a pin-striped suit, we<br>
-            believe you deserve a personalized wealth management<br>
-            experience and an experienced financial team to help you<br>
-            champion your future.
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
 
         <!-- CTA -->
@@ -338,12 +337,18 @@
                 drawer.classList.remove('active');
                 if (overlay) overlay.classList.remove('active');
                 if (toggleBtn) toggleBtn.classList.remove('active');
+                document.documentElement.classList.remove('menu-open');
+                document.body.classList.remove('menu-open');
                 document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
             } else {
                 drawer.classList.add('active');
                 if (overlay) overlay.classList.add('active');
                 if (toggleBtn) toggleBtn.classList.add('active');
+                document.documentElement.classList.add('menu-open');
+                document.body.classList.add('menu-open');
                 document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
             }
         }
 
