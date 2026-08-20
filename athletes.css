@@ -1545,7 +1545,8 @@ img[src*="gold_trophy"] {
 
     /* ── Hero Section (Clear fixed 95px header) ── */
     .ath-hero-section {
-        padding-top: 115px !important;
+        margin-top: 0 !important;
+        padding-top: 105px !important;
         padding-bottom: 40px !important;
         padding-left: 20px !important;
         padding-right: 20px !important;
@@ -1598,13 +1599,19 @@ img[src*="gold_trophy"] {
         width: 100% !important;
     }
 
-    /* Content text FIRST on mobile so text always precedes its image */
+    /* Feature image FIRST on mobile */
     .ath-grid-2col-divider {
         display: flex !important;
-        flex-direction: column-reverse !important;
+        flex-direction: column !important;
         min-height: auto !important;
         height: auto !important;
         width: 100% !important;
+    }
+
+    /* We're Not Playing: Content first after 100+ years notebook, football player image below */
+    .ath-grid-not-playing {
+        display: flex !important;
+        flex-direction: column-reverse !important;
     }
 
     /* ── Vertical Dividers Hide on Mobile ── */
@@ -1641,7 +1648,7 @@ img[src*="gold_trophy"] {
 
     .ath-col-img img[src*="basketball_player"],
     .ath-col-img img[src*="emp_basketball_player"] {
-        object-position: center 50% !important;
+        object-position: center top !important;
     }
 
     .ath-col-img img[src*="football_helmet"] {
@@ -1707,6 +1714,17 @@ img[src*="gold_trophy"] {
         font-size: 14px !important;
         line-height: 1.68 !important;
         color: #c2cbd4 !important;
+    }
+
+    /* ── 19 Years / On The Ball Ordering on Mobile ── */
+    .ath-grid-3col-divider .ath-stat-box {
+        order: 1 !important;
+    }
+    .ath-grid-3col-divider .ath-col-img {
+        order: 2 !important;
+    }
+    .ath-grid-3col-divider .ath-col-content {
+        order: 3 !important;
     }
 
     /* ── 19 Years Stat Box on Mobile ── */
@@ -1792,7 +1810,8 @@ img[src*="gold_trophy"] {
 
 @media (max-width: 480px) {
     .ath-hero-section {
-        padding-top: 110px !important;
+        margin-top: 0 !important;
+        padding-top: 100px !important;
         padding-bottom: 30px !important;
     }
 
@@ -1840,7 +1859,8 @@ img[src*="gold_trophy"] {
 
     /* ── Empowering Hero on Mobile ── */
     .emp-hero-sec {
-        padding-top: 110px !important;
+        margin-top: 0 !important;
+        padding-top: 105px !important;
     }
 
     .emp-hero-grid {
@@ -1851,7 +1871,7 @@ img[src*="gold_trophy"] {
     }
 
     .emp-hero-text {
-        padding: 28px 20px 32px !important;
+        padding: 0 20px 32px !important;
         width: 100% !important;
         box-sizing: border-box !important;
     }
@@ -1916,7 +1936,7 @@ img[src*="gold_trophy"] {
     /* ── Playing Career on Mobile ── */
     .emp-grid-career {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: column-reverse !important;
         min-height: auto !important;
         height: auto !important;
         width: 100% !important;
@@ -1930,13 +1950,14 @@ img[src*="gold_trophy"] {
 
     .emp-grid-career .ath-col-img {
         width: 100% !important;
-        height: 320px !important;
-        min-height: 320px !important;
+        height: 440px !important;
+        min-height: 440px !important;
         position: relative !important;
     }
 
-    .emp-grid-career .ath-col-img img {
-        object-position: center 50% !important;
+    .emp-grid-career .ath-col-img img,
+    .emp-grid-career .ath-col-img .ath-feature-img {
+        object-position: center 6% !important;
         object-fit: cover !important;
     }
 
@@ -1990,7 +2011,7 @@ img[src*="gold_trophy"] {
 
 @media (max-width: 480px) {
     .emp-hero-sec {
-        padding-top: 105px !important;
+        padding-top: 100px !important;
     }
 
     .emp-hero-title {
@@ -2074,11 +2095,12 @@ img[src*="gold_trophy"] {
 
     /* Hero Section Mobile */
     .titans-hero-sec {
+        margin-top: 0 !important;
         padding-top: 105px !important;
     }
 
     .titans-hero-text {
-        padding: 32px 20px 28px !important;
+        padding: 0 20px 28px !important;
         width: 100% !important;
         box-sizing: border-box !important;
     }
@@ -2975,28 +2997,28 @@ img[src*="gold_trophy"] {
         width: 100% !important;
     }
 
-    /* Row flow: text top, image/feature below */
+    /* Unified Row flow: Image first, content below */
     .diff-row-01 .diff-row-grid,
     .diff-row-03 .diff-row-grid,
-    .diff-row-pillars .diff-row-grid,
     .diff-stat-callout-grid {
-        flex-direction: column-reverse !important;
+        flex-direction: column !important;
     }
 
     .diff-row-02 .diff-row-grid,
     .diff-row-04 .diff-row-grid,
     .diff-row-06 .diff-row-grid {
-        flex-direction: column !important;
+        flex-direction: column-reverse !important;
     }
 
     /* ── Hero Section Mobile ── */
     .diff-hero-sec {
-        padding-top: 110px !important;
+        margin-top: 0 !important;
+        padding-top: 105px !important;
         background: #000000 !important;
     }
 
     .diff-hero-text {
-        padding: 36px 20px 32px !important;
+        padding: 0 20px 32px !important;
         width: 100% !important;
         box-sizing: border-box !important;
         text-align: left !important;
@@ -3371,10 +3393,13 @@ img[src*="gold_trophy"] {
 
 @media (max-width: 480px) {
     .diff-hero-sec {
-        padding-top: 105px !important;
+        padding-top: 100px !important;
     }
 
-    .diff-hero-text,
+    .diff-hero-text {
+        padding: 0 16px 28px !important;
+    }
+
     .diff-col-content {
         padding: 28px 14px !important;
     }
