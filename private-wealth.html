@@ -18,7 +18,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="styles.css?v=38">
+    <link rel="stylesheet" href="styles.css?v=160">
     <link rel="stylesheet" href="athletes.css?v=38">
     <link rel="stylesheet" href="private-wealth.css?v=38">
 </head>
@@ -29,10 +29,11 @@
      HEADER
      ============================================================ -->
     <header class="site-header" id="main-header">
+
         <!-- Left Navigation -->
         <nav class="nav-left">
             <a href="index.html" class="nav-link">HOME</a>
-
+            
             <!-- Dropdown for ATHLETES -->
             <div class="nav-dropdown-wrapper" id="athletes-dropdown">
                 <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
@@ -50,7 +51,7 @@
             </div>
 
             <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
-
+            
             <!-- Dropdown for INDIVIDUALS -->
             <div class="nav-dropdown-wrapper" id="individuals-dropdown">
                 <a href="individuals.html" class="nav-link nav-dropdown-trigger active" id="individuals-trigger">
@@ -58,7 +59,7 @@
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
-                    <a href="private-wealth.html" class="nav-dropdown-item active" id="nav-item-private-wealth">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
                         PRIVATE WEALTH
                     </a>
                 </div>
@@ -75,18 +76,69 @@
         <!-- Right Navigation -->
         <nav class="nav-right">
             <a href="team.html" class="nav-link">YOUR TEAM</a>
-            <a href="resources.html" class="nav-link">RESOURCES</a>
+            
+            <!-- Dropdown for RESOURCES -->
+            <div class="nav-dropdown-wrapper" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="nav-item-investment-strategy">
+                        INVESTMENT STRATEGY QUARTERLY
+                    </a>
+                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                        WORTHWHILE
+                    </a>
+                </div>
+            </div>
+
             <a href="contact.html" class="nav-link">CONTACT US</a>
-            <a href="https://clientaccess.rjf.com" class="nav-link" target="_blank">CLIENT ACCESS</a>
+
+            <!-- Dropdown for CLIENT ACCESS -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="nav-link nav-dropdown-trigger" id="client-access-trigger" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="client-access-panel" id="client-access-menu" role="menu" aria-label="Client Access Submenu">
+                    <form autocomplete="off" target="_blank" class="ca-form login-form" action="https://clientaccess.rjf.com/sc" method="post" id="investor-access">
+                        <div class="ca-input-group">
+                            <i class="fas fa-user ca-input-icon"></i>
+                            <input type="text" class="ca-input" name="username" placeholder="ENTER YOUR USERNAME" autocomplete="username">
+                        </div>
+                        <div class="ca-input-group">
+                            <i class="fas fa-lock ca-input-icon"></i>
+                            <input type="password" class="ca-input" name="password" placeholder="••••••••••" autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="ca-login-btn">LOGIN</button>
+                        <label class="ca-remember-row">
+                            <input type="checkbox" class="ca-checkbox">
+                            <span class="ca-remember-label">REMEMBER ME</span>
+                        </label>
+                        <div class="ca-links-list">
+                            <a href="https://clientaccess.rjf.com/Support/Password" target="_blank" rel="noopener noreferrer" class="ca-link">FORGOT YOUR PASSWORD?</a>
+                            <a href="https://clientaccess.rjf.com/Enroll/ClientEnrollment" target="_blank" rel="noopener noreferrer" class="ca-link">ENROLL</a>
+                            <a href="https://clientaccess.rjf.com/Support/LoginHelp" target="_blank" rel="noopener noreferrer" class="ca-link">NEED HELP?</a>
+                            <a href="https://clientaccess.rjf.com/FAQ" target="_blank" rel="noopener noreferrer" class="ca-link">CONTACT US / FAQ</a>
+                            <a href="https://www.raymondjames.com/privacy-security-and-account-protection/privacy-commitment" target="_blank" rel="noopener noreferrer" class="ca-link">PRIVACY / SECURITY</a>
+                            <a href="https://www.raymondjames.com/client-resources" target="_blank" rel="noopener noreferrer" class="ca-link">CLIENT RESOURCES</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </nav>
 
         <!-- Mobile Hamburger Button -->
-        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
-            aria-label="Toggle navigation menu">
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
+
     </header>
 
     <!-- Mobile Navigation Drawer Overlay -->
@@ -94,15 +146,14 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
-                aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
-
+            
             <div class="drawer-accordion-item">
-                <div class="drawer-accordion-header">
-                    <a href="athletes.html" class="drawer-link drawer-accordion-main-link">ATHLETES</a>
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileAthletesAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileAthletesAccordion(event)">ATHLETES</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
@@ -120,23 +171,78 @@
             <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
 
             <div class="drawer-accordion-item">
-                <div class="drawer-accordion-header">
-                    <a href="individuals.html" class="drawer-link drawer-accordion-main-link">INDIVIDUALS</a>
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileIndividualsAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link active" onclick="toggleMobileIndividualsAccordion(event)">INDIVIDUALS</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn" onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
                 </div>
-                <div class="drawer-accordion-content open" id="drawer-individuals-content">
-                    <a href="private-wealth.html" class="drawer-sublink active" id="mob-private-wealth">
+                <div class="drawer-accordion-content" id="drawer-individuals-content">
+                    <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
                         <span>PRIVATE WEALTH</span>
                     </a>
                 </div>
             </div>
 
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
-            <a href="resources.html" class="drawer-link">RESOURCES</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileResourcesAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileResourcesAccordion(event)">RESOURCES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-resources-btn" onclick="toggleMobileResourcesAccordion(event)" aria-label="Toggle Resources submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-resources-content">
+                    <a href="press-releases.html" class="drawer-sublink" id="mob-press-releases">
+                        <span>PRESS RELEASES</span>
+                    </a>
+                    <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="drawer-sublink" id="mob-investment-strategy">
+                        <span>INVESTMENT STRATEGY QUARTERLY</span>
+                    </a>
+                    <a href="worthwhile.html" class="drawer-sublink" id="mob-worthwhile">
+                        <span>WORTHWHILE</span>
+                    </a>
+                </div>
+            </div>
+
             <a href="contact.html" class="drawer-link">CONTACT US</a>
-            <a href="https://clientaccess.rjf.com" class="drawer-link btn-highlight" target="_blank">CLIENT ACCESS</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileClientAccessAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileClientAccessAccordion(event)">CLIENT ACCESS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-ca-btn" onclick="toggleMobileClientAccessAccordion(event)" aria-label="Toggle Client Access submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content drawer-ca-content" id="drawer-ca-content">
+                    <div class="drawer-ca-box">
+                        <form autocomplete="off" target="_blank" class="ca-form login-form" action="https://clientaccess.rjf.com/sc" method="post" id="investor-access">
+                            <div class="ca-input-group">
+                                <i class="fas fa-user ca-input-icon"></i>
+                                <input type="text" class="ca-input" name="username" placeholder="ENTER YOUR USERNAME" autocomplete="username">
+                            </div>
+                            <div class="ca-input-group">
+                                <i class="fas fa-lock ca-input-icon"></i>
+                                <input type="password" class="ca-input" name="password" placeholder="••••••••••" autocomplete="current-password">
+                            </div>
+                            <button type="submit" class="ca-login-btn">LOGIN</button>
+                            <label class="ca-remember-row">
+                                <input type="checkbox" class="ca-checkbox">
+                                <span class="ca-remember-label">REMEMBER ME</span>
+                            </label>
+                            <div class="ca-links-list">
+                                <a href="https://clientaccess.rjf.com/Support/Password" target="_blank" rel="noopener noreferrer" class="ca-link">FORGOT YOUR PASSWORD?</a>
+                                <a href="https://clientaccess.rjf.com/Enroll/ClientEnrollment" target="_blank" rel="noopener noreferrer" class="ca-link">ENROLL</a>
+                                <a href="https://clientaccess.rjf.com/Support/LoginHelp" target="_blank" rel="noopener noreferrer" class="ca-link">NEED HELP?</a>
+                                <a href="https://clientaccess.rjf.com/FAQ" target="_blank" rel="noopener noreferrer" class="ca-link">CONTACT US / FAQ</a>
+                                <a href="https://www.raymondjames.com/privacy-security-and-account-protection/privacy-commitment" target="_blank" rel="noopener noreferrer" class="ca-link">PRIVACY / SECURITY</a>
+                                <a href="https://www.raymondjames.com/client-resources" target="_blank" rel="noopener noreferrer" class="ca-link">CLIENT RESOURCES</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </nav>
     </div>
 
@@ -654,12 +760,15 @@
                 if (e.preventDefault) e.preventDefault();
                 if (e.stopPropagation) e.stopPropagation();
             }
-            var drawer = document.getElementById('mobile-drawer');
-            var overlay = document.getElementById('drawer-overlay');
-            var toggleBtn = document.getElementById('mobile-toggle');
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggleBtn = document.getElementById('mobile-toggle');
+
             if (!drawer) return;
 
-            if (drawer.classList.contains('active')) {
+            const isOpen = drawer.classList.contains('active');
+
+            if (isOpen) {
                 drawer.classList.remove('active');
                 if (overlay) overlay.classList.remove('active');
                 if (toggleBtn) toggleBtn.classList.remove('active');
@@ -704,8 +813,35 @@
             }
         }
 
+        function toggleMobileResourcesAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-resources-btn');
+            var content = document.getElementById('drawer-resources-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
+        function toggleMobileClientAccessAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-ca-btn');
+            var content = document.getElementById('drawer-ca-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const drawer = document.getElementById('mobile-drawer');
+            const header = document.getElementById('main-header');
 
             // Close drawer on escape key
             document.addEventListener('keydown', (e) => {
@@ -714,214 +850,45 @@
                 }
             });
 
-            // Desktop Athletes Dropdown Click Toggle
+            // Sticky Header with Glassmorphism on Scroll
+            window.addEventListener('scroll', () => {
+                if (header) {
+                    if (window.scrollY > 40) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                }
+            });
+
+            // Desktop Dropdowns Click-Outside Handlers
             const athWrapper = document.getElementById('athletes-dropdown');
             const athMenu = document.getElementById('athletes-menu');
-
-            if (athWrapper && athMenu) {
-                document.addEventListener('click', (e) => {
-                    if (!athWrapper.contains(e.target)) {
-                        athMenu.classList.remove('show');
-                        athWrapper.classList.remove('active');
-                    }
-                });
-            }
-
-            // Desktop Individuals Dropdown Click Toggle
             const indWrapper = document.getElementById('individuals-dropdown');
             const indMenu = document.getElementById('individuals-menu');
+            const resWrapper = document.getElementById('resources-dropdown');
+            const resMenu = document.getElementById('resources-menu');
+            const caWrapper = document.getElementById('client-access-dropdown');
+            const caMenu = document.getElementById('client-access-menu');
 
-            if (indWrapper && indMenu) {
-                document.addEventListener('click', (e) => {
-                    if (!indWrapper.contains(e.target)) {
-                        indMenu.classList.remove('show');
-                        indWrapper.classList.remove('active');
-                    }
-                });
-            }
-
-            // Concentric Gold Dots Click Switch
-            const concentricDots = document.querySelectorAll('.pw-concentric-dot');
-            concentricDots.forEach((dot) => {
-                dot.addEventListener('click', () => {
-                    concentricDots.forEach(d => d.classList.remove('active'));
-                    dot.classList.add('active');
-                });
+            document.addEventListener('click', (e) => {
+                if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
+                    athMenu.classList.remove('show');
+                    athWrapper.classList.remove('active');
+                }
+                if (indWrapper && indMenu && !indWrapper.contains(e.target)) {
+                    indMenu.classList.remove('show');
+                    indWrapper.classList.remove('active');
+                }
+                if (resWrapper && resMenu && !resWrapper.contains(e.target)) {
+                    resMenu.classList.remove('show');
+                    resWrapper.classList.remove('active');
+                }
+                if (caWrapper && caMenu && !caWrapper.contains(e.target)) {
+                    caMenu.classList.remove('show');
+                    caWrapper.classList.remove('active');
+                }
             });
-
-            // Skyline Dots Click Switch
-            const skylineDots = document.querySelectorAll('.pw-skyline-dot');
-            skylineDots.forEach((dot) => {
-                dot.addEventListener('click', () => {
-                    skylineDots.forEach(d => d.classList.remove('active'));
-                    dot.classList.add('active');
-                });
-            });
-
-            // Solutions Service Cards Carousel
-            const track = document.getElementById('pwSolTrack');
-            const prevBtn = document.getElementById('pwSolPrevBtn');
-            const nextBtn = document.getElementById('pwSolNextBtn');
-            const carouselContainer = document.getElementById('pwSolCarousel');
-
-            if (track && prevBtn && nextBtn && carouselContainer) {
-                const originalCards = Array.from(track.children);
-                const totalOriginal = originalCards.length;
-
-                // Card click active state
-                originalCards.forEach((card) => {
-                    card.addEventListener('click', () => {
-                        track.querySelectorAll('.pw-sol-card').forEach(c => c.classList.remove('active'));
-                        card.classList.add('active');
-                    });
-                });
-
-                // Clones for seamless infinite looping
-                originalCards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    clone.classList.add('pw-clone');
-                    clone.addEventListener('click', () => {
-                        track.querySelectorAll('.pw-sol-card').forEach(c => c.classList.remove('active'));
-                        clone.classList.add('active');
-                    });
-                    track.appendChild(clone);
-                });
-
-                [...originalCards].reverse().forEach(card => {
-                    const clone = card.cloneNode(true);
-                    clone.classList.add('pw-clone');
-                    clone.addEventListener('click', () => {
-                        track.querySelectorAll('.pw-sol-card').forEach(c => c.classList.remove('active'));
-                        clone.classList.add('active');
-                    });
-                    track.insertBefore(clone, track.firstChild);
-                });
-
-                let currentIndex = totalOriginal; // start at index 5 (first real card)
-                let isTransitioning = false;
-                let transitionSafetyTimer = null;
-
-                function getCardStepWidth() {
-                    const firstCard = track.querySelector('.pw-sol-card');
-                    if (!firstCard) return 0;
-                    const style = window.getComputedStyle(track);
-                    const gap = parseFloat(style.gap) || 30;
-                    return firstCard.offsetWidth + gap;
-                }
-
-                function updatePosition(smooth = true) {
-                    if (smooth) {
-                        track.style.transition = 'transform 0.55s cubic-bezier(0.25, 1, 0.5, 1)';
-                    } else {
-                        track.style.transition = 'none';
-                    }
-                    const step = getCardStepWidth();
-                    track.style.transform = `translateX(-${currentIndex * step}px)`;
-
-                    if (smooth) {
-                        clearTimeout(transitionSafetyTimer);
-                        transitionSafetyTimer = setTimeout(() => {
-                            handleTransitionEnd();
-                        }, 600);
-                    }
-                }
-
-                function handleTransitionEnd() {
-                    isTransitioning = false;
-                    clearTimeout(transitionSafetyTimer);
-                    if (currentIndex >= totalOriginal * 2) {
-                        currentIndex = currentIndex - totalOriginal;
-                        updatePosition(false);
-                    } else if (currentIndex < totalOriginal) {
-                        currentIndex = currentIndex + totalOriginal;
-                        updatePosition(false);
-                    }
-                }
-
-                // Initial alignment
-                requestAnimationFrame(() => {
-                    updatePosition(false);
-                });
-
-                window.addEventListener('resize', () => {
-                    updatePosition(false);
-                });
-
-                function nextSlide() {
-                    if (isTransitioning) return;
-                    isTransitioning = true;
-                    currentIndex++;
-                    updatePosition(true);
-                }
-
-                function prevSlide() {
-                    if (isTransitioning) return;
-                    isTransitioning = true;
-                    currentIndex--;
-                    updatePosition(true);
-                }
-
-                // Continuous Auto-scrolling
-                let autoplayTimer = null;
-                const AUTOPLAY_INTERVAL = 3000; // 3 seconds per scroll
-
-                function startAutoplay() {
-                    if (autoplayTimer) clearInterval(autoplayTimer);
-                    autoplayTimer = setInterval(() => {
-                        nextSlide();
-                    }, AUTOPLAY_INTERVAL);
-                }
-
-                function stopAutoplay() {
-                    if (autoplayTimer) {
-                        clearInterval(autoplayTimer);
-                        autoplayTimer = null;
-                    }
-                }
-
-                function restartAutoplay() {
-                    stopAutoplay();
-                    startAutoplay();
-                }
-
-                // Start autoplay immediately
-                startAutoplay();
-
-                nextBtn.addEventListener('click', () => {
-                    nextSlide();
-                    restartAutoplay();
-                });
-
-                prevBtn.addEventListener('click', () => {
-                    prevSlide();
-                    restartAutoplay();
-                });
-
-                track.addEventListener('transitionend', () => {
-                    handleTransitionEnd();
-                });
-
-                // Touch swipe handling
-                let touchStartX = 0;
-                let touchEndX = 0;
-
-                carouselContainer.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                }, { passive: true });
-
-                carouselContainer.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    const diff = touchStartX - touchEndX;
-                    if (Math.abs(diff) > 40) {
-                        if (diff > 0) {
-                            nextSlide();
-                        } else {
-                            prevSlide();
-                        }
-                        restartAutoplay();
-                    }
-                }, { passive: true });
-            }
         });
     </script>
 </body>

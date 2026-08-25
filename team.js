@@ -487,6 +487,32 @@ function toggleMobileIndividualsAccordion(e) {
   }
 }
 
+function toggleMobileResourcesAccordion(e) {
+  if (e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+  }
+  var btn = document.getElementById('drawer-resources-btn');
+  var content = document.getElementById('drawer-resources-content');
+  if (btn && content) {
+    btn.classList.toggle('active');
+    content.classList.toggle('open');
+  }
+}
+
+function toggleMobileClientAccessAccordion(e) {
+  if (e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+  }
+  var btn = document.getElementById('drawer-ca-btn');
+  var content = document.getElementById('drawer-ca-content');
+  if (btn && content) {
+    btn.classList.toggle('active');
+    content.classList.toggle('open');
+  }
+}
+
 /* Close on Escape key */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
@@ -516,6 +542,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const athMenu = document.getElementById('athletes-menu');
   const indWrapper = document.getElementById('individuals-dropdown');
   const indMenu = document.getElementById('individuals-menu');
+  const resWrapper = document.getElementById('resources-dropdown');
+  const resMenu = document.getElementById('resources-menu');
+  const caWrapper = document.getElementById('client-access-dropdown');
+  const caMenu = document.getElementById('client-access-menu');
 
   document.addEventListener('click', (e) => {
     if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
@@ -526,5 +556,15 @@ document.addEventListener('DOMContentLoaded', () => {
       indMenu.classList.remove('show');
       indWrapper.classList.remove('active');
     }
+    if (resWrapper && resMenu && !resWrapper.contains(e.target)) {
+      resMenu.classList.remove('show');
+      resWrapper.classList.remove('active');
+    }
+    if (caWrapper && caMenu && !caWrapper.contains(e.target)) {
+      caMenu.classList.remove('show');
+      caWrapper.classList.remove('active');
+    }
   });
 });
+
+

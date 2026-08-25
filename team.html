@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Raleway:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=37">
+    <link rel="stylesheet" href="styles.css?v=160">
     <link rel="stylesheet" href="team.css">
     <link rel="stylesheet" href="athletes.css">
 </head>
@@ -19,109 +19,222 @@
      HEADER
      ============================================================ -->
 <header class="site-header" id="main-header">
-    <nav class="nav-left">
-        <a href="index.html" class="nav-link">HOME</a>
-        
-        <!-- Dropdown for ATHLETES -->
-        <div class="nav-dropdown-wrapper" id="athletes-dropdown">
-            <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
-                <span>ATHLETES</span>
-                <i class="fas fa-chevron-down nav-caret"></i>
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+            
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
+            
+            <!-- Dropdown for INDIVIDUALS -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>INDIVIDUALS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
-                <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
-                    EMPOWERING PRO ATHLETES
-                </a>
-                <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
-                    OUR DIFFERENCE
-                </a>
-            </div>
         </div>
 
-        <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
-        
-        <!-- Dropdown for INDIVIDUALS -->
-        <div class="nav-dropdown-wrapper" id="individuals-dropdown">
-            <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
-                <span>INDIVIDUALS</span>
-                <i class="fas fa-chevron-down nav-caret"></i>
-            </a>
-            <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
-                <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
-                    PRIVATE WEALTH
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link active">YOUR TEAM</a>
+            
+            <!-- Dropdown for RESOURCES -->
+            <div class="nav-dropdown-wrapper" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="nav-item-investment-strategy">
+                        INVESTMENT STRATEGY QUARTERLY
+                    </a>
+                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                        WORTHWHILE
+                    </a>
+                </div>
             </div>
+
+            <a href="contact.html" class="nav-link">CONTACT US</a>
+
+            <!-- Dropdown for CLIENT ACCESS -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="nav-link nav-dropdown-trigger" id="client-access-trigger" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="client-access-panel" id="client-access-menu" role="menu" aria-label="Client Access Submenu">
+                    <form autocomplete="off" target="_blank" class="ca-form login-form" action="https://clientaccess.rjf.com/sc" method="post" id="investor-access">
+                        <div class="ca-input-group">
+                            <i class="fas fa-user ca-input-icon"></i>
+                            <input type="text" class="ca-input" name="username" placeholder="ENTER YOUR USERNAME" autocomplete="username">
+                        </div>
+                        <div class="ca-input-group">
+                            <i class="fas fa-lock ca-input-icon"></i>
+                            <input type="password" class="ca-input" name="password" placeholder="••••••••••" autocomplete="current-password">
+                        </div>
+                        <button type="submit" class="ca-login-btn">LOGIN</button>
+                        <label class="ca-remember-row">
+                            <input type="checkbox" class="ca-checkbox">
+                            <span class="ca-remember-label">REMEMBER ME</span>
+                        </label>
+                        <div class="ca-links-list">
+                            <a href="https://clientaccess.rjf.com/Support/Password" target="_blank" rel="noopener noreferrer" class="ca-link">FORGOT YOUR PASSWORD?</a>
+                            <a href="https://clientaccess.rjf.com/Enroll/ClientEnrollment" target="_blank" rel="noopener noreferrer" class="ca-link">ENROLL</a>
+                            <a href="https://clientaccess.rjf.com/Support/LoginHelp" target="_blank" rel="noopener noreferrer" class="ca-link">NEED HELP?</a>
+                            <a href="https://clientaccess.rjf.com/FAQ" target="_blank" rel="noopener noreferrer" class="ca-link">CONTACT US / FAQ</a>
+                            <a href="https://www.raymondjames.com/privacy-security-and-account-protection/privacy-commitment" target="_blank" rel="noopener noreferrer" class="ca-link">PRIVACY / SECURITY</a>
+                            <a href="https://www.raymondjames.com/client-resources" target="_blank" rel="noopener noreferrer" class="ca-link">CLIENT RESOURCES</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
         </div>
-    </nav>
-    <div class="header-logo">
-        <a href="index.html" class="logo-anchor">
-            <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
-        </a>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileAthletesAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileAthletesAccordion(event)">ATHLETES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-athletes-content">
+                    <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                        <span>EMPOWERING PRO ATHLETES</span>
+                    </a>
+                    <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileIndividualsAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileIndividualsAccordion(event)">INDIVIDUALS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn" onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-individuals-content">
+                    <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
+                        <span>PRIVATE WEALTH</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="team.html" class="drawer-link active">YOUR TEAM</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileResourcesAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileResourcesAccordion(event)">RESOURCES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-resources-btn" onclick="toggleMobileResourcesAccordion(event)" aria-label="Toggle Resources submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-resources-content">
+                    <a href="press-releases.html" class="drawer-sublink" id="mob-press-releases">
+                        <span>PRESS RELEASES</span>
+                    </a>
+                    <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="drawer-sublink" id="mob-investment-strategy">
+                        <span>INVESTMENT STRATEGY QUARTERLY</span>
+                    </a>
+                    <a href="worthwhile.html" class="drawer-sublink" id="mob-worthwhile">
+                        <span>WORTHWHILE</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileClientAccessAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileClientAccessAccordion(event)">CLIENT ACCESS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-ca-btn" onclick="toggleMobileClientAccessAccordion(event)" aria-label="Toggle Client Access submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content drawer-ca-content" id="drawer-ca-content">
+                    <div class="drawer-ca-box">
+                        <form autocomplete="off" target="_blank" class="ca-form login-form" action="https://clientaccess.rjf.com/sc" method="post" id="investor-access">
+                            <div class="ca-input-group">
+                                <i class="fas fa-user ca-input-icon"></i>
+                                <input type="text" class="ca-input" name="username" placeholder="ENTER YOUR USERNAME" autocomplete="username">
+                            </div>
+                            <div class="ca-input-group">
+                                <i class="fas fa-lock ca-input-icon"></i>
+                                <input type="password" class="ca-input" name="password" placeholder="••••••••••" autocomplete="current-password">
+                            </div>
+                            <button type="submit" class="ca-login-btn">LOGIN</button>
+                            <label class="ca-remember-row">
+                                <input type="checkbox" class="ca-checkbox">
+                                <span class="ca-remember-label">REMEMBER ME</span>
+                            </label>
+                            <div class="ca-links-list">
+                                <a href="https://clientaccess.rjf.com/Support/Password" target="_blank" rel="noopener noreferrer" class="ca-link">FORGOT YOUR PASSWORD?</a>
+                                <a href="https://clientaccess.rjf.com/Enroll/ClientEnrollment" target="_blank" rel="noopener noreferrer" class="ca-link">ENROLL</a>
+                                <a href="https://clientaccess.rjf.com/Support/LoginHelp" target="_blank" rel="noopener noreferrer" class="ca-link">NEED HELP?</a>
+                                <a href="https://clientaccess.rjf.com/FAQ" target="_blank" rel="noopener noreferrer" class="ca-link">CONTACT US / FAQ</a>
+                                <a href="https://www.raymondjames.com/privacy-security-and-account-protection/privacy-commitment" target="_blank" rel="noopener noreferrer" class="ca-link">PRIVACY / SECURITY</a>
+                                <a href="https://www.raymondjames.com/client-resources" target="_blank" rel="noopener noreferrer" class="ca-link">CLIENT RESOURCES</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
-    <nav class="nav-right">
-        <a href="team.html" class="nav-link active">YOUR TEAM</a>
-        <a href="resources.html" class="nav-link">RESOURCES</a>
-        <a href="contact.html" class="nav-link">CONTACT US</a>
-        <a href="https://clientaccess.rjf.com" class="nav-link" target="_blank">CLIENT ACCESS</a>
-    </nav>
-    <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-</header>
-
-<!-- Mobile Navigation Drawer Overlay -->
-<div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
-
-<!-- Mobile Navigation Drawer -->
-<div class="mobile-drawer" id="mobile-drawer">
-    <div class="drawer-header">
-        <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-        <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
-    </div>
-    <nav class="drawer-nav">
-        <a href="index.html" class="drawer-link">HOME</a>
-
-        <div class="drawer-accordion-item">
-            <div class="drawer-accordion-header">
-                <a href="athletes.html" class="drawer-link drawer-accordion-main-link">ATHLETES</a>
-                <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
-                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
-                </button>
-            </div>
-            <div class="drawer-accordion-content" id="drawer-athletes-content">
-                <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
-                    <span>EMPOWERING PRO ATHLETES</span>
-                </a>
-                <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
-                    <span>OUR DIFFERENCE</span>
-                </a>
-            </div>
-        </div>
-
-        <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
-
-        <div class="drawer-accordion-item">
-            <div class="drawer-accordion-header">
-                <a href="individuals.html" class="drawer-link drawer-accordion-main-link">INDIVIDUALS</a>
-                <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn" onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
-                    <i class="fas fa-chevron-down drawer-accordion-icon"></i>
-                </button>
-            </div>
-            <div class="drawer-accordion-content" id="drawer-individuals-content">
-                <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
-                    <span>PRIVATE WEALTH</span>
-                </a>
-            </div>
-        </div>
-
-        <a href="team.html" class="drawer-link active">YOUR TEAM</a>
-        <a href="resources.html" class="drawer-link">RESOURCES</a>
-        <a href="contact.html" class="drawer-link">CONTACT US</a>
-        <a href="https://clientaccess.rjf.com" class="drawer-link btn-highlight" target="_blank">CLIENT ACCESS</a>
-    </nav>
-</div>
 
 
 <!-- ============================================================
@@ -435,6 +548,6 @@
     </div>
 </footer>
 
-<script src="team.js?v=20"></script>
+<script src="team.js?v=100"></script>
 </body>
 </html>
