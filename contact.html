@@ -4,28 +4,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Difference | The Seiler Group of Raymond James</title>
-    <meta name="description"
-        content="Distinctions you can appreciate — Discover the specialized wealth management capabilities, 100+ years of experience, and consultative process engineered for professional athletes by The Seiler Group.">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <title>Contact Us | The Seiler Group</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
-        rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Stylesheets -->
+
+    <!-- Core Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=170">
-    <link rel="stylesheet" href="athletes.css?v=30">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-surface: #0d0e11;
+            --bg-surface-elevated: #16181d;
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --accent-orange: #d89e1b;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-serif: "Playfair Display", Georgia, serif;
+            --font-sans: "Montserrat", sans-serif;
+        }
+
+        body.contact-page {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Hero Section matching exact requirements */
+        .hero-section {
+            position: relative;
+            min-height: 760px;
+            display: flex;
+            align-items: center;
+            padding: 160px 6% 90px 6%;
+            background-size: cover;
+            background-position: right top;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid var(--border-subtle);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .hero-contact-us {
+            background-image: url('assets/contact/hero-contact-us.png');
+            background-position: right top;
+            background-size: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, #050505 0%, rgba(5, 5, 5, 0.95) 40%, rgba(5, 5, 5, 0.5) 68%, rgba(5, 5, 5, 0.0) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 680px;
+            margin: 0;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-serif);
+            font-size: 3.6rem;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content h1 .accent-text {
+            display: block;
+            color: var(--accent-orange);
+            font-style: italic;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.02rem;
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+            line-height: 1.75;
+            font-family: var(--font-sans);
+        }
+
+        /* Container & Grids */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4.5rem 2rem;
+            box-sizing: border-box;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3.5rem;
+            align-items: start;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--accent-orange);
+        }
+
+        .connect-lead-text {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            font-family: var(--font-sans);
+        }
+
+        .stat-box {
+            background: linear-gradient(145deg, #16181d, #0d0e11);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0 0 0.3rem 0;
+            font-family: var(--font-sans);
+        }
+
+        .stat-source {
+            color: #666666;
+            font-size: 0.75rem;
+            font-family: var(--font-sans);
+            margin: 0;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            border-radius: 4px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+        }
+
+        .card-title {
+            font-family: var(--font-sans);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 0.4rem 0;
+        }
+
+        .card-subtext {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            margin: 0 0 1.8rem 0;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            background-color: var(--bg-surface-elevated);
+            border: 1px solid var(--border-subtle);
+            color: #fff;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            border-radius: 2px;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 10px rgba(216, 158, 27, 0.25);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 2.2rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-main);
+            cursor: pointer;
+            font-family: var(--font-sans);
+        }
+
+        .radio-label input[type="radio"] {
+            accent-color: var(--accent-orange);
+            width: 15px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        .recaptcha-disclaimer {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin: 1.5rem 0;
+            line-height: 1.5;
+            font-family: var(--font-sans);
+        }
+
+        .recaptcha-disclaimer a {
+            color: var(--text-muted);
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #fff;
+            color: #000;
+            padding: 0.9rem 1.8rem;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            font-family: var(--font-sans);
+            border-radius: 2px;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-orange);
+            color: #fff;
+        }
+
+        .form-success-alert {
+            display: none;
+            background: rgba(39, 174, 96, 0.15);
+            border: 1px solid #27ae60;
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+            color: #2ecc71;
+            font-family: var(--font-sans);
+            font-size: 13px;
+        }
+
+        @media (max-width: 992px) {
+            .hero-section {
+                min-height: 70vh;
+                padding: 120px 5% 60px 5%;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: auto;
+                padding: 110px 1.5rem 50px 1.5rem;
+                background-position: 70% center;
+            }
+            .hero-overlay {
+                background: linear-gradient(180deg, rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0.95) 100%);
+            }
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            .grid-2 {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+        }
+    </style>
 </head>
 
-<body class="athletes-page our-difference-page">
+<body class="contact-page">
 
     <!-- ============================================================
-     HEADER
+     SITE HEADER
      ============================================================ -->
     <header class="site-header" id="main-header">
 
@@ -35,7 +341,7 @@
             
             <!-- Dropdown for ATHLETES -->
             <div class="nav-dropdown-wrapper" id="athletes-dropdown">
-                <a href="athletes.html" class="nav-link nav-dropdown-trigger active" id="athletes-trigger">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
                     <span>ATHLETES</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
@@ -97,7 +403,7 @@
 
             <!-- Dropdown for CONTACT US -->
             <div class="nav-dropdown-wrapper" id="contact-dropdown">
-                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger active" id="contact-trigger">
                     <span>CONTACT US</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
@@ -163,7 +469,7 @@
             
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileAthletesAccordion(event)">
-                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link active" onclick="toggleMobileAthletesAccordion(event)">ATHLETES</a>
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileAthletesAccordion(event)">ATHLETES</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn" onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
@@ -218,13 +524,13 @@
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileContactAccordion(event)">
-                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileContactAccordion(event)">CONTACT US</a>
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link active" onclick="toggleMobileContactAccordion(event)">CONTACT US</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-contact-btn" onclick="toggleMobileContactAccordion(event)" aria-label="Toggle Contact submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
                 </div>
                 <div class="drawer-accordion-content" id="drawer-contact-content">
-                    <a href="contact.html" class="drawer-sublink" id="mob-contact-main">
+                    <a href="contact.html" class="drawer-sublink active" id="mob-contact-main">
                         <span>CONTACT US</span>
                     </a>
                     <a href="introduce-us.html" class="drawer-sublink" id="mob-introduce-us">
@@ -272,231 +578,89 @@
     </div>
 
     <!-- ============================================================
-     HERO SECTION — DISTINCTIONS YOU CAN APPRECIATE
+     HERO SECTION
      ============================================================ -->
-    <section class="diff-hero-sec">
-        <div class="diff-hero-grid">
-            <div class="diff-hero-text">
-                <h1 class="diff-hero-title">
-                    Distinctions<br>
-                    <span class="diff-gold-heading">you can appreciate</span>
-                </h1>
-                <div class="diff-hero-underline"></div>
-                <div class="diff-hero-paragraphs">
-                    <p>Finding the right advisory team to serve as your trusted <br class="ath-desktop-br">partner is essential for your financial independence and <br class="ath-desktop-br">well-being. Here are the ways we stand out – and why <br class="ath-desktop-br">we believe you should give serious consideration to <br class="ath-desktop-br">The Seiler Group of Raymond James.</p>
-                </div>
-            </div>
-            <div class="diff-hero-media">
-                <img src="assets/difference/basketball_court_diff.png" alt="Basketball Player Driving to Basket" class="diff-hero-img">
-            </div>
+    <section class="hero-section hero-contact-us">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Managing success <span class="accent-text">from sports or business</span></h1>
+            <p>While professional athletes and business titans seem to live in two greatly different worlds, they do share some key attributes. They both require the careful management and preservation of significant wealth. They need to address the financial complexities that often accompany this wealth. And the great time constraints of their careers mean they are too busy to manage their financial affairs on their own.</p>
+            <p>At The Seiler Group, we will treat you like you are our only client, catering to every need and taking ownership of every action.</p>
         </div>
     </section>
 
     <!-- ============================================================
-     SECTION 01 — OUR FINANCIAL INDUSTRY EXPERIENCE
+     CONTACT FORM SECTION
      ============================================================ -->
-    <section class="diff-row-sec diff-row-01">
-        <div class="diff-row-grid">
-            <div class="diff-col-media">
-                <img src="assets/difference/pen_notebook.png" alt="Executive Fountain Pen on Leather Notebook" class="diff-row-img diff-pen-img">
-            </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-content">
-                <div class="diff-number-heading-wrap">
-                    <span class="diff-num">01</span>
-                    <h2 class="diff-heading">Our financial industry experience</h2>
-                </div>
-                <p class="diff-body-text">You will find a team of financial professionals with more <br class="ath-desktop-br">than a century of combined industry experience, led by <br class="ath-desktop-br">Thomas A. Seiler, who has served as an NFLPA® financial <br class="ath-desktop-br">advisor since 2003.</p>
-            </div>
-        </div>
-    </section>
+    <main class="container">
+        <div class="grid-2">
+            <div>
+                <h2 class="section-title">Let's Connect</h2>
+                <p class="connect-lead-text">
+                    There is a pride and comfort in knowing that your financial affairs are being looked after and cared for in this most thorough, personal and comprehensive manner.
+                </p>
 
-    <!-- ============================================================
-     SECTION 02 — A SPECIALTY IN SERVING PROFESSIONAL ATHLETES
-     ============================================================ -->
-    <section class="diff-row-sec diff-row-02">
-        <div class="diff-row-grid diff-row-reverse">
-            <div class="diff-col-content">
-                <div class="diff-number-heading-wrap">
-                    <span class="diff-num">02</span>
-                    <h2 class="diff-heading">A specialty in serving <br class="ath-desktop-br">professional athletes</h2>
+                <div class="stat-box">
+                    <div class="stat-number">1 in 250</div>
+                    <p class="stat-desc">
+                        College athletes who go on to the pros.
+                    </p>
+                    <p class="stat-source">
+                        Source: NCAA and NAIA
+                    </p>
                 </div>
-                <p class="diff-body-text">You have significant wealth that demands careful management <br class="ath-desktop-br">and preservation. We understand the financial complexities that <br class="ath-desktop-br">pro athletes often encounter and know how to apply our prudent <br class="ath-desktop-br">wealth counsel to addressing them. Our team includes former <br class="ath-desktop-br">pro athletes who can relate well to your world, offering deep <br class="ath-desktop-br">familiarity with the life and highlights, as well as the challenges – <br class="ath-desktop-br">bridging all crossroads of your career, life and finances.</p>
             </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-media">
-                <img src="assets/difference/football_player_diff.png" alt="Professional Football Player Running in Stadium" class="diff-row-img diff-football-img">
-            </div>
-        </div>
-    </section>
 
-    <!-- ============================================================
-     SECTION 03 — WEALTH IS FREEDOM
-     ============================================================ -->
-    <section class="diff-row-sec diff-row-03">
-        <div class="diff-row-grid">
-            <div class="diff-col-media">
-                <img src="assets/difference/wealth_freedom.png" alt="Athlete on Ocean Cliff Overlooking Sunset with Luxury Yacht" class="diff-row-img diff-freedom-img">
-            </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-content">
-                <div class="diff-number-heading-wrap">
-                    <span class="diff-num">03</span>
-                    <h2 class="diff-heading">Wealth is freedom</h2>
-                </div>
-                <p class="diff-body-text">While we focus on managing and growing your wealth, what we <br class="ath-desktop-br">are really doing is helping you build freedom to achieve the life <br class="ath-desktop-br">you want to live. Wealth is the power to make things happen. It <br class="ath-desktop-br">has the capacity to turn goals into reality. It changes the question <br class="ath-desktop-br">from &ldquo;if&rdquo; to &ldquo;when.&rdquo; That is what drives us to work diligently on <br class="ath-desktop-br">your behalf. By building wealth, we know what we are really <br class="ath-desktop-br">doing is building the freedom to make it all possible.</p>
-            </div>
-        </div>
-    </section>
+            <div class="card">
+                <h3 class="card-title">Send a Message</h3>
+                <p class="card-subtext">All fields marked with (*) are required.</p>
 
-    <!-- ============================================================
-     SECTION 04 — OUR CONSULTATIVE PROCESS
-     ============================================================ -->
-    <section class="diff-row-sec diff-row-04">
-        <div class="diff-row-grid diff-row-reverse">
-            <div class="diff-col-content">
-                <div class="diff-number-heading-wrap">
-                    <span class="diff-num">04</span>
-                    <h2 class="diff-heading">Our consultative process</h2>
-                </div>
-                <p class="diff-body-text">Charting a prudent course to financial independence requires <br class="ath-desktop-br">a well-conceived, personalized plan with well-defined, long-term <br class="ath-desktop-br">goals. Our four-step wealth advisory consultative process can <br class="ath-desktop-br">help you design a cohesive plan for the future.</p>
-            </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-process">
-                <div class="diff-process-chain">
-                    <div class="diff-step-item">
-                        <div class="diff-step-circle">1</div>
+                <form id="contact-form" onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label>Name*</label>
+                        <input type="text" class="form-control" name="Name" required>
                     </div>
-                    <div class="diff-step-line"></div>
-                    <div class="diff-step-item">
-                        <div class="diff-step-circle">2</div>
-                    </div>
-                    <div class="diff-step-line"></div>
-                    <div class="diff-step-item">
-                        <div class="diff-step-circle">3</div>
-                    </div>
-                    <div class="diff-step-line"></div>
-                    <div class="diff-step-item">
-                        <div class="diff-step-circle">4</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ============================================================
-     SECTION 05 — THE FOUR PILLARS OF WEALTH MANAGEMENT
-     ============================================================ -->
-    <section class="diff-row-sec diff-row-pillars">
-        <div class="diff-row-grid">
-            <div class="diff-col-pillars-icons">
-                <div class="diff-pillars-list">
-                    <!-- 1. Lifestyle -->
-                    <div class="diff-pillar-node">
-                        <div class="diff-pillar-icon-box">
-                            <svg class="diff-pillar-svg" viewBox="0 0 64 64" fill="none" stroke="#c98226" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M32 54 C32 54 10 40 10 23 C10 14 16.5 8.5 24 8.5 C28.5 8.5 31 11 32 12.5 C33 11 35.5 8.5 40 8.5 C47.5 8.5 54 14 54 23 C54 40 32 54 32 54 Z"/>
-                            </svg>
+                    <div class="form-group">
+                        <label>Phone Number*</label>
+                        <input type="tel" class="form-control" name="Phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address*</label>
+                        <input type="email" class="form-control" name="Email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Client Type*</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="ClientType" value="Athletes" required checked> Athletes
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="ClientType" value="Business" required> Business
+                            </label>
                         </div>
-                        <span class="diff-pillar-label">Lifestyle</span>
                     </div>
 
-                    <div class="diff-pillar-sep"></div>
-
-                    <!-- 2. Assets -->
-                    <div class="diff-pillar-node">
-                        <div class="diff-pillar-icon-box">
-                            <svg class="diff-pillar-svg" viewBox="0 0 64 64" fill="none" stroke="#c98226" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M9 54V38L18 32V54"/>
-                                <path d="M21 54V24L30 17V54"/>
-                                <path d="M33 54V8H42V54"/>
-                                <path d="M45 54V28L54 34V54"/>
-                                <path d="M6 54H57"/>
-                            </svg>
-                        </div>
-                        <span class="diff-pillar-label">assets</span>
+                    <div class="form-group">
+                        <label>Comments</label>
+                        <textarea class="form-control" rows="4" name="Comments"></textarea>
                     </div>
 
-                    <div class="diff-pillar-sep"></div>
+                    <p class="recaptcha-disclaimer">
+                        This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+                    </p>
 
-                    <!-- 3. Risks -->
-                    <div class="diff-pillar-node">
-                        <div class="diff-pillar-icon-box">
-                            <svg class="diff-pillar-svg" viewBox="0 0 64 64" fill="none" stroke="#c98226" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 12 C22 14.5 28 11 32 8.5 C36 11 42 14.5 52 12 V28 C52 43 32 56 32 56 C32 56 12 43 12 28 Z"/>
-                            </svg>
-                        </div>
-                        <span class="diff-pillar-label">risks</span>
+                    <button type="submit" class="btn-primary">Submit</button>
+
+                    <div class="form-success-alert" id="form-success-msg">
+                        <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
                     </div>
-
-                    <div class="diff-pillar-sep"></div>
-
-                    <!-- 4. Liabilities -->
-                    <div class="diff-pillar-node">
-                        <div class="diff-pillar-icon-box">
-                            <svg class="diff-pillar-svg" viewBox="0 0 64 64" fill="none" stroke="#c98226" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="32" cy="10" r="3"/>
-                                <path d="M32 13V50"/>
-                                <path d="M20 54L32 50L44 54H20Z"/>
-                                <path d="M12 19H52"/>
-                                <circle cx="32" cy="19" r="1.8" fill="#c98226"/>
-                                <path d="M12 19L5 37H19L12 19Z"/>
-                                <path d="M5 37C5 41 19 41 19 37"/>
-                                <path d="M52 19L45 37H59L52 19Z"/>
-                                <path d="M45 37C45 41 59 41 59 37"/>
-                            </svg>
-                        </div>
-                        <span class="diff-pillar-label">liabilities</span>
-                    </div>
-                </div>
-            </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-content">
-                <h2 class="diff-heading diff-heading-standalone">The four pillars of <br class="ath-desktop-br">wealth management</h2>
-                <p class="diff-body-text">We believe that holistic wealth management is most effective <br class="ath-desktop-br">when it involves every aspect of your life. We look at each <br class="ath-desktop-br">client's &ldquo;big picture&rdquo; in terms of four different pillars: <br class="ath-desktop-br">Lifestyle, assets, risks and liabilities.</p>
+                </form>
             </div>
         </div>
-    </section>
-
-    <!-- ============================================================
-     SECTION 06 — OUR PARTNERSHIP WITH RAYMOND JAMES
-     ============================================================ -->
-    <section class="diff-row-sec diff-row-06">
-        <div class="diff-row-grid diff-row-reverse">
-            <div class="diff-col-content">
-                <div class="diff-number-heading-wrap">
-                    <span class="diff-num">06</span>
-                    <h2 class="diff-heading">Our partnership with<br class="ath-desktop-br">Raymond James</h2>
-                </div>
-                <p class="diff-body-text">Raymond James is one of the largest independent financial <br class="ath-desktop-br">services firms in America, giving us access to its robust <br class="ath-desktop-br">resources and sophisticated products, while never <br class="ath-desktop-br">compromising our ability to focus on what&rsquo;s most important &ndash; <br class="ath-desktop-br">offering objective advice and putting your best interests first.</p>
-            </div>
-            <div class="diff-v-divider"></div>
-            <div class="diff-col-media">
-                <img src="assets/difference/raymond_james_sign.png" alt="Raymond James Headquarters" class="diff-row-img diff-rj-img">
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-     STAT CALLOUT — AVERAGE RETIREMENT AGE 28
-     ============================================================ -->
-    <section class="diff-stat-callout-sec">
-        <div class="diff-stat-callout-grid">
-            <div class="diff-stat-ball-media">
-                <img src="assets/difference/basketball_diff.png" alt="Basketball on Hardwood Court" class="diff-stat-ball-img">
-            </div>
-            <div class="diff-stat-text-col">
-                <div class="diff-stat-number-wrap">
-                    <span class="diff-stat-big-num">28</span>
-                    <div class="diff-stat-v-divider"></div>
-                    <div class="diff-stat-label-wrap">
-                        <h3 class="diff-stat-title">Average retirement age <br class="ath-desktop-br">of an NBA player</h3>
-                        <p class="diff-stat-source">Source: sportscasting.com, 2022</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <!-- ============================================================
      CHAMPION STRIP
@@ -511,8 +675,7 @@
             <div class="champ-socials">
                 <a href="#" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i
-                        class="fas fa-envelope"></i></a>
+                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
 
@@ -536,43 +699,30 @@
 
         <div class="footer-addresses">
             <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F: 215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite 1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
                 <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong> <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
                 <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
         </div>
 
         <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2025 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is not responsible for the content of any website or the collection or use of information regarding any website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
             </p>
         </div>
     </footer>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
     <script>
         function toggleMobileMenu(e) {
             if (e) {
@@ -669,6 +819,20 @@
                 btn.classList.toggle('active');
                 content.classList.toggle('open');
             }
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            const form = document.getElementById('contact-form');
+            const successMsg = document.getElementById('form-success-msg');
+            if (form && successMsg) {
+                successMsg.style.display = 'block';
+                form.reset();
+                setTimeout(() => {
+                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            }
+            return false;
         }
 
         document.addEventListener('DOMContentLoaded', () => {

@@ -14,7 +14,7 @@
         href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=160">
+    <link rel="stylesheet" href="styles.css?v=170">
     <link rel="stylesheet" href="athletes.css?v=30">
 </head>
 
@@ -91,7 +91,18 @@
                 </div>
             </div>
 
-            <a href="contact.html" class="nav-link">CONTACT US</a>
+            <!-- Dropdown for CONTACT US -->
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
 
             <!-- Dropdown for CLIENT ACCESS -->
             <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
@@ -201,7 +212,22 @@
                 </div>
             </div>
 
-            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileContactAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileContactAccordion(event)">CONTACT US</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-contact-btn" onclick="toggleMobileContactAccordion(event)" aria-label="Toggle Contact submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-contact-content">
+                    <a href="contact.html" class="drawer-sublink" id="mob-contact-main">
+                        <span>CONTACT US</span>
+                    </a>
+                    <a href="introduce-us.html" class="drawer-sublink" id="mob-introduce-us">
+                        <span>INTRODUCE US</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileClientAccessAccordion(event)">
@@ -534,6 +560,19 @@
             }
         }
 
+        function toggleMobileContactAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-contact-btn');
+            var content = document.getElementById('drawer-contact-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
         function toggleMobileClientAccessAccordion(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
@@ -576,6 +615,8 @@
             const indMenu = document.getElementById('individuals-menu');
             const resWrapper = document.getElementById('resources-dropdown');
             const resMenu = document.getElementById('resources-menu');
+            const conWrapper = document.getElementById('contact-dropdown');
+            const conMenu = document.getElementById('contact-menu');
             const caWrapper = document.getElementById('client-access-dropdown');
             const caMenu = document.getElementById('client-access-menu');
 
@@ -591,6 +632,10 @@
                 if (resWrapper && resMenu && !resWrapper.contains(e.target)) {
                     resMenu.classList.remove('show');
                     resWrapper.classList.remove('active');
+                }
+                if (conWrapper && conMenu && !conWrapper.contains(e.target)) {
+                    conMenu.classList.remove('show');
+                    conWrapper.classList.remove('active');
                 }
                 if (caWrapper && caMenu && !caWrapper.contains(e.target)) {
                     caMenu.classList.remove('show');
