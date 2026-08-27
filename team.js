@@ -474,6 +474,19 @@ function toggleMobileAthletesAccordion(e) {
   }
 }
 
+function toggleMobileTitansAccordion(e) {
+  if (e) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+  }
+  var btn = document.getElementById('drawer-titans-btn');
+  var content = document.getElementById('drawer-titans-content');
+  if (btn && content) {
+    btn.classList.toggle('active');
+    content.classList.toggle('open');
+  }
+}
+
 function toggleMobileIndividualsAccordion(e) {
   if (e) {
     if (e.preventDefault) e.preventDefault();
@@ -553,6 +566,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const athWrapper = document.getElementById('athletes-dropdown');
   const athMenu = document.getElementById('athletes-menu');
+  const titWrapper = document.getElementById('titans-dropdown');
+  const titMenu = document.getElementById('titans-menu');
   const indWrapper = document.getElementById('individuals-dropdown');
   const indMenu = document.getElementById('individuals-menu');
   const resWrapper = document.getElementById('resources-dropdown');
@@ -566,6 +581,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
       athMenu.classList.remove('show');
       athWrapper.classList.remove('active');
+    }
+    if (titWrapper && titMenu && !titWrapper.contains(e.target)) {
+      titMenu.classList.remove('show');
+      titWrapper.classList.remove('active');
     }
     if (indWrapper && indMenu && !indWrapper.contains(e.target)) {
       indMenu.classList.remove('show');
@@ -583,6 +602,19 @@ document.addEventListener('DOMContentLoaded', () => {
       caMenu.classList.remove('show');
       caWrapper.classList.remove('active');
     }
+  });
+
+  // Auto-close mobile drawer on in-page anchor navigation
+  document.querySelectorAll('.drawer-sublink').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (href && (href.startsWith('#') || href.includes('business-titans.html#'))) {
+        const drawer = document.getElementById('mobile-drawer');
+        if (drawer && drawer.classList.contains('active')) {
+          toggleMobileMenu(e);
+        }
+      }
+    });
   });
 });
 

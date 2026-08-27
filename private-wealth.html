@@ -50,7 +50,21 @@
                 </div>
             </div>
 
-            <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
+                        <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELLING VISIONARIES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
             
             <!-- Dropdown for INDIVIDUALS -->
             <div class="nav-dropdown-wrapper" id="individuals-dropdown">
@@ -179,7 +193,22 @@
                 </div>
             </div>
 
-            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+                        <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileTitansAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileTitansAccordion(event)">BUSINESS TITANS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-titans-btn" onclick="toggleMobileTitansAccordion(event)" aria-label="Toggle Business Titans submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-titans-content">
+                    <a href="counseling-visionaries.html" class="drawer-sublink" id="mob-titans-counselling">
+                        <span>COUNSELLING VISIONARIES</span>
+                    </a>
+                    <a href="our-difference.html" class="drawer-sublink" id="mob-titans-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileIndividualsAccordion(event)">
@@ -813,13 +842,26 @@
             }
         }
 
-        function toggleMobileAthletesAccordion(e) {
+                function toggleMobileAthletesAccordion(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
                 if (e.stopPropagation) e.stopPropagation();
             }
             var btn = document.getElementById('drawer-athletes-btn');
             var content = document.getElementById('drawer-athletes-content');
+            if (btn && content) {
+                btn.classList.toggle('active');
+                content.classList.toggle('open');
+            }
+        }
+
+        function toggleMobileTitansAccordion(e) {
+            if (e) {
+                if (e.preventDefault) e.preventDefault();
+                if (e.stopPropagation) e.stopPropagation();
+            }
+            var btn = document.getElementById('drawer-titans-btn');
+            var content = document.getElementById('drawer-titans-content');
             if (btn && content) {
                 btn.classList.toggle('active');
                 content.classList.toggle('open');
@@ -933,6 +975,17 @@
                     caMenu.classList.remove('show');
                     caWrapper.classList.remove('active');
                 }
+            // Auto-close mobile drawer on in-page anchor navigation
+            document.querySelectorAll('.drawer-sublink').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && (href.startsWith('#') || href.includes('business-titans.html#'))) {
+                        const drawer = document.getElementById('mobile-drawer');
+                        if (drawer && drawer.classList.contains('active')) {
+                            toggleMobileMenu(e);
+                        }
+                    }
+                });
             });
         });
     </script>

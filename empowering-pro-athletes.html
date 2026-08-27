@@ -5,20 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empowering Pro Athletes | The Seiler Group of Raymond James</title>
-    <meta name="description"
-        content="Empowering pro athletes with dedicated wealth management, contract guidance, and post-career financial planning by The Seiler Group.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Prata&family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
         rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=170">
-    <link rel="stylesheet" href="athletes.css?v=30">
+    <link rel="stylesheet" href="athletes.css?v=36">
 </head>
 
-<body class="athletes-page">
+<body class="athletes-page empowering-page">
 
     <!-- ============================================================
      HEADER
@@ -30,13 +32,13 @@
             <a href="index.html" class="nav-link">HOME</a>
             
             <!-- Dropdown for ATHLETES -->
-            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+            <div class="nav-dropdown-wrapper active" id="athletes-dropdown">
                 <a href="athletes.html" class="nav-link nav-dropdown-trigger active" id="athletes-trigger">
                     <span>ATHLETES</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
-                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item active" id="nav-item-empowering">
                         EMPOWERING PRO ATHLETES
                     </a>
                     <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
@@ -45,7 +47,21 @@
                 </div>
             </div>
 
-            <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELLING VISIONARIES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
             
             <!-- Dropdown for INDIVIDUALS -->
             <div class="nav-dropdown-wrapper" id="individuals-dropdown">
@@ -165,7 +181,7 @@
                     </button>
                 </div>
                 <div class="drawer-accordion-content" id="drawer-athletes-content">
-                    <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                    <a href="empowering-pro-athletes.html" class="drawer-sublink active" id="mob-empowering">
                         <span>EMPOWERING PRO ATHLETES</span>
                     </a>
                     <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
@@ -174,7 +190,22 @@
                 </div>
             </div>
 
-            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileTitansAccordion(event)">
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileTitansAccordion(event)">BUSINESS TITANS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-titans-btn" onclick="toggleMobileTitansAccordion(event)" aria-label="Toggle Business Titans submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-titans-content">
+                    <a href="counseling-visionaries.html" class="drawer-sublink" id="mob-titans-counselling">
+                        <span>COUNSELLING VISIONARIES</span>
+                    </a>
+                    <a href="our-difference.html" class="drawer-sublink" id="mob-titans-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileIndividualsAccordion(event)">
@@ -278,9 +309,9 @@
                     <span class="emp-gold-heading">pro athletes</span>
                 </h1>
                 <div class="emp-hero-paragraphs">
-                    <p>While your college and pro coaches help you make the most <br class="ath-desktop-br">of your athletic talent and ability, we are here to help you <br class="ath-desktop-br">manage the financial rewards that come with a pro career. <br class="ath-desktop-br">We know how to work within the special circumstances <br class="ath-desktop-br">of professional athletes.</p>
-                    <p>We want you to see The Seiler Group as your financial <br class="ath-desktop-br">quarterback, here to help you make informed and confident <br class="ath-desktop-br">financial decisions throughout your life and career. We place <br class="ath-desktop-br">a high value on a relationship based on integrity, accountability <br class="ath-desktop-br">and an in-depth understanding of your goals and needs.</p>
-                    <p>With our combination of experience and skill, we can deliver <br class="ath-desktop-br">tailored investment strategies designed to help you manage <br class="ath-desktop-br">and preserve your wealth.</p>
+                    <p>While your college and pro coaches help you make the most of your athletic talent and ability, we are here to help you manage the financial rewards that come with a pro career. We know how to work within the special circumstances of professional athletes.</p>
+                    <p>We want you to see The Seiler Group as your financial quarterback, here to help you make informed and confident financial decisions throughout your life and career. We place a high value on a relationship based on integrity, accountability and an in-depth understanding of your goals and needs.</p>
+                    <p>With our combination of experience and skill, we can deliver tailored investment strategies designed to help you manage and preserve your wealth.</p>
                 </div>
             </div>
             <div class="emp-hero-media">
@@ -427,49 +458,27 @@
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
-                <span class="addr-bold">5 Caufield Place</span>
-                <span class="addr-sep">//</span>
-                <span>Suite 201</span>
-                <span class="addr-sep">//</span>
-                <span>Newtown, PA 18940-9434</span>
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
-            <div class="addr-row addr-contacts">
-                <span>T: 215.860.7823</span>
-                <span class="addr-sep">//</span>
-                <span>TF: +1.855.473.4537</span>
-                <span class="addr-sep">//</span>
-                <span>F: 215.860.7829</span>
-                <span class="addr-sep">//</span>
-                <a href="#" class="map-link">Map &amp; Directions</a>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
-            <div class="addr-row addr-secondary">
-                <span class="addr-bold">201 East Las Olas Boulevard</span>
-                <span class="addr-sep">//</span>
-                <span>Suite 1630</span>
-                <span class="addr-sep">//</span>
-                <span>Fort Lauderdale, FL 33301-4439</span>
-            </div>
-            <div class="addr-row addr-secondary-map">
-                <a href="#" class="map-link">Map &amp; Directions</a>
-            </div>
-            <div class="addr-row addr-secondary">
-                <span class="addr-bold">14541 Hope Center Loop</span>
-                <span class="addr-sep">//</span>
-                <span>Suite 100</span>
-                <span class="addr-sep">//</span>
-                <span>Fort Myers, FL 33912</span>
-            </div>
-            <div class="addr-row addr-secondary-map">
-                <a href="#" class="map-link">Map &amp; Directions</a>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
         </div>
 
         <div class="footer-legal">
-            <p>Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC. Investment advisory
-                services offered through Raymond James Financial Services Advisors, Inc. The Seiler Group is not a
-                registered broker/dealer and is independent of Raymond James Financial Services.</p>
             <p>Raymond James financial advisors may only conduct business with residents of the states and/or
                 jurisdictions for which they are properly registered. Therefore, a response to a request for information
                 may be delayed. Please note that not all of the investments and services mentioned are available in
@@ -480,170 +489,16 @@
                 endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
                 not responsible for the content of any website or the collection or use of information regarding any
                 website's users and/or members.</p>
-            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a href="#">New York Stock
-                    Exchange</a> / <a href="#">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
+            <p class="footer-copy">© 2025 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
                     href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
             </p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script>
-        function toggleMobileMenu(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            const toggleBtn = document.getElementById('mobile-toggle');
-
-            if (!drawer) return;
-
-            const isOpen = drawer.classList.contains('active');
-
-            if (isOpen) {
-                drawer.classList.remove('active');
-                if (overlay) overlay.classList.remove('active');
-                if (toggleBtn) toggleBtn.classList.remove('active');
-                document.documentElement.classList.remove('menu-open');
-                document.body.classList.remove('menu-open');
-                document.body.style.overflow = '';
-                document.documentElement.style.overflow = '';
-            } else {
-                drawer.classList.add('active');
-                if (overlay) overlay.classList.add('active');
-                if (toggleBtn) toggleBtn.classList.add('active');
-                document.documentElement.classList.add('menu-open');
-                document.body.classList.add('menu-open');
-                document.body.style.overflow = 'hidden';
-                document.documentElement.style.overflow = 'hidden';
-            }
-        }
-
-        function toggleMobileAthletesAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            var btn = document.getElementById('drawer-athletes-btn');
-            var content = document.getElementById('drawer-athletes-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
-        }
-
-        function toggleMobileIndividualsAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            var btn = document.getElementById('drawer-individuals-btn');
-            var content = document.getElementById('drawer-individuals-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
-        }
-
-        function toggleMobileResourcesAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            var btn = document.getElementById('drawer-resources-btn');
-            var content = document.getElementById('drawer-resources-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
-        }
-
-        function toggleMobileContactAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            var btn = document.getElementById('drawer-contact-btn');
-            var content = document.getElementById('drawer-contact-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
-        }
-
-        function toggleMobileClientAccessAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
-            var btn = document.getElementById('drawer-ca-btn');
-            var content = document.getElementById('drawer-ca-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const drawer = document.getElementById('mobile-drawer');
-            const header = document.getElementById('main-header');
-
-            // Close drawer on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
-                    toggleMobileMenu(e);
-                }
-            });
-
-            // Sticky Header with Glassmorphism on Scroll
-            window.addEventListener('scroll', () => {
-                if (header) {
-                    if (window.scrollY > 40) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                }
-            });
-
-            // Desktop Dropdowns Click-Outside Handlers
-            const athWrapper = document.getElementById('athletes-dropdown');
-            const athMenu = document.getElementById('athletes-menu');
-            const indWrapper = document.getElementById('individuals-dropdown');
-            const indMenu = document.getElementById('individuals-menu');
-            const resWrapper = document.getElementById('resources-dropdown');
-            const resMenu = document.getElementById('resources-menu');
-            const conWrapper = document.getElementById('contact-dropdown');
-            const conMenu = document.getElementById('contact-menu');
-            const caWrapper = document.getElementById('client-access-dropdown');
-            const caMenu = document.getElementById('client-access-menu');
-
-            document.addEventListener('click', (e) => {
-                if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
-                    athMenu.classList.remove('show');
-                    athWrapper.classList.remove('active');
-                }
-                if (indWrapper && indMenu && !indWrapper.contains(e.target)) {
-                    indMenu.classList.remove('show');
-                    indWrapper.classList.remove('active');
-                }
-                if (resWrapper && resMenu && !resWrapper.contains(e.target)) {
-                    resMenu.classList.remove('show');
-                    resWrapper.classList.remove('active');
-                }
-                if (conWrapper && conMenu && !conWrapper.contains(e.target)) {
-                    conMenu.classList.remove('show');
-                    conWrapper.classList.remove('active');
-                }
-                if (caWrapper && caMenu && !caWrapper.contains(e.target)) {
-                    caMenu.classList.remove('show');
-                    caWrapper.classList.remove('active');
-                }
-            });
-        });
-    </script>
+    <!-- SCRIPT -->
+    <script src="team.js"></script>
 </body>
 
 </html>

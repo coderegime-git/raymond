@@ -1,0 +1,424 @@
+/* ============================================================
+   PRESS RELEASES & RESOURCES PAGE STYLES
+   ============================================================ */
+
+.pr-hero-sec {
+    position: relative;
+    min-height: 75vh;
+    margin-top: 95px;
+    display: flex;
+    align-items: center;
+    padding: 5rem 6%;
+    background-color: #080808;
+    background-image: url('assets/press-releases/hero-press-releases.png');
+    background-size: cover;
+    background-position: right 25%;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.pr-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #080808 0%, rgba(8, 8, 8, 0.94) 42%, rgba(8, 8, 8, 0.35) 75%, rgba(8, 8, 8, 0.1) 100%);
+    z-index: 1;
+}
+
+.pr-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+}
+
+.pr-hero-content h1 {
+    font-family: 'Prata', 'Playfair Display', Georgia, serif;
+    font-size: clamp(38px, 3.6vw, 56px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.pr-hero-content h1 .accent-text {
+    display: block;
+    color: #d48b38;
+    font-style: italic;
+    margin-top: 4px;
+}
+
+.pr-hero-content p {
+    color: #a0a5ab;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.76;
+    margin-bottom: 1.2rem;
+    max-width: 580px;
+}
+
+/* Main Container */
+.pr-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5.5rem 24px;
+}
+
+.pr-section-title {
+    font-family: 'Prata', 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: #d48b38;
+    letter-spacing: -0.3px;
+}
+
+.pr-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 3rem;
+    margin-bottom: 5rem;
+}
+
+.pr-card {
+    background: #111215;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2.8rem;
+    border-radius: 6px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    box-sizing: border-box !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pr-card:hover {
+    border-color: rgba(212, 139, 56, 0.35);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.pr-card-highlight {
+    border-left: 3px solid #d48b38;
+}
+
+/* Worthwhile Magazine Block */
+.worthwhile-feature-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.worthwhile-wrapper {
+    margin: 1.8rem 0 2.2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.worthwhile-pdf-link {
+    display: inline-block;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.worthwhile-cover-image {
+    max-width: 100%;
+    width: 270px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7);
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    display: block;
+}
+
+.worthwhile-pdf-link:hover .worthwhile-cover-image {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 45px rgba(212, 139, 56, 0.25);
+}
+
+.worthwhile-box {
+    background: linear-gradient(145deg, #16181e 0%, #101115 100%);
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    border: 1px solid rgba(212, 139, 56, 0.35);
+    border-radius: 6px;
+    position: relative;
+}
+
+.worthwhile-box h3 {
+    color: #ffffff;
+    font-family: 'Prata', 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+}
+
+.worthwhile-box p {
+    color: #a0a5ab;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    margin-bottom: 1.6rem;
+}
+
+/* Press Releases List */
+.pr-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0;
+}
+
+.pr-list-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 1.1rem 0.8rem;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background-color 0.25s ease, padding-left 0.25s ease;
+}
+
+.pr-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding-left: 1.2rem;
+}
+
+.pr-list-item:last-child {
+    border-bottom: none;
+}
+
+.pr-item-title {
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.45;
+    transition: color 0.2s ease;
+}
+
+.pr-list-item:hover .pr-item-title {
+    color: #f3c27e;
+}
+
+.pr-item-date {
+    color: #d48b38;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Buttons & Links */
+.pr-btn-primary {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 13px 32px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-radius: 0;
+}
+
+.pr-btn-primary:hover {
+    background-color: #d48b38;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 139, 56, 0.4);
+}
+
+/* Related Resources Grid */
+.pr-grid-3 {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 1.8rem !important;
+    align-items: stretch !important;
+}
+
+.pr-grid-3 .pr-card {
+    padding: 2.2rem 2rem !important;
+}
+
+.pr-grid-3 .pr-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 139, 56, 0.5);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6);
+}
+
+.pr-card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-grow: 1 !important;
+    margin-bottom: 1.6rem !important;
+}
+
+.pr-card-footer {
+    margin-top: auto !important;
+    padding-top: 0 !important;
+}
+
+.pr-resource-category {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #d48b38;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
+}
+
+.pr-resource-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    color: #ffffff;
+    margin-bottom: 0.9rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.pr-resource-snippet {
+    color: #a0a5ab;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    margin-bottom: 0 !important;
+    font-weight: 300;
+    flex-grow: 1 !important;
+}
+
+.pr-link-action {
+    color: #d48b38;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.25s ease;
+}
+
+.pr-link-action:hover {
+    color: #ffffff;
+    gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .pr-hero-sec {
+        background-position: right 25%;
+        min-height: 68vh;
+        padding: 4.5rem 5%;
+    }
+}
+
+@media (max-width: 900px) {
+    .pr-hero-sec {
+        margin-top: 78px !important;
+        padding: 0 !important;
+        min-height: auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background-image: none !important;
+        background-color: #080808 !important;
+    }
+
+    .pr-hero-sec::before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 280px;
+        min-height: 280px;
+        background-image: url('assets/press-releases/hero-press-releases.png');
+        background-size: cover;
+        background-position: center 25%;
+        background-repeat: no-repeat;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .pr-hero-overlay {
+        display: none !important;
+    }
+
+    .pr-hero-content {
+        padding: 36px 20px 40px 20px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        background: #080808 !important;
+    }
+
+    .pr-hero-content h1 {
+        font-size: clamp(28px, 7.5vw, 38px) !important;
+        margin-bottom: 1rem !important;
+        line-height: 1.15 !important;
+    }
+
+    .pr-hero-content p {
+        font-size: 14.5px !important;
+        line-height: 1.68 !important;
+    }
+
+    .pr-container {
+        padding: 45px 20px !important;
+    }
+
+    .pr-grid-2 {
+        grid-template-columns: 1fr !important;
+        gap: 2.2rem !important;
+        margin-bottom: 3.5rem !important;
+    }
+
+    .pr-card {
+        padding: 24px 20px !important;
+    }
+
+    .worthwhile-wrapper {
+        margin: 1.4rem 0 1.6rem;
+    }
+
+    .worthwhile-cover-image {
+        max-width: 220px;
+    }
+
+    .worthwhile-box {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .worthwhile-box h3 {
+        font-size: 1.35rem;
+    }
+
+    .pr-grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+}
+
+@media (max-width: 540px) {
+    .pr-btn-primary {
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+}
