@@ -40,10 +40,10 @@
         /* Hero Section matching exact requirements */
         .hero-section {
             position: relative;
-            min-height: 760px;
+            min-height: 640px;
             display: flex;
-            align-items: center;
-            padding: 160px 6% 90px 6%;
+            align-items: flex-start;
+            padding: 150px 6% 70px 6%;
             background-size: cover;
             background-position: right top;
             background-repeat: no-repeat;
@@ -92,12 +92,13 @@
         }
 
         .hero-content p {
-            color: var(--text-muted);
-            font-size: 1.02rem;
+            color: #dbe2ea;
+            font-size: 17px;
             margin-bottom: 1.25rem;
             font-weight: 300;
-            line-height: 1.75;
-            font-family: var(--font-sans);
+            line-height: 1.72;
+            font-family: 'Open Sans', var(--font-sans);
+            letter-spacing: 0.15px;
         }
 
         /* Container & Grids */
@@ -124,12 +125,13 @@
         }
 
         .connect-lead-text {
-            color: var(--text-muted);
-            font-size: 0.98rem;
-            line-height: 1.7;
+            color: #c9d2dc;
+            font-size: 17px;
+            line-height: 1.76;
             font-weight: 300;
             margin-bottom: 2rem;
-            font-family: var(--font-sans);
+            font-family: 'Open Sans', var(--font-sans);
+            letter-spacing: 0.15px;
         }
 
         .stat-box {
@@ -143,19 +145,31 @@
 
         .stat-number {
             font-family: var(--font-serif);
-            font-size: 3.5rem;
+            font-size: clamp(2.3rem, 3.2vw, 3rem);
             color: var(--accent-orange);
-            line-height: 1;
-            margin-bottom: 0.5rem;
+            line-height: 1.1;
+            margin-bottom: 0.6rem;
             font-weight: 700;
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+
+        .stat-number .stat-curr {
+            font-family: 'Montserrat', -apple-system, sans-serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 2px;
+            display: inline-block;
         }
 
         .stat-desc {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: #c9d2dc;
+            font-size: 16px;
             line-height: 1.6;
             margin: 0 0 0.3rem 0;
-            font-family: var(--font-sans);
+            font-family: 'Open Sans', var(--font-sans);
+            font-weight: 300;
         }
 
         .stat-source {
@@ -320,6 +334,17 @@
             .hero-content h1 {
                 font-size: 2.3rem;
             }
+            .hero-content p {
+                font-size: 16px !important;
+                line-height: 1.68 !important;
+            }
+            .connect-lead-text {
+                font-size: 16px !important;
+                line-height: 1.72 !important;
+            }
+            .stat-desc {
+                font-size: 15px !important;
+            }
             .grid-2 {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
@@ -355,7 +380,7 @@
                 </div>
             </div>
 
-                        <!-- Dropdown for BUSINESS TITANS -->
+            <!-- Dropdown for BUSINESS TITANS -->
             <div class="nav-dropdown-wrapper" id="titans-dropdown">
                 <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
                     <span>BUSINESS TITANS</span>
@@ -498,7 +523,7 @@
                 </div>
             </div>
 
-                        <div class="drawer-accordion-item">
+            <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileTitansAccordion(event)">
                     <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileTitansAccordion(event)">BUSINESS TITANS</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-titans-btn" onclick="toggleMobileTitansAccordion(event)" aria-label="Toggle Business Titans submenu">
@@ -630,12 +655,12 @@
                 </p>
 
                 <div class="stat-box">
-                    <div class="stat-number">1 in 250</div>
+                    <div class="stat-number"><span class="stat-curr">$</span>24.7 million</div>
                     <p class="stat-desc">
-                        College athletes who go on to the pros.
+                        Average career earnings of an NBA player
                     </p>
                     <p class="stat-source">
-                        Source: NCAA and NAIA
+                        Source: sportscasting.com, 2020
                     </p>
                 </div>
             </div>
@@ -704,7 +729,8 @@
             <div class="champ-socials">
                 <a href="#" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i
+                        class="fas fa-envelope"></i></a>
             </div>
         </div>
 
@@ -728,23 +754,38 @@
 
         <div class="footer-addresses">
             <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F: 215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite 1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
                 <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong> <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
                 <p><a href="#" target="_blank">Map &amp; Directions</a></p>
             </div>
         </div>
 
         <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is not responsible for the content of any website or the collection or use of information regarding any website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
             </p>
         </div>
     </footer>
@@ -785,7 +826,7 @@
             }
         }
 
-                function toggleMobileAthletesAccordion(e) {
+        function toggleMobileAthletesAccordion(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
                 if (e.stopPropagation) e.stopPropagation();
@@ -932,6 +973,8 @@
                     caMenu.classList.remove('show');
                     caWrapper.classList.remove('active');
                 }
+            });
+
             // Auto-close mobile drawer on in-page anchor navigation
             document.querySelectorAll('.drawer-sublink').forEach(link => {
                 link.addEventListener('click', (e) => {

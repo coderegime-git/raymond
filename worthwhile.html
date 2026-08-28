@@ -4,250 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introduce Us | The Seiler Group</title>
-
+    <title>WorthWhile Magazine | The Seiler Group of Raymond James</title>
+    <meta name="description" content="Read WorthWhile Magazine from The Seiler Group of Raymond James — quarterly perspectives on wealth, business strategy, and purposeful living.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Core Stylesheets -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=170">
-    <link rel="stylesheet" href="contact.css?v=20">
-    <style>
-        /* Exact styles matching new requirements introduce-us.html */
-        .hero-section {
-            position: relative;
-            min-height: 640px;
-            background-size: cover;
-            background-position: right top;
-            background-repeat: no-repeat;
-            display: flex;
-            align-items: flex-start;
-            padding: 150px 6% 70px 6%;
-            overflow: hidden;
-            box-sizing: border-box;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .hero-introduce-us {
-            background-image: url('assets/contact/hero-introduce-us.png');
-            background-position: right top;
-            background-size: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, #050505 0%, rgba(5, 5, 5, 0.95) 40%, rgba(5, 5, 5, 0.5) 68%, rgba(5, 5, 5, 0.0) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 640px;
-            margin: 0;
-        }
-
-        .hero-content h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 3.6rem;
-            font-weight: 400;
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
-            color: #ffffff;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-content h1 .accent-text {
-            display: block;
-            color: #d89e1b;
-            font-style: italic;
-        }
-
-        .hero-content p {
-            max-width: 580px;
-            color: #dbe2ea;
-            font-size: 17px;
-            margin-bottom: 1.2rem;
-            font-weight: 300;
-            line-height: 1.72;
-            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            letter-spacing: 0.15px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4.5rem 2rem;
-            box-sizing: border-box;
-        }
-
-        .card {
-            background: #0d0e11;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 2.5rem;
-            border-radius: 4px;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            color: #d89e1b;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.5rem;
-            color: rgba(255, 255, 255, 0.7);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 0.85rem 1rem;
-            background-color: #16181d;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            border-radius: 2px;
-            box-sizing: border-box;
-            transition: border-color 0.25s ease;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #d89e1b;
-            box-shadow: 0 0 10px rgba(216, 158, 27, 0.25);
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 2rem;
-            margin-top: 0.5rem;
-        }
-
-        .radio-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            color: #ffffff;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .radio-label input[type="radio"] {
-            accent-color: #d89e1b;
-        }
-
-        .recaptcha-disclaimer {
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.5);
-            margin: 1.5rem 0;
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.5;
-        }
-
-        .recaptcha-disclaimer a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: underline;
-        }
-
-        .btn-primary {
-            background-color: #d89e1b;
-            color: #080a0f;
-            padding: 0.95rem 1.8rem;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            border-radius: 2px;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .btn-primary:hover {
-            background-color: #ffffff;
-            color: #080a0f;
-            box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);
-        }
-
-        .form-success-alert {
-            display: none;
-            background: rgba(39, 174, 96, 0.15);
-            border: 1px solid #27ae60;
-            border-radius: 4px;
-            padding: 16px;
-            margin-top: 16px;
-            color: #2ecc71;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-        }
-
-        @media (max-width: 992px) {
-            .hero-section {
-                min-height: 70vh;
-                padding: 120px 5% 60px 5%;
-            }
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-section {
-                min-height: auto;
-                padding: 110px 1.5rem 50px 1.5rem;
-                background-position: 70% center;
-            }
-            .hero-overlay {
-                background: linear-gradient(180deg, rgba(8, 8, 8, 0.85) 0%, rgba(8, 8, 8, 0.95) 100%);
-            }
-            .hero-content h1 {
-                font-size: 2.3rem;
-            }
-            .hero-content p {
-                font-size: 16px !important;
-                line-height: 1.68 !important;
-            }
-            .container {
-                padding: 3.5rem 1.25rem;
-            }
-            .card {
-                padding: 1.8rem 1.4rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="press-releases.css?v=40">
 </head>
 
-<body class="introduce-us-page">
+<body class="athletes-page resources-page worthwhile-page">
 
     <!-- ============================================================
-     SITE HEADER
+     HEADER
      ============================================================ -->
     <header class="site-header" id="main-header">
 
@@ -312,9 +89,9 @@
         <nav class="nav-right">
             <a href="team.html" class="nav-link">YOUR TEAM</a>
             
-            <!-- Dropdown for RESOURCES -->
-            <div class="nav-dropdown-wrapper" id="resources-dropdown">
-                <a href="resources.html" class="nav-link nav-dropdown-trigger" id="resources-trigger">
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
                     <span>RESOURCES</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
@@ -325,20 +102,20 @@
                     <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="nav-item-investment-strategy">
                         INVESTMENT STRATEGY QUARTERLY
                     </a>
-                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                    <a href="worthwhile.html" class="nav-dropdown-item active" id="nav-item-worthwhile">
                         WORTHWHILE
                     </a>
                 </div>
             </div>
 
             <!-- Dropdown for CONTACT US -->
-            <div class="nav-dropdown-wrapper active" id="contact-dropdown">
-                <a href="contact.html" class="nav-link nav-dropdown-trigger active" id="contact-trigger">
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
                     <span>CONTACT US</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
-                    <a href="introduce-us.html" class="nav-dropdown-item active" id="nav-item-introduce-us">
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
                         INTRODUCE US
                     </a>
                 </div>
@@ -461,7 +238,7 @@
                     <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="drawer-sublink" id="mob-investment-strategy">
                         <span>INVESTMENT STRATEGY QUARTERLY</span>
                     </a>
-                    <a href="worthwhile.html" class="drawer-sublink" id="mob-worthwhile">
+                    <a href="worthwhile.html" class="drawer-sublink active" id="mob-worthwhile">
                         <span>WORTHWHILE</span>
                     </a>
                 </div>
@@ -469,7 +246,7 @@
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header" style="cursor: pointer;" onclick="toggleMobileContactAccordion(event)">
-                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link active" onclick="toggleMobileContactAccordion(event)">CONTACT US</a>
+                    <a href="javascript:void(0)" class="drawer-link drawer-accordion-main-link" onclick="toggleMobileContactAccordion(event)">CONTACT US</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-contact-btn" onclick="toggleMobileContactAccordion(event)" aria-label="Toggle Contact submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
@@ -478,7 +255,7 @@
                     <a href="contact.html" class="drawer-sublink" id="mob-contact-main">
                         <span>CONTACT US</span>
                     </a>
-                    <a href="introduce-us.html" class="drawer-sublink active" id="mob-introduce-us">
+                    <a href="introduce-us.html" class="drawer-sublink" id="mob-introduce-us">
                         <span>INTRODUCE US</span>
                     </a>
                 </div>
@@ -523,83 +300,75 @@
     </div>
 
     <!-- ============================================================
-     HERO SECTION
+     HERO SECTION — WORTHWHILE MAGAZINE
      ============================================================ -->
-    <section class="hero-section hero-introduce-us">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1>Your personal referral <span class="accent-text">is highly valued and appreciated</span></h1>
-            <p>Many of our new clients have come via referrals from our current clients or other professional advisors with whom we collaborate. If you wish to refer someone who could benefit from our financial acumen, we thank you and want you to know we will treat the information provided with the urgency and discretion it deserves.</p>
+    <section class="pr-hero-sec">
+        <div class="pr-hero-overlay"></div>
+        <div class="pr-hero-content">
+            <h1>WorthWhile <span class="accent-text">Magazine</span></h1>
+            <p>Stay up to date with the latest awards, recognition, and insights from Thomas A. Seiler and The Seiler Group.</p>
         </div>
     </section>
 
     <!-- ============================================================
-     REFERRAL FORM SECTION
+     WORTHWHILE CONTENT
      ============================================================ -->
-    <main class="container">
-        <div class="card" style="max-width: 700px; margin: 0 auto;">
-            <h2 class="section-title" style="font-size: 1.8rem; margin-bottom: 0.5rem;">Referral Form</h2>
-            <p style="color: #a0a5b5; font-size: 0.85rem; margin-bottom: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 300;">All fields marked with (*) are required.</p>
-
-            <form id="referral-form" onsubmit="handleReferralSubmit(event)">
-                <div class="form-group">
-                    <label>Your Full Name*</label>
-                    <input type="text" class="form-control" name="FullName" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Your Email*</label>
-                    <input type="email" class="form-control" name="Email" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Your Phone Number*</label>
-                    <input type="tel" class="form-control" name="Phone" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Your Preferred Time &amp; Day to Connect*</label>
-                    <input type="text" class="form-control" name="PreferredTime" placeholder="e.g. Weekdays after 2 PM" required>
-                </div>
-
-                <div class="form-group">
-                    <label>How Would You Like to Connect?*</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="ConnectMethod" value="Call" required checked> Call
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="ConnectMethod" value="Email" required> Email
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group" style="margin-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 1.5rem;">
-                    <label style="color: #d89e1b; font-size: 0.9rem; font-weight: 700; margin-bottom: 0.8rem;">Details of the Individual You Are Introducing</label>
-                    <label>Their Name*</label>
-                    <input type="text" class="form-control" name="ReferralName" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Their Phone or Email*</label>
-                    <input type="text" class="form-control" name="ReferralContact" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Additional Notes / Relationship</label>
-                    <textarea class="form-control" rows="3" name="Notes" placeholder="Any background information you'd like to share..."></textarea>
-                </div>
-
-                <p class="recaptcha-disclaimer">
-                    This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.
+    <main class="pr-container">
+        <!-- Worthwhile Feature Card (Full Width / Centered) -->
+        <div class="pr-card pr-card-highlight worthwhile-feature-card" style="max-width: 650px; margin: 0 auto 5rem auto;">
+            <div>
+                <h2 class="pr-section-title">WorthWhile Magazine</h2>
+                <p style="color: #a0a5ab; font-size: 15px; font-weight: 300; line-height: 1.68; margin-bottom: 1.5rem;">
+                    Click the magazine below to read the latest edition of WorthWhile.
                 </p>
-
-                <button type="submit" class="btn-primary" style="width: 100%;">Submit Referral</button>
-
-                <div class="form-success-alert" id="form-success-msg">
-                    <i class="fas fa-check-circle"></i> Thank you! Your referral has been submitted securely.
+                <div class="worthwhile-wrapper">
+                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/p/u/publications/Files/Worthwhile-PDFs/Worthwhile-Summer-2026.pdf" target="_blank" rel="noopener noreferrer" class="worthwhile-pdf-link" aria-label="Read Worthwhile Summer 2026 Edition PDF">
+                        <img class="worthwhile-cover-image" src="assets/press-releases/Summer_2026-module-cover.jpg" alt="Worthwhile Summer 2026">
+                    </a>
                 </div>
-            </form>
+            </div>
+            <div class="worthwhile-box">
+                <h3>Worthwhile Summer 2026</h3>
+                <p>Quarterly Wealth &amp; Life Strategy Perspectives</p>
+                <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/p/u/publications/Files/Worthwhile-PDFs/Worthwhile-Summer-2026.pdf" target="_blank" rel="noopener noreferrer" class="pr-btn-primary"><span>READ EDITION</span> <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+
+        <!-- Related Resources Section -->
+        <h2 class="pr-section-title" style="margin-bottom: 2rem;">Related Resources</h2>
+        <div class="pr-grid-3">
+            <div class="pr-card pr-card-highlight">
+                <div class="pr-card-body">
+                    <div class="pr-resource-category">Executive &amp; Corporate</div>
+                    <div class="pr-resource-heading">Crafting a retirement that evolves with you</div>
+                    <div class="pr-resource-snippet">How a high-net-worth individual can build a tailored roadmap of investments that can evolve to meet target milestones for life and retirement.</div>
+                </div>
+                <div class="pr-card-footer">
+                    <a href="private-wealth.html" class="pr-link-action">READ &rarr;</a>
+                </div>
+            </div>
+
+            <div class="pr-card pr-card-highlight">
+                <div class="pr-card-body">
+                    <div class="pr-resource-category">Legacy &amp; Charitable</div>
+                    <div class="pr-resource-heading">Giving conditionally</div>
+                    <div class="pr-resource-snippet">How to help maximize charitable giving while keeping control of your assets.</div>
+                </div>
+                <div class="pr-card-footer">
+                    <a href="private-wealth.html" class="pr-link-action">READ &rarr;</a>
+                </div>
+            </div>
+
+            <div class="pr-card pr-card-highlight">
+                <div class="pr-card-body">
+                    <div class="pr-resource-category">Executive &amp; Corporate</div>
+                    <div class="pr-resource-heading">What is Qualified Small Business Stock?</div>
+                    <div class="pr-resource-snippet">Evaluate risks and explore strategies to minimize emerging and potential capital gains.</div>
+                </div>
+                <div class="pr-card-footer">
+                    <a href="business-titans.html" class="pr-link-action">READ &rarr;</a>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -789,20 +558,6 @@
                 btn.classList.toggle('active');
                 content.classList.toggle('open');
             }
-        }
-
-        function handleReferralSubmit(e) {
-            e.preventDefault();
-            const form = document.getElementById('referral-form');
-            const successMsg = document.getElementById('form-success-msg');
-            if (form && successMsg) {
-                successMsg.style.display = 'block';
-                form.reset();
-                setTimeout(() => {
-                    successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100);
-            }
-            return false;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
