@@ -3,7 +3,7 @@
    Pixel-accurate match to reference screenshot
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Raleway:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Raleway:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600;700&display=swap');
 
 /* ── Reset ── */
 *,
@@ -745,6 +745,16 @@ body.menu-open {
     min-width: 190px;
 }
 
+.champ-logo-link {
+    display: block;
+    line-height: 0;
+    transition: opacity 0.2s ease;
+}
+
+.champ-logo-link:hover {
+    opacity: 0.85;
+}
+
 /* Official logo image in champion strip */
 .champ-logo-img {
     display: block;
@@ -765,11 +775,139 @@ body.menu-open {
     font-size: 16px;
     line-height: 1;
     text-decoration: none;
-    transition: opacity .2s;
+    transition: all .2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
 }
 
 .champ-socials a:hover {
-    opacity: 0.75;
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+
+/* Email Action Toast Notification */
+.email-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99999;
+    max-width: 380px;
+    background: #11141c;
+    border: 1px solid rgba(216, 158, 27, 0.6);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-family: 'Open Sans', 'Montserrat', sans-serif;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.email-toast-container.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.email-toast-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.email-toast-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #d89e1b;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.email-toast-close {
+    background: none;
+    border: none;
+    color: #8a94a6;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+.email-toast-close:hover {
+    color: #ffffff;
+}
+
+.email-toast-body {
+    font-size: 12px;
+    color: #c8d4df;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.email-toast-address {
+    font-family: monospace;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: #ffffff;
+    display: inline-block;
+    margin-top: 4px;
+    user-select: all;
+}
+
+.email-toast-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.email-toast-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    border: none;
+}
+
+.email-toast-btn-primary {
+    background: #d89e1b;
+    color: #000000;
+}
+
+.email-toast-btn-primary:hover {
+    background: #ecc056;
+}
+
+.email-toast-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.email-toast-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Center quote / Legal disclaimer */
@@ -800,15 +938,21 @@ body.menu-open {
 }
 
 .champ-heading {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
+    font-family: 'Oswald', 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1.8px;
-    line-height: 1.3;
+    letter-spacing: 1.2px;
+    line-height: 1.22;
     color: #ffffff;
     margin-bottom: 0;
     text-align: center;
+}
+
+.champ-heading .champ-gold,
+.champ-heading span {
+    color: #e0a32a;
+    display: block;
 }
 
 /* LEARN MORE centered underlined text link matching exact reference image */
@@ -912,6 +1056,7 @@ body.menu-open {
 .footer-copy {
     margin-top: 4px;
     color: #555f69;
+    line-height: 1.8;
 }
 
 .footer-legal a {
@@ -923,6 +1068,7 @@ body.menu-open {
 
 .footer-legal a:hover {
     color: #ffffff;
+    text-decoration: underline;
 }
 
 /* ============================================================
@@ -1213,6 +1359,27 @@ body.menu-open {
 
     .addr-row p {
         gap: 3px 6px;
+    }
+
+    .footer-legal {
+        gap: 12px;
+    }
+
+    .footer-legal p {
+        font-size: 10px;
+        line-height: 1.65;
+    }
+
+    .footer-copy {
+        font-size: 10px;
+        line-height: 1.9;
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+    .footer-copy a {
+        display: inline-block;
+        padding: 1px 0;
     }
 }
 

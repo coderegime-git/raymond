@@ -267,13 +267,12 @@ const completeHtml = `<!DOCTYPE html>
         <!-- Brand / Social -->
         <div class="champ-brand">
             <!-- Official logo -->
-            <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
             <!-- Social icons -->
             <div class="champ-socials">
-                <a href="#" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:tom.seiler@raymondjames.com" aria-label="Email" id="email-link"><i
-                        class="fas fa-envelope"></i></a>
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer" aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
 
@@ -285,7 +284,7 @@ const completeHtml = `<!DOCTYPE html>
         <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br>YOUR FUTURE</h3>
-            <a href="team.html" class="champ-link" id="learn-more-btn">LEARN MORE</a>
+            <a href="contact.html" class="champ-link" id="learn-more-btn">LEARN MORE</a>
         </div>
 
     </section>
@@ -348,8 +347,7 @@ const completeHtml = `<!DOCTYPE html>
                 not responsible for the content of any website or the collection or use of information regarding any
                 website's users and/or members.</p>
             <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a href="#">New York Stock
-                    Exchange</a> / <a href="#">SIPC</a> &nbsp;|&nbsp; <a href="#">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="#">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="#">Terms of Use</a>
+                    Exchange</a> / <a href="#">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures" target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank" rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Use</a>
             </p>
         </div>
     </footer>
@@ -460,6 +458,7 @@ const completeHtml = `<!DOCTYPE html>
             }
         });
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>`;
