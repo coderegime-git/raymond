@@ -1,0 +1,698 @@
+/* ============================================================
+   RESOURCES LANDING PAGE STYLES — THE SEILER GROUP
+   ============================================================ */
+
+/* ── Hero Section ── */
+.res-hero-sec {
+    position: relative;
+    min-height: 56vh;
+    margin-top: 95px;
+    display: flex;
+    align-items: center;
+    padding: 5.5rem 7% 4.5rem;
+    background-color: #08080a;
+    background-image: radial-gradient(circle at 85% 30%, rgba(212, 139, 56, 0.12) 0%, transparent 60%),
+                      linear-gradient(180deg, rgba(8, 8, 10, 0.6) 0%, #08080a 100%),
+                      url('assets/press-releases/hero-press-releases.png');
+    background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+}
+
+.res-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #08080a 0%, rgba(8, 8, 10, 0.95) 45%, rgba(8, 8, 10, 0.65) 75%, rgba(8, 8, 10, 0.3) 100%);
+    z-index: 1;
+}
+
+.res-hero-container {
+    position: relative;
+    z-index: 2;
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.res-hero-content {
+    max-width: 760px;
+}
+
+.res-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(212, 139, 56, 0.1);
+    border: 1px solid rgba(212, 139, 56, 0.3);
+    border-radius: 50px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #d48b38;
+    margin-bottom: 1.5rem;
+}
+
+.res-hero-badge i {
+    font-size: 0.75rem;
+}
+
+.res-hero-title {
+    font-family: 'Playfair Display', 'Prata', Georgia, serif;
+    font-size: clamp(2.6rem, 4.2vw, 4.2rem);
+    font-weight: 400;
+    line-height: 1.12;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+}
+
+.res-hero-title .res-gold-heading {
+    display: block;
+    color: #d48b38;
+    font-style: italic;
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+.res-hero-desc {
+    color: #b0b6bc;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15.5px;
+    font-weight: 300;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    max-width: 660px;
+}
+
+/* Quick Jump Pill Links */
+.res-quick-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 1.2rem;
+}
+
+.res-pill-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    color: #e0e0e0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.res-pill-link i {
+    font-size: 0.72rem;
+    color: #d48b38;
+    transition: transform 0.3s ease;
+}
+
+.res-pill-link:hover {
+    background: rgba(212, 139, 56, 0.15);
+    border-color: #d48b38;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.res-pill-link:hover i {
+    transform: translateY(2px);
+}
+
+/* ── Main Layout Containers ── */
+.res-page-wrapper {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 5rem 24px 6rem 24px;
+}
+
+.res-section-header {
+    text-align: center;
+    max-width: 780px;
+    margin: 0 auto 3.5rem auto;
+}
+
+.res-eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #d48b38;
+    margin-bottom: 0.8rem;
+}
+
+.res-section-title {
+    font-family: 'Playfair Display', 'Prata', Georgia, serif;
+    font-size: clamp(2.2rem, 3.2vw, 3rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+}
+
+.res-section-title span {
+    color: #d48b38;
+    font-style: italic;
+}
+
+.res-section-subtitle {
+    color: #9ea5ad;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.75;
+}
+
+/* ── Featured Core 3 Cards ── */
+.res-core-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 6rem;
+}
+
+.res-core-card {
+    background: #111216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.res-core-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: transparent;
+    transition: background 0.3s ease;
+}
+
+.res-core-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(212, 139, 56, 0.4);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 139, 56, 0.15);
+}
+
+.res-core-card:hover::before {
+    background: #d48b38;
+}
+
+.res-core-card-header {
+    position: relative;
+    padding: 2.2rem 2.2rem 1.4rem;
+}
+
+.res-card-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(212, 139, 56, 0.12);
+    border: 1px solid rgba(212, 139, 56, 0.3);
+    border-radius: 3px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #d48b38;
+    margin-bottom: 1.2rem;
+}
+
+.res-core-card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.55rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+}
+
+.res-core-card-desc {
+    color: #a2a8af;
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+.res-preview-media {
+    position: relative;
+    height: 190px;
+    margin: 0 1.8rem;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #090a0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.res-preview-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.res-core-card:hover .res-preview-media img {
+    transform: scale(1.04);
+}
+
+.res-media-badge {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.res-media-badge i {
+    color: #d48b38;
+}
+
+.res-core-card-footer {
+    padding: 1.8rem 2.2rem 2.2rem;
+}
+
+.res-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 13px 20px;
+    background: #17191e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.res-action-btn i {
+    font-size: 0.75rem;
+    color: #d48b38;
+    transition: transform 0.3s ease;
+}
+
+.res-action-btn:hover {
+    background: #d48b38;
+    border-color: #d48b38;
+    color: #0b0b0b;
+}
+
+.res-action-btn:hover i {
+    color: #0b0b0b;
+    transform: translateX(4px);
+}
+
+/* ── Interactive Category Library ── */
+.res-library-sec {
+    margin-bottom: 6rem;
+}
+
+.res-tab-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 3rem;
+}
+
+.res-tab-btn {
+    background: #111216;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 11px 22px;
+    border-radius: 4px;
+    color: #9ea5ad;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.res-tab-btn:hover {
+    color: #ffffff;
+    border-color: rgba(212, 139, 56, 0.5);
+}
+
+.res-tab-btn.active {
+    background: #d48b38;
+    border-color: #d48b38;
+    color: #0b0b0b;
+    font-weight: 700;
+}
+
+.res-library-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.res-lib-item {
+    background: #111216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 2.2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.res-lib-item:hover {
+    border-color: rgba(212, 139, 56, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+}
+
+.res-lib-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    background: rgba(212, 139, 56, 0.1);
+    border: 1px solid rgba(212, 139, 56, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d48b38;
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.res-lib-category {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #d48b38;
+    margin-bottom: 0.6rem;
+}
+
+.res-lib-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.35;
+    margin-bottom: 0.9rem;
+}
+
+.res-lib-desc {
+    color: #9da3ab;
+    font-size: 13.5px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 1.6rem;
+}
+
+.res-lib-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #d48b38;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.res-lib-link i {
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+}
+
+.res-lib-link:hover {
+    color: #f3b169;
+}
+
+.res-lib-link:hover i {
+    transform: translateX(4px);
+}
+
+/* ── Institutional Strength Banner ── */
+.res-strength-banner {
+    background: #111216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 3.5rem 3rem;
+    margin-bottom: 6rem;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+}
+
+.res-strength-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1px 1.4fr;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+.res-strength-divider {
+    background: rgba(255, 255, 255, 0.1);
+    height: 100%;
+    min-height: 200px;
+}
+
+.res-strength-left h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+}
+
+.res-strength-left h3 span {
+    color: #d48b38;
+    font-style: italic;
+}
+
+.res-strength-left p {
+    color: #9fa5ad;
+    font-size: 14.5px;
+    font-weight: 300;
+    line-height: 1.75;
+}
+
+.res-stats-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.res-stat-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: 1.6rem 1.4rem;
+}
+
+.res-stat-number {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #d48b38;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.res-stat-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    margin-bottom: 0.3rem;
+}
+
+.res-stat-sub {
+    font-size: 12px;
+    color: #838a92;
+    font-weight: 300;
+    line-height: 1.4;
+}
+
+/* ── FAQ / Quick Access Section ── */
+.res-faq-sec {
+    max-width: 960px;
+    margin: 0 auto 5rem auto;
+}
+
+.res-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.res-faq-item {
+    background: #111216;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.res-faq-item.active {
+    border-color: rgba(212, 139, 56, 0.4);
+}
+
+.res-faq-header {
+    padding: 1.4rem 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    user-select: none;
+}
+
+.res-faq-question {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+    padding-right: 20px;
+}
+
+.res-faq-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d48b38;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.res-faq-item.active .res-faq-icon {
+    transform: rotate(180deg);
+    background: #d48b38;
+    color: #0b0b0b;
+}
+
+.res-faq-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 1.8rem;
+    color: #a0a6ae;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.8;
+}
+
+.res-faq-item.active .res-faq-body {
+    max-height: 400px;
+    padding: 0 1.8rem 1.6rem 1.8rem;
+}
+
+.res-faq-body a {
+    color: #d48b38;
+    text-decoration: underline;
+}
+
+.res-faq-body a:hover {
+    color: #f3b169;
+}
+
+/* ── Responsive Queries ── */
+@media (max-width: 1024px) {
+    .res-core-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .res-library-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .res-strength-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .res-strength-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .res-hero-sec {
+        padding: 4.5rem 20px 3.5rem;
+        min-height: auto;
+    }
+
+    .res-hero-title {
+        font-size: 2.2rem;
+    }
+
+    .res-page-wrapper {
+        padding: 3.5rem 18px 4.5rem;
+    }
+
+    .res-library-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .res-stats-row {
+        grid-template-columns: 1fr;
+    }
+
+    .res-strength-banner {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .res-faq-header {
+        padding: 1.2rem 1.4rem;
+    }
+
+    .res-faq-body {
+        padding: 0 1.4rem;
+    }
+
+    .res-faq-item.active .res-faq-body {
+        padding: 0 1.4rem 1.4rem 1.4rem;
+    }
+}
