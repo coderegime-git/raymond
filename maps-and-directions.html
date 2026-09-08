@@ -4,27 +4,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Press Releases &amp; Recognition | The Seiler Group of Raymond James</title>
-    <meta name="description" content="Stay up to date with the latest awards, recognition, rankings, and press releases from Thomas A. Seiler and The Seiler Group of Raymond James.">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <title>Maps &amp; Directions | The Seiler Group</title>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Open+Sans:wght@300;400;600;700&display=swap"
         rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Stylesheets -->
+
+    <!-- Core Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=171">
-    <link rel="stylesheet" href="press-releases.css?v=35">
+    <style>
+        :root {
+            --bg-dark: #050505;
+            --bg-surface: #0d0e11;
+            --bg-surface-elevated: #16181d;
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --accent-orange: #d89e1b;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --font-serif: "Playfair Display", Georgia, serif;
+            --font-sans: "Montserrat", sans-serif;
+        }
+
+        body.maps-page {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Centered Map Section with Directions Bar */
+        .map-section {
+            padding: 130px 24px 70px 24px;
+            max-width: 1240px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+
+        .map-card-frame {
+            position: relative;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Directions Search Bar above the Map */
+        .directions-bar {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 12px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            gap: 12px;
+        }
+
+        .directions-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .directions-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            font-size: 15px;
+            font-family: 'Open Sans', var(--font-sans);
+            color: #333;
+            background-color: #fff;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .directions-input:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 2px rgba(216, 158, 27, 0.25);
+        }
+
+        .directions-input::placeholder {
+            color: #757575;
+            font-weight: 400;
+        }
+
+        .directions-btn {
+            background-color: var(--accent-orange);
+            color: #000000;
+            border: none;
+            padding: 13px 26px;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .directions-btn:hover {
+            background-color: #c98e14;
+        }
+
+        .directions-btn:active {
+            transform: scale(0.98);
+        }
+
+        .map-iframe-container {
+            position: relative;
+            width: 100%;
+            height: 580px;
+            background-color: #e5e3df;
+        }
+
+        .map-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 992px) {
+            .map-section {
+                padding: 115px 20px 50px 20px;
+            }
+            .map-iframe-container {
+                height: 480px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .map-section {
+                padding: 105px 16px 40px 16px;
+            }
+            .directions-bar {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 12px;
+            }
+            .directions-btn {
+                justify-content: center;
+                width: 100%;
+            }
+            .map-iframe-container {
+                height: 390px;
+            }
+        }
+    </style>
 </head>
 
-<body class="athletes-page resources-page press-releases-page">
+<body class="maps-page">
 
     <!-- ============================================================
-     HEADER
+     SITE HEADER
      ============================================================ -->
     <header class="site-header" id="main-header">
 
@@ -89,14 +238,14 @@
         <nav class="nav-right">
             <a href="team.html" class="nav-link">YOUR TEAM</a>
             
-            <!-- Dropdown for RESOURCES (Active) -->
-            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
-                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+            <!-- Dropdown for RESOURCES -->
+            <div class="nav-dropdown-wrapper" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger" id="resources-trigger">
                     <span>RESOURCES</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
-                    <a href="press-releases.html" class="nav-dropdown-item active" id="nav-item-press-releases">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
                         PRESS RELEASES
                     </a>
                     <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="nav-item-investment-strategy">
@@ -232,7 +381,7 @@
                     </button>
                 </div>
                 <div class="drawer-accordion-content" id="drawer-resources-content">
-                    <a href="press-releases.html" class="drawer-sublink active" id="mob-press-releases">
+                    <a href="press-releases.html" class="drawer-sublink" id="mob-press-releases">
                         <span>PRESS RELEASES</span>
                     </a>
                     <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="drawer-sublink" id="mob-investment-strategy">
@@ -300,99 +449,38 @@
     </div>
 
     <!-- ============================================================
-     HERO SECTION — PRESS RELEASES
+     MAP SECTION (DIRECTLY UNDER HEADER)
      ============================================================ -->
-    <section class="pr-hero-sec">
-        <div class="pr-hero-overlay"></div>
-        <div class="pr-hero-content">
-            <h1>Press <span class="accent-text">Releases &amp; Publications</span></h1>
-            <p>Stay up to date with the latest awards, industry rankings, and media recognition honoring Thomas A. Seiler and The Seiler Group of Raymond James.</p>
-        </div>
-    </section>
-
-    <!-- ============================================================
-     PRESS RELEASES CONTENT (CENTERED)
-     ============================================================ -->
-    <main class="pr-container">
-        
-        <!-- Press Releases List (Centered Card) -->
-        <div class="pr-card pr-centered-card">
-            <h2 class="pr-section-title">Press Releases</h2>
-            <ul class="pr-list">
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/press-release-2025-forbes-top-wealth-advisors-best-in-state.pdf" class="pr-item-link" id="pr-link-forbes-2025" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to Forbes Best-In-State Wealth Advisors</strong>
-                        <span class="pr-item-date">04/23/25</span>
-                    </a>
-                </li>
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/2025-barrons-top-1200-financial-advisors--press-release-template-4162025.pdf" class="pr-item-link" id="pr-link-barrons-2025" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to Barron's List of Top 1,200 Financial Advisors</strong>
-                        <span class="pr-item-date">04/23/25</span>
-                    </a>
-                </li>
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/2022-Forbes-Best-In-State.pdf" class="pr-item-link" id="pr-link-forbes-2022" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to 2022 Forbes Best-In-State Wealth Advisors</strong>
-                        <span class="pr-item-date">04/07/22</span>
-                    </a>
-                </li>
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/2022-Barron-Top-1200.pdf" class="pr-item-link" id="pr-link-barrons-2022" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to 2022 Barron's Top 1,200</strong>
-                        <span class="pr-item-date">03/11/2022</span>
-                    </a>
-                </li>
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/2021-Forbes-Best-In-State.pdf" class="pr-item-link" id="pr-link-forbes-2021" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to 2021 Forbes Best-In-State Wealth Advisors</strong>
-                        <span class="pr-item-date">02/11/21</span>
-                    </a>
-                </li>
-                <li class="pr-list-item">
-                    <a href="https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Files/2021-Barron-Top-1200.pdf" class="pr-item-link" id="pr-link-barrons-2021" target="_blank" rel="noopener noreferrer">
-                        <strong class="pr-item-title">Thomas A. Seiler Named to 2021 Barron's Top 1,200</strong>
-                        <span class="pr-item-date">03/14/2021</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Related Resources Section -->
-        <h2 class="pr-section-title" style="margin-bottom: 2rem;">Related Resources</h2>
-        <div class="pr-grid-3">
-            <div class="pr-card pr-card-highlight">
-                <div class="pr-card-body">
-                    <div class="pr-resource-category">Executive &amp; Corporate</div>
-                    <div class="pr-resource-heading">Crafting a retirement that evolves with you</div>
-                    <div class="pr-resource-snippet">How a high-net-worth individual can build a tailored roadmap of investments that can evolve to meet target milestones for life and retirement.</div>
+    <main class="map-section">
+        <div class="map-card-frame">
+            
+            <!-- Directions Search Bar -->
+            <form class="directions-bar" id="directions-form" onsubmit="handleGetDirections(event)">
+                <div class="directions-input-wrapper">
+                    <input 
+                        type="text" 
+                        id="directions-from-input" 
+                        class="directions-input" 
+                        placeholder="Directions From" 
+                        autocomplete="street-address">
                 </div>
-                <div class="pr-card-footer">
-                    <a href="private-wealth.html" class="pr-link-action">READ &rarr;</a>
-                </div>
+                <button type="submit" class="directions-btn" id="get-directions-btn">
+                    <i class="fas fa-search"></i> GET DIRECTIONS
+                </button>
+            </form>
+
+            <!-- Map Viewport -->
+            <div class="map-iframe-container">
+                <iframe 
+                    id="map-frame"
+                    src="" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Google Maps Location">
+                </iframe>
             </div>
 
-            <div class="pr-card pr-card-highlight">
-                <div class="pr-card-body">
-                    <div class="pr-resource-category">Legacy &amp; Charitable</div>
-                    <div class="pr-resource-heading">Giving conditionally</div>
-                    <div class="pr-resource-snippet">How to help maximize charitable giving while keeping control of your assets.</div>
-                </div>
-                <div class="pr-card-footer">
-                    <a href="private-wealth.html" class="pr-link-action">READ &rarr;</a>
-                </div>
-            </div>
-
-            <div class="pr-card pr-card-highlight">
-                <div class="pr-card-body">
-                    <div class="pr-resource-category">Executive &amp; Corporate</div>
-                    <div class="pr-resource-heading">What is Qualified Small Business Stock?</div>
-                    <div class="pr-resource-snippet">Evaluate risks and explore strategies to minimize emerging and potential capital gains.</div>
-                </div>
-                <div class="pr-card-footer">
-                    <a href="business-titans.html" class="pr-link-action">READ &rarr;</a>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -472,6 +560,93 @@
      SCRIPTS
      ============================================================ -->
     <script>
+        const locations = {
+            '37W': {
+                name: 'Newtown, PA',
+                address: '5 Caufield Place, Suite 201, Newtown, PA 18940',
+                zoom: 13
+            },
+            '37W04': {
+                name: 'Fort Lauderdale, FL',
+                address: '201 East Las Olas Boulevard, Suite 1630, Fort Lauderdale, FL 33301',
+                zoom: 13
+            },
+            '37W02': {
+                name: 'Fort Myers, FL',
+                address: '14541 Hope Center Loop, Suite 100, Fort Myers, FL 33912',
+                zoom: 13
+            },
+            '37W05': {
+                name: 'Fort Myers, FL',
+                address: '14541 Hope Center Loop, Suite 100, Fort Myers, FL 33912',
+                zoom: 13
+            },
+            // Aliases
+            'newtown': {
+                name: 'Newtown, PA',
+                address: '5 Caufield Place, Suite 201, Newtown, PA 18940',
+                zoom: 13
+            },
+            '3FW': {
+                name: 'Fort Lauderdale, FL',
+                address: '201 East Las Olas Boulevard, Suite 1630, Fort Lauderdale, FL 33301',
+                zoom: 13
+            },
+            'fort-lauderdale': {
+                name: 'Fort Lauderdale, FL',
+                address: '201 East Las Olas Boulevard, Suite 1630, Fort Lauderdale, FL 33301',
+                zoom: 13
+            },
+            'fl': {
+                name: 'Fort Lauderdale, FL',
+                address: '201 East Las Olas Boulevard, Suite 1630, Fort Lauderdale, FL 33301',
+                zoom: 13
+            },
+            '3GW': {
+                name: 'Fort Myers, FL',
+                address: '14541 Hope Center Loop, Suite 100, Fort Myers, FL 33912',
+                zoom: 13
+            },
+            'fort-myers': {
+                name: 'Fort Myers, FL',
+                address: '14541 Hope Center Loop, Suite 100, Fort Myers, FL 33912',
+                zoom: 13
+            }
+        };
+
+        let activeAddress = '5 Caufield Place, Suite 201, Newtown, PA 18940';
+
+        function initMap() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let locKey = urlParams.get('_') || urlParams.get('loc') || urlParams.get('location') || '37W';
+            locKey = locKey.trim();
+
+            const locData = locations[locKey] || locations[locKey.toLowerCase()] || locations['37W'];
+            activeAddress = locData.address;
+
+            const encodedAddress = encodeURIComponent(activeAddress);
+            const mapFrame = document.getElementById('map-frame');
+            if (mapFrame) {
+                mapFrame.src = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=${locData.zoom}&ie=UTF8&iwloc=&output=embed`;
+            }
+        }
+
+        function handleGetDirections(e) {
+            e.preventDefault();
+            const fromInput = document.getElementById('directions-from-input');
+            const fromVal = fromInput ? fromInput.value.trim() : '';
+
+            let googleMapsUrl = '';
+            if (fromVal) {
+                googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(fromVal)}&destination=${encodeURIComponent(activeAddress)}`;
+            } else {
+                googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(activeAddress)}`;
+            }
+
+            window.open(googleMapsUrl, '_blank', 'noopener,noreferrer');
+            return false;
+        }
+
         function toggleMobileMenu(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
@@ -505,84 +680,50 @@
         }
 
         function toggleMobileAthletesAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-athletes-btn');
             var content = document.getElementById('drawer-athletes-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         function toggleMobileTitansAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-titans-btn');
             var content = document.getElementById('drawer-titans-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         function toggleMobileIndividualsAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-individuals-btn');
             var content = document.getElementById('drawer-individuals-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         function toggleMobileResourcesAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-resources-btn');
             var content = document.getElementById('drawer-resources-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         function toggleMobileContactAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-contact-btn');
             var content = document.getElementById('drawer-contact-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         function toggleMobileClientAccessAccordion(e) {
-            if (e) {
-                if (e.preventDefault) e.preventDefault();
-                if (e.stopPropagation) e.stopPropagation();
-            }
+            if (e) { if (e.preventDefault) e.preventDefault(); if (e.stopPropagation) e.stopPropagation(); }
             var btn = document.getElementById('drawer-ca-btn');
             var content = document.getElementById('drawer-ca-content');
-            if (btn && content) {
-                btn.classList.toggle('active');
-                content.classList.toggle('open');
-            }
+            if (btn && content) { btn.classList.toggle('active'); content.classList.toggle('open'); }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+
             const drawer = document.getElementById('mobile-drawer');
             const header = document.getElementById('main-header');
 
@@ -593,7 +734,7 @@
                 }
             });
 
-            // Sticky Header with Glassmorphism on Scroll
+            // Sticky Header on Scroll
             window.addEventListener('scroll', () => {
                 if (header) {
                     if (window.scrollY > 40) {
@@ -638,22 +779,8 @@
                     caWrapper.classList.remove('active');
                 }
             });
-
-            // Auto-close mobile drawer on in-page anchor navigation
-            document.querySelectorAll('.drawer-sublink').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const href = link.getAttribute('href');
-                    if (href && (href.startsWith('#') || href.includes('business-titans.html#'))) {
-                        const drawer = document.getElementById('mobile-drawer');
-                        if (drawer && drawer.classList.contains('active')) {
-                            toggleMobileMenu(e);
-                        }
-                    }
-                });
-            });
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
 
 </html>
