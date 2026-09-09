@@ -20,7 +20,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=171">
     <link rel="stylesheet" href="athletes.css?v=270">
-    <link rel="stylesheet" href="resources.css?v=1">
+    <link rel="stylesheet" href="resources.css?v=6">
 </head>
 
 <body class="athletes-page resources-page">
@@ -302,309 +302,461 @@
     </div>
 
     <!-- ============================================================
-     HERO SECTION
+     MAIN RESOURCES CONTAINER (Starts directly below header)
      ============================================================ -->
-    <section class="res-hero-sec">
-        <div class="res-hero-overlay"></div>
-        <div class="res-hero-container">
-            <div class="res-hero-content">
-                <div class="res-hero-badge">
-                    <i class="fas fa-compass"></i> INSIGHTS &amp; STRATEGY
-                </div>
-                <h1 class="res-hero-title">
-                    Strategic Wealth<br>
-                    <span class="res-gold-heading">Resources &amp; Perspectives</span>
-                </h1>
-                <p class="res-hero-desc">
-                    Empowering visionary business leaders, professional athletes, and multi-generational families with timely market intelligence, macroeconomic perspectives, industry-leading research, and Raymond James' premier publications.
-                </p>
-                <div class="res-quick-nav">
-                    <a href="#core-publications" class="res-pill-link"><i class="fas fa-book-open"></i> Key Publications</a>
-                    <a href="#resource-library" class="res-pill-link"><i class="fas fa-layer-group"></i> Resource Library</a>
-                    <a href="#institutional-strength" class="res-pill-link"><i class="fas fa-shield-alt"></i> Firm Strength</a>
-                    <a href="#resource-faq" class="res-pill-link"><i class="fas fa-question-circle"></i> Quick Guidance</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main class="res-page-wrapper" id="resource-library">
 
-    <!-- ============================================================
-     MAIN RESOURCES CONTAINER
-     ============================================================ -->
-    <main class="res-page-wrapper">
-
-        <!-- ── Advanced Resources Filter & Grid ── -->
+        <!-- ── Advanced Resources Filter Header ── -->
         <section class="res-advanced-filters">
+            <!-- Search Bar -->
             <div class="res-search-bar">
-                <input type="text" placeholder="Search our resources">
-                <button><i class="fas fa-search"></i></button>
+                <input type="text" id="res-search-input" placeholder="Search our resources" autocomplete="off">
+                <button type="button" id="res-search-btn" aria-label="Search resources"><i class="fas fa-search"></i></button>
             </div>
             
+            <!-- Reset Filters Link -->
             <div class="res-reset-filters">
-                <a href="#"><i class="fas fa-times"></i> RESET ALL FILTERS</a>
+                <a href="javascript:void(0)" id="res-reset-btn" class="res-reset-link"><i class="fas fa-times"></i> RESET ALL FILTERS</a>
             </div>
             
+            <!-- Filter Divider -->
             <div class="res-filter-divider"></div>
             
+            <!-- Dropdown Filters Bar -->
             <div class="res-filter-dropdowns">
-                <div class="res-dropdown">
-                    <span>CATEGORY</span> <i class="fas fa-chevron-down"></i>
+                <!-- Dropdown 1: CATEGORY -->
+                <div class="res-dropdown-wrapper" id="dd-category-wrapper">
+                    <button type="button" class="res-dropdown-btn" id="dd-category-btn">
+                        <span id="label-category">CATEGORY</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="res-dropdown-menu" id="dd-category-menu">
+                        <div class="res-dropdown-item selected" data-filter="all" data-target="category">All Categories</div>
+                        <div class="res-dropdown-item" data-filter="Markets & Strategy" data-target="category">Markets &amp; Strategy</div>
+                        <div class="res-dropdown-item" data-filter="Economy & Policy" data-target="category">Economy &amp; Policy</div>
+                        <div class="res-dropdown-item" data-filter="Executives & Business" data-target="category">Executives &amp; Business</div>
+                        <div class="res-dropdown-item" data-filter="Family & Lifestyle" data-target="category">Family &amp; Lifestyle</div>
+                        <div class="res-dropdown-item" data-filter="Retirement & Longevity" data-target="category">Retirement &amp; Longevity</div>
+                    </div>
                 </div>
-                <div class="res-dropdown active">
-                    <span>TOPIC</span>
+
+                <!-- Dropdown 2: TOPIC -->
+                <div class="res-dropdown-wrapper" id="dd-topic-wrapper">
+                    <button type="button" class="res-dropdown-btn" id="dd-topic-btn">
+                        <span id="label-topic">TOPIC</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="res-dropdown-menu" id="dd-topic-menu">
+                        <div class="res-dropdown-item selected" data-filter="all" data-target="topic">All Topics</div>
+                        <div class="res-dropdown-item" data-filter="Market Outlook" data-target="topic">Market Outlook</div>
+                        <div class="res-dropdown-item" data-filter="Retirement Planning" data-target="topic">Retirement Planning</div>
+                        <div class="res-dropdown-item" data-filter="Wealth Strategy" data-target="topic">Wealth Strategy</div>
+                        <div class="res-dropdown-item" data-filter="Fixed Income" data-target="topic">Fixed Income</div>
+                        <div class="res-dropdown-item" data-filter="Global Economics" data-target="topic">Global Economics</div>
+                    </div>
                 </div>
-                <div class="res-dropdown">
-                    <span>MEDIA</span> <i class="fas fa-chevron-down"></i>
+
+                <!-- Dropdown 3: MEDIA -->
+                <div class="res-dropdown-wrapper" id="dd-media-wrapper">
+                    <button type="button" class="res-dropdown-btn" id="dd-media-btn">
+                        <span id="label-media">MEDIA</span> <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="res-dropdown-menu" id="dd-media-menu">
+                        <div class="res-dropdown-item selected" data-filter="all" data-target="media">All Media</div>
+                        <div class="res-dropdown-item" data-filter="Articles & Reading" data-target="media">Articles &amp; Reading</div>
+                        <div class="res-dropdown-item" data-filter="Infographics" data-target="media">Infographics</div>
+                        <div class="res-dropdown-item" data-filter="Reports & Publications" data-target="media">Reports &amp; Publications</div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ── LATEST INSIGHTS & PERSPECTIVES (MASONRY GRID) ── -->
-        <section class="insights-masonry-sec" id="latest-insights">
-            <div class="masonry-grid">
-                
-                <!-- Row 1 -->
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="market">
-                    <h3>LET'S TALK CHINA, BUT DON'T BE FOOLED BY ITS PROPAGANDA MACHINE</h3>
-                    <span class="date">9/4/2026</span>
-                    <p>Raymond James Chief Economist Eugenio J. Alemán discusses current economic conditions.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
+        <!-- ── 3-COLUMN MASONRY CARD GRID ── -->
+        <section class="masonry-grid-wrapper">
+            <div class="masonry-grid" id="resources-grid">
+
+                <!-- CARD 1 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Retirement & Longevity" 
+                     data-topic="Retirement Planning" 
+                     data-media="Articles & Reading"
+                     data-title="PLANNING FOR THE LIFE YOU WANT IN RETIREMENT"
+                     data-desc="Focus on goals, not just wealth. Explore structured retirement roadmaps designed for long-term clarity.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-1.jpg" alt="Luxury Estate Retirement Planning">
                     </div>
-                </div>
-
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="market">
-                    <h3>5 KEY FORCES SHAPING THE MARKET OUTLOOK AFTER LABOR DAY</h3>
-                    <span class="date">9/4/2026</span>
-                    <p>Review the latest Weekly Headings by CIO Larry Adam.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
-                    </div>
-                </div>
-
-                <div class="res-lib-item m-card m-image-card m-notch-left" data-category="market">
-                    <img src="https://images.unsplash.com/photo-1579227114347-15d08fc37cae?q=80&w=800&auto=format&fit=crop" alt="Compass">
-                </div>
-
-                <!-- Row 2 -->
-                <div class="res-lib-item m-card m-image-card m-notch-bottom" data-category="exec">
-                    <img src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?q=80&w=800&auto=format&fit=crop" alt="TV Remote">
-                </div>
-
-                <div class="res-lib-item m-card text-card m-dark-bg" data-category="exec">
-                    <h3>MAINTAINING INCOME AFTER RETIREMENT</h3>
-                    <p>How your retirement savings can continue working for you.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Executives & Business</span>
-                    </div>
-                </div>
-
-                <div class="res-lib-item m-card m-image-card m-notch-bottom" data-category="exec">
-                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=800&auto=format&fit=crop" alt="Winding Road">
-                </div>
-
-                <!-- Row 3 -->
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="family">
-                    <h3>THE FRAGMENTED FUTURE OF SPORTS STREAMING</h3>
-                    <p>Live sports viewing has entered a new era of choice and complexity.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Family & Legacy</span>
-                    </div>
-                </div>
-
-                <div class="res-lib-item m-card text-card m-yellow-bg" data-category="market">
-                    <h3>STRUCTURED INVESTMENTS FOR TIMES OF VOLATILITY</h3>
-                    <p>An innovative approach to your investment objectives.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
-                    </div>
-                </div>
-
-                <div class="res-lib-item m-card text-card m-dark-bg" data-category="market">
-                    <h3>AUGUST REVIEW: MARKETS ADVANCE DESPITE FAMILIAR TENSIONS</h3>
-                    <span class="date">8/31/2026</span>
-                    <p>The month of August reminded many investors that the markets rarely move in a straight line.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
-                    </div>
-                </div>
-
-                <!-- Row 4 & 5 -->
-                <div class="res-lib-item m-card m-image-card m-notch-bottom" data-category="tools">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop" alt="Globe">
-                </div>
-
-                <!-- Spanning Card -->
-                <div class="res-lib-item m-card text-card m-image-bg m-dark-text m-span-2-col m-span-2-row" data-category="market" style="background-image: url('https://images.unsplash.com/photo-1579227114347-15d08fc37cae?q=80&w=1200&auto=format&fit=crop');">
-                    <div class="m-bg-overlay"></div>
-                    <div class="content">
-                        <h3>FIVE CATALYSTS THAT COULD DRIVE A PICKUP IN VOLATILITY</h3>
-                        <span class="date">8/28/2026</span>
-                        <p>Review the latest Weekly Headings by CIO Larry Adam.</p>
+                    <div class="m-card-body">
+                        <h3>PLANNING FOR THE LIFE YOU WANT IN RETIREMENT</h3>
+                        <span class="m-card-date">9/4/2026</span>
+                        <p>Focus on goals, not just wealth. Explore structured retirement roadmaps designed for long-term clarity.</p>
                         <div class="m-card-footer">
-                            <a href="#">READ</a>
-                            <span class="category">Market & Strategy</span>
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Retirement &amp; Longevity</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="market">
-                    <h3>IF IT ISN'T BROKEN, DON'T FIX IT!</h3>
-                    <span class="date">8/31/2026</span>
-                    <p>Doug Drabik discusses fixed income market conditions and offers insight for bond investors.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
+                <!-- CARD 2 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Economy & Policy" 
+                     data-topic="Global Economics" 
+                     data-media="Articles & Reading"
+                     data-title="LET'S TALK CHINA, BUT DON'T BE FOOLED BY ITS PROPAGANDA MACHINE"
+                     data-desc="Raymond James Chief Economist Eugenio J. Alemán discusses current economic conditions and global policy trends.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-2.jpg" alt="Shanghai Global Financial Center">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>LET'S TALK CHINA, BUT DON'T BE FOOLED BY ITS PROPAGANDA MACHINE</h3>
+                        <span class="m-card-date">9/4/2026</span>
+                        <p>Raymond James Chief Economist Eugenio J. Alemán discusses current economic conditions and global policy trends.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Economy &amp; Policy</span>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Row 6 -->
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="market">
-                    <h3>FIVE CATALYSTS THAT COULD DRIVE A PICKUP IN VOLATILITY</h3>
-                    <span class="date">8/28/2026</span>
-                    <p>Review the latest Weekly Headings by CIO Larry Adam.</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Market & Strategy</span>
+                <!-- CARD 3 (Dark Elevated Card - Glass Skyscraper Architecture) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Executives & Business" 
+                     data-topic="Wealth Strategy" 
+                     data-media="Reports & Publications"
+                     data-title="ARCHITECTURAL PRECISION IN INSTITUTIONAL ASSET MANAGEMENT"
+                     data-desc="Explore how global enterprise structures utilize sophisticated asset allocation models.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-3.jpg" alt="Modern Architecture Skyscraper">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>ARCHITECTURAL PRECISION IN INSTITUTIONAL ASSET MANAGEMENT</h3>
+                        <span class="m-card-date">9/2/2026</span>
+                        <p>Explore how global enterprise structures utilize sophisticated asset allocation models and risk management.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Executives &amp; Business</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="athletes">
-                    <h3>INFOGRAPHIC: RETIRING EARLY? 5 WAYS TO HELP MANAGE HEALTH CARE COSTS</h3>
-                    <p>Retiring before Medicare eligibility at 65 can leave a gap in health care coverage. Explore strategies to help bridge that gap.</p>
-                    <div class="m-card-footer">
-                        <a href="#">VIEW</a>
-                        <span class="category">Athletes & Sports</span>
+                <!-- CARD 4 (Dark Elevated Card - Compass Navigation) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Articles & Reading"
+                     data-title="NAVIGATING MARKET CYCLES WITH DISCIPLINED DIRECTION"
+                     data-desc="Strategic navigation insights for multi-generational wealth preservation.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-4.jpg" alt="Nautical Compass Navigation">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>NAVIGATING MARKET CYCLES WITH DISCIPLINED DIRECTION</h3>
+                        <span class="m-card-date">9/1/2026</span>
+                        <p>Strategic navigation insights for multi-generational wealth preservation through shifting economic environments.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="res-lib-item m-card text-card m-white-bg" data-category="exec">
-                    <h3>PRIVATE CREDIT IS A GROWING RETIREMENT INCOME STRATEGY</h3>
-                    <p>Direct lending gives options to more risk-tolerant income investors</p>
-                    <div class="m-card-footer">
-                        <a href="#">READ</a>
-                        <span class="category">Executives & Business</span>
+                <!-- CARD 5 (Dark Navy Accent Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Family & Lifestyle" 
+                     data-topic="Wealth Strategy" 
+                     data-media="Articles & Reading"
+                     data-title="THE FRAGMENTED FUTURE OF SPORTS STREAMING"
+                     data-desc="Live sports viewing has entered a new era of choice and complexity. Examining media rights valuations and investment opportunities.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-5.jpg" alt="Sports Stadium Broadcasting Lights">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>THE FRAGMENTED FUTURE OF SPORTS STREAMING</h3>
+                        <span class="m-card-date">9/4/2026</span>
+                        <p>Live sports viewing has entered a new era of choice and complexity. Examining media rights valuations and investment opportunities.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Family &amp; Lifestyle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 (Dark Elevated Card - Executive Leader) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Executives & Business" 
+                     data-topic="Wealth Strategy" 
+                     data-media="Articles & Reading"
+                     data-title="LEADERSHIP & DIGITAL AGILITY IN PRIVATE WEALTH"
+                     data-desc="Empowering executive decision-makers with modern tools and quantitative strategies.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-6.jpg" alt="Executive Boardroom Collaboration">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>LEADERSHIP & DIGITAL AGILITY IN PRIVATE WEALTH</h3>
+                        <span class="m-card-date">8/31/2026</span>
+                        <p>Empowering executive decision-makers with modern wealth tools, quantitative reporting, and agile governance.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Executives &amp; Business</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 7 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Reports & Publications"
+                     data-title="5 KEY FORCES SHAPING THE MARKET OUTLOOK AFTER LABOR DAY"
+                     data-desc="Review the latest Weekly Headings by CIO Larry Adam highlighting equity valuations, rate expectations, and macro drivers.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-7.jpg" alt="Financial Market Trading Charts">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>5 KEY FORCES SHAPING THE MARKET OUTLOOK AFTER LABOR DAY</h3>
+                        <span class="m-card-date">9/4/2026</span>
+                        <p>Review the latest Weekly Headings by CIO Larry Adam highlighting equity valuations, rate expectations, and macro drivers.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 8 (Vibrant Gold Accent Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Retirement & Longevity" 
+                     data-topic="Retirement Planning" 
+                     data-media="Articles & Reading"
+                     data-title="MAINTAINING INCOME AFTER RETIREMENT"
+                     data-desc="How your retirement savings can continue working for you through tactical fixed income and dividend growth strategies.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-8.jpg" alt="Wealth Investment Growth">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>MAINTAINING INCOME AFTER RETIREMENT</h3>
+                        <span class="m-card-date">9/4/2026</span>
+                        <p>How your retirement savings can continue working for you through tactical fixed income and dividend growth strategies.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Retirement &amp; Longevity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 9 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Wealth Strategy" 
+                     data-media="Reports & Publications"
+                     data-title="STRUCTURED INVESTMENTS FOR TIMES OF VOLATILITY"
+                     data-desc="An innovative approach to your investment objectives, balancing upside potential with downside buffer protection.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-9.jpg" alt="Corporate Glass Skyscraper Skyline">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>STRUCTURED INVESTMENTS FOR TIMES OF VOLATILITY</h3>
+                        <span class="m-card-date">8/31/2026</span>
+                        <p>An innovative approach to your investment objectives, balancing upside potential with downside buffer protection.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 10 (Dark Elevated Card - Winding Mountain Road) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Articles & Reading"
+                     data-title="NAVIGATING UNCERTAINTY ON THE PATH TO LONG-TERM GROWTH"
+                     data-desc="Aerial view of long-term economic trajectories and portfolio risk mitigation.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-10.jpg" alt="Winding Mountain Road Growth">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>NAVIGATING UNCERTAINTY ON THE PATH TO LONG-TERM GROWTH</h3>
+                        <span class="m-card-date">8/30/2026</span>
+                        <p>Aerial perspective of long-term economic trajectories, macroeconomic trends, and strategic risk hedging.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 11 (Dark Elevated Card - Fixed Income Strategy) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Fixed Income" 
+                     data-media="Articles & Reading"
+                     data-title="IF IT ISN'T BROKEN, DON'T FIX IT!"
+                     data-desc="Doug Drabik discusses fixed income market conditions and offers insight for bond investors.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-11.jpg" alt="Global Network Connections">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>IF IT ISN'T BROKEN, DON'T FIX IT!</h3>
+                        <span class="m-card-date">8/31/2026</span>
+                        <p>Doug Drabik discusses fixed income market conditions and offers insight for bond investors.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 12 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Reports & Publications"
+                     data-title="AUGUST REVIEW: MARKETS ADVANCE DESPITE FAMILIAR TENSIONS"
+                     data-desc="The month of August reminded many investors that markets rarely move in a straight line. Analysis of multi-asset monthly performance.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-12.jpg" alt="Wall Street Market Bull Sculpture">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>AUGUST REVIEW: MARKETS ADVANCE DESPITE FAMILIAR TENSIONS</h3>
+                        <span class="m-card-date">8/31/2026</span>
+                        <p>The month of August reminded many investors that markets rarely move in a straight line. Analysis of multi-asset monthly performance.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 13 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Economy & Policy" 
+                     data-topic="Global Economics" 
+                     data-media="Articles & Reading"
+                     data-title="CONSUMPTION IS THE ANCHOR, BUT INVESTMENT DRIVES THE CYCLE"
+                     data-desc="Raymond James Chief Economist Eugenio J. Alemán discusses consumer sentiment, capital expenditure, and business cycle dynamics.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-13.jpg" alt="Global Trade Cargo Shipping Port">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>CONSUMPTION IS THE ANCHOR, BUT INVESTMENT DRIVES THE CYCLE</h3>
+                        <span class="m-card-date">8/28/2026</span>
+                        <p>Raymond James Chief Economist Eugenio J. Alemán discusses consumer sentiment, capital expenditure, and business cycle dynamics.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Economy &amp; Policy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 14 (Dark Elevated Card with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Reports & Publications"
+                     data-title="FIVE CATALYSTS THAT COULD DRIVE A PICKUP IN VOLATILITY"
+                     data-desc="Review the latest Weekly Headings by CIO Larry Adam examining global policy shifts, earnings momentum, and geopolitical headlines.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-14.jpg" alt="Financial Analytics & Laptop Dashboard">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>FIVE CATALYSTS THAT COULD DRIVE A PICKUP IN VOLATILITY</h3>
+                        <span class="m-card-date">8/28/2026</span>
+                        <p>Review the latest Weekly Headings by CIO Larry Adam examining global policy shifts, earnings momentum, and geopolitical headlines.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 15 (Dark Elevated Card - Infographic with Image Header) -->
+                <div class="m-card m-dark-card has-image" 
+                     data-category="Retirement & Longevity" 
+                     data-topic="Retirement Planning" 
+                     data-media="Infographics"
+                     data-title="INFOGRAPHIC: RETIRING EARLY? 5 WAYS TO HELP MANAGE HEALTH CARE COSTS"
+                     data-desc="Retiring before Medicare eligibility at 65 can leave a gap in health care coverage. Explore strategies to help bridge that gap effectively.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-15.jpg" alt="Healthcare Planning Consultation">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>INFOGRAPHIC: RETIRING EARLY? 5 WAYS TO HELP MANAGE HEALTH CARE COSTS</h3>
+                        <span class="m-card-date">8/28/2026</span>
+                        <p>Retiring before Medicare eligibility at 65 can leave a gap in health care coverage. Explore strategies to help bridge that gap effectively.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">VIEW</a>
+                            <span class="category">Retirement &amp; Longevity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 16 (Hidden Extra Card for Load More) -->
+                <div class="m-card m-dark-card has-image extra-card" 
+                     style="display: none;"
+                     data-category="Executives & Business" 
+                     data-topic="Wealth Strategy" 
+                     data-media="Articles & Reading"
+                     data-title="PRIVATE CREDIT IS A GROWING RETIREMENT INCOME STRATEGY"
+                     data-desc="Direct lending gives options to risk-tolerant income investors seeking enhanced yield and capital preservation structures.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-16.jpg" alt="Business Agreement Handshake">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>PRIVATE CREDIT IS A GROWING RETIREMENT INCOME STRATEGY</h3>
+                        <span class="m-card-date">8/25/2026</span>
+                        <p>Direct lending gives options to risk-tolerant income investors seeking enhanced yield and capital preservation structures.</p>
+                        <div class="m-card-footer">
+                            <a href="javascript:void(0)" class="open-modal-trigger">READ</a>
+                            <span class="category">Executives &amp; Business</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 17 (Hidden Extra Card for Load More) -->
+                <div class="m-card m-dark-card has-image extra-card" 
+                     style="display: none;"
+                     data-category="Markets & Strategy" 
+                     data-topic="Market Outlook" 
+                     data-media="Reports & Publications"
+                     data-title="INVESTMENT STRATEGY QUARTERLY: NAVIGATING GLOBAL SHIFTS"
+                     data-desc="Raymond James' flagship report providing strategic asset allocation guidance, economic updates, and market intelligence.">
+                    <div class="m-card-image">
+                        <img src="assets/resources/card-17.jpg" alt="Global Financial Intelligence">
+                    </div>
+                    <div class="m-card-body">
+                        <h3>INVESTMENT STRATEGY QUARTERLY: NAVIGATING GLOBAL SHIFTS</h3>
+                        <span class="m-card-date">8/20/2026</span>
+                        <p>Raymond James' flagship report providing strategic asset allocation guidance, economic updates, and market intelligence.</p>
+                        <div class="m-card-footer">
+                            <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer">DOWNLOAD PDF</a>
+                            <span class="category">Markets &amp; Strategy</span>
+                        </div>
                     </div>
                 </div>
 
             </div>
-        </section>
 
-        <!-- ── Institutional Strength Banner ── -->
-        <section class="res-strength-banner" id="institutional-strength">
-            <div class="res-strength-grid">
-                <div class="res-strength-left">
-                    <span class="res-eyebrow">THE RAYMOND JAMES FOUNDATION</span>
-                    <h3>Boutique Care, <span>Global Scale</span></h3>
-                    <p>
-                        As part of Raymond James — an established S&amp;P 500 financial services firm — we combine the high-touch, bespoke service of a dedicated boutique family office with the robust institutional resources, world-class capital markets desks, and specialized expertise of a global financial powerhouse.
-                    </p>
-                </div>
-                <div class="res-strength-divider"></div>
-                <div class="res-strength-right">
-                    <div class="res-stats-row">
-                        <div class="res-stat-box">
-                            <div class="res-stat-number">$1.4T+</div>
-                            <div class="res-stat-label">Total Client Assets</div>
-                            <div class="res-stat-sub">Under administration across Raymond James Financial</div>
-                        </div>
-                        <div class="res-stat-box">
-                            <div class="res-stat-number">100+</div>
-                            <div class="res-stat-label">Years Experience</div>
-                            <div class="res-stat-sub">Cumulative financial industry wisdom on our advisory team</div>
-                        </div>
-                        <div class="res-stat-box">
-                            <div class="res-stat-number">8</div>
-                            <div class="res-stat-label">Industry Practices</div>
-                            <div class="res-stat-sub">Dedicated Raymond James Investment Banking growth sectors</div>
-                        </div>
-                        <div class="res-stat-box">
-                            <div class="res-stat-number">Top 1,200</div>
-                            <div class="res-stat-label">Barron's Ranked</div>
-                            <div class="res-stat-sub">Repeatedly recognized among America's premier wealth advisors</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Quick Guidance & FAQ ── -->
-        <section class="res-faq-sec" id="resource-faq">
-            <div class="res-section-header">
-                <span class="res-eyebrow">HELP &amp; FREQUENTLY ASKED QUESTIONS</span>
-                <h2 class="res-section-title">Client Resource <span>Guidance</span></h2>
-                <p class="res-section-subtitle">
-                    Common questions regarding account access, publications, and strategic advisory coordination.
-                </p>
-            </div>
-
-            <div class="res-faq-list">
-
-                <!-- FAQ 1 -->
-                <div class="res-faq-item active">
-                    <div class="res-faq-header" onclick="toggleFaq(this)">
-                        <h4 class="res-faq-question">How do I access my monthly statements, tax 1099 forms, and performance reports?</h4>
-                        <div class="res-faq-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="res-faq-body">
-                        You can securely view, download, and store your statements, trade confirmations, and tax documents anytime through <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer">Raymond James Client Access</a>. If you need assistance setting up paperless delivery or linking accounts, our team is directly available at <strong>215.860.7823</strong>.
-                    </div>
-                </div>
-
-                <!-- FAQ 2 -->
-                <div class="res-faq-item">
-                    <div class="res-faq-header" onclick="toggleFaq(this)">
-                        <h4 class="res-faq-question">Where can I find Raymond James' latest global economic forecasts and asset allocation updates?</h4>
-                        <div class="res-faq-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="res-faq-body">
-                        Our flagship <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer">Investment Strategy Quarterly (ISQ)</a> publication contains comprehensive analysis from Chief Investment Officer Larry Adam and the Investment Strategy Committee. We also provide personalized commentary during our regular client review meetings.
-                    </div>
-                </div>
-
-                <!-- FAQ 3 -->
-                <div class="res-faq-item">
-                    <div class="res-faq-header" onclick="toggleFaq(this)">
-                        <h4 class="res-faq-question">How does The Seiler Group coordinate with external CPAs, attorneys, and family offices?</h4>
-                        <div class="res-faq-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="res-faq-body">
-                        We serve as the central hub of your advisory team, orchestrating seamless communication with your estate planning attorneys, certified public accountants, business managers, and sports agents to ensure all tax, legal, and investment maneuvers are completely aligned.
-                    </div>
-                </div>
-
-                <!-- FAQ 4 -->
-                <div class="res-faq-item">
-                    <div class="res-faq-header" onclick="toggleFaq(this)">
-                        <h4 class="res-faq-question">What specialized resources are available for newly drafted or traded professional athletes?</h4>
-                        <div class="res-faq-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="res-faq-body">
-                        We offer dedicated onboarding roadmaps, multi-state tax forecasting, cash flow modeling for seasonal compensation, trust setup for asset protection, and financial education sessions designed to help athletes build enduring wealth far beyond their playing careers. Explore our <a href="empowering-pro-athletes.html">Empowering Pro Athletes</a> solutions.
-                    </div>
-                </div>
-
-                <!-- FAQ 5 -->
-                <div class="res-faq-item">
-                    <div class="res-faq-header" onclick="toggleFaq(this)">
-                        <h4 class="res-faq-question">How does Raymond James safeguard my accounts and private financial data?</h4>
-                        <div class="res-faq-icon"><i class="fas fa-chevron-down"></i></div>
-                    </div>
-                    <div class="res-faq-body">
-                        Raymond James employs enterprise-grade 256-bit encryption, multi-factor authentication, continuous behavioral threat monitoring, and strict privacy protocols. Visit our <a href="https://www.raymondjames.com/privacy-security-and-account-protection/privacy-commitment" target="_blank" rel="noopener noreferrer">Privacy &amp; Security Commitment</a> for complete details.
-                    </div>
-                </div>
-
+            <!-- Centered Load More Button Container -->
+            <div class="res-load-more-container">
+                <button type="button" id="load-more-btn" class="res-load-more-btn">
+                    <i class="fas fa-sync-alt"></i> LOAD MORE
+                </button>
             </div>
         </section>
 
     </main>
+
+    <!-- Modal Dialog Lightbox -->
+    <div class="res-modal-overlay" id="res-modal-overlay">
+        <div class="res-modal-card">
+            <button class="res-modal-close" id="res-modal-close" aria-label="Close modal">&times;</button>
+            <span class="res-modal-badge" id="modal-category">RAYMOND JAMES PERSPECTIVE</span>
+            <h3 class="res-modal-title" id="modal-title">PUBLICATION TITLE</h3>
+            <p class="res-modal-desc" id="modal-desc">Detailed publication description will appear here.</p>
+            <div class="res-modal-actions">
+                <a href="contact.html" class="res-modal-btn res-btn-primary"><i class="fas fa-envelope"></i> REQUEST FULL REPORT</a>
+                <button type="button" class="res-modal-btn res-btn-secondary" onclick="closeResModal()"><i class="fas fa-times"></i> CLOSE</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ============================================================
      CHAMPION STRIP
@@ -613,9 +765,7 @@
 
         <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
             <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
@@ -696,36 +846,64 @@
      JAVASCRIPT LOGIC
      ============================================================ -->
     <script>
-        // Resource Library Category Filtering
-        function filterResources(category, btnElement) {
-            const buttons = document.querySelectorAll('.res-tab-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            if (btnElement) btnElement.classList.add('active');
+        // Global Filter State
+        const filterState = {
+            search: '',
+            category: 'all',
+            topic: 'all',
+            media: 'all'
+        };
 
-            const items = document.querySelectorAll('.res-lib-item');
-            items.forEach(item => {
-                if (category === 'all' || item.getAttribute('data-category') === category) {
-                    item.style.display = 'flex';
+        // Filter Logic Implementation
+        function applyGridFilters() {
+            const cards = document.querySelectorAll('#resources-grid .m-card');
+            const searchVal = filterState.search.toLowerCase().trim();
+
+            cards.forEach(card => {
+                const isExtra = card.classList.contains('extra-card');
+                const isRevealed = card.dataset.revealed === 'true';
+
+                if (isExtra && !isRevealed && searchVal === '' && filterState.category === 'all' && filterState.topic === 'all' && filterState.media === 'all') {
+                    card.style.display = 'none';
+                    return;
+                }
+
+                const cat = card.getAttribute('data-category') || '';
+                const top = card.getAttribute('data-topic') || '';
+                const med = card.getAttribute('data-media') || '';
+                const textContent = (card.textContent || '').toLowerCase();
+
+                const matchesSearch = searchVal === '' || textContent.includes(searchVal);
+                const matchesCategory = filterState.category === 'all' || cat === filterState.category;
+                const matchesTopic = filterState.topic === 'all' || top === filterState.topic;
+                const matchesMedia = filterState.media === 'all' || med === filterState.media;
+
+                if (matchesSearch && matchesCategory && matchesTopic && matchesMedia) {
+                    card.style.display = 'flex';
                 } else {
-                    item.style.display = 'none';
+                    card.style.display = 'none';
                 }
             });
         }
 
-        // FAQ Accordion Toggle
-        function toggleFaq(headerElement) {
-            const item = headerElement.closest('.res-faq-item');
-            const isActive = item.classList.contains('active');
-            
-            // Optional: Close others
-            document.querySelectorAll('.res-faq-item').forEach(el => el.classList.remove('active'));
-            
-            if (!isActive) {
-                item.classList.add('active');
-            }
+        // Modal Functionality
+        function openResModal(card) {
+            const title = card.getAttribute('data-title') || card.querySelector('h3')?.innerText || 'Publication Insight';
+            const desc = card.getAttribute('data-desc') || card.querySelector('p')?.innerText || 'Exclusive Raymond James publication commentary.';
+            const cat = card.getAttribute('data-category') || 'MARKETS & STRATEGY';
+
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal-category').innerText = cat;
+
+            document.getElementById('res-modal-overlay').classList.add('active');
         }
 
-        // Mobile Menu Drawer Toggle
+        function closeResModal() {
+            document.getElementById('res-modal-overlay').classList.remove('active');
+        }
+
+        // Mobile Drawer Navigation Toggles
         function toggleMobileMenu(e) {
             if (e) {
                 if (e.preventDefault) e.preventDefault();
@@ -837,17 +1015,129 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const drawer = document.getElementById('mobile-drawer');
-            const header = document.getElementById('main-header');
+            // Search Input Event
+            const searchInput = document.getElementById('res-search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    filterState.search = e.target.value;
+                    applyGridFilters();
+                });
+            }
 
-            // Close drawer on escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
-                    toggleMobileMenu(e);
-                }
+            // Dropdown Toggle Behavior
+            const dropdownWrappers = document.querySelectorAll('.res-dropdown-wrapper');
+            dropdownWrappers.forEach(wrapper => {
+                const btn = wrapper.querySelector('.res-dropdown-btn');
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdownWrappers.forEach(w => {
+                        if (w !== wrapper) w.classList.remove('active');
+                    });
+                    wrapper.classList.toggle('active');
+                });
             });
 
-            // Sticky Header with Glassmorphism on Scroll
+            // Dropdown Item Selection
+            const dropdownItems = document.querySelectorAll('.res-dropdown-item');
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', (e) => {
+                    const target = item.getAttribute('data-target');
+                    const value = item.getAttribute('data-filter');
+                    const labelText = item.innerText;
+
+                    filterState[target] = value;
+
+                    // Update button label
+                    const labelEl = document.getElementById(`label-${target}`);
+                    if (labelEl) {
+                        labelEl.innerText = value === 'all' ? target.toUpperCase() : labelText.toUpperCase();
+                    }
+
+                    // Update selected class inside menu
+                    const menu = item.closest('.res-dropdown-menu');
+                    menu.querySelectorAll('.res-dropdown-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+
+                    // Close dropdown
+                    item.closest('.res-dropdown-wrapper').classList.remove('active');
+
+                    // Apply Filter
+                    applyGridFilters();
+                });
+            });
+
+            // Close Dropdowns on Click Outside
+            document.addEventListener('click', (e) => {
+                dropdownWrappers.forEach(w => w.classList.remove('active'));
+            });
+
+            // Reset All Filters
+            const resetBtn = document.getElementById('res-reset-btn');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    filterState.search = '';
+                    filterState.category = 'all';
+                    filterState.topic = 'all';
+                    filterState.media = 'all';
+
+                    if (searchInput) searchInput.value = '';
+                    document.getElementById('label-category').innerText = 'CATEGORY';
+                    document.getElementById('label-topic').innerText = 'TOPIC';
+                    document.getElementById('label-media').innerText = 'MEDIA';
+
+                    document.querySelectorAll('.res-dropdown-item').forEach(i => {
+                        if (i.getAttribute('data-filter') === 'all') {
+                            i.classList.add('selected');
+                        } else {
+                            i.classList.remove('selected');
+                        }
+                    });
+
+                    applyGridFilters();
+                });
+            }
+
+            // Load More Button
+            const loadMoreBtn = document.getElementById('load-more-btn');
+            if (loadMoreBtn) {
+                loadMoreBtn.addEventListener('click', () => {
+                    const extraCards = document.querySelectorAll('.extra-card');
+                    let newlyRevealed = false;
+                    extraCards.forEach(card => {
+                        card.dataset.revealed = 'true';
+                        card.style.display = 'flex';
+                        newlyRevealed = true;
+                    });
+                    if (newlyRevealed) {
+                        loadMoreBtn.innerHTML = '<i class="fas fa-check"></i> ALL INSIGHTS LOADED';
+                        loadMoreBtn.style.opacity = '0.7';
+                        loadMoreBtn.disabled = true;
+                    }
+                });
+            }
+
+            // Card Click Trigger Modal
+            document.querySelectorAll('.m-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'A' && e.target.getAttribute('href') !== 'javascript:void(0)') {
+                        return; // Let standard PDF link handle navigation
+                    }
+                    openResModal(card);
+                });
+            });
+
+            // Modal Close Events
+            const modalClose = document.getElementById('res-modal-close');
+            const modalOverlay = document.getElementById('res-modal-overlay');
+            if (modalClose) modalClose.addEventListener('click', closeResModal);
+            if (modalOverlay) {
+                modalOverlay.addEventListener('click', (e) => {
+                    if (e.target === modalOverlay) closeResModal();
+                });
+            }
+
+            // Sticky Header Scroll Event
+            const header = document.getElementById('main-header');
             window.addEventListener('scroll', () => {
                 if (header) {
                     if (window.scrollY > 40) {
@@ -856,54 +1146,6 @@
                         header.classList.remove('scrolled');
                     }
                 }
-            });
-
-            // Desktop Dropdowns Click-Outside Handlers
-            const athWrapper = document.getElementById('athletes-dropdown');
-            const athMenu = document.getElementById('athletes-menu');
-            const indWrapper = document.getElementById('individuals-dropdown');
-            const indMenu = document.getElementById('individuals-menu');
-            const resWrapper = document.getElementById('resources-dropdown');
-            const resMenu = document.getElementById('resources-menu');
-            const conWrapper = document.getElementById('contact-dropdown');
-            const conMenu = document.getElementById('contact-menu');
-            const caWrapper = document.getElementById('client-access-dropdown');
-            const caMenu = document.getElementById('client-access-menu');
-
-            document.addEventListener('click', (e) => {
-                if (athWrapper && athMenu && !athWrapper.contains(e.target)) {
-                    athMenu.classList.remove('show');
-                    athWrapper.classList.remove('active');
-                }
-                if (indWrapper && indMenu && !indWrapper.contains(e.target)) {
-                    indMenu.classList.remove('show');
-                    indWrapper.classList.remove('active');
-                }
-                if (resWrapper && resMenu && !resWrapper.contains(e.target)) {
-                    resMenu.classList.remove('show');
-                    resWrapper.classList.remove('active');
-                }
-                if (conWrapper && conMenu && !conWrapper.contains(e.target)) {
-                    conMenu.classList.remove('show');
-                    conWrapper.classList.remove('active');
-                }
-                if (caWrapper && caMenu && !caWrapper.contains(e.target)) {
-                    caMenu.classList.remove('show');
-                    caWrapper.classList.remove('active');
-                }
-            });
-
-            // Auto-close mobile drawer on in-page anchor navigation
-            document.querySelectorAll('.drawer-sublink, .res-pill-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const href = link.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        const drawer = document.getElementById('mobile-drawer');
-                        if (drawer && drawer.classList.contains('active')) {
-                            toggleMobileMenu(e);
-                        }
-                    }
-                });
             });
         });
     </script>
