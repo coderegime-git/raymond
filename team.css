@@ -574,6 +574,7 @@ html.modal-open {
     color: #b4c2d0;
     text-decoration: none;
     transition: color .2s;
+    word-break: break-word;
 }
 
 .bio-contact-list a:hover { color: #d4940c; }
@@ -1038,24 +1039,51 @@ html.modal-open {
     }
 
     .bio-contact-list {
-        align-items: center;
-        margin-top: 14px;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: auto;
+        max-width: 100%;
+        margin: 16px auto 0;
+        padding: 0 4px;
+        box-sizing: border-box;
     }
 
     .bio-contact-list li {
-        justify-content: center;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        text-align: left;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .bio-contact-list li i {
+        color: #d4940c;
+        font-size: 13px;
+        margin-top: 2px;
+        flex-shrink: 0;
+        width: 16px;
         text-align: center;
+    }
+
+    .bio-contact-list li span,
+    .bio-contact-list li a {
+        text-align: left;
+        line-height: 1.45;
+        word-break: break-word;
     }
 
     .bio-right {
         flex: unset;
         width: 100%;
-        padding: 20px 48px 24px 18px;
+        padding: 22px 20px 28px;
+        box-sizing: border-box;
     }
 
     .bio-contact-btn {
         align-self: center;
-        margin: 16px auto 0;
+        margin: 20px auto 0;
         width: 100%;
         max-width: 280px;
     }

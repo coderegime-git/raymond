@@ -122,21 +122,21 @@ const MEMBERS = {
     photo: 'assets/team/joseph.png',
     intro: 'Joe is dedicated to recruiting prospective clients and providing financial education to our current professional athlete clients, such as how to establish a strong financial foundation. He has the ability to break down even the most complex financial concepts so any client can grasp them.',
     bio: [
-      '<h5 class="bio-subheading">His carefully measured approach</h5><p class="bio-text">Joe reviews clients’ portfolios to evaluate performance and assess the probability of meeting their goals. He strives to help each client pursue generational wealth and determine what “wealth is freedom” means to them.</p>',
-      '<p class="bio-text">Clients appreciate his accessibility and attention to detail. As an Accredited Asset Management Specialist™, he is well-versed in investments, insurance, tax, retirement and estate planning issues.</p>',
-      '<h5 class="bio-subheading">A solid background</h5><p class="bio-text">Joe first joined our team in 2018 as an intern and participated in the Raymond James Advisor Mastery Program, designed to provide the training and support to prepare him for a career as a financial advisor.</p>',
-      '<p class="bio-text">He is a graduate of Rutgers University, where he earned a bachelor’s degree in economics and was a sports writer for The Daily Targum, the student newspaper.</p>',
-      '<h5 class="bio-subheading">A personal note</h5><p class="bio-text">Joe is originally from Freehold, New Jersey, and now lives in Red Bank, New Jersey. In his free time, he enjoys the beach, playing golf and exercising.</p>'
+      '<h5 class="bio-subheading">A Thoughtful and Disciplined Approach</h5><p class="bio-text">Joe works closely with clients to review portfolio performance, evaluate progress toward financial goals, and help identify strategies designed to support long-term success. He is committed to helping clients build and preserve generational wealth while defining what financial freedom means for their unique circumstances.</p>',
+      '<p class="bio-text">Clients value Joe’s responsiveness, attention to detail, and dedication to providing a personalized experience. As an Accredited Asset Management Specialist™ (AAMS™), he has a strong foundation in investment management, insurance, retirement planning, tax considerations, and estate planning strategies.</p>',
+      '<h5 class="bio-subheading">Building a Strong Foundation</h5><p class="bio-text">Joe joined The Seiler Group in 2018 as an intern and later participated in the Raymond James Advisor Mastery Program, an intensive development program designed to prepare the next generation of financial advisors through advanced training, mentorship, and hands-on client experience.</p>',
+      '<p class="bio-text">He earned a bachelor’s degree in Economics from Rutgers University, where he also worked as a sports writer for The Daily Targum, the university’s student newspaper.</p>',
+      '<h5 class="bio-subheading">Outside the Office</h5><p class="bio-text">Originally from Freehold, New Jersey, Joe now resides in Fort Lauderdale, Florida. Outside of work, he enjoys spending time at the beach, playing golf, and spending time with friends and family.</p>'
     ],
     footnotes: [
       'AAMS® and Accredited Asset Management Specialist® are registered service marks of the College for Financial Planning.'
     ],
-    designations: ['AAMS™'],
+    designations: ['Accredited Asset Management Specialist™ (AAMS™)'],
     desNote: 'Visit raymondjames.com/sm/disclosures for information on Raymond James ratings and designations.'
   },
   'priya-roy': {
     name: 'PRYIA N. ROY',
-    certs: 'JD',
+    certs: 'JD, WMS™',
     role: 'Financial Planning Consultant',
     phone: '(215) 860-7823',
     email: 'pryia.roy@raymondjames.com',
@@ -152,8 +152,8 @@ const MEMBERS = {
       'He is a member New Jersey State Bar Association and the Fraternal Order of Police Federal Agent’s Lodge Number 92.'
     ],
     disclaimer: 'Raymond James and its advisors do not offer legal advice. You should discuss any legal matters with the appropriate professional.<br><br>Raymond James is not affiliated with the above organizations and/or charitable causes.',
-    designations: ['JD'],
-    desNote: ''
+    designations: ['JD', 'WMS™'],
+    desNote: 'Visit raymondjames.com/sm/disclosures for information on Raymond James ratings and designations.'
   },
   'matthew-margolis': {
     name: 'MATTHEW J. MARGOLIS',
@@ -211,6 +211,7 @@ const MEMBERS = {
     role: 'Investment Portfolio Associate',
     phone: '(215) 860-7823',
     email: 'jeremy.voccia@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/jeremy-voccia-a8a1b9137/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/jeremy.png',
     intro: 'Jeremy is responsible for reviewing clients’ investment policies to ensure their portfolios align with their goals and risk tolerance. As a Certified Financial Planner® professional, he brings a disciplined approach to asset allocation and long-term strategy, helping clients stay on track toward achieving their objectives.',
@@ -345,6 +346,16 @@ function openModal(memberId) {
   const firstName = m.name.split(' ')[0];
   const lastName = m.name.split(' ').slice(-1)[0];
 
+  const linkedinUrl = m.linkedin
+    ? (m.linkedin.startsWith('http') ? m.linkedin : 'https://' + m.linkedin)
+    : '';
+  const linkedinDisplay = m.linkedin
+    ? m.linkedin.replace(/^https?:\/\//, '').replace(/\/$/, '')
+    : '';
+  const linkedinLink = m.linkedin
+    ? `<li><i class="fab fa-linkedin-in"></i> <a href="${linkedinUrl.endsWith('/') ? linkedinUrl : linkedinUrl + '/'}" target="_blank" rel="noopener">${linkedinDisplay}</a></li>`
+    : '';
+
   inner.innerHTML = `
     <div class="bio-left">
       <img src="assets/logo.svg" alt="The Seiler Group" class="bio-logo">
@@ -358,6 +369,7 @@ function openModal(memberId) {
         <ul class="bio-contact-list">
           <li><i class="fas fa-phone"></i> <span>${m.phone}</span></li>
           <li><i class="far fa-envelope"></i> <a href="mailto:${m.email}">${m.email}</a></li>
+          ${linkedinLink}
           <li><i class="fas fa-map-marker-alt"></i> <span>${addressLines}</span></li>
         </ul>
       </div>
@@ -617,5 +629,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
-
-

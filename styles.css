@@ -490,7 +490,8 @@ body.menu-open {
     align-items: flex-end;
     overflow: hidden;
     padding-bottom: 52px;
-    cursor: pointer;
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
     transition: flex .6s cubic-bezier(.4, 0, .2, 1);
 }
 
@@ -570,6 +571,7 @@ body.menu-open {
     z-index: 10;
     padding: 0 48px;
     width: 100%;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* LEFT panel — text pushed RIGHT (toward center) */
@@ -593,6 +595,13 @@ body.menu-open {
     letter-spacing: -0.5px;
     margin-bottom: 18px;
     filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.70));
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
 }
 
 .title-athletes,
@@ -630,6 +639,13 @@ body.menu-open {
     letter-spacing: 1.5px;
     margin-top: 4px;
     margin-bottom: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
 }
 
 /* Blue-indigo subtitle */
@@ -656,6 +672,13 @@ body.menu-open {
     max-width: 360px;
     margin-left: auto;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    pointer-events: none;
 }
 
 .content-right .hero-desc {
@@ -666,6 +689,9 @@ body.menu-open {
 /* CTA Buttons — compact */
 .hero-btn {
     display: inline-block;
+    position: relative;
+    z-index: 20;
+    pointer-events: auto !important;
     padding: 10px 30px;
     font-family: 'Montserrat', sans-serif;
     font-size: 11px;
@@ -674,6 +700,13 @@ body.menu-open {
     text-transform: uppercase;
     text-decoration: none;
     transition: all .3s ease;
+    cursor: pointer !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Athletes button — blue periwinkle border + text matching headline */
@@ -683,10 +716,15 @@ body.menu-open {
     color: #9aaaf4;
 }
 
-.btn-athletes:hover {
-    background: rgba(120, 136, 232, 0.25);
-    border-color: #b8c8ff;
-    color: #b8c8ff;
+.btn-athletes:hover,
+.btn-athletes:active,
+.btn-athletes:focus,
+.btn-athletes:focus-visible {
+    background: rgba(120, 136, 232, 0.35) !important;
+    border-color: #b8c8ff !important;
+    color: #b8c8ff !important;
+    box-shadow: 0 0 16px rgba(120, 136, 232, 0.55);
+    outline: none;
 }
 
 /* Titans button — amber/gold text + amber border + dark box */
@@ -696,10 +734,15 @@ body.menu-open {
     color: #d4940c;
 }
 
-.btn-titans:hover {
-    background: rgba(212, 148, 12, 0.30);
-    border-color: #f0b030;
-    color: #f0b030;
+.btn-titans:hover,
+.btn-titans:active,
+.btn-titans:focus,
+.btn-titans:focus-visible {
+    background: rgba(212, 148, 12, 0.35) !important;
+    border-color: #f0b030 !important;
+    color: #f0b030 !important;
+    box-shadow: 0 0 16px rgba(240, 176, 48, 0.55);
+    outline: none;
 }
 
 /* ── Center Shield Badge ── */
@@ -1209,6 +1252,10 @@ body.menu-open {
     .hero-btn {
         padding: 12px 34px;
         font-size: 11px;
+        position: relative;
+        z-index: 20;
+        pointer-events: auto !important;
+        cursor: pointer !important;
     }
 
     .center-badge {
