@@ -318,10 +318,13 @@
                     </div>
                 </div>
                 <div class="ath-hero-media">
-                    <div class="ath-video-card" id="video-trigger">
-                        <img src="assets/athletes/stadium_court.png" alt="Stadium Arena Court" class="ath-video-img">
-                        <div class="ath-video-overlay"></div>
-                        <div class="ath-play-button">
+                    <div class="ath-video-card" id="ath-video-container" style="position: relative; cursor: pointer;">
+                        <video id="ath-hero-video" playsinline preload="auto" style="width: 100%; height: 100%; object-fit: cover; display: block; background: #000;">
+                            <source src="assets/athletes/athlete_video.mp4#t=0.001" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="ath-video-overlay" id="ath-video-overlay"></div>
+                        <div class="ath-play-button" id="ath-play-btn" aria-label="Play video">
                             <i class="fas fa-play"></i>
                         </div>
                     </div>
@@ -516,7 +519,10 @@
         <div class="ath-modal-card video-card-modal">
             <button class="ath-modal-close" id="modal-video-close" aria-label="Close modal">&times;</button>
             <div class="ath-video-wrapper">
-                <iframe width="100%" height="380" src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=0" title="The Seiler Group Athletes Practice" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <video id="ath-player-video" controls width="100%" preload="metadata" poster="assets/athletes/stadium_court.png" style="max-height: 80vh; border-radius: 8px; background: #000; width: 100%; display: block;">
+                    <source src="assets/athletes/athlete_video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
     </div>
@@ -701,6 +707,55 @@
                     }
                 });
             });
+
+            // Hero Video Click-to-Play Handler
+            const heroVideo = document.getElementById('ath-hero-video');
+            const playBtn = document.getElementById('ath-play-btn');
+            const videoOverlay = document.getElementById('ath-video-overlay');
+
+            if (heroVideo && playBtn) {
+                // Preload and seek to first frame so preview displays immediately
+                heroVideo.addEventListener('loadedmetadata', () => {
+                    heroVideo.currentTime = 0.01;
+                });
+
+                function startHeroVideo() {
+                    heroVideo.controls = true;
+                    heroVideo.play().then(() => {
+                        playBtn.style.opacity = '0';
+                        playBtn.style.pointerEvents = 'none';
+                        if (videoOverlay) {
+                            videoOverlay.style.opacity = '0';
+                            videoOverlay.style.pointerEvents = 'none';
+                        }
+                    }).catch(err => {
+                        console.log('Video playback error:', err);
+                    });
+                }
+
+                playBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    startHeroVideo();
+                });
+
+                if (videoOverlay) {
+                    videoOverlay.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        startHeroVideo();
+                    });
+                }
+
+                heroVideo.addEventListener('ended', () => {
+                    heroVideo.controls = false;
+                    playBtn.style.opacity = '1';
+                    playBtn.style.pointerEvents = 'auto';
+                    if (videoOverlay) {
+                        videoOverlay.style.opacity = '1';
+                        videoOverlay.style.pointerEvents = 'auto';
+                    }
+                });
+            }
+
         });
     </script>
     <script src="email-handler.js"></script>
