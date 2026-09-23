@@ -10,6 +10,7 @@ const MEMBERS = {
     role: 'Managing Director\nSenior Vice President, Investments',
     phone: '(212) 350-0100',
     email: 'tom.seiler@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/tomseiler/',
     address: 'The Seiler Group\nRaymond James & Associates\n420 Lexington Avenue, New York, NY 10170',
     photo: 'assets/team/thomas.png',
     intro: 'As a founding member of The Seiler Group of Raymond James, Thomas Seiler has been dedicated to meeting the sophisticated needs of today’s high-net-worth individuals with a specialized focus on professional athletes and business titans. He began his career in 1990 with Merrill Lynch, concentrating on high-net-worth clients.',
@@ -36,6 +37,7 @@ const MEMBERS = {
     role: 'Private Wealth Advisor\nSenior Vice President, Investments',
     phone: '(215) 860-7823',
     email: 'patrick.seiler@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/patrickseiler/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/patrick.png',
     intro: 'Patrick Seiler works with corporate clients, including pension and profit-sharing plans, 401(k) plans and foundations. He also provides comprehensive planning to private high-net-worth individuals and families. He has a specialized focus on professional athletes and business titans.',
@@ -62,6 +64,7 @@ const MEMBERS = {
     role: 'Financial Advisor',
     phone: '(215) 860-7823',
     email: 'ross.hart@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/rosshart/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/ross.png',
     intro: 'Ross Hart works with families and individuals, including business titans and professional athletes, on developing comprehensive financial plans custom tailored to their specific goals and objectives.',
@@ -94,6 +97,7 @@ const MEMBERS = {
     role: 'Investment Portfolio Associate',
     phone: '(215) 860-7823',
     email: 'matthew.geraci@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/matthew-geraci-366350117/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/mathew.png',
     intro: 'Matt works with all clients of The Seiler Group to make sure their needs are taken care of and to help them pursue their goals and financial independence through personalized financial planning.',
@@ -118,6 +122,7 @@ const MEMBERS = {
     role: 'Investment Portfolio Associate',
     phone: '(215) 860-7823',
     email: 'joseph.brauner@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/joseph-brauner/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/joseph.png',
     intro: 'Joe is dedicated to recruiting prospective clients and providing financial education to our current professional athlete clients, such as how to establish a strong financial foundation. He has the ability to break down even the most complex financial concepts so any client can grasp them.',
@@ -140,6 +145,7 @@ const MEMBERS = {
     role: 'Financial Planning Consultant',
     phone: '(215) 860-7823',
     email: 'pryia.roy@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/pryia-roy-jd-wms-96b413176/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/pryia.png',
     intro: 'Pryia is focused on serving professional athletes, entertainers, physicians and other high-net-worth individuals. He builds, implements and manages custom-designed portfolios designed to help meet clients’ short- and long-term financial goals and preserve their wealth for generations to come. His work embodies our group’s “wealth is freedom” motto, as he strives to give clients the freedom to do what is most important for them and their families.',
@@ -178,6 +184,7 @@ const MEMBERS = {
     role: 'Wealth Management Associate',
     phone: '(215) 860-7823',
     email: 'isaiah.burrows@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/isaiah-burrows-wms™-aams™-72216b172/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/issaih.png',
     intro: 'Isaiah serves professional athletes and entertainers and works with our team in assisting clients with pursuing their goals and managing their financial lives. He is a hard worker who pays attention to detail and his personable nature makes it easy to relate to clients.',
@@ -194,6 +201,7 @@ const MEMBERS = {
     role: 'Client Service Associate',
     phone: '(215) 860-7823',
     email: 'pamela.longmore@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/pamela-longmore-a3a797171/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/pamela.png',
     intro: 'Pamela provides support for our clients’ account needs on a daily basis. She focuses on building strong client relationships built on trust and reliability. Her approachability and attentiveness are valued by clients because they appreciate working with someone who is both professional and empathetic toward their individual situation and needs.',
@@ -265,6 +273,7 @@ const MEMBERS = {
     role: 'Client Service Associate',
     phone: '(215) 860-7823',
     email: 'kylie.swider@raymondjames.com',
+    linkedin: 'https://www.linkedin.com/in/kylie-swider/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/kylie.png',
     intro: 'Kylie joined our team in August 2025 after receiving her master’s in marketing (M.S.) at Stonehill College. Before Stonehill, Kylie attended Villanova University where she received her bachelor’s degree in communications. She has always been interested in the financial industry and is about halfway through her MBA at Villanova University. She is drawn to a career that is customer focused and allows people to set themselves up for a successful future.',
@@ -346,11 +355,12 @@ function openModal(memberId) {
   const firstName = m.name.split(' ')[0];
   const lastName = m.name.split(' ').slice(-1)[0];
 
-  const linkedinUrl = m.linkedin
-    ? (m.linkedin.startsWith('http') ? m.linkedin : 'https://' + m.linkedin)
+  const cleanLinkedin = m.linkedin ? m.linkedin.trim().split('?')[0] : '';
+  const linkedinUrl = cleanLinkedin
+    ? (cleanLinkedin.startsWith('http') ? cleanLinkedin : 'https://' + cleanLinkedin)
     : '';
-  const linkedinDisplay = m.linkedin
-    ? m.linkedin.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  const linkedinDisplay = cleanLinkedin
+    ? cleanLinkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
     : '';
   const linkedinLink = m.linkedin
     ? `<li><i class="fab fa-linkedin-in"></i> <a href="${linkedinUrl.endsWith('/') ? linkedinUrl : linkedinUrl + '/'}" target="_blank" rel="noopener">${linkedinDisplay}</a></li>`
