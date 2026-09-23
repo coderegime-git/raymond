@@ -1,12 +1,17 @@
 /* ============================================================
    RESOURCES LANDING PAGE STYLES — THE SEILER GROUP
-   Matching the website's dark theme palette (#0b0b0b)
+   Corporate Midnight Navy & Electric Blue Palette
    ============================================================ */
+
+body.resources-page {
+    background-color: #0b172a !important;
+    color: #ffffff !important;
+}
 
 /* ── Main Layout Container (Directly below 95px fixed header, Dark Theme) ── */
 .res-page-wrapper {
     margin-top: 95px;
-    background-color: #0b0b0b !important;
+    background-color: #0b172a !important;
     color: #ffffff !important;
     padding: 3rem 0 6rem 0;
     min-height: 80vh;
@@ -22,27 +27,27 @@
     align-items: center;
 }
 
-/* Search Bar (Dark Theme Match) */
+/* Search Bar */
 .res-search-bar {
     display: flex;
     width: 100%;
     max-width: 820px;
     margin-bottom: 1rem;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-    border-radius: 4px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+    border-radius: 6px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.25);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .res-search-bar:focus-within {
-    border-color: #d48b38;
-    box-shadow: 0 10px 30px rgba(212, 139, 56, 0.15);
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25), 0 12px 35px rgba(0, 0, 0, 0.5);
 }
 
 .res-search-bar input {
     flex: 1;
-    background-color: #111216 !important;
+    background-color: #0d1b31 !important;
     border: none;
     padding: 16px 24px;
     font-size: 15px;
@@ -52,15 +57,15 @@
 }
 
 .res-search-bar input::placeholder {
-    color: #8a929b;
+    color: #94a3b8;
     font-weight: 400;
 }
 
 .res-search-bar button {
-    background-color: #d48b38;
+    background-color: #d89e1b;
     border: none;
     padding: 0 28px;
-    color: #000000;
+    color: #080a0f;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
@@ -70,7 +75,7 @@
 }
 
 .res-search-bar button:hover {
-    background-color: #c98e18;
+    background-color: #f3c27e;
 }
 
 /* Reset Filters Link */
@@ -79,7 +84,7 @@
 }
 
 .res-reset-link {
-    color: #9da5ad;
+    color: #94a3b8;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
@@ -93,7 +98,7 @@
 }
 
 .res-reset-link:hover {
-    color: #d48b38;
+    color: #60a5fa;
 }
 
 /* Filter Divider Line */
@@ -101,7 +106,7 @@
     width: 100%;
     max-width: 1060px;
     height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(59, 130, 246, 0.2);
     margin-bottom: 0.5rem;
 }
 
@@ -139,18 +144,18 @@
 
 .res-dropdown-btn i {
     font-size: 11px;
-    color: #9da5ad;
+    color: #94a3b8;
     transition: transform 0.3s ease;
 }
 
 .res-dropdown-btn:hover,
 .res-dropdown-wrapper.active .res-dropdown-btn {
-    color: #d48b38;
+    color: #60a5fa;
 }
 
 .res-dropdown-wrapper.active .res-dropdown-btn i {
     transform: rotate(180deg);
-    color: #d48b38;
+    color: #60a5fa;
 }
 
 .res-dropdown-menu {
@@ -158,10 +163,10 @@
     top: 100%;
     left: 50%;
     transform: translateX(-50%) translateY(10px);
-    background: #111216;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #11233e !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-    border-radius: 4px;
+    border-radius: 6px;
     min-width: 230px;
     padding: 8px 0;
     z-index: 100;
@@ -189,8 +194,8 @@
 
 .res-dropdown-item:hover,
 .res-dropdown-item.selected {
-    background-color: rgba(212, 139, 56, 0.15);
-    color: #d48b38;
+    background-color: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
 }
 
 /* ── Masonry Grid Layout ── */
@@ -209,7 +214,7 @@
 
 /* ── Base Card Styles ── */
 .m-card {
-    border-radius: 4px;
+    border-radius: 8px !important;
     overflow: hidden;
     transition: transform 0.35s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.35s ease, border-color 0.35s ease;
     position: relative;
@@ -218,11 +223,15 @@
     justify-content: space-between;
     min-height: 240px;
     cursor: pointer;
+    background-color: #11233e !important;
+    border: 1px solid rgba(59, 130, 246, 0.22) !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35) !important;
 }
 
 .m-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+    border-color: rgba(96, 165, 250, 0.45) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6) !important;
 }
 
 /* Card Header Image Styling */
@@ -231,7 +240,7 @@
     height: 195px;
     overflow: hidden;
     position: relative;
-    background-color: #0f172a;
+    background-color: #0d1b31;
 }
 
 .m-card-image img {
@@ -252,22 +261,16 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    background-color: #111216 !important;
+    background-color: #11233e !important;
 }
 
-/* 1. Dark Elevated Card */
+/* Dark Elevated Cards */
 .m-dark-card,
 .m-white-card {
-    background-color: #111216 !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    background-color: #11233e !important;
+    border: 1px solid rgba(59, 130, 246, 0.22) !important;
     padding: 2rem 1.8rem 1.6rem 1.8rem;
     color: #ffffff !important;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
-}
-
-.m-dark-card:hover,
-.m-white-card:hover {
-    border-color: rgba(212, 139, 56, 0.4) !important;
 }
 
 .m-dark-card.has-image,
@@ -290,7 +293,7 @@
 
 .m-dark-card:hover h3,
 .m-white-card:hover h3 {
-    color: #d48b38 !important;
+    color: #93c5fd !important;
 }
 
 .m-dark-card .m-card-date,
@@ -317,7 +320,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid rgba(59, 130, 246, 0.18) !important;
     padding-top: 1.1rem;
     margin-top: auto;
 }
@@ -327,10 +330,10 @@
     font-weight: 800;
     font-size: 12px;
     text-decoration: none;
-    letter-spacing: 1px;
-    color: #d48b38 !important;
+    letter-spacing: 1.5px;
+    color: #60a5fa !important;
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -347,7 +350,7 @@
 
 .m-dark-card:hover .m-card-footer a,
 .m-white-card:hover .m-card-footer a {
-    color: #ffffff !important;
+    color: #93c5fd !important;
 }
 
 .m-dark-card:hover .m-card-footer a::after,
@@ -358,97 +361,18 @@
 .m-dark-card .m-card-footer .category,
 .m-white-card .m-card-footer .category {
     font-size: 11.5px;
-    font-weight: 400;
-    color: #94a3b8 !important;
-}
-
-/* 2. Dark Navy Accent Card */
-.m-dark-card {
-    background-color: #0b192c !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding: 2rem 1.8rem 1.6rem 1.8rem;
-    color: #ffffff !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
-}
-
-.m-dark-card.has-image {
-    padding: 0 !important;
-}
-
-.m-dark-card .m-card-body {
-    background-color: #0b192c !important;
-}
-
-.m-dark-card h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.12rem;
-    font-weight: 800;
-    color: #ffffff !important;
-    line-height: 1.35;
-    margin-bottom: 0.6rem;
-    text-transform: uppercase;
-    letter-spacing: -0.2px;
-}
-
-.m-dark-card .m-card-date {
-    font-size: 12px;
     font-weight: 600;
-    color: #94a3b8 !important;
-    margin-bottom: 0.9rem;
-    display: block;
-}
-
-.m-dark-card p {
-    font-family: 'Open Sans', 'Montserrat', sans-serif;
-    font-size: 13.5px;
-    color: #cbd5e1 !important;
-    line-height: 1.65;
-    margin-bottom: 1.5rem;
-    font-weight: 300;
-}
-
-.m-dark-card .m-card-footer {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    padding-top: 1.1rem;
-    margin-top: auto;
-}
-
-.m-dark-card .m-card-footer a {
-    font-weight: 800;
-    font-size: 12px;
-    text-decoration: none;
-    letter-spacing: 1px;
-    color: #d48b38 !important;
+    color: #60a5fa !important;
     text-transform: uppercase;
-    transition: color 0.2s ease;
+    letter-spacing: 1px;
 }
 
-.m-dark-card .m-card-footer a::after {
-    content: '\f0da';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    font-size: 10px;
-    margin-left: 6px;
-}
-
-.m-dark-card:hover .m-card-footer a {
-    color: #ffffff !important;
-}
-
-.m-dark-card .m-card-footer .category {
-    font-size: 11.5px;
-    font-weight: 400;
-    color: #94a3b8 !important;
-}
-
-/* 3. Gold Accent Card */
+/* Gold Accent Card (Preserved Gold Brand Card) */
 .m-gold-card {
     background-color: #dfa01e !important;
     background-image: linear-gradient(135deg, #e3a024 0%, #c98e18 100%) !important;
     border: none !important;
+    border-radius: 8px !important;
     padding: 2rem 1.8rem 1.6rem 1.8rem;
     color: #0f172a !important;
     box-shadow: 0 8px 25px rgba(223, 160, 30, 0.25) !important;
@@ -522,12 +446,12 @@
     color: #334155 !important;
 }
 
-/* 4. Notch Corner Image Card (Matching Dark Page Background #0b0b0b) */
+/* Notch Corner Image Card */
 .m-image-card {
     position: relative;
     overflow: hidden;
-    border-radius: 4px;
-    background-color: #0f172a;
+    border-radius: 8px !important;
+    background-color: #0d1b31;
     min-height: 280px;
 }
 
@@ -544,7 +468,6 @@
     transform: scale(1.06);
 }
 
-/* Corner Notch Triangle Badge (Matches #0b0b0b) */
 .m-image-card.m-notch-left::before {
     content: '';
     position: absolute;
@@ -554,29 +477,30 @@
     height: 0;
     border-left: 14px solid transparent;
     border-right: 14px solid transparent;
-    border-bottom: 14px solid #0b0b0b;
+    border-bottom: 14px solid #0b172a !important;
     z-index: 5;
 }
 
-/* 5. Dark Image Overlay Card */
+/* Dark Image Overlay Card */
 .m-dark-overlay-card {
     position: relative;
     min-height: 280px;
     background-size: cover;
     background-position: center;
-    border-radius: 4px;
+    border-radius: 8px !important;
     overflow: hidden;
     padding: 2.2rem 2rem 1.8rem 2rem;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    border: 1px solid rgba(59, 130, 246, 0.22) !important;
 }
 
 .m-dark-overlay-card .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(11, 25, 44, 0.45) 0%, rgba(11, 25, 44, 0.92) 100%);
+    background: linear-gradient(180deg, rgba(8, 19, 36, 0.45) 0%, rgba(8, 19, 36, 0.95) 100%) !important;
     z-index: 1;
 }
 
@@ -613,16 +537,16 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
     padding-top: 1rem;
 }
 
 .m-dark-overlay-card .m-card-footer a {
     font-weight: 800;
     font-size: 12px;
-    color: #d48b38;
+    color: #60a5fa !important;
     text-decoration: none;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .m-dark-overlay-card .m-card-footer a::after {
@@ -635,10 +559,10 @@
 
 .m-dark-overlay-card .m-card-footer .category {
     font-size: 11.5px;
-    color: #cbd5e1;
+    color: #60a5fa !important;
 }
 
-/* ── Centered LOAD MORE Button (Reference Image 4) ── */
+/* ── Centered LOAD MORE Button ── */
 .res-load-more-container {
     display: flex;
     justify-content: center;
@@ -646,22 +570,22 @@
 }
 
 .res-load-more-btn {
-    background-color: #dfa01e;
-    background-image: linear-gradient(135deg, #e3a024 0%, #c98e18 100%);
+    background-color: #d89e1b !important;
+    background-image: none !important;
     border: none;
     padding: 16px 42px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #000000;
+    letter-spacing: 2px;
+    color: #080a0f !important;
     cursor: pointer;
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 8px 22px rgba(223, 160, 30, 0.25);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
     transition: all 0.3s ease;
 }
 
@@ -671,9 +595,9 @@
 }
 
 .res-load-more-btn:hover {
-    background-color: #c98e18;
+    background-color: #f3c27e !important;
     transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(223, 160, 30, 0.35);
+    box-shadow: 0 8px 24px rgba(216, 158, 27, 0.45) !important;
 }
 
 .res-load-more-btn:hover i {
@@ -684,7 +608,7 @@
 .res-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(8, 8, 10, 0.85);
+    background: rgba(8, 19, 36, 0.85);
     backdrop-filter: blur(8px);
     z-index: 1000;
     display: flex;
@@ -702,8 +626,8 @@
 }
 
 .res-modal-card {
-    background: #111216;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: #11233e !important;
+    border: 1px solid rgba(59, 130, 246, 0.25) !important;
     border-radius: 8px;
     max-width: 650px;
     width: 100%;
@@ -729,7 +653,7 @@
     height: 36px;
     border-radius: 50%;
     font-size: 18px;
-    color: #9da5ad;
+    color: #94a3b8;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -738,16 +662,16 @@
 }
 
 .res-modal-close:hover {
-    background: #d48b38;
-    color: #000000;
+    background: #d89e1b;
+    color: #080a0f;
 }
 
 .res-modal-badge {
     display: inline-block;
     padding: 4px 12px;
-    background: rgba(212, 139, 56, 0.15);
-    border: 1px solid rgba(212, 139, 56, 0.3);
-    color: #d48b38;
+    background: rgba(59, 130, 246, 0.15) !important;
+    border: 1px solid rgba(59, 130, 246, 0.3) !important;
+    color: #60a5fa !important;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -767,7 +691,7 @@
 }
 
 .res-modal-desc {
-    color: #9da5ad;
+    color: #cbd5e1;
     font-size: 14.5px;
     line-height: 1.7;
     margin-bottom: 1.8rem;
@@ -794,21 +718,48 @@
 }
 
 .res-btn-primary {
-    background: #d48b38;
-    color: #000000;
+    background: #d89e1b;
+    color: #080a0f;
 }
 
 .res-btn-primary:hover {
-    background: #c98e18;
+    background: #f3c27e;
 }
 
 .res-btn-secondary {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(59, 130, 246, 0.12);
     color: #ffffff;
+    border: 1px solid rgba(59, 130, 246, 0.25);
 }
 
 .res-btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(59, 130, 246, 0.22);
+}
+
+/* ── Champion Strip & Footer ── */
+body.resources-page .champion-strip {
+    background: #081324 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.resources-page .champ-heading {
+    color: #ffffff !important;
+}
+
+body.resources-page .champ-heading .champ-gold,
+body.resources-page .champ-heading span {
+    color: #e0a32a !important;
+    display: block;
+}
+
+body.resources-page .champ-link {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+body.resources-page .site-footer {
+    background: #07101e !important;
+    border: 1px solid rgba(197, 155, 39, 0.35) !important;
 }
 
 /* ── Responsive Rules ── */

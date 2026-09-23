@@ -1,11 +1,13 @@
 /* ============================================================
    PRIVATE WEALTH PAGE STYLES (private-wealth.css)
-   Exact match to reference design and layout
+   Corporate Midnight Navy Theme with Golden Lines & Gold Accents
+   Exact match to individuals.html / individuals.css color revision
    ============================================================ */
 
 /* ── Base Setup ── */
-.private-wealth-page {
-    background-color: #000000;
+.private-wealth-page,
+body.private-wealth-page {
+    background-color: #0b172a !important;
     color: #ffffff;
     font-family: 'Open Sans', sans-serif;
     overflow-x: hidden;
@@ -22,7 +24,7 @@
 
 .pw-gold-text,
 .pw-gold-heading {
-    color: #c98226;
+    color: #d89e1b;
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
 }
 
@@ -41,7 +43,7 @@
     padding-bottom: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    background: #000000;
+    background: #081324;
     width: 100%;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
     overflow: hidden;
@@ -60,7 +62,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #000000;
+    background: #081324;
 }
 
 .pw-hero-title {
@@ -98,7 +100,7 @@
 }
 
 .pw-hero-link {
-    color: #c98226;
+    color: #d89e1b;
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -109,7 +111,7 @@
 }
 
 .pw-hero-link:hover {
-    color: #f3b93f;
+    color: #ecc056;
     text-decoration: underline;
 }
 
@@ -118,7 +120,7 @@
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    color: #000000 !important;
+    color: #080a0f !important;
     font-family: 'Montserrat', sans-serif;
     font-size: 12.5px;
     font-weight: 700;
@@ -126,13 +128,13 @@
     text-transform: uppercase;
     text-decoration: none;
     padding: 10px 20px;
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
     transition: all 0.25s ease;
 }
 
 .pw-btn-white:hover {
-    background-color: #e5e5e5;
+    background-color: #f0f4f8;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.35);
 }
@@ -142,8 +144,25 @@
     width: 100%;
     height: 100%;
     min-height: 500px;
-    background: #000000;
+    background: #081324;
     overflow: hidden;
+}
+
+/* Seamless subtle gradient blend between text and image to softly dissolve the hard boundary line */
+.pw-hero-media::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: clamp(45px, 6vw, 90px);
+    background: linear-gradient(to right,
+        #081324 0%,
+        rgba(8, 19, 36, 0.82) 30%,
+        rgba(8, 19, 36, 0.3) 70%,
+        transparent 100%);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .pw-hero-media img,
@@ -156,6 +175,7 @@
     object-fit: cover;
     object-position: center;
     display: block;
+    z-index: 1;
 }
 
 /* ============================================================
@@ -163,7 +183,7 @@
    ============================================================ */
 .pw-solutions-sec {
     padding: 0 0 55px 0;
-    background: #000000;
+    background: #0b172a;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
     position: relative;
     overflow: hidden;
@@ -177,7 +197,7 @@
     align-items: center;
     overflow: hidden;
     margin-bottom: 45px;
-    background: #000000;
+    background: #081324;
 }
 
 .pw-solutions-bg-wrap {
@@ -203,7 +223,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.25) 28%, rgba(0, 0, 0, 0.72) 46%, #000000 62%, #000000 100%);
+    background: linear-gradient(to right, rgba(8, 19, 36, 0.05) 0%, rgba(8, 19, 36, 0.35) 28%, rgba(8, 19, 36, 0.78) 46%, #081324 62%, #081324 100%);
     pointer-events: none;
 }
 
@@ -239,7 +259,7 @@
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: clamp(34px, 3.4vw, 46px);
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     line-height: 1.15;
     margin: 0 0 20px 0;
     letter-spacing: -0.2px;
@@ -250,12 +270,12 @@
     font-size: 17px;
     font-weight: 300;
     line-height: 1.76;
-    color: #c9d2dc;
+    color: #dbe2ea;
     margin: 0;
     max-width: 520px;
 }
 
-/* ── Concentric Gold Ring Indicators (Exact match to cropped screenshot) ── */
+/* ── Concentric Gold Ring Indicators ── */
 .pw-solutions-bottom-indicators {
     position: absolute;
     bottom: 22px;
@@ -287,8 +307,8 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1.5px solid #c98226;
-    background: rgba(0, 0, 0, 0.45);
+    border: 1.5px solid #d89e1b;
+    background: rgba(8, 19, 36, 0.6);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.8);
     transition: all 0.25s ease;
 }
@@ -297,7 +317,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #c98226;
+    background: #d89e1b;
     position: relative;
     z-index: 2;
     transition: all 0.25s ease;
@@ -305,15 +325,15 @@
 
 .pw-concentric-dot:hover .pw-dot-outer,
 .pw-concentric-dot.active .pw-dot-outer {
-    border-color: #f3b93f;
-    box-shadow: 0 0 10px rgba(243, 185, 63, 0.7);
+    border-color: #ecc056;
+    box-shadow: 0 0 10px rgba(216, 158, 27, 0.7);
     transform: scale(1.1);
 }
 
 .pw-concentric-dot:hover .pw-dot-inner,
 .pw-concentric-dot.active .pw-dot-inner {
-    background: #f3b93f;
-    box-shadow: 0 0 8px rgba(243, 185, 63, 0.9);
+    background: #ecc056;
+    box-shadow: 0 0 8px rgba(216, 158, 27, 0.9);
 }
 
 /* Solutions Service Cards Carousel */
@@ -350,8 +370,8 @@
 }
 
 .pw-sol-card-inner {
-    background: transparent;
-    border: 1.5px solid transparent;
+    background: #11233e;
+    border: 1px solid rgba(125, 80, 27, 0.45);
     padding: 35px 22px;
     display: flex;
     flex-direction: column;
@@ -361,14 +381,16 @@
     box-sizing: border-box;
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
-    border-radius: 2px;
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
 .pw-sol-card-inner:hover,
 .pw-sol-card.active .pw-sol-card-inner {
-    border-color: #d49b38;
-    background: rgba(212, 155, 56, 0.03);
-    box-shadow: 0 0 25px rgba(212, 155, 56, 0.12);
+    border-color: #d89e1b;
+    background: #152b4a;
+    box-shadow: 0 0 25px rgba(216, 158, 27, 0.2);
+    transform: translateY(-2px);
 }
 
 .pw-sol-icon-box {
@@ -392,12 +414,22 @@
     display: block;
 }
 
+.pw-sol-icon rect[fill="#000000"],
+.pw-sol-icon path[fill="#000000"] {
+    fill: #11233e !important;
+}
+
+.pw-sol-card-inner:hover .pw-sol-icon rect[fill="#000000"],
+.pw-sol-card-inner:hover .pw-sol-icon path[fill="#000000"] {
+    fill: #152b4a !important;
+}
+
 .pw-sol-card-title {
     font-family: 'Montserrat', sans-serif;
     font-size: 15.5px;
     font-weight: 700;
     letter-spacing: 1.2px;
-    color: #e5a93c;
+    color: #d89e1b;
     text-transform: uppercase;
     line-height: 1.35;
     margin: 0 0 16px 0;
@@ -436,7 +468,7 @@
 }
 
 .pw-sol-arrow:hover {
-    color: #e5a93c;
+    color: #d89e1b;
     opacity: 1;
     transform: translateY(-50%) scale(1.2);
 }
@@ -483,7 +515,7 @@
    ============================================================ */
 .pw-award-sec {
     padding: 60px 0;
-    background: #000000;
+    background: #0b172a;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
 }
 
@@ -491,12 +523,13 @@
     max-width: 880px;
     margin: 0 auto;
     border: 1px solid rgba(125, 80, 27, 0.7);
-    background: linear-gradient(135deg, #090c10 0%, #040507 100%);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.95);
+    background: #11233e;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
     display: grid;
     grid-template-columns: 240px 1px 1fr;
     align-items: center;
     overflow: hidden;
+    border-radius: 2px;
 }
 
 .pw-award-media {
@@ -504,6 +537,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #0d1b31;
 }
 
 .pw-award-img {
@@ -527,7 +561,7 @@
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: 36px;
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     margin: 0 0 10px 0;
 }
 
@@ -535,7 +569,7 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     font-weight: 300;
-    color: #c9d2dc;
+    color: #dbe2ea;
     margin: 0;
     line-height: 1.6;
 }
@@ -545,7 +579,7 @@
    ============================================================ */
 .pw-feature-sec {
     padding: 0 !important;
-    background: #000000;
+    background: #0b172a;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
     overflow: hidden;
     width: 100%;
@@ -562,8 +596,42 @@
     position: relative;
     width: 100%;
     min-height: 420px;
-    background: #000000;
+    background: #081324;
     overflow: hidden;
+}
+
+/* Subtle edge dissolution feathering right edge of image into text */
+.pw-feature-grid .pw-feature-media::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: clamp(45px, 6vw, 90px);
+    background: linear-gradient(to left,
+        #0b172a 0%,
+        rgba(11, 23, 42, 0.82) 30%,
+        rgba(11, 23, 42, 0.3) 70%,
+        transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Subtle edge dissolution feathering left edge of image into text */
+.pw-diff-grid .pw-feature-media::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: clamp(45px, 6vw, 90px);
+    background: linear-gradient(to right,
+        #0b172a 0%,
+        rgba(11, 23, 42, 0.82) 30%,
+        rgba(11, 23, 42, 0.3) 70%,
+        transparent 100%);
+    z-index: 2;
+    pointer-events: none;
 }
 
 .pw-feature-img {
@@ -578,14 +646,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: #000000;
+    background: #0b172a;
 }
 
 .pw-feature-title {
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: clamp(30px, 3vw, 40px);
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     line-height: 1.2;
     margin: 0 0 20px 0;
 }
@@ -595,7 +663,7 @@
     font-size: 17px;
     font-weight: 300;
     line-height: 1.76;
-    color: #c9d2dc;
+    color: #dbe2ea;
     margin: 0;
     max-width: 540px;
 }
@@ -614,7 +682,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #c98226;
+    color: #d89e1b;
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
     font-weight: 700;
@@ -626,7 +694,7 @@
 }
 
 .pw-gold-link:hover {
-    color: #f3b93f;
+    color: #ecc056;
     text-decoration: underline;
 }
 
@@ -646,7 +714,7 @@
     position: relative;
     width: 100%;
     min-height: 480px;
-    background: #000000;
+    background: #081324;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
     overflow: hidden;
     display: flex;
@@ -672,7 +740,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
+    background: linear-gradient(to bottom, transparent 60%, rgba(8, 19, 36, 0.88) 100%);
     pointer-events: none;
 }
 
@@ -681,7 +749,7 @@
    ============================================================ */
 .pw-considerations-sec {
     padding: 70px 0;
-    background: #000000;
+    background: #0b172a;
     border-bottom: 1px solid rgba(125, 80, 27, 0.6);
 }
 
@@ -689,7 +757,7 @@
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: clamp(30px, 3vw, 40px);
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     text-align: center;
     margin: 0 0 45px 0;
 }
@@ -701,26 +769,28 @@
 }
 
 .pw-consider-card {
-    background: #0d1017;
-    border: 1px solid rgba(125, 80, 27, 0.45);
+    background: #11233e;
+    border: 1px solid rgba(125, 80, 27, 0.6);
+    border-radius: 4px;
     padding: 36px 28px 32px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .pw-consider-card:hover {
     transform: translateY(-4px);
-    border-color: #c98226;
+    border-color: #d89e1b;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
 }
 
 .pw-consider-title {
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: 21px;
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     line-height: 1.25;
     margin: 0 0 14px 0;
 }
@@ -755,7 +825,7 @@
 
 .pw-bullet-item::before {
     content: '•';
-    color: #c98226;
+    color: #d89e1b;
     position: absolute;
     left: 0;
     top: 0;
@@ -768,7 +838,7 @@
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.2px;
-    color: #c98226;
+    color: #d89e1b;
     text-transform: uppercase;
     text-decoration: none;
     margin-top: auto;
@@ -779,7 +849,7 @@
 }
 
 .pw-consider-link:hover {
-    color: #f3b93f;
+    color: #ecc056;
     text-decoration: underline;
 }
 
@@ -788,14 +858,15 @@
    ============================================================ */
 .pw-resources-sec {
     padding: 60px 0 70px;
-    background: #000000;
+    background: #081324;
+    border-top: 1px solid rgba(125, 80, 27, 0.6);
 }
 
 .pw-resources-header {
     font-family: 'Prata', 'Playfair Display', Georgia, serif;
     font-size: clamp(28px, 2.8vw, 36px);
     font-weight: 400;
-    color: #c98226;
+    color: #d89e1b;
     margin: 0 0 35px 0;
 }
 
@@ -806,19 +877,31 @@
 }
 
 .pw-resource-card {
-    background: #0d1017;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: #11233e;
+    border: 1px solid rgba(125, 80, 27, 0.5);
+    border-radius: 4px;
     padding: 28px 24px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .pw-resource-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(201, 130, 38, 0.5);
+    border-color: #d89e1b;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+}
+
+.pw-card-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #d89e1b;
+    margin-bottom: 8px;
 }
 
 .pw-res-title {
@@ -844,7 +927,7 @@
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: #ffffff;
+    color: #d89e1b;
     text-transform: uppercase;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -852,8 +935,93 @@
     margin-top: auto;
 }
 
+.pw-res-link:hover,
 .pw-resource-card:hover .pw-res-link {
-    color: #c98226;
+    color: #ecc056;
+}
+
+/* ============================================================
+   9. CHAMPION STRIP & FOOTER (Matches individuals.html)
+   ============================================================ */
+body.private-wealth-page .champion-strip {
+    background: #081324 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+body.private-wealth-page .champ-quote {
+    color: #94a3b8 !important;
+}
+
+body.private-wealth-page .champ-heading {
+    color: #ffffff !important;
+}
+
+body.private-wealth-page .champ-heading .champ-gold,
+body.private-wealth-page .champ-heading span {
+    color: #e0a32a !important;
+    display: block;
+}
+
+body.private-wealth-page .champ-link {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+}
+
+body.private-wealth-page .champ-link:hover {
+    color: #d89e1b !important;
+}
+
+body.private-wealth-page .champ-socials a:hover {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #60a5fa !important;
+}
+
+body.private-wealth-page .site-footer {
+    background: #07101e !important;
+    border: 1px solid rgba(125, 80, 27, 0.6) !important;
+}
+
+body.private-wealth-page .site-footer .addr-row strong {
+    color: #ffffff !important;
+}
+
+body.private-wealth-page .site-footer .addr-row .slash {
+    color: #555555 !important;
+}
+
+body.private-wealth-page .site-footer .addr-row a {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease;
+}
+
+body.private-wealth-page .site-footer .addr-row a:hover {
+    color: #ffffff !important;
+    opacity: 0.8 !important;
+    text-decoration: underline !important;
+}
+
+body.private-wealth-page .site-footer .footer-legal p {
+    color: #7a8b9e !important;
+}
+
+body.private-wealth-page .site-footer .footer-copy {
+    color: #555f69 !important;
+}
+
+body.private-wealth-page .site-footer .footer-legal a {
+    color: #ffffff !important;
+    font-weight: 500 !important;
+    text-decoration: none !important;
+    transition: opacity 0.2s ease;
+}
+
+body.private-wealth-page .site-footer .footer-legal a:hover {
+    color: #ffffff !important;
+    text-decoration: underline !important;
+    opacity: 0.85 !important;
 }
 
 /* ============================================================
@@ -867,6 +1035,18 @@
     .pw-hero-media {
         min-height: 400px;
         height: 400px;
+    }
+
+    .pw-hero-media::before {
+        width: 100%;
+        height: 50px;
+        top: 0;
+        left: 0;
+        bottom: auto;
+        background: linear-gradient(to bottom,
+            #081324 0%,
+            rgba(8, 19, 36, 0.75) 40%,
+            transparent 100%);
     }
 
     .pw-solutions-banner {
@@ -898,6 +1078,32 @@
     .pw-feature-media {
         min-height: 340px;
         height: 340px;
+    }
+
+    .pw-feature-grid .pw-feature-media::before {
+        width: 100%;
+        height: 50px;
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top,
+            #0b172a 0%,
+            rgba(11, 23, 42, 0.75) 40%,
+            transparent 100%);
+    }
+
+    .pw-diff-grid .pw-feature-media::before {
+        width: 100%;
+        height: 50px;
+        top: 0;
+        bottom: auto;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to bottom,
+            #0b172a 0%,
+            rgba(11, 23, 42, 0.75) 40%,
+            transparent 100%);
     }
 
     .pw-considerations-grid {
@@ -950,7 +1156,7 @@
     }
 
     .pw-solutions-gradient-overlay {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.88) 50%, #000000 100%);
+        background: linear-gradient(to bottom, rgba(8, 19, 36, 0.45) 0%, rgba(8, 19, 36, 0.90) 50%, #081324 100%);
     }
 
     .pw-solutions-title {
