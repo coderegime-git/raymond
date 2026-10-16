@@ -201,7 +201,7 @@ const MEMBERS = {
     role: 'Client Service Associate',
     phone: '(215) 860-7823',
     email: 'pamela.longmore@raymondjames.com',
-    linkedin: 'https://www.linkedin.com/in/pamela-longmore-a3a797171/',
+    linkedin: 'https://www.linkedin.com/in/pamela-longmore/',
     address: 'The Seiler Group\nRaymond James & Associates\n5 Caufield Place, Suite 201, Newtown, PA 18940',
     photo: 'assets/team/pamela.png',
     intro: 'Pamela provides support for our clients’ account needs on a daily basis. She focuses on building strong client relationships built on trust and reliability. Her approachability and attentiveness are valued by clients because they appreciate working with someone who is both professional and empathetic toward their individual situation and needs.',

@@ -20,7 +20,7 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
     <link rel="stylesheet" href="athletes.css?v=38">
-    <link rel="stylesheet" href="private-wealth.css?v=41">
+    <link rel="stylesheet" href="private-wealth.css?v=43">
 </head>
 
 <body class="athletes-page private-wealth-page">
@@ -69,7 +69,7 @@
             <!-- Dropdown for INDIVIDUALS -->
             <div class="nav-dropdown-wrapper" id="individuals-dropdown">
                 <a href="individuals.html" class="nav-link nav-dropdown-trigger active" id="individuals-trigger">
-                    <span>INDIVIDUALS</span>
+                    <span>PRIVATE WEALTH</span>
                     <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
                 <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
@@ -212,7 +212,7 @@
 
             <div class="drawer-accordion-item">
                 <div class="drawer-accordion-header">
-                    <a href="individuals.html" class="drawer-link drawer-accordion-main-link active">INDIVIDUALS</a>
+                    <a href="individuals.html" class="drawer-link drawer-accordion-main-link active">PRIVATE WEALTH</a>
                     <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn" onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
                         <i class="fas fa-chevron-down drawer-accordion-icon"></i>
                     </button>
@@ -322,7 +322,7 @@
                 </div>
             </div>
             <div class="pw-hero-media">
-                <img src="assets/private-wealth/pw_hero.png" alt="Two executives in evening private wealth consultation" class="pw-hero-img">
+                <img src="assets/private-wealth/pw_hero.png" alt="Affluent couple in evening private wealth consultation" class="pw-hero-img">
             </div>
         </div>
     </section>
@@ -352,20 +352,7 @@
             </div>
 
             <!-- Bottom Center Concentric Gold Ring Carousel Indicators -->
-            <div class="pw-solutions-bottom-indicators">
-                <button class="pw-concentric-dot active" aria-label="Slide 1">
-                    <span class="pw-dot-outer"></span>
-                    <span class="pw-dot-inner"></span>
-                </button>
-                <button class="pw-concentric-dot" aria-label="Slide 2">
-                    <span class="pw-dot-outer"></span>
-                    <span class="pw-dot-inner"></span>
-                </button>
-                <button class="pw-concentric-dot" aria-label="Slide 3">
-                    <span class="pw-dot-outer"></span>
-                    <span class="pw-dot-inner"></span>
-                </button>
-            </div>
+            
         </div>
 
         <!-- Solutions Service Cards Carousel Container -->
@@ -555,12 +542,12 @@
         <div class="pw-container">
             <div class="pw-award-card">
                 <div class="pw-award-media">
-                    <img src="assets/private-wealth/pw_ft_award.png" alt="Financial Times 400 Top Financial Advisers Award" class="pw-award-img">
+                    <img src="assets/logo.svg" alt="CFP® Professional Certification" class="pw-award-img">
                 </div>
                 <div class="pw-award-v-divider"></div>
                 <div class="pw-award-content">
-                    <h3 class="pw-award-title">Times 400</h3>
-                    <p class="pw-award-desc">Tom Seiler – Financial Times 400 Top Financial Advisers, 2020**</p>
+                    <h3 class="pw-award-title">CFP® Professional</h3>
+                    <p class="pw-award-desc">Certified Financial Planner Board of Standards marks of excellence in comprehensive wealth planning.</p>
                 </div>
             </div>
         </div>
@@ -602,7 +589,7 @@
                 </a>
             </div>
             <div class="pw-feature-media">
-                <img src="assets/private-wealth/pw_advisor_difference.png" alt="Leather portfolio notebook, fountain pen and whiskey tumbler" class="pw-feature-img">
+                <img src="assets/private-wealth/pw_advisor_difference.png" alt="Multi-generational wealth portfolio chart and family portrait" class="pw-feature-img">
             </div>
         </div>
     </section>
@@ -613,20 +600,7 @@
     <section class="pw-skyline-sec">
         <img src="assets/private-wealth/pw_skyline_penthouse.png" alt="Luxury penthouse study with illuminated New York skyline" class="pw-skyline-img">
         <div class="pw-skyline-overlay"></div>
-        <div class="pw-solutions-bottom-indicators">
-            <button class="pw-concentric-dot active" aria-label="Slide 1">
-                <span class="pw-dot-outer"></span>
-                <span class="pw-dot-inner"></span>
-            </button>
-            <button class="pw-concentric-dot" aria-label="Slide 2">
-                <span class="pw-dot-outer"></span>
-                <span class="pw-dot-inner"></span>
-            </button>
-            <button class="pw-concentric-dot" aria-label="Slide 3">
-                <span class="pw-dot-outer"></span>
-                <span class="pw-dot-inner"></span>
-            </button>
-        </div>
+        
     </section>
 
     <!-- ============================================================
@@ -988,54 +962,134 @@
                 });
             });
 
-            // Carousel Logic for Solutions Service Cards
+            // Continuous Seamless Infinite Carousel for Solutions Service Cards
+            const carouselContainer = document.getElementById('pwSolCarousel');
             const track = document.getElementById('pwSolTrack');
             const prevBtn = document.getElementById('pwSolPrevBtn');
             const nextBtn = document.getElementById('pwSolNextBtn');
             
-            if (track && prevBtn && nextBtn) {
-                let currentIndex = 0;
-                const totalCards = 5;
+            if (track && carouselContainer) {
+                const originalCards = Array.from(track.children);
+                const count = originalCards.length;
                 
-                function getCardsPerView() {
-                    if (window.innerWidth <= 639) return 1;
-                    if (window.innerWidth <= 991) return 2;
-                    return 3;
-                }
-
-                function updateCarousel() {
-                    const cardsPerView = getCardsPerView();
-                    const maxIndex = totalCards - cardsPerView;
-                    if (currentIndex > maxIndex) currentIndex = maxIndex;
-                    if (currentIndex < 0) currentIndex = 0;
-
-                    const cardWidthPercent = 100 / cardsPerView;
-                    const gapAdjustment = (cardsPerView > 1) ? ((cardsPerView - 1) * 30 / cardsPerView) : 0;
-                    
-                    track.style.transform = `translateX(calc(-${currentIndex * cardWidthPercent}% - ${currentIndex * 30 / cardsPerView}px))`;
-                }
-
-                nextBtn.addEventListener('click', () => {
-                    const maxIndex = totalCards - getCardsPerView();
-                    if (currentIndex < maxIndex) {
-                        currentIndex++;
-                    } else {
-                        currentIndex = 0; // wrap around
-                    }
-                    updateCarousel();
+                // Clone sets before and after for true seamless infinite loop
+                originalCards.forEach(card => {
+                    const cloneBefore = card.cloneNode(true);
+                    cloneBefore.classList.add('pw-clone');
+                    track.insertBefore(cloneBefore, track.firstChild);
+                });
+                originalCards.forEach(card => {
+                    const cloneAfter = card.cloneNode(true);
+                    cloneAfter.classList.add('pw-clone');
+                    track.appendChild(cloneAfter);
                 });
 
-                prevBtn.addEventListener('click', () => {
-                    const maxIndex = totalCards - getCardsPerView();
-                    if (currentIndex > 0) {
-                        currentIndex--;
+                let currentIndex = count; // Start at middle set (original cards)
+                let isTransitioning = false;
+                const transitionStyle = 'transform 0.65s cubic-bezier(0.25, 1, 0.5, 1)';
+                
+                function getStep() {
+                    const card = track.children[0];
+                    if (!card) return 0;
+                    const style = window.getComputedStyle(track);
+                    const gap = parseFloat(style.gap) || 30;
+                    return card.getBoundingClientRect().width + gap;
+                }
+
+                function setPosition(index, animate = true) {
+                    if (animate) {
+                        track.style.transition = transitionStyle;
                     } else {
-                        currentIndex = maxIndex; // wrap around
+                        track.style.transition = 'none';
                     }
-                    updateCarousel();
+                    const step = getStep();
+                    track.style.transform = `translateX(-${index * step}px)`;
+                }
+
+                // Initial position at original set without animation
+                requestAnimationFrame(() => {
+                    setPosition(currentIndex, false);
                 });
 
-                window.addEventListener('resize', updateCarousel);
+                function slideNext() {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentIndex++;
+                    setPosition(currentIndex, true);
+                }
+
+                function slidePrev() {
+                    if (isTransitioning) return;
+                    isTransitioning = true;
+                    currentIndex--;
+                    setPosition(currentIndex, true);
+                }
+
+                // Seamless infinite wrap-around on transition end
+                track.addEventListener('transitionend', () => {
+                    isTransitioning = false;
+                    if (currentIndex >= count * 2) {
+                        currentIndex -= count;
+                        setPosition(currentIndex, false);
+                    } else if (currentIndex < count) {
+                        currentIndex += count;
+                        setPosition(currentIndex, false);
+                    }
+                });
+
+                // Auto-advance continuously without stopping
+                let autoTimer = null;
+                function startContinuousFlow() {
+                    if (autoTimer) clearInterval(autoTimer);
+                    autoTimer = setInterval(() => {
+                        slideNext();
+                    }, 2600);
+                }
+
+                if (nextBtn) {
+                    nextBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        slideNext();
+                        startContinuousFlow();
+                    });
+                }
+
+                if (prevBtn) {
+                    prevBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        slidePrev();
+                        startContinuousFlow();
+                    });
+                }
+
+                // Touch / Swipe support
+                let touchStartX = 0;
+                let touchEndX = 0;
+                carouselContainer.addEventListener('touchstart', (e) => {
+                    touchStartX = e.changedTouches[0].screenX;
+                }, { passive: true });
+
+                carouselContainer.addEventListener('touchend', (e) => {
+                    touchEndX = e.changedTouches[0].screenX;
+                    const diff = touchStartX - touchEndX;
+                    if (Math.abs(diff) > 40) {
+                        if (diff > 0) slideNext();
+                        else slidePrev();
+                        startContinuousFlow();
+                    }
+                }, { passive: true });
+
+                // Start continuous flow immediately without stopping
+                startContinuousFlow();
+
+                // Handle resize seamlessly
+                let resizeTimer;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimer);
+                    resizeTimer = setTimeout(() => {
+                        setPosition(currentIndex, false);
+                    }, 100);
+                });
             }
         });
     </script>
