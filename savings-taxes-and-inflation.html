@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings, Taxes and Inflation | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate how investment growth, federal/state taxes, and compounding inflation impact the real purchasing power of your savings over time.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .sti-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .sti-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .sti-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .sti-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 780px;
+            border-top: 5px solid #dfa01e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            color: #1e293b;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .report-modal-close:hover {
+            color: #0b172a;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .report-table th, .report-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .report-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .report-table tr:hover td {
+            background-color: #f8fafc;
+        }
+        .report-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER BAR -->
+    <header class="top-nav-container">
+        <div class="top-nav-inner">
+            <div class="brand-left">
+                <a href="index.html" class="brand-logo-link">
+                    <span class="brand-title">THE SEILER GROUP</span>
+                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
+                </a>
+            </div>
+            <div class="header-contact">
+                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
+                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECONDARY NAVIGATION -->
+    <nav class="sub-nav">
+        <div class="sub-nav-inner">
+            <a href="index.html">HOME</a>
+            <a href="corporate-executive-services.html">ABOUT US</a>
+            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
+            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
+            <a href="resources.html" class="active">RESOURCES</a>
+            <a href="contact-us.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="roth-ira-vs-traditional-ira.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Roth IRA vs. Traditional IRA">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="self-employment-tax-rate.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Self-Employment Tax Rate">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Savings, Taxes and Inflation" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            </div>
+
+            <!-- Page Titles -->
+            <h1 class="calc-page-title">SAVINGS, TAXES AND INFLATION</h1>
+            <div class="calc-category-path">Savings &amp; Investments &gt; Calculator</div>
+
+            <div class="calc-share-container">
+                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
+            </div>
+
+            <p class="calc-intro-paragraph">
+                The value of your savings can be affected by both taxes and inflation. Use this calculator to determine how much your savings will be worth with taxes/inflation taking their toll on your balance. Adjust the inflation and tax rates and examine the potential impact on your savings after-tax.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="calc-actions-row">
+                <button type="button" class="calc-btn-primary" onclick="calculateSavingsTaxes()">CALCULATE</button>
+                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Highlight Banner -->
+            <div class="calc-dynamic-banner" id="savings-banner">
+                <span id="banner-text">After 15 years you could have $173,632.71</span>
+                <span class="banner-badge"><i class="fas fa-coins"></i> Future Value</span>
+            </div>
+
+            <!-- Summary Stat Cards -->
+            <div class="sti-stat-grid">
+                <div class="sti-stat-card">
+                    <div class="sti-stat-val" id="stat-nominal-val" style="color: #60a5fa;">$173,633</div>
+                    <div class="sti-stat-label">Nominal Balance (After-Tax)</div>
+                </div>
+                <div class="sti-stat-card">
+                    <div class="sti-stat-val" id="stat-real-val" style="color: #4ade80;">$111,448</div>
+                    <div class="sti-stat-label">Purchasing Power (Real Value)</div>
+                </div>
+                <div class="sti-stat-card">
+                    <div class="sti-stat-val" id="stat-inflation-loss" style="color: #ef4444;">-$62,185</div>
+                    <div class="sti-stat-label">Inflation Erosion Loss</div>
+                </div>
+                <div class="sti-stat-card">
+                    <div class="sti-stat-val" id="stat-total-principal">$61,000</div>
+                    <div class="sti-stat-label">Total Principal Contributed</div>
+                </div>
+            </div>
+
+            <!-- CALCULATOR FORM -->
+            <div class="calc-two-col-layout">
+                
+                <!-- Left Column: Inputs -->
+                <div class="calc-inputs-column">
+                    
+                    <div class="calc-section-group">
+                        <div class="calc-group-title">SAVINGS, TAXES, AND INFLATION INPUTS</div>
+
+                        <!-- Years -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-years">Years*</label>
+                            <div class="calc-input-control">
+                                <input type="number" id="inp-years" class="calc-text-input" value="15" min="1" max="40" step="1">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-years" class="calc-range-slider" min="1" max="40" step="1" value="15">
+                                    <div class="calc-slider-range-labels">
+                                        <span>1</span>
+                                        <span>20</span>
+                                        <span>40</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Monthly additions -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-additions">Monthly additions*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-additions" class="calc-text-input" value="$200.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-additions" class="calc-range-slider" min="0" max="5000" step="50" value="200">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$2.5k</span>
+                                        <span>$5k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Amount currently invested -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-current-inv">Amount currently invested*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-current-inv" class="calc-text-input" value="$25,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-current-inv" class="calc-range-slider" min="0" max="250000" step="2500" value="25000">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$125k</span>
+                                        <span>$250k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expected rate of return -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-return">Expected rate of return*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-return" class="calc-text-input" value="7.50%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-return" class="calc-range-slider" min="1.0" max="15.0" step="0.25" value="7.5">
+                                    <div class="calc-slider-range-labels">
+                                        <span>1.0%</span>
+                                        <span>8.0%</span>
+                                        <span>15.0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expected inflation rate -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-inflation">Expected inflation rate*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-inflation" class="calc-text-input" value="3.00%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-inflation" class="calc-range-slider" min="0.0" max="10.0" step="0.25" value="3.0">
+                                    <div class="calc-slider-range-labels">
+                                        <span>0%</span>
+                                        <span>5%</span>
+                                        <span>10%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Federal tax rate -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-fed-tax">Federal tax rate*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-fed-tax" class="calc-text-input" value="22.0%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="40" step="1" value="22">
+                                    <div class="calc-slider-range-labels">
+                                        <span>0%</span>
+                                        <span>22%</span>
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- State tax rate -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-state-tax">State tax rate*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-state-tax" class="calc-text-input" value="5.0%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
+                                    <div class="calc-slider-range-labels">
+                                        <span>0%</span>
+                                        <span>7.5%</span>
+                                        <span>15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Charts -->
+                <div class="calc-charts-column">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-title">BALANCE BY YEAR</div>
+                        <div id="sti-svg-container" style="width: 100%; height: 350px;">
+                            <!-- Dynamic SVG Chart rendered via JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 2px;"></span>
+                                <span>Nominal Balance (After Taxes)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #16a34a; border-radius: 2px;"></span>
+                                <span>Real Purchasing Power</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DEFINITIONS SECTION -->
+            <section class="calc-definitions-wrapper">
+                <h3 class="calc-defs-title">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">YEARS</div>
+                    <div class="calc-def-desc">The number of years you plan to save.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">PERIODIC CONTRIBUTIONS</div>
+                    <div class="calc-def-desc">The amount you add each month to your savings. This calculator assumes monthly compounding of contributions and interest.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">AMOUNT CURRENTLY INVESTED</div>
+                    <div class="calc-def-desc">Initial lump sum starting balance already set aside in your investment account.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">EXPECTED RATE OF RETURN</div>
+                    <div class="calc-def-desc">The gross annual return expected before taxes and inflation. Over long horizons, equities have generated average historical compound returns between 8% and 11%.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">FEDERAL TAX RATE &amp; STATE TAX RATE</div>
+                    <div class="calc-def-desc">Your marginal tax rates. Taxes act as an annual drag on taxable investment yields and realized capital gains.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">EXPECTED INFLATION RATE</div>
+                    <div class="calc-def-desc">The projected annual rate of consumer price inflation. Over the long run, inflation has averaged approximately 3.0% annually, reducing the future purchasing power of every dollar saved.</div>
+                </div>
+            </section>
+
+            <!-- LEGAL DISCLAIMER -->
+            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Savings, Taxes &amp; Inflation Analysis Report</h2>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
+                </div>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+            </div>
+
+            <div id="report-modal-body">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-corporate">
+        <div class="footer-corporate-inner">
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">THE SEILER GROUP</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    Comprehensive wealth management, financial planning, and visionary investment counseling tailored to high-net-worth individuals and corporate executives.
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">OFFICE LOCATION</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    2850 S. Ocean Blvd, Suite 500<br>
+                    Palm Beach, FL 33480<br>
+                    Direct: 800-237-0152
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">QUICK LINKS</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                    <a href="resources.html" style="color: #dfa01e; text-decoration: none;">Resource Center</a>
+                    <a href="counseling-visionaries.html" style="color: #94a3b8; text-decoration: none;">Visionary Counseling</a>
+                    <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Our Advisors</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 The Seiler Group of Raymond James. All rights reserved. Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE SCRIPT -->
+    <script>
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function fmtPct(num) {
+            return Number(num).toFixed(2) + '%';
+        }
+
+        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                let v = parseFloat(range.value);
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(v);
+                } else if (isPct) {
+                    inp.value = fmtPct(v);
+                } else {
+                    inp.value = v;
+                }
+                calculateSavingsTaxes();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = parseClean(inp.value);
+                if (val < parseFloat(range.min)) val = parseFloat(range.min);
+                if (val > parseFloat(range.max)) val = parseFloat(range.max);
+                range.value = val;
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(val);
+                } else if (isPct) {
+                    inp.value = fmtPct(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateSavingsTaxes();
+            });
+        }
+
+        let stiData = {};
+
+        function calculateSavingsTaxes() {
+            const years = parseClean(document.getElementById('inp-years').value) || 15;
+            const monthlyAdd = parseClean(document.getElementById('inp-additions').value) || 200;
+            const currentInv = parseClean(document.getElementById('inp-current-inv').value) || 25000;
+            const grossReturn = (parseClean(document.getElementById('inp-return').value) || 7.5) / 100;
+            const inflation = (parseClean(document.getElementById('inp-inflation').value) || 3.0) / 100;
+            const fedTax = (parseClean(document.getElementById('inp-fed-tax').value) || 22.0) / 100;
+            const stateTax = (parseClean(document.getElementById('inp-state-tax').value) || 5.0) / 100;
+
+            const totalTaxRate = fedTax + stateTax;
+            // After-tax nominal rate of return
+            const afterTaxReturn = grossReturn * (1 - totalTaxRate * 0.45); // blended dividend/growth drag
+
+            let balance = currentInv;
+            let totalPrincipal = currentInv;
+
+            let yearlyData = [];
+
+            for (let y = 1; y <= years; y++) {
+                // Compound monthly
+                for (let m = 0; m < 12; m++) {
+                    balance = balance * (1 + afterTaxReturn / 12) + monthlyAdd;
+                    totalPrincipal += monthlyAdd;
+                }
+                const realValue = balance / Math.pow(1 + inflation, y);
+                yearlyData.push({
+                    year: y,
+                    nominal: balance,
+                    real: realValue
+                });
+            }
+
+            const finalNominal = balance;
+            const finalReal = finalNominal / Math.pow(1 + inflation, years);
+            const inflationLoss = finalNominal - finalReal;
+
+            stiData = {
+                years, monthlyAdd, currentInv, grossReturn, inflation, fedTax, stateTax,
+                totalTaxRate, afterTaxReturn, totalPrincipal, finalNominal, finalReal,
+                inflationLoss, yearlyData
+            };
+
+            // Update UI
+            document.getElementById('banner-text').innerText = 
+                `After ${years} years you could have ${fmtMoneyCents(finalNominal)}`;
+            document.getElementById('stat-nominal-val').innerText = fmtMoney(finalNominal);
+            document.getElementById('stat-real-val').innerText = fmtMoney(finalReal);
+            document.getElementById('stat-inflation-loss').innerText = `-${fmtMoney(inflationLoss)}`;
+            document.getElementById('stat-total-principal').innerText = fmtMoney(totalPrincipal);
+
+            renderStiChart(yearlyData, finalNominal);
+        }
+
+        function renderStiChart(data, maxVal) {
+            const container = document.getElementById('sti-svg-container');
+            const w = 480;
+            const h = 330;
+            const padL = 65;
+            const padR = 25;
+            const padT = 30;
+            const padB = 45;
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            const peak = maxVal * 1.15;
+
+            // Pick sample years if years > 10 (e.g. 8-10 bars)
+            let sampled = data;
+            if (data.length > 10) {
+                const step = Math.ceil(data.length / 8);
+                sampled = data.filter((d, i) => (i + 1) % step === 0 || i === data.length - 1);
+            }
+
+            const barGroupW = chartW / sampled.length;
+            const barW = Math.min(16, barGroupW * 0.35);
+
+            let gridHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const val = (peak / 4) * i;
+                const y = padT + chartH - (i * chartH / 4);
+                gridHtml += `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
+                    <text x="${padL - 8}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val / 1000)}k</text>
+                `;
+            }
+
+            let barsHtml = '';
+            sampled.forEach((d, idx) => {
+                const centerX = padL + idx * barGroupW + barGroupW / 2;
+                const xNom = centerX - barW - 1;
+                const xReal = centerX + 1;
+
+                const hNom = (d.nominal / peak) * chartH;
+                const hReal = (d.real / peak) * chartH;
+
+                const yNom = padT + chartH - hNom;
+                const yReal = padT + chartH - hReal;
+
+                barsHtml += `
+                    <!-- Nominal Bar (Blue) -->
+                    <rect x="${xNom}" y="${yNom}" width="${barW}" height="${hNom}" fill="#2563eb" rx="2" />
+                    <!-- Real Bar (Green) -->
+                    <rect x="${xReal}" y="${yReal}" width="${barW}" height="${hReal}" fill="#16a34a" rx="2" />
+                    <text x="${centerX}" y="${padT + chartH + 18}" fill="#0b172a" font-size="10" font-weight="600" text-anchor="middle">Yr ${d.year}</text>
+                `;
+            });
+
+            const svgHtml = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
+                    ${gridHtml}
+                    ${barsHtml}
+                    <!-- Axis -->
+                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
+                </svg>
+            `;
+
+            container.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!stiData.finalNominal) calculateSavingsTaxes();
+
+            const d = stiData;
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Purchasing Power Assessment</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #60a5fa; margin-top: 4px;">
+                        Nominal Value: ${fmtMoneyCents(d.finalNominal)}
+                    </div>
+                    <div style="font-size: 14px; color: #4ade80; margin-top: 4px; font-weight: 600;">
+                        Real Inflation-Adjusted Purchasing Power: ${fmtMoneyCents(d.finalReal)}
+                    </div>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Timeline &amp; Assumptions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Savings Horizon</td><td>${d.years} Years</td></tr>
+                        <tr><td>Initial Investment Principal</td><td>${fmtMoneyCents(d.currentInv)}</td></tr>
+                        <tr><td>Monthly Savings Additions</td><td>${fmtMoneyCents(d.monthlyAdd)} / month</td></tr>
+                        <tr><td>Total Cumulative Principal Contributed</td><td>${fmtMoneyCents(d.totalPrincipal)}</td></tr>
+                        <tr><td>Gross Annual Expected Return</td><td>${fmtPct(d.grossReturn * 100)}</td></tr>
+                        <tr><td>Combined Federal &amp; State Tax Drag</td><td>${fmtPct(d.totalTaxRate * 100)}</td></tr>
+                        <tr><td>Expected Annual Inflation Rate</td><td>${fmtPct(d.inflation * 100)}</td></tr>
+                    </tbody>
+                </table>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Future Value Breakdown</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Total Principal Invested</td><td>${fmtMoneyCents(d.totalPrincipal)}</td></tr>
+                        <tr><td>Net Investment Earnings (After Tax)</td><td style="color: #2563eb;">+ ${fmtMoneyCents(d.finalNominal - d.totalPrincipal)}</td></tr>
+                        <tr style="background: #eff6ff; font-weight: 700;">
+                            <td>Nominal Account Balance</td>
+                            <td style="color: #1e40af; font-size: 15px;">${fmtMoneyCents(d.finalNominal)}</td>
+                        </tr>
+                        <tr style="background: #fef2f2;">
+                            <td style="color: #dc2626;">Cumulative Inflation Value Erosion</td>
+                            <td style="color: #dc2626;">- ${fmtMoneyCents(d.inflationLoss)}</td>
+                        </tr>
+                        <tr style="background: #f0fdf4; font-weight: 800;">
+                            <td style="color: #166534;">Real Purchasing Power (Today's Dollars)</td>
+                            <td style="color: #15803d; font-size: 16px;">${fmtMoneyCents(d.finalReal)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-years', 'range-years', false, false);
+            setupSync('inp-additions', 'range-additions', false, true);
+            setupSync('inp-current-inv', 'range-current-inv', false, true);
+            setupSync('inp-return', 'range-return', true, false);
+            setupSync('inp-inflation', 'range-inflation', true, false);
+            setupSync('inp-fed-tax', 'range-fed-tax', true, false);
+            setupSync('inp-state-tax', 'range-state-tax', true, false);
+
+            calculateSavingsTaxes();
+        });
+    </script>
+</body>
+</html>

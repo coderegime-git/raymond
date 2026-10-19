@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Loan Calculator | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate your monthly mortgage payments and generate an interactive amortization schedule. See the impact of prepaying principal to save on interest.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .mlc-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .mlc-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .mlc-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .mlc-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .subtotal-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dfa01e;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+        .calc-select-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .calc-select-input {
+            width: 100%;
+            max-width: 280px;
+            padding: 8px 12px;
+            background: #0b172a;
+            color: #ffffff;
+            border: 1px solid rgba(223, 160, 30, 0.4);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .amort-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        .amort-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: right;
+            border: 1px solid #1e293b;
+        }
+        .amort-table th:first-child {
+            text-align: center;
+        }
+        .amort-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            text-align: right;
+            color: #334155;
+        }
+        .amort-table td:first-child {
+            text-align: center;
+            font-weight: 600;
+        }
+        .amort-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="mortgage-15-vs-30-year-comparison.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Mortgage 15 vs 30-Year Comparison">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="municipal-bond-tax-equivalent-yield.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Municipal Bond Tax Equivalent Yield">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Mortgage Loan Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">MORTGAGE LOAN CALCULATOR</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Loans &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Use this calculator to generate an estimated amortization schedule for your current mortgage. Quickly see how much principal you could pay and total interest you could pay. You can also determine the impact of any principal prepayments! Press the 'Report' button for a 30-year summary or a year-by-year schedule.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateMortgage()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="mlc-result-banner" style="margin-bottom: 25px;">
+                Monthly payment is <span class="highlight-val" id="banner-pmt-val" style="color: #4ade80;">$1,614.78</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="mlc-stat-grid">
+                <div class="mlc-stat-card">
+                    <div class="mlc-stat-val" id="stat-monthly-pmt">$1,614.78</div>
+                    <div class="mlc-stat-label">Monthly Principal &amp; Interest</div>
+                </div>
+                <div class="mlc-stat-card">
+                    <div class="mlc-stat-val" id="stat-total-payments" style="color: #60a5fa;">$581,321</div>
+                    <div class="mlc-stat-label">Total Lifetime Payments</div>
+                </div>
+                <div class="mlc-stat-card">
+                    <div class="mlc-stat-val" id="stat-total-interest" style="color: #f87171;">$331,321</div>
+                    <div class="mlc-stat-label">Total Interest Paid</div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: LOAN INFORMATION -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>LOAN INFORMATION</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Mortgage amount -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-loan-amount" class="calc-label">Mortgage amount*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-loan-amount" class="calc-input" value="$250,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-loan-amount" class="calc-slider" value="250000" min="50000" max="1000000" step="10000">
+                                <div class="calc-slider-scale"><span>$50,000</span><span>$525,000</span><span>$1,000,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Term in years -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-loan-term" class="calc-label">Term in years*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="inp-loan-term" class="calc-input" value="30" min="5" max="30"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-loan-term" class="calc-slider" value="30" min="5" max="30" step="5">
+                                <div class="calc-slider-scale"><span>5 yrs</span><span>15 yrs</span><span>30 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interest rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-mort-rate" class="calc-label">Interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-mort-rate" class="calc-input" value="6.75%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-mort-rate" class="calc-slider" value="6.75" min="2" max="12" step="0.125">
+                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Accordion 2: PREPAYMENTS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>PREPAYMENTS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-prepay-amt" class="calc-label">Monthly prepayment amount</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-prepay-amt" class="calc-input" value="$0.00" onchange="calculateMortgage()"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section: Total Payments Stacked Chart -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>TOTAL PAYMENTS ALLOCATION</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Principal vs. Interest</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #15803d; display: inline-block; border-radius: 2px;"></span> Principal ($250,000)</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1d4ed8; display: inline-block; border-radius: 2px;"></span> Total Interest ($331,321)</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="mlc-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">MORTGAGE AMOUNT</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Original or expected balance for your mortgage.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">TERM IN YEARS</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The number of years over which you will pay off this loan. The most common mortgage terms are 15 years and 30 years.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">INTEREST RATE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Annual fixed interest rate for this mortgage.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">MONTHLY PAYMENT</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Monthly principal and interest payment (PI).</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">TOTAL PAYMENTS</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total of all monthly payments over the full term of the mortgage.</p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide mortgage or financial advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">MORTGAGE AMORTIZATION SUMMARY</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateMortgage();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateMortgage();
+            });
+        }
+
+        let mlcState = {};
+
+        function calculateMortgage() {
+            const amount = parseNum(document.getElementById('inp-loan-amount').value) || 250000;
+            const termYears = Math.max(5, Math.min(30, parseNum(document.getElementById('inp-loan-term').value) || 30));
+            const rate = (parseNum(document.getElementById('inp-mort-rate').value) || 6.75) / 100;
+            const prepay = parseNum(document.getElementById('inp-prepay-amt').value) || 0;
+
+            const r = rate / 12;
+            const n = termYears * 12;
+            const basePmt = (amount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+            let bal = amount;
+            let totalInt = 0;
+            let totalPmt = 0;
+            let monthsActual = 0;
+
+            while (bal > 0 && monthsActual < n) {
+                monthsActual++;
+                const intMonth = bal * r;
+                totalInt += intMonth;
+                const prinMonth = Math.min(bal, basePmt - intMonth + prepay);
+                bal -= prinMonth;
+                totalPmt += (intMonth + prinMonth);
+            }
+
+            mlcState = {
+                amount, termYears, rate, basePmt, totalPmt, totalInt, monthsActual
+            };
+
+            document.getElementById('banner-pmt-val').textContent = fmtMoneyCents(basePmt);
+            document.getElementById('stat-monthly-pmt').textContent = fmtMoneyCents(basePmt);
+            document.getElementById('stat-total-payments').textContent = fmtMoney(totalPmt);
+            document.getElementById('stat-total-interest').textContent = fmtMoney(totalInt);
+
+            renderStackedChart(amount, totalInt);
+        }
+
+        function renderStackedChart(principal, interest) {
+            const svg = document.getElementById('mlc-chart-svg');
+            if (!svg) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 80;
+            const padRight = 80;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            const total = principal + interest;
+            const hPrin = (principal / total) * chartH;
+            const hInt = (interest / total) * chartH;
+
+            const bW = 120;
+            const cx = padLeft + chartW / 2;
+
+            let svgHtml = `
+                <!-- Background Grid -->
+                <line x1="${padLeft}" y1="${padTop}" x2="${width - padRight}" y2="${padTop}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />
+                <line x1="${padLeft}" y1="${padTop + chartH / 2}" x2="${width - padRight}" y2="${padTop + chartH / 2}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />
+                <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#1e293b" stroke-width="1" />
+
+                <!-- Principal Bar (Bottom - Green) -->
+                <rect x="${cx - bW / 2}" y="${padTop + chartH - hPrin}" width="${bW}" height="${hPrin}" fill="#15803d" rx="2">
+                    <title>Principal: ${fmtMoney(principal)}</title>
+                </rect>
+                <text x="${cx}" y="${padTop + chartH - hPrin / 2 + 5}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">Principal: ${fmtMoney(principal)}</text>
+
+                <!-- Interest Bar (Top - Blue) -->
+                <rect x="${cx - bW / 2}" y="${padTop + chartH - hPrin - hInt}" width="${bW}" height="${hInt}" fill="#1d4ed8" rx="2">
+                    <title>Interest: ${fmtMoney(interest)}</title>
+                </rect>
+                <text x="${cx}" y="${padTop + chartH - hPrin - hInt / 2 + 5}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">Interest: ${fmtMoney(interest)}</text>
+
+                <text x="${cx}" y="${padTop + chartH + 22}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">Total Lifetime Payments: ${fmtMoney(total)}</text>
+            `;
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!mlcState.amount) calculateMortgage();
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Mortgage Amortization Summary</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #4ade80; margin-top: 4px;">
+                        Monthly Payment: ${fmtMoneyCents(mlcState.basePmt)}
+                    </div>
+                </div>
+
+                <table class="amort-table">
+                    <tbody>
+                        <tr><td>Principal Borrowed</td><td style="font-weight: 700;">${fmtMoney(mlcState.amount)}</td></tr>
+                        <tr><td>Loan Term</td><td>${mlcState.termYears} Years (${Math.round(mlcState.monthsActual / 12 * 10) / 10} yrs payoff)</td></tr>
+                        <tr><td>Interest Rate</td><td>${(mlcState.rate * 100).toFixed(2)}%</td></tr>
+                        <tr><td>Total Interest Paid</td><td style="color: #ef4444; font-weight: 700;">${fmtMoney(mlcState.totalInt)}</td></tr>
+                        <tr><td>Total Lifetime Cost</td><td style="color: #4ade80; font-weight: 700;">${fmtMoney(mlcState.totalPmt)}</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-loan-amount', 'range-loan-amount', false, true);
+            setupSync('inp-loan-term', 'range-loan-term', false, false);
+            setupSync('inp-mort-rate', 'range-mort-rate', true, false);
+
+            calculateMortgage();
+        });
+    </script>
+</body>
+</html>

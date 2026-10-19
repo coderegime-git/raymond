@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Worth Calculator | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate your current net worth by tabulating all personal assets against total liabilities. Project your net worth trajectory over the next 10 years.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .nw-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .nw-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .nw-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .nw-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .subtotal-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dfa01e;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .nw-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        .nw-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: right;
+            border: 1px solid #1e293b;
+        }
+        .nw-table th:first-child {
+            text-align: left;
+        }
+        .nw-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            text-align: right;
+            color: #334155;
+        }
+        .nw-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+        .nw-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="mortgage-payoff-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Mortgage Payoff Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="personal-economic-recovery.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Personal Economic Recovery">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Net Worth Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">NET WORTH CALCULATOR</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Personal Finance &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Your net worth is the value of all of your assets minus the total of all of your liabilities. Put another way, it is what you have minus what you owe. If this result is positive, then you have a surplus net worth. If you determine that you owe more than you have, then you have a negative net worth. This calculator helps you determine your net worth and estimates how it could grow or diminish over the next 10 years.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateNW()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="nw-result-banner" style="margin-bottom: 25px;">
+                Your current net worth is <span class="highlight-val" id="banner-nw-val" style="color: #4ade80;">$325,000.00</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="nw-stat-grid">
+                <div class="nw-stat-card">
+                    <div class="nw-stat-val" id="stat-net-worth">$325,000</div>
+                    <div class="nw-stat-label">Total Net Worth</div>
+                </div>
+                <div class="nw-stat-card">
+                    <div class="nw-stat-val" id="stat-total-assets" style="color: #60a5fa;">$525,000</div>
+                    <div class="nw-stat-label">Total Assets</div>
+                </div>
+                <div class="nw-stat-card">
+                    <div class="nw-stat-val" id="stat-total-liabilities" style="color: #f87171;">$200,000</div>
+                    <div class="nw-stat-label">Total Liabilities</div>
+                </div>
+            </div>
+
+            <!-- Accordion: Growth Rates -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>ANNUAL GROWTH RATES</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-asset-growth" class="calc-label">Annual asset growth*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-asset-growth" class="calc-input" value="7.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-asset-growth" class="calc-slider" value="7" min="0" max="15" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>7.5%</span><span>15%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-growth" class="calc-label">Annual liability growth*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-liab-growth" class="calc-input" value="0.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-liab-growth" class="calc-slider" value="0" min="0" max="10" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>5%</span><span>10%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: YOUR ASSETS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>YOUR ASSETS</span>
+                    <span class="subtotal-badge" id="badge-assets">$525,000.00</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-home" class="calc-label">Home</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-home" class="calc-input" value="$350,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-re" class="calc-label">Other real estate</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-re" class="calc-input" value="$0.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-auto" class="calc-label">Automobiles</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-auto" class="calc-input" value="$25,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-ret" class="calc-label">Retirement accounts</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-ret" class="calc-input" value="$100,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-stocks" class="calc-label">Stocks / Mutual funds</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-stocks" class="calc-input" value="$35,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-cash" class="calc-label">Checking, savings &amp; cash</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-cash" class="calc-input" value="$15,000.00" onchange="calculateNW()"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Accordion 2: YOUR LIABILITIES -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>YOUR LIABILITIES</span>
+                    <span class="subtotal-badge" id="badge-liab">$200,000.00</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-mort" class="calc-label">Home mortgage principal</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-mort" class="calc-input" value="$185,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-auto" class="calc-label">Auto loans</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-auto" class="calc-input" value="$10,000.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-student" class="calc-label">Student loans</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-student" class="calc-input" value="$0.00" onchange="calculateNW()"></div></div></div>
+                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-cards" class="calc-label">Credit card &amp; other debt</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-cards" class="calc-input" value="$5,000.00" onchange="calculateNW()"></div></div></div>
+                </div>
+            </div>
+
+            <!-- Chart Section: Projected Net Worth by Year -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>PROJECTED NET WORTH BY YEAR FOR 10 YEARS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">10-Year Net Worth Trend</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #10b981; display: inline-block; border-radius: 2px;"></span> Net Worth</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #3b82f6; display: inline-block; border-radius: 2px;"></span> Assets</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #ef4444; display: inline-block; border-radius: 2px;"></span> Liabilities</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="nw-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL ASSET GROWTH</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Average annual growth you expect your assets to experience.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL LIABILITY GROWTH</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Average annual growth you expect your debts to experience (or reduction if negative).</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">HOME</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Current estimated market value of your primary residence.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">RETIREMENT ACCOUNTS</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total current balance of your 401(k), IRA, pension, and other qualified retirement assets.</p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide financial or investment advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">NET WORTH 10-YEAR PROJECTION</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateNW();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateNW();
+            });
+        }
+
+        let nwProjection = [];
+
+        function calculateNW() {
+            const aGrowth = (parseNum(document.getElementById('inp-asset-growth').value) || 7) / 100;
+            const lGrowth = (parseNum(document.getElementById('inp-liab-growth').value) || 0) / 100;
+
+            const totalAssets = 
+                parseNum(document.getElementById('a-home').value) +
+                parseNum(document.getElementById('a-re').value) +
+                parseNum(document.getElementById('a-auto').value) +
+                parseNum(document.getElementById('a-ret').value) +
+                parseNum(document.getElementById('a-stocks').value) +
+                parseNum(document.getElementById('a-cash').value);
+
+            const totalLiabilities = 
+                parseNum(document.getElementById('l-mort').value) +
+                parseNum(document.getElementById('l-auto').value) +
+                parseNum(document.getElementById('l-student').value) +
+                parseNum(document.getElementById('l-cards').value);
+
+            const currentNW = totalAssets - totalLiabilities;
+
+            document.getElementById('badge-assets').textContent = fmtMoneyCents(totalAssets);
+            document.getElementById('badge-liab').textContent = fmtMoneyCents(totalLiabilities);
+            document.getElementById('banner-nw-val').textContent = fmtMoneyCents(currentNW);
+
+            document.getElementById('stat-net-worth').textContent = fmtMoney(currentNW);
+            document.getElementById('stat-total-assets').textContent = fmtMoney(totalAssets);
+            document.getElementById('stat-total-liabilities').textContent = fmtMoney(totalLiabilities);
+
+            nwProjection = [];
+            for (let y = 0; y <= 10; y++) {
+                const aY = totalAssets * Math.pow(1 + aGrowth, y);
+                const lY = totalLiabilities * Math.pow(1 + lGrowth, y);
+                nwProjection.push({
+                    year: y,
+                    assets: aY,
+                    liab: lY,
+                    netWorth: aY - lY
+                });
+            }
+
+            renderNwChart(nwProjection);
+        }
+
+        function renderNwChart(data) {
+            const svg = document.getElementById('nw-chart-svg');
+            if (!svg || !data.length) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            let maxVal = Math.max(...data.map(d => Math.max(d.assets, d.netWorth))) * 1.25;
+            if (maxVal === 0) maxVal = 500000;
+
+            let svgHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const yVal = (maxVal / 4) * i;
+                const yPos = padTop + chartH - (i / 4) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            let ptsA = '';
+            let ptsL = '';
+            let ptsNW = '';
+
+            data.forEach((d, idx) => {
+                const cx = padLeft + (idx / 10) * chartW;
+                const cyA = padTop + chartH - (Math.max(0, d.assets) / maxVal) * chartH;
+                const cyL = padTop + chartH - (Math.max(0, d.liab) / maxVal) * chartH;
+                const cyNW = padTop + chartH - (Math.max(0, d.netWorth) / maxVal) * chartH;
+
+                ptsA += `${cx},${cyA} `;
+                ptsL += `${cx},${cyL} `;
+                ptsNW += `${cx},${cyNW} `;
+
+                svgHtml += `<circle cx="${cx}" cy="${cyNW}" r="3" fill="#10b981"><title>Year ${d.year} Net Worth: ${fmtMoney(d.netWorth)}</title></circle>`;
+                svgHtml += `<text x="${cx}" y="${padTop + chartH + 18}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="middle">Yr ${d.year}</text>`;
+            });
+
+            svgHtml += `<polyline points="${ptsA.trim()}" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,4" />`;
+            svgHtml += `<polyline points="${ptsL.trim()}" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />`;
+            svgHtml += `<polyline points="${ptsNW.trim()}" fill="none" stroke="#10b981" stroke-width="2.5" />`;
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!nwProjection.length) calculateNW();
+
+            let rows = '';
+            nwProjection.forEach(d => {
+                rows += `
+                    <tr>
+                        <td>Year ${d.year}</td>
+                        <td>${fmtMoney(d.assets)}</td>
+                        <td style="color: #ef4444;">${fmtMoney(d.liab)}</td>
+                        <td style="color: #10b981; font-weight: 700;">${fmtMoney(d.netWorth)}</td>
+                    </tr>
+                `;
+            });
+
+            body.innerHTML = `
+                <table class="nw-table">
+                    <thead>
+                        <tr>
+                            <th>Projection Year</th>
+                            <th>Total Assets</th>
+                            <th>Total Liabilities</th>
+                            <th>Net Worth</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-asset-growth', 'range-asset-growth', true, false);
+            setupSync('inp-liab-growth', 'range-liab-growth', true, false);
+
+            calculateNW();
+        });
+    </script>
+</body>
+</html>

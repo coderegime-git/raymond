@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disability Insurance | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate your income shortfall and determine how much disability insurance coverage is required to maintain your family's standard of living.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .dis-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .dis-stat-card {
+            background: rgba(11, 23, 42, 0.85);
+            border: 1px solid rgba(223, 160, 30, 0.3);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+        }
+        .dis-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .dis-stat-label {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="credit-assessment.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Credit Assessment">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="cost-of-waiting-to-save.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Cost of Waiting to Save">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
+                <img src="assets/resources/card-16.jpg" alt="Disability Insurance" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">DISABILITY INSURANCE</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Insurance &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    One out of three people between the ages of 35 and 65 will become disabled for 90 days or longer. Could you maintain your current standard of living if you suffered a disability? If you cannot work, your living expenses will continue, while your income could be substantially reduced or completely lost. This calculator helps you determine how much disability insurance coverage you would need to maintain your standard of living.
+                </p>
+            </header>
+
+            <!-- Sticky Floating Action Box -->
+            <div class="calc-action-card-sticky-wrapper">
+                <section class="calc-action-card">
+                    <div class="calc-btn-row">
+                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateDisability()">CALCULATE</button>
+                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-right-icons">
+                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <span class="calc-req-text">*indicates required</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Form Card: Disability Insurance Needs -->
+            <div style="background: #0d1b31; border: 1px solid rgba(223, 160, 30, 0.35); border-radius: 6px; padding: 24px; margin-bottom: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223, 160, 30, 0.2); padding-bottom: 12px; margin-bottom: 20px;">
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0; font-weight: 700;">Disability Insurance Needs</h2>
+                    <span style="font-size: 11px; color: #94a3b8; font-style: italic;">*indicates required</span>
+                </div>
+
+                <!-- Current monthly expenses -->
+                <div class="calc-input-row">
+                    <div class="calc-label-col">
+                        <label for="inp-curr-exp" class="calc-field-label">Current monthly expenses:*</label>
+                        <span class="calc-q-dot" title="Total regular monthly living expenses.">?</span>
+                    </div>
+                    <input type="text" id="inp-curr-exp" class="calc-text-input" value="$3,500">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-curr-exp" class="calc-range-slider" min="0" max="10000" step="50" value="3500">
+                        <div class="calc-tick-labels">
+                            <span>$0</span>
+                            <span>$2,500</span>
+                            <span>$5,000</span>
+                            <span>$7,500</span>
+                            <span>$10,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disabled monthly expenses -->
+                <div class="calc-input-row">
+                    <div class="calc-label-col">
+                        <label for="inp-dis-exp" class="calc-field-label">Disabled monthly expenses:*</label>
+                        <span class="calc-q-dot" title="Estimated monthly expenses while disabled (typically ~90% of current).">?</span>
+                    </div>
+                    <input type="text" id="inp-dis-exp" class="calc-text-input" value="$3,150">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-dis-exp" class="calc-range-slider" min="0" max="10000" step="50" value="3150">
+                        <div class="calc-tick-labels">
+                            <span>$0</span>
+                            <span>$2,500</span>
+                            <span>$5,000</span>
+                            <span>$7,500</span>
+                            <span>$10,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current monthly coverage -->
+                <div class="calc-input-row">
+                    <div class="calc-label-col">
+                        <label for="inp-curr-cov" class="calc-field-label">Current monthly coverage:*</label>
+                        <span class="calc-q-dot" title="Existing employer or personal disability insurance monthly benefit.">?</span>
+                    </div>
+                    <input type="text" id="inp-curr-cov" class="calc-text-input" value="$1,500">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-curr-cov" class="calc-range-slider" min="0" max="10000" step="50" value="1500">
+                        <div class="calc-tick-labels">
+                            <span>$0</span>
+                            <span>$2,500</span>
+                            <span>$5,000</span>
+                            <span>$7,500</span>
+                            <span>$10,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Months of disability -->
+                <div class="calc-input-row">
+                    <div class="calc-label-col">
+                        <label for="inp-months-dis" class="calc-field-label">Months of disability:*</label>
+                        <span class="calc-q-dot" title="Duration of expected disability event in months.">?</span>
+                    </div>
+                    <input type="text" id="inp-months-dis" class="calc-text-input" value="12">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-months-dis" class="calc-range-slider" min="1" max="60" step="1" value="12">
+                        <div class="calc-tick-labels">
+                            <span>1</span>
+                            <span>15</span>
+                            <span>30</span>
+                            <span>45</span>
+                            <span>60</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Months of coverage -->
+                <div class="calc-input-row">
+                    <div class="calc-label-col">
+                        <label for="inp-months-cov" class="calc-field-label">Months of coverage:*</label>
+                        <span class="calc-q-dot" title="How many months your existing coverage will pay benefits.">?</span>
+                    </div>
+                    <input type="text" id="inp-months-cov" class="calc-text-input" value="6">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-months-cov" class="calc-range-slider" min="0" max="60" step="1" value="6">
+                        <div class="calc-tick-labels">
+                            <span>0</span>
+                            <span>15</span>
+                            <span>30</span>
+                            <span>45</span>
+                            <span>60</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Annual inflation -->
+                <div class="calc-input-row" style="margin-bottom: 0;">
+                    <div class="calc-label-col">
+                        <label for="inp-dis-inflation" class="calc-field-label">Annual inflation:*</label>
+                        <span class="calc-q-dot" title="Expected rate of living cost inflation.">?</span>
+                    </div>
+                    <input type="text" id="inp-dis-inflation" class="calc-text-input" value="3%">
+                    <div class="calc-slider-col">
+                        <input type="range" id="range-dis-inflation" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                        <div class="calc-tick-labels">
+                            <span>0%</span>
+                            <span>3%</span>
+                            <span>5%</span>
+                            <span>8%</span>
+                            <span>10%</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Dynamic Result Banner -->
+            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 18px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
+                <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; font-weight: 600; margin-bottom: 4px;">DISABILITY COVERAGE GAP</div>
+                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #ef4444; margin: 0; font-weight: 700;">
+                    YOUR CURRENT SHORTFALL IS <span style="color: #dfa01e;">$1,650</span> PER MONTH.
+                </h2>
+            </div>
+
+            <!-- Metric Cards -->
+            <div class="dis-stat-grid">
+                <div class="dis-stat-card">
+                    <div class="dis-stat-val" id="card-initial-gap">$1,650.00</div>
+                    <div class="dis-stat-label">Initial Monthly Shortfall</div>
+                </div>
+                <div class="dis-stat-card">
+                    <div class="dis-stat-val" id="card-post-cliff-gap">$3,150.00</div>
+                    <div class="dis-stat-label">Shortfall After Coverage Ends</div>
+                </div>
+                <div class="dis-stat-card">
+                    <div class="dis-stat-val" id="card-total-shortfall">$28,800.00</div>
+                    <div class="dis-stat-label">Total Cumulative Shortfall</div>
+                </div>
+                <div class="dis-stat-card">
+                    <div class="dis-stat-val" id="card-cov-pct">47.6%</div>
+                    <div class="dis-stat-label">Initial Expense Coverage %</div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             CHART SECTION
+             ============================================================ -->
+            <section class="calc-section" id="sec-chart">
+                <div class="calc-sec-header">
+                    <h2 class="calc-sec-title">MONTHLY EXPENSES VS. DISABILITY COVERAGE</h2>
+                    <div style="display: flex; gap: 20px; align-items: center; font-size: 12px; font-weight: 600;">
+                        <span style="display: flex; align-items: center; gap: 6px; color: #60a5fa;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #2563eb; display: inline-block;"></span> Disabled monthly expenses
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #16a34a; display: inline-block;"></span> Current coverage
+                        </span>
+                    </div>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px;">
+                    <div id="disability-chart-container" style="width: 100%; height: 320px; position: relative;">
+                        <!-- SVG Line Chart -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION (EXACT TEXT)
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CURRENT MONTHLY EXPENSES</h4>
+                    <p class="calc-def-desc">
+                        Your total monthly living expenses. Remember to include your home or rent payments, food, clothing, auto, phone and other monthly expenses.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">DISABLED MONTHLY EXPENSES</h4>
+                    <p class="calc-def-desc">
+                        Your monthly expenses while you are disabled. This amount is usually a little less than your regular monthly expenses. The default value for this field is estimated as 90% of your current monthly expenses. You should keep in mind, however, that many expenses such as your mortgage, rent, utilities and food will not likely reduce for someone before you are disabled.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">MONTHS OF DISABILITY</h4>
+                    <p class="calc-def-desc">
+                        The number of months you become disabled will prevent you from working. A common baseline is between 6 and 12 months.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CURRENT MONTHLY COVERAGE</h4>
+                    <p class="calc-def-desc">
+                        Your current monthly disability coverage. Make sure to include any disability coverage provided by your employer.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">MONTHS OF COVERAGE</h4>
+                    <p class="calc-def-desc">
+                        Number of months that your current monthly coverage will last.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ANNUAL INFLATION</h4>
+                    <p class="calc-def-desc">
+                        This is what you expect for the average long-term inflation rate. A common measure of inflation in the U.S. is the Consumer Price Index (CPI). From 1926 through 2023 the CPI has had a long-term average of 3.0% annually.
+                    </p>
+                </div>
+
+                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
+        <div style="background: #0d1b31; max-width: 800px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
+            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Disability Needs Analysis Report</h2>
+                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
+                </div>
+            </div>
+            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
+                <!-- Monthly schedule table -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="calc-footer">
+        <div class="calc-footer-inner">
+            <p class="calc-footer-copy">&copy; 2026 The Seiler Group &bull; Raymond James Financial Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     CALCULATOR JAVASCRIPT ENGINE
+     ============================================================ -->
+    <script>
+        function toggleMobileMenu(e) {
+            e.stopPropagation();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-nav-toggle');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+
+        function parseCurrency(str) {
+            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        }
+        function formatCurrency(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+        function formatCurrencyCents(num) {
+            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function parsePercent(str) {
+            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                const val = parseFloat(range.value);
+                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
+                else if (isPct) inp.value = val + '%';
+                else inp.value = val;
+                calculateDisability();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
+                if (val < 0) val = 0;
+                if (maxVal && val > maxVal) val = maxVal;
+                range.value = val;
+                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
+                else if (isPct) inp.value = val + '%';
+                else inp.value = val;
+                calculateDisability();
+            });
+        }
+
+        bindSliderAndInput('inp-curr-exp', 'range-curr-exp', true, false, 10000);
+        bindSliderAndInput('inp-dis-exp', 'range-dis-exp', true, false, 10000);
+        bindSliderAndInput('inp-curr-cov', 'range-curr-cov', true, false, 10000);
+        bindSliderAndInput('inp-months-dis', 'range-months-dis', false, false, 60);
+        bindSliderAndInput('inp-months-cov', 'range-months-cov', false, false, 60);
+        bindSliderAndInput('inp-dis-inflation', 'range-dis-inflation', false, true, 10);
+
+        let lastMonthlyData = [];
+
+        function calculateDisability() {
+            const currExp = parseCurrency(document.getElementById('inp-curr-exp').value);
+            const disExp = parseCurrency(document.getElementById('inp-dis-exp').value);
+            const currCov = parseCurrency(document.getElementById('inp-curr-cov').value);
+            const monthsDis = parseInt(document.getElementById('inp-months-dis').value) || 12;
+            const monthsCov = parseInt(document.getElementById('inp-months-cov').value) || 6;
+            const inflation = parsePercent(document.getElementById('inp-dis-inflation').value) / 100;
+
+            const initialShortfall = Math.max(0, disExp - currCov);
+            const postCliffShortfall = disExp;
+
+            let totalShortfall = 0;
+            const monthlyData = [];
+
+            for (let m = 1; m <= monthsDis; m++) {
+                const inflatedExp = disExp * Math.pow(1 + inflation / 12, m);
+                const covBenefit = (m <= monthsCov) ? currCov : 0;
+                const gap = Math.max(0, inflatedExp - covBenefit);
+                totalShortfall += gap;
+
+                monthlyData.push({
+                    month: m,
+                    expense: inflatedExp,
+                    coverage: covBenefit,
+                    shortfall: gap
+                });
+            }
+
+            lastMonthlyData = monthlyData;
+
+            // Update Headline & Cards
+            document.getElementById('res-headline').innerHTML = `YOUR CURRENT SHORTFALL IS <span style="color: #dfa01e;">${formatCurrency(initialShortfall)}</span> PER MONTH.`;
+            document.getElementById('card-initial-gap').textContent = formatCurrencyCents(initialShortfall);
+            document.getElementById('card-post-cliff-gap').textContent = formatCurrencyCents(postCliffShortfall);
+            document.getElementById('card-total-shortfall').textContent = formatCurrencyCents(totalShortfall);
+
+            const covPct = disExp > 0 ? ((currCov / disExp) * 100).toFixed(1) + '%' : '100%';
+            document.getElementById('card-cov-pct').textContent = covPct;
+
+            renderDisabilityChart(monthlyData);
+        }
+
+        function renderDisabilityChart(data) {
+            const container = document.getElementById('disability-chart-container');
+            if (!container || data.length === 0) return;
+
+            const width = container.clientWidth || 700;
+            const height = 300;
+            const padLeft = 70;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 45;
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            const maxVal = Math.max(...data.map(d => Math.max(d.expense, d.coverage))) * 1.15 || 5000;
+
+            let gridSvg = '';
+            const steps = 5;
+            for (let i = 0; i <= steps; i++) {
+                const yVal = (maxVal / steps) * i;
+                const yPos = padTop + chartH - (i / steps) * chartH;
+                gridSvg += `
+                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
+                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
+                `;
+            }
+
+            const stepX = chartW / (data.length - 1 || 1);
+            let expPath = '';
+            let covPath = '';
+
+            data.forEach((d, idx) => {
+                const x = padLeft + (idx * stepX);
+                const yExp = padTop + chartH - (d.expense / maxVal) * chartH;
+                const yCov = padTop + chartH - (d.coverage / maxVal) * chartH;
+
+                expPath += (idx === 0) ? `M ${x} ${yExp}` : ` L ${x} ${yExp}`;
+                covPath += (idx === 0) ? `M ${x} ${yCov}` : ` L ${x} ${yCov}`;
+            });
+
+            let xLabels = '';
+            const labelInterval = Math.max(1, Math.ceil(data.length / 8));
+            data.forEach((d, idx) => {
+                if (idx % labelInterval === 0 || idx === data.length - 1) {
+                    const x = padLeft + (idx * stepX);
+                    xLabels += `<text x="${x}" y="${height - 15}" fill="#cbd5e1" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="middle">Mo ${d.month}</text>`;
+                }
+            });
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+                    ${gridSvg}
+                    <path d="${expPath}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+                    <path d="${covPath}" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round"/>
+                    ${xLabels}
+                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
+                    <text x="${width / 2}" y="${height + 5}" fill="#dfa01e" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">MONTHS OF DISABILITY</text>
+                </svg>
+            `;
+        }
+
+        function openReportModal() {
+            calculateDisability();
+            const modal = document.getElementById('report-modal');
+            const content = document.getElementById('modal-report-content');
+
+            let rows = '';
+            lastMonthlyData.forEach(item => {
+                rows += `
+                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                        <td style="padding: 10px; text-align: left; color: #fff; font-weight: 600;">Month ${item.month}</td>
+                        <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(item.expense)}</td>
+                        <td style="padding: 10px; color: #4ade80;">${formatCurrencyCents(item.coverage)}</td>
+                        <td style="padding: 10px; color: ${item.shortfall > 0 ? '#ef4444' : '#94a3b8'}; font-weight: 700;">
+                            ${item.shortfall > 0 ? '-' + formatCurrencyCents(item.shortfall) : '$0.00'}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            content.innerHTML = `
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                    <thead>
+                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
+                            <th style="padding: 12px 10px; text-align: left;">Timeline</th>
+                            <th style="padding: 12px 10px;">Monthly Expense</th>
+                            <th style="padding: 12px 10px;">Insurance Benefit</th>
+                            <th style="padding: 12px 10px;">Net Shortfall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        window.addEventListener('resize', () => {
+            if (lastMonthlyData.length > 0) renderDisabilityChart(lastMonthlyData);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateDisability();
+        });
+    </script>
+</body>
+</html>

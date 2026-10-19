@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Equity Line of Credit Calculator | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate how much you may qualify to borrow with a Home Equity Line of Credit (HELOC) based on your home's appraised value, outstanding debt, and LTV ratio.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .heloc-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .heloc-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .heloc-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .heloc-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        /* Report Modal */
+        .report-modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 30px 15px;
+        }
+        .report-modal-box {
+            max-width: 780px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-top: 6px solid #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 26px;
+            cursor: pointer;
+            color: #64748b;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="home-budget-analysis.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Home Budget Analysis">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="how-important-is-social-security.html" class="calc-side-nav-btn next-btn" title="Next Calculator: How Important Is Social Security?">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <img src="assets/resources/home-equity-line-of-credit-calculator-hero.jpg" alt="Home Equity Line of Credit Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">HOME EQUITY LINE OF CREDIT CALCULATOR</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Personal Finance &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Use this calculator to determine the home equity line of credit amount you may qualify to receive. The line of credit is based on a percentage of the value of your home. The more your home is worth, the larger the line of credit. Of course, the balance of all loans you have on your home, including your primary mortgage, reduces the amount of equity available, and reduces the line of credit amount you can borrow.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateHELOC()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="heloc-result-banner" style="margin-bottom: 25px;">
+                You may qualify for a <span class="highlight-val" id="banner-qual-line">$140,000</span> credit line.
+            </div>
+
+            <p style="font-size: 12px; color: #64748b; font-style: italic; margin-bottom: 15px;">* Indicates required</p>
+
+            <!-- ============================================================
+             INPUTS SECTION
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-sec-body" style="padding: 24px 22px;">
+
+                    <!-- Appraised value of your home -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-appraised" class="calc-field-label">Appraised value of your home:*</label>
+                            <span class="calc-q-dot" title="Estimated current market valuation of your property.">?</span>
+                        </div>
+                        <input type="text" id="inp-appraised" class="calc-text-input" value="$350,000.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-appraised" class="calc-range-slider" min="50000" max="1000000" step="10000" value="350000">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$250K</span>
+                                <span>$500K</span>
+                                <span>$750K</span>
+                                <span>$1.0M</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outstanding home loans -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-loans" class="calc-field-label">Outstanding home loans:*</label>
+                            <span class="calc-q-dot" title="Total balance of all current mortgages and liens on the property.">?</span>
+                        </div>
+                        <input type="text" id="inp-loans" class="calc-text-input" value="$140,000.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-loans" class="calc-range-slider" min="0" max="1000000" step="10000" value="140000">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$250K</span>
+                                <span>$500K</span>
+                                <span>$750K</span>
+                                <span>$1.0M</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loan-to-value (LTV) ratio limit -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col">
+                            <label for="inp-ltv" class="calc-field-label">Loan-to-value (LTV) ratio limit:*</label>
+                            <span class="calc-q-dot" title="Maximum combined loan-to-value allowed by your lending institution.">?</span>
+                        </div>
+                        <input type="text" id="inp-ltv" class="calc-text-input" value="80%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ltv" class="calc-range-slider" min="50" max="100" step="5" value="80">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                                <span>75%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Key Metric Cards -->
+            <div class="heloc-stat-grid">
+                <div class="heloc-stat-card">
+                    <div class="heloc-stat-val" id="stat-max-borrow" style="color: #60a5fa;">$280,000</div>
+                    <div class="heloc-stat-label">Maximum Total Borrowing (80%)</div>
+                </div>
+                <div class="heloc-stat-card">
+                    <div class="heloc-stat-val" id="stat-current-debt" style="color: #f87171;">$140,000</div>
+                    <div class="heloc-stat-label">Current Outstanding Debt</div>
+                </div>
+                <div class="heloc-stat-card">
+                    <div class="heloc-stat-val" id="stat-available-line" style="color: #4ade80;">$140,000</div>
+                    <div class="heloc-stat-label">Available Line of Credit</div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             CHART SECTION: WHAT IF MY APPRAISED VALUE CHANGES?
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 35px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <h2 class="calc-sec-title" style="color: #dfa01e; font-size: 14px; font-weight: 700; text-transform: uppercase;">WHAT IF MY APPRAISED VALUE CHANGES?</h2>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px;">
+                    <div style="display: flex; justify-content: flex-end; gap: 20px; font-size: 12.5px; font-weight: 600; margin-bottom: 15px;">
+                        <span style="display: flex; align-items: center; gap: 6px; color: #06b6d4;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #06b6d4; display: inline-block;"></span> Limit at 90%
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #16a34a;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #16a34a; display: inline-block;"></span> Limit at 80%
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #2563eb;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #2563eb; display: inline-block;"></span> Limit at 70%
+                        </span>
+                    </div>
+                    <div id="heloc-chart-wrapper" style="width: 100%; height: 280px;">
+                        <!-- Dynamic SVG Line Chart -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">APPRAISED VALUE OF YOUR HOME</h4>
+                    <p class="calc-def-desc">
+                        The current value of your home as determined by a recent appraisal, assessment, or automated valuation model.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OUTSTANDING HOME LOANS</h4>
+                    <p class="calc-def-desc">
+                        Total amount of all outstanding loans and balances, including your first mortgage, second mortgage(s), and any other debt secured by your home.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">LOAN-TO-VALUE (LTV) RATIO LIMIT</h4>
+                    <p class="calc-def-desc">
+                        The maximum percentage of your home's appraised value that the lender will allow you to borrow against. For example, if the lender has an 80% limit and the home has an appraised value of $300,000, the maximum credit limit is $240,000 minus your $140,000 outstanding home loans, leaving you with an available credit line of $100,000.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Disclaimer Note -->
+            <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11.5px; line-height: 1.6; color: #64748b;">
+                <p>
+                    The educational tool and calculations provided are hypothetical examples and estimates only. Credit approval and actual credit limits are subject to underwriting criteria, debt-to-income verification, credit score, and property appraisal requirements determined by the lender. Tax deductibility of interest may vary under current IRS guidelines. Consult your mortgage professional or financial advisor before applying for home equity credit.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="report-modal-bg" id="report-modal">
+        <div class="report-modal-box">
+            <button class="report-modal-close" onclick="closeReportModal()">&times;</button>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #dfa01e; padding-bottom: 15px; margin-bottom: 20px;">
+                <img src="assets/logo.svg" alt="The Seiler Group" style="height: 45px;">
+                <div style="text-align: right;">
+                    <h3 style="margin: 0; color: #0b172a; font-size: 18px; font-weight: 700;">HELOC ELIGIBILITY REPORT</h3>
+                    <div style="font-size: 12px; color: #64748b;">The Seiler Group of Raymond James</div>
+                </div>
+            </div>
+
+            <div id="report-modal-content"></div>
+
+            <div style="margin-top: 25px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()" style="padding: 8px 18px; font-size: 13px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button type="button" class="calc-btn calc-btn-primary" onclick="closeReportModal()" style="padding: 8px 22px; font-size: 13px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer style="background: #0b172a; color: #94a3b8; padding: 40px 20px; font-size: 12px; text-align: center; border-top: 1px solid rgba(223,160,30,0.3);">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <p style="margin-bottom: 10px;">&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC.</p>
+            <p style="margin: 0;">Securities offered through Raymond James Financial Services, Inc. Member FINRA / SIPC. Investment advisory services offered through Raymond James Financial Services Advisors, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     CALCULATION SCRIPT
+     ============================================================ -->
+    <script>
+        function fmtMoney(num) {
+            return '$' + Math.round(Number(num) || 0).toLocaleString('en-US');
+        }
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        function setupSync(inputId, rangeId, isPercent, isCurrency) {
+            const inp = document.getElementById(inputId);
+            const rng = document.getElementById(rangeId);
+            if (!inp || !rng) return;
+
+            rng.addEventListener('input', () => {
+                const val = parseFloat(rng.value) || 0;
+                if (isPercent) {
+                    inp.value = val + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateHELOC();
+            });
+
+            inp.addEventListener('change', () => {
+                let clean = parseClean(inp.value);
+                clean = Math.max(parseFloat(rng.min), Math.min(parseFloat(rng.max), clean));
+                rng.value = clean;
+                if (isPercent) {
+                    inp.value = clean + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(clean);
+                } else {
+                    inp.value = clean;
+                }
+                calculateHELOC();
+            });
+        }
+
+        let lastHELOC = null;
+
+        function calculateHELOC() {
+            const appraised = parseClean(document.getElementById('inp-appraised').value);
+            const loans = parseClean(document.getElementById('inp-loans').value);
+            const ltv = parseClean(document.getElementById('inp-ltv').value) / 100;
+
+            const maxBorrow = appraised * ltv;
+            const availableLine = Math.max(0, maxBorrow - loans);
+
+            lastHELOC = { appraised, loans, ltv, maxBorrow, availableLine };
+
+            document.getElementById('banner-qual-line').innerText = fmtMoney(availableLine);
+            document.getElementById('stat-max-borrow').innerText = fmtMoney(maxBorrow);
+            document.getElementById('stat-current-debt').innerText = fmtMoney(loans);
+            document.getElementById('stat-available-line').innerText = fmtMoney(availableLine);
+
+            renderHELOCChart(loans);
+        }
+
+        function renderHELOCChart(loans) {
+            const container = document.getElementById('heloc-chart-wrapper');
+            const w = 680;
+            const h = 260;
+            const padL = 60;
+            const padR = 20;
+            const padT = 20;
+            const padB = 40;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            const minVal = 100000;
+            const maxVal = 600000;
+            const maxCredit = (maxVal * 0.90) - loans;
+
+            function getY(val, ltvRatio) {
+                const credit = Math.max(0, (val * ltvRatio) - loans);
+                return (h - padB) - ((credit / maxCredit) * plotH);
+            }
+            function getX(val) {
+                return padL + (((val - minVal) / (maxVal - minVal)) * plotW);
+            }
+
+            const points90 = [];
+            const points80 = [];
+            const points70 = [];
+
+            for (let v = minVal; v <= maxVal; v += 50000) {
+                const x = getX(v);
+                points90.push(`${x},${getY(v, 0.90)}`);
+                points80.push(`${x},${getY(v, 0.80)}`);
+                points70.push(`${x},${getY(v, 0.70)}`);
+            }
+
+            container.innerHTML = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <!-- Grid Lines -->
+                    <line x1="${padL}" y1="${padT}" x2="${w - padR}" y2="${padT}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${padT + plotH / 2}" x2="${w - padR}" y2="${padT + plotH / 2}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#cbd5e1" stroke-width="1.5" />
+                    
+                    <!-- Y Axis Labels -->
+                    <text x="${padL - 8}" y="${padT + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxCredit)}</text>
+                    <text x="${padL - 8}" y="${padT + plotH / 2 + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxCredit / 2)}</text>
+                    <text x="${padL - 8}" y="${h - padB}" text-anchor="end" font-size="10" fill="#64748b">$0</text>
+
+                    <!-- X Axis Labels -->
+                    <text x="${getX(100000)}" y="${h - 18}" text-anchor="middle" font-size="10" fill="#64748b">$100K</text>
+                    <text x="${getX(250000)}" y="${h - 18}" text-anchor="middle" font-size="10" fill="#64748b">$250K</text>
+                    <text x="${getX(400000)}" y="${h - 18}" text-anchor="middle" font-size="10" fill="#64748b">$400K</text>
+                    <text x="${getX(550000)}" y="${h - 18}" text-anchor="middle" font-size="10" fill="#64748b">$550K</text>
+
+                    <!-- Line 90% (Cyan) -->
+                    <polyline fill="none" stroke="#06b6d4" stroke-width="2.5" points="${points90.join(' ')}" />
+                    <!-- Line 80% (Green) -->
+                    <polyline fill="none" stroke="#16a34a" stroke-width="2.5" points="${points80.join(' ')}" />
+                    <!-- Line 70% (Blue) -->
+                    <polyline fill="none" stroke="#2563eb" stroke-width="2.5" points="${points70.join(' ')}" />
+                </svg>
+            `;
+        }
+
+        function openReportModal() {
+            if (!lastHELOC) calculateHELOC();
+            const h = lastHELOC;
+            const content = document.getElementById('report-modal-content');
+
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                    <div style="background: #f8fafc; padding: 18px; border-radius: 6px; border-left: 4px solid #dfa01e;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #0b172a; text-transform: uppercase;">Property Valuation</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Appraised Home Value:</span><strong>${fmtMoney(h.appraised)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Current Outstanding Debt:</span><strong>${fmtMoney(h.loans)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Lender LTV Limit:</span><strong>${Math.round(h.ltv * 100)}%</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4);">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #dfa01e; text-transform: uppercase;">Available Equity Line</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Maximum Allowed Debt:</span><strong>${fmtMoney(h.maxBorrow)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Existing Mortgages Deducted:</span><strong>-${fmtMoney(h.loans)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #4ade80;">
+                            <span>Estimated HELOC Credit Line:</span><strong>${fmtMoney(h.availableLine)}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #0b172a; text-transform: uppercase;">Financial Considerations</h4>
+                <p style="font-size: 12.5px; line-height: 1.6; color: #475569;">
+                    A Home Equity Line of Credit can serve as a flexible liquidity facility for home renovations, business expansion, or emergency reserves. Because HELOCs feature variable interest rates and are secured by your home, strategic discipline is recommended to protect your primary residence equity.
+                </p>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-appraised', 'range-appraised', false, true);
+            setupSync('inp-loans', 'range-loans', false, true);
+            setupSync('inp-ltv', 'range-ltv', true, false);
+            calculateHELOC();
+        });
+    </script>
+</body>
+</html>

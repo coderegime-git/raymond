@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Employment Tax Rate | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Estimate your 2024 self-employment taxes (Schedule SE) including Social Security, Medicare, and the 50% above-the-line tax deduction.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .set-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .set-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .set-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .set-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 780px;
+            border-top: 5px solid #dfa01e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            color: #1e293b;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .report-modal-close:hover {
+            color: #0b172a;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .report-table th, .report-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .report-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .report-table tr:hover td {
+            background-color: #f8fafc;
+        }
+        .report-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER BAR -->
+    <header class="top-nav-container">
+        <div class="top-nav-inner">
+            <div class="brand-left">
+                <a href="index.html" class="brand-logo-link">
+                    <span class="brand-title">THE SEILER GROUP</span>
+                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
+                </a>
+            </div>
+            <div class="header-contact">
+                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
+                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECONDARY NAVIGATION -->
+    <nav class="sub-nav">
+        <div class="sub-nav-inner">
+            <a href="index.html">HOME</a>
+            <a href="corporate-executive-services.html">ABOUT US</a>
+            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
+            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
+            <a href="resources.html" class="active">RESOURCES</a>
+            <a href="contact-us.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="savings-taxes-and-inflation.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Savings, Taxes and Inflation">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="should-my-spouse-work.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Should My Spouse Work?">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Self-Employment Tax Rate" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            </div>
+
+            <!-- Page Titles -->
+            <h1 class="calc-page-title">SELF-EMPLOYMENT TAX RATE</h1>
+            <div class="calc-category-path">Tax Planning &gt; Calculator</div>
+
+            <div class="calc-share-container">
+                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
+            </div>
+
+            <p class="calc-intro-paragraph">
+                Use this calculator to estimate your self-employment taxes. Normally these taxes are withheld by your employer. However, if you are self-employed you must pay a 12.4% tax for Social Security and 2.9% for Medicare. Enter your net income from business and employment to calculate the self-employment tax due.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="calc-actions-row">
+                <button type="button" class="calc-btn-primary" onclick="calculateSETax()">CALCULATE</button>
+                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Highlight Banner -->
+            <div class="calc-dynamic-banner" id="se-banner">
+                <span id="banner-text">2024 self-employment taxes are estimated at $12,716.80</span>
+                <span class="banner-badge"><i class="fas fa-file-invoice-dollar"></i> Schedule SE</span>
+            </div>
+
+            <!-- Summary Stat Cards -->
+            <div class="set-stat-grid">
+                <div class="set-stat-card">
+                    <div class="set-stat-val" id="stat-total-se-tax" style="color: #ef4444;">$12,716.80</div>
+                    <div class="set-stat-label">Total Self-Employment Tax</div>
+                </div>
+                <div class="set-stat-card">
+                    <div class="set-stat-val" id="stat-ss-tax" style="color: #60a5fa;">$10,306.26</div>
+                    <div class="set-stat-label">Social Security (12.4%)</div>
+                </div>
+                <div class="set-stat-card">
+                    <div class="set-stat-val" id="stat-med-tax" style="color: #4ade80;">$2,410.54</div>
+                    <div class="set-stat-label">Medicare Tax (2.9%)</div>
+                </div>
+                <div class="set-stat-card">
+                    <div class="set-stat-val" id="stat-deductible-tax" style="color: #dfa01e;">$6,358.40</div>
+                    <div class="set-stat-label">50% AGI Tax Deduction</div>
+                </div>
+            </div>
+
+            <!-- CALCULATOR FORM -->
+            <div class="calc-two-col-layout">
+                
+                <!-- Left Column: Inputs -->
+                <div class="calc-inputs-column">
+                    
+                    <div class="calc-section-group">
+                        <div class="calc-group-title">SELF-EMPLOYMENT TAX RATE INFORMATION</div>
+
+                        <!-- Net business income or loss -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-business-inc">Net business income or loss*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-business-inc" class="calc-text-input" value="$90,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-business-inc" class="calc-range-slider" min="0" max="300000" step="2500" value="90000">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$150k</span>
+                                        <span>$300k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Other self-employed net income or loss -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-other-se-inc">Other self-employed net income or loss</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-other-se-inc" class="calc-text-input" value="$0.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-other-se-inc" class="calc-range-slider" min="0" max="100000" step="2500" value="0">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$50k</span>
+                                        <span>$100k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Church employee income -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-church-inc">Church employee income</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-church-inc" class="calc-text-input" value="$0.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-church-inc" class="calc-range-slider" min="0" max="50000" step="1000" value="0">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$25k</span>
+                                        <span>$50k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Employer-paid wages and tips -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-wages">Employer-paid wages and tips (W-2)</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-wages" class="calc-text-input" value="$0.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-wages" class="calc-range-slider" min="0" max="200000" step="5000" value="0">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$100k</span>
+                                        <span>$200k</span>
+                                    </div>
+                                </div>
+                                <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+                                    W-2 wages offset the 2024 Social Security wage base maximum ($168,600).
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Charts -->
+                <div class="calc-charts-column">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-title">SELF-EMPLOYMENT TAXES FOR 2024</div>
+                        <div id="se-svg-container" style="width: 100%; height: 350px;">
+                            <!-- Dynamic SVG Chart rendered via JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 2px;"></span>
+                                <span>Social Security Tax (12.4%)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #16a34a; border-radius: 2px;"></span>
+                                <span>Medicare Tax (2.9%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DEFINITIONS SECTION -->
+            <section class="calc-definitions-wrapper">
+                <h3 class="calc-defs-title">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">NET BUSINESS INCOME OR LOSS</div>
+                    <div class="calc-def-desc">Net profit or loss from business activities as reported on Schedule C or Schedule K-1. Gross revenues minus ordinary and necessary allowable business deductions.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">NET SE INCOME SUBJECT TO TAX (92.35% RULE)</div>
+                    <div class="calc-def-desc">By IRS statute, self-employment tax is not calculated on 100% of your net profits. Instead, it is computed on 92.35% of your total net self-employment earnings to equalize self-employed individuals with traditional employers who deduct their share of FICA payroll taxes.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">SOCIAL SECURITY WAGE BASE CAP</div>
+                    <div class="calc-def-desc">For 2024, the Social Security tax portion (12.4%) applies only to earnings up to the annual statutory wage base maximum of $168,600. If you also earn W-2 wages from an employer, those wages reduce the remaining cap subject to self-employment Social Security tax.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">MEDICARE TAX &amp; ADDITIONAL MEDICARE TAX</div>
+                    <div class="calc-def-desc">The Medicare tax portion is 2.9% and applies to all self-employment earnings with no income cap. In addition, an Additional Medicare Tax of 0.9% applies to combined wages and self-employment earnings exceeding $200,000 for single filers or $250,000 for married couples filing jointly.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">50% DEDUCTION FOR SELF-EMPLOYMENT TAX</div>
+                    <div class="calc-def-desc">You are entitled to deduct 50% of your total self-employment tax as an above-the-line deduction on Schedule 1 of Form 1040. This reduces your Adjusted Gross Income (AGI) regardless of whether you itemize deductions or take the standard deduction.</div>
+                </div>
+            </section>
+
+            <!-- LEGAL DISCLAIMER -->
+            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Self-Employment Tax Analysis Report (2024)</h2>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
+                </div>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+            </div>
+
+            <div id="report-modal-body">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-corporate">
+        <div class="footer-corporate-inner">
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">THE SEILER GROUP</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    Comprehensive wealth management, financial planning, and visionary investment counseling tailored to high-net-worth individuals and corporate executives.
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">OFFICE LOCATION</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    2850 S. Ocean Blvd, Suite 500<br>
+                    Palm Beach, FL 33480<br>
+                    Direct: 800-237-0152
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">QUICK LINKS</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                    <a href="resources.html" style="color: #dfa01e; text-decoration: none;">Resource Center</a>
+                    <a href="counseling-visionaries.html" style="color: #94a3b8; text-decoration: none;">Visionary Counseling</a>
+                    <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Our Advisors</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 The Seiler Group of Raymond James. All rights reserved. Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE SCRIPT -->
+    <script>
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function fmtPct(num) {
+            return Number(num).toFixed(2) + '%';
+        }
+
+        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                let v = parseFloat(range.value);
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(v);
+                } else if (isPct) {
+                    inp.value = fmtPct(v);
+                } else {
+                    inp.value = v;
+                }
+                calculateSETax();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = parseClean(inp.value);
+                if (val < parseFloat(range.min)) val = parseFloat(range.min);
+                if (val > parseFloat(range.max)) val = parseFloat(range.max);
+                range.value = val;
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(val);
+                } else if (isPct) {
+                    inp.value = fmtPct(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateSETax();
+            });
+        }
+
+        let seData = {};
+
+        function calculateSETax() {
+            const bizIncome = parseClean(document.getElementById('inp-business-inc').value) || 0;
+            const otherIncome = parseClean(document.getElementById('inp-other-se-inc').value) || 0;
+            const churchIncome = parseClean(document.getElementById('inp-church-inc').value) || 0;
+            const wages = parseClean(document.getElementById('inp-wages').value) || 0;
+
+            const totalSeIncome = bizIncome + otherIncome + churchIncome;
+
+            // 2024 Parameters
+            const ssCap2024 = 168600;
+            let netTaxableSubject = 0;
+            let ssTax = 0;
+            let medTax = 0;
+            let addlMedTax = 0;
+            let totalSeTax = 0;
+            let deductibleSeTax = 0;
+
+            if (totalSeIncome >= 400) {
+                // Apply 92.35% factor
+                netTaxableSubject = totalSeIncome * 0.9235;
+
+                // Social Security portion (12.4% up to cap after W2 wages)
+                const remainingCap = Math.max(0, ssCap2024 - wages);
+                const ssTaxableAmount = Math.min(netTaxableSubject, remainingCap);
+                ssTax = ssTaxableAmount * 0.124;
+
+                // Medicare portion (2.9% with no cap)
+                medTax = netTaxableSubject * 0.029;
+
+                // Additional Medicare tax (0.9% over $200k combined wages + SE earnings)
+                const combinedIncome = wages + netTaxableSubject;
+                if (combinedIncome > 200000) {
+                    const excessSubject = Math.min(netTaxableSubject, combinedIncome - 200000);
+                    addlMedTax = excessSubject * 0.009;
+                }
+
+                totalSeTax = ssTax + medTax + addlMedTax;
+                deductibleSeTax = totalSeTax * 0.50;
+            }
+
+            seData = {
+                bizIncome, otherIncome, churchIncome, wages, totalSeIncome,
+                netTaxableSubject, ssCap2024, ssTax, medTax, addlMedTax,
+                totalSeTax, deductibleSeTax
+            };
+
+            // Update UI
+            document.getElementById('banner-text').innerText = 
+                `2024 self-employment taxes are estimated at ${fmtMoneyCents(totalSeTax)}`;
+            document.getElementById('stat-total-se-tax').innerText = fmtMoneyCents(totalSeTax);
+            document.getElementById('stat-ss-tax').innerText = fmtMoneyCents(ssTax);
+            document.getElementById('stat-med-tax').innerText = fmtMoneyCents(medTax + addlMedTax);
+            document.getElementById('stat-deductible-tax').innerText = fmtMoneyCents(deductibleSeTax);
+
+            renderSeChart(ssTax, medTax + addlMedTax);
+        }
+
+        function renderSeChart(ssTax, medTax) {
+            const container = document.getElementById('se-svg-container');
+            const maxVal = Math.max(ssTax, medTax, 5000) * 1.2;
+            const w = 480;
+            const h = 330;
+            const padL = 70;
+            const padR = 30;
+            const padT = 30;
+            const padB = 60;
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            const hSS = (ssTax / maxVal) * chartH;
+            const hMed = (medTax / maxVal) * chartH;
+
+            const ySS = padT + chartH - hSS;
+            const yMed = padT + chartH - hMed;
+
+            const barW = 85;
+            const xSS = padL + (chartW / 3) - (barW / 2);
+            const xMed = padL + (2 * chartW / 3) - (barW / 2);
+
+            let gridLines = '';
+            for (let i = 0; i <= 4; i++) {
+                const val = (maxVal / 4) * i;
+                const y = padT + chartH - (i * chartH / 4);
+                gridLines += `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
+                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val / 1000)}k</text>
+                `;
+            }
+
+            const svgHtml = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
+                    ${gridLines}
+
+                    <!-- Social Security Bar -->
+                    <rect x="${xSS}" y="${ySS}" width="${barW}" height="${hSS}" fill="#2563eb" rx="4" />
+                    <text x="${xSS + barW / 2}" y="${Math.max(padT + 15, ySS - 8)}" fill="#1e3a8a" font-size="12" font-weight="700" text-anchor="middle">
+                        ${fmtMoney(ssTax)}
+                    </text>
+                    <text x="${xSS + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
+                        Social Security (12.4%)
+                    </text>
+
+                    <!-- Medicare Bar -->
+                    <rect x="${xMed}" y="${yMed}" width="${barW}" height="${hMed}" fill="#16a34a" rx="4" />
+                    <text x="${xMed + barW / 2}" y="${Math.max(padT + 15, yMed - 8)}" fill="#14532d" font-size="12" font-weight="700" text-anchor="middle">
+                        ${fmtMoney(medTax)}
+                    </text>
+                    <text x="${xMed + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
+                        Medicare (2.9%)
+                    </text>
+
+                    <!-- Axis -->
+                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
+                </svg>
+            `;
+
+            container.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!seData.totalSeTax) calculateSETax();
+
+            const d = seData;
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">2024 Schedule SE Tax Estimate</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #f87171; margin-top: 4px;">
+                        Total Self-Employment Tax: ${fmtMoneyCents(d.totalSeTax)}
+                    </div>
+                    <div style="font-size: 13px; color: #4ade80; margin-top: 4px; font-weight: 600;">
+                        Allowable 50% AGI Deduction: ${fmtMoneyCents(d.deductibleSeTax)}
+                    </div>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Self-Employment Earnings Breakdown</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Net Business Income / Schedule C Profit</td><td>${fmtMoneyCents(d.bizIncome)}</td></tr>
+                        <tr><td>Other Self-Employment Net Income</td><td>${fmtMoneyCents(d.otherIncome)}</td></tr>
+                        <tr><td>Church Employee Income</td><td>${fmtMoneyCents(d.churchIncome)}</td></tr>
+                        <tr><td>Total Gross Self-Employment Income</td><td style="font-weight: 700;">${fmtMoneyCents(d.totalSeIncome)}</td></tr>
+                        <tr><td>Net Subject to Tax (92.35% Statutory Rule)</td><td>${fmtMoneyCents(d.netTaxableSubject)}</td></tr>
+                        <tr><td>Employer W-2 Wages Offsetting Social Security Cap</td><td>${fmtMoneyCents(d.wages)}</td></tr>
+                    </tbody>
+                </table>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Self-Employment Tax Itemization</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Social Security Tax Portion (12.4% up to $168,600 cap)</td><td style="color: #2563eb; font-weight: 700;">${fmtMoneyCents(d.ssTax)}</td></tr>
+                        <tr><td>Medicare Tax Portion (2.9% on all net earnings)</td><td style="color: #16a34a; font-weight: 700;">${fmtMoneyCents(d.medTax)}</td></tr>
+                        ${d.addlMedTax > 0 ? `
+                        <tr><td>0.9% Additional Medicare Tax</td><td style="color: #dc2626; font-weight: 700;">${fmtMoneyCents(d.addlMedTax)}</td></tr>` : ''}
+                        <tr style="background: #fef2f2; font-weight: 800;">
+                            <td style="color: #991b1b;">Total 2024 Self-Employment Tax Liability</td>
+                            <td style="color: #dc2626; font-size: 15px;">${fmtMoneyCents(d.totalSeTax)}</td>
+                        </tr>
+                        <tr style="background: #eff6ff; font-weight: 700;">
+                            <td style="color: #1e40af;">Above-the-Line Tax Deduction (Form 1040 Sch 1)</td>
+                            <td style="color: #2563eb; font-size: 15px;">${fmtMoneyCents(d.deductibleSeTax)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-business-inc', 'range-business-inc', false, true);
+            setupSync('inp-other-se-inc', 'range-other-se-inc', false, true);
+            setupSync('inp-church-inc', 'range-church-inc', false, true);
+            setupSync('inp-wages', 'range-wages', false, true);
+
+            calculateSETax();
+        });
+    </script>
+</body>
+</html>

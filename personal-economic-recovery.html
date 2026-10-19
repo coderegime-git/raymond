@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Economic Recovery | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate the time required to recover from investment portfolio drawdowns. Plan new contributions and compound growth to restore original wealth.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .per-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .per-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .per-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .per-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .rec-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        .rec-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: right;
+            border: 1px solid #1e293b;
+        }
+        .rec-table th:first-child {
+            text-align: center;
+        }
+        .rec-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            text-align: right;
+            color: #334155;
+        }
+        .rec-table td:first-child {
+            text-align: center;
+            font-weight: 600;
+        }
+        .rec-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="net-worth-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Net Worth Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="required-minimum-distributions-rmd.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Required Minimum Distributions">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Personal Economic Recovery" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">PERSONAL ECONOMIC RECOVERY</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Recovering from a devastating investment loss takes both time and very often new contributions. Even a very large investment loss can be recovered if you develop a plan that includes new money invested and begin taking action today. This calculator helps you determine when a portfolio will recover its former value or hit new goals.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateRecovery()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="per-result-banner" style="margin-bottom: 25px;">
+                Recovery of investment balance in <span class="highlight-val" id="banner-recovery-time" style="color: #4ade80;">6 years and 7 months</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="per-stat-grid">
+                <div class="per-stat-card">
+                    <div class="per-stat-val" id="stat-target-val">$100,000</div>
+                    <div class="per-stat-label">Original Goal Target</div>
+                </div>
+                <div class="per-stat-card">
+                    <div class="per-stat-val" id="stat-current-val" style="color: #f87171;">$60,000</div>
+                    <div class="per-stat-label">Current Depleted Value</div>
+                </div>
+                <div class="per-stat-card">
+                    <div class="per-stat-val" id="stat-shortfall" style="color: #facc15;">$40,000</div>
+                    <div class="per-stat-label">Recovery Gap</div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: RECOVERY INPUTS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>RECOVERY INPUTS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Original investment -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-orig-inv" class="calc-label">Original investment*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-orig-inv" class="calc-input" value="$100,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-orig-inv" class="calc-slider" value="100000" min="10000" max="500000" step="5000">
+                                <div class="calc-slider-scale"><span>$10,000</span><span>$255,000</span><span>$500,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current value -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-curr-val" class="calc-label">Current value*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-curr-val" class="calc-input" value="$60,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-curr-val" class="calc-slider" value="60000" min="5000" max="400000" step="5000">
+                                <div class="calc-slider-scale"><span>$5,000</span><span>$200,000</span><span>$400,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional contribution -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-contrib" class="calc-label">Monthly additional contribution*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-contrib" class="calc-input" value="$400.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-contrib" class="calc-slider" value="400" min="0" max="2500" step="50">
+                                <div class="calc-slider-scale"><span>$0</span><span>$1,250</span><span>$2,500</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-rec-ror" class="calc-label">Expected rate of return*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-rec-ror" class="calc-input" value="7.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-rec-ror" class="calc-slider" value="7" min="0" max="15" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>7.5%</span><span>15%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected inflation rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-rec-infl" class="calc-label">Expected inflation rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-rec-infl" class="calc-input" value="3.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-rec-infl" class="calc-slider" value="3" min="0" max="10" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>5%</span><span>10%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Chart Section: Recovery Bar Chart -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>ANNUAL PORTFOLIO RECOVERY PROGRESSION</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Progression Toward Recovery</span>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="recovery-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ORIGINAL INVESTMENT</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The amount of your investment before suffering your losses. This is the goal you are seeking to recover.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">CURRENT VALUE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Your current remaining balance after your losses.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ADDITIONAL CONTRIBUTIONS</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The amount you will contribute to help accelerate your wealth restoration.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">EXPECTED RATE OF RETURN</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The annual rate of return you anticipate earning from your diversified recovery portfolio.</p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">ECONOMIC RECOVERY DETAILED PROJECTION</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateRecovery();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateRecovery();
+            });
+        }
+
+        let annualRecovery = [];
+
+        function calculateRecovery() {
+            const target = parseNum(document.getElementById('inp-orig-inv').value) || 100000;
+            const current = parseNum(document.getElementById('inp-curr-val').value) || 60000;
+            const contribMonthly = parseNum(document.getElementById('inp-contrib').value) || 400;
+            const ror = (parseNum(document.getElementById('inp-rec-ror').value) || 7) / 100;
+
+            const rMonthly = ror / 12;
+            let bal = current;
+            let months = 0;
+            annualRecovery = [{ year: 0, bal: current }];
+
+            while (bal < target && months < 360) {
+                months++;
+                bal += contribMonthly;
+                bal += (bal * rMonthly);
+
+                if (months % 12 === 0 || bal >= target) {
+                    annualRecovery.push({
+                        year: Math.ceil(months / 12),
+                        bal: bal
+                    });
+                }
+            }
+
+            const years = Math.floor(months / 12);
+            const remMonths = months % 12;
+
+            document.getElementById('banner-recovery-time').textContent = `${years} years and ${remMonths} months`;
+            document.getElementById('stat-target-val').textContent = fmtMoney(target);
+            document.getElementById('stat-current-val').textContent = fmtMoney(current);
+            document.getElementById('stat-shortfall').textContent = fmtMoney(Math.max(0, target - current));
+
+            renderRecoveryChart(annualRecovery, target);
+        }
+
+        function renderRecoveryChart(data, target) {
+            const svg = document.getElementById('recovery-chart-svg');
+            if (!svg || !data.length) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            let maxVal = Math.max(target, ...data.map(d => d.bal)) * 1.25;
+            if (maxVal === 0) maxVal = 100000;
+
+            let svgHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const yVal = (maxVal / 4) * i;
+                const yPos = padTop + chartH - (i / 4) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            // Target Goal Line
+            const yTarget = padTop + chartH - (target / maxVal) * chartH;
+            svgHtml += `<line x1="${padLeft}" y1="${yTarget}" x2="${width - padRight}" y2="${yTarget}" stroke="#dfa01e" stroke-width="2" stroke-dasharray="4,4" />`;
+            svgHtml += `<text x="${width - padRight}" y="${yTarget - 5}" fill="#dfa01e" font-size="10" font-weight="700" text-anchor="end">Target: ${fmtMoney(target)}</text>`;
+
+            const slotW = chartW / data.length;
+            const barW = Math.max(16, Math.min(45, slotW * 0.55));
+
+            data.forEach((d, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (d.bal / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+                const isRecovered = d.bal >= target;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${isRecovered ? '#10b981' : '#3b82f6'}" rx="3">
+                        <title>Year ${d.year}: ${fmtMoney(d.bal)}</title>
+                    </rect>
+                    <text x="${cx}" y="${padTop + chartH + 18}" fill="#cbd5e1" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="middle">Yr ${d.year}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!annualRecovery.length) calculateRecovery();
+
+            let rows = '';
+            annualRecovery.forEach(d => {
+                rows += `
+                    <tr>
+                        <td>Year ${d.year}</td>
+                        <td style="color: #10b981; font-weight: 700;">${fmtMoney(d.bal)}</td>
+                    </tr>
+                `;
+            });
+
+            body.innerHTML = `
+                <table class="rec-table">
+                    <thead>
+                        <tr>
+                            <th>Recovery Year</th>
+                            <th>Portfolio Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-orig-inv', 'range-orig-inv', false, true);
+            setupSync('inp-curr-val', 'range-curr-val', false, true);
+            setupSync('inp-contrib', 'range-contrib', false, true);
+            setupSync('inp-rec-ror', 'range-rec-ror', true, false);
+            setupSync('inp-rec-infl', 'range-rec-infl', true, false);
+
+            calculateRecovery();
+        });
+    </script>
+</body>
+</html>

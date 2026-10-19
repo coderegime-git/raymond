@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Marginal Tax Rate | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate your federal marginal tax rate, average effective tax rate, and estimated tax liability for the 2024 tax year based on IRS tax brackets and deductions.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .tax-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .tax-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .tax-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .tax-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .subtotal-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dfa01e;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+        .calc-select-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .calc-select-input {
+            width: 100%;
+            max-width: 280px;
+            padding: 8px 12px;
+            background: #0b172a;
+            color: #ffffff;
+            border: 1px solid rgba(223, 160, 30, 0.4);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+        .tax-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .tax-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid #1e293b;
+        }
+        .tax-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .tax-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="mortgage-adjustable-vs-fixed-rates-comparison.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Mortgage Comparison">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="mortgage-15-vs-30-year-comparison.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Mortgage 15 vs 30-Year Comparison">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Your Marginal Tax Rate" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">YOUR MARGINAL TAX RATE</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Tax Planning &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Determine your income tax bracket so you know your potential tax liability for unexpected income. Also helps planning out tax-deferred income. This calculator helps you calculate your average income tax rate bracket and your marginal tax rate for the current tax year.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateTaxes()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="tax-result-banner" style="margin-bottom: 25px;">
+                Marginal Tax Rate: <span class="highlight-val" id="banner-marginal-val" style="color: #4ade80;">22.00%</span> | Average Tax Rate: <span class="highlight-val" id="banner-effective-val" style="color: #60a5fa;">8.42%</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="tax-stat-grid">
+                <div class="tax-stat-card">
+                    <div class="tax-stat-val" id="stat-marginal">22.00%</div>
+                    <div class="tax-stat-label">Marginal Tax Bracket</div>
+                </div>
+                <div class="tax-stat-card">
+                    <div class="tax-stat-val" id="stat-effective" style="color: #60a5fa;">8.42%</div>
+                    <div class="tax-stat-label">Effective (Average) Rate</div>
+                </div>
+                <div class="tax-stat-card">
+                    <div class="tax-stat-val" id="stat-tax-liability" style="color: #f87171;">$5,053</div>
+                    <div class="tax-stat-label">Estimated Federal Tax</div>
+                </div>
+                <div class="tax-stat-card">
+                    <div class="tax-stat-val" id="stat-taxable-inc" style="color: #facc15;">$45,400</div>
+                    <div class="tax-stat-label">Taxable Income</div>
+                </div>
+            </div>
+
+            <!-- ACCORDION: MARGINAL TAX INPUTS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>MARGINAL TAX INPUTS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Filing Status -->
+                    <div class="calc-select-row">
+                        <label for="sel-filing-status" class="calc-label" style="margin-bottom: 0;">Filing status</label>
+                        <select id="sel-filing-status" class="calc-select-input" onchange="calculateTaxes()">
+                            <option value="single" selected>Single</option>
+                            <option value="mfj">Married Filing Jointly</option>
+                            <option value="mfs">Married Filing Separately</option>
+                            <option value="hoh">Head of Household</option>
+                            <option value="qss">Qualifying Surviving Spouse</option>
+                        </select>
+                    </div>
+
+                    <!-- Dependent -->
+                    <div class="calc-select-row">
+                        <label for="sel-is-dependent" class="calc-label" style="margin-bottom: 0;">Are you someone's dependent?</label>
+                        <select id="sel-is-dependent" class="calc-select-input" onchange="calculateTaxes()">
+                            <option value="no" selected>No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <!-- Wages, salaries, tips -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-wages" class="calc-label">Wages, salaries, tips*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-wages" class="calc-input" value="$60,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-wages" class="calc-slider" value="60000" min="0" max="300000" step="2500">
+                                <div class="calc-slider-scale"><span>$0</span><span>$150,000</span><span>$300,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Number of dependents qualifying for child tax credit -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dependents" class="calc-label">Number of dependents qualifying for child tax credit*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="inp-dependents" class="calc-input" value="0" min="0" max="6"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-dependents" class="calc-slider" value="0" min="0" max="6" step="1">
+                                <div class="calc-slider-scale"><span>0</span><span>3</span><span>6</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACCORDION: STANDARD OR ITEMIZED DEDUCTION -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>STANDARD OR ITEMIZED DEDUCTION</span>
+                    <span class="subtotal-badge" id="badge-deduction">Deduction: $14,600.00</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-medical" class="calc-label">Medical and dental expenses</label></div>
+                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-medical" class="calc-input" value="$0.00" onchange="calculateTaxes()"></div></div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-salt" class="calc-label">State and local taxes (SALT, max $10k)</label></div>
+                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-salt" class="calc-input" value="$0.00" onchange="calculateTaxes()"></div></div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-mort-int" class="calc-label">Home mortgage interest</label></div>
+                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-mort-int" class="calc-input" value="$0.00" onchange="calculateTaxes()"></div></div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-charity" class="calc-label">Gifts to charity</label></div>
+                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-charity" class="calc-input" value="$0.00" onchange="calculateTaxes()"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section: How Federal Taxes Are Estimated -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>HOW FEDERAL TAXES ARE ESTIMATED</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Income Allocation Breakdown</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #10b981; display: inline-block; border-radius: 2px;"></span> Take-Home Income</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #ef4444; display: inline-block; border-radius: 2px;"></span> Federal Tax</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #3b82f6; display: inline-block; border-radius: 2px;"></span> Deduction</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="tax-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2024 IRS Tax Brackets Table -->
+            <section style="margin-top: 25px;">
+                <h4 style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 16px; margin-bottom: 10px;">Filing Status and Federal Income Tax Rates on Taxable Income for 2024</h4>
+                <table class="tax-table">
+                    <thead>
+                        <tr>
+                            <th>Tax Rate</th>
+                            <th>Married Filing Jointly</th>
+                            <th>Single</th>
+                            <th>Head of Household</th>
+                            <th>Married Filing Separately</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>10%</td><td>$0 - $23,200</td><td>$0 - $11,600</td><td>$0 - $16,550</td><td>$0 - $11,600</td></tr>
+                        <tr><td>12%</td><td>$23,200 - $94,300</td><td>$11,600 - $47,150</td><td>$16,550 - $63,100</td><td>$11,600 - $47,150</td></tr>
+                        <tr><td>22%</td><td>$94,300 - $201,050</td><td>$47,150 - $100,525</td><td>$63,100 - $100,500</td><td>$47,150 - $100,525</td></tr>
+                        <tr><td>24%</td><td>$201,050 - $383,900</td><td>$100,525 - $191,950</td><td>$100,500 - $191,950</td><td>$100,525 - $191,950</td></tr>
+                        <tr><td>32%</td><td>$383,900 - $487,450</td><td>$191,950 - $243,725</td><td>$191,950 - $243,700</td><td>$191,950 - $243,725</td></tr>
+                        <tr><td>35%</td><td>$487,450 - $731,200</td><td>$243,725 - $609,350</td><td>$243,700 - $609,350</td><td>$243,725 - $365,600</td></tr>
+                        <tr><td>37%</td><td>Over $731,200</td><td>Over $609,350</td><td>Over $609,350</td><td>Over $365,600</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">FEDERAL INCOME TAX RATE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        Describes Filing Status and Federal Income Tax Rates on Taxable Income table to assist you in estimating your federal income tax.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">MARGINAL TAX RATE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        This is the percentage paid in federal taxes on additional income. To determine your marginal tax rate, this tool calculates your total federal income tax and then recalculates it assuming you receive additional income.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">AVERAGE TAX RATE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        This is your total federal taxes divided by your total income. The average tax rate is always lower, sometimes by a wide margin, than your bracket tax bracket or marginal tax rate.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">STANDARD DEDUCTION</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The standard deduction is used to reduce your taxable income if you do not choose to itemize deductions on Schedule A. For 2024, the standard deduction is $14,600 for Single filers and $29,200 for Married Filing Jointly.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide tax or investment advice. Consult a certified tax advisor for personalized guidance.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">FEDERAL TAX ESTIMATE DETAILED REPORT</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateTaxes();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateTaxes();
+            });
+        }
+
+        // 2024 IRS Brackets
+        const BRACKETS_2024 = {
+            single: [
+                { limit: 11600, rate: 0.10 },
+                { limit: 47150, rate: 0.12 },
+                { limit: 100525, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243725, rate: 0.32 },
+                { limit: 609350, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            mfj: [
+                { limit: 23200, rate: 0.10 },
+                { limit: 94300, rate: 0.12 },
+                { limit: 201050, rate: 0.22 },
+                { limit: 383900, rate: 0.24 },
+                { limit: 487450, rate: 0.32 },
+                { limit: 731200, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            mfs: [
+                { limit: 11600, rate: 0.10 },
+                { limit: 47150, rate: 0.12 },
+                { limit: 100525, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243725, rate: 0.32 },
+                { limit: 365600, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            hoh: [
+                { limit: 16550, rate: 0.10 },
+                { limit: 63100, rate: 0.12 },
+                { limit: 100500, rate: 0.22 },
+                { limit: 191950, rate: 0.24 },
+                { limit: 243700, rate: 0.32 },
+                { limit: 609350, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ],
+            qss: [
+                { limit: 23200, rate: 0.10 },
+                { limit: 94300, rate: 0.12 },
+                { limit: 201050, rate: 0.22 },
+                { limit: 383900, rate: 0.24 },
+                { limit: 487450, rate: 0.32 },
+                { limit: 731200, rate: 0.35 },
+                { limit: Infinity, rate: 0.37 }
+            ]
+        };
+
+        const STD_DEDUCTIONS_2024 = {
+            single: 14600,
+            mfj: 29200,
+            mfs: 14600,
+            hoh: 21900,
+            qss: 29200
+        };
+
+        function computeTaxFor(taxableInc, status) {
+            const brackets = BRACKETS_2024[status] || BRACKETS_2024.single;
+            let tax = 0;
+            let prevLimit = 0;
+            let marginal = 0.10;
+
+            for (let b of brackets) {
+                if (taxableInc > prevLimit) {
+                    const chunk = Math.min(taxableInc - prevLimit, b.limit - prevLimit);
+                    tax += chunk * b.rate;
+                    marginal = b.rate;
+                    prevLimit = b.limit;
+                } else {
+                    break;
+                }
+            }
+            return { tax, marginal };
+        }
+
+        let taxState = {};
+
+        function calculateTaxes() {
+            const status = document.getElementById('sel-filing-status').value;
+            const wages = parseNum(document.getElementById('inp-wages').value) || 0;
+            const dependents = parseInt(document.getElementById('inp-dependents').value, 10) || 0;
+
+            const med = parseNum(document.getElementById('inp-medical').value) || 0;
+            const salt = Math.min(10000, parseNum(document.getElementById('inp-salt').value) || 0);
+            const mort = parseNum(document.getElementById('inp-mort-int').value) || 0;
+            const charity = parseNum(document.getElementById('inp-charity').value) || 0;
+            const itemizedTotal = med + salt + mort + charity;
+
+            const stdDed = STD_DEDUCTIONS_2024[status] || 14600;
+            const chosenDeduction = Math.max(stdDed, itemizedTotal);
+
+            const taxableIncome = Math.max(0, wages - chosenDeduction);
+            const { tax: rawTax, marginal } = computeTaxFor(taxableIncome, status);
+
+            // Child tax credit: $2,000 per qualifying child
+            const childCredit = dependents * 2000;
+            const finalTax = Math.max(0, rawTax - childCredit);
+
+            const effectiveRate = wages > 0 ? (finalTax / wages) * 100 : 0;
+            const marginalPct = marginal * 100;
+
+            taxState = {
+                status, wages, chosenDeduction, taxableIncome, finalTax, effectiveRate, marginalPct
+            };
+
+            document.getElementById('badge-deduction').textContent = `Deduction: ${fmtMoneyCents(chosenDeduction)}`;
+            document.getElementById('banner-marginal-val').textContent = `${marginalPct.toFixed(2)}%`;
+            document.getElementById('banner-effective-val').textContent = `${effectiveRate.toFixed(2)}%`;
+
+            document.getElementById('stat-marginal').textContent = `${marginalPct.toFixed(2)}%`;
+            document.getElementById('stat-effective').textContent = `${effectiveRate.toFixed(2)}%`;
+            document.getElementById('stat-tax-liability').textContent = fmtMoney(finalTax);
+            document.getElementById('stat-taxable-inc').textContent = fmtMoney(taxableIncome);
+
+            renderTaxChart(taxState);
+        }
+
+        function renderTaxChart(data) {
+            const svg = document.getElementById('tax-chart-svg');
+            if (!svg) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            const items = [
+                { name: 'Take-Home Pay', val: Math.max(0, data.wages - data.finalTax), color: '#10b981' },
+                { name: 'Estimated Tax', val: data.finalTax, color: '#ef4444' },
+                { name: 'Total Deduction', val: data.chosenDeduction, color: '#3b82f6' }
+            ];
+
+            let maxVal = Math.max(...items.map(i => i.val)) * 1.25;
+            if (maxVal === 0) maxVal = 50000;
+
+            let svgHtml = '';
+            const gridCount = 4;
+            for (let i = 0; i <= gridCount; i++) {
+                const yVal = (maxVal / gridCount) * i;
+                const yPos = padTop + chartH - (i / gridCount) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            const slotW = chartW / items.length;
+            const barW = 85;
+
+            items.forEach((item, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (item.val / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
+                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
+                    </rect>
+                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoney(item.val)}</text>
+                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!taxState.wages) calculateTaxes();
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Federal Tax Summary</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #4ade80; margin-top: 4px;">
+                        Estimated Federal Tax: ${fmtMoneyCents(taxState.finalTax)}
+                    </div>
+                </div>
+
+                <table class="tax-table">
+                    <tbody>
+                        <tr><td>Gross Wages &amp; Salaries</td><td style="font-weight: 700;">${fmtMoneyCents(taxState.wages)}</td></tr>
+                        <tr><td>Allowable Deduction (Standard or Itemized)</td><td style="color: #3b82f6;">${fmtMoneyCents(taxState.chosenDeduction)}</td></tr>
+                        <tr><td>Taxable Income</td><td style="font-weight: 700; color: #facc15;">${fmtMoneyCents(taxState.taxableIncome)}</td></tr>
+                        <tr><td>Marginal Tax Bracket</td><td style="color: #dfa01e; font-weight: 700;">${taxState.marginalPct.toFixed(2)}%</td></tr>
+                        <tr><td>Effective (Average) Tax Rate</td><td style="color: #60a5fa; font-weight: 700;">${taxState.effectiveRate.toFixed(2)}%</td></tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-wages', 'range-wages', false, true);
+            setupSync('inp-dependents', 'range-dependents', false, false);
+
+            calculateTaxes();
+        });
+    </script>
+</body>
+</html>

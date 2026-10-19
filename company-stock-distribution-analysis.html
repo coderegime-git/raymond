@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Stock Distribution Analysis | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Evaluate the tax advantages of Net Unrealized Appreciation (NUA) on company stock distributions from qualified retirement plans vs traditional IRA rollovers.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .tax-bracket-tbl {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 14px 0 20px 0;
+            background: #091424;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .tax-bracket-tbl th {
+            background: #11233e;
+            color: #dfa01e;
+            padding: 9px 12px;
+            font-weight: 700;
+            text-align: right;
+            border-bottom: 1px solid rgba(223, 160, 30, 0.3);
+        }
+        .tax-bracket-tbl th:first-child { text-align: left; }
+        .tax-bracket-tbl td {
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            text-align: right;
+        }
+        .tax-bracket-tbl td:first-child { text-align: left; color: #ffffff; font-weight: 600; }
+        .tax-bracket-tbl tr:last-child td { border-bottom: none; }
+
+        .checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .checkbox-row:last-child { border-bottom: none; }
+        .custom-check {
+            width: 18px;
+            height: 18px;
+            accent-color: #dfa01e;
+            cursor: pointer;
+        }
+        .check-label {
+            font-size: 13.5px;
+            color: #cbd5e1;
+            cursor: pointer;
+            user-select: none;
+        }
+        .stock-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .stock-stat-card {
+            background: rgba(11, 23, 42, 0.85);
+            border: 1px solid rgba(223, 160, 30, 0.3);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+        }
+        .stock-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .stock-stat-label {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="college-savings-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: College Savings Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="compound-savings-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Compound Savings Calculator">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
+                <img src="assets/resources/card-11.jpg" alt="Company Stock Distribution" style="width: 100%; height: 260px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">COMPANY STOCK DISTRIBUTION ANALYSIS</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    If you own company stock in a retirement plan, you may be able to take advantage of favorable capital gains tax rates on some of your earnings if you take a lump sum distribution. You generally will receive a distribution that's non-taxable (your cost basis) and will pay the latter as ordinary income tax later, whereas if you have an un-taxed portion roll off your employer's company stock, then your retirement plan is converted. Investment decisions may be influenced by tax advantages. If you've been informed that allow you to pay only capital gains taxes on a significant portion of the distribution, read the following to consider how such a distribution might benefit your retirement savings.
+                </p>
+            </header>
+
+            <!-- Sticky Floating Action Box -->
+            <div class="calc-action-card-sticky-wrapper">
+                <section class="calc-action-card">
+                    <div class="calc-btn-row">
+                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateStockDistribution()">CALCULATE</button>
+                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-right-icons">
+                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
+                            <i class="fas fa-print"></i>
+                        </button>
+                        <span class="calc-req-text">*indicates required</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ============================================================
+             SECTION 1: DISTRIBUTION ANALYSIS INPUTS
+             ============================================================ -->
+            <section class="calc-section" id="sec-inputs">
+                <div class="calc-sec-header" onclick="toggleSec('sec-inputs')">
+                    <h2 class="calc-sec-title">DISTRIBUTION ANALYSIS INPUTS:</h2>
+                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+                </div>
+                <div class="calc-sec-body">
+
+                    <!-- Market value of stock distribution -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-market-val" class="calc-field-label">Market value of stock distribution:*</label>
+                            <span class="calc-q-dot" title="Fair market value of company shares at distribution.">?</span>
+                        </div>
+                        <input type="text" id="inp-market-val" class="calc-text-input" value="$100,000">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-market-val" class="calc-range-slider" min="0" max="1000000" step="10000" value="100000">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$250,000</span>
+                                <span>$500,000</span>
+                                <span>$750,000</span>
+                                <span>$1,000,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total stock purchase cost (cost basis) -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-cost-basis" class="calc-field-label">Total stock purchase cost:*</label>
+                            <span class="calc-q-dot" title="Original cost basis paid for the shares inside the plan.">?</span>
+                        </div>
+                        <input type="text" id="inp-cost-basis" class="calc-text-input" value="$25,000">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cost-basis" class="calc-range-slider" min="0" max="1000000" step="5000" value="25000">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$250,000</span>
+                                <span>$500,000</span>
+                                <span>$750,000</span>
+                                <span>$1,000,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-stock-return" class="calc-field-label">Rate of return:*</label>
+                            <span class="calc-q-dot" title="Anticipated annual return on investments after distribution.">?</span>
+                        </div>
+                        <input type="text" id="inp-stock-return" class="calc-text-input" value="8%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-stock-return" class="calc-range-slider" min="0" max="15" step="0.5" value="8">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>11%</span>
+                                <span>15%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Holding period years -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-hold-yrs" class="calc-field-label">Holding period years:*</label>
+                            <span class="calc-q-dot" title="Years you expect to hold the company shares after distribution.">?</span>
+                        </div>
+                        <input type="text" id="inp-hold-yrs" class="calc-text-input" value="5">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-hold-yrs" class="calc-range-slider" min="0" max="30" step="1" value="5">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>7</span>
+                                <span>15</span>
+                                <span>22</span>
+                                <span>30</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Holding period months -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-hold-mos" class="calc-field-label">Holding period months:*</label>
+                            <span class="calc-q-dot" title="Additional months of holding period.">?</span>
+                        </div>
+                        <input type="text" id="inp-hold-mos" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-hold-mos" class="calc-range-slider" min="0" max="11" step="1" value="0">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>3</span>
+                                <span>6</span>
+                                <span>9</span>
+                                <span>11</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capital gains rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-cap-gain" class="calc-field-label">Capital gains rate:*</label>
+                            <span class="calc-q-dot" title="Your federal long-term capital gains tax bracket (0%, 15%, or 20%).">?</span>
+                        </div>
+                        <input type="text" id="inp-cap-gain" class="calc-text-input" value="15%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cap-gain" class="calc-range-slider" min="0" max="28" step="1" value="15">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>15%</span>
+                                <span>20%</span>
+                                <span>28%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected inflation rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-stock-inflation" class="calc-field-label">Expected inflation rate:*</label>
+                            <span class="calc-q-dot" title="Anticipated long-term annual inflation rate.">?</span>
+                        </div>
+                        <input type="text" id="inp-stock-inflation" class="calc-text-input" value="3%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-stock-inflation" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>5%</span>
+                                <span>8%</span>
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marginal income tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-marginal-tax" class="calc-field-label">Marginal income tax rate:*</label>
+                            <span class="calc-q-dot" title="Federal marginal tax bracket applied to the cost basis distribution.">?</span>
+                        </div>
+                        <input type="text" id="inp-marginal-tax" class="calc-text-input" value="24%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-marginal-tax" class="calc-range-slider" min="0" max="37" step="1" value="24">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>10%</span>
+                                <span>24%</span>
+                                <span>32%</span>
+                                <span>37%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Checkboxes: Age & Qualification Rules -->
+                    <div style="background: #091424; padding: 16px 20px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.25); margin-top: 15px;">
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="chk-ira-age" class="custom-check" checked>
+                            <label for="chk-ira-age" class="check-label">Check here if IRA distribution will be at age 59 1/2 or older</label>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="chk-ret-age" class="custom-check" checked>
+                            <label for="chk-ret-age" class="check-label">Check here if retirement plan distribution will be at age 55 or older</label>
+                        </div>
+                        <div class="checkbox-row">
+                            <input type="checkbox" id="chk-separation" class="custom-check" checked>
+                            <label for="chk-separation" class="check-label">Check here if separation from service occurs in year 55 or older</label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Key Metric Summary Cards -->
+            <div class="stock-stat-grid">
+                <div class="stock-stat-card">
+                    <div class="stock-stat-val" id="card-nua">$75,000.00</div>
+                    <div class="stock-stat-label">Net Unrealized Appreciation (NUA)</div>
+                </div>
+                <div class="stock-stat-card">
+                    <div class="stock-stat-val" id="card-dist-tax">$6,000.00</div>
+                    <div class="stock-stat-label">Ordinary Tax Due at Distribution</div>
+                </div>
+                <div class="stock-stat-card">
+                    <div class="stock-stat-val" id="card-nua-net">$121,433.00</div>
+                    <div class="stock-stat-label">NUA Strategy Net Proceeds</div>
+                </div>
+                <div class="stock-stat-card">
+                    <div class="stock-stat-val" id="card-ira-net">$111,670.00</div>
+                    <div class="stock-stat-label">Complete IRA Rollover Net</div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 2: ESTIMATED TAX ON DISTRIBUTIONS*
+             ============================================================ -->
+            <section class="calc-section" id="sec-chart">
+                <div class="calc-sec-header">
+                    <h2 class="calc-sec-title">ESTIMATED TAX ON DISTRIBUTIONS*</h2>
+                    <span style="font-size: 11.5px; color: #dfa01e; font-style: italic;">*Assumes outside funds used to pay tax at distribution</span>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px;">
+
+                    <!-- Chart Legend -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 20px; font-size: 12px; font-weight: 600;">
+                        <span style="display: flex; align-items: center; gap: 6px; color: #38bdf8;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #2563eb; display: inline-block;"></span> Liquidation Proceeds
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #16a34a; display: inline-block;"></span> Ordinary Tax
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #06b6d4;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span> Penalty Tax
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #dfa01e;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #dfa01e; display: inline-block;"></span> Net Available to Invest
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #a855f7;">
+                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #9333ea; display: inline-block;"></span> Investment Growth
+                        </span>
+                    </div>
+
+                    <div id="stock-chart-container" style="width: 100%; height: 320px; position: relative;">
+                        <!-- Dynamic SVG Comparison Bar Chart -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS & TAX BRACKET TABLES (EXACT TEXT & TABLES)
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">GENERAL ASSUMPTIONS</h4>
+                    <ol style="margin: 8px 0 16px 20px; line-height: 1.6; color: #cbd5e1; font-size: 13.5px;">
+                        <li>Taxes, which are due as a result of the distribution of company stock from a retirement plan to a taxable account, will be paid from outside sources. In other words, no portion of the company stock is sold or liquidated to obtain the money necessary to pay the taxes.</li>
+                        <li>The entire distribution consists of company stock.</li>
+                        <li>The distribution qualifies as a "lump-sum distribution." A lump-sum distribution is defined in the Internal Revenue Code as the distribution or payment, within a single tax year, of a plan participant's entire balance from all of the employer's qualified plans of one kind (e.g., pension, profit-sharing, or stock bonus plans). The qualifying events that allow distributions are separation from service, permanent disability, death, or after the employee attains age 59 1/2.</li>
+                    </ol>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">NET UNREALIZED APPRECIATION (NUA)</h4>
+                    <p class="calc-def-desc">
+                        NUA is the excess of the fair market value (FMV) of your company stock at the time of distribution over its cost basis to the qualified plan's trust. This amount will be taxable when you eventually sell the stock in your taxable account. If the NUA distribution is a qualified distribution of your company stock, your cost basis is treated as a long-term capital gain, even if you sell the stock immediately after the distribution. If you hold it for at least one year after the distribution date, it is then consolidated into a long-term capital gain.
+                    </p>
+                    <p class="calc-def-desc" style="margin-top: 8px;">
+                        If you roll over your company stock to an IRA, rather than taking it as a currently taxable NUA distribution, the NUA will be subject to taxation at the ordinary income tax rate, rather than capital gains rates, when it is subsequently withdrawn from the IRA.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">PRESENT VALUE</h4>
+                    <p class="calc-def-desc">
+                        The amount that is future cash or future value is worth today, based on an assumed inflation rate. By calculating taxes on distribution to present values, comparison between alternatives can be placed on a common basis.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">TOTAL STOCK PURCHASE COST (COST BASIS)</h4>
+                    <p class="calc-def-desc">
+                        The price the employer paid for the stock when it was distributed from your retirement plan.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CAPITAL GAINS RATE</h4>
+                    <p class="calc-def-desc">
+                        This is the tax rate you expect to pay on any long-term capital gains. If qualified dividends are taxed at lower, special capital gains rates and are calculated as follows (note that qualified dividends are taxed at long term capital gains):
+                    </p>
+
+                    <!-- Long-term Capital Gain Tax Rates Table for 2026 -->
+                    <table class="tax-bracket-tbl">
+                        <thead>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly (or Qualified Widow/er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0%</td>
+                                <td>$0 &ndash; $96,700</td>
+                                <td>$0 &ndash; $48,350</td>
+                                <td>$0 &ndash; $64,750</td>
+                                <td>$0 &ndash; $48,350</td>
+                            </tr>
+                            <tr>
+                                <td>15%</td>
+                                <td>$96,700 &ndash; $600,050</td>
+                                <td>$48,350 &ndash; $533,400</td>
+                                <td>$64,750 &ndash; $566,700</td>
+                                <td>$48,350 &ndash; $300,025</td>
+                            </tr>
+                            <tr>
+                                <td>20%</td>
+                                <td>Over $600,050</td>
+                                <td>Over $533,400</td>
+                                <td>Over $566,700</td>
+                                <td>Over $300,025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">MARGINAL INCOME TAX RATE</h4>
+                    <p class="calc-def-desc">
+                        This is the tax rate applied to federal income on your taxable income, and the calculation will help you determine your marginal income tax rate. Use the Filing Status and Federal Income Tax Rates on Taxable Income table to assist you in estimating your federal tax rate:
+                    </p>
+
+                    <!-- Federal Income Tax Rates Table for 2026 -->
+                    <table class="tax-bracket-tbl">
+                        <thead>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly (or Qualified Widow/er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>10%</td>
+                                <td>$0 &ndash; $23,200</td>
+                                <td>$0 &ndash; $11,600</td>
+                                <td>$0 &ndash; $16,550</td>
+                                <td>$0 &ndash; $11,600</td>
+                            </tr>
+                            <tr>
+                                <td>12%</td>
+                                <td>$23,200 &ndash; $94,300</td>
+                                <td>$11,600 &ndash; $47,150</td>
+                                <td>$16,550 &ndash; $63,100</td>
+                                <td>$11,600 &ndash; $47,150</td>
+                            </tr>
+                            <tr>
+                                <td>22%</td>
+                                <td>$94,300 &ndash; $201,050</td>
+                                <td>$47,150 &ndash; $100,525</td>
+                                <td>$63,100 &ndash; $100,500</td>
+                                <td>$47,150 &ndash; $100,525</td>
+                            </tr>
+                            <tr>
+                                <td>24%</td>
+                                <td>$201,050 &ndash; $383,900</td>
+                                <td>$100,525 &ndash; $191,950</td>
+                                <td>$100,500 &ndash; $191,950</td>
+                                <td>$100,525 &ndash; $191,950</td>
+                            </tr>
+                            <tr>
+                                <td>32%</td>
+                                <td>$383,900 &ndash; $487,450</td>
+                                <td>$191,950 &ndash; $243,725</td>
+                                <td>$191,950 &ndash; $243,725</td>
+                                <td>$191,950 &ndash; $243,725</td>
+                            </tr>
+                            <tr>
+                                <td>35%</td>
+                                <td>$487,450 &ndash; $731,200</td>
+                                <td>$243,725 &ndash; $609,350</td>
+                                <td>$243,725 &ndash; $609,350</td>
+                                <td>$243,725 &ndash; $365,600</td>
+                            </tr>
+                            <tr>
+                                <td>37%</td>
+                                <td>Over $731,200</td>
+                                <td>Over $609,350</td>
+                                <td>Over $609,350</td>
+                                <td>Over $365,600</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">EXPECTED INFLATION RATE</h4>
+                    <p class="calc-def-desc">
+                        This is what you expect for the average long-term inflation rate. A common measure of inflation in the U.S. is the Consumer Price Index (CPI). From 1926 through 2023 the CPI has had a long-term average of 3.0% annually.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">SEPARATED FROM SERVICE AT AGE 55 OR OLDER</h4>
+                    <p class="calc-def-desc">
+                        Check this box if you separated from service from the employer providing the retirement plan in the year you attained age 55 or later. Under these circumstances, there would be no 10% penalty tax on the distribution from the retirement plan.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">RETIREMENT PLAN DISTRIBUTION WILL BE AT AGE 59 1/2 OR OLDER</h4>
+                    <p class="calc-def-desc">
+                        Check this box if the retirement plan distribution from the retirement plan will occur on or after the date you reached age 59 1/2. Under these circumstances, there would be no 10% penalty tax on the future distributions from the retirement plan or IRA.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">IRA DISTRIBUTION WILL BE AT AGE 59 1/2 OR OLDER</h4>
+                    <p class="calc-def-desc">
+                        Check this box if the distribution from the IRA will occur on or after you reach age 59 1/2. Under these circumstances there would be no 10% penalty tax on the distribution.
+                    </p>
+                </div>
+
+                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
+        <div style="background: #0d1b31; max-width: 880px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
+            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Company Stock Distribution Analysis: NUA vs Rollover Report</h2>
+                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
+                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
+                </div>
+            </div>
+            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
+                <!-- Comparison table rendered by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="calc-footer">
+        <div class="calc-footer-inner">
+            <p class="calc-footer-copy">&copy; 2026 The Seiler Group &bull; Raymond James Financial Services. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     CALCULATOR JAVASCRIPT ENGINE
+     ============================================================ -->
+    <script>
+        function toggleMobileMenu(e) {
+            e.stopPropagation();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-nav-toggle');
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('open');
+            toggle.classList.toggle('open');
+        }
+
+        function toggleSec(secId) {
+            const sec = document.getElementById(secId);
+            if (sec) sec.classList.toggle('collapsed');
+        }
+
+        // Helpers
+        function parseCurrency(str) {
+            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        }
+        function formatCurrency(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+        function formatCurrencyCents(num) {
+            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function parsePercent(str) {
+            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // Sync inputs & sliders
+        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                const val = parseFloat(range.value);
+                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
+                else if (isPct) inp.value = val + '%';
+                else inp.value = val;
+                calculateStockDistribution();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
+                if (val < 0) val = 0;
+                if (maxVal && val > maxVal) val = maxVal;
+                range.value = val;
+                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
+                else if (isPct) inp.value = val + '%';
+                else inp.value = val;
+                calculateStockDistribution();
+            });
+        }
+
+        bindSliderAndInput('inp-market-val', 'range-market-val', true, false, 1000000);
+        bindSliderAndInput('inp-cost-basis', 'range-cost-basis', true, false, 1000000);
+        bindSliderAndInput('inp-stock-return', 'range-stock-return', false, true, 15);
+        bindSliderAndInput('inp-hold-yrs', 'range-hold-yrs', false, false, 30);
+        bindSliderAndInput('inp-hold-mos', 'range-hold-mos', false, false, 11);
+        bindSliderAndInput('inp-cap-gain', 'range-cap-gain', false, true, 28);
+        bindSliderAndInput('inp-stock-inflation', 'range-stock-inflation', false, true, 10);
+        bindSliderAndInput('inp-marginal-tax', 'range-marginal-tax', false, true, 37);
+
+        ['chk-ira-age', 'chk-ret-age', 'chk-separation'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.addEventListener('change', calculateStockDistribution);
+        });
+
+        let lastCalcResults = {};
+
+        function calculateStockDistribution() {
+            const marketVal = parseCurrency(document.getElementById('inp-market-val').value);
+            const costBasis = Math.min(marketVal, parseCurrency(document.getElementById('inp-cost-basis').value));
+            const rReturn = parsePercent(document.getElementById('inp-stock-return').value) / 100;
+            const holdYrs = (parseInt(document.getElementById('inp-hold-yrs').value) || 0) + ((parseInt(document.getElementById('inp-hold-mos').value) || 0) / 12);
+            const capGainsRate = parsePercent(document.getElementById('inp-cap-gain').value) / 100;
+            const inflationRate = parsePercent(document.getElementById('inp-stock-inflation').value) / 100;
+            const ordinaryTaxRate = parsePercent(document.getElementById('inp-marginal-tax').value) / 100;
+
+            const isIraAge59 = document.getElementById('chk-ira-age').checked;
+            const isRetAge55 = document.getElementById('chk-ret-age').checked;
+            const isSeparated55 = document.getElementById('chk-separation').checked;
+
+            // Penalty rules:
+            const distPenalty = (!isRetAge55 && !isSeparated55) ? 0.10 : 0.0;
+            const iraPenalty = (!isIraAge59) ? 0.10 : 0.0;
+
+            // NUA Calculation
+            const nua = Math.max(0, marketVal - costBasis);
+            const taxAtDist = (costBasis * ordinaryTaxRate) + (costBasis * distPenalty);
+
+            // Future value of shares:
+            const fvShares = marketVal * Math.pow(1 + rReturn, holdYrs);
+            const growthAfterDist = Math.max(0, fvShares - marketVal);
+
+            // At liquidation in future under NUA:
+            // NUA taxed at capital gains rate, and additional post-distribution growth taxed at capital gains rate
+            const futureCapGainsTax = (nua + growthAfterDist) * capGainsRate;
+            const nuaNetProceeds = fvShares - futureCapGainsTax;
+
+            // Alternative: 100% Traditional IRA Rollover
+            // All grows tax-deferred inside IRA, then 100% taxed at ordinary income tax rate + ira penalty upon withdrawal
+            const fvIra = marketVal * Math.pow(1 + rReturn, holdYrs);
+            const iraTaxAtWithdrawal = fvIra * (ordinaryTaxRate + iraPenalty);
+            const iraNetProceeds = fvIra - iraTaxAtWithdrawal;
+
+            lastCalcResults = {
+                marketVal,
+                costBasis,
+                nua,
+                taxAtDist,
+                holdYrs,
+                fvShares,
+                futureCapGainsTax,
+                nuaNetProceeds,
+                fvIra,
+                iraTaxAtWithdrawal,
+                iraNetProceeds,
+                ordinaryTaxRate,
+                capGainsRate,
+                growthAfterDist
+            };
+
+            // Update Badges
+            document.getElementById('card-nua').textContent = formatCurrencyCents(nua);
+            document.getElementById('card-dist-tax').textContent = formatCurrencyCents(taxAtDist);
+            document.getElementById('card-nua-net').textContent = formatCurrencyCents(nuaNetProceeds);
+            document.getElementById('card-ira-net').textContent = formatCurrencyCents(iraNetProceeds);
+
+            renderStockChart(lastCalcResults);
+        }
+
+        function renderStockChart(res) {
+            const container = document.getElementById('stock-chart-container');
+            if (!container) return;
+
+            const width = container.clientWidth || 700;
+            const height = 300;
+            const padLeft = 70;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 45;
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            const maxVal = Math.max(res.fvShares, res.fvIra, res.marketVal, 100000) * 1.15;
+
+            let gridSvg = '';
+            const steps = 5;
+            for (let i = 0; i <= steps; i++) {
+                const yVal = (maxVal / steps) * i;
+                const yPos = padTop + chartH - (i / steps) * chartH;
+                gridSvg += `
+                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
+                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
+                `;
+            }
+
+            // Two bar clusters: "At Distribution" and "In Future (NUA vs IRA)"
+            const colW = Math.min(50, chartW / 6);
+            const groupGap = chartW / 2;
+
+            // Cluster 1: At Distribution (Market Value vs Taxes)
+            const c1X = padLeft + (groupGap * 0.25);
+            const hDistVal = (res.marketVal / maxVal) * chartH;
+            const hDistTax = (res.taxAtDist / maxVal) * chartH;
+            const hDistNet = ((res.marketVal - res.taxAtDist) / maxVal) * chartH;
+
+            // Cluster 2: In Future (NUA Net vs IRA Net)
+            const c2X = padLeft + (groupGap * 1.05);
+            const hNuaNet = (res.nuaNetProceeds / maxVal) * chartH;
+            const hIraNet = (res.iraNetProceeds / maxVal) * chartH;
+            const hGrowth = (res.growthAfterDist / maxVal) * chartH;
+
+            const bars = `
+                <!-- Cluster 1: At Distribution -->
+                <rect x="${c1X}" y="${padTop + chartH - hDistVal}" width="${colW}" height="${hDistVal}" fill="#2563eb" rx="3">
+                    <title>Gross Distribution Value: ${formatCurrencyCents(res.marketVal)}</title>
+                </rect>
+                <text x="${c1X + colW/2}" y="${padTop + chartH - hDistVal - 6}" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">${formatCurrency(res.marketVal)}</text>
+
+                <rect x="${c1X + colW + 8}" y="${padTop + chartH - hDistTax}" width="${colW}" height="${hDistTax}" fill="#16a34a" rx="3">
+                    <title>Ordinary Tax Due: ${formatCurrencyCents(res.taxAtDist)}</title>
+                </rect>
+                <text x="${c1X + colW + 8 + colW/2}" y="${padTop + chartH - hDistTax - 6}" fill="#4ade80" font-size="11" font-weight="700" text-anchor="middle">${formatCurrency(res.taxAtDist)}</text>
+
+                <!-- Cluster 2: Future Comparison -->
+                <rect x="${c2X}" y="${padTop + chartH - hNuaNet}" width="${colW}" height="${hNuaNet}" fill="#dfa01e" rx="3">
+                    <title>NUA Strategy Net: ${formatCurrencyCents(res.nuaNetProceeds)}</title>
+                </rect>
+                <text x="${c2X + colW/2}" y="${padTop + chartH - hNuaNet - 6}" fill="#dfa01e" font-size="11" font-weight="700" text-anchor="middle">${formatCurrency(res.nuaNetProceeds)}</text>
+
+                <rect x="${c2X + colW + 8}" y="${padTop + chartH - hIraNet}" width="${colW}" height="${hIraNet}" fill="#9333ea" rx="3">
+                    <title>IRA Rollover Net: ${formatCurrencyCents(res.iraNetProceeds)}</title>
+                </rect>
+                <text x="${c2X + colW + 8 + colW/2}" y="${padTop + chartH - hIraNet - 6}" fill="#c084fc" font-size="11" font-weight="700" text-anchor="middle">${formatCurrency(res.iraNetProceeds)}</text>
+            `;
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
+                    ${gridSvg}
+                    ${bars}
+                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
+                    <text x="${c1X + colW}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" text-anchor="middle">At Distribution</text>
+                    <text x="${c2X + colW}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" text-anchor="middle">In Future: NUA vs IRA</text>
+                </svg>
+            `;
+        }
+
+        function openReportModal() {
+            calculateStockDistribution();
+            const modal = document.getElementById('report-modal');
+            const content = document.getElementById('modal-report-content');
+            const res = lastCalcResults;
+
+            content.innerHTML = `
+                <div style="background: #091424; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size: 13px; color: #cbd5e1;">
+                        <div><strong style="color: #94a3b8;">Market Value:</strong><br><span style="color: #fff; font-weight: 700;">${formatCurrencyCents(res.marketVal)}</span></div>
+                        <div><strong style="color: #94a3b8;">Cost Basis:</strong><br><span style="color: #fff; font-weight: 700;">${formatCurrencyCents(res.costBasis)}</span></div>
+                        <div><strong style="color: #94a3b8;">NUA Amount:</strong><br><span style="color: #dfa01e; font-weight: 700;">${formatCurrencyCents(res.nua)}</span></div>
+                        <div><strong style="color: #94a3b8;">Holding Horizon:</strong><br><span style="color: #38bdf8; font-weight: 700;">${res.holdYrs.toFixed(1)} Years</span></div>
+                    </div>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                    <thead>
+                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
+                            <th style="padding: 12px 10px; text-align: left;">Comparison Metric</th>
+                            <th style="padding: 12px 10px;">Lump-Sum NUA Strategy</th>
+                            <th style="padding: 12px 10px;">100% IRA Rollover Strategy</th>
+                            <th style="padding: 12px 10px;">Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                            <td style="padding: 10px; text-align: left; color: #fff;">Initial Stock Value</td>
+                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(res.marketVal)}</td>
+                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(res.marketVal)}</td>
+                            <td style="padding: 10px; color: #94a3b8;">$0.00</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                            <td style="padding: 10px; text-align: left; color: #fff;">Tax Due at Distribution</td>
+                            <td style="padding: 10px; color: #ef4444;">-${formatCurrencyCents(res.taxAtDist)}</td>
+                            <td style="padding: 10px; color: #4ade80;">$0.00</td>
+                            <td style="padding: 10px; color: #ef4444;">-${formatCurrencyCents(res.taxAtDist)}</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                            <td style="padding: 10px; text-align: left; color: #fff;">Future Portfolio Value</td>
+                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(res.fvShares)}</td>
+                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(res.fvIra)}</td>
+                            <td style="padding: 10px; color: #94a3b8;">$0.00</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                            <td style="padding: 10px; text-align: left; color: #fff;">Tax Rate on Future Growth/NUA</td>
+                            <td style="padding: 10px; color: #dfa01e;">${(res.capGainsRate*100).toFixed(0)}% (Capital Gains)</td>
+                            <td style="padding: 10px; color: #ef4444;">${(res.ordinaryTaxRate*100).toFixed(0)}% (Ordinary Income)</td>
+                            <td style="padding: 10px; color: #38bdf8;">Save ${((res.ordinaryTaxRate - res.capGainsRate)*100).toFixed(0)}%</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
+                            <td style="padding: 10px; text-align: left; color: #fff;">Future Taxes Paid</td>
+                            <td style="padding: 10px; color: #ef4444;">-${formatCurrencyCents(res.futureCapGainsTax)}</td>
+                            <td style="padding: 10px; color: #ef4444;">-${formatCurrencyCents(res.iraTaxAtWithdrawal)}</td>
+                            <td style="padding: 10px; color: #4ade80;">+${formatCurrencyCents(res.iraTaxAtWithdrawal - res.futureCapGainsTax)}</td>
+                        </tr>
+                        <tr style="background: rgba(223,160,30,0.1); font-weight: 700; text-align: right;">
+                            <td style="padding: 12px 10px; text-align: left; color: #dfa01e;">Net Proceeds to Participant</td>
+                            <td style="padding: 12px 10px; color: #dfa01e; font-size: 15px;">${formatCurrencyCents(res.nuaNetProceeds)}</td>
+                            <td style="padding: 12px 10px; color: #ffffff; font-size: 15px;">${formatCurrencyCents(res.iraNetProceeds)}</td>
+                            <td style="padding: 12px 10px; color: ${res.nuaNetProceeds >= res.iraNetProceeds ? '#4ade80' : '#ef4444'}; font-size: 15px;">
+                                ${res.nuaNetProceeds >= res.iraNetProceeds ? '+' : ''}${formatCurrencyCents(res.nuaNetProceeds - res.iraNetProceeds)}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        window.addEventListener('resize', () => {
+            if (lastCalcResults.marketVal !== undefined) renderStockChart(lastCalcResults);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calculateStockDistribution();
+        });
+    </script>
+</body>
+</html>

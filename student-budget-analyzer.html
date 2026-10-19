@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Budget Analyzer | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Manage college and university finances. Track tuition, living costs, meal plans, transportation, scholarships, and student income with an interactive budget analyzer.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .sba-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .sba-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .sba-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .sba-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .budget-accordion-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .budget-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px;
+            background: #f8fafc;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .budget-accordion-header:hover {
+            background: #f1f5f9;
+        }
+        .budget-accordion-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0b172a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .budget-accordion-badge {
+            font-size: 12px;
+            color: #dfa01e;
+            font-weight: 700;
+        }
+        .budget-accordion-body {
+            padding: 16px 18px;
+            border-top: 1px solid #e2e8f0;
+            display: none;
+        }
+        .budget-timing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .budget-timing-table th, .budget-timing-table td {
+            padding: 8px 12px;
+            border: 1px solid #cbd5e1;
+        }
+        .budget-timing-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 780px;
+            border-top: 5px solid #dfa01e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            color: #1e293b;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .report-modal-close:hover {
+            color: #0b172a;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .report-table th, .report-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .report-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .report-table tr:hover td {
+            background-color: #f8fafc;
+        }
+        .report-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER BAR -->
+    <header class="top-nav-container">
+        <div class="top-nav-inner">
+            <div class="brand-left">
+                <a href="index.html" class="brand-logo-link">
+                    <span class="brand-title">THE SEILER GROUP</span>
+                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
+                </a>
+            </div>
+            <div class="header-contact">
+                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
+                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECONDARY NAVIGATION -->
+    <nav class="sub-nav">
+        <div class="sub-nav-inner">
+            <a href="index.html">HOME</a>
+            <a href="corporate-executive-services.html">ABOUT US</a>
+            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
+            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
+            <a href="resources.html" class="active">RESOURCES</a>
+            <a href="contact-us.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="social-security-benefits-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Social Security Benefits Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="student-loan-consolidation-and-debt-payoff.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Student Loan Consolidation and Debt Payoff">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Student Budget Analyzer" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Page Titles -->
+            <h1 class="calc-page-title">STUDENT BUDGET ANALYZER</h1>
+            <div class="calc-category-path">Personal Finance &gt; Calculator</div>
+
+            <div class="calc-share-container">
+                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
+            </div>
+
+            <p class="calc-intro-paragraph">
+                Use this calculator to help determine your budget as a full-time student. This calculator is specifically designed to help students understand their expenses and income while attending a university, college or other higher education institution.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="calc-actions-row">
+                <button type="button" class="calc-btn-primary" onclick="calculateStudentBudget()">CALCULATE</button>
+                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Highlight Banner -->
+            <div class="calc-dynamic-banner" id="budget-banner">
+                <span id="banner-text">At the end of the year your budget may be balanced</span>
+                <span class="banner-badge"><i class="fas fa-graduation-cap"></i> Student Budget</span>
+            </div>
+
+            <!-- Summary Stat Cards -->
+            <div class="sba-stat-grid">
+                <div class="sba-stat-card">
+                    <div class="sba-stat-val" id="stat-total-income" style="color: #60a5fa;">$28,500 / yr</div>
+                    <div class="sba-stat-label">Total Student Income &amp; Aid</div>
+                </div>
+                <div class="sba-stat-card">
+                    <div class="sba-stat-val" id="stat-total-expenses" style="color: #ef4444;">$26,200 / yr</div>
+                    <div class="sba-stat-label">Total Academic &amp; Living Costs</div>
+                </div>
+                <div class="sba-stat-card">
+                    <div class="sba-stat-val" id="stat-net-surplus" style="color: #4ade80;">+$2,300 / yr</div>
+                    <div class="sba-stat-label" id="lbl-surplus-title">Annual Budget Surplus</div>
+                </div>
+                <div class="sba-stat-card">
+                    <div class="sba-stat-val" id="stat-monthly-buffer" style="color: #dfa01e;">$191.67 / mo</div>
+                    <div class="sba-stat-label">Monthly Discretionary Buffer</div>
+                </div>
+            </div>
+
+            <!-- CALCULATOR FORM -->
+            <div class="calc-two-col-layout">
+                
+                <!-- Left Column: Inputs & Accordions -->
+                <div class="calc-inputs-column">
+
+                    <!-- SECTION: YOUR INCOME AND CONTRIBUTIONS -->
+                    <div class="calc-section-group" style="margin-bottom: 25px;">
+                        <div class="calc-group-title" style="color: #dfa01e; display: flex; justify-content: space-between; align-items: center;">
+                            <span>YOUR INCOME AND CONTRIBUTIONS</span>
+                            <span id="lbl-income-subtotal" style="font-size: 13px; font-weight: 700; color: #4ade80;">$28,500 / yr</span>
+                        </div>
+
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-inc-scholarships">Grants &amp; scholarships</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-inc-scholarships" class="calc-text-input" value="$12,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-inc-scholarships" class="calc-range-slider" min="0" max="40000" step="500" value="12000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-inc-loans">Student loans</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-inc-loans" class="calc-text-input" value="$6,500.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-inc-loans" class="calc-range-slider" min="0" max="30000" step="500" value="6500">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-inc-parents">Family / parental support</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-inc-parents" class="calc-text-input" value="$5,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-inc-parents" class="calc-range-slider" min="0" max="30000" step="500" value="5000">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-inc-job">Work-study / employment</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-inc-job" class="calc-text-input" value="$5,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-inc-job" class="calc-range-slider" min="0" max="25000" step="250" value="5000">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EXPENSES HEADER -->
+                    <div style="font-weight: 700; font-size: 14px; color: #0b172a; margin-bottom: 12px; letter-spacing: 0.5px; border-bottom: 2px solid #0b172a; padding-bottom: 6px;">
+                        ANNUAL STUDENT EXPENSES BY CATEGORY
+                    </div>
+
+                    <!-- Accordion 1: School Expenses -->
+                    <div class="budget-accordion-card">
+                        <div class="budget-accordion-header" onclick="toggleAcc('acc-1', 'chev-1')">
+                            <span class="budget-accordion-title"><i class="fas fa-book"></i> SCHOOL EXPENSES</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="budget-accordion-badge" id="badge-school">$11,200.00</span>
+                                <i id="chev-1" class="fas fa-chevron-down" style="color: #64748b; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                        <div class="budget-accordion-body" id="acc-1" style="display: block;">
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-tuition">Tuition &amp; registration</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-tuition" class="calc-text-input" value="$10,000.00">
+                                </div>
+                            </div>
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-books">Books &amp; supplies</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-books" class="calc-text-input" value="$1,200.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 2: Living Expenses -->
+                    <div class="budget-accordion-card">
+                        <div class="budget-accordion-header" onclick="toggleAcc('acc-2', 'chev-2')">
+                            <span class="budget-accordion-title"><i class="fas fa-building"></i> LIVING EXPENSES</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="budget-accordion-badge" id="badge-living">$8,400.00</span>
+                                <i id="chev-2" class="fas fa-chevron-down" style="color: #64748b; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                        <div class="budget-accordion-body" id="acc-2">
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-housing">Dorm / apartment rent</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-housing" class="calc-text-input" value="$7,200.00">
+                                </div>
+                            </div>
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-utilities">Utilities &amp; internet</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-utilities" class="calc-text-input" value="$1,200.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 3: Food and Groceries -->
+                    <div class="budget-accordion-card">
+                        <div class="budget-accordion-header" onclick="toggleAcc('acc-3', 'chev-3')">
+                            <span class="budget-accordion-title"><i class="fas fa-utensils"></i> FOOD AND GROCERIES</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="budget-accordion-badge" id="badge-food">$3,600.00</span>
+                                <i id="chev-3" class="fas fa-chevron-down" style="color: #64748b; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                        <div class="budget-accordion-body" id="acc-3">
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-mealplan">Campus meal plan / groceries</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-mealplan" class="calc-text-input" value="$3,600.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 4: Transportation -->
+                    <div class="budget-accordion-card">
+                        <div class="budget-accordion-header" onclick="toggleAcc('acc-4', 'chev-4')">
+                            <span class="budget-accordion-title"><i class="fas fa-bus"></i> TRANSPORTATION</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="budget-accordion-badge" id="badge-transport">$1,500.00</span>
+                                <i id="chev-4" class="fas fa-chevron-down" style="color: #64748b; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                        <div class="budget-accordion-body" id="acc-4">
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-transit">Transit pass / gas / parking</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-transit" class="calc-text-input" value="$1,500.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 5: Personal & Discretionary -->
+                    <div class="budget-accordion-card">
+                        <div class="budget-accordion-header" onclick="toggleAcc('acc-5', 'chev-5')">
+                            <span class="budget-accordion-title"><i class="fas fa-smile"></i> PERSONAL &amp; ENTERTAINMENT</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="budget-accordion-badge" id="badge-personal">$1,500.00</span>
+                                <i id="chev-5" class="fas fa-chevron-down" style="color: #64748b; font-size: 12px;"></i>
+                            </div>
+                        </div>
+                        <div class="budget-accordion-body" id="acc-5">
+                            <div class="calc-input-row">
+                                <label class="calc-input-label" for="inp-exp-entertainment">Clothing, outings &amp; personal care</label>
+                                <div class="calc-input-control">
+                                    <input type="text" id="inp-exp-entertainment" class="calc-text-input" value="$1,500.00">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Charts -->
+                <div class="calc-charts-column">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-title">STUDENT BUDGET BREAKDOWN</div>
+                        <div id="sba-svg-container" style="width: 100%; height: 350px;">
+                            <!-- Dynamic SVG Donut Chart rendered via JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 50%;"></span>
+                                <span>School &amp; Tuition</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #dfa01e; border-radius: 50%;"></span>
+                                <span>Housing &amp; Utilities</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #16a34a; border-radius: 50%;"></span>
+                                <span>Food &amp; Dining</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 12px; height: 12px; background: #a855f7; border-radius: 50%;"></span>
+                                <span>Transit &amp; Personal</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DEFINITIONS SECTION -->
+            <section class="calc-definitions-wrapper">
+                <h3 class="calc-defs-title">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">PAYMENT TIMING OPTIONS</div>
+                    <div class="calc-def-desc">Each expense or income item can be budgeted by academic year, semester, or month.</div>
+                </div>
+
+                <!-- Academic Payment Schedule Table -->
+                <div style="margin: 20px 0; overflow-x: auto;">
+                    <div style="font-weight: 700; color: #0b172a; font-size: 13px; margin-bottom: 8px;">
+                        Standard Higher Education Academic Schedule
+                    </div>
+                    <table class="budget-timing-table">
+                        <thead>
+                            <tr>
+                                <th>Schedule Frequency</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Academic Year</td><td>One annual lump-sum allocation covering the complete 9 to 12 month school year.</td></tr>
+                            <tr><td>Semester 1 &amp; 2</td><td>Two periodic disbursements (typically August/September for Fall, January for Spring).</td></tr>
+                            <tr><td>Monthly</td><td>Recurring monthly expenditures (rent, groceries, phone, subscriptions).</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">SCHOOL EXPENSES</div>
+                    <div class="calc-def-desc">Tuition, university registration fees, course books, lab materials, software licensing, and academic fees.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">LIVING &amp; HOUSING EXPENSES</div>
+                    <div class="calc-def-desc">On-campus residence hall fees, off-campus apartment rent, electricity, water, high-speed internet, and renter's insurance.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">FINANCIAL AID &amp; CONTRIBUTIONS</div>
+                    <div class="calc-def-desc">Scholarships, Pell Grants, institutional aid, subsidized/unsubsidized federal student loans, family support, and on-campus work-study earnings.</div>
+                </div>
+            </section>
+
+            <!-- LEGAL DISCLAIMER -->
+            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Student Academic Budget Report</h2>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
+                </div>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+            </div>
+
+            <div id="report-modal-body">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-corporate">
+        <div class="footer-corporate-inner">
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">THE SEILER GROUP</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    Comprehensive wealth management, financial planning, and visionary investment counseling tailored to high-net-worth individuals and corporate executives.
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">OFFICE LOCATION</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    2850 S. Ocean Blvd, Suite 500<br>
+                    Palm Beach, FL 33480<br>
+                    Direct: 800-237-0152
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">QUICK LINKS</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                    <a href="resources.html" style="color: #dfa01e; text-decoration: none;">Resource Center</a>
+                    <a href="counseling-visionaries.html" style="color: #94a3b8; text-decoration: none;">Visionary Counseling</a>
+                    <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Our Advisors</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 The Seiler Group of Raymond James. All rights reserved. Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE SCRIPT -->
+    <script>
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function toggleAcc(accId, chevId) {
+            const el = document.getElementById(accId);
+            const chev = document.getElementById(chevId);
+            if (el.style.display === 'block') {
+                el.style.display = 'none';
+                chev.className = 'fas fa-chevron-down';
+            } else {
+                el.style.display = 'block';
+                chev.className = 'fas fa-chevron-up';
+            }
+        }
+
+        function setupSync(inputId, rangeId, isCurrency = true) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                let v = parseFloat(range.value);
+                inp.value = fmtMoneyCents(v);
+                calculateStudentBudget();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = parseClean(inp.value);
+                if (val < parseFloat(range.min)) val = parseFloat(range.min);
+                if (val > parseFloat(range.max)) val = parseFloat(range.max);
+                range.value = val;
+                inp.value = fmtMoneyCents(val);
+                calculateStudentBudget();
+            });
+        }
+
+        let sbaData = {};
+
+        function calculateStudentBudget() {
+            // Incomes
+            const scholarships = parseClean(document.getElementById('inp-inc-scholarships').value) || 0;
+            const loans = parseClean(document.getElementById('inp-inc-loans').value) || 0;
+            const parents = parseClean(document.getElementById('inp-inc-parents').value) || 0;
+            const job = parseClean(document.getElementById('inp-inc-job').value) || 0;
+
+            const totalIncome = scholarships + loans + parents + job;
+            document.getElementById('lbl-income-subtotal').innerText = `${fmtMoney(totalIncome)} / yr`;
+
+            // Expenses
+            const tuition = parseClean(document.getElementById('inp-exp-tuition').value) || 0;
+            const books = parseClean(document.getElementById('inp-exp-books').value) || 0;
+            const schoolSubtotal = tuition + books;
+            document.getElementById('badge-school').innerText = fmtMoneyCents(schoolSubtotal);
+
+            const housing = parseClean(document.getElementById('inp-exp-housing').value) || 0;
+            const utilities = parseClean(document.getElementById('inp-exp-utilities').value) || 0;
+            const livingSubtotal = housing + utilities;
+            document.getElementById('badge-living').innerText = fmtMoneyCents(livingSubtotal);
+
+            const mealplan = parseClean(document.getElementById('inp-exp-mealplan').value) || 0;
+            document.getElementById('badge-food').innerText = fmtMoneyCents(mealplan);
+
+            const transit = parseClean(document.getElementById('inp-exp-transit').value) || 0;
+            document.getElementById('badge-transport').innerText = fmtMoneyCents(transit);
+
+            const personal = parseClean(document.getElementById('inp-exp-entertainment').value) || 0;
+            document.getElementById('badge-personal').innerText = fmtMoneyCents(personal);
+
+            const totalExpenses = schoolSubtotal + livingSubtotal + mealplan + transit + personal;
+            const netSurplus = totalIncome - totalExpenses;
+            const monthlyBuffer = netSurplus / 12;
+
+            sbaData = {
+                scholarships, loans, parents, job, totalIncome,
+                tuition, books, schoolSubtotal, housing, utilities, livingSubtotal,
+                mealplan, transit, personal, totalExpenses, netSurplus, monthlyBuffer
+            };
+
+            // Update UI
+            document.getElementById('stat-total-income').innerText = fmtMoney(totalIncome) + ' / yr';
+            document.getElementById('stat-total-expenses').innerText = fmtMoney(totalExpenses) + ' / yr';
+
+            const bannerText = document.getElementById('banner-text');
+            const statSurplus = document.getElementById('stat-net-surplus');
+            const lblSurplus = document.getElementById('lbl-surplus-title');
+            const statBuffer = document.getElementById('stat-monthly-buffer');
+
+            if (netSurplus >= 0) {
+                bannerText.innerText = `You have an estimated annual surplus of ${fmtMoneyCents(netSurplus)}`;
+                statSurplus.innerText = `+${fmtMoney(netSurplus)} / yr`;
+                statSurplus.style.color = '#4ade80';
+                lblSurplus.innerText = 'Annual Budget Surplus';
+                statBuffer.innerText = `+${fmtMoneyCents(monthlyBuffer)} / mo`;
+                statBuffer.style.color = '#dfa01e';
+            } else {
+                bannerText.innerText = `At the end of the year your budget may be ${fmtMoneyCents(Math.abs(netSurplus))} short`;
+                statSurplus.innerText = `-${fmtMoney(Math.abs(netSurplus))} / yr`;
+                statSurplus.style.color = '#ef4444';
+                lblSurplus.innerText = 'Annual Budget Deficit';
+                statBuffer.innerText = `-${fmtMoneyCents(Math.abs(monthlyBuffer))} / mo`;
+                statBuffer.style.color = '#ef4444';
+            }
+
+            renderChart(schoolSubtotal, livingSubtotal, mealplan, transit + personal, totalExpenses);
+        }
+
+        function renderChart(school, living, food, other, total) {
+            const container = document.getElementById('sba-svg-container');
+            const w = 480;
+            const h = 330;
+            const cx = w / 2;
+            const cy = h / 2;
+            const r = 105;
+
+            const t = Math.max(total, 1);
+
+            const slices = [
+                { label: 'School', val: school, color: '#2563eb' },
+                { label: 'Living', val: living, color: '#dfa01e' },
+                { label: 'Food', val: food, color: '#16a34a' },
+                { label: 'Other', val: other, color: '#a855f7' }
+            ];
+
+            let currentAngle = -Math.PI / 2;
+            let pathsHtml = '';
+
+            slices.forEach(slice => {
+                if (slice.val <= 0) return;
+                const sliceAngle = (slice.val / t) * 2 * Math.PI;
+                const endAngle = currentAngle + sliceAngle;
+
+                const x1 = cx + r * Math.cos(currentAngle);
+                const y1 = cy + r * Math.sin(currentAngle);
+                const x2 = cx + r * Math.cos(endAngle);
+                const y2 = cy + r * Math.sin(endAngle);
+
+                const largeArc = sliceAngle > Math.PI ? 1 : 0;
+                const pathData = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+
+                pathsHtml += `<path d="${pathData}" fill="${slice.color}" stroke="#ffffff" stroke-width="2" />`;
+                currentAngle = endAngle;
+            });
+
+            const svgHtml = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
+                    ${pathsHtml}
+                    <!-- Donut Hole -->
+                    <circle cx="${cx}" cy="${cy}" r="${r * 0.42}" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" />
+                    <text x="${cx}" y="${cy - 4}" fill="#0b172a" font-size="11" font-weight="700" text-anchor="middle">EXPENSES</text>
+                    <text x="${cx}" y="${cy + 14}" fill="#2563eb" font-size="13" font-weight="800" text-anchor="middle">${fmtMoney(total)}</text>
+                </svg>
+            `;
+
+            container.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!sbaData.totalIncome) calculateStudentBudget();
+
+            const d = sbaData;
+            const isSurplus = d.netSurplus >= 0;
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Academic Financial Status</div>
+                    <div style="font-size: 22px; font-weight: 700; color: ${isSurplus ? '#4ade80' : '#ef4444'}; margin-top: 4px;">
+                        ${isSurplus ? 'Annual Surplus: +' + fmtMoneyCents(d.netSurplus) : 'Annual Deficit: -' + fmtMoneyCents(Math.abs(d.netSurplus))}
+                    </div>
+                    <div style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
+                        Income: ${fmtMoney(d.totalIncome)} / yr | Expenses: ${fmtMoney(d.totalExpenses)} / yr
+                    </div>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Student Income Breakdown</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Grants &amp; Scholarships</td><td>${fmtMoneyCents(d.scholarships)}</td></tr>
+                        <tr><td>Student Loans</td><td>${fmtMoneyCents(d.loans)}</td></tr>
+                        <tr><td>Parental &amp; Family Contributions</td><td>${fmtMoneyCents(d.parents)}</td></tr>
+                        <tr><td>Work-Study &amp; Job Wages</td><td>${fmtMoneyCents(d.job)}</td></tr>
+                        <tr style="background: #f8fafc; font-weight: 700;">
+                            <td>Total Available Funds</td>
+                            <td style="color: #2563eb;">${fmtMoneyCents(d.totalIncome)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Academic &amp; Living Expenses Breakdown</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>School Expenses (Tuition, Fees &amp; Books)</td><td>${fmtMoneyCents(d.schoolSubtotal)}</td></tr>
+                        <tr><td>Living &amp; Housing Expenses (Rent &amp; Utilities)</td><td>${fmtMoneyCents(d.livingSubtotal)}</td></tr>
+                        <tr><td>Food &amp; Dining (Meal Plan &amp; Groceries)</td><td>${fmtMoneyCents(d.mealplan)}</td></tr>
+                        <tr><td>Transportation &amp; Commuting</td><td>${fmtMoneyCents(d.transit)}</td></tr>
+                        <tr><td>Personal, Wardrobe &amp; Entertainment</td><td>${fmtMoneyCents(d.personal)}</td></tr>
+                        <tr style="background: #fef2f2; font-weight: 700;">
+                            <td>Total Annual Expenditures</td>
+                            <td style="color: #dc2626;">${fmtMoneyCents(d.totalExpenses)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-inc-scholarships', 'range-inc-scholarships');
+            setupSync('inp-inc-loans', 'range-inc-loans');
+            setupSync('inp-inc-parents', 'range-inc-parents');
+            setupSync('inp-inc-job', 'range-inc-job');
+
+            // Wire expense inputs
+            const expInputs = [
+                'inp-exp-tuition', 'inp-exp-books', 'inp-exp-housing',
+                'inp-exp-utilities', 'inp-exp-mealplan', 'inp-exp-transit',
+                'inp-exp-entertainment'
+            ];
+            expInputs.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('change', () => {
+                        el.value = fmtMoneyCents(parseClean(el.value));
+                        calculateStudentBudget();
+                    });
+                }
+            });
+
+            calculateStudentBudget();
+        });
+    </script>
+</body>
+</html>

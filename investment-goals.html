@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Goals | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate what it takes to reach your investment goals. Project your portfolio growth before taxes, after taxes, and after inflation.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .goal-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .goal-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .goal-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .goal-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .calc-select-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .calc-select-input {
+            width: 100%;
+            max-width: 280px;
+            padding: 8px 12px;
+            background: #0b172a;
+            color: #ffffff;
+            border: 1px solid rgba(223, 160, 30, 0.4);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .calc-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .calc-checkbox-row input {
+            accent-color: #dfa01e;
+            width: 17px;
+            height: 17px;
+            cursor: pointer;
+        }
+
+        /* Bracket Table */
+        .tax-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .tax-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 9px 12px;
+            font-weight: 700;
+            border-bottom: 2px solid #dfa01e;
+            text-align: left;
+        }
+        .tax-table td {
+            padding: 8px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .tax-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        /* Report Modal */
+        .report-modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 30px 15px;
+        }
+        .report-modal-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-top: 6px solid #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 26px;
+            cursor: pointer;
+            color: #64748b;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="investment-distributions.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Investment Distributions">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="investment-returns.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Investment Returns">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <img src="assets/resources/investment-goals-hero.jpg" alt="Investment Goals" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">INVESTMENT GOALS</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    What will it take to reach your investment goals? Use this investment goal calculator to discover how much your investment might grow before taxes, after taxes, and after taxes and inflation. It will also provide suggestions on what changes to your plan are most likely to help you reach your investment goal.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateGoals()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="goal-result-banner" style="margin-bottom: 25px;">
+                Your plan is on track to <span class="highlight-val" id="banner-goal-status" style="color: #4ade80;">exceed</span> your goal of <span class="highlight-val" id="banner-goal-target">$50,000</span>.
+            </div>
+
+            <!-- Top Investment Goal Input -->
+            <div class="calc-input-row" style="margin-bottom: 25px;">
+                <div class="calc-label-col">
+                    <label for="inp-target-goal" class="calc-field-label">Investment goal:*</label>
+                    <span class="calc-q-dot" title="Your desired capital accumulation target.">?</span>
+                </div>
+                <input type="text" id="inp-target-goal" class="calc-text-input" value="$50,000.00">
+                <div class="calc-slider-col">
+                    <input type="range" id="range-target-goal" class="calc-range-slider" min="10000" max="250000" step="5000" value="50000">
+                    <div class="calc-tick-labels">
+                        <span>$0</span>
+                        <span>$50K</span>
+                        <span>$100K</span>
+                        <span>$175K</span>
+                        <span>$250K</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 1: INVESTMENT PLAN
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 20px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <h2 class="calc-sec-title" style="color: #dfa01e; font-size: 14px; font-weight: 700; text-transform: uppercase;">INVESTMENT PLAN</h2>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px 22px;">
+
+                    <!-- Years to accumulate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-yrs-acc" class="calc-field-label">Years to accumulate:*</label></div>
+                        <input type="text" id="inp-yrs-acc" class="calc-text-input" value="10">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-yrs-acc" class="calc-range-slider" min="1" max="50" step="1" value="10">
+                            <div class="calc-tick-labels"><span>1</span><span>12</span><span>25</span><span>37</span><span>50</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Initial investment -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-init-inv" class="calc-field-label">Amount of initial investment:*</label></div>
+                        <input type="text" id="inp-init-inv" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-init-inv" class="calc-range-slider" min="0" max="100000" step="2500" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$25K</span><span>$50K</span><span>$75K</span><span>$100K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ror" class="calc-field-label">Rate of return on investment:*</label></div>
+                        <input type="text" id="inp-ror" class="calc-text-input" value="7%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ror" class="calc-range-slider" min="0" max="15" step="0.5" value="7">
+                            <div class="calc-tick-labels"><span>0%</span><span>4%</span><span>8%</span><span>11%</span><span>15%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Periodic contribution -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-periodic" class="calc-field-label">Periodic contribution:*</label></div>
+                        <input type="text" id="inp-periodic" class="calc-text-input" value="$300.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-periodic" class="calc-range-slider" min="0" max="2000" step="25" value="300">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$1.0K</span><span>$1.5K</span><span>$2.0K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Frequency -->
+                    <div class="calc-select-row">
+                        <label for="sel-contrib-freq" class="calc-field-label" style="margin: 0;">Contribution frequency:*</label>
+                        <select id="sel-contrib-freq" class="calc-select-input" onchange="calculateGoals()">
+                            <option value="12" selected>Monthly</option>
+                            <option value="4">Quarterly</option>
+                            <option value="1">Annually</option>
+                        </select>
+                    </div>
+
+                    <!-- Compound interest -->
+                    <div class="calc-select-row">
+                        <label for="sel-compound" class="calc-field-label" style="margin: 0;">Compound interest:*</label>
+                        <select id="sel-compound" class="calc-select-input" onchange="calculateGoals()">
+                            <option value="12" selected>Monthly</option>
+                            <option value="1">Annually</option>
+                            <option value="4">Quarterly</option>
+                            <option value="365">Daily</option>
+                        </select>
+                    </div>
+
+                    <!-- Make deposits -->
+                    <div class="calc-checkbox-row">
+                        <input type="checkbox" id="chk-beg-period" checked onchange="calculateGoals()">
+                        <label for="chk-beg-period" class="calc-field-label" style="margin: 0; cursor: pointer;">Make deposits: At beginning of the period (uncheck for the end of the period)</label>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 2: INVESTMENT TAXES AND INFLATION
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <div>
+                        <h2 class="calc-sec-title" style="color: #dfa01e; font-size: 14px; font-weight: 700; text-transform: uppercase;">INVESTMENT TAXES AND INFLATION</h2>
+                        <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;">Adjust before taxes, after taxes, and after taxes &amp; inflation</div>
+                    </div>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px 22px;">
+
+                    <!-- State marginal tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-state-tax-rate" class="calc-field-label">State marginal tax rate:*</label></div>
+                        <input type="text" id="inp-state-tax-rate" class="calc-text-input" value="5%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-state-tax-rate" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
+                            <div class="calc-tick-labels"><span>0%</span><span>4%</span><span>8%</span><span>11%</span><span>15%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Federal tax bracket -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-fed-bracket" class="calc-field-label">Federal tax bracket:*</label></div>
+                        <input type="text" id="inp-fed-bracket" class="calc-text-input" value="22%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-fed-bracket" class="calc-range-slider" min="0" max="40" step="2" value="22">
+                            <div class="calc-tick-labels"><span>0%</span><span>12%</span><span>22%</span><span>32%</span><span>40%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Expected annual inflation rate -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col"><label for="inp-goal-infl" class="calc-field-label">Expected annual inflation rate:*</label></div>
+                        <input type="text" id="inp-goal-infl" class="calc-text-input" value="3%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-goal-infl" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <div class="calc-tick-labels"><span>0%</span><span>3%</span><span>5%</span><span>8%</span><span>10%</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Key Metric Cards -->
+            <div class="goal-stat-grid">
+                <div class="goal-stat-card">
+                    <div class="goal-stat-val" id="stat-before-tax" style="color: #60a5fa;">$52,650.07</div>
+                    <div class="goal-stat-label">Accumulation (Pre-Tax)</div>
+                </div>
+                <div class="goal-stat-card">
+                    <div class="goal-stat-val" id="stat-after-tax" style="color: #4ade80;">$46,218.40</div>
+                    <div class="goal-stat-label">After-Tax Value</div>
+                </div>
+                <div class="goal-stat-card">
+                    <div class="goal-stat-val" id="stat-real-val" style="color: #dfa01e;">$34,390.85</div>
+                    <div class="goal-stat-label">After-Tax &amp; Inflation Value</div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             CHART SECTION
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 35px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <h2 class="calc-sec-title" id="chart-goal-heading" style="color: #dfa01e; font-size: 13.5px; font-weight: 700; text-transform: uppercase;">
+                        YOUR CURRENT PLAN PRODUCES $52,650.07 AFTER 10 YEARS BEFORE TAXES AND INFLATION.
+                    </h2>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px;">
+                    <div style="display: flex; justify-content: flex-end; gap: 20px; font-size: 12.5px; font-weight: 600; margin-bottom: 15px;">
+                        <span style="display: flex; align-items: center; gap: 6px; color: #2563eb;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #2563eb; display: inline-block;"></span> Total Accumulation
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #16a34a;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #16a34a; display: inline-block;"></span> Investment Goal
+                        </span>
+                    </div>
+                    <div id="goal-chart-wrapper" style="width: 100%; height: 260px;">
+                        <!-- SVG Bar Chart -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">INVESTMENT GOAL</h4>
+                    <p class="calc-def-desc">
+                        The goal is the future value of your invested funds.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">YEARS TO ACCUMULATE & INITIAL INVESTMENT</h4>
+                    <p class="calc-def-desc">
+                        The number of years you have to save, and the starting capital you currently have invested.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">PERIODIC CONTRIBUTIONS & FREQUENCY</h4>
+                    <p class="calc-def-desc">
+                        The recurring dollar sum added to your account each period (monthly, quarterly, or annually).
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">RATE OF RETURN & INFLATION</h4>
+                    <p class="calc-def-desc">
+                        Assumed constant compound annual yield earned on your portfolio, offset by federal and state income tax liabilities and long-term cost of living inflation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Disclaimer Note -->
+            <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11.5px; line-height: 1.6; color: #64748b;">
+                <p>
+                    The educational tool and calculations provided are hypothetical examples and estimates only. Investment returns fluctuate and are not guaranteed. Actual portfolio yields will be subject to market volatility, investment management fees, and applicable taxes. Consult your financial advisor.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="report-modal-bg" id="report-modal">
+        <div class="report-modal-box">
+            <button class="report-modal-close" onclick="closeReportModal()">&times;</button>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #dfa01e; padding-bottom: 15px; margin-bottom: 20px;">
+                <img src="assets/logo.svg" alt="The Seiler Group" style="height: 45px;">
+                <div style="text-align: right;">
+                    <h3 style="margin: 0; color: #0b172a; font-size: 18px; font-weight: 700;">INVESTMENT GOAL REPORT</h3>
+                    <div style="font-size: 12px; color: #64748b;">The Seiler Group of Raymond James</div>
+                </div>
+            </div>
+
+            <div id="report-modal-content"></div>
+
+            <div style="margin-top: 25px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()" style="padding: 8px 18px; font-size: 13px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button type="button" class="calc-btn calc-btn-primary" onclick="closeReportModal()" style="padding: 8px 22px; font-size: 13px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer style="background: #0b172a; color: #94a3b8; padding: 40px 20px; font-size: 12px; text-align: center; border-top: 1px solid rgba(223,160,30,0.3);">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <p style="margin-bottom: 10px;">&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC.</p>
+            <p style="margin: 0;">Securities offered through Raymond James Financial Services, Inc. Member FINRA / SIPC. Investment advisory services offered through Raymond James Financial Services Advisors, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     CALCULATION SCRIPT
+     ============================================================ -->
+    <script>
+        function fmtMoney(num) {
+            return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        function setupSync(inputId, rangeId, isPercent, isCurrency) {
+            const inp = document.getElementById(inputId);
+            const rng = document.getElementById(rangeId);
+            if (!inp || !rng) return;
+
+            rng.addEventListener('input', () => {
+                const val = parseFloat(rng.value) || 0;
+                if (isPercent) {
+                    inp.value = val + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateGoals();
+            });
+
+            inp.addEventListener('change', () => {
+                let clean = parseClean(inp.value);
+                clean = Math.max(parseFloat(rng.min), Math.min(parseFloat(rng.max), clean));
+                rng.value = clean;
+                if (isPercent) {
+                    inp.value = clean + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(clean);
+                } else {
+                    inp.value = clean;
+                }
+                calculateGoals();
+            });
+        }
+
+        let lastGoal = null;
+
+        function calculateGoals() {
+            const goalTarget = parseClean(document.getElementById('inp-target-goal').value) || 50000;
+            const years = parseClean(document.getElementById('inp-yrs-acc').value) || 10;
+            const initInv = parseClean(document.getElementById('inp-init-inv').value);
+            const ror = (parseClean(document.getElementById('inp-ror').value) || 7) / 100;
+            const periodic = parseClean(document.getElementById('inp-periodic').value);
+            const freq = parseInt(document.getElementById('sel-contrib-freq').value) || 12;
+            const isBeg = document.getElementById('chk-beg-period').checked;
+
+            const stateTax = (parseClean(document.getElementById('inp-state-tax-rate').value) || 5) / 100;
+            const fedTax = (parseClean(document.getElementById('inp-fed-bracket').value) || 22) / 100;
+            const infl = (parseClean(document.getElementById('inp-goal-infl').value) || 3) / 100;
+
+            const totalTax = stateTax + fedTax * (1 - stateTax);
+            const rorAfterTax = ror * (1 - totalTax);
+            const rorReal = (1 + rorAfterTax) / (1 + infl) - 1;
+
+            const schedulePreTax = [];
+            let balPre = initInv;
+            let balPost = initInv;
+            let balReal = initInv;
+
+            const rPrePer = ror / freq;
+            const rPostPer = rorAfterTax / freq;
+            const rRealPer = rorReal / freq;
+
+            for (let y = 1; y <= years; y++) {
+                for (let p = 0; p < freq; p++) {
+                    if (isBeg) {
+                        balPre = (balPre + periodic) * (1 + rPrePer);
+                        balPost = (balPost + periodic) * (1 + rPostPer);
+                        balReal = (balReal + periodic) * (1 + rRealPer);
+                    } else {
+                        balPre = (balPre * (1 + rPrePer)) + periodic;
+                        balPost = (balPost * (1 + rPostPer)) + periodic;
+                        balReal = (balReal * (1 + rRealPer)) + periodic;
+                    }
+                }
+                schedulePreTax.push({ year: y, pre: balPre, post: balPost, real: balReal });
+            }
+
+            const finalPre = balPre;
+            const finalPost = balPost;
+            const finalReal = balReal;
+
+            const isExceed = finalPre >= goalTarget;
+
+            lastGoal = { goalTarget, years, initInv, ror, periodic, finalPre, finalPost, finalReal, isExceed };
+
+            document.getElementById('banner-goal-status').innerText = isExceed ? 'exceed' : 'fall short of';
+            document.getElementById('banner-goal-status').style.color = isExceed ? '#4ade80' : '#f87171';
+            document.getElementById('banner-goal-target').innerText = fmtMoney(goalTarget);
+
+            document.getElementById('chart-goal-heading').innerText = `YOUR CURRENT PLAN PRODUCES ${fmtMoney(finalPre)} AFTER ${years} YEARS BEFORE TAXES AND INFLATION.`;
+            document.getElementById('stat-before-tax').innerText = fmtMoney(finalPre);
+            document.getElementById('stat-after-tax').innerText = fmtMoney(finalPost);
+            document.getElementById('stat-real-val').innerText = fmtMoney(finalReal);
+
+            renderGoalChart(schedulePreTax, goalTarget, years);
+        }
+
+        function renderGoalChart(schedule, target, totalYears) {
+            const container = document.getElementById('goal-chart-wrapper');
+            const maxVal = Math.max(target, ...schedule.map(s => s.pre), 10000);
+            const w = 680;
+            const h = 260;
+            const padL = 70;
+            const padR = 25;
+            const padT = 20;
+            const padB = 40;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+            const barGroupW = plotW / totalYears;
+            const barW = barGroupW * 0.42;
+
+            const yTarget = (h - padB) - ((target / maxVal) * plotH);
+
+            let bars = '';
+            schedule.forEach((s, idx) => {
+                const x = padL + idx * barGroupW + (barGroupW - barW * 2) / 2;
+                const hPre = (s.pre / maxVal) * plotH;
+                const hGoalProgress = (Math.min(target, (s.year / totalYears) * target) / maxVal) * plotH;
+
+                const yPre = (h - padB) - hPre;
+                const yGoal = (h - padB) - hGoalProgress;
+
+                bars += `
+                    <g>
+                        <!-- Pre-Tax Bar (Blue) -->
+                        <rect x="${x}" y="${yPre}" width="${barW}" height="${hPre}" fill="#2563eb" rx="2" />
+                        <!-- Goal Pro-Rata Bar (Green) -->
+                        <rect x="${x + barW + 2}" y="${yGoal}" width="${barW}" height="${hGoalProgress}" fill="#16a34a" rx="2" />
+                        <!-- Year label -->
+                        <text x="${x + barW}" y="${h - 18}" text-anchor="middle" font-size="10" fill="#64748b">${s.year}</text>
+                    </g>
+                `;
+            });
+
+            container.innerHTML = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <!-- Grid Lines -->
+                    <line x1="${padL}" y1="${padT}" x2="${w - padR}" y2="${padT}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${padT + plotH / 2}" x2="${w - padR}" y2="${padT + plotH / 2}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#cbd5e1" stroke-width="1.5" />
+
+                    <!-- Goal Target Reference Line -->
+                    <line x1="${padL}" y1="${yTarget}" x2="${w - padR}" y2="${yTarget}" stroke="#dfa01e" stroke-width="2" stroke-dasharray="4,4" />
+                    <text x="${w - padR}" y="${yTarget - 6}" text-anchor="end" font-size="10" font-weight="700" fill="#dfa01e">Target Goal: ${fmtMoney(target)}</text>
+
+                    <!-- Y Axis Labels -->
+                    <text x="${padL - 8}" y="${padT + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal)}</text>
+                    <text x="${padL - 8}" y="${padT + plotH / 2 + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal / 2)}</text>
+                    <text x="${padL - 8}" y="${h - padB}" text-anchor="end" font-size="10" fill="#64748b">$0</text>
+                    ${bars}
+                </svg>
+            `;
+        }
+
+        function openReportModal() {
+            if (!lastGoal) calculateGoals();
+            const g = lastGoal;
+            const content = document.getElementById('report-modal-content');
+
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                    <div style="background: #f8fafc; padding: 18px; border-radius: 6px; border-left: 4px solid #dfa01e;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #0b172a; text-transform: uppercase;">Goal Objective</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Target Goal:</span><strong>${fmtMoney(g.goalTarget)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Accumulation Timeline:</span><strong>${g.years} Years</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Monthly Contribution:</span><strong>${fmtMoney(g.periodic)}</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4);">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #dfa01e; text-transform: uppercase;">Projected Wealth</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Pre-Tax Balance:</span><strong style="color: #60a5fa;">${fmtMoney(g.finalPre)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>After-Tax Balance:</span><strong style="color: #4ade80;">${fmtMoney(g.finalPost)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #facc15;">
+                            <span>Real Purchasing Power:</span><strong>${fmtMoney(g.finalReal)}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #0b172a; text-transform: uppercase;">Optimization Strategies</h4>
+                <p style="font-size: 12.5px; line-height: 1.6; color: #475569;">
+                    Automating systematic monthly contributions early in each period harnesses the full force of compound interest. Consider utilizing tax-advantaged accounts (such as Roth IRAs or 401(k) plans) to preserve your portfolio against drag from federal and state income taxes.
+                </p>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-target-goal', 'range-target-goal', false, true);
+            setupSync('inp-yrs-acc', 'range-yrs-acc', false, false);
+            setupSync('inp-init-inv', 'range-init-inv', false, true);
+            setupSync('inp-ror', 'range-ror', true, false);
+            setupSync('inp-periodic', 'range-periodic', false, true);
+            setupSync('inp-state-tax-rate', 'range-state-tax-rate', true, false);
+            setupSync('inp-fed-bracket', 'range-fed-bracket', true, false);
+            setupSync('inp-goal-infl', 'range-goal-infl', true, false);
+            calculateGoals();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Important Is Social Security? | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate the impact of Social Security on your retirement nest egg and discover the additional savings required if relying solely on personal assets.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .ss-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .ss-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .ss-stat-val {
+            font-size: 21px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .ss-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        .calc-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 15px;
+            padding: 4px 0;
+        }
+        .calc-checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #dfa01e;
+            cursor: pointer;
+        }
+        .calc-checkbox-label {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+        }
+
+        /* Report Modal */
+        .report-modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 30px 15px;
+        }
+        .report-modal-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-top: 6px solid #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 26px;
+            cursor: pointer;
+            color: #64748b;
+            background: none;
+            border: none;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="home-equity-line-of-credit-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Home Equity Line of Credit Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="investment-distributions.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Investment Distributions">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <img src="assets/resources/how-important-is-social-security-hero.jpg" alt="How Important Is Social Security?" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">HOW IMPORTANT IS SOCIAL SECURITY?</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    How will receiving your Social Security benefits affect your retirement? Use this calculator to determine how saving for retirement needs will differ if you include the expectations of a secure retirement savings with and without Social Security benefits.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateSSPlan()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="ss-result-banner" style="margin-bottom: 25px;">
+                Social Security provides an estimated <span class="highlight-val" id="banner-ss-ann">$34,800/yr</span> in guaranteed indexed retirement income.
+            </div>
+
+            <p style="font-size: 12px; color: #64748b; font-style: italic; margin-bottom: 15px;">* Indicates required</p>
+
+            <!-- ============================================================
+             SECTION 1: RETIREMENT PLAN INPUTS
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <h2 class="calc-sec-title" style="color: #dfa01e; font-size: 14px; font-weight: 700; text-transform: uppercase;">RETIREMENT PLAN INPUTS</h2>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px 22px;">
+
+                    <!-- Current age -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-age" class="calc-field-label">Current age:*</label></div>
+                        <input type="text" id="inp-age" class="calc-text-input" value="40">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-age" class="calc-range-slider" min="15" max="90" step="1" value="40">
+                            <div class="calc-tick-labels"><span>15</span><span>40</span><span>65</span><span>90</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Age at retirement -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-retire-age" class="calc-field-label">Age at retirement:*</label></div>
+                        <input type="text" id="inp-retire-age" class="calc-text-input" value="65">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-retire-age" class="calc-range-slider" min="50" max="90" step="1" value="65">
+                            <div class="calc-tick-labels"><span>50</span><span>63</span><span>77</span><span>90</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Household annual income -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-income" class="calc-field-label">Household annual income:*</label></div>
+                        <input type="text" id="inp-income" class="calc-text-input" value="$70,000.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-income" class="calc-range-slider" min="10000" max="500000" step="5000" value="70000">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Expected annual salary increase -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-sal-inc" class="calc-field-label">Expected annual salary increase:*</label></div>
+                        <input type="text" id="inp-sal-inc" class="calc-text-input" value="3%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sal-inc" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <div class="calc-tick-labels"><span>0%</span><span>3%</span><span>5%</span><span>8%</span><span>10%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Current retirement savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-cur-sav" class="calc-field-label">Current retirement savings:*</label></div>
+                        <input type="text" id="inp-cur-sav" class="calc-text-input" value="$100,000.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cur-sav" class="calc-range-slider" min="0" max="2000000" step="25000" value="100000">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500K</span><span>$1.0M</span><span>$1.5M</span><span>$2.0M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Percent of income needed during retirement -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-need-pct" class="calc-field-label">Percent of income needed in retirement:*</label></div>
+                        <input type="text" id="inp-need-pct" class="calc-text-input" value="80%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-need-pct" class="calc-range-slider" min="40" max="120" step="5" value="80">
+                            <div class="calc-tick-labels"><span>40%</span><span>60%</span><span>80%</span><span>100%</span><span>120%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return before retirement -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ret-pre" class="calc-field-label">Rate of return before retirement:*</label></div>
+                        <input type="text" id="inp-ret-pre" class="calc-text-input" value="8%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ret-pre" class="calc-range-slider" min="0" max="15" step="0.5" value="8">
+                            <div class="calc-tick-labels"><span>0%</span><span>4%</span><span>8%</span><span>11%</span><span>15%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return during retirement -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ret-post" class="calc-field-label">Rate of return during retirement:*</label></div>
+                        <input type="text" id="inp-ret-post" class="calc-text-input" value="6%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ret-post" class="calc-range-slider" min="0" max="15" step="0.5" value="6">
+                            <div class="calc-tick-labels"><span>0%</span><span>4%</span><span>8%</span><span>11%</span><span>15%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Expected rate of inflation -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-infl" class="calc-field-label">Expected rate of inflation:*</label></div>
+                        <input type="text" id="inp-infl" class="calc-text-input" value="3%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-infl" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <div class="calc-tick-labels"><span>0%</span><span>3%</span><span>5%</span><span>8%</span><span>10%</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Years of retirement income -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-yrs-ret" class="calc-field-label">Years of retirement income:*</label></div>
+                        <input type="text" id="inp-yrs-ret" class="calc-text-input" value="25">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-yrs-ret" class="calc-range-slider" min="5" max="50" step="1" value="25">
+                            <div class="calc-tick-labels"><span>5</span><span>16</span><span>28</span><span>39</span><span>50</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Married Spousal Benefit Checkbox -->
+                    <div class="calc-checkbox-row">
+                        <input type="checkbox" id="chk-married-ss" onchange="calculateSSPlan()">
+                        <label for="chk-married-ss" class="calc-checkbox-label">If you are married, check this box if you have a spouse eligible for benefits.</label>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Key Metric Cards -->
+            <div class="ss-stat-grid">
+                <div class="ss-stat-card">
+                    <div class="ss-stat-val" id="stat-nestegg-with" style="color: #60a5fa;">$642,800</div>
+                    <div class="ss-stat-label">Savings Needed (WITH Social Security)</div>
+                </div>
+                <div class="ss-stat-card">
+                    <div class="ss-stat-val" id="stat-nestegg-without" style="color: #f87171;">$1,480,200</div>
+                    <div class="ss-stat-label">Savings Needed (WITHOUT Social Security)</div>
+                </div>
+                <div class="ss-stat-card">
+                    <div class="ss-stat-val" id="stat-gap-bridged" style="color: #4ade80;">$837,400</div>
+                    <div class="ss-stat-label">Capital Value of Social Security</div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             CHART SECTION: RETIREMENT PLAN RESULTS COMPARISON
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 35px;">
+                <div class="calc-sec-header" style="background: #0b172a; padding: 14px 20px; border-bottom: 1px solid rgba(223,160,30,0.3);">
+                    <h2 class="calc-sec-title" style="color: #dfa01e; font-size: 14px; font-weight: 700; text-transform: uppercase;">RETIREMENT PLAN RESULTS COMPARISON</h2>
+                </div>
+                <div class="calc-sec-body" style="padding: 24px;">
+                    <div style="display: flex; justify-content: flex-end; gap: 20px; font-size: 12.5px; font-weight: 600; margin-bottom: 15px;">
+                        <span style="display: flex; align-items: center; gap: 6px; color: #2563eb;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #2563eb; display: inline-block;"></span> With Social Security
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 6px; color: #ef4444;">
+                            <span style="width: 12px; height: 12px; border-radius: 2px; background: #ef4444; display: inline-block;"></span> Without Social Security
+                        </span>
+                    </div>
+                    <div id="ss-chart-wrapper" style="width: 100%; height: 260px;">
+                        <!-- SVG Comparison Chart -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">SOCIAL SECURITY BENEFIT</h4>
+                    <p class="calc-def-desc">
+                        Social Security is based on a sliding scale depending on your lifetime earnings, how long you work, and what age you retire. Social Security benefits automatically increase each year based on increases in the Consumer Price Index (COLA). In addition, spousal benefits allow a non-working or lower-earning spouse to receive up to 50% of the primary earner's benefit amount.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">AGE AT RETIREMENT & CURRENT AGE</h4>
+                    <p class="calc-def-desc">
+                        Age at which you retire defines your investment compounding timeline and full retirement age (FRA) entitlement under Social Security guidelines.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">HOUSEHOLD ANNUAL INCOME & SALARY INCREASE</h4>
+                    <p class="calc-def-desc">
+                        Your combined household earnings used to project future retirement living standards and baseline Social Security benefit tiers.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">RATE OF RETURN & INFLATION</h4>
+                    <p class="calc-def-desc">
+                        Assumed compound annual investment returns before and during retirement, net of advisory and administrative fees, offset by long-term cost of living inflation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Disclaimer Note -->
+            <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11.5px; line-height: 1.6; color: #64748b;">
+                <p>
+                    The educational tool and calculations provided are hypothetical examples and estimates only. Social Security rules and benefit projections are subject to future legislative reform. Consult a certified financial planner or the Social Security Administration (SSA.gov) for personalized statements.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="report-modal-bg" id="report-modal">
+        <div class="report-modal-box">
+            <button class="report-modal-close" onclick="closeReportModal()">&times;</button>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #dfa01e; padding-bottom: 15px; margin-bottom: 20px;">
+                <img src="assets/logo.svg" alt="The Seiler Group" style="height: 45px;">
+                <div style="text-align: right;">
+                    <h3 style="margin: 0; color: #0b172a; font-size: 18px; font-weight: 700;">SOCIAL SECURITY IMPACT REPORT</h3>
+                    <div style="font-size: 12px; color: #64748b;">The Seiler Group of Raymond James</div>
+                </div>
+            </div>
+
+            <div id="report-modal-content"></div>
+
+            <div style="margin-top: 25px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()" style="padding: 8px 18px; font-size: 13px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button type="button" class="calc-btn calc-btn-primary" onclick="closeReportModal()" style="padding: 8px 22px; font-size: 13px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer style="background: #0b172a; color: #94a3b8; padding: 40px 20px; font-size: 12px; text-align: center; border-top: 1px solid rgba(223,160,30,0.3);">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <p style="margin-bottom: 10px;">&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC.</p>
+            <p style="margin: 0;">Securities offered through Raymond James Financial Services, Inc. Member FINRA / SIPC. Investment advisory services offered through Raymond James Financial Services Advisors, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     CALCULATION SCRIPT
+     ============================================================ -->
+    <script>
+        function fmtMoney(num) {
+            return '$' + Math.round(Number(num) || 0).toLocaleString('en-US');
+        }
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        function setupSync(inputId, rangeId, isPercent, isCurrency) {
+            const inp = document.getElementById(inputId);
+            const rng = document.getElementById(rangeId);
+            if (!inp || !rng) return;
+
+            rng.addEventListener('input', () => {
+                const val = parseFloat(rng.value) || 0;
+                if (isPercent) {
+                    inp.value = val + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateSSPlan();
+            });
+
+            inp.addEventListener('change', () => {
+                let clean = parseClean(inp.value);
+                clean = Math.max(parseFloat(rng.min), Math.min(parseFloat(rng.max), clean));
+                rng.value = clean;
+                if (isPercent) {
+                    inp.value = clean + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(clean);
+                } else {
+                    inp.value = clean;
+                }
+                calculateSSPlan();
+            });
+        }
+
+        let lastSS = null;
+
+        function calculateSSPlan() {
+            const curAge = parseClean(document.getElementById('inp-age').value);
+            const retAge = parseClean(document.getElementById('inp-retire-age').value);
+            const income = parseClean(document.getElementById('inp-income').value);
+            const salInc = (parseClean(document.getElementById('inp-sal-inc').value) || 3) / 100;
+            const curSav = parseClean(document.getElementById('inp-cur-sav').value);
+            const needPct = (parseClean(document.getElementById('inp-need-pct').value) || 80) / 100;
+            const retPre = (parseClean(document.getElementById('inp-ret-pre').value) || 8) / 100;
+            const retPost = (parseClean(document.getElementById('inp-ret-post').value) || 6) / 100;
+            const infl = (parseClean(document.getElementById('inp-infl').value) || 3) / 100;
+            const yrsRet = parseClean(document.getElementById('inp-yrs-ret').value) || 25;
+            const isMarried = document.getElementById('chk-married-ss').checked;
+
+            const yrsToRet = Math.max(1, retAge - curAge);
+            const finalSalary = income * Math.pow(1 + salInc, yrsToRet);
+            const annualNeedYear1 = finalSalary * needPct;
+
+            // Estimated primary Social Security at full retirement age
+            let baseSS = Math.min(48000, Math.max(18000, finalSalary * 0.38));
+            if (isMarried) baseSS *= 1.5; // 50% spousal addition
+
+            // Real return in retirement
+            const realRetPost = (1 + retPost) / (1 + infl) - 1;
+            const pvFactor = realRetPost > 0 ? (1 - Math.pow(1 + realRetPost, -yrsRet)) / realRetPost : yrsRet;
+
+            const nestEggWithout = annualNeedYear1 * pvFactor;
+            const netNeedWithSS = Math.max(0, annualNeedYear1 - baseSS);
+            const nestEggWith = netNeedWithSS * pvFactor;
+            const capitalGap = Math.max(0, nestEggWithout - nestEggWith);
+
+            lastSS = {
+                curAge, retAge, income, curSav, yrsRet,
+                baseSS, nestEggWith, nestEggWithout, capitalGap
+            };
+
+            document.getElementById('banner-ss-ann').innerText = `${fmtMoney(baseSS)}/yr`;
+            document.getElementById('stat-nestegg-with').innerText = fmtMoney(nestEggWith);
+            document.getElementById('stat-nestegg-without').innerText = fmtMoney(nestEggWithout);
+            document.getElementById('stat-gap-bridged').innerText = fmtMoney(capitalGap);
+
+            renderSSChart(nestEggWith, nestEggWithout);
+        }
+
+        function renderSSChart(withSS, withoutSS) {
+            const container = document.getElementById('ss-chart-wrapper');
+            const maxVal = Math.max(withoutSS, 1000000);
+            const w = 680;
+            const h = 260;
+            const padL = 70;
+            const padR = 40;
+            const padT = 20;
+            const padB = 40;
+            const plotH = h - padT - padB;
+
+            const hWith = (withSS / maxVal) * plotH;
+            const hWithout = (withoutSS / maxVal) * plotH;
+
+            const yBase = h - padB;
+            const yWith = yBase - hWith;
+            const yWithout = yBase - hWithout;
+
+            container.innerHTML = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <!-- Grid Lines -->
+                    <line x1="${padL}" y1="${padT}" x2="${w - padR}" y2="${padT}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${padT + plotH / 2}" x2="${w - padR}" y2="${padT + plotH / 2}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${yBase}" x2="${w - padR}" y2="${yBase}" stroke="#cbd5e1" stroke-width="1.5" />
+
+                    <!-- Y Axis Labels -->
+                    <text x="${padL - 8}" y="${padT + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal)}</text>
+                    <text x="${padL - 8}" y="${padT + plotH / 2 + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal / 2)}</text>
+                    <text x="${padL - 8}" y="${yBase}" text-anchor="end" font-size="10" fill="#64748b">$0</text>
+
+                    <!-- Bar 1: With Social Security -->
+                    <rect x="180" y="${yWith}" width="90" height="${hWith}" fill="#2563eb" rx="3" />
+                    <text x="225" y="${yWith - 8}" text-anchor="middle" font-size="12" font-weight="700" fill="#1e40af">${fmtMoney(withSS)}</text>
+                    <text x="225" y="${h - 18}" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">WITH Social Security</text>
+
+                    <!-- Bar 2: Without Social Security -->
+                    <rect x="410" y="${yWithout}" width="90" height="${hWithout}" fill="#ef4444" rx="3" />
+                    <text x="455" y="${yWithout - 8}" text-anchor="middle" font-size="12" font-weight="700" fill="#b91c1c">${fmtMoney(withoutSS)}</text>
+                    <text x="455" y="${h - 18}" text-anchor="middle" font-size="11" font-weight="600" fill="#475569">WITHOUT Social Security</text>
+                </svg>
+            `;
+        }
+
+        function openReportModal() {
+            if (!lastSS) calculateSSPlan();
+            const s = lastSS;
+            const content = document.getElementById('report-modal-content');
+
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                    <div style="background: #f8fafc; padding: 18px; border-radius: 6px; border-left: 4px solid #2563eb;">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #0b172a; text-transform: uppercase;">With Social Security</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Estimated Social Security:</span><strong>${fmtMoney(s.baseSS)}/yr</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Required Capital Nest Egg:</span><strong>${fmtMoney(s.nestEggWith)}</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4);">
+                        <h4 style="margin: 0 0 12px 0; font-size: 13.5px; color: #dfa01e; text-transform: uppercase;">Without Social Security</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px;">
+                            <span>Total Self-Funded Target:</span><strong>${fmtMoney(s.nestEggWithout)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 14px; margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #4ade80;">
+                            <span>Social Security Capital Benefit:</span><strong>${fmtMoney(s.capitalGap)}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #0b172a; text-transform: uppercase;">Strategic Retirement Insights</h4>
+                <p style="font-size: 12.5px; line-height: 1.6; color: #475569;">
+                    Social Security functions as an inflation-indexed lifetime annuity backed by the federal government. Delaying your claim from age 62 up to age 70 increases your monthly benefit by approximately 8% per year, substantially reducing the portfolio withdrawal pressure on your personal savings.
+                </p>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-age', 'range-age', false, false);
+            setupSync('inp-retire-age', 'range-retire-age', false, false);
+            setupSync('inp-income', 'range-income', false, true);
+            setupSync('inp-sal-inc', 'range-sal-inc', true, false);
+            setupSync('inp-cur-sav', 'range-cur-sav', false, true);
+            setupSync('inp-need-pct', 'range-need-pct', true, false);
+            setupSync('inp-ret-pre', 'range-ret-pre', true, false);
+            setupSync('inp-ret-post', 'range-ret-post', true, false);
+            setupSync('inp-infl', 'range-infl', true, false);
+            setupSync('inp-yrs-ret', 'range-yrs-ret', false, false);
+            calculateSSPlan();
+        });
+    </script>
+</body>
+</html>

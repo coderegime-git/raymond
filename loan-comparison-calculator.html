@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Comparison Calculator | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Side-by-side comparison of loan offers. Compare monthly payments, APR, total interest, closing costs, and balloon payments across multiple loans.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .loan-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .loan-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .loan-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .loan-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .subtotal-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dfa01e;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 880px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            margin-top: 15px;
+        }
+        .comp-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 9px 12px;
+            text-align: right;
+            border: 1px solid #1e293b;
+        }
+        .comp-table th:first-child {
+            text-align: left;
+        }
+        .comp-table td {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            text-align: right;
+            color: #334155;
+        }
+        .comp-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+        .comp-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="life-insurance-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Life Insurance Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="long-term-care-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Long-Term Care Calculator">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Loan Comparison Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">LOAN COMPARISON CALCULATOR</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Loans &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Determining which loan provides you with the best value involves more than simply comparing monthly payments. Use this calculator to sort through the monthly payments, fees and other loan costs associated with getting a new loan. By comparing these important variables side-by-side, you can easily see each loan and compare results. Click on the 'View Report' button to see the results in detail.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateLoans()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="loan-result-banner" style="margin-bottom: 25px;">
+                <span class="highlight-val" id="banner-rec-text" style="color: #4ade80;">LOAN 1 HAS THE LOWEST APR AT 6.78%</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="loan-stat-grid">
+                <div class="loan-stat-card">
+                    <div class="loan-stat-val" id="stat-loan1-pmt">$516.60</div>
+                    <div class="loan-stat-label">Loan 1 Monthly Payment</div>
+                </div>
+                <div class="loan-stat-card">
+                    <div class="loan-stat-val" id="stat-loan2-pmt" style="color: #60a5fa;">$489.15</div>
+                    <div class="loan-stat-label">Loan 2 Monthly Payment</div>
+                </div>
+                <div class="loan-stat-card">
+                    <div class="loan-stat-val" id="stat-loan3-pmt" style="color: #4ade80;">$283.89</div>
+                    <div class="loan-stat-label">Loan 3 Monthly Payment</div>
+                </div>
+            </div>
+
+            <!-- ACCORDION: LOAN 1 -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>LOAN 1</span>
+                    <span class="subtotal-badge" id="badge-loan1">Monthly payment: $516.60</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l1-amount" class="calc-label">Loan amount*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l1-amount" class="calc-input" value="$25,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l1-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
+                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l1-rate" class="calc-label">Interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l1-rate" class="calc-input" value="6.50%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l1-rate" class="calc-slider" value="6.5" min="0" max="18" step="0.125">
+                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l1-term" class="calc-label">Term (years)*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="l1-term" class="calc-input" value="5" min="1" max="30"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l1-term" class="calc-slider" value="5" min="1" max="30" step="1">
+                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l1-orig-pct" class="calc-label">Origination fee</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l1-orig-pct" class="calc-input" value="1.00%" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l1-closing" class="calc-label">Closing costs</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l1-closing" class="calc-input" value="$400.00" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION: LOAN 2 -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>LOAN 2</span>
+                    <span class="subtotal-badge" id="badge-loan2">Monthly payment: $489.15</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l2-amount" class="calc-label">Loan amount*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l2-amount" class="calc-input" value="$25,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l2-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
+                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l2-rate" class="calc-label">Interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l2-rate" class="calc-input" value="6.25%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l2-rate" class="calc-slider" value="6.25" min="0" max="18" step="0.125">
+                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l2-term" class="calc-label">Term (years)*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="l2-term" class="calc-input" value="5" min="1" max="30"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l2-term" class="calc-slider" value="5" min="1" max="30" step="1">
+                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l2-orig-pct" class="calc-label">Origination fee</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l2-orig-pct" class="calc-input" value="1.50%" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l2-closing" class="calc-label">Closing costs</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l2-closing" class="calc-input" value="$650.00" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION: LOAN 3 -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>LOAN 3</span>
+                    <span class="subtotal-badge" id="badge-loan3">Monthly payment: $283.89</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l3-amount" class="calc-label">Loan amount*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l3-amount" class="calc-input" value="$25,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l3-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
+                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l3-rate" class="calc-label">Interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l3-rate" class="calc-input" value="6.75%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l3-rate" class="calc-slider" value="6.75" min="0" max="18" step="0.125">
+                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l3-term" class="calc-label">Term (years)*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="l3-term" class="calc-input" value="10" min="1" max="30"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-l3-term" class="calc-slider" value="10" min="1" max="30" step="1">
+                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l3-orig-pct" class="calc-label">Origination fee</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l3-orig-pct" class="calc-input" value="1.00%" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="l3-closing" class="calc-label">Closing costs</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="l3-closing" class="calc-input" value="$400.00" onchange="calculateLoans()"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section: Monthly Payments Comparison -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>MONTHLY PAYMENTS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Payment Comparison</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1e3a8a; display: inline-block; border-radius: 2px;"></span> Loan 1</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #166534; display: inline-block; border-radius: 2px;"></span> Loan 2</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #0284c7; display: inline-block; border-radius: 2px;"></span> Loan 3</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="loan-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">LOAN AMOUNT</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The total dollar amount for this loan.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">INTEREST RATE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The stated interest rate for this loan.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">TERM (YEARS)</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The number of years over which you will pay off the loan. The most common terms are 1-5 years and 30 years. If the loan has a balloon payment, the term can be shorter than the amortization period.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">AMORTIZATION</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The number of years used in calculating the monthly payment.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ORIGINATION FEE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The dollar amount charged as a loan origination fee and is included in the annual percentage rate (APR) calculation.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">CLOSING COSTS</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        Total of all closing costs for this loan.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL PERCENTAGE RATE (APR)</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        A combined calculation of fees, interest and amortization used to compare different loan offers on an equal basis.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment or loan advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">LOAN COMPARISON DETAILED REPORT</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateLoans();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateLoans();
+            });
+        }
+
+        let loanResults = [];
+
+        function calcLoanData(amount, ratePct, termYears, origPct, closing) {
+            const r = (ratePct / 100) / 12;
+            const n = termYears * 12;
+            let monthly = 0;
+            if (r > 0) {
+                monthly = (amount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            } else {
+                monthly = amount / n;
+            }
+            const totalPmt = monthly * n;
+            const totalInterest = totalPmt - amount;
+            const origFee = amount * (origPct / 100);
+            const totalFees = origFee + closing;
+            const apr = ratePct + ((totalFees / amount) / termYears) * 100;
+
+            return {
+                amount, ratePct, termYears, monthly, totalPmt, totalInterest, totalFees, apr
+            };
+        }
+
+        function calculateLoans() {
+            const l1 = calcLoanData(
+                parseNum(document.getElementById('l1-amount').value) || 25000,
+                parseNum(document.getElementById('l1-rate').value) || 6.5,
+                parseNum(document.getElementById('l1-term').value) || 5,
+                parseNum(document.getElementById('l1-orig-pct').value) || 1,
+                parseNum(document.getElementById('l1-closing').value) || 400
+            );
+
+            const l2 = calcLoanData(
+                parseNum(document.getElementById('l2-amount').value) || 25000,
+                parseNum(document.getElementById('l2-rate').value) || 6.25,
+                parseNum(document.getElementById('l2-term').value) || 5,
+                parseNum(document.getElementById('l2-orig-pct').value) || 1.5,
+                parseNum(document.getElementById('l2-closing').value) || 650
+            );
+
+            const l3 = calcLoanData(
+                parseNum(document.getElementById('l3-amount').value) || 25000,
+                parseNum(document.getElementById('l3-rate').value) || 6.75,
+                parseNum(document.getElementById('l3-term').value) || 10,
+                parseNum(document.getElementById('l3-orig-pct').value) || 1,
+                parseNum(document.getElementById('l3-closing').value) || 400
+            );
+
+            loanResults = [l1, l2, l3];
+
+            document.getElementById('badge-loan1').textContent = `Monthly payment: ${fmtMoneyCents(l1.monthly)}`;
+            document.getElementById('badge-loan2').textContent = `Monthly payment: ${fmtMoneyCents(l2.monthly)}`;
+            document.getElementById('badge-loan3').textContent = `Monthly payment: ${fmtMoneyCents(l3.monthly)}`;
+
+            document.getElementById('stat-loan1-pmt').textContent = fmtMoneyCents(l1.monthly);
+            document.getElementById('stat-loan2-pmt').textContent = fmtMoneyCents(l2.monthly);
+            document.getElementById('stat-loan3-pmt').textContent = fmtMoneyCents(l3.monthly);
+
+            // Find lowest APR
+            let lowestAprIdx = 0;
+            if (l2.apr < loanResults[lowestAprIdx].apr) lowestAprIdx = 1;
+            if (l3.apr < loanResults[lowestAprIdx].apr) lowestAprIdx = 2;
+
+            document.getElementById('banner-rec-text').textContent = 
+                `LOAN ${lowestAprIdx + 1} HAS THE LOWEST APR AT ${loanResults[lowestAprIdx].apr.toFixed(2)}%`;
+
+            renderLoanChart(loanResults);
+        }
+
+        function renderLoanChart(loans) {
+            const svg = document.getElementById('loan-chart-svg');
+            if (!svg) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            let maxVal = Math.max(...loans.map(l => l.monthly)) * 1.25;
+            if (maxVal === 0) maxVal = 1000;
+
+            let svgHtml = '';
+            const gridCount = 4;
+            for (let i = 0; i <= gridCount; i++) {
+                const yVal = (maxVal / gridCount) * i;
+                const yPos = padTop + chartH - (i / gridCount) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            const colors = ['#1d4ed8', '#15803d', '#0284c7'];
+            const barW = 75;
+            const slotW = chartW / 3;
+
+            loans.forEach((l, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (l.monthly / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${colors[idx]}" rx="3">
+                        <title>Loan ${idx + 1}: ${fmtMoneyCents(l.monthly)}</title>
+                    </rect>
+                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(l.monthly)}</text>
+                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">Loan ${idx + 1}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!loanResults.length) calculateLoans();
+
+            body.innerHTML = `
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Loan 1</th>
+                            <th>Loan 2</th>
+                            <th>Loan 3</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Loan Amount</td>
+                            <td>${fmtMoney(loanResults[0].amount)}</td>
+                            <td>${fmtMoney(loanResults[1].amount)}</td>
+                            <td>${fmtMoney(loanResults[2].amount)}</td>
+                        </tr>
+                        <tr>
+                            <td>Interest Rate</td>
+                            <td>${loanResults[0].ratePct.toFixed(2)}%</td>
+                            <td>${loanResults[1].ratePct.toFixed(2)}%</td>
+                            <td>${loanResults[2].ratePct.toFixed(2)}%</td>
+                        </tr>
+                        <tr>
+                            <td>Term</td>
+                            <td>${loanResults[0].termYears} Years</td>
+                            <td>${loanResults[1].termYears} Years</td>
+                            <td>${loanResults[2].termYears} Years</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Payment</td>
+                            <td style="font-weight: 700; color: #1d4ed8;">${fmtMoneyCents(loanResults[0].monthly)}</td>
+                            <td style="font-weight: 700; color: #15803d;">${fmtMoneyCents(loanResults[1].monthly)}</td>
+                            <td style="font-weight: 700; color: #0284c7;">${fmtMoneyCents(loanResults[2].monthly)}</td>
+                        </tr>
+                        <tr>
+                            <td>Upfront Fees</td>
+                            <td>${fmtMoney(loanResults[0].totalFees)}</td>
+                            <td>${fmtMoney(loanResults[1].totalFees)}</td>
+                            <td>${fmtMoney(loanResults[2].totalFees)}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Interest Paid</td>
+                            <td>${fmtMoney(loanResults[0].totalInterest)}</td>
+                            <td>${fmtMoney(loanResults[1].totalInterest)}</td>
+                            <td>${fmtMoney(loanResults[2].totalInterest)}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Cost of Loan</td>
+                            <td>${fmtMoney(loanResults[0].totalPmt + loanResults[0].totalFees)}</td>
+                            <td>${fmtMoney(loanResults[1].totalPmt + loanResults[1].totalFees)}</td>
+                            <td>${fmtMoney(loanResults[2].totalPmt + loanResults[2].totalFees)}</td>
+                        </tr>
+                        <tr style="background: #f1f5f9; font-weight: 700;">
+                            <td>Estimated APR</td>
+                            <td style="color: #dfa01e;">${loanResults[0].apr.toFixed(2)}%</td>
+                            <td style="color: #dfa01e;">${loanResults[1].apr.toFixed(2)}%</td>
+                            <td style="color: #dfa01e;">${loanResults[2].apr.toFixed(2)}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('l1-amount', 'range-l1-amount', false, true);
+            setupSync('l1-rate', 'range-l1-rate', true, false);
+            setupSync('l1-term', 'range-l1-term', false, false);
+
+            setupSync('l2-amount', 'range-l2-amount', false, true);
+            setupSync('l2-rate', 'range-l2-rate', true, false);
+            setupSync('l2-term', 'range-l2-term', false, false);
+
+            setupSync('l3-amount', 'range-l3-amount', false, true);
+            setupSync('l3-rate', 'range-l3-rate', true, false);
+            setupSync('l3-term', 'range-l3-term', false, false);
+
+            calculateLoans();
+        });
+    </script>
+</body>
+</html>

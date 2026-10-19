@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roth IRA Savings | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate the growth of your Roth IRA savings and see the powerful tax-free wealth advantage compared to a taxable account.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .roth-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .roth-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .roth-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .roth-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .roth-tax-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 12px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .roth-tax-table th, .roth-tax-table td {
+            padding: 8px 10px;
+            border: 1px solid #cbd5e1;
+            text-align: center;
+        }
+        .roth-tax-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        .roth-tax-table tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 780px;
+            border-top: 5px solid #dfa01e;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+            color: #1e293b;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #64748b;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .report-modal-close:hover {
+            color: #0b172a;
+        }
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 13px;
+        }
+        .report-table th, .report-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        .report-table th {
+            background-color: #0b172a;
+            color: #dfa01e;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .report-table tr:hover td {
+            background-color: #f8fafc;
+        }
+        .report-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER BAR -->
+    <header class="top-nav-container">
+        <div class="top-nav-inner">
+            <div class="brand-left">
+                <a href="index.html" class="brand-logo-link">
+                    <span class="brand-title">THE SEILER GROUP</span>
+                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
+                </a>
+            </div>
+            <div class="header-contact">
+                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
+                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECONDARY NAVIGATION -->
+    <nav class="sub-nav">
+        <div class="sub-nav-inner">
+            <a href="index.html">HOME</a>
+            <a href="corporate-executive-services.html">ABOUT US</a>
+            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
+            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
+            <a href="resources.html" class="active">RESOURCES</a>
+            <a href="contact-us.html">CONTACT US</a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="roth-401k-vs-traditional-401k.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Roth 401(k) vs. Traditional 401(k)">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="roth-ira-conversion.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Roth IRA Conversion">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Roth IRA Savings" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            </div>
+
+            <!-- Page Titles -->
+            <h1 class="calc-page-title">ROTH IRA SAVINGS</h1>
+            <div class="calc-category-path">Retirement &amp; Longevity &gt; Calculator</div>
+
+            <div class="calc-share-container">
+                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
+            </div>
+
+            <p class="calc-intro-paragraph">
+                Investing in a Roth IRA can make a big difference in your retirement savings. That's because the distribution for contributions made to a Roth IRA Account is future tax-free if you held your Roth IRA for 5 years and under Authorized laws. Use This Tool to evaluate tax-free investments.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="calc-actions-row">
+                <button type="button" class="calc-btn-primary" onclick="calculateRothSavings()">CALCULATE</button>
+                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Highlight Banner -->
+            <div class="calc-dynamic-banner" id="roth-banner">
+                <span id="banner-text">At retirement your Roth balance could be worth $448,510.00</span>
+                <span class="banner-badge"><i class="fas fa-piggy-bank"></i> Tax-Free Growth</span>
+            </div>
+
+            <!-- Summary Stat Cards -->
+            <div class="roth-stat-grid">
+                <div class="roth-stat-card">
+                    <div class="roth-stat-val" id="stat-roth-bal" style="color: #60a5fa;">$448,510</div>
+                    <div class="roth-stat-label">Projected Roth IRA Balance</div>
+                </div>
+                <div class="roth-stat-card">
+                    <div class="roth-stat-val" id="stat-taxable-bal" style="color: #4ade80;">$337,215</div>
+                    <div class="roth-stat-label">Taxable Account Balance</div>
+                </div>
+                <div class="roth-stat-card">
+                    <div class="roth-stat-val" id="stat-tax-advantage" style="color: #dfa01e;">+$111,295</div>
+                    <div class="roth-stat-label">Roth Tax-Free Advantage</div>
+                </div>
+                <div class="roth-stat-card">
+                    <div class="roth-stat-val" id="stat-total-contribs">$210,000</div>
+                    <div class="roth-stat-label">Total Contributed</div>
+                </div>
+            </div>
+
+            <!-- CALCULATOR FORM -->
+            <div class="calc-two-col-layout">
+                
+                <!-- Left Column: Inputs -->
+                <div class="calc-inputs-column">
+                    
+                    <div class="calc-section-group">
+                        <div class="calc-group-title">ROTH IRA SAVINGS</div>
+
+                        <!-- Starting balance -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-start-bal">Starting balance*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-start-bal" class="calc-text-input" value="$0.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-start-bal" class="calc-range-slider" min="0" max="100000" step="2500" value="0">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$0</span>
+                                        <span>$50k</span>
+                                        <span>$100k</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Annual contribution -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-contrib">Annual contribution*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-contrib" class="calc-text-input" value="$7,000.00">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-contrib" class="calc-range-slider" min="500" max="8000" step="250" value="7000">
+                                    <div class="calc-slider-range-labels">
+                                        <span>$500</span>
+                                        <span>$4k</span>
+                                        <span>$8k (2024 Limit)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Current age -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-curr-age">Current age*</label>
+                            <div class="calc-input-control">
+                                <input type="number" id="inp-curr-age" class="calc-text-input" value="35" min="18" max="70" step="1">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-curr-age" class="calc-range-slider" min="18" max="70" step="1" value="35">
+                                    <div class="calc-slider-range-labels">
+                                        <span>18</span>
+                                        <span>44</span>
+                                        <span>70</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Age at retirement -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-ret-age">Age at retirement*</label>
+                            <div class="calc-input-control">
+                                <input type="number" id="inp-ret-age" class="calc-text-input" value="65" min="50" max="80" step="1">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-ret-age" class="calc-range-slider" min="50" max="80" step="1" value="65">
+                                    <div class="calc-slider-range-labels">
+                                        <span>50</span>
+                                        <span>65</span>
+                                        <span>80</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Expected rate of return -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-return">Expected rate of return*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-return" class="calc-text-input" value="7.50%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-return" class="calc-range-slider" min="1.0" max="15.0" step="0.25" value="7.5">
+                                    <div class="calc-slider-range-labels">
+                                        <span>1.0%</span>
+                                        <span>8.0%</span>
+                                        <span>15.0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Marginal tax rate -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label" for="inp-tax-rate">Marginal tax rate*</label>
+                            <div class="calc-input-control">
+                                <input type="text" id="inp-tax-rate" class="calc-text-input" value="22.0%">
+                                <div class="calc-slider-wrapper">
+                                    <input type="range" id="range-tax-rate" class="calc-range-slider" min="0" max="40" step="1" value="22">
+                                    <div class="calc-slider-range-labels">
+                                        <span>0%</span>
+                                        <span>22%</span>
+                                        <span>40%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Total contributed calculated -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label">Total contributed</label>
+                            <div class="calc-input-control">
+                                <div id="lbl-total-contrib" style="font-size: 15px; font-weight: 700; color: #0b172a; padding: 8px 0;">$210,000.00</div>
+                            </div>
+                        </div>
+
+                        <!-- Maximize Checkbox -->
+                        <div class="calc-input-row">
+                            <label class="calc-input-label">Maximize contributions</label>
+                            <div class="calc-input-control">
+                                <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; cursor: pointer;">
+                                    <input type="checkbox" id="chk-maximize" onchange="toggleMaximize()">
+                                    Maximize contributions to allowable statutory limit ($7,000 / $8,000 50+)
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Right Column: Interactive Charts -->
+                <div class="calc-charts-column">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-title">ROTH IRA VS. TAXABLE ACCOUNT</div>
+                        <div id="roth-growth-svg-container" style="width: 100%; height: 350px;">
+                            <!-- Dynamic SVG Growth Curves rendered via JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 14px; height: 14px; background: #2563eb; border-radius: 2px;"></span>
+                                <span>Roth IRA (Tax-Free)</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 14px; height: 14px; background: #15803d; border-radius: 2px;"></span>
+                                <span>Taxable Account (Tax-Drag)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- DEFINITIONS SECTION -->
+            <section class="calc-definitions-wrapper">
+                <h3 class="calc-defs-title">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">STARTING BALANCE</div>
+                    <div class="calc-def-desc">The current balance of your Roth IRA.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">ANNUAL CONTRIBUTION</div>
+                    <div class="calc-def-desc">The amount you will contribute to your Roth IRA each year. For 2024, the maximum annual contribution is $7,000 ($8,000 for individuals age 50 or older). High earners are subject to phase-out limitations based on Modified Adjusted Gross Income (MAGI).</div>
+                </div>
+
+                <!-- 2024 MAGI Phaseout Table -->
+                <div style="margin: 20px 0; overflow-x: auto;">
+                    <div style="font-weight: 700; color: #0b172a; font-size: 13px; margin-bottom: 8px;">
+                        2024 Roth IRA Modified AGI Phaseout Ranges
+                    </div>
+                    <table class="roth-tax-table">
+                        <thead>
+                            <tr>
+                                <th>Tax Filing Status</th>
+                                <th>Phase-Out Income Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Married Filing Jointly or Qualifying Surviving Spouse</td><td>$230,000 – $240,000</td></tr>
+                            <tr><td>Single or Head of Household</td><td>$146,000 – $161,000</td></tr>
+                            <tr><td>Married Filing Separately</td><td>$0 – $10,000</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">CURRENT AGE &amp; AGE AT RETIREMENT</div>
+                    <div class="calc-def-desc">Your current age and anticipated retirement age. Contributions are assumed to compound each year until retirement.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">EXPECTED RATE OF RETURN</div>
+                    <div class="calc-def-desc">The expected average annual nominal rate of return for your investments in the account. Historically, the S&amp;P 500 has averaged roughly 10%–11% before inflation.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">MARGINAL TAX RATE</div>
+                    <div class="calc-def-desc">The combined federal and state income tax bracket that applies to your top tier of income. In a taxable investment account, this tax rate creates an annual tax drag on yields, dividends, and realized gains.</div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">ROTH 5-YEAR RULE &amp; QUALIFIED DISTRIBUTIONS</div>
+                    <div class="calc-def-desc">Withdrawals of earnings from a Roth IRA are 100% tax-free provided the account has been open for at least 5 tax years and you are at least age 59½, or meet other statutory exceptions (death, disability, first-time home purchase). Contributed principal can be withdrawn tax-free and penalty-free at any time.</div>
+                </div>
+            </section>
+
+            <!-- LEGAL DISCLAIMER -->
+            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
+                <div>
+                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Roth IRA Savings Projection Report</h2>
+                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
+                </div>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+            </div>
+
+            <div id="report-modal-body">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-corporate">
+        <div class="footer-corporate-inner">
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">THE SEILER GROUP</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    Comprehensive wealth management, financial planning, and visionary investment counseling tailored to high-net-worth individuals and corporate executives.
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">OFFICE LOCATION</div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.6;">
+                    2850 S. Ocean Blvd, Suite 500<br>
+                    Palm Beach, FL 33480<br>
+                    Direct: 800-237-0152
+                </p>
+            </div>
+            <div class="footer-corporate-col">
+                <div class="footer-corporate-title">QUICK LINKS</div>
+                <div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px;">
+                    <a href="resources.html" style="color: #dfa01e; text-decoration: none;">Resource Center</a>
+                    <a href="counseling-visionaries.html" style="color: #94a3b8; text-decoration: none;">Visionary Counseling</a>
+                    <a href="contact-us.html" style="color: #94a3b8; text-decoration: none;">Contact Our Advisors</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            &copy; 2026 The Seiler Group of Raymond James. All rights reserved. Securities offered through Raymond James Financial Services, Inc., member FINRA/SIPC.
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE ENGINE SCRIPT -->
+    <script>
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function fmtPct(num) {
+            return Number(num).toFixed(2) + '%';
+        }
+
+        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
+
+            range.addEventListener('input', () => {
+                let v = parseFloat(range.value);
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(v);
+                } else if (isPct) {
+                    inp.value = fmtPct(v);
+                } else {
+                    inp.value = v;
+                }
+                calculateRothSavings();
+            });
+
+            inp.addEventListener('change', () => {
+                let val = parseClean(inp.value);
+                if (val < parseFloat(range.min)) val = parseFloat(range.min);
+                if (val > parseFloat(range.max)) val = parseFloat(range.max);
+                range.value = val;
+                if (isCurrency) {
+                    inp.value = fmtMoneyCents(val);
+                } else if (isPct) {
+                    inp.value = fmtPct(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateRothSavings();
+            });
+        }
+
+        function toggleMaximize() {
+            const chk = document.getElementById('chk-maximize');
+            const age = parseClean(document.getElementById('inp-curr-age').value) || 35;
+            const inp = document.getElementById('inp-contrib');
+            const range = document.getElementById('range-contrib');
+            if (chk.checked) {
+                const maxVal = age >= 50 ? 8000 : 7000;
+                inp.value = fmtMoneyCents(maxVal);
+                range.value = maxVal;
+            }
+            calculateRothSavings();
+        }
+
+        let rothSavingsData = {};
+
+        function calculateRothSavings() {
+            const startBal = parseClean(document.getElementById('inp-start-bal').value) || 0;
+            const annualContrib = parseClean(document.getElementById('inp-contrib').value) || 7000;
+            const currAge = parseClean(document.getElementById('inp-curr-age').value) || 35;
+            let retAge = parseClean(document.getElementById('inp-ret-age').value) || 65;
+            if (retAge <= currAge) retAge = currAge + 1;
+
+            const rateReturn = (parseClean(document.getElementById('inp-return').value) || 7.5) / 100;
+            const taxRate = (parseClean(document.getElementById('inp-tax-rate').value) || 22.0) / 100;
+
+            const yrs = retAge - currAge;
+            const totalContribs = startBal + (annualContrib * yrs);
+            document.getElementById('lbl-total-contrib').innerText = fmtMoneyCents(totalContribs);
+
+            // In taxable account, annual returns are taxed at ordinary or blended capital gains rate
+            const taxableReturn = rateReturn * (1 - taxRate * 0.45); // blended dividend & turnover tax drag
+
+            let rothPoints = [];
+            let taxablePoints = [];
+
+            let rBal = startBal;
+            let tBal = startBal;
+
+            rothPoints.push({ age: currAge, bal: rBal });
+            taxablePoints.push({ age: currAge, bal: tBal });
+
+            for (let y = 1; y <= yrs; y++) {
+                const age = currAge + y;
+                rBal = rBal * (1 + rateReturn) + annualContrib;
+                tBal = tBal * (1 + taxableReturn) + annualContrib;
+                rothPoints.push({ age, bal: rBal });
+                taxablePoints.push({ age, bal: tBal });
+            }
+
+            const rothFinal = rBal;
+            const taxableFinal = tBal;
+            const taxAdvantage = rothFinal - taxableFinal;
+
+            rothSavingsData = {
+                startBal, annualContrib, currAge, retAge, yrs, rateReturn, taxRate,
+                totalContribs, rothFinal, taxableFinal, taxAdvantage, rothPoints, taxablePoints
+            };
+
+            // Update UI
+            document.getElementById('banner-text').innerText = 
+                `At retirement your Roth balance could be worth ${fmtMoneyCents(rothFinal)}`;
+            document.getElementById('stat-roth-bal').innerText = fmtMoney(rothFinal);
+            document.getElementById('stat-taxable-bal').innerText = fmtMoney(taxableFinal);
+            document.getElementById('stat-tax-advantage').innerText = `+${fmtMoney(taxAdvantage)}`;
+            document.getElementById('stat-total-contribs').innerText = fmtMoney(totalContribs);
+
+            renderGrowthChart(rothPoints, taxablePoints, currAge, retAge, rothFinal);
+        }
+
+        function renderGrowthChart(rothPts, taxablePts, startAge, endAge, maxVal) {
+            const container = document.getElementById('roth-growth-svg-container');
+            const w = 480;
+            const h = 330;
+            const padL = 70;
+            const padR = 30;
+            const padT = 30;
+            const padB = 50;
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            const peak = maxVal * 1.15;
+            const totalYears = endAge - startAge;
+
+            function getX(age) {
+                return padL + ((age - startAge) / totalYears) * chartW;
+            }
+
+            function getY(val) {
+                return padT + chartH - (val / peak) * chartH;
+            }
+
+            let rothStr = rothPts.map(p => `${getX(p.age).toFixed(1)},${getY(p.bal).toFixed(1)}`).join(' ');
+            let taxStr = taxablePts.map(p => `${getX(p.age).toFixed(1)},${getY(p.bal).toFixed(1)}`).join(' ');
+
+            const xEnd = getX(endAge);
+            const yBase = padT + chartH;
+
+            // Roth area
+            const rothArea = `${padL},${yBase} ` + rothStr + ` ${xEnd},${yBase}`;
+            // Taxable area
+            const taxArea = `${padL},${yBase} ` + taxStr + ` ${xEnd},${yBase}`;
+
+            let gridHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const val = (peak / 4) * i;
+                const y = padT + chartH - (i * chartH / 4);
+                gridHtml += `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
+                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val / 1000)}k</text>
+                `;
+            }
+
+            const svgHtml = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
+                    ${gridHtml}
+
+                    <!-- Roth Area (Blue) -->
+                    <polygon points="${rothArea}" fill="#2563eb" fill-opacity="0.9" />
+
+                    <!-- Taxable Area (Green) -->
+                    <polygon points="${taxArea}" fill="#16a34a" fill-opacity="0.95" />
+
+                    <!-- Axis -->
+                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
+
+                    <!-- Age Labels -->
+                    <text x="${padL}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">Age ${startAge}</text>
+                    <text x="${xEnd}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="700" text-anchor="middle">Age ${endAge}</text>
+                </svg>
+            `;
+
+            container.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!rothSavingsData.rothFinal) calculateRothSavings();
+
+            const d = rothSavingsData;
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Tax-Free Wealth Creation</div>
+                    <div style="font-size: 22px; font-weight: 700; color: #60a5fa; margin-top: 4px;">
+                        Roth IRA Balance at Age ${d.retAge}: ${fmtMoneyCents(d.rothFinal)}
+                    </div>
+                    <div style="font-size: 13px; color: #4ade80; margin-top: 4px; font-weight: 600;">
+                        Tax-Free Advantage over Taxable Account: +${fmtMoneyCents(d.taxAdvantage)}
+                    </div>
+                </div>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Account Growth Assumptions</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Current Age / Retirement Age</td><td>${d.currAge} / ${d.retAge} (${d.yrs} compounding years)</td></tr>
+                        <tr><td>Initial Starting Balance</td><td>${fmtMoneyCents(d.startBal)}</td></tr>
+                        <tr><td>Annual Contribution</td><td>${fmtMoneyCents(d.annualContrib)} / year</td></tr>
+                        <tr><td>Total Cumulative Contributed</td><td>${fmtMoneyCents(d.totalContribs)}</td></tr>
+                        <tr><td>Expected Investment Return</td><td>${fmtPct(d.rateReturn * 100)}</td></tr>
+                        <tr><td>Investor Marginal Tax Rate</td><td>${fmtPct(d.taxRate * 100)}</td></tr>
+                    </tbody>
+                </table>
+
+                <table class="report-table">
+                    <thead>
+                        <tr><th colspan="2">Projected Value at Age ${d.retAge}</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #eff6ff; font-weight: 700;">
+                            <td style="color: #1e40af;">Roth IRA (100% Tax-Free In Retirement)</td>
+                            <td style="color: #1d4ed8; font-size: 15px;">${fmtMoneyCents(d.rothFinal)}</td>
+                        </tr>
+                        <tr style="background: #f0fdf4;">
+                            <td style="color: #166534;">Taxable Brokerage Account (Annual Tax Drag)</td>
+                            <td style="color: #15803d; font-size: 15px;">${fmtMoneyCents(d.taxableFinal)}</td>
+                        </tr>
+                        <tr style="background: #fffbeb; font-weight: 800;">
+                            <td style="color: #b45309;">Roth IRA Tax Savings Benefit</td>
+                            <td style="color: #dfa01e; font-size: 16px;">+${fmtMoneyCents(d.taxAdvantage)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-start-bal', 'range-start-bal', false, true);
+            setupSync('inp-contrib', 'range-contrib', false, true);
+            setupSync('inp-curr-age', 'range-curr-age', false, false);
+            setupSync('inp-ret-age', 'range-ret-age', false, false);
+            setupSync('inp-return', 'range-return', true, false);
+            setupSync('inp-tax-rate', 'range-tax-rate', true, false);
+
+            calculateRothSavings();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>401(k): Spend It or Save It? | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="There are several ways to manage your 401(k) balance when you leave an employer. Use this calculator to illustrate the real cost of taxes and lost retirement earnings.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=2">
+</head>
+
+<body class="calc-white-page">
+
+    <!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
+            </a>
+        </div>
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item" id="nav-item-insights">
+                        ALL RESOURCES
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="401k-savings-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: 401(k) Savings Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="403b-savings-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: 403(b) Savings Calculator">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">401(K): SPEND IT OR SAVE IT</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    There are several ways to manage your 401(k) balance when you leave an employer. The most fundamental of which is should you spend it or save it? Depending on your age and tax bracket, making the wrong decision can cost you thousands of dollars both in taxes and lost earnings. This calculator helps illustrate the difference.
+                </p>
+            </header>
+
+            <!-- Sticky Floating Action Box (Pinned to top when scrolling) -->
+            <div class="calc-action-card-sticky-wrapper">
+                <section class="calc-action-card">
+                    <div class="calc-btn-row">
+                        <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-subtitle">401(k) Spend It or Save It?</div>
+                    <div class="calc-action-right-icons">
+                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" id="btn-menu-report" title="View Full Report">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <span class="calc-req-text">*indicates required</span>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ============================================================
+             SECTION 1: 401(K) ACCOUNT DETAILS
+             ============================================================ -->
+            <section class="calc-section" id="sec-account-details">
+                <div class="calc-sec-header" onclick="toggleSec('sec-account-details')">
+                    <h2 class="calc-sec-title">401(K) ACCOUNT DETAILS:</h2>
+                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+                </div>
+                <div class="calc-sec-body">
+
+                    <!-- Current 401(k) balance -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-balance" class="calc-field-label">Current 401(k) balance:*</label>
+                            <span class="calc-q-dot" title="Current value in your 401(k) account">?</span>
+                        </div>
+                        <input type="text" id="inp-balance" class="calc-text-input" value="$1,000">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-balance" class="calc-range-slider" min="0" max="1000000" step="500" value="1000">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Annual rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-return" class="calc-field-label">Annual rate of return:*</label>
+                            <span class="calc-q-dot" title="Expected rate of return if funds remain invested">?</span>
+                        </div>
+                        <input type="text" id="inp-return" class="calc-text-input" value="7%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-return" class="calc-range-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current age -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-age" class="calc-field-label">Current age:*</label>
+                            <span class="calc-q-dot" title="Your current age">?</span>
+                        </div>
+                        <input type="text" id="inp-age" class="calc-text-input" value="29">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-age" class="calc-range-slider" min="15" max="90" step="1" value="29">
+                            <div class="calc-tick-labels">
+                                <span>15</span>
+                                <span>40</span>
+                                <span>65</span>
+                                <span>90</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Age at retirement -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-retire-age" class="calc-field-label">Age at retirement:*</label>
+                            <span class="calc-q-dot" title="Target retirement age">?</span>
+                        </div>
+                        <input type="text" id="inp-retire-age" class="calc-text-input" value="65">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-retire-age" class="calc-range-slider" min="10" max="90" step="1" value="65">
+                            <div class="calc-tick-labels">
+                                <span>10</span>
+                                <span>37</span>
+                                <span>63</span>
+                                <span>90</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Federal income tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-fed-tax" class="calc-field-label">Federal income tax rate:*</label>
+                            <span class="calc-q-dot" title="Your marginal federal income tax bracket">?</span>
+                        </div>
+                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="25%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="50" step="1" value="25">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State income tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-state-tax" class="calc-field-label">State income tax rate:*</label>
+                            <span class="calc-q-dot" title="Your state income tax rate">?</span>
+                        </div>
+                        <input type="text" id="inp-state-tax" class="calc-text-input" value="5%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="20" step="0.5" value="5">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 2: CASH TODAY VS. SAVINGS AT RETIREMENT
+             ============================================================ -->
+            <section class="calc-section" id="sec-chart">
+                <div class="calc-sec-header" onclick="toggleSec('sec-chart')">
+                    <h2 class="calc-sec-title">CASH TODAY VS. SAVINGS AT RETIREMENT</h2>
+                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+                </div>
+                <div class="calc-sec-body">
+
+                    <div class="calc-chart-box">
+                        <div class="calc-tip-box" id="chart-tip"></div>
+                        <svg class="calc-chart-svg" id="spend-chart-svg" viewBox="0 0 760 330" preserveAspectRatio="none">
+                            <!-- Injected dynamically via JS -->
+                        </svg>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: TAXES, PENALTIES & LOST INTEREST
+             ============================================================ -->
+            <section class="calc-section collapsed" id="sec-breakdown">
+                <div class="calc-sec-header" onclick="toggleSec('sec-breakdown')">
+                    <h2 class="calc-sec-title">TAXES, PENALTIES &amp; LOST INTEREST</h2>
+                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+                </div>
+                <div class="calc-sec-body">
+                    <table class="calc-breakdown-table">
+                        <tbody>
+                            <tr>
+                                <td>Initial 401(k) Balance:</td>
+                                <td id="bk-init">$1,000.00</td>
+                            </tr>
+                            <tr>
+                                <td>Federal Income Tax:</td>
+                                <td id="bk-fed">-$250.00</td>
+                            </tr>
+                            <tr>
+                                <td>State Income Tax:</td>
+                                <td id="bk-state">-$50.00</td>
+                            </tr>
+                            <tr>
+                                <td>IRS Early Withdrawal Penalty (10%):</td>
+                                <td id="bk-penalty">-$100.00</td>
+                            </tr>
+                            <tr class="calc-breakdown-total">
+                                <td>Cash Received If Spent Today:</td>
+                                <td id="bk-cash">$600.00</td>
+                            </tr>
+                            <tr>
+                                <td>Future Compound Value If Kept Saved:</td>
+                                <td id="bk-future">$11,424.00</td>
+                            </tr>
+                            <tr style="color: #c00000; font-weight: 800;">
+                                <td>Total Opportunity Cost of Cashing Out:</td>
+                                <td id="bk-cost">-$10,824.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: DEFINITIONS
+             ============================================================ -->
+            <section class="calc-def-wrap">
+                <h3 class="calc-def-heading">DEFINITIONS</h3>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">CURRENT AGE</h4>
+                    <p class="calc-term-desc">Your current age.</p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">AGE AT RETIREMENT</h4>
+                    <p class="calc-term-desc">
+                        Age you wish to retire. The tool calculates the ending balance at retirement for each of your rollover options.
+                    </p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">FEDERAL INCOME TAX RATE</h4>
+                    <p class="calc-term-desc">
+                        Consult the table below to determine your federal tax bracket. If you are unsure, the calculator will choose 25%. Please note that state taxes are entered in a separate entry field. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                    </p>
+
+                    <!-- Filing Status Table for 2026 -->
+                    <div class="calc-tax-table-box">
+                        <table class="calc-tax-table">
+                            <caption>Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</caption>
+                            <thead>
+                                <tr>
+                                    <th>Tax Rate</th>
+                                    <th>Married Filing Jointly or Qualified Widow(er)</th>
+                                    <th>Single</th>
+                                    <th>Head of Household</th>
+                                    <th>Married Filing Separately</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>10%</strong></td>
+                                    <td>$0 - $24,800</td>
+                                    <td>$0 - $12,400</td>
+                                    <td>$0 - $17,700</td>
+                                    <td>$0 - $12,400</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>12%</strong></td>
+                                    <td>$24,800 - $100,800</td>
+                                    <td>$12,400 - $50,400</td>
+                                    <td>$17,700 - $67,450</td>
+                                    <td>$12,400 - $50,400</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>22%</strong></td>
+                                    <td>$100,800 - $211,400</td>
+                                    <td>$50,400 - $105,700</td>
+                                    <td>$67,450 - $105,700</td>
+                                    <td>$50,400 - $105,700</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24%</strong></td>
+                                    <td>$211,400 - $403,550</td>
+                                    <td>$105,700 - $201,775</td>
+                                    <td>$105,700 - $201,750</td>
+                                    <td>$105,700 - $201,775</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>32%</strong></td>
+                                    <td>$403,550 - $512,450</td>
+                                    <td>$201,775 - $256,225</td>
+                                    <td>$201,750 - $256,200</td>
+                                    <td>$201,775 - $256,225</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>35%</strong></td>
+                                    <td>$512,450 - $768,700</td>
+                                    <td>$256,225 - $640,600</td>
+                                    <td>$256,200 - $640,600</td>
+                                    <td>$256,225 - $384,350</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>37%</strong></td>
+                                    <td>Over $768,700</td>
+                                    <td>Over $640,600</td>
+                                    <td>Over $640,600</td>
+                                    <td>Over $384,350</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-tax-footnote">
+                            *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates. Source: Rev. Proc. 2025-32
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">STATE INCOME TAX RATE</h4>
+                    <p class="calc-term-desc">
+                        The current state marginal tax rate you expect to pay on any additional income (or taxable distributions).
+                    </p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">CURRENT 401(K) BALANCE</h4>
+                    <p class="calc-term-desc">
+                        The starting balance or current amount you have invested or saved in your 401(k).
+                    </p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-term-title">ANNUAL RATE OF RETURN</h4>
+                    <p class="calc-term-desc">
+                        The annual rate of return for your 401(k) account. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                    </p>
+                    <p class="calc-term-desc">
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                    </p>
+                </div>
+
+                <!-- Legal Disclaimer Strip -->
+                <div class="calc-disclaimer-strip">
+                    <hr class="calc-divider">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Report Modal -->
+    <div class="calc-modal-bg" id="modal-report">
+        <div class="calc-modal-content">
+            <div class="calc-modal-head">
+                <h3>401(k) Rollover vs. Cash Out Amortization Report</h3>
+                <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="calc-modal-body">
+                <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
+                <table class="calc-breakdown-table" style="font-size: 13px;">
+                    <thead>
+                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
+                            <th style="padding: 10px 12px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Category</th>
+                            <th style="padding: 10px 12px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-table-rows"></tbody>
+                </table>
+            </div>
+            <div class="calc-modal-foot">
+                <button type="button" class="calc-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                <button type="button" class="calc-btn" id="modal-btn-done" style="background: #dfa01e; color: #080a0f; font-weight: 700;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <section class="champion-strip">
+        <div class="champ-brand">
+            <span class="champ-the">THE</span>
+            <span class="champ-name">SEILER GROUP</span>
+            <span class="champ-sub">OF RAYMOND JAMES</span>
+        </div>
+        <div class="champ-quote">
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
+            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
+            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
+            complete the organization's initial and ongoing certification requirements to use the certification marks.
+        </div>
+        <div class="champ-cta">
+            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="site-footer">
+        <div class="footer-addresses">
+            <div class="addr-row">
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
+                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
+                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
+                    Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Script -->
+    <script>
+        const fmtCurr = (num) => '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
+        const parseNum = (val) => parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+
+        function toggleSec(id) {
+            document.getElementById(id)?.classList.toggle('collapsed');
+        }
+
+        function toggleMobileMenu(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
+            }
+        }
+
+        // Form controls
+        const inpBalance = document.getElementById('inp-balance');
+        const rangeBalance = document.getElementById('range-balance');
+
+        const inpReturn = document.getElementById('inp-return');
+        const rangeReturn = document.getElementById('range-return');
+
+        const inpAge = document.getElementById('inp-age');
+        const rangeAge = document.getElementById('range-age');
+
+        const inpRetireAge = document.getElementById('inp-retire-age');
+        const rangeRetireAge = document.getElementById('range-retire-age');
+
+        const inpFedTax = document.getElementById('inp-fed-tax');
+        const rangeFedTax = document.getElementById('range-fed-tax');
+
+        const inpStateTax = document.getElementById('inp-state-tax');
+        const rangeStateTax = document.getElementById('range-state-tax');
+
+        function bindCtl(inp, range, type) {
+            range.addEventListener('input', () => {
+                const v = parseFloat(range.value);
+                if (type === 'curr') inp.value = fmtCurr(v);
+                else if (type === 'pct') inp.value = `${v}%`;
+                else inp.value = v;
+                calculate();
+            });
+            inp.addEventListener('change', () => {
+                const v = parseNum(inp.value);
+                range.value = v;
+                if (type === 'curr') inp.value = fmtCurr(v);
+                else if (type === 'pct') inp.value = `${v}%`;
+                else inp.value = v;
+                calculate();
+            });
+        }
+
+        bindCtl(inpBalance, rangeBalance, 'curr');
+        bindCtl(inpReturn, rangeReturn, 'pct');
+        bindCtl(inpAge, rangeAge, 'num');
+        bindCtl(inpRetireAge, rangeRetireAge, 'num');
+        bindCtl(inpFedTax, rangeFedTax, 'pct');
+        bindCtl(inpStateTax, rangeStateTax, 'pct');
+
+        let spendVal = 600;
+        let saveVal = 11424;
+
+        function calculate() {
+            const P = parseNum(rangeBalance.value);
+            const r = parseNum(rangeReturn.value) / 100;
+            const age = parseNum(rangeAge.value);
+            const retireAge = Math.max(age + 1, parseNum(rangeRetireAge.value));
+            const fedTaxRate = parseNum(rangeFedTax.value) / 100;
+            const stateTaxRate = parseNum(rangeStateTax.value) / 100;
+
+            const years = retireAge - age;
+
+            // 10% penalty if cashing out before 59.5
+            const penaltyRate = age < 59.5 ? 0.10 : 0.00;
+            const totalTaxAndPenaltyRate = fedTaxRate + stateTaxRate + penaltyRate;
+
+            // Cash received today if spent
+            spendVal = Math.round(P * (1 - totalTaxAndPenaltyRate));
+
+            // Future value if saved and compounded at r
+            saveVal = Math.round(P * Math.pow(1 + r, years));
+
+            // Update Breakdown Table
+            const fedTaxAmount = Math.round(P * fedTaxRate);
+            const stateTaxAmount = Math.round(P * stateTaxRate);
+            const penaltyAmount = Math.round(P * penaltyRate);
+            const costLostGrowth = Math.max(0, saveVal - spendVal);
+
+            document.getElementById('bk-init').textContent = fmtCurr(P);
+            document.getElementById('bk-fed').textContent = '-' + fmtCurr(fedTaxAmount);
+            document.getElementById('bk-state').textContent = '-' + fmtCurr(stateTaxAmount);
+            document.getElementById('bk-penalty').textContent = '-' + fmtCurr(penaltyAmount);
+            document.getElementById('bk-cash').textContent = fmtCurr(spendVal);
+            document.getElementById('bk-future').textContent = fmtCurr(saveVal);
+            document.getElementById('bk-cost').textContent = '-' + fmtCurr(costLostGrowth);
+
+            renderBarChart(spendVal, saveVal);
+        }
+
+        function renderBarChart(spend, save) {
+            const svg = document.getElementById('spend-chart-svg');
+            const tip = document.getElementById('chart-tip');
+            svg.innerHTML = '';
+
+            const w = 760;
+            const h = 330;
+            const padL = 75;
+            const padR = 30;
+            const padT = 30;
+            const padB = 40;
+
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            // Round max scale to multiple of $2,000 (at least $14,000)
+            const maxVal = Math.max(14000, Math.ceil(Math.max(spend, save) / 2000) * 2000);
+            const steps = 7;
+            const stepVal = maxVal / steps;
+
+            // Y Grid Lines & Labels
+            for (let i = 0; i <= steps; i++) {
+                const val = i * stepVal;
+                const yPos = padT + chartH - (i / steps) * chartH;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', padL);
+                line.setAttribute('x2', w - padR);
+                line.setAttribute('y1', yPos);
+                line.setAttribute('y2', yPos);
+                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', padL - 10);
+                text.setAttribute('y', yPos + 4);
+                text.setAttribute('text-anchor', 'end');
+                text.setAttribute('font-family', 'Open Sans, sans-serif');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', '#94a3b8');
+                text.textContent = fmtCurr(val);
+                svg.appendChild(text);
+            }
+
+            // Two Bars: Spend it & Save it
+            const colWidth = chartW / 2;
+            const barW = Math.min(150, colWidth * 0.55);
+
+            // 1. Spend It (Royal Blue)
+            const xSpend = padL + colWidth * 0.5;
+            const hSpend = (spend / maxVal) * chartH;
+            const ySpend = padT + chartH - hSpend;
+
+            const rectSpend = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rectSpend.setAttribute('x', xSpend - barW / 2);
+            rectSpend.setAttribute('y', ySpend);
+            rectSpend.setAttribute('width', barW);
+            rectSpend.setAttribute('height', Math.max(2, hSpend));
+            rectSpend.setAttribute('fill', '#2563eb');
+            rectSpend.setAttribute('stroke', '#3b82f6');
+            rectSpend.setAttribute('rx', '3');
+            rectSpend.setAttribute('cursor', 'pointer');
+
+            const txtSpendVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txtSpendVal.setAttribute('x', xSpend);
+            txtSpendVal.setAttribute('y', ySpend - 8);
+            txtSpendVal.setAttribute('text-anchor', 'middle');
+            txtSpendVal.setAttribute('font-family', 'Montserrat, sans-serif');
+            txtSpendVal.setAttribute('font-size', '13');
+            txtSpendVal.setAttribute('font-weight', '700');
+            txtSpendVal.setAttribute('fill', '#ffffff');
+            txtSpendVal.textContent = fmtCurr(spend);
+
+            const txtSpendLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txtSpendLabel.setAttribute('x', xSpend);
+            txtSpendLabel.setAttribute('y', padT + chartH + 22);
+            txtSpendLabel.setAttribute('text-anchor', 'middle');
+            txtSpendLabel.setAttribute('font-family', 'Montserrat, sans-serif');
+            txtSpendLabel.setAttribute('font-size', '12');
+            txtSpendLabel.setAttribute('font-weight', '700');
+            txtSpendLabel.setAttribute('letter-spacing', '0.5px');
+            txtSpendLabel.setAttribute('fill', '#cbd5e1');
+            txtSpendLabel.textContent = 'SPEND IT';
+
+            // 2. Save It (Luxury Gold)
+            const xSave = padL + colWidth * 1.5;
+            const hSave = (save / maxVal) * chartH;
+            const ySave = padT + chartH - hSave;
+
+            const rectSave = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rectSave.setAttribute('x', xSave - barW / 2);
+            rectSave.setAttribute('y', ySave);
+            rectSave.setAttribute('width', barW);
+            rectSave.setAttribute('height', Math.max(2, hSave));
+            rectSave.setAttribute('fill', '#d89e1b');
+            rectSave.setAttribute('stroke', '#f5b938');
+            rectSave.setAttribute('rx', '3');
+            rectSave.setAttribute('cursor', 'pointer');
+
+            const txtSaveVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txtSaveVal.setAttribute('x', xSave);
+            txtSaveVal.setAttribute('y', ySave - 8);
+            txtSaveVal.setAttribute('text-anchor', 'middle');
+            txtSaveVal.setAttribute('font-family', 'Montserrat, sans-serif');
+            txtSaveVal.setAttribute('font-size', '13');
+            txtSaveVal.setAttribute('font-weight', '700');
+            txtSaveVal.setAttribute('fill', '#dfa01e');
+            txtSaveVal.textContent = fmtCurr(save);
+
+            const txtSaveLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txtSaveLabel.setAttribute('x', xSave);
+            txtSaveLabel.setAttribute('y', padT + chartH + 22);
+            txtSaveLabel.setAttribute('text-anchor', 'middle');
+            txtSaveLabel.setAttribute('font-family', 'Montserrat, sans-serif');
+            txtSaveLabel.setAttribute('font-size', '12');
+            txtSaveLabel.setAttribute('font-weight', '700');
+            txtSaveLabel.setAttribute('letter-spacing', '0.5px');
+            txtSaveLabel.setAttribute('fill', '#cbd5e1');
+            txtSaveLabel.textContent = 'SAVE IT';
+
+            svg.appendChild(rectSpend);
+            svg.appendChild(txtSpendVal);
+            svg.appendChild(txtSpendLabel);
+
+            svg.appendChild(rectSave);
+            svg.appendChild(txtSaveVal);
+            svg.appendChild(txtSaveLabel);
+
+            // Bottom axis line
+            const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            axisLine.setAttribute('x1', padL);
+            axisLine.setAttribute('x2', w - padR);
+            axisLine.setAttribute('y1', padT + chartH);
+            axisLine.setAttribute('y2', padT + chartH);
+            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.15)');
+            axisLine.setAttribute('stroke-width', '1.5');
+            svg.appendChild(axisLine);
+        }
+
+        // View Report Modal
+        const modal = document.getElementById('modal-report');
+        function openReport() {
+            document.getElementById('modal-summary').innerHTML = `
+                Comparing cashing out vs rolling over a <strong>${fmtCurr(parseNum(rangeBalance.value))}</strong> 401(k) balance. 
+                If spent today at age ${rangeAge.value}, after taxes &amp; early withdrawal penalties you receive <strong>${fmtCurr(spendVal)}</strong>. 
+                If kept saved until retirement at age ${rangeRetireAge.value} earning ${rangeReturn.value}%, it will grow to <strong>${fmtCurr(saveVal)}</strong>.
+            `;
+            const rows = document.getElementById('modal-table-rows');
+            rows.innerHTML = `
+                <tr><td>Cash Today If Spent:</td><td style="text-align: right;"><strong>${fmtCurr(spendVal)}</strong></td></tr>
+                <tr><td>Savings at Retirement:</td><td style="text-align: right; color: #2e7d32;"><strong>${fmtCurr(saveVal)}</strong></td></tr>
+                <tr><td>Net Opportunity Cost:</td><td style="text-align: right; color: #c62828;"><strong>-${fmtCurr(saveVal - spendVal)}</strong></td></tr>
+            `;
+            modal.classList.add('active');
+        }
+
+        document.getElementById('btn-view-report').addEventListener('click', openReport);
+        document.getElementById('btn-menu-report').addEventListener('click', openReport);
+        document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('active'));
+        document.getElementById('modal-btn-done').addEventListener('click', () => modal.classList.remove('active'));
+        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+        document.getElementById('btn-calculate').addEventListener('click', () => {
+            calculate();
+            document.getElementById('sec-chart').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Initialize calculation
+        calculate();
+
+        // Header scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

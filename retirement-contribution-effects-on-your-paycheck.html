@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retirement Contribution Effects on Your Paycheck | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate how increasing your 401(k) or 403(b) retirement contributions affects your take-home paycheck and long-term nest egg with pre-tax tax advantages.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .pay-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .pay-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .pay-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .pay-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .calc-select-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+        .calc-select-input {
+            width: 100%;
+            max-width: 280px;
+            padding: 8px 12px;
+            background: #0b172a;
+            color: #ffffff;
+            border: 1px solid rgba(223, 160, 30, 0.4);
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+        }
+        .tax-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .tax-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid #1e293b;
+        }
+        .tax-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .tax-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="required-minimum-distributions-rmd.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Required Minimum Distributions">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="resources.html?media=Calculators" class="calc-side-nav-btn next-btn" title="Next Calculator: View All Calculators">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Retirement Contribution Effects on Paycheck" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">RETIREMENT CONTRIBUTION EFFECTS ON YOUR PAYCHECK</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    An employer-sponsored retirement savings account could be one of your best tools for creating a secure retirement. As you make pre-tax contributions, you save on taxes. Most plans also allow you to save on income taxes, compounding investment growth, and many plans also provide employer-matching contributions. This calculator helps you see how contributing pre-tax dollars impacts your take-home paycheck and long-term nest egg.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculatePaycheck()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="pay-result-banner" style="margin-bottom: 25px;">
+                Contributing 5% instead of 1% reduces your paycheck by <span class="highlight-val" id="banner-pay-reduction" style="color: #facc15;">$123.08</span>, but could increase your retirement savings by <span class="highlight-val" id="banner-savings-increase" style="color: #4ade80;">$358,461.00</span>!
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="pay-stat-grid">
+                <div class="pay-stat-card">
+                    <div class="pay-stat-val" id="stat-curr-takehome">$2,145</div>
+                    <div class="pay-stat-label">Current Take-Home Pay</div>
+                </div>
+                <div class="pay-stat-card">
+                    <div class="pay-stat-val" id="stat-prop-takehome" style="color: #60a5fa;">$2,022</div>
+                    <div class="pay-stat-label">Proposed Take-Home Pay</div>
+                </div>
+                <div class="pay-stat-card">
+                    <div class="pay-stat-val" id="stat-future-nestegg" style="color: #4ade80;">$448,076</div>
+                    <div class="pay-stat-label">Projected Nest Egg (Proposed)</div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: YOUR PROPOSED RETIREMENT SAVINGS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>YOUR PROPOSED RETIREMENT SAVINGS</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Current Salary -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-salary" class="calc-label">Gross annual salary*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-salary" class="calc-input" value="$75,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-salary" class="calc-slider" value="75000" min="15000" max="300000" step="2500">
+                                <div class="calc-slider-scale"><span>$15,000</span><span>$150,000</span><span>$300,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Contribution % -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-curr-pct" class="calc-label">Current contribution %*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-curr-pct" class="calc-input" value="1.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-curr-pct" class="calc-slider" value="1" min="0" max="25" step="1">
+                                <div class="calc-slider-scale"><span>0%</span><span>12%</span><span>25%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Proposed Contribution % -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-prop-pct" class="calc-label">Proposed contribution %*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-prop-pct" class="calc-input" value="5.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-prop-pct" class="calc-slider" value="5" min="0" max="25" step="1">
+                                <div class="calc-slider-scale"><span>0%</span><span>12%</span><span>25%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pay Frequency -->
+                    <div class="calc-select-row">
+                        <label for="sel-pay-freq" class="calc-label" style="margin-bottom: 0;">Pay frequency</label>
+                        <select id="sel-pay-freq" class="calc-select-input" onchange="calculatePaycheck()">
+                            <option value="52">Weekly (52/yr)</option>
+                            <option value="26" selected>Bi-weekly (26/yr)</option>
+                            <option value="24">Semi-monthly (24/yr)</option>
+                            <option value="12">Monthly (12/yr)</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Accordion 2: FILING STATUS AND RETIREMENT ASSUMPTIONS -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>FILING STATUS &amp; INVESTMENT PLAN</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <div class="calc-select-row">
+                        <label for="sel-tax-filing" class="calc-label" style="margin-bottom: 0;">Federal filing status</label>
+                        <select id="sel-tax-filing" class="calc-select-input" onchange="calculatePaycheck()">
+                            <option value="single" selected>Single</option>
+                            <option value="mfj">Married Filing Jointly</option>
+                            <option value="hoh">Head of Household</option>
+                        </select>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-years-ret" class="calc-label">Years until retirement*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="inp-years-ret" class="calc-input" value="25" min="1" max="40"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-years-ret" class="calc-slider" value="25" min="1" max="40" step="1">
+                                <div class="calc-slider-scale"><span>1 yr</span><span>20 yrs</span><span>40 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ror-plan" class="calc-label">Expected annual return*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-ror-plan" class="calc-input" value="7.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-ror-plan" class="calc-slider" value="7" min="0" max="15" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>7.5%</span><span>15%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Chart Section: Paycheck Comparison -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>TAKE-HOME PAYCHECK COMPARISON</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Per-Paycheck Net Income</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1d4ed8; display: inline-block; border-radius: 2px;"></span> Current</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #15803d; display: inline-block; border-radius: 2px;"></span> Proposed</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="pay-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">RETIREMENT CONTRIBUTION %</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">This is the percentage of your gross annual salary you choose to save into your pre-tax retirement plan.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">PAY FREQUENCY</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">How often you receive a paycheck (e.g. bi-weekly 26 pay periods per year).</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">TAX ADVANTAGE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Because contributions are pre-tax, every dollar contributed reduces your taxable income, softening the net impact on your paycheck.</p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment or tax advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">RETIREMENT CONTRIBUTION PAYCHECK REPORT</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculatePaycheck();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculatePaycheck();
+            });
+        }
+
+        let payReport = {};
+
+        function calculatePaycheck() {
+            const salary = parseNum(document.getElementById('inp-salary').value) || 75000;
+            const currPct = (parseNum(document.getElementById('inp-curr-pct').value) || 1) / 100;
+            const propPct = (parseNum(document.getElementById('inp-prop-pct').value) || 5) / 100;
+            const freq = parseInt(document.getElementById('sel-pay-freq').value, 10) || 26;
+            const years = parseInt(document.getElementById('inp-years-ret').value, 10) || 25;
+            const ror = (parseNum(document.getElementById('inp-ror-plan').value) || 7) / 100;
+
+            const grossPerPeriod = salary / freq;
+            const estTaxRate = 0.22; // Marginal combined tax savings rate
+            const ficaRate = 0.0765;
+
+            // Current Paycheck
+            const currContrib = grossPerPeriod * currPct;
+            const currTaxable = grossPerPeriod - currContrib;
+            const currTax = currTaxable * estTaxRate;
+            const currFica = grossPerPeriod * ficaRate;
+            const currTakeHome = grossPerPeriod - currContrib - currTax - currFica;
+
+            // Proposed Paycheck
+            const propContrib = grossPerPeriod * propPct;
+            const propTaxable = grossPerPeriod - propContrib;
+            const propTax = propTaxable * estTaxRate;
+            const propFica = grossPerPeriod * ficaRate;
+            const propTakeHome = grossPerPeriod - propContrib - propTax - propFica;
+
+            const reductionPerPeriod = Math.max(0, currTakeHome - propTakeHome);
+
+            // Future Nest Egg Calculation
+            const rAnnual = ror;
+            const currAnnualContrib = salary * currPct;
+            const propAnnualContrib = salary * propPct;
+
+            let currNestEgg = 0;
+            let propNestEgg = 0;
+            for (let y = 0; y < years; y++) {
+                currNestEgg = (currNestEgg + currAnnualContrib) * (1 + rAnnual);
+                propNestEgg = (propNestEgg + propAnnualContrib) * (1 + rAnnual);
+            }
+            const eggDifference = Math.max(0, propNestEgg - currNestEgg);
+
+            payReport = {
+                currTakeHome, propTakeHome, reductionPerPeriod, currNestEgg, propNestEgg, eggDifference, currPct, propPct
+            };
+
+            document.getElementById('banner-pay-reduction').textContent = fmtMoneyCents(reductionPerPeriod);
+            document.getElementById('banner-savings-increase').textContent = fmtMoney(eggDifference);
+
+            document.getElementById('stat-curr-takehome').textContent = fmtMoney(currTakeHome);
+            document.getElementById('stat-prop-takehome').textContent = fmtMoney(propTakeHome);
+            document.getElementById('stat-future-nestegg').textContent = fmtMoney(propNestEgg);
+
+            renderPayChart(currTakeHome, propTakeHome);
+        }
+
+        function renderPayChart(currVal, propVal) {
+            const svg = document.getElementById('pay-chart-svg');
+            if (!svg) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            const maxVal = Math.max(currVal, propVal) * 1.25;
+
+            let svgHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const yVal = (maxVal / 4) * i;
+                const yPos = padTop + chartH - (i / 4) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            const items = [
+                { name: 'Current Paycheck', val: currVal, color: '#1d4ed8' },
+                { name: 'Proposed Paycheck', val: propVal, color: '#15803d' }
+            ];
+
+            const slotW = chartW / 2;
+            const barW = 85;
+
+            items.forEach((item, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (item.val / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
+                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
+                    </rect>
+                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(item.val)}</text>
+                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!payReport.currTakeHome) calculatePaycheck();
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Take-Home Pay vs. Long-Term Nest Egg</div>
+                    <div style="font-size: 20px; font-weight: 700; color: #4ade80; margin-top: 4px;">
+                        Retirement Nest Egg Increases by ${fmtMoney(payReport.eggDifference)}
+                    </div>
+                    <p style="font-size: 12px; color: #94a3b8; margin: 6px 0 0 0;">
+                        Net paycheck reduction is only ${fmtMoneyCents(payReport.reductionPerPeriod)} per pay period thanks to federal and state tax deductions.
+                    </p>
+                </div>
+
+                <table class="tax-table">
+                    <tbody>
+                        <tr><td>Current Contribution</td><td>${(payReport.currPct * 100).toFixed(0)}%</td></tr>
+                        <tr><td>Proposed Contribution</td><td>${(payReport.propPct * 100).toFixed(0)}%</td></tr>
+                        <tr><td>Current Take-Home Pay</td><td>${fmtMoneyCents(payReport.currTakeHome)}</td></tr>
+                        <tr><td>Proposed Take-Home Pay</td><td style="color: #60a5fa; font-weight: 700;">${fmtMoneyCents(payReport.propTakeHome)}</td></tr>
+                        <tr><td>Per-Paycheck Difference</td><td style="color: #facc15; font-weight: 700;">-${fmtMoneyCents(payReport.reductionPerPeriod)}</td></tr>
+                        <tr style="background: #f1f5f9; font-weight: 700;">
+                            <td>Projected Retirement Wealth Growth</td>
+                            <td style="color: #15803d;">+${fmtMoney(payReport.eggDifference)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-salary', 'range-salary', false, true);
+            setupSync('inp-curr-pct', 'range-curr-pct', true, false);
+            setupSync('inp-prop-pct', 'range-prop-pct', true, false);
+            setupSync('inp-years-ret', 'range-years-ret', false, false);
+            setupSync('inp-ror-plan', 'range-ror-plan', true, false);
+
+            calculatePaycheck();
+        });
+    </script>
+</body>
+</html>

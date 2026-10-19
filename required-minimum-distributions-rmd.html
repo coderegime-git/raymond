@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Required Minimum Distributions (RMD) | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate your Required Minimum Distribution (RMD) under SECURE Act 2.0. Determine annual mandatory IRA and 401(k) withdrawals using IRS Uniform Lifetime Tables.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .rmd-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .rmd-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .rmd-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .rmd-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .rmd-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .rmd-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid #1e293b;
+        }
+        .rmd-table td {
+            padding: 7px 10px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .rmd-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="personal-economic-recovery.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Personal Economic Recovery">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="retirement-contribution-effects-on-your-paycheck.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Retirement Contribution Effects on Your Paycheck">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Required Minimum Distributions" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">REQUIRED MINIMUM DISTRIBUTIONS (RMD)</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    The IRS requires that you withdraw a minimum amount—known as a required minimum distribution (RMD)—from certain types of retirement accounts annually starting the year you reach age 73 (or 75). Determining how much you are required to withdraw is an important aspect of retirement planning. Use this calculator to determine your required minimum distributions.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateRMD()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="rmd-result-banner" style="margin-bottom: 25px;">
+                Your required minimum distribution is <span class="highlight-val" id="banner-rmd-val" style="color: #4ade80;">$10,772.00</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="rmd-stat-grid">
+                <div class="rmd-stat-card">
+                    <div class="rmd-stat-val" id="stat-rmd-curr">$10,772</div>
+                    <div class="rmd-stat-label">Current Year RMD</div>
+                </div>
+                <div class="rmd-stat-card">
+                    <div class="rmd-stat-val" id="stat-account-bal" style="color: #60a5fa;">$285,450</div>
+                    <div class="rmd-stat-label">Starting Account Balance</div>
+                </div>
+                <div class="rmd-stat-card">
+                    <div class="rmd-stat-val" id="stat-div-factor" style="color: #facc15;">26.5</div>
+                    <div class="rmd-stat-label">IRS Life Expectancy Factor</div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: PLAN INFORMATION -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>PLAN INFORMATION</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Owner's age -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-owner-age" class="calc-label">Owner's current age*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="inp-owner-age" class="calc-input" value="73" min="70" max="100"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-owner-age" class="calc-slider" value="73" min="70" max="100" step="1">
+                                <div class="calc-slider-scale"><span>70 yrs</span><span>85 yrs</span><span>100 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amount subject to RMD -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-rmd-amt" class="calc-label">Amount subject to RMD*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-rmd-amt" class="calc-input" value="$285,450.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-rmd-amt" class="calc-slider" value="285450" min="50000" max="2000000" step="25000">
+                                <div class="calc-slider-scale"><span>$50,000</span><span>$1,000,000</span><span>$2,000,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-rmd-ror" class="calc-label">Expected rate of return*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="inp-rmd-ror" class="calc-input" value="6.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-rmd-ror" class="calc-slider" value="6" min="0" max="12" step="0.25">
+                                <div class="calc-slider-scale"><span>0%</span><span>6%</span><span>12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Chart Section: Required Minimum Distributions by Year -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>REQUIRED MINIMUM DISTRIBUTIONS BY YEAR</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Annual Mandatory Distribution</span>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="rmd-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECURE Act 2.0 RMD Age Reference Table -->
+            <section style="margin-top: 25px;">
+                <h4 style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 16px; margin-bottom: 10px;">SECURE Act 2.0 RMD Starting Age Rules</h4>
+                <table class="rmd-table">
+                    <thead>
+                        <tr>
+                            <th>Birth Date</th>
+                            <th>RMD Starting Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Account owners born on or before 6/30/1949</td><td>70 &frac12;</td></tr>
+                        <tr><td>7/1/1949 through 12/31/1950</td><td>72</td></tr>
+                        <tr><td>1/1/1951 through 12/31/1959</td><td>73</td></tr>
+                        <tr><td>Account owners born on or after 1/1/1960</td><td>75</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">REQUIRED MINIMUM DISTRIBUTION (RMD)</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The minimum annual amount required by the IRS to be withdrawn from qualified retirement plans.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">AMOUNT SUBJECT TO RMD</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The prior year-end fair market value of all qualified retirement accounts subject to minimum distributions.</p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">UNIFORM LIFETIME TABLE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The standard IRS actuarial table used to compute annual distribution divisors based on the account owner's age.</p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide tax or financial advice. Consult a qualified CPA or estate planning advisor regarding your specific circumstances.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">RMD PROJECTION REPORT</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateRMD();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateRMD();
+            });
+        }
+
+        // IRS Uniform Lifetime Table Divisors (2022+ updated)
+        const UNIFORM_TABLE = {
+            72: 27.4, 73: 26.5, 74: 25.5, 75: 24.6, 76: 23.7, 77: 22.9, 78: 22.0, 79: 21.1,
+            80: 20.2, 81: 19.4, 82: 18.5, 83: 17.7, 84: 16.8, 85: 16.0, 86: 15.2, 87: 14.4,
+            88: 13.7, 89: 12.9, 90: 12.2, 91: 11.5, 92: 10.8, 93: 10.1, 94: 9.5, 95: 8.9,
+            96: 8.4, 97: 7.8, 98: 7.3, 99: 6.8, 100: 6.4
+        };
+
+        let rmdSchedule = [];
+
+        function calculateRMD() {
+            const startAge = Math.max(72, Math.min(100, parseInt(document.getElementById('inp-owner-age').value, 10) || 73));
+            let bal = parseNum(document.getElementById('inp-rmd-amt').value) || 285450;
+            const ror = (parseNum(document.getElementById('inp-rmd-ror').value) || 6) / 100;
+
+            rmdSchedule = [];
+            const currDivisor = UNIFORM_TABLE[startAge] || 26.5;
+            const currRMD = bal / currDivisor;
+
+            document.getElementById('banner-rmd-val').textContent = fmtMoneyCents(currRMD);
+            document.getElementById('stat-rmd-curr').textContent = fmtMoney(currRMD);
+            document.getElementById('stat-account-bal').textContent = fmtMoney(bal);
+            document.getElementById('stat-div-factor').textContent = currDivisor.toFixed(1);
+
+            for (let a = startAge; a <= Math.min(95, startAge + 20); a++) {
+                const div = UNIFORM_TABLE[a] || 8.0;
+                const rmd = bal / div;
+                rmdSchedule.push({
+                    age: a,
+                    startBal: bal,
+                    divisor: div,
+                    rmd: rmd
+                });
+                bal = (bal - rmd) * (1 + ror);
+            }
+
+            renderRmdChart(rmdSchedule);
+        }
+
+        function renderRmdChart(data) {
+            const svg = document.getElementById('rmd-chart-svg');
+            if (!svg || !data.length) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            let maxVal = Math.max(...data.map(d => d.rmd)) * 1.25;
+            if (maxVal === 0) maxVal = 25000;
+
+            let svgHtml = '';
+            for (let i = 0; i <= 4; i++) {
+                const yVal = (maxVal / 4) * i;
+                const yPos = padTop + chartH - (i / 4) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            const slotW = chartW / data.length;
+            const barW = Math.max(14, Math.min(32, slotW * 0.7));
+
+            data.forEach((d, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (d.rmd / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="#1d4ed8" rx="2">
+                        <title>Age ${d.age}: RMD ${fmtMoneyCents(d.rmd)}</title>
+                    </rect>
+                    <text x="${cx}" y="${padTop + chartH + 18}" fill="#cbd5e1" font-size="9" font-family="'Open Sans', sans-serif" text-anchor="middle">${d.age}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!rmdSchedule.length) calculateRMD();
+
+            let rows = '';
+            rmdSchedule.forEach(d => {
+                rows += `
+                    <tr>
+                        <td>Age ${d.age}</td>
+                        <td>${fmtMoney(d.startBal)}</td>
+                        <td>${d.divisor.toFixed(1)}</td>
+                        <td style="color: #dfa01e; font-weight: 700;">${fmtMoneyCents(d.rmd)}</td>
+                    </tr>
+                `;
+            });
+
+            body.innerHTML = `
+                <table class="rmd-table">
+                    <thead>
+                        <tr>
+                            <th>Age</th>
+                            <th>Starting Balance</th>
+                            <th>IRS Divisor</th>
+                            <th>Required Minimum Distribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-owner-age', 'range-owner-age', false, false);
+            setupSync('inp-rmd-amt', 'range-rmd-amt', false, true);
+            setupSync('inp-rmd-ror', 'range-rmd-ror', true, false);
+
+            calculateRMD();
+        });
+    </script>
+</body>
+</html>

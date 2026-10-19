@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculators | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Interactive financial planning calculators from The Seiler Group of Raymond James. Calculate 401(k) savings, mortgage amortization, Roth conversions, and college funding.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="401k-savings-calculator.css?v=3">
+</head>
+
+<body class="calculator-page">
+
+    <!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
+            </a>
+        </div>
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item" id="nav-item-insights">
+                        ALL RESOURCES
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header">
+                    <a href="athletes.html" class="drawer-link drawer-accordion-main-link">ATHLETES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-athletes-btn"
+                        onclick="toggleMobileAthletesAccordion(event)" aria-label="Toggle Athletes submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-athletes-content">
+                    <a href="empowering-pro-athletes.html" class="drawer-sublink" id="mob-empowering">
+                        <span>EMPOWERING PRO ATHLETES</span>
+                    </a>
+                    <a href="our-difference.html" class="drawer-sublink" id="mob-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header">
+                    <a href="business-titans.html" class="drawer-link drawer-accordion-main-link">BUSINESS TITANS</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-titans-btn"
+                        onclick="toggleMobileTitansAccordion(event)" aria-label="Toggle Business Titans submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-titans-content">
+                    <a href="counseling-visionaries.html" class="drawer-sublink" id="mob-titans-counselling">
+                        <span>COUNSELING VISIONARIES</span>
+                    </a>
+                    <a href="titans-our-difference.html" class="drawer-sublink" id="mob-titans-difference">
+                        <span>OUR DIFFERENCE</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header">
+                    <a href="individuals.html" class="drawer-link drawer-accordion-main-link">PRIVATE WEALTH</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-individuals-btn"
+                        onclick="toggleMobileIndividualsAccordion(event)" aria-label="Toggle Individuals submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-individuals-content">
+                    <a href="private-wealth.html" class="drawer-sublink" id="mob-private-wealth">
+                        <span>PRIVATE WEALTH</span>
+                    </a>
+                </div>
+            </div>
+
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header">
+                    <a href="resources.html" class="drawer-link drawer-accordion-main-link active">RESOURCES</a>
+                    <button class="drawer-accordion-chevron-btn" id="drawer-resources-btn"
+                        onclick="toggleMobileResourcesAccordion(event)" aria-label="Toggle Resources submenu">
+                        <i class="fas fa-chevron-down drawer-accordion-icon"></i>
+                    </button>
+                </div>
+                <div class="drawer-accordion-content" id="drawer-resources-content">
+                    <a href="press-releases.html" class="drawer-sublink" id="mob-press-releases">
+                        <span>PRESS RELEASES</span>
+                    </a>
+                    <a href="resources.html" class="drawer-sublink" id="mob-resources">
+                        <span>ALL RESOURCES</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="drawer-accordion-item">
+                <div class="drawer-accordion-header">
+                    <a href="contact.html" class="drawer-link drawer-accordion-main-link">CONTACT US</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="javascript:void(0)" class="calc-side-nav-btn prev-btn" id="btn-prev-calculator" title="Previous Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="401k-spend-it-or-save-it.html" class="calc-side-nav-btn next-btn" id="btn-next-calculator" title="Next Calculator: 401(k) Spend It or Save It">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR WRAPPER
+     ============================================================ -->
+    <main class="calc-main-wrapper">
+        <article class="calc-page-container">
+
+            <!-- Hero Image Banner -->
+            <div class="calc-hero-banner">
+                <img id="calc-hero-img" src="assets/resources/calculator-hero.jpg" alt="Financial planning calculator">
+            </div>
+
+            <!-- Elevated Calculator Card Container -->
+            <div class="calc-card-container">
+
+                <!-- Interactive Calculator Switcher Bar -->
+                <div class="calc-switcher-bar">
+                    <div class="calc-switcher-label">
+                        <i class="fas fa-calculator"></i> SELECT A CALCULATOR:
+                    </div>
+                    <select class="calc-select-dropdown" id="calc-selector" aria-label="Select Financial Calculator">
+                        <!-- Populated dynamically via JS -->
+                    </select>
+                </div>
+
+                <!-- Title & Meta Header -->
+                <header class="calc-header-meta">
+                    <h1 class="calc-page-title" id="calc-title">401(K) SAVINGS CALCULATOR</h1>
+                    <div class="calc-meta-bar">
+                        <a href="resources.html?media=Calculators" class="calc-cat-link" id="calc-cat-link">Calculator</a>
+                        <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                    </div>
+                    <p class="calc-intro-text" id="calc-intro-text">
+                        A 401(k) can be one of your best tools for creating a secure retirement. It provides you with two important advantages. First, all contributions and earnings to your 401(k) are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide matching contributions to your 401(k) account.
+                    </p>
+                </header>
+
+                <!-- Top Action & Summary Bar -->
+                <section class="calc-action-bar">
+                    <div class="calc-btn-group">
+                        <button type="button" class="calc-top-btn calc-primary-btn" id="btn-calculate">CALCULATE</button>
+                        <button type="button" class="calc-top-btn calc-secondary-btn" id="btn-view-report">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-total-banner" id="calc-summary-text">
+                        Your total is <span class="highlight-val" id="total-val">$756,476.60</span> after <span id="years-val">35</span> years.
+                    </div>
+                    <div class="calc-sub-bar">
+                        <button type="button" class="calc-icon-btn" id="btn-help-summary" title="Definitions & Help" onclick="document.querySelector('.calc-definitions-section').scrollIntoView({behavior: 'smooth'})">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" id="btn-report-icon" title="View Full Table Report">
+                            <i class="fas fa-list-ul"></i>
+                        </button>
+                        <span class="calc-required-hint">*indicates required</span>
+                    </div>
+                </section>
+
+                <!-- Dynamic Dynamic Form Sections Container -->
+                <div id="dynamic-sections-container">
+                    <!-- Populated dynamically via JS -->
+                </div>
+
+                <!-- ============================================================
+                 CHART SECTION
+                 ============================================================ -->
+                <section class="calc-accordion-section" id="section-chart">
+                    <div class="calc-section-header" onclick="toggleSection('section-chart')">
+                        <h2 class="calc-section-title" id="chart-section-title">401(K) BALANCE BY YEAR</h2>
+                        <i class="fas fa-chevron-up calc-toggle-icon"></i>
+                    </div>
+                    <div class="calc-section-body">
+                        <div class="calc-chart-wrapper" id="chart-wrapper">
+                            <!-- Floating interactive tooltip -->
+                            <div class="calc-tooltip" id="chart-tooltip"></div>
+                            
+                            <!-- Dynamic SVG Chart -->
+                            <svg class="calc-chart-svg" id="balance-chart-svg" viewBox="0 0 880 330" preserveAspectRatio="none">
+                                <!-- Injected dynamically via JS -->
+                            </svg>
+                        </div>
+
+                        <!-- Chart Legend -->
+                        <div class="calc-chart-legend" id="chart-legend-container">
+                            <div class="legend-item">
+                                <span class="legend-dot dot-blue"></span>
+                                <span id="legend-with-match">With employer match $756,476.60</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot dot-green"></span>
+                                <span id="legend-without-match">Without employer match $584,367.58</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                 DEFINITIONS SECTION
+                 ============================================================ -->
+                <section class="calc-definitions-section" id="definitions-container">
+                    <!-- Populated dynamically via JS -->
+                </section>
+
+            </div><!-- end .calc-card-container -->
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="report-modal">
+        <div class="calc-modal-card">
+            <div class="calc-modal-header">
+                <h3 id="report-modal-title">Financial Calculation Amortization Report</h3>
+                <button type="button" class="calc-modal-close-btn" id="btn-close-modal" aria-label="Close report">&times;</button>
+            </div>
+            <div class="calc-modal-body">
+                <div class="calc-report-summary-box" id="report-summary-content">
+                    <!-- Populated dynamically -->
+                </div>
+                <div class="calc-table-wrapper">
+                    <table class="calc-report-table">
+                        <thead id="report-table-head">
+                            <tr>
+                                <th>Year</th>
+                                <th>Age</th>
+                                <th>Salary</th>
+                                <th>Employee Contrib.</th>
+                                <th>Employer Match</th>
+                                <th>Annual Growth</th>
+                                <th>Year-End Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="report-table-body">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="calc-modal-footer">
+                <button type="button" class="calc-modal-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Report</button>
+                <button type="button" class="calc-modal-btn primary" id="btn-done-modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <section class="champion-strip">
+        <div class="champ-brand">
+            <span class="champ-the">THE</span>
+            <span class="champ-name">SEILER GROUP</span>
+            <span class="champ-sub">OF RAYMOND JAMES</span>
+        </div>
+        <div class="champ-quote">
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
+            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
+            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
+            complete the organization's initial and ongoing certification requirements to use the certification marks.
+        </div>
+        <div class="champ-cta">
+            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+        </div>
+    </section>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer class="site-footer">
+        <div class="footer-addresses">
+            <div class="addr-row">
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            </div>
+        </div>
+
+        <div class="footer-legal">
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
+                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
+                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
+                    Use</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Load Multi-Calculator Math Engine -->
+    <script src="calculators-engine.js?v=2"></script>
+
+    <!-- Master Controller Script -->
+    <script>
+        // Formatting Helpers
+        const { fmtCurr, fmtCurrWhole, fmtPct, cleanNum } = window.CALC_UTILS;
+
+        // All 60 Calculators Database from Raymond James
+        let allCalculators = [];
+        let activeCalcSlug = '401k-savings-calculator';
+        let currentSchedule = [];
+
+        // Mobile Menu Toggles
+        function toggleMobileMenu(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
+            }
+        }
+
+        function toggleMobileAthletesAccordion(e) {
+            if (e) e.preventDefault();
+            document.getElementById('drawer-athletes-btn')?.classList.toggle('active');
+            document.getElementById('drawer-athletes-content')?.classList.toggle('open');
+        }
+        function toggleMobileTitansAccordion(e) {
+            if (e) e.preventDefault();
+            document.getElementById('drawer-titans-btn')?.classList.toggle('active');
+            document.getElementById('drawer-titans-content')?.classList.toggle('open');
+        }
+        function toggleMobileIndividualsAccordion(e) {
+            if (e) e.preventDefault();
+            document.getElementById('drawer-individuals-btn')?.classList.toggle('active');
+            document.getElementById('drawer-individuals-content')?.classList.toggle('open');
+        }
+        function toggleMobileResourcesAccordion(e) {
+            if (e) e.preventDefault();
+            document.getElementById('drawer-resources-btn')?.classList.toggle('active');
+            document.getElementById('drawer-resources-content')?.classList.toggle('open');
+        }
+
+        function toggleSection(id) {
+            document.getElementById(id)?.classList.toggle('collapsed');
+        }
+
+        // Fetch & Populate Calculator Selectors
+        fetch('calculators_data.json')
+            .then(res => res.json())
+            .then(data => {
+                allCalculators = data;
+                const selector = document.getElementById('calc-selector');
+                selector.innerHTML = '';
+
+                data.forEach((calc, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = calc.slug;
+                    opt.textContent = `${idx + 1}. ${calc.title}`;
+                    selector.appendChild(opt);
+                });
+
+                // Check URL parameter e.g. ?calc=mortgage-loan-calculator
+                const params = new URLSearchParams(window.location.search);
+                const queryCalc = params.get('calc');
+                if (queryCalc && (window.CALCULATOR_MODELS[queryCalc] || data.find(c => c.slug === queryCalc))) {
+                    activeCalcSlug = queryCalc;
+                }
+                selector.value = activeCalcSlug;
+                loadCalculator(activeCalcSlug);
+            })
+            .catch(() => {
+                // Fallback directly to 401(k) calculator
+                loadCalculator('401k-savings-calculator');
+            });
+
+        // Dropdown selection event
+        document.getElementById('calc-selector').addEventListener('change', (e) => {
+            loadCalculator(e.target.value);
+        });
+
+        // Floating Prev/Next buttons
+        document.getElementById('btn-prev-calculator').addEventListener('click', () => {
+            if (!allCalculators.length) return;
+            const idx = allCalculators.findIndex(c => c.slug === activeCalcSlug);
+            const prevIdx = (idx - 1 + allCalculators.length) % allCalculators.length;
+            const targetSlug = allCalculators[prevIdx].slug;
+            document.getElementById('calc-selector').value = targetSlug;
+            loadCalculator(targetSlug);
+        });
+
+        document.getElementById('btn-next-calculator').addEventListener('click', () => {
+            if (!allCalculators.length) return;
+            const idx = allCalculators.findIndex(c => c.slug === activeCalcSlug);
+            const nextIdx = (idx + 1) % allCalculators.length;
+            const targetSlug = allCalculators[nextIdx].slug;
+            document.getElementById('calc-selector').value = targetSlug;
+            loadCalculator(targetSlug);
+        });
+
+        // Load Calculator Instance
+        function loadCalculator(slug) {
+            activeCalcSlug = slug;
+            const model = window.CALCULATOR_MODELS[slug] || window.CALCULATOR_MODELS['401k-savings-calculator'];
+            const metaInfo = allCalculators.find(c => c.slug === slug);
+
+            // Update Titles & Intro
+            document.getElementById('calc-title').textContent = (metaInfo ? metaInfo.title : model.title);
+            document.getElementById('calc-cat-link').textContent = (metaInfo ? metaInfo.category : model.category);
+            document.getElementById('calc-intro-text').textContent = (metaInfo ? metaInfo.desc : model.desc);
+            document.getElementById('chart-section-title').textContent = `${(metaInfo ? metaInfo.title : model.title)} PROJECTION`;
+
+            // Build Dynamic Input Sections
+            const container = document.getElementById('dynamic-sections-container');
+            container.innerHTML = '';
+
+            model.sections.forEach((sec, sIdx) => {
+                const secId = `section-dyn-${sIdx}`;
+                const sectionEl = document.createElement('section');
+                sectionEl.className = 'calc-accordion-section';
+                sectionEl.id = secId;
+
+                let fieldsHtml = '';
+                sec.fields.forEach(f => {
+                    let formattedVal = f.default;
+                    if (f.type === 'percent') formattedVal = `${f.default}%`;
+                    else if (f.type === 'currency') formattedVal = fmtCurr(f.default);
+
+                    fieldsHtml += `
+                        <div class="calc-row">
+                            <div class="calc-row-label-group">
+                                <label for="inp-${f.id}" class="calc-label">${f.label}</label>
+                                <span class="calc-help-dot" title="${f.tip || ''}">?</span>
+                            </div>
+                            <input type="text" id="inp-${f.id}" class="calc-input-box" value="${formattedVal}">
+                            <div class="calc-slider-container">
+                                <input type="range" id="range-${f.id}" class="calc-slider" 
+                                       min="${f.min}" max="${f.max}" step="${f.step}" value="${f.default}">
+                                <div class="calc-ticks">
+                                    ${(f.ticks || []).map(t => `<span>${t}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                sectionEl.innerHTML = `
+                    <div class="calc-section-header" onclick="toggleSection('${secId}')">
+                        <h2 class="calc-section-title">${sec.title}</h2>
+                        <i class="fas fa-chevron-up calc-toggle-icon"></i>
+                    </div>
+                    <div class="calc-section-body">
+                        ${fieldsHtml}
+                        <div class="calc-subtotal-line" id="subtotal-${sIdx}"></div>
+                    </div>
+                `;
+                container.appendChild(sectionEl);
+            });
+
+            // Bind Sliders & Inputs
+            model.sections.forEach((sec, sIdx) => {
+                sec.fields.forEach(f => {
+                    const inp = document.getElementById(`inp-${f.id}`);
+                    const range = document.getElementById(`range-${f.id}`);
+                    if (!inp || !range) return;
+
+                    const updateSliderFill = () => {
+                        const min = parseFloat(range.min) || 0;
+                        const max = parseFloat(range.max) || 100;
+                        const val = parseFloat(range.value) || 0;
+                        const pct = ((val - min) / (max - min)) * 100;
+                        range.style.background = `linear-gradient(to right, #dfa01e 0%, #dfa01e ${pct}%, #1e293b ${pct}%, #1e293b 100%)`;
+                    };
+
+                    updateSliderFill();
+
+                    range.addEventListener('input', () => {
+                        const val = parseFloat(range.value);
+                        if (f.type === 'percent') inp.value = `${val}%`;
+                        else if (f.type === 'currency') inp.value = fmtCurr(val);
+                        else inp.value = val;
+                        updateSliderFill();
+                        triggerRecalculate(model);
+                    });
+
+                    inp.addEventListener('change', () => {
+                        const val = cleanNum(inp.value);
+                        range.value = val;
+                        if (f.type === 'percent') inp.value = `${val}%`;
+                        else if (f.type === 'currency') inp.value = fmtCurr(val);
+                        else inp.value = val;
+                        updateSliderFill();
+                        triggerRecalculate(model);
+                    });
+                });
+            });
+
+            // Build Definitions
+            const defContainer = document.getElementById('definitions-container');
+            defContainer.innerHTML = `
+                <h3 class="calc-def-header">DEFINITIONS</h3>
+                ${(model.definitions || []).map(d => `
+                    <div class="calc-def-item">
+                        <h4 class="calc-def-term">${d.term}</h4>
+                        <p class="calc-def-desc">${d.desc}</p>
+                    </div>
+                `).join('')}
+            `;
+
+            // Initial calculation
+            triggerRecalculate(model);
+        }
+
+        // Trigger Recalculate based on active model values
+        function triggerRecalculate(model) {
+            const vals = {};
+            model.sections.forEach(sec => {
+                sec.fields.forEach(f => {
+                    const range = document.getElementById(`range-${f.id}`);
+                    if (range) vals[f.id] = parseFloat(range.value) || 0;
+                });
+            });
+
+            const result = model.calculate(vals);
+            currentSchedule = result.schedule || [];
+
+            // Update Summary Banner
+            document.getElementById('calc-summary-text').innerHTML = result.summaryText;
+
+            // Update Subtotal lines
+            (result.subtotals || []).forEach((sub, idx) => {
+                const subEl = document.getElementById(`subtotal-${idx}`);
+                if (subEl) subEl.textContent = sub.label;
+            });
+
+            // Update Legend
+            const legContainer = document.getElementById('chart-legend-container');
+            legContainer.innerHTML = (result.legend || []).map((l, i) => `
+                <div class="legend-item">
+                    <span class="legend-dot" style="background-color: ${l.color}"></span>
+                    <span>${l.label}</span>
+                </div>
+            `).join('');
+
+            // Render SVG Chart
+            renderChart(currentSchedule);
+        }
+
+        // Render SVG Bar Chart
+        function renderChart(data) {
+            const svg = document.getElementById('balance-chart-svg');
+            const tooltip = document.getElementById('chart-tooltip');
+            svg.innerHTML = '';
+            if (!data || data.length === 0) return;
+
+            const w = 880;
+            const h = 330;
+            const padL = 72;
+            const padR = 25;
+            const padT = 25;
+            const padB = 40;
+
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            const maxValRaw = Math.max(...data.map(d => Math.max(d.valWith || 0, d.valWithout || 0)));
+            const maxVal = Math.max(10000, Math.ceil(maxValRaw / 100000) * 100000);
+            const yStep = maxVal / 8;
+
+            // Draw Y-axis grid lines and labels
+            for (let i = 0; i <= 8; i++) {
+                const val = i * yStep;
+                const yPos = padT + chartH - (i / 8) * chartH;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', padL);
+                line.setAttribute('x2', w - padR);
+                line.setAttribute('y1', yPos);
+                line.setAttribute('y2', yPos);
+                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', padL - 10);
+                text.setAttribute('y', yPos + 4);
+                text.setAttribute('text-anchor', 'end');
+                text.setAttribute('font-family', 'Open Sans, sans-serif');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', '#94a3b8');
+                text.textContent = `$${Math.round(val / 1000)}`;
+                svg.appendChild(text);
+            }
+
+            // Y-Axis Title
+            const yTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            yTitle.setAttribute('x', -(padT + chartH / 2));
+            yTitle.setAttribute('y', 20);
+            yTitle.setAttribute('transform', 'rotate(-90)');
+            yTitle.setAttribute('text-anchor', 'middle');
+            yTitle.setAttribute('font-family', 'Montserrat, sans-serif');
+            yTitle.setAttribute('font-size', '11.5');
+            yTitle.setAttribute('font-weight', '700');
+            yTitle.setAttribute('fill', '#ffffff');
+            yTitle.textContent = 'Thousands of Dollars';
+            svg.appendChild(yTitle);
+
+            // Draw Bars
+            const n = data.length;
+            const slotW = chartW / n;
+            const barW = Math.max(2, Math.min(10, (slotW - 4) / 2));
+
+            data.forEach((d, idx) => {
+                const xCenter = padL + (idx + 0.5) * slotW;
+                const hWith = (d.valWith / maxVal) * chartH;
+                const hWithout = (d.valWithout / maxVal) * chartH;
+                const yWith = padT + chartH - hWith;
+                const yWithout = padT + chartH - hWithout;
+
+                // Primary Bar (Blue)
+                const rectBlue = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rectBlue.setAttribute('x', xCenter - barW - 0.5);
+                rectBlue.setAttribute('y', yWith);
+                rectBlue.setAttribute('width', barW);
+                rectBlue.setAttribute('height', Math.max(1, hWith));
+                rectBlue.setAttribute('fill', '#2563eb');
+                rectBlue.setAttribute('rx', '1');
+                rectBlue.setAttribute('cursor', 'pointer');
+
+                // Secondary Bar (Green)
+                const rectGreen = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rectGreen.setAttribute('x', xCenter + 0.5);
+                rectGreen.setAttribute('y', yWithout);
+                rectGreen.setAttribute('width', barW);
+                rectGreen.setAttribute('height', Math.max(1, hWithout));
+                rectGreen.setAttribute('fill', '#10b981');
+                rectGreen.setAttribute('rx', '1');
+                rectGreen.setAttribute('cursor', 'pointer');
+
+                function showTip(e, text) {
+                    const rect = svg.getBoundingClientRect();
+                    const xRel = (xCenter / w) * rect.width;
+                    const yRel = ((Math.min(yWith, yWithout)) / h) * rect.height;
+                    tooltip.innerHTML = text;
+                    tooltip.style.left = `${xRel}px`;
+                    tooltip.style.top = `${yRel - 10}px`;
+                    tooltip.style.display = 'block';
+                }
+
+                rectBlue.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Year ${d.year} (Age ${d.age}): <strong style="color: #dfa01e;">${fmtCurrWhole(d.valWith)}</strong>`);
+                });
+                rectBlue.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+
+                rectGreen.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Year ${d.year} Comparison: <strong style="color: #10b981;">${fmtCurrWhole(d.valWithout)}</strong>`);
+                });
+                rectGreen.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
+
+                svg.appendChild(rectBlue);
+                svg.appendChild(rectGreen);
+
+                const step = n > 30 ? 2 : 1;
+                if (idx % step === 0 || idx === n - 1) {
+                    const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                    xLabel.setAttribute('x', xCenter);
+                    xLabel.setAttribute('y', padT + chartH + 18);
+                    xLabel.setAttribute('text-anchor', 'middle');
+                    xLabel.setAttribute('font-family', 'Open Sans, sans-serif');
+                    xLabel.setAttribute('font-size', '11');
+                    xLabel.setAttribute('fill', '#94a3b8');
+                    xLabel.textContent = d.age || d.year;
+                    svg.appendChild(xLabel);
+                }
+            });
+
+            // Base horizontal axis
+            const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            axisLine.setAttribute('x1', padL);
+            axisLine.setAttribute('x2', w - padR);
+            axisLine.setAttribute('y1', padT + chartH);
+            axisLine.setAttribute('y2', padT + chartH);
+            axisLine.setAttribute('stroke', 'rgba(223, 160, 30, 0.4)');
+            axisLine.setAttribute('stroke-width', '1.5');
+            svg.appendChild(axisLine);
+        }
+
+        // View Report Modal
+        const reportModal = document.getElementById('report-modal');
+        function openReportModal() {
+            const tableBody = document.getElementById('report-table-body');
+            const summaryBox = document.getElementById('report-summary-content');
+
+            summaryBox.innerHTML = `
+                <strong style="color: #dfa01e;">Projection Summary:</strong> Plan Horizon: ${currentSchedule.length} years | 
+                Final Accumulated Nest Egg: ${fmtCurr(currentSchedule[currentSchedule.length - 1]?.valWith || 0)}.
+            `;
+
+            tableBody.innerHTML = currentSchedule.map(d => `
+                <tr>
+                    <td>${d.year}</td>
+                    <td>${d.age}</td>
+                    <td>${fmtCurrWhole(d.salary || 0)}</td>
+                    <td>${fmtCurrWhole(d.empContrib || 0)}</td>
+                    <td>${fmtCurrWhole(d.empMatch || 0)}</td>
+                    <td>${fmtCurrWhole(d.growth || 0)}</td>
+                    <td><strong style="color: #dfa01e;">${fmtCurrWhole(d.valWith)}</strong></td>
+                </tr>
+            `).join('');
+
+            reportModal.classList.add('open');
+        }
+
+        document.getElementById('btn-view-report').addEventListener('click', openReportModal);
+        document.getElementById('btn-report-icon').addEventListener('click', openReportModal);
+        document.getElementById('btn-close-modal').addEventListener('click', () => reportModal.classList.remove('open'));
+        document.getElementById('btn-done-modal').addEventListener('click', () => reportModal.classList.remove('open'));
+        reportModal.addEventListener('click', (e) => { if (e.target === reportModal) reportModal.classList.remove('open'); });
+
+        // Calculate button smooth scroll to results
+        document.getElementById('btn-calculate').addEventListener('click', () => {
+            const model = window.CALCULATOR_MODELS[activeCalcSlug] || window.CALCULATOR_MODELS['401k-savings-calculator'];
+            triggerRecalculate(model);
+            document.getElementById('calc-summary-text').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+
+        // Sticky Header on Scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estate Tax Planning | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Use this interactive estate tax planning calculator to project the value of your estate, calculate potential federal estate taxes, and preserve wealth for future generations.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        /* Estate Tax Planning Specific Enhancements */
+        .calc-accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0b172a;
+            padding: 14px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(223, 160, 30, 0.3);
+            border-top: 1px solid rgba(223, 160, 30, 0.3);
+            transition: background 0.2s ease;
+            user-select: none;
+        }
+        .calc-accordion-header:hover {
+            background: #0f2038;
+        }
+        .calc-accordion-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #dfa01e;
+            letter-spacing: 0.8px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .calc-accordion-icon {
+            color: #dfa01e;
+            font-size: 14px;
+            transition: transform 0.3s ease;
+        }
+        .calc-accordion-header.collapsed .calc-accordion-icon {
+            transform: rotate(-90deg);
+        }
+        .calc-accordion-content {
+            padding: 20px 22px;
+            background: #ffffff;
+            transition: max-height 0.3s ease-out;
+        }
+        .calc-accordion-content.collapsed {
+            display: none;
+        }
+
+        /* Checkbox Row Styling */
+        .calc-checkbox-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding: 4px 0;
+        }
+        .calc-checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #dfa01e;
+            cursor: pointer;
+        }
+        .calc-checkbox-label {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+        }
+
+        /* Stats grid */
+        .est-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .est-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 14px 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .est-stat-val {
+            font-size: 20px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .est-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+
+        /* Gift Exemption Table Styling */
+        .gift-table-wrap {
+            margin: 20px 0;
+            overflow-x: auto;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .gift-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+            background: #ffffff;
+        }
+        .gift-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 10px 14px;
+            font-weight: 700;
+            border-bottom: 2px solid #dfa01e;
+        }
+        .gift-table td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .gift-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+        .gift-table tr:hover td {
+            background: #f1f5f9;
+        }
+
+        /* Chart & Donut Layout */
+        .chart-layout-box {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            padding: 15px 0;
+        }
+        .chart-legend-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 260px;
+        }
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .chart-legend-swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        /* Table inside section */
+        .sched-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12.5px;
+            margin-top: 15px;
+        }
+        .sched-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 9px 10px;
+            font-weight: 700;
+            text-align: right;
+            border-bottom: 2px solid #dfa01e;
+        }
+        .sched-table th:first-child {
+            text-align: left;
+        }
+        .sched-table td {
+            padding: 8px 10px;
+            text-align: right;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .sched-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+        .sched-table tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+
+        /* Report Modal */
+        .report-modal-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 99999;
+            overflow-y: auto;
+            padding: 30px 15px;
+        }
+        .report-modal-box {
+            max-width: 820px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-top: 6px solid #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 26px;
+            cursor: pointer;
+            color: #64748b;
+            background: none;
+            border: none;
+        }
+        .report-modal-close:hover {
+            color: #0b172a;
+        }
+    </style>
+</head>
+<body class="calc-page-body">
+
+    <!-- ============================================================
+     HEADER & BRAND NAVIGATION
+     ============================================================ -->
+    <header class="calc-header">
+        <div class="calc-header-inner">
+            <a href="index.html" class="calc-logo-wrap">
+                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+            </a>
+            <nav class="calc-nav-desktop">
+                <a href="index.html" class="calc-nav-link">HOME</a>
+                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
+                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
+                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
+            </nav>
+            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
+        </div>
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Mobile Navigation Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="emergency-savings-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Emergency Savings Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="home-budget-analysis.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Home Budget Analysis">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Estate Tax Planning" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">ESTATE TAX PLANNING</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Tax Planning &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Estate tax planning is very important to preserving your wealth for future generations. Knowing your potential estate tax liability is a good place to start your estate tax plan. Use this calculator to project the value of your estate and the associated estate tax for the next 10 years. This calculation uses the rules and elections you select in this calculator to approximate results for an estate. It should be noted that certain estate planning instruments, which are beyond the scope of this calculator, may be necessary in order for assets to be distributed according to your wishes.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateEstateTax()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Pill -->
+            <div class="calc-highlight-banner" id="estate-result-banner" style="margin-bottom: 25px;">
+                Your heirs may receive <span class="highlight-val" id="banner-heir-amt">$0</span> after taxes & expenses.
+            </div>
+
+            <p style="font-size: 12px; color: #64748b; font-style: italic; margin-bottom: 15px;">* Indicates required</p>
+
+            <!-- ============================================================
+             SECTION 1: MARITAL STATUS, GIFTS AND CHARITY
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 20px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-marital')">
+                    <h2 class="calc-accordion-title">MARITAL STATUS, GIFTS AND CHARITY</h2>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-marital-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-marital">
+
+                    <!-- Charitable contributions -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-charity" class="calc-field-label">Charitable contributions:</label>
+                            <span class="calc-q-dot" title="Portion of your estate designated for qualified charities.">?</span>
+                        </div>
+                        <input type="text" id="inp-charity" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-charity" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$2.5M</span>
+                                <span>$5.0M</span>
+                                <span>$7.5M</span>
+                                <span>$10M</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Taxable gift distributions -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-gifts" class="calc-field-label">Taxable gift distributions:*</label>
+                            <span class="calc-q-dot" title="Cumulative taxable gifts made during your lifetime exceeding annual exclusion limits.">?</span>
+                        </div>
+                        <input type="text" id="inp-gifts" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-gifts" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$2.5M</span>
+                                <span>$5.0M</span>
+                                <span>$7.5M</span>
+                                <span>$10M</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Married Checkbox -->
+                    <div class="calc-checkbox-row">
+                        <input type="checkbox" id="chk-married" onchange="handleMarriedChange()">
+                        <label for="chk-married" class="calc-checkbox-label">Married: If you are married, check here</label>
+                    </div>
+
+                    <!-- Transfer to spouse -->
+                    <div class="calc-input-row" id="row-transfer-spouse" style="opacity: 0.55;">
+                        <div class="calc-label-col">
+                            <label for="inp-transfer-spouse" class="calc-field-label">Transfer to spouse:</label>
+                            <span class="calc-q-dot" title="Percentage of your estate passed tax-free to surviving spouse under unlimited marital deduction.">?</span>
+                        </div>
+                        <input type="text" id="inp-transfer-spouse" class="calc-text-input" value="100%" disabled>
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-transfer-spouse" class="calc-range-slider" min="0" max="100" step="5" value="100" disabled>
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                                <span>75%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inflation rate -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col">
+                            <label for="inp-inflation" class="calc-field-label">Inflation rate:*</label>
+                            <span class="calc-q-dot" title="Projected annual inflation rate indexing estate tax exemptions.">?</span>
+                        </div>
+                        <input type="text" id="inp-inflation" class="calc-text-input" value="3%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-inflation" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>5%</span>
+                                <span>8%</span>
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 2: ASSETS AND LIFE INSURANCE
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 20px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-assets')">
+                    <h2 class="calc-accordion-title">ASSETS AND LIFE INSURANCE</h2>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-assets-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-assets">
+
+                    <!-- Home -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-home" class="calc-field-label">Home:</label></div>
+                        <input type="text" id="inp-home" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-home" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Other Real Estate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-re" class="calc-field-label">Other real estate:</label></div>
+                        <input type="text" id="inp-re" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-re" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Automobiles -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-autos" class="calc-field-label">Automobiles:</label></div>
+                        <input type="text" id="inp-autos" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-autos" class="calc-range-slider" min="0" max="500000" step="5000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Other vehicles -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-vehicles" class="calc-field-label">Other vehicles:</label></div>
+                        <input type="text" id="inp-vehicles" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-vehicles" class="calc-range-slider" min="0" max="500000" step="5000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Jewelry -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-jewelry" class="calc-field-label">Jewelry:</label></div>
+                        <input type="text" id="inp-jewelry" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-jewelry" class="calc-range-slider" min="0" max="500000" step="5000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Household items -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-household" class="calc-field-label">Household items:</label></div>
+                        <input type="text" id="inp-household" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-household" class="calc-range-slider" min="0" max="500000" step="5000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Checking & Savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-cash-accts" class="calc-field-label">Checking and savings:</label></div>
+                        <input type="text" id="inp-cash-accts" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cash-accts" class="calc-range-slider" min="0" max="2000000" step="10000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500K</span><span>$1.0M</span><span>$1.5M</span><span>$2.0M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Retirement accounts -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-retirement" class="calc-field-label">Retirement accounts:</label></div>
+                        <input type="text" id="inp-retirement" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-retirement" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$2.5M</span><span>$5.0M</span><span>$7.5M</span><span>$10M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Taxable investments / brokerage -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-taxable-inv" class="calc-field-label">Taxable brokerage:</label></div>
+                        <input type="text" id="inp-taxable-inv" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-taxable-inv" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$2.5M</span><span>$5.0M</span><span>$7.5M</span><span>$10M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Bonds -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-bonds" class="calc-field-label">Bonds:</label></div>
+                        <input type="text" id="inp-bonds" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-bonds" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Mutual funds -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-mutual-funds" class="calc-field-label">Mutual funds:</label></div>
+                        <input type="text" id="inp-mutual-funds" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-mutual-funds" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Stocks -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-stocks" class="calc-field-label">Stocks:</label></div>
+                        <input type="text" id="inp-stocks" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-stocks" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$2.5M</span><span>$5.0M</span><span>$7.5M</span><span>$10M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cash value life insurance -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-life-ins" class="calc-field-label">Life insurance cash value:</label></div>
+                        <input type="text" id="inp-life-ins" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-life-ins" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cash & Other -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-other-assets" class="calc-field-label">Cash & other assets:</label></div>
+                        <input type="text" id="inp-other-assets" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-assets" class="calc-range-slider" min="0" max="5000000" step="25000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1.25M</span><span>$2.5M</span><span>$3.75M</span><span>$5M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Annual asset growth -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col"><label for="inp-asset-growth" class="calc-field-label">Annual asset growth rate:*</label></div>
+                        <input type="text" id="inp-asset-growth" class="calc-text-input" value="6%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-asset-growth" class="calc-range-slider" min="0" max="15" step="0.5" value="6">
+                            <div class="calc-tick-labels"><span>0%</span><span>4%</span><span>7%</span><span>11%</span><span>15%</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: LIABILITIES & EXPENSES
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-liabilities')">
+                    <h2 class="calc-accordion-title">LIABILITIES & EXPENSES</h2>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-liabilities-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-liabilities">
+
+                    <!-- Home mortgage principal -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-home-mtg" class="calc-field-label">Home mortgage principal:</label></div>
+                        <input type="text" id="inp-home-mtg" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-home-mtg" class="calc-range-slider" min="0" max="2000000" step="10000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500K</span><span>$1.0M</span><span>$1.5M</span><span>$2.0M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Other mortgage principal -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-other-mtg" class="calc-field-label">Other mortgage principal:</label></div>
+                        <input type="text" id="inp-other-mtg" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-mtg" class="calc-range-slider" min="0" max="2000000" step="10000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500K</span><span>$1.0M</span><span>$1.5M</span><span>$2.0M</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Auto loan -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-auto-loan" class="calc-field-label">Auto loan:</label></div>
+                        <input type="text" id="inp-auto-loan" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-auto-loan" class="calc-range-slider" min="0" max="200000" step="2500" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$50K</span><span>$100K</span><span>$150K</span><span>$200K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Student loans & other loans -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-other-loans" class="calc-field-label">Student & other loans:</label></div>
+                        <input type="text" id="inp-other-loans" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-loans" class="calc-range-slider" min="0" max="500000" step="5000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$125K</span><span>$250K</span><span>$375K</span><span>$500K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Credit card debt -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-cc-debt" class="calc-field-label">Credit card debt:</label></div>
+                        <input type="text" id="inp-cc-debt" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cc-debt" class="calc-range-slider" min="0" max="100000" step="1000" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$25K</span><span>$50K</span><span>$75K</span><span>$100K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Funeral expenses -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-funeral" class="calc-field-label">Funeral expenses:</label></div>
+                        <input type="text" id="inp-funeral" class="calc-text-input" value="$15,000">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-funeral" class="calc-range-slider" min="0" max="50000" step="1000" value="15000">
+                            <div class="calc-tick-labels"><span>$0</span><span>$12.5K</span><span>$25K</span><span>$37.5K</span><span>$50K</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Probate percentage -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col"><label for="inp-probate" class="calc-field-label">Probate & administration:*</label></div>
+                        <input type="text" id="inp-probate" class="calc-text-input" value="4%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-probate" class="calc-range-slider" min="0" max="10" step="0.5" value="4">
+                            <div class="calc-tick-labels"><span>0%</span><span>2.5%</span><span>5%</span><span>7.5%</span><span>10%</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             VISUAL CHART 1: DISTRIBUTION DONUT / PIE
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-chart1')">
+                    <h2 class="calc-accordion-title" id="chart1-heading">IF YOU WERE TO DIE IN 2026, YOUR $0 ESTATE WILL BE DISTRIBUTED AS FOLLOWS:</h2>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-chart1-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-chart1">
+                    <div class="chart-layout-box">
+                        <div id="pie-chart-wrapper" style="width: 250px; height: 250px; position: relative;">
+                            <!-- Dynamic SVG Pie/Donut Chart -->
+                        </div>
+                        <div class="chart-legend-box" id="pie-legend">
+                            <div class="chart-legend-item">
+                                <span class="chart-legend-swatch" style="background: #2563eb;"></span>
+                                <span>Net Distribution to Heirs: <strong id="leg-heirs">$0</strong></span>
+                            </div>
+                            <div class="chart-legend-item">
+                                <span class="chart-legend-swatch" style="background: #16a34a;"></span>
+                                <span>Potential Federal Estate Tax: <strong id="leg-fed-tax">$0</strong></span>
+                            </div>
+                            <div class="chart-legend-item">
+                                <span class="chart-legend-swatch" style="background: #06b6d4;"></span>
+                                <span>State Estate Tax: <strong id="leg-state-tax">$0</strong></span>
+                            </div>
+                            <div class="chart-legend-item">
+                                <span class="chart-legend-swatch" style="background: #dfa01e;"></span>
+                                <span>Administration / Probate: <strong id="leg-admin">$0</strong></span>
+                            </div>
+                            <div class="chart-legend-item">
+                                <span class="chart-legend-swatch" style="background: #8b5cf6;"></span>
+                                <span>Charitable Contribution: <strong id="leg-charity">$0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: ESTATE VALUE AND TAX PROJECTIONS
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 25px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-proj-summary')">
+                    <div>
+                        <h2 class="calc-accordion-title">ESTATE VALUE AND TAX PROJECTIONS</h2>
+                        <div style="font-size: 11px; color: #94a3b8; margin-top: 3px;" id="proj-subtext">Return on assets: 6%, Gross annual income: 0%, Inflation return: 3%</div>
+                    </div>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-proj-summary-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-proj-summary">
+                    <div class="est-stat-grid">
+                        <div class="est-stat-card">
+                            <div class="est-stat-val" id="stat-gross">$0</div>
+                            <div class="est-stat-label">Gross Estate</div>
+                        </div>
+                        <div class="est-stat-card">
+                            <div class="est-stat-val" id="stat-deductions" style="color: #cbd5e1;">$0</div>
+                            <div class="est-stat-label">Debts & Deductions</div>
+                        </div>
+                        <div class="est-stat-card">
+                            <div class="est-stat-val" id="stat-taxable">$0</div>
+                            <div class="est-stat-label">Taxable Estate</div>
+                        </div>
+                        <div class="est-stat-card">
+                            <div class="est-stat-val" id="stat-tax" style="color: #ef4444;">$0</div>
+                            <div class="est-stat-label">Federal Estate Tax</div>
+                        </div>
+                        <div class="est-stat-card">
+                            <div class="est-stat-val" id="stat-heirs" style="color: #10b981;">$0</div>
+                            <div class="est-stat-label">Net To Heirs</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 5: PROJECTED VALUE OF YOUR ESTATE FOR THE NEXT 10 YEARS
+             ============================================================ -->
+            <section class="calc-section" style="margin-bottom: 35px;">
+                <div class="calc-accordion-header" onclick="toggleAccordion('sec-10yr')">
+                    <h2 class="calc-accordion-title">PROJECTED VALUE OF YOUR ESTATE FOR THE NEXT 10 YEARS</h2>
+                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-10yr-icon"></i>
+                </div>
+                <div class="calc-accordion-content" id="sec-10yr">
+                    <div id="growth-chart-wrapper" style="width: 100%; height: 260px; margin-bottom: 20px;">
+                        <!-- SVG 10-Year Bar/Line Chart -->
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="sched-table" id="table-10yr">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Gross Estate</th>
+                                    <th>Exclusion Limit</th>
+                                    <th>Estimated Estate Tax</th>
+                                    <th>Net to Heirs</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-10yr-body">
+                                <!-- Populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION
+             ============================================================ -->
+            <div class="calc-def-wrap">
+                <h3 class="calc-def-head">DEFINITIONS</h3>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ESTATE TAX EXEMPTION</h4>
+                    <p class="calc-def-desc">
+                        For 2026, the estate exemption is $15,000,000 with a top federal estate tax rate of 40%. (Tax Year 2025: In Tax 2025, excess is $13.99 million taxed at 40%; the basic exclusion is $13.99 million per individual). Any unused exemption is allowed to be used by a surviving spouse (Portability). For example, if a married decedent who utilizes zero of their $15,000,000 lifetime basic exclusion died without passing any assets to a surviving spouse or utilizing any of their exclusion, their unused estate tax exemption amount of $15,000,000 is allowed to be ported over to the surviving spouse, and then added to their basic exclusion amount. This calculator does not include state estate tax information.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ADAPTING TO HIGHER MAXIMUM TAX RATE</h4>
+                    <p class="calc-def-desc">
+                        In 2026, the basic exclusion is $15,000,000 per person and amounts exceeding the exclusion amount are taxed at the rate of 40%. This calculation default is tailored for future years. This exemption is indexed to inflation and may differ slightly based on future legislation.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">MARITAL STATUS</h4>
+                    <p class="calc-def-desc">
+                        Check this box if you are married. Checking "Married" allows spouses to transfer an unlimited amount to your surviving spouse at the time of your death. Choosing "Single" disables the spouse transfer.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">TRANSFER TO SPOUSE</h4>
+                    <p class="calc-def-desc">
+                        Married couples never have to pay estate taxes on assets transferred to a surviving spouse. In addition, any assets transferred to a surviving spouse are free and clear against the exclusion exemption. This calculator allows married couples to indicate how much of their estate will be transferred directly to a spouse. The default for married couples is to indicate your entire estate (100%), although it may cause a larger estate to exist in the future.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">PAID OFF DEBTS / PRIOR GIFTS</h4>
+                    <p class="calc-def-desc">
+                        Large gifts distributed during your lifetime can reduce your estate tax exemption when you die. This can increase your assets subject to tax. The tax code provides that up to a certain current statutory limit each year (the annual gift tax exclusion), gifts do not reduce this lifetime exemption. If you had prior annual gifts over the limit, enter those gifts in net taxable distribution in your domain. Past year exclusion amounts are $10,000 to $19,000. In future years, the limit will elevate in inflation-indexed increments.
+                    </p>
+
+                    <!-- Gift Exemption Table -->
+                    <div class="gift-table-wrap">
+                        <table class="gift-table">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>Gift Exemption (Single individual)</th>
+                                    <th>Gift Exemption (Married couple)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2001 and prior</td><td>$10,000</td><td>$20,000</td></tr>
+                                <tr><td>2002-2005</td><td>$11,000</td><td>$22,000</td></tr>
+                                <tr><td>2006-2008</td><td>$12,000</td><td>$24,000</td></tr>
+                                <tr><td>2009-2012</td><td>$13,000</td><td>$26,000</td></tr>
+                                <tr><td>2013-2017</td><td>$14,000</td><td>$28,000</td></tr>
+                                <tr><td>2018-2021</td><td>$15,000</td><td>$30,000</td></tr>
+                                <tr><td>2022</td><td>$16,000</td><td>$32,000</td></tr>
+                                <tr><td>2023</td><td>$17,000</td><td>$34,000</td></tr>
+                                <tr><td>2024</td><td>$18,000</td><td>$36,000</td></tr>
+                                <tr><td>2025-2026</td><td>$19,000</td><td>$38,000</td></tr>
+                                <tr><td>2027 and beyond</td><td>$19,000, plus inflation adjustment</td><td>$38,000, plus inflation adjustment</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="calc-def-desc" style="font-weight: 600; margin-top: 10px;">
+                        If you had prior large gifts, you can calculate your used gift exemption as follows:
+                    </p>
+                    <ol style="font-size: 13px; color: #475569; padding-left: 20px; line-height: 1.6; margin-bottom: 12px;">
+                        <li>If you are single, determine if you have ever given gifts to any individual recipient in a single year above the limits in the Gift Exemption Amounts table.</li>
+                        <li>For each recipient and year where you exceeded these limits, calculate the excess. Excess is determined per recipient, not the total of gifts to all recipients.</li>
+                        <li>The total excess from all the calculation fields is the "total gift exemption".</li>
+                        <li>You do not need to include amounts that were used to pay for tuition or medical costs for heirs as they were paid directly to the school or medical organization.</li>
+                    </ol>
+                    <p class="calc-def-desc" style="font-style: italic;">
+                        As an example of how single individuals perform this: You gave your son $15,000 and your daughter $10,000 in 2002. Then in 2008, you gave your son $40,000 and your daughter $15,000. In this case you have three gifts over the limit. The excess of each is: ($15,000 - $11,000 = $4,000), ($40,000 - $12,000 = $28,000), and ($15,000 - $12,000 = $3,000). The total used gift exemption would be $35,000.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">EXPECTED INFLATION RATE</h4>
+                    <p class="calc-def-desc">
+                        The inflation rate default is set to 3.00%. Historical inflation rates can vary, but this rate provides a reasonable average baseline over long-term projection periods.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ANNUAL ASSET GROWTH / SPENDING</h4>
+                    <p class="calc-def-desc">
+                        Annual rate you expect your total assets to grow or shrink. Enter positive rate if accumulating, negative rate if drawing down assets during retirement.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CHARITABLE CONTRIBUTIONS</h4>
+                    <p class="calc-def-desc">
+                        Bequests to qualified charitable organizations qualify for an unlimited deduction and directly reduce your taxable estate.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ASSETS (HOME, REAL ESTATE, VEHICLES, INVESTMENTS & CASH)</h4>
+                    <p class="calc-def-desc">
+                        <strong>Home & Real Estate:</strong> Current fair market value of all personal real property.<br>
+                        <strong>Automobiles & Vehicles:</strong> Total estimated resale value of cars, boats, and recreational vehicles.<br>
+                        <strong>Jewelry & Household Items:</strong> Estimated fair market value of personal effects, art, and furniture.<br>
+                        <strong>Checking, Savings & CDs:</strong> Current total balances across liquid bank accounts.<br>
+                        <strong>Retirement Accounts:</strong> Pre-tax 401(k), 403(b), Traditional IRAs, and Roth accounts.<br>
+                        <strong>Taxable Brokerage, Stocks & Bonds:</strong> Non-retirement equities, fixed income instruments, and mutual funds.<br>
+                        <strong>Life Insurance Cash Value:</strong> Cash surrender value of permanent or whole life policies owned.
+                    </p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">LIABILITIES, FUNERAL & PROBATE EXPENSES</h4>
+                    <p class="calc-def-desc">
+                        <strong>Mortgages & Loans:</strong> Outstanding principal balance on home mortgages, equity loans, vehicle notes, and education loans.<br>
+                        <strong>Credit Cards:</strong> Unpaid revolving unsecured credit balances.<br>
+                        <strong>Funeral Expenses:</strong> Expected final arrangements and burial costs deducted prior to tax calculation.<br>
+                        <strong>Probate & Administration:</strong> Percentage of gross estate allocated to estate administration, legal probate counsel, and executor fees (typically 3% to 6%).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Bottom Disclaimer Note -->
+            <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11.5px; line-height: 1.6; color: #64748b;">
+                <p>
+                    The educational tool and calculations provided are hypothetical examples and estimates only. Results depend on your inputs, current federal tax codes, and projections that will change over time. The calculator assumes current federal unified gift and estate tax rates and does not calculate individual state estate or inheritance taxes, generation-skipping transfer taxes, or specific trust structures. Consult a qualified estate planning attorney, CPA, or financial advisor before making decisions regarding your estate plan.
+                </p>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="report-modal-bg" id="report-modal">
+        <div class="report-modal-box">
+            <button class="report-modal-close" onclick="closeReportModal()">&times;</button>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #dfa01e; padding-bottom: 15px; margin-bottom: 20px;">
+                <img src="assets/logo.svg" alt="The Seiler Group" style="height: 45px;">
+                <div style="text-align: right;">
+                    <h3 style="margin: 0; color: #0b172a; font-size: 18px; font-weight: 700;">ESTATE TAX PLANNING REPORT</h3>
+                    <div style="font-size: 12px; color: #64748b;">The Seiler Group of Raymond James</div>
+                </div>
+            </div>
+
+            <div id="report-modal-content">
+                <!-- Dynamically injected report details -->
+            </div>
+
+            <div style="margin-top: 25px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()" style="padding: 8px 18px; font-size: 13px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
+                <button type="button" class="calc-btn calc-btn-primary" onclick="closeReportModal()" style="padding: 8px 22px; font-size: 13px;">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     FOOTER
+     ============================================================ -->
+    <footer style="background: #0b172a; color: #94a3b8; padding: 40px 20px; font-size: 12px; text-align: center; border-top: 1px solid rgba(223,160,30,0.3);">
+        <div style="max-width: 1100px; margin: 0 auto;">
+            <p style="margin-bottom: 10px;">&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC.</p>
+            <p style="margin: 0;">Securities offered through Raymond James Financial Services, Inc. Member FINRA / SIPC. Investment advisory services offered through Raymond James Financial Services Advisors, Inc.</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+     INTERACTIVE LOGIC & CALCULATION ENGINE
+     ============================================================ -->
+    <script>
+        // Formatting Helpers
+        function fmtMoney(num) {
+            return '$' + Math.round(Number(num) || 0).toLocaleString('en-US');
+        }
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        // Toggle Accordions
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(id + '-icon');
+            if (content.classList.contains('collapsed')) {
+                content.classList.remove('collapsed');
+                if (icon) icon.parentElement.classList.remove('collapsed');
+            } else {
+                content.classList.add('collapsed');
+                if (icon) icon.parentElement.classList.add('collapsed');
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        // Married Status Switch
+        function handleMarriedChange() {
+            const isMarried = document.getElementById('chk-married').checked;
+            const transferRow = document.getElementById('row-transfer-spouse');
+            const inpTransfer = document.getElementById('inp-transfer-spouse');
+            const rangeTransfer = document.getElementById('range-transfer-spouse');
+
+            if (isMarried) {
+                transferRow.style.opacity = '1';
+                inpTransfer.disabled = false;
+                rangeTransfer.disabled = false;
+            } else {
+                transferRow.style.opacity = '0.55';
+                inpTransfer.disabled = true;
+                rangeTransfer.disabled = true;
+                inpTransfer.value = '100%';
+                rangeTransfer.value = 100;
+            }
+            calculateEstateTax();
+        }
+
+        // Two-way synchronization between inputs and sliders
+        function setupSync(inputId, rangeId, isPercent, isCurrency) {
+            const inp = document.getElementById(inputId);
+            const rng = document.getElementById(rangeId);
+            if (!inp || !rng) return;
+
+            rng.addEventListener('input', () => {
+                const val = parseFloat(rng.value) || 0;
+                if (isPercent) {
+                    inp.value = val + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(val);
+                } else {
+                    inp.value = val;
+                }
+                calculateEstateTax();
+            });
+
+            inp.addEventListener('change', () => {
+                let clean = parseClean(inp.value);
+                clean = Math.max(parseFloat(rng.min), Math.min(parseFloat(rng.max), clean));
+                rng.value = clean;
+                if (isPercent) {
+                    inp.value = clean + '%';
+                } else if (isCurrency) {
+                    inp.value = fmtMoney(clean);
+                } else {
+                    inp.value = clean;
+                }
+                calculateEstateTax();
+            });
+        }
+
+        // Core Calculation Engine
+        let lastCalculation = null;
+
+        function calculateEstateTax() {
+            // Inputs: Section 1
+            const charity = parseClean(document.getElementById('inp-charity').value);
+            const taxableGifts = parseClean(document.getElementById('inp-gifts').value);
+            const isMarried = document.getElementById('chk-married').checked;
+            const spouseTransferPct = isMarried ? (parseClean(document.getElementById('inp-transfer-spouse').value) / 100) : 0;
+            const inflationRate = (parseClean(document.getElementById('inp-inflation').value) || 3) / 100;
+
+            // Inputs: Section 2 (Assets)
+            const home = parseClean(document.getElementById('inp-home').value);
+            const re = parseClean(document.getElementById('inp-re').value);
+            const autos = parseClean(document.getElementById('inp-autos').value);
+            const vehicles = parseClean(document.getElementById('inp-vehicles').value);
+            const jewelry = parseClean(document.getElementById('inp-jewelry').value);
+            const household = parseClean(document.getElementById('inp-household').value);
+            const cashAccts = parseClean(document.getElementById('inp-cash-accts').value);
+            const retirement = parseClean(document.getElementById('inp-retirement').value);
+            const taxableInv = parseClean(document.getElementById('inp-taxable-inv').value);
+            const bonds = parseClean(document.getElementById('inp-bonds').value);
+            const mutualFunds = parseClean(document.getElementById('inp-mutual-funds').value);
+            const stocks = parseClean(document.getElementById('inp-stocks').value);
+            const lifeIns = parseClean(document.getElementById('inp-life-ins').value);
+            const otherAssets = parseClean(document.getElementById('inp-other-assets').value);
+            const assetGrowthRate = (parseClean(document.getElementById('inp-asset-growth').value) || 6) / 100;
+
+            const totalAssets = home + re + autos + vehicles + jewelry + household + cashAccts + retirement + taxableInv + bonds + mutualFunds + stocks + lifeIns + otherAssets;
+
+            // Inputs: Section 3 (Liabilities)
+            const homeMtg = parseClean(document.getElementById('inp-home-mtg').value);
+            const otherMtg = parseClean(document.getElementById('inp-other-mtg').value);
+            const autoLoan = parseClean(document.getElementById('inp-auto-loan').value);
+            const otherLoans = parseClean(document.getElementById('inp-other-loans').value);
+            const ccDebt = parseClean(document.getElementById('inp-cc-debt').value);
+            const funeral = parseClean(document.getElementById('inp-funeral').value);
+            const probatePct = (parseClean(document.getElementById('inp-probate').value) || 4) / 100;
+
+            const totalDebt = homeMtg + otherMtg + autoLoan + otherLoans + ccDebt;
+            const probateCost = totalAssets * probatePct;
+            const totalDeductions = totalDebt + funeral + probateCost + charity;
+
+            // Marital Deduction
+            const netBeforeMarital = Math.max(0, totalAssets - (totalDebt + funeral + probateCost + charity));
+            const maritalDeduction = isMarried ? (netBeforeMarital * spouseTransferPct) : 0;
+
+            // 2026 Base Exemption: $15,000,000 indexed for inflation
+            const baseExemption = 15000000;
+            const remainingExemption = Math.max(0, baseExemption - taxableGifts);
+
+            // Gross Taxable Estate
+            const taxableEstate = Math.max(0, totalAssets - totalDeductions - maritalDeduction);
+            const amountSubjectToTax = Math.max(0, taxableEstate - remainingExemption);
+
+            // Federal Estate Tax Rate: 40%
+            const federalTax = amountSubjectToTax * 0.40;
+            const stateTax = 0; // standard CalcXML educational baseline
+
+            // Net inherited by heirs
+            const netToHeirs = Math.max(0, totalAssets - totalDebt - funeral - probateCost - federalTax - charity);
+
+            lastCalculation = {
+                totalAssets,
+                totalDebt,
+                funeral,
+                probateCost,
+                charity,
+                maritalDeduction,
+                taxableEstate,
+                remainingExemption,
+                federalTax,
+                stateTax,
+                netToHeirs,
+                isMarried,
+                spouseTransferPct,
+                inflationRate,
+                assetGrowthRate
+            };
+
+            // Update UI Elements
+            document.getElementById('banner-heir-amt').innerText = fmtMoney(netToHeirs);
+            document.getElementById('chart1-heading').innerText = `IF YOU WERE TO DIE IN 2026, YOUR ${fmtMoney(totalAssets)} ESTATE WILL BE DISTRIBUTED AS FOLLOWS:`;
+            
+            document.getElementById('stat-gross').innerText = fmtMoney(totalAssets);
+            document.getElementById('stat-deductions').innerText = fmtMoney(totalDeductions + maritalDeduction);
+            document.getElementById('stat-taxable').innerText = fmtMoney(taxableEstate);
+            document.getElementById('stat-tax').innerText = fmtMoney(federalTax);
+            document.getElementById('stat-heirs').innerText = fmtMoney(netToHeirs);
+
+            document.getElementById('leg-heirs').innerText = fmtMoney(netToHeirs);
+            document.getElementById('leg-fed-tax').innerText = fmtMoney(federalTax);
+            document.getElementById('leg-state-tax').innerText = fmtMoney(stateTax);
+            document.getElementById('leg-admin').innerText = fmtMoney(probateCost + funeral);
+            document.getElementById('leg-charity').innerText = fmtMoney(charity);
+
+            // Render Donut & 10-Year Projections
+            renderPieChart(netToHeirs, federalTax, stateTax, probateCost + funeral, charity, totalAssets);
+            render10YearProjections(totalAssets, remainingExemption, inflationRate, assetGrowthRate, totalDeductions);
+        }
+
+        // SVG Donut Chart Renderer
+        function renderPieChart(heirs, fedTax, stateTax, admin, charity, totalEstate) {
+            const container = document.getElementById('pie-chart-wrapper');
+            const total = heirs + fedTax + stateTax + admin + charity;
+
+            if (total <= 0) {
+                container.innerHTML = `
+                    <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;">
+                        <circle cx="100" cy="100" r="80" fill="#2563eb" />
+                        <text x="100" y="105" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="700">$0 Estate</text>
+                    </svg>
+                `;
+                return;
+            }
+
+            const slices = [
+                { val: heirs, color: '#2563eb', label: 'Heirs' },
+                { val: fedTax, color: '#16a34a', label: 'Fed Tax' },
+                { val: stateTax, color: '#06b6d4', label: 'State Tax' },
+                { val: admin, color: '#dfa01e', label: 'Admin' },
+                { val: charity, color: '#8b5cf6', label: 'Charity' }
+            ].filter(s => s.val > 0);
+
+            let cumulativeAngle = 0;
+            const paths = slices.map(slice => {
+                const angle = (slice.val / total) * 360;
+                const startAngle = cumulativeAngle;
+                const endAngle = cumulativeAngle + angle;
+                cumulativeAngle = endAngle;
+
+                const x1 = 100 + 80 * Math.cos((Math.PI / 180) * (startAngle - 90));
+                const y1 = 100 + 80 * Math.sin((Math.PI / 180) * (startAngle - 90));
+                const x2 = 100 + 80 * Math.cos((Math.PI / 180) * (endAngle - 90));
+                const y2 = 100 + 80 * Math.sin((Math.PI / 180) * (endAngle - 90));
+                const largeArc = angle > 180 ? 1 : 0;
+
+                if (angle >= 359.9) {
+                    return `<circle cx="100" cy="100" r="80" fill="${slice.color}" />`;
+                }
+
+                return `<path d="M 100 100 L ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2} Z" fill="${slice.color}" />`;
+            }).join('');
+
+            container.innerHTML = `
+                <svg viewBox="0 0 200 200" style="width: 100%; height: 100%; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));">
+                    ${paths}
+                    <circle cx="100" cy="100" r="38" fill="#ffffff" />
+                </svg>
+            `;
+        }
+
+        // 10-Year Growth Table and SVG Visualizer
+        function render10YearProjections(currentAssets, currentExemption, inflation, growth, currentDeductions) {
+            const tableBody = document.getElementById('table-10yr-body');
+            const chartWrapper = document.getElementById('growth-chart-wrapper');
+
+            let rowsHtml = '';
+            const schedule = [];
+            let estateVal = currentAssets;
+            let exemptionVal = currentExemption;
+
+            for (let i = 0; i < 10; i++) {
+                const year = 2026 + i;
+                if (i > 0) {
+                    estateVal *= (1 + growth);
+                    exemptionVal *= (1 + inflation);
+                }
+
+                const taxable = Math.max(0, estateVal - currentDeductions);
+                const overExempt = Math.max(0, taxable - exemptionVal);
+                const estTax = overExempt * 0.40;
+                const heirsNet = Math.max(0, estateVal - currentDeductions - estTax);
+
+                schedule.push({
+                    year,
+                    estateVal,
+                    exemptionVal,
+                    estTax,
+                    heirsNet
+                });
+
+                rowsHtml += `
+                    <tr>
+                        <td>${year}</td>
+                        <td>${fmtMoney(estateVal)}</td>
+                        <td>${fmtMoney(exemptionVal)}</td>
+                        <td style="color: ${estTax > 0 ? '#ef4444' : '#64748b'}; font-weight: ${estTax > 0 ? '700' : '400'};">${fmtMoney(estTax)}</td>
+                        <td style="color: #10b981; font-weight: 700;">${fmtMoney(heirsNet)}</td>
+                    </tr>
+                `;
+            }
+
+            tableBody.innerHTML = rowsHtml;
+
+            // Render SVG 10-Year Bar Chart
+            const maxVal = Math.max(...schedule.map(s => s.estateVal), 1000000);
+            const w = 680;
+            const h = 230;
+            const padL = 60;
+            const padR = 20;
+            const padT = 20;
+            const padB = 40;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+            const barGroupW = plotW / 10;
+            const barW = barGroupW * 0.65;
+
+            let bars = '';
+            schedule.forEach((s, idx) => {
+                const x = padL + idx * barGroupW + (barGroupW - barW) / 2;
+                const totalH = (s.estateVal / maxVal) * plotH;
+                const taxH = (s.estTax / maxVal) * plotH;
+                const heirsH = totalH - taxH;
+
+                const yBase = h - padB;
+                const yHeirs = yBase - heirsH;
+                const yTax = yHeirs - taxH;
+
+                bars += `
+                    <g>
+                        <!-- Heirs share -->
+                        <rect x="${x}" y="${yHeirs}" width="${barW}" height="${Math.max(0, heirsH)}" fill="#2563eb" rx="2" />
+                        <!-- Estate Tax share -->
+                        ${taxH > 0 ? `<rect x="${x}" y="${yTax}" width="${barW}" height="${Math.max(0, taxH)}" fill="#ef4444" rx="2" />` : ''}
+                        <!-- Year label -->
+                        <text x="${x + barW / 2}" y="${h - 18}" text-anchor="middle" font-size="11" fill="#475569" font-family="'Open Sans', sans-serif">'${String(s.year).slice(2)}</text>
+                    </g>
+                `;
+            });
+
+            chartWrapper.innerHTML = `
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <!-- Grid Lines -->
+                    <line x1="${padL}" y1="${padT}" x2="${w - padR}" y2="${padT}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${padT + plotH / 2}" x2="${w - padR}" y2="${padT + plotH / 2}" stroke="#e2e8f0" stroke-dasharray="3,3" />
+                    <line x1="${padL}" y1="${h - padB}" x2="${w - padR}" y2="${h - padB}" stroke="#cbd5e1" stroke-width="1.5" />
+                    <!-- Y Axis Labels -->
+                    <text x="${padL - 8}" y="${padT + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal)}</text>
+                    <text x="${padL - 8}" y="${padT + plotH / 2 + 4}" text-anchor="end" font-size="10" fill="#64748b">${fmtMoney(maxVal / 2)}</text>
+                    <text x="${padL - 8}" y="${h - padB}" text-anchor="end" font-size="10" fill="#64748b">$0</text>
+                    ${bars}
+                </svg>
+            `;
+        }
+
+        // View Report Modal
+        function openReportModal() {
+            if (!lastCalculation) calculateEstateTax();
+            const c = lastCalculation;
+            const content = document.getElementById('report-modal-content');
+
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border-left: 4px solid #dfa01e;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #0b172a; text-transform: uppercase;">Estate Summary (2026)</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Gross Estate Value:</span><strong>${fmtMoney(c.totalAssets)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Liabilities & Debts:</span><strong>${fmtMoney(c.totalDebt)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Probate & Admin Costs:</span><strong>${fmtMoney(c.probateCost)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Charitable Bequests:</span><strong>${fmtMoney(c.charity)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Marital Deduction:</span><strong>${fmtMoney(c.maritalDeduction)}</strong>
+                        </div>
+                    </div>
+
+                    <div style="background: #0b172a; color: #fff; padding: 15px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4);">
+                        <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #dfa01e; text-transform: uppercase;">Tax Calculation Worksheet</h4>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Taxable Estate:</span><strong>${fmtMoney(c.taxableEstate)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
+                            <span>Applicable Exemption:</span><strong>${fmtMoney(c.remainingExemption)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px; color: #f87171;">
+                            <span>Estimated Federal Tax:</span><strong>${fmtMoney(c.federalTax)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #4ade80;">
+                            <span>Net Inherited by Heirs:</span><strong>${fmtMoney(c.netToHeirs)}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #0b172a; text-transform: uppercase;">Next Steps & Strategic Recommendations</h4>
+                <p style="font-size: 12.5px; line-height: 1.6; color: #475569; margin-bottom: 12px;">
+                    1. <strong>Utilize the Unified Exemption:</strong> Maximize your $15,000,000 lifetime federal estate tax basic exclusion with strategic lifetime gifting and trust formation.<br>
+                    2. <strong>Spousal Portability (Form 706):</strong> If married, ensure your executor files a timely estate tax return upon the first spouse's death to transfer any unused basic exclusion.<br>
+                    3. <strong>Irrevocable Life Insurance Trusts (ILIT):</strong> Removing life insurance death benefits from your taxable gross estate can eliminate estate taxes and supply liquid wealth for estate administrative fees.
+                </p>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        // Initialize Synchronization on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Section 1
+            setupSync('inp-charity', 'range-charity', false, true);
+            setupSync('inp-gifts', 'range-gifts', false, true);
+            setupSync('inp-transfer-spouse', 'range-transfer-spouse', true, false);
+            setupSync('inp-inflation', 'range-inflation', true, false);
+
+            // Section 2
+            setupSync('inp-home', 'range-home', false, true);
+            setupSync('inp-re', 'range-re', false, true);
+            setupSync('inp-autos', 'range-autos', false, true);
+            setupSync('inp-vehicles', 'range-vehicles', false, true);
+            setupSync('inp-jewelry', 'range-jewelry', false, true);
+            setupSync('inp-household', 'range-household', false, true);
+            setupSync('inp-cash-accts', 'range-cash-accts', false, true);
+            setupSync('inp-retirement', 'range-retirement', false, true);
+            setupSync('inp-taxable-inv', 'range-taxable-inv', false, true);
+            setupSync('inp-bonds', 'range-bonds', false, true);
+            setupSync('inp-mutual-funds', 'range-mutual-funds', false, true);
+            setupSync('inp-stocks', 'range-stocks', false, true);
+            setupSync('inp-life-ins', 'range-life-ins', false, true);
+            setupSync('inp-other-assets', 'range-other-assets', false, true);
+            setupSync('inp-asset-growth', 'range-asset-growth', true, false);
+
+            // Section 3
+            setupSync('inp-home-mtg', 'range-home-mtg', false, true);
+            setupSync('inp-other-mtg', 'range-other-mtg', false, true);
+            setupSync('inp-auto-loan', 'range-auto-loan', false, true);
+            setupSync('inp-other-loans', 'range-other-loans', false, true);
+            setupSync('inp-cc-debt', 'range-cc-debt', false, true);
+            setupSync('inp-funeral', 'range-funeral', false, true);
+            setupSync('inp-probate', 'range-probate', true, false);
+
+            // Calculate Initial Values
+            calculateEstateTax();
+        });
+    </script>
+</body>
+</html>

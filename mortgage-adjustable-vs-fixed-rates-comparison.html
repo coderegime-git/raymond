@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Adjustable vs. Fixed Rates Comparison | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Compare Fixed-Rate Mortgages against Fully Amortizing and Interest-Only Adjustable Rate Mortgages (ARMs). Calculate monthly payments and long-term interest costs.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Shared Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <style>
+        .mort-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .mort-stat-card {
+            background: #0b172a;
+            border: 1px solid rgba(223, 160, 30, 0.35);
+            border-radius: 6px;
+            padding: 16px 18px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .mort-stat-val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #dfa01e;
+            font-family: 'Open Sans', sans-serif;
+            margin-bottom: 4px;
+        }
+        .mort-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #94a3b8;
+            font-weight: 600;
+        }
+        .subtotal-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #dfa01e;
+            margin-left: auto;
+            padding-right: 15px;
+        }
+        .arm-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin: 15px 0;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+        }
+        .arm-table th {
+            background: #0b172a;
+            color: #dfa01e;
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #1e293b;
+        }
+        .arm-table td {
+            padding: 8px 12px;
+            border: 1px solid #e2e8f0;
+            color: #334155;
+        }
+        .arm-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        .report-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(11, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+        }
+        .report-modal-content {
+            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 30px;
+            border: 2px solid #dfa01e;
+            width: 90%;
+            max-width: 860px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .report-modal-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            color: #64748b;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP CORPORATE NAVIGATION BAR -->
+    <nav class="rj-navbar">
+        <div class="rj-nav-inner">
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-link">HOME</a>
+                <a href="about.html" class="rj-nav-link">ABOUT US</a>
+                <a href="services.html" class="rj-nav-link">SERVICES</a>
+                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
+                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
+                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+            </div>
+            <a href="index.html" class="rj-logo-link">
+                <span class="rj-logo-gold">THE SEILER GROUP</span>
+                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <a href="long-term-care-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Long-Term Care Calculator">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+
+    <a href="your-marginal-tax-rate.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Your Marginal Tax Rate">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- MAIN CALCULATOR CONTENT -->
+    <main class="calc-white-wrapper">
+        <article class="calc-white-container">
+
+            <!-- Hero Image Banner -->
+            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
+                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Mortgage Comparison" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            </div>
+
+            <!-- Title & Meta Header -->
+            <header class="calc-white-header">
+                <h1 class="calc-white-title">MORTGAGE ADJUSTABLE VS. FIXED RATES COMPARISON</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Mortgage &gt; Calculator</a>
+                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                </div>
+                <p class="calc-intro-p">
+                    Use this calculator to compare a fixed rate mortgage to two types of ARMs: a Fully Amortizing ARM and an Interest-Only ARM. Adjust the mortgage loan terms, payments to see which option best meets your needs. An adjustable rate mortgage (ARM) has a rate that can change, causing your monthly payments to increase or decrease.
+                </p>
+            </header>
+
+            <!-- Top Actions & Highlight Banner -->
+            <div class="calc-btn-group">
+                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateMortgage()">RECALCULATE</button>
+                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            </div>
+
+            <!-- Dynamic Result Highlight Banner -->
+            <div class="calc-highlight-banner" id="mort-result-banner" style="margin-bottom: 25px;">
+                <span class="highlight-val" id="banner-mort-status" style="color: #4ade80;">ARM vs Fixed Rate Mortgage Analysis</span>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="mort-stat-grid">
+                <div class="mort-stat-card">
+                    <div class="mort-stat-val" id="stat-fixed-pmt">$1,471.21</div>
+                    <div class="mort-stat-label">Fixed Rate Payment</div>
+                </div>
+                <div class="mort-stat-card">
+                    <div class="mort-stat-val" id="stat-arm-pmt" style="color: #60a5fa;">$1,327.32</div>
+                    <div class="mort-stat-label">Amortizing ARM Payment</div>
+                </div>
+                <div class="mort-stat-card">
+                    <div class="mort-stat-val" id="stat-io-pmt" style="color: #4ade80;">$1,041.67</div>
+                    <div class="mort-stat-label">Interest-Only ARM Payment</div>
+                </div>
+            </div>
+
+            <!-- Accordion 1: FIXED RATE MORTGAGE -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>FIXED RATE MORTGAGE</span>
+                    <span class="subtotal-badge" id="badge-fixed">Monthly payment: $1,471.21</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-amount" class="calc-label">Mortgage amount*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="m-amount" class="calc-input" value="$250,000.00"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-m-amount" class="calc-slider" value="250000" min="50000" max="1000000" step="10000">
+                                <div class="calc-slider-scale"><span>$50,000</span><span>$525,000</span><span>$1,000,000</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-term" class="calc-label">Term (in years)*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="number" id="m-term" class="calc-input" value="30" min="10" max="30"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-m-term" class="calc-slider" value="30" min="10" max="30" step="5">
+                                <div class="calc-slider-scale"><span>10 yrs</span><span>20 yrs</span><span>30 yrs</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-fixed-rate" class="calc-label">Interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="m-fixed-rate" class="calc-input" value="5.80%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-m-fixed-rate" class="calc-slider" value="5.8" min="2" max="12" step="0.1">
+                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion 2: FULLY AMORTIZING ARM -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>FULLY AMORTIZING ARM</span>
+                    <span class="subtotal-badge" id="badge-arm">Initial payment: $1,327.32</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-arm-rate" class="calc-label">Initial interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="m-arm-rate" class="calc-input" value="4.80%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-m-arm-rate" class="calc-slider" value="4.8" min="2" max="12" step="0.1">
+                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-arm-cap" class="calc-label">Interest rate cap</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="m-arm-cap" class="calc-input" value="12.00%" onchange="calculateMortgage()"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accordion 3: INTEREST ONLY ARM -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>INTEREST ONLY ARM</span>
+                    <span class="subtotal-badge" id="badge-io">Initial payment: $1,041.67</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="m-io-rate" class="calc-label">Initial interest rate*</label></div>
+                        <div class="calc-field-col">
+                            <div class="calc-input-wrapper"><input type="text" id="m-io-rate" class="calc-input" value="5.00%"></div>
+                            <div class="calc-slider-wrapper">
+                                <input type="range" id="range-m-io-rate" class="calc-slider" value="5.0" min="2" max="12" step="0.1">
+                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section: Monthly Payment by Mortgage Type -->
+            <div class="calc-accordion active">
+                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
+                    <span>MONTHLY PAYMENT BY MORTGAGE TYPE</span>
+                    <i class="fas fa-chevron-up"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Initial Monthly Payments</span>
+                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1e3a8a; display: inline-block; border-radius: 2px;"></span> Fixed Rate</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #166534; display: inline-block; border-radius: 2px;"></span> Amortizing ARM</span>
+                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #0284c7; display: inline-block; border-radius: 2px;"></span> Interest Only</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg id="mort-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reference Table: Common Adjustable Rate Mortgages -->
+            <section style="margin-top: 25px;">
+                <h4 style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 16px; margin-bottom: 10px;">Common Adjustable Rate Mortgages</h4>
+                <table class="arm-table">
+                    <thead>
+                        <tr>
+                            <th>ARM Type</th>
+                            <th>Months Fixed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>3/1 ARM</td><td>Fixed for 36 months; adjusts annually for the remaining term of the loan.</td></tr>
+                        <tr><td>5/1 ARM</td><td>Fixed for 60 months; adjusts annually for the remaining term of the loan.</td></tr>
+                        <tr><td>7/1 ARM</td><td>Fixed for 84 months; adjusts annually for the remaining term of the loan.</td></tr>
+                        <tr><td>10/1 ARM</td><td>Fixed for 120 months; adjusts annually for the remaining term of the loan.</td></tr>
+                        <tr><td>3/6 month ARM</td><td>Fixed for 36 months; adjusts every six months for the remaining term of the loan.</td></tr>
+                        <tr><td>5/6 month ARM</td><td>Fixed for 60 months; adjusts every six months for the remaining term of the loan.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Definitions Section -->
+            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
+                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">FIXED-RATE MORTGAGE</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        A fixed-rate mortgage has the same interest rate and monthly payment throughout the term of the mortgage.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">FULLY AMORTIZING ARM</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        An adjustable rate mortgage where the initial rate is fixed for a specified period and then adjusts periodically. The monthly payment is calculated to pay off the entire mortgage balance over the term.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">INTEREST ONLY ARM</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        An Interest-Only ARM requires monthly interest payments only during the initial fixed period, keeping initial payments low without paying down principal.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">MORTGAGE AMOUNT</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        Original or expected balance for your mortgage.
+                    </p>
+                </div>
+                <div class="calc-def-item" style="margin-bottom: 14px;">
+                    <strong style="color: #0b172a; font-size: 13px;">INTEREST RATE CAP</strong>
+                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
+                        The absolute maximum interest rate for the mortgage. The mortgage's interest rate will never exceed this interest rate cap.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Educational Disclaimer Footer -->
+            <footer style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.6;">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide mortgage or investment advice. All examples are hypothetical and are for illustrative purposes.</p>
+            </footer>
+
+        </article>
+    </main>
+
+    <!-- REPORT MODAL -->
+    <div id="report-modal" class="report-modal">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
+                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">MORTGAGE COMPARISON DETAILED REPORT</h3>
+                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
+                    <i class="fas fa-print"></i> Print
+                </button>
+            </div>
+            <div id="report-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        function toggleAccordion(el) {
+            const acc = el.parentElement;
+            acc.classList.toggle('active');
+            const icon = el.querySelector('i');
+            if (acc.classList.contains('active')) {
+                icon.className = 'fas fa-chevron-up';
+            } else {
+                icon.className = 'fas fa-chevron-down';
+            }
+        }
+
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
+
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function setupSync(inputId, sliderId, isPct, isCur) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+
+            sld.addEventListener('input', () => {
+                if (isPct) {
+                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(sld.value);
+                } else {
+                    inp.value = sld.value;
+                }
+                calculateMortgage();
+            });
+
+            inp.addEventListener('change', () => {
+                let v = parseNum(inp.value);
+                if (isPct) {
+                    inp.value = v.toFixed(2) + '%';
+                } else if (isCur) {
+                    inp.value = fmtMoneyCents(v);
+                } else {
+                    inp.value = v;
+                }
+                sld.value = v;
+                calculateMortgage();
+            });
+        }
+
+        let mortData = {};
+
+        function calculateMortgage() {
+            const amount = parseNum(document.getElementById('m-amount').value) || 250000;
+            const term = Math.max(10, Math.min(30, parseNum(document.getElementById('m-term').value) || 30));
+            const fixedRate = (parseNum(document.getElementById('m-fixed-rate').value) || 5.8) / 100;
+            const armRate = (parseNum(document.getElementById('m-arm-rate').value) || 4.8) / 100;
+            const ioRate = (parseNum(document.getElementById('m-io-rate').value) || 5.0) / 100;
+
+            const n = term * 12;
+
+            // Fixed Payment
+            const rFixed = fixedRate / 12;
+            const fixedPmt = (amount * rFixed * Math.pow(1 + rFixed, n)) / (Math.pow(1 + rFixed, n) - 1);
+
+            // Amortizing ARM Payment
+            const rArm = armRate / 12;
+            const armPmt = (amount * rArm * Math.pow(1 + rArm, n)) / (Math.pow(1 + rArm, n) - 1);
+
+            // Interest-Only Payment
+            const ioPmt = (amount * ioRate) / 12;
+
+            mortData = {
+                amount, term, fixedRate, armRate, ioRate, fixedPmt, armPmt, ioPmt
+            };
+
+            document.getElementById('badge-fixed').textContent = `Monthly payment: ${fmtMoneyCents(fixedPmt)}`;
+            document.getElementById('badge-arm').textContent = `Initial payment: ${fmtMoneyCents(armPmt)}`;
+            document.getElementById('badge-io').textContent = `Initial payment: ${fmtMoneyCents(ioPmt)}`;
+
+            document.getElementById('stat-fixed-pmt').textContent = fmtMoneyCents(fixedPmt);
+            document.getElementById('stat-arm-pmt').textContent = fmtMoneyCents(armPmt);
+            document.getElementById('stat-io-pmt').textContent = fmtMoneyCents(ioPmt);
+
+            renderMortChart([
+                { name: 'Fixed Rate', val: fixedPmt, color: '#1d4ed8' },
+                { name: 'Amortizing ARM', val: armPmt, color: '#15803d' },
+                { name: 'Interest Only', val: ioPmt, color: '#0284c7' }
+            ]);
+        }
+
+        function renderMortChart(items) {
+            const svg = document.getElementById('mort-chart-svg');
+            if (!svg) return;
+
+            const width = 700;
+            const height = 260;
+            const padLeft = 70;
+            const padRight = 40;
+            const padTop = 30;
+            const padBottom = 40;
+
+            const chartW = width - padLeft - padRight;
+            const chartH = height - padTop - padBottom;
+
+            let maxVal = Math.max(...items.map(i => i.val)) * 1.25;
+            if (maxVal === 0) maxVal = 2000;
+
+            let svgHtml = '';
+            const gridCount = 4;
+            for (let i = 0; i <= gridCount; i++) {
+                const yVal = (maxVal / gridCount) * i;
+                const yPos = padTop + chartH - (i / gridCount) * chartH;
+                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
+                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            }
+
+            const slotW = chartW / items.length;
+            const barW = 75;
+
+            items.forEach((item, idx) => {
+                const cx = padLeft + idx * slotW + slotW / 2;
+                const bH = (item.val / maxVal) * chartH;
+                const bY = padTop + chartH - bH;
+
+                svgHtml += `
+                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
+                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
+                    </rect>
+                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(item.val)}</text>
+                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
+                `;
+            });
+
+            svg.innerHTML = svgHtml;
+        }
+
+        function openReportModal() {
+            const body = document.getElementById('report-modal-body');
+            if (!mortData.amount) calculateMortgage();
+
+            body.innerHTML = `
+                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Mortgage Payment Summary</div>
+                    <div style="font-size: 18px; font-weight: 700; color: #ffffff; margin-top: 4px;">
+                        Principal Loan: ${fmtMoney(mortData.amount)} (${mortData.term} Years)
+                    </div>
+                </div>
+
+                <table class="arm-table">
+                    <thead>
+                        <tr>
+                            <th>Mortgage Option</th>
+                            <th>Interest Rate</th>
+                            <th>Initial Monthly Payment</th>
+                            <th>First 5-Year Payment Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="font-weight: 600;">Fixed Rate Mortgage</td>
+                            <td>${(mortData.fixedRate * 100).toFixed(2)}%</td>
+                            <td style="color: #1d4ed8; font-weight: 700;">${fmtMoneyCents(mortData.fixedPmt)}</td>
+                            <td>${fmtMoney(mortData.fixedPmt * 60)}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Fully Amortizing 5/1 ARM</td>
+                            <td>${(mortData.armRate * 100).toFixed(2)}%</td>
+                            <td style="color: #15803d; font-weight: 700;">${fmtMoneyCents(mortData.armPmt)}</td>
+                            <td>${fmtMoney(mortData.armPmt * 60)}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600;">Interest-Only 5/1 ARM</td>
+                            <td>${(mortData.ioRate * 100).toFixed(2)}%</td>
+                            <td style="color: #0284c7; font-weight: 700;">${fmtMoneyCents(mortData.ioPmt)}</td>
+                            <td>${fmtMoney(mortData.ioPmt * 60)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
+            document.getElementById('report-modal').style.display = 'block';
+        }
+
+        function closeReportModal() {
+            document.getElementById('report-modal').style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('m-amount', 'range-m-amount', false, true);
+            setupSync('m-term', 'range-m-term', false, false);
+            setupSync('m-fixed-rate', 'range-m-fixed-rate', true, false);
+            setupSync('m-arm-rate', 'range-m-arm-rate', true, false);
+            setupSync('m-io-rate', 'range-m-io-rate', true, false);
+
+            calculateMortgage();
+        });
+    </script>
+</body>
+</html>
