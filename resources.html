@@ -2393,11 +2393,32 @@
                 });
             }
 
-            // Dropdown Toggle Behavior
+            // Dropdown Toggle Behavior & Clear Filter Icon
             const dropdownWrappers = document.querySelectorAll('.res-dropdown-wrapper');
             dropdownWrappers.forEach(wrapper => {
                 const btn = wrapper.querySelector('.res-dropdown-btn');
                 btn.addEventListener('click', (e) => {
+                    const clearIcon = e.target.closest('.res-clear-filter-icon');
+                    if (clearIcon) {
+                        e.stopPropagation();
+                        const target = btn.id.replace('dd-', '').replace('-btn', '');
+                        filterState[target] = 'all';
+                        const labelEl = document.getElementById(`label-${target}`);
+                        if (labelEl) labelEl.innerText = target.toUpperCase();
+                        clearIcon.className = 'fas fa-chevron-down';
+                        btn.classList.remove('has-filter');
+                        const menu = wrapper.querySelector('.res-dropdown-menu');
+                        if (menu) {
+                            menu.querySelectorAll('.res-dropdown-item').forEach(i => {
+                                if (i.getAttribute('data-filter') === 'all') i.classList.add('selected');
+                                else i.classList.remove('selected');
+                            });
+                        }
+                        wrapper.classList.remove('active');
+                        applyGridFilters();
+                        return;
+                    }
+
                     e.stopPropagation();
                     dropdownWrappers.forEach(w => {
                         if (w !== wrapper) w.classList.remove('active');
@@ -2416,10 +2437,26 @@
 
                     filterState[target] = value;
 
-                    // Update button label
+                    // Update button label & active icon matching client screenshots
                     const labelEl = document.getElementById(`label-${target}`);
+                    const btn = document.getElementById(`dd-${target}-btn`);
                     if (labelEl) {
-                        labelEl.innerText = value === 'all' ? target.toUpperCase() : labelText.toUpperCase();
+                        let text = value === 'all' ? target.toUpperCase() : labelText.toUpperCase();
+                        if (text === 'CALCULATORS') text = 'CALCULATOR';
+                        labelEl.innerText = text;
+                    }
+
+                    if (btn) {
+                        const icon = btn.querySelector('i');
+                        if (icon) {
+                            if (value === 'all') {
+                                icon.className = 'fas fa-chevron-down';
+                                btn.classList.remove('has-filter');
+                            } else {
+                                icon.className = 'fas fa-times res-clear-filter-icon';
+                                btn.classList.add('has-filter');
+                            }
+                        }
                     }
 
                     // Update selected class inside menu
