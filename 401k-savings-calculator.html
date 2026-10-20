@@ -252,24 +252,32 @@
             <!-- Elevated Calculator Card Container -->
             <div class="calc-card-container">
 
-                <!-- Interactive Calculator Switcher Bar -->
-                <div class="calc-switcher-bar">
-                    <div class="calc-switcher-label">
-                        <i class="fas fa-calculator"></i> SELECT A CALCULATOR:
-                    </div>
-                    <select class="calc-select-dropdown" id="calc-selector" aria-label="Select Financial Calculator">
-                        <!-- Populated dynamically via JS -->
-                    </select>
-                </div>
-
                 <!-- Title & Meta Header -->
                 <header class="calc-header-meta">
                     <h1 class="calc-page-title" id="calc-title">401(K) SAVINGS CALCULATOR</h1>
                     <div class="calc-meta-bar">
-                        <a href="resources.html?media=Calculators" class="calc-cat-link" id="calc-cat-link">Calculator</a>
-                        <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                            <i class="fas fa-share-nodes"></i> Share
-                        </button>
+                        <div class="calc-meta-left-group">
+                            <a href="resources.html?media=Calculators" class="calc-cat-link" id="calc-cat-link">Calculator</a>
+                            <div class="calc-share-wrapper" id="calc-share-wrapper">
+                                <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Share Calculator">
+                                    <i class="fas fa-share-nodes"></i> Share
+                                </button>
+                                <div class="calc-share-dropdown" id="calc-share-dropdown" role="menu" aria-label="Social Share Options">
+                                    <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
+                                        <i class="fab fa-x-twitter"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" class="calc-share-item" id="share-em" title="Share via Email" aria-label="Share via Email" onclick="shareToSocial('email', event)">
+                                        <i class="fas fa-envelope"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <p class="calc-intro-text" id="calc-intro-text">
                         A 401(k) can be one of your best tools for creating a secure retirement. It provides you with two important advantages. First, all contributions and earnings to your 401(k) are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide matching contributions to your 401(k) account.
@@ -283,16 +291,16 @@
                         <button type="button" class="calc-top-btn calc-secondary-btn" id="btn-view-report">VIEW REPORT</button>
                     </div>
                     <div class="calc-total-banner" id="calc-summary-text">
-                        Your total is <span class="highlight-val" id="total-val">$756,476.60</span> after <span id="years-val">35</span> years.
+                        Your total is <span class="highlight-val" id="total-val">$3,735,791.83</span> after <span id="years-val">35</span> years.
                     </div>
                     <div class="calc-sub-bar">
                         <button type="button" class="calc-icon-btn" id="btn-help-summary" title="Definitions & Help" onclick="document.querySelector('.calc-definitions-section').scrollIntoView({behavior: 'smooth'})">
                             <i class="fas fa-question-circle"></i>
                         </button>
                         <button type="button" class="calc-icon-btn" id="btn-report-icon" title="View Full Table Report">
-                            <i class="fas fa-list-ul"></i>
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <span class="calc-required-hint">*indicates required</span>
+                        <span class="calc-required-hint">*indicates required.</span>
                     </div>
                 </section>
 
@@ -315,7 +323,7 @@
                             <div class="calc-tooltip" id="chart-tooltip"></div>
                             
                             <!-- Dynamic SVG Chart -->
-                            <svg class="calc-chart-svg" id="balance-chart-svg" viewBox="0 0 880 330" preserveAspectRatio="none">
+                            <svg class="calc-chart-svg" id="balance-chart-svg" viewBox="0 0 880 340" preserveAspectRatio="none">
                                 <!-- Injected dynamically via JS -->
                             </svg>
                         </div>
@@ -324,11 +332,11 @@
                         <div class="calc-chart-legend" id="chart-legend-container">
                             <div class="legend-item">
                                 <span class="legend-dot dot-blue"></span>
-                                <span id="legend-with-match">With employer match $756,476.60</span>
+                                <span id="legend-with-match">With employer match <strong>$3,735,791.83</strong></span>
                             </div>
                             <div class="legend-item">
                                 <span class="legend-dot dot-green"></span>
-                                <span id="legend-without-match">Without employer match $584,367.58</span>
+                                <span id="legend-without-match">Without employer match <strong>$3,563,682.81</strong></span>
                             </div>
                         </div>
                     </div>
@@ -337,9 +345,22 @@
                 <!-- ============================================================
                  DEFINITIONS SECTION
                  ============================================================ -->
+                <!-- ============================================================
+                 DEFINITIONS SECTION
+                 ============================================================ -->
                 <section class="calc-definitions-section" id="definitions-container">
                     <!-- Populated dynamically via JS -->
                 </section>
+
+                <!-- ============================================================
+                 OFFICIAL DISCLAIMER SECTION
+                 ============================================================ -->
+                <div class="calc-disclaimer-wrapper">
+                    <hr class="calc-disclaimer-divider">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
 
             </div><!-- end .calc-card-container -->
 
@@ -352,12 +373,15 @@
     <div class="calc-modal-overlay" id="report-modal">
         <div class="calc-modal-card">
             <div class="calc-modal-header">
-                <h3 id="report-modal-title">Financial Calculation Amortization Report</h3>
+                <h3 id="report-modal-title">401(k) Savings Projection Report</h3>
                 <button type="button" class="calc-modal-close-btn" id="btn-close-modal" aria-label="Close report">&times;</button>
             </div>
             <div class="calc-modal-body">
                 <div class="calc-report-summary-box" id="report-summary-content">
-                    <!-- Populated dynamically -->
+                    <!-- Narrative analysis populated dynamically -->
+                </div>
+                <div id="report-results-summary-wrapper">
+                    <!-- Key/Value Results Summary populated dynamically -->
                 </div>
                 <div class="calc-table-wrapper">
                     <table class="calc-report-table">
@@ -369,7 +393,8 @@
                                 <th>Employee Contrib.</th>
                                 <th>Employer Match</th>
                                 <th>Annual Growth</th>
-                                <th>Year-End Balance</th>
+                                <th>Without Match</th>
+                                <th>Ending Balance</th>
                             </tr>
                         </thead>
                         <tbody id="report-table-body">
@@ -385,31 +410,49 @@
         </div>
     </div>
 
-    <!-- ============================================================
+        <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
+
+        <!-- Brand / Social -->
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <!-- Official logo -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
+                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
+            <!-- Social icons -->
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
         </div>
+
+        <!-- Center Quote -->
         <div class="champ-quote">
             Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
             certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
             to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
             complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
+
+        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
             <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
         </div>
+
     </section>
 
     <!-- ============================================================
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
@@ -450,6 +493,7 @@
                     Use</a>
             </p>
         </div>
+
     </footer>
 
     <!-- Load Multi-Calculator Math Engine -->
@@ -464,6 +508,8 @@
         let allCalculators = [];
         let activeCalcSlug = '401k-savings-calculator';
         let currentSchedule = [];
+        let currentResultsSummary = [];
+        let currentNarrative = '';
 
         // Mobile Menu Toggles
         function toggleMobileMenu(e) {
@@ -517,22 +563,25 @@
             .then(data => {
                 allCalculators = data;
                 const selector = document.getElementById('calc-selector');
-                selector.innerHTML = '';
-
-                data.forEach((calc, idx) => {
-                    const opt = document.createElement('option');
-                    opt.value = calc.slug;
-                    opt.textContent = `${idx + 1}. ${calc.title}`;
-                    selector.appendChild(opt);
-                });
+                if (selector) {
+                    selector.innerHTML = '';
+                    data.forEach((calc, idx) => {
+                        const opt = document.createElement('option');
+                        opt.value = calc.slug;
+                        opt.textContent = `${idx + 1}. ${calc.title}`;
+                        selector.appendChild(opt);
+                    });
+                }
 
                 // Check URL parameter e.g. ?calc=mortgage-loan-calculator
                 const params = new URLSearchParams(window.location.search);
                 const queryCalc = params.get('calc');
                 if (queryCalc && (window.CALCULATOR_MODELS[queryCalc] || data.find(c => c.slug === queryCalc))) {
                     activeCalcSlug = queryCalc;
+                } else {
+                    activeCalcSlug = '401-k-savings-calculator';
                 }
-                selector.value = activeCalcSlug;
+                if (selector) selector.value = activeCalcSlug;
                 loadCalculator(activeCalcSlug);
             })
             .catch(() => {
@@ -540,41 +589,121 @@
                 loadCalculator('401k-savings-calculator');
             });
 
-        // Dropdown selection event
-        document.getElementById('calc-selector').addEventListener('change', (e) => {
+        // Dropdown selection event (if selector exists)
+        document.getElementById('calc-selector')?.addEventListener('change', (e) => {
             loadCalculator(e.target.value);
         });
 
         // Floating Prev/Next buttons
-        document.getElementById('btn-prev-calculator').addEventListener('click', () => {
+        document.getElementById('btn-prev-calculator')?.addEventListener('click', () => {
             if (!allCalculators.length) return;
             const idx = allCalculators.findIndex(c => c.slug === activeCalcSlug);
             const prevIdx = (idx - 1 + allCalculators.length) % allCalculators.length;
             const targetSlug = allCalculators[prevIdx].slug;
-            document.getElementById('calc-selector').value = targetSlug;
+            const selector = document.getElementById('calc-selector');
+            if (selector) selector.value = targetSlug;
             loadCalculator(targetSlug);
         });
 
-        document.getElementById('btn-next-calculator').addEventListener('click', () => {
+        document.getElementById('btn-next-calculator')?.addEventListener('click', () => {
             if (!allCalculators.length) return;
             const idx = allCalculators.findIndex(c => c.slug === activeCalcSlug);
             const nextIdx = (idx + 1) % allCalculators.length;
             const targetSlug = allCalculators[nextIdx].slug;
-            document.getElementById('calc-selector').value = targetSlug;
+            const selector = document.getElementById('calc-selector');
+            if (selector) selector.value = targetSlug;
             loadCalculator(targetSlug);
         });
+
+        // Share Helper Functions
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const wrapper = document.getElementById('calc-share-wrapper');
+            if (wrapper) wrapper.classList.toggle('open');
+        }
+
+        function shareToSocial(platform, e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title || '401(k) Savings Calculator | The Seiler Group');
+            let shareUrl = '';
+
+            if (platform === 'facebook') {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            } else if (platform === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            } else if (platform === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            } else if (platform === 'email') {
+                window.location.href = `mailto:?subject=${title}&body=${encodeURIComponent('Check out this 401(k) calculator: ')}%0A${url}`;
+                return;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=620,height=520,scrollbars=yes,resizable=yes');
+            }
+            document.getElementById('calc-share-wrapper')?.classList.remove('open');
+        }
+
+        // Close share dropdown on document click
+        document.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('calc-share-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+
+        // Piecewise scale mapping functions for non-linear sliders (salary, balance)
+        function valToSliderPos(val, f) {
+            if (!f.scalePoints) {
+                const min = parseFloat(f.min) || 0;
+                const max = parseFloat(f.max) || 100;
+                return Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+            }
+            const pts = f.scalePoints;
+            const segs = pts.length - 1;
+            for (let i = 0; i < segs; i++) {
+                if (val <= pts[i + 1] || i === segs - 1) {
+                    const frac = Math.max(0, Math.min(1, (val - pts[i]) / (pts[i + 1] - pts[i])));
+                    return ((i + frac) / segs) * 100;
+                }
+            }
+            return 100;
+        }
+
+        function sliderPosToVal(pct, f) {
+            if (!f.scalePoints) {
+                const min = parseFloat(f.min) || 0;
+                const max = parseFloat(f.max) || 100;
+                return min + (pct / 100) * (max - min);
+            }
+            const pts = f.scalePoints;
+            const segs = pts.length - 1;
+            const scaled = (pct / 100) * segs;
+            const i = Math.min(segs - 1, Math.floor(scaled));
+            const frac = scaled - i;
+            const raw = pts[i] + frac * (pts[i + 1] - pts[i]);
+            const step = f.step || 1000;
+            return Math.round(raw / step) * step;
+        }
 
         // Load Calculator Instance
         function loadCalculator(slug) {
             activeCalcSlug = slug;
-            const model = window.CALCULATOR_MODELS[slug] || window.CALCULATOR_MODELS['401k-savings-calculator'];
-            const metaInfo = allCalculators.find(c => c.slug === slug);
+            const normalizedSlug = (slug === '401-k-savings-calculator' || slug === '401k-savings-calculator') 
+                ? '401k-savings-calculator' 
+                : slug;
+            const model = window.CALCULATOR_MODELS[normalizedSlug] || window.CALCULATOR_MODELS['401k-savings-calculator'];
+            const metaInfo = allCalculators.find(c => c.slug === slug || c.slug === normalizedSlug);
+
+            const selectorEl = document.getElementById('calc-selector');
+            if (selectorEl) selectorEl.value = slug;
 
             // Update Titles & Intro
             document.getElementById('calc-title').textContent = (metaInfo ? metaInfo.title : model.title);
-            document.getElementById('calc-cat-link').textContent = (metaInfo ? metaInfo.category : model.category);
+            document.getElementById('calc-cat-link').textContent = 'Calculator';
             document.getElementById('calc-intro-text').textContent = (metaInfo ? metaInfo.desc : model.desc);
-            document.getElementById('chart-section-title').textContent = `${(metaInfo ? metaInfo.title : model.title)} PROJECTION`;
+            document.getElementById('chart-section-title').textContent = model.chartTitle || '401(K) BALANCE BY YEAR';
 
             // Build Dynamic Input Sections
             const container = document.getElementById('dynamic-sections-container');
@@ -592,6 +721,11 @@
                     if (f.type === 'percent') formattedVal = `${f.default}%`;
                     else if (f.type === 'currency') formattedVal = fmtCurr(f.default);
 
+                    const initialSliderPos = f.scalePoints ? valToSliderPos(f.default, f) : f.default;
+                    const rMin = f.scalePoints ? 0 : f.min;
+                    const rMax = f.scalePoints ? 100 : f.max;
+                    const rStep = f.scalePoints ? 0.25 : f.step;
+
                     fieldsHtml += `
                         <div class="calc-row">
                             <div class="calc-row-label-group">
@@ -601,7 +735,7 @@
                             <input type="text" id="inp-${f.id}" class="calc-input-box" value="${formattedVal}">
                             <div class="calc-slider-container">
                                 <input type="range" id="range-${f.id}" class="calc-slider" 
-                                       min="${f.min}" max="${f.max}" step="${f.step}" value="${f.default}">
+                                       min="${rMin}" max="${rMax}" step="${rStep}" value="${initialSliderPos}" data-real-val="${f.default}">
                                 <div class="calc-ticks">
                                     ${(f.ticks || []).map(t => `<span>${t}</span>`).join('')}
                                 </div>
@@ -631,27 +765,35 @@
                     if (!inp || !range) return;
 
                     const updateSliderFill = () => {
-                        const min = parseFloat(range.min) || 0;
-                        const max = parseFloat(range.max) || 100;
-                        const val = parseFloat(range.value) || 0;
-                        const pct = ((val - min) / (max - min)) * 100;
-                        range.style.background = `linear-gradient(to right, #dfa01e 0%, #dfa01e ${pct}%, #1e293b ${pct}%, #1e293b 100%)`;
+                        let pct = 0;
+                        if (f.scalePoints) {
+                            pct = parseFloat(range.value) || 0;
+                        } else {
+                            const min = parseFloat(range.min) || 0;
+                            const max = parseFloat(range.max) || 100;
+                            const val = parseFloat(range.value) || 0;
+                            pct = ((val - min) / (max - min)) * 100;
+                        }
+                        range.style.background = `linear-gradient(to right, #1d68d8 0%, #1d68d8 ${pct}%, #203148 ${pct}%, #203148 100%)`;
                     };
 
                     updateSliderFill();
 
                     range.addEventListener('input', () => {
-                        const val = parseFloat(range.value);
-                        if (f.type === 'percent') inp.value = `${val}%`;
-                        else if (f.type === 'currency') inp.value = fmtCurr(val);
-                        else inp.value = val;
+                        const raw = parseFloat(range.value);
+                        const realVal = f.scalePoints ? sliderPosToVal(raw, f) : raw;
+                        range.dataset.realVal = realVal;
+                        if (f.type === 'percent') inp.value = `${realVal}%`;
+                        else if (f.type === 'currency') inp.value = fmtCurr(realVal);
+                        else inp.value = realVal;
                         updateSliderFill();
                         triggerRecalculate(model);
                     });
 
                     inp.addEventListener('change', () => {
                         const val = cleanNum(inp.value);
-                        range.value = val;
+                        range.dataset.realVal = val;
+                        range.value = f.scalePoints ? valToSliderPos(val, f) : val;
                         if (f.type === 'percent') inp.value = `${val}%`;
                         else if (f.type === 'currency') inp.value = fmtCurr(val);
                         else inp.value = val;
@@ -668,7 +810,7 @@
                 ${(model.definitions || []).map(d => `
                     <div class="calc-def-item">
                         <h4 class="calc-def-term">${d.term}</h4>
-                        <p class="calc-def-desc">${d.desc}</p>
+                        <div class="calc-def-desc">${d.desc}</div>
                     </div>
                 `).join('')}
             `;
@@ -683,12 +825,16 @@
             model.sections.forEach(sec => {
                 sec.fields.forEach(f => {
                     const range = document.getElementById(`range-${f.id}`);
-                    if (range) vals[f.id] = parseFloat(range.value) || 0;
+                    if (range) {
+                        vals[f.id] = f.scalePoints ? (parseFloat(range.dataset.realVal) || f.default) : (parseFloat(range.value) || 0);
+                    }
                 });
             });
 
             const result = model.calculate(vals);
             currentSchedule = result.schedule || [];
+            currentResultsSummary = result.resultsSummary || [];
+            currentNarrative = result.reportNarrative || '';
 
             // Update Summary Banner
             document.getElementById('calc-summary-text').innerHTML = result.summaryText;
@@ -696,7 +842,7 @@
             // Update Subtotal lines
             (result.subtotals || []).forEach((sub, idx) => {
                 const subEl = document.getElementById(`subtotal-${idx}`);
-                if (subEl) subEl.textContent = sub.label;
+                if (subEl) subEl.innerHTML = sub.label;
             });
 
             // Update Legend
@@ -720,61 +866,79 @@
             if (!data || data.length === 0) return;
 
             const w = 880;
-            const h = 330;
+            const h = 340;
             const padL = 72;
             const padR = 25;
-            const padT = 25;
+            const padT = 20;
             const padB = 40;
 
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
             const maxValRaw = Math.max(...data.map(d => Math.max(d.valWith || 0, d.valWithout || 0)));
-            const maxVal = Math.max(10000, Math.ceil(maxValRaw / 100000) * 100000);
-            const yStep = maxVal / 8;
+            // Align with steps of 500,000 to produce exact $4,000 top tick matching Screenshot 4
+            const stepUnit = maxValRaw > 2000000 ? 500000 : 100000;
+            const maxVal = Math.max(10000, Math.ceil(maxValRaw / stepUnit) * stepUnit);
+            const intervals = Math.min(8, Math.max(4, Math.round(maxVal / stepUnit)));
+            const yStep = maxVal / intervals;
+
+            // Plot background rectangle with border
+            const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotRect.setAttribute('x', padL);
+            plotRect.setAttribute('y', padT);
+            plotRect.setAttribute('width', chartW);
+            plotRect.setAttribute('height', chartH);
+            plotRect.setAttribute('fill', '#07101e');
+            plotRect.setAttribute('stroke', 'rgba(223, 160, 30, 0.35)');
+            plotRect.setAttribute('stroke-width', '1');
+            plotRect.setAttribute('rx', '3');
+            svg.appendChild(plotRect);
 
             // Draw Y-axis grid lines and labels
-            for (let i = 0; i <= 8; i++) {
+            for (let i = 0; i <= intervals; i++) {
                 const val = i * yStep;
-                const yPos = padT + chartH - (i / 8) * chartH;
+                const yPos = padT + chartH - (i / intervals) * chartH;
 
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', padL);
-                line.setAttribute('x2', w - padR);
-                line.setAttribute('y1', yPos);
-                line.setAttribute('y2', yPos);
-                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
-                line.setAttribute('stroke-width', '1');
-                svg.appendChild(line);
+                if (i > 0 && i < intervals) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', padL);
+                    line.setAttribute('x2', padL + chartW);
+                    line.setAttribute('y1', yPos);
+                    line.setAttribute('y2', yPos);
+                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke-width', '1');
+                    svg.appendChild(line);
+                }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', padL - 10);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
                 text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11');
+                text.setAttribute('font-size', '11.5');
+                text.setAttribute('font-weight', '600');
                 text.setAttribute('fill', '#94a3b8');
-                text.textContent = `$${Math.round(val / 1000)}`;
+                text.textContent = `$${Math.round(val / 1000).toLocaleString('en-US')}`;
                 svg.appendChild(text);
             }
 
-            // Y-Axis Title
+            // Rotated Y-Axis Title
             const yTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             yTitle.setAttribute('x', -(padT + chartH / 2));
-            yTitle.setAttribute('y', 20);
+            yTitle.setAttribute('y', 16);
             yTitle.setAttribute('transform', 'rotate(-90)');
             yTitle.setAttribute('text-anchor', 'middle');
             yTitle.setAttribute('font-family', 'Montserrat, sans-serif');
-            yTitle.setAttribute('font-size', '11.5');
+            yTitle.setAttribute('font-size', '12');
             yTitle.setAttribute('font-weight', '700');
-            yTitle.setAttribute('fill', '#ffffff');
+            yTitle.setAttribute('fill', '#dfa01e');
             yTitle.textContent = 'Thousands of Dollars';
             svg.appendChild(yTitle);
 
             // Draw Bars
             const n = data.length;
             const slotW = chartW / n;
-            const barW = Math.max(2, Math.min(10, (slotW - 4) / 2));
+            const barW = Math.max(2, Math.min(10, (slotW - 3) / 2));
 
             data.forEach((d, idx) => {
                 const xCenter = padL + (idx + 0.5) * slotW;
@@ -783,24 +947,24 @@
                 const yWith = padT + chartH - hWith;
                 const yWithout = padT + chartH - hWithout;
 
-                // Primary Bar (Blue)
+                // Primary Bar (Blue - With match)
                 const rectBlue = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                 rectBlue.setAttribute('x', xCenter - barW - 0.5);
                 rectBlue.setAttribute('y', yWith);
                 rectBlue.setAttribute('width', barW);
                 rectBlue.setAttribute('height', Math.max(1, hWith));
                 rectBlue.setAttribute('fill', '#2563eb');
-                rectBlue.setAttribute('rx', '1');
+                rectBlue.setAttribute('rx', '2');
                 rectBlue.setAttribute('cursor', 'pointer');
 
-                // Secondary Bar (Green)
+                // Secondary Bar (Green - Without match)
                 const rectGreen = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
                 rectGreen.setAttribute('x', xCenter + 0.5);
                 rectGreen.setAttribute('y', yWithout);
                 rectGreen.setAttribute('width', barW);
                 rectGreen.setAttribute('height', Math.max(1, hWithout));
                 rectGreen.setAttribute('fill', '#10b981');
-                rectGreen.setAttribute('rx', '1');
+                rectGreen.setAttribute('rx', '2');
                 rectGreen.setAttribute('cursor', 'pointer');
 
                 function showTip(e, text) {
@@ -814,20 +978,20 @@
                 }
 
                 rectBlue.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Year ${d.year} (Age ${d.age}): <strong style="color: #dfa01e;">${fmtCurrWhole(d.valWith)}</strong>`);
+                    showTip(e, `Age ${d.age} (Year ${d.year}): <strong style="color: #dfa01e;">${fmtCurr(d.valWith)}</strong>`);
                 });
                 rectBlue.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 
                 rectGreen.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Year ${d.year} Comparison: <strong style="color: #10b981;">${fmtCurrWhole(d.valWithout)}</strong>`);
+                    showTip(e, `Age ${d.age} Without Match: <strong style="color: #10b981;">${fmtCurr(d.valWithout)}</strong>`);
                 });
                 rectGreen.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 
                 svg.appendChild(rectBlue);
                 svg.appendChild(rectGreen);
 
-                const step = n > 30 ? 2 : 1;
-                if (idx % step === 0 || idx === n - 1) {
+                // Print even ages (30, 32, 34, ..., 64)
+                if (d.age % 2 === 0) {
                     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     xLabel.setAttribute('x', xCenter);
                     xLabel.setAttribute('y', padT + chartH + 18);
@@ -835,20 +999,10 @@
                     xLabel.setAttribute('font-family', 'Open Sans, sans-serif');
                     xLabel.setAttribute('font-size', '11');
                     xLabel.setAttribute('fill', '#94a3b8');
-                    xLabel.textContent = d.age || d.year;
+                    xLabel.textContent = d.age;
                     svg.appendChild(xLabel);
                 }
             });
-
-            // Base horizontal axis
-            const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            axisLine.setAttribute('x1', padL);
-            axisLine.setAttribute('x2', w - padR);
-            axisLine.setAttribute('y1', padT + chartH);
-            axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(223, 160, 30, 0.4)');
-            axisLine.setAttribute('stroke-width', '1.5');
-            svg.appendChild(axisLine);
         }
 
         // View Report Modal
@@ -856,12 +1010,39 @@
         function openReportModal() {
             const tableBody = document.getElementById('report-table-body');
             const summaryBox = document.getElementById('report-summary-content');
+            const resultsSummaryWrapper = document.getElementById('report-results-summary-wrapper');
 
-            summaryBox.innerHTML = `
-                <strong style="color: #dfa01e;">Projection Summary:</strong> Plan Horizon: ${currentSchedule.length} years | 
-                Final Accumulated Nest Egg: ${fmtCurr(currentSchedule[currentSchedule.length - 1]?.valWith || 0)}.
-            `;
+            // 1. Narrative Analysis
+            if (currentNarrative) {
+                summaryBox.innerHTML = currentNarrative;
+                summaryBox.style.display = 'block';
+            } else {
+                summaryBox.style.display = 'none';
+            }
 
+            // 2. Results Summary Key-Value Table
+            if (resultsSummaryWrapper) {
+                if (currentResultsSummary && currentResultsSummary.length > 0) {
+                    resultsSummaryWrapper.innerHTML = `
+                        <h4 style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">Results Summary</h4>
+                        <table class="calc-results-summary-table">
+                            <tbody>
+                                ${currentResultsSummary.map(item => `
+                                    <tr class="${item.highlight ? 'summary-row-highlight' : ''}">
+                                        <td class="summary-label">${item.label}</td>
+                                        <td class="summary-value">${item.value}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                        <h4 style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e; margin: 18px 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">Annual Schedule</h4>
+                    `;
+                } else {
+                    resultsSummaryWrapper.innerHTML = '';
+                }
+            }
+
+            // 3. Amortization / Projection Table
             tableBody.innerHTML = currentSchedule.map(d => `
                 <tr>
                     <td>${d.year}</td>
@@ -870,6 +1051,7 @@
                     <td>${fmtCurrWhole(d.empContrib || 0)}</td>
                     <td>${fmtCurrWhole(d.empMatch || 0)}</td>
                     <td>${fmtCurrWhole(d.growth || 0)}</td>
+                    <td>${fmtCurrWhole(d.valWithout || 0)}</td>
                     <td><strong style="color: #dfa01e;">${fmtCurrWhole(d.valWith)}</strong></td>
                 </tr>
             `).join('');
@@ -899,6 +1081,7 @@
             }
         });
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>

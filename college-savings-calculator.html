@@ -1,91 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>College Savings Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your projected college costs, required monthly contributions, and total savings balance to fund your child's higher education.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>College Savings Calculator | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Saving for your children's education requires a long-term plan. And, like saving for retirement, the earlier you start your plan the better. Use this calculator to help develop or fine-tune your education savings plan. Click the 'View Report' button for a detailed look at the results.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .college-alert-banner {
-            background: rgba(223, 160, 30, 0.12);
-            border: 1px solid #dfa01e;
-            border-radius: 6px;
-            padding: 14px 18px;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .college-alert-p1 {
-            color: #ffffff;
-            font-size: 14.5px;
-            font-weight: 700;
-            margin: 0 0 4px 0;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .college-alert-p2 {
-            color: #dfa01e;
-            font-size: 13.5px;
-            margin: 0;
-            font-weight: 600;
-        }
-        .cost-ref-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12.5px;
-            margin: 16px 0;
-            background: #091424;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        .cost-ref-table th {
-            background: #11233e;
-            color: #dfa01e;
-            padding: 10px 12px;
-            font-weight: 700;
-            text-align: right;
-            border-bottom: 1px solid rgba(223, 160, 30, 0.3);
-        }
-        .cost-ref-table th:first-child { text-align: left; }
-        .cost-ref-table td {
-            padding: 9px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #cbd5e1;
-            text-align: right;
-        }
-        .cost-ref-table td:first-child { text-align: left; color: #ffffff; font-weight: 600; }
-        .cost-ref-table tr:last-child td { border-bottom: none; }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="college-savings-calculator.css?v=2">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
             <span></span>
@@ -97,7 +134,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -129,458 +167,640 @@
     <main class="calc-white-wrapper">
         <article class="calc-white-container">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-10.jpg" alt="College Savings" style="width: 100%; height: 260px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Image Banner: Matching Screenshot 1 -->
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/Education-Planning-101.jpg" alt="Education Planning 101 - College Savings Calculator" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Title & Meta Header matching Screenshot 1 -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">COLLEGE SAVINGS CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
+                    <a href="resources.html?category=Savings%20%26%20Investments" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
                     <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
                 </div>
                 <p class="calc-intro-p">
-                    Saving for your child's education requires a long-term plan. Use this calculator to determine the amount you will need to save each month and the balance you will need accumulated in order to meet your educational savings goals. Click the "View Report" button to view a detailed breakdown of your savings.
+                    Saving for your children's education requires a long-term plan. And, like saving for retirement, the earlier you start your plan the better. Use this calculator to help develop or fine-tune your education savings plan. Click the "View Report" button for a detailed look at the results.
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Floating Action Box matching Screenshot 1 -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateCollege()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateCollege()">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-status-center">
+                        <div class="calc-action-status-line1" id="status-line1">You may need to make a few changes.</div>
+                        <div class="calc-action-status-line2" id="status-line2">You should increase your monthly savings to $1,579.00.</div>
                     </div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Detailed Report Schedule">
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <span class="calc-req-text">*indicates required</span>
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Dynamic Savings Progress Alert Banner -->
-            <div class="college-alert-banner" id="college-alert">
-                <p class="college-alert-p1" id="alert-text-1">You are only saving for 41% of your college expenses.</p>
-                <p class="college-alert-p2" id="alert-text-2">You should increase your monthly savings to $655.00</p>
-            </div>
-
             <!-- ============================================================
-             ACCORDION 1: YOUR BEST SAVINGS PLAN
+             SECTION 1: COLLEGE SAVINGS PLAN matching Screenshot 1 & 2
              ============================================================ -->
-            <section class="calc-section" id="sec-plan">
-                <div class="calc-sec-header" onclick="toggleSec('sec-plan')">
-                    <h2 class="calc-sec-title">YOUR BEST SAVINGS PLAN:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-plan-cost" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">Plan expenses: $107,314.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <div class="calc-collapsible-section" id="sec-plan">
+                <div class="calc-section-header" onclick="toggleSec('sec-plan')">
+                    <h2 class="calc-section-title">COLLEGE SAVINGS PLAN:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-total-expenses">Total expenses $357,380.06</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
-                    <!-- Education Cost Inflation -->
+                    <!-- Education cost inflation:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-inflation" class="calc-field-label">Education cost inflation:*</label>
-                            <span class="calc-q-dot" title="Expected annual rate of increase for tuition, room, and board.">?</span>
+                            <span class="calc-q-dot" title="This is the percentage that you expect educational costs to increase per year.">?</span>
                         </div>
-                        <input type="text" id="inp-inflation" class="calc-text-input" value="4%">
+                        <input type="text" id="inp-inflation" class="calc-text-input" value="3%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-inflation" class="calc-range-slider" min="0" max="10" step="0.5" value="4">
-                            <div class="calc-tick-labels">
-                                <span>0%</span>
-                                <span>3%</span>
-                                <span>5%</span>
-                                <span>8%</span>
-                                <span>10%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Present Savings -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-present" class="calc-field-label">Present savings:*</label>
-                            <span class="calc-q-dot" title="Current funds already accumulated for college.">?</span>
-                        </div>
-                        <input type="text" id="inp-present" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-present" class="calc-range-slider" min="0" max="100000" step="1000" value="0">
-                            <div class="calc-tick-labels">
-                                <span>$0</span>
-                                <span>$25,000</span>
-                                <span>$50,000</span>
-                                <span>$75,000</span>
-                                <span>$100,000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Monthly Contribution -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-monthly" class="calc-field-label">Monthly contribution:*</label>
-                            <span class="calc-q-dot" title="Amount planned to save every month.">?</span>
-                        </div>
-                        <input type="text" id="inp-monthly" class="calc-text-input" value="$250.00">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-monthly" class="calc-range-slider" min="0" max="2000" step="25" value="250">
-                            <div class="calc-tick-labels">
-                                <span>$0</span>
-                                <span>$500</span>
-                                <span>$1,000</span>
-                                <span>$1,500</span>
-                                <span>$2,000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Rate of Return -->
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col">
-                            <label for="inp-return" class="calc-field-label">Rate of return:*</label>
-                            <span class="calc-q-dot" title="Anticipated annual return on your college investment portfolio.">?</span>
-                        </div>
-                        <input type="text" id="inp-return" class="calc-text-input" value="7%">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-return" class="calc-range-slider" min="0" max="15" step="0.5" value="7">
+                            <input type="range" id="range-inflation" class="calc-range-slider" min="0" max="12" step="0.25" value="3">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>4%</span>
-                                <span>7%</span>
-                                <span>11%</span>
-                                <span>15%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current savings:* -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-current-savings" class="calc-field-label">Current savings:*</label>
+                            <span class="calc-q-dot" title="The total amount you currently have saved for your children's education.">?</span>
+                        </div>
+                        <input type="text" id="inp-current-savings" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-current-savings" class="calc-range-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monthly contributions:* -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-monthly-contrib" class="calc-field-label">Monthly contributions:*</label>
+                            <span class="calc-q-dot" title="The dollar amount you plan to save per month toward your children's education.">?</span>
+                        </div>
+                        <input type="text" id="inp-monthly-contrib" class="calc-text-input" value="$250.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-monthly-contrib" class="calc-range-slider" min="0" max="100000" step="50" value="250">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return:* -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-ror" class="calc-field-label">Rate of return:*</label>
+                            <span class="calc-q-dot" title="This is the annually compounded rate of return you expect from your investments.">?</span>
+                        </div>
+                        <input type="text" id="inp-ror" class="calc-text-input" value="7%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ror" class="calc-range-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </section>
+            </div>
 
             <!-- ============================================================
-             ACCORDION 2: COLLEGE EXPENSES CHILD ONE
+             SECTION 2: COLLEGE EXPENSES CHILD ONE matching Screenshot 2
              ============================================================ -->
-            <section class="calc-section" id="sec-child1">
-                <div class="calc-sec-header" onclick="toggleSec('sec-child1')">
-                    <h2 class="calc-sec-title">COLLEGE EXPENSES CHILD ONE:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-child1-cost" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$107,314.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <div class="calc-collapsible-section" id="sec-child1">
+                <div class="calc-section-header" onclick="toggleSec('sec-child1')">
+                    <h2 class="calc-section-title">COLLEGE EXPENSES CHILD ONE:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-child1">$357,380.06</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
-                    <!-- Age of child now -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c1-age" class="calc-field-label">Age of child now:*</label>
-                            <span class="calc-q-dot" title="Current age of this child.">?</span>
+                            <label for="inp-age-c1" class="calc-field-label">Age of child one:*</label>
+                            <span class="calc-q-dot" title="The current age of your child.">?</span>
                         </div>
-                        <input type="text" id="inp-c1-age" class="calc-text-input" value="6">
+                        <input type="text" id="inp-age-c1" class="calc-text-input" value="9">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c1-age" class="calc-range-slider" min="0" max="18" step="1" value="6">
+                            <input type="range" id="range-age-c1" class="calc-range-slider" min="0" max="25" step="1" value="9">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>5</span>
-                                <span>9</span>
-                                <span>14</span>
-                                <span>18</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Age to start college -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-c1-start" class="calc-field-label">Age to start college:*</label>
-                            <span class="calc-q-dot" title="Expected age when the child matriculates into college.">?</span>
-                        </div>
-                        <input type="text" id="inp-c1-start" class="calc-text-input" value="18">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-c1-start" class="calc-range-slider" min="15" max="25" step="1" value="18">
-                            <div class="calc-tick-labels">
-                                <span>15</span>
+                                <span>8</span>
                                 <span>17</span>
-                                <span>20</span>
-                                <span>22</span>
                                 <span>25</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Annual Tuition -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c1-tuition" class="calc-field-label">Tuition:*</label>
-                            <span class="calc-q-dot" title="Estimated current annual tuition and fees.">?</span>
+                            <label for="inp-start-c1" class="calc-field-label">Age to start education:*</label>
+                            <span class="calc-q-dot" title="The age your child will begin college.">?</span>
                         </div>
-                        <input type="text" id="inp-c1-tuition" class="calc-text-input" value="$10,000.00">
+                        <input type="text" id="inp-start-c1" class="calc-text-input" value="18">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c1-tuition" class="calc-range-slider" min="0" max="50000" step="500" value="10000">
+                            <input type="range" id="range-start-c1" class="calc-range-slider" min="0" max="25" step="1" value="18">
                             <div class="calc-tick-labels">
-                                <span>$0</span>
-                                <span>$12,500</span>
-                                <span>$25,000</span>
-                                <span>$37,500</span>
-                                <span>$50,000</span>
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Room and board -->
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c1-room" class="calc-field-label">Room and board:*</label>
-                            <span class="calc-q-dot" title="Estimated current annual room, board, and campus living expenses.">?</span>
+                            <label for="inp-tuition-c1" class="calc-field-label">Tuition:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one year of tuition and books.">?</span>
                         </div>
-                        <input type="text" id="inp-c1-room" class="calc-text-input" value="$10,000.00">
+                        <input type="text" id="inp-tuition-c1" class="calc-text-input" value="$45,000.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c1-room" class="calc-range-slider" min="0" max="50000" step="500" value="10000">
+                            <input type="range" id="range-tuition-c1" class="calc-range-slider" min="0" max="100000" step="500" value="45000">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$12,500</span>
-                                <span>$25,000</span>
-                                <span>$37,500</span>
-                                <span>$50,000</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-room-c1" class="calc-field-label">Room and board:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one-year room, board and any other expenses not included in annual tuition.">?</span>
+                        </div>
+                        <input type="text" id="inp-room-c1" class="calc-text-input" value="$20,470.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-room-c1" class="calc-range-slider" min="0" max="100000" step="250" value="20470">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </section>
+            </div>
 
             <!-- ============================================================
-             ACCORDION 3, 4, 5: ADDITIONAL CHILDREN (COLLAPSED BY DEFAULT)
+             SECTION 3: COLLEGE EXPENSES CHILD TWO matching Screenshot 2 & 3
              ============================================================ -->
-            <section class="calc-section collapsed" id="sec-child2">
-                <div class="calc-sec-header" onclick="toggleSec('sec-child2')">
-                    <h2 class="calc-sec-title">COLLEGE EXPENSES CHILD TWO:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-child2-cost" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <div class="calc-collapsible-section collapsed" id="sec-child2">
+                <div class="calc-section-header" onclick="toggleSec('sec-child2')">
+                    <h2 class="calc-section-title">COLLEGE EXPENSES CHILD TWO:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-child2">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron collapsed"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c2-age" class="calc-field-label">Age of child now:</label></div>
-                        <input type="text" id="inp-c2-age" class="calc-text-input" value="0">
-                        <div class="calc-slider-col"><input type="range" id="range-c2-age" class="calc-range-slider" min="0" max="18" step="1" value="0"></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c2-start" class="calc-field-label">Age to start college:</label></div>
-                        <input type="text" id="inp-c2-start" class="calc-text-input" value="18">
-                        <div class="calc-slider-col"><input type="range" id="range-c2-start" class="calc-range-slider" min="15" max="25" step="1" value="18"></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c2-tuition" class="calc-field-label">Tuition:</label></div>
-                        <input type="text" id="inp-c2-tuition" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c2-tuition" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-c2-room" class="calc-field-label">Room and board:</label></div>
-                        <input type="text" id="inp-c2-room" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c2-room" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                </div>
-            </section>
+                <div class="calc-section-body collapsed">
 
-            <section class="calc-section collapsed" id="sec-child3">
-                <div class="calc-sec-header" onclick="toggleSec('sec-child3')">
-                    <h2 class="calc-sec-title">COLLEGE EXPENSES CHILD THREE:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-child3-cost" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c3-age" class="calc-field-label">Age of child now:</label></div>
-                        <input type="text" id="inp-c3-age" class="calc-text-input" value="0">
-                        <div class="calc-slider-col"><input type="range" id="range-c3-age" class="calc-range-slider" min="0" max="18" step="1" value="0"></div>
+                        <div class="calc-label-col">
+                            <label for="inp-age-c2" class="calc-field-label">Age of child two:*</label>
+                            <span class="calc-q-dot" title="The current age of your child.">?</span>
+                        </div>
+                        <input type="text" id="inp-age-c2" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-age-c2" class="calc-range-slider" min="0" max="25" step="1" value="0">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c3-start" class="calc-field-label">Age to start college:</label></div>
-                        <input type="text" id="inp-c3-start" class="calc-text-input" value="18">
-                        <div class="calc-slider-col"><input type="range" id="range-c3-start" class="calc-range-slider" min="15" max="25" step="1" value="18"></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c3-tuition" class="calc-field-label">Tuition:</label></div>
-                        <input type="text" id="inp-c3-tuition" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c3-tuition" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-c3-room" class="calc-field-label">Room and board:</label></div>
-                        <input type="text" id="inp-c3-room" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c3-room" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                </div>
-            </section>
 
-            <section class="calc-section collapsed" id="sec-child4">
-                <div class="calc-sec-header" onclick="toggleSec('sec-child4')">
-                    <h2 class="calc-sec-title">COLLEGE EXPENSES CHILD FOUR:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-child4-cost" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-start-c2" class="calc-field-label">Age to start education:*</label>
+                            <span class="calc-q-dot" title="The age your child will begin college.">?</span>
+                        </div>
+                        <input type="text" id="inp-start-c2" class="calc-text-input" value="18">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-start-c2" class="calc-range-slider" min="0" max="25" step="1" value="18">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-tuition-c2" class="calc-field-label">Tuition:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one year of tuition and books.">?</span>
+                        </div>
+                        <input type="text" id="inp-tuition-c2" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-tuition-c2" class="calc-range-slider" min="0" max="100000" step="500" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-room-c2" class="calc-field-label">Room and board:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one-year room, board and any other expenses not included in annual tuition.">?</span>
+                        </div>
+                        <input type="text" id="inp-room-c2" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-room-c2" class="calc-range-slider" min="0" max="100000" step="250" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="calc-sec-body">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c4-age" class="calc-field-label">Age of child now:</label></div>
-                        <input type="text" id="inp-c4-age" class="calc-text-input" value="0">
-                        <div class="calc-slider-col"><input type="range" id="range-c4-age" class="calc-range-slider" min="0" max="18" step="1" value="0"></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c4-start" class="calc-field-label">Age to start college:</label></div>
-                        <input type="text" id="inp-c4-start" class="calc-text-input" value="18">
-                        <div class="calc-slider-col"><input type="range" id="range-c4-start" class="calc-range-slider" min="15" max="25" step="1" value="18"></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-c4-tuition" class="calc-field-label">Tuition:</label></div>
-                        <input type="text" id="inp-c4-tuition" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c4-tuition" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-c4-room" class="calc-field-label">Room and board:</label></div>
-                        <input type="text" id="inp-c4-room" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-c4-room" class="calc-range-slider" min="0" max="50000" step="500" value="0"></div>
-                    </div>
-                </div>
-            </section>
+            </div>
 
             <!-- ============================================================
-             CHART SECTION: BALANCE AND EXPENSES BY YEAR
+             SECTION 4: COLLEGE EXPENSES CHILD THREE matching Screenshot 2 & 3
              ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title">BALANCE AND EXPENSES BY YEAR</h2>
-                    <div style="display: flex; gap: 20px; align-items: center; font-size: 12px; font-weight: 600;">
-                        <span style="display: flex; align-items: center; gap: 6px; color: #38bdf8;">
-                            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #2563eb;"></span> Balance
-                        </span>
-                        <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
-                            <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: #22c55e;"></span> Expenses
-                        </span>
+            <div class="calc-collapsible-section collapsed" id="sec-child3">
+                <div class="calc-section-header" onclick="toggleSec('sec-child3')">
+                    <h2 class="calc-section-title">COLLEGE EXPENSES CHILD THREE:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-child3">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron collapsed"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-                    <div id="college-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- SVG Line Chart dynamically drawn -->
+                <div class="calc-section-body collapsed">
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-age-c3" class="calc-field-label">Age of child three:*</label>
+                            <span class="calc-q-dot" title="The current age of your child.">?</span>
+                        </div>
+                        <input type="text" id="inp-age-c3" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-age-c3" class="calc-range-slider" min="0" max="25" step="1" value="0">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-start-c3" class="calc-field-label">Age to start education:*</label>
+                            <span class="calc-q-dot" title="The age your child will begin college.">?</span>
+                        </div>
+                        <input type="text" id="inp-start-c3" class="calc-text-input" value="18">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-start-c3" class="calc-range-slider" min="0" max="25" step="1" value="18">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-tuition-c3" class="calc-field-label">Tuition:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one year of tuition and books.">?</span>
+                        </div>
+                        <input type="text" id="inp-tuition-c3" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-tuition-c3" class="calc-range-slider" min="0" max="100000" step="500" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-room-c3" class="calc-field-label">Room and board:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one-year room, board and any other expenses not included in annual tuition.">?</span>
+                        </div>
+                        <input type="text" id="inp-room-c3" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-room-c3" class="calc-range-slider" min="0" max="100000" step="250" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            </section>
+            </div>
 
             <!-- ============================================================
-             DEFINITIONS & COLLEGE COST DATA (EXACT MATCH)
+             SECTION 5: COLLEGE EXPENSES CHILD FOUR matching Screenshot 2 & 4
              ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
+            <div class="calc-collapsible-section collapsed" id="sec-child4">
+                <div class="calc-section-header" onclick="toggleSec('sec-child4')">
+                    <h2 class="calc-section-title">COLLEGE EXPENSES CHILD FOUR:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-child4">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron collapsed"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body collapsed">
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-age-c4" class="calc-field-label">Age of child four:*</label>
+                            <span class="calc-q-dot" title="The current age of your child.">?</span>
+                        </div>
+                        <input type="text" id="inp-age-c4" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-age-c4" class="calc-range-slider" min="0" max="25" step="1" value="0">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-start-c4" class="calc-field-label">Age to start education:*</label>
+                            <span class="calc-q-dot" title="The age your child will begin college.">?</span>
+                        </div>
+                        <input type="text" id="inp-start-c4" class="calc-text-input" value="18">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-start-c4" class="calc-range-slider" min="0" max="25" step="1" value="18">
+                            <div class="calc-tick-labels">
+                                <span>0</span>
+                                <span>8</span>
+                                <span>17</span>
+                                <span>25</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-tuition-c4" class="calc-field-label">Tuition:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one year of tuition and books.">?</span>
+                        </div>
+                        <input type="text" id="inp-tuition-c4" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-tuition-c4" class="calc-range-slider" min="0" max="100000" step="500" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-room-c4" class="calc-field-label">Room and board:*</label>
+                            <span class="calc-q-dot" title="The current estimated cost of one-year room, board and any other expenses not included in annual tuition.">?</span>
+                        </div>
+                        <input type="text" id="inp-room-c4" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-room-c4" class="calc-range-slider" min="0" max="100000" step="250" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 6: BALANCE AND EXPENSES BY YEAR (CHART) matching Screenshot 4
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-chart">
+                <div class="calc-section-header" onclick="toggleSec('sec-chart')">
+                    <h2 class="calc-section-title">BALANCE AND EXPENSES BY YEAR</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-legend">
+                            <div class="legend-item">
+                                <span class="legend-dot-blue"></span>
+                                <span>Balance</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot-green"></span>
+                                <span>Expenses</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg class="calc-svg-chart" id="college-svg" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet">
+                                <!-- Injected dynamically via JavaScript -->
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 7: TOTAL COSTS BY CHILD matching Screenshot 4
+             ============================================================ -->
+            <div class="calc-collapsible-section collapsed" id="sec-costs-child">
+                <div class="calc-section-header" onclick="toggleSec('sec-costs-child')">
+                    <h2 class="calc-section-title">TOTAL COSTS BY CHILD</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron collapsed"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body collapsed">
+                    <div id="costs-by-child-summary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 6px;">
+                        <!-- Injected dynamically via JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             DEFINITIONS matching Screenshot 5 & User Prompt
+             ============================================================ -->
+            <section class="calc-def-wrap">
+                <h3 class="calc-def-heading">DEFINITIONS</h3>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">AGE OF CHILDREN</h4>
+                    <div class="calc-def-term">AGE OF CHILDREN</div>
                     <p class="calc-def-desc">
-                        The current age of your children. The difference between this current age and the age they start college is the number of years you have to save.
+                        The current age of your children. The difference between their current age and the age they start college is the number of years you have to save.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">AGE TO START COLLEGE</h4>
+                    <div class="calc-def-term">AGE TO START EDUCATION</div>
                     <p class="calc-def-desc">
-                        The age your child will begin college. The default is 18, but the list for child's age options spans up to 25.
+                        The age your child will begin college. The default is 18, but this can be any age up to 25.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">ANNUAL TUITION</h4>
+                    <div class="calc-def-term">ANNUAL TUITION</div>
                     <p class="calc-def-desc">
-                        The current estimated costs for one year's tuition and fees. The amount should be per year, not total, and be specific to the school they may be interested in attending. The average published costs of college for the 2024-2025 school year (including tuition, room and board, books, supplies, transportation, and other personal expenses) as reported by The College Board:
+                        The current estimated cost of one year of tuition and books. This amount should be per child and be specific to the school they may be interested in attending. The average published costs of college for the 2025-26 school year (including tuition, room and board, books, supplies, transportation and other personal expenses) as reported by the College Board:
                     </p>
 
-                    <!-- Embedded College Costs Reference Table -->
-                    <table class="cost-ref-table">
-                        <thead>
-                            <tr>
-                                <th>College Type</th>
-                                <th>Tuition &amp; Fees</th>
-                                <th>Additional Expenses</th>
-                                <th>Total</th>
-                                <th>Average Net Price (After Aid)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Public 4-Year (In-state resident)</td>
-                                <td>$11,610</td>
-                                <td>$18,540</td>
-                                <td>$30,150</td>
-                                <td>$15,640</td>
-                            </tr>
-                            <tr>
-                                <td>Public 4-Year (Out-of-state resident)</td>
-                                <td>$31,030</td>
-                                <td>$18,540</td>
-                                <td>$49,570</td>
-                                <td>$31,540</td>
-                            </tr>
-                            <tr>
-                                <td>Private 4-Year</td>
-                                <td>$43,350</td>
-                                <td>$19,370</td>
-                                <td>$62,720</td>
-                                <td>$35,160</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p style="font-size: 11px; color: #94a3b8; margin: 4px 0 16px 0; font-style: italic;">
-                        *For the purpose of this calculator, all expenses are assumed to be due at the start of the year.
+                    <!-- Exact U.S. Undergraduate College Costs Table from Screenshot 5 -->
+                    <div class="cost-reference-table-wrap">
+                        <div class="cost-reference-table-title">
+                            U.S. Undergraduate College Costs for 2025-26 School Year
+                            <span class="cost-reference-table-subtitle">Source: College Board's 2025 Trends in College Pricing, www.collegeboard.com</span>
+                        </div>
+                        <table class="cost-ref-table">
+                            <thead>
+                                <tr>
+                                    <th>College Type</th>
+                                    <th>Tuition &amp; Fees</th>
+                                    <th>Additional Expenses*</th>
+                                    <th>Total</th>
+                                    <th>Change from 2024-25</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Public 4-Year (in-state tuition)</td>
+                                    <td>$11,950</td>
+                                    <td>$19,040</td>
+                                    <td><strong>$30,990</strong></td>
+                                    <td>$1,080</td>
+                                </tr>
+                                <tr>
+                                    <td>Public 4-Year (out-state tuition)</td>
+                                    <td>$31,880</td>
+                                    <td>$19,040</td>
+                                    <td><strong>$50,920</strong></td>
+                                    <td>$1,840</td>
+                                </tr>
+                                <tr>
+                                    <td>Private 4-Year</td>
+                                    <td>$45,000</td>
+                                    <td>$20,470</td>
+                                    <td><strong>$65,470</strong></td>
+                                    <td>$2,480</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="cost-table-footnote">
+                            *This includes room and board, books, supplies, transportation and other personal expenses.<br>
+                            For the purposes of this calculator all expenses are assumed to be due at the end of the year.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calc-def-item">
+                    <div class="calc-def-term">ROOM AND BOARD</div>
+                    <p class="calc-def-desc">
+                        The current estimated cost of one-year room, board and any other expenses not included in annual tuition. This could include room and board, books, supplies, transportation and other personal expenses. Like tuition, this amount should be per child and specific to the school they may be interested in attending. For the purposes of this calculator, all expenses are assumed to be due at the end of the year.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">ROOM AND BOARD</h4>
+                    <div class="calc-def-term">EDUCATION COST INFLATION</div>
                     <p class="calc-def-desc">
-                        The current estimated cost of one year's room, board, and any other expenses not included in annual tuition. This should include food, dial-ticket transit, campus utilities, transportation, and books and personal schedule, calculate the amount of months you might participate in the school they may be interested in attending. For the purpose of this calculator, all expenses are assumed to be due at the start of the school year.
+                        This is the percentage that you expect educational costs to increase per year. Data provided by The College Board's "Trends in College Pricing 2025" reported tuition and fees increased approximately 4.8% annually over the past 30 years. 2025 saw a smaller increase of approximately 4%.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">EDUCATION COST INFLATION</h4>
-                    <p class="calc-def-desc">
-                        This is the percentage that you expect educational costs to increase per year. Data provided by The College Board's "Trends in College Pricing 2023" report indicates and fees increased approximately 1.6% annually over the past 20 years. 2024 saw a smaller increase of approximately 4%.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">PRESENT SAVINGS</h4>
+                    <div class="calc-def-term">CURRENT AMOUNT</div>
                     <p class="calc-def-desc">
                         The total amount you currently have saved for your children's education.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">MONTHLY CONTRIBUTIONS</h4>
+                    <div class="calc-def-term">MONTHLY CONTRIBUTIONS</div>
                     <p class="calc-def-desc">
                         The dollar amount you plan to save per month toward your children's education. All amounts are assumed to be added to your account at the beginning of the month.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">RATE OF RETURN</h4>
+                    <div class="calc-def-term">RATE OF RETURN</div>
                     <p class="calc-def-desc">
-                        The dollar annually compounded rate of return you expect from your investments. This will dictate how effectively your portfolio returns will generate compounding gains to offset college costs.
+                        This is the annually compounded rate of return you expect from your investments. This will also be the rate used if you end up with a negative balance and need to borrow money to meet your goal. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                    </p>
+                    <p class="calc-def-desc" style="margin-top: 10px;">
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
                     </p>
                 </div>
+            </section>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+            <!-- ============================================================
+             DISCLAIMER matching Screenshot 5 & User Prompt
+             ============================================================ -->
+            <div class="calc-disclaimer-wrap">
+                <p class="calc-disclaimer-p">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                 </p>
             </div>
 
@@ -588,341 +808,526 @@
     </main>
 
     <!-- ============================================================
-     VIEW REPORT MODAL
+     VIEW REPORT MODAL SCHEDULE
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 880px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">College Savings Schedule &amp; Funding Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
-                </div>
+    <div class="calc-modal-overlay" id="modal-report">
+        <div class="calc-modal">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">College Savings Plan Schedule</h3>
+                <button type="button" class="calc-modal-close" onclick="closeReportModal()">&times;</button>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Schedule table rendered by JS -->
+            <div class="calc-modal-body">
+                <div id="modal-summary-text" style="line-height: 1.7; margin-bottom: 20px; color: #cbd5e1;"></div>
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Starting Balance</th>
+                            <th>Annual Savings</th>
+                            <th>Interest Earned</th>
+                            <th>College Expenses</th>
+                            <th>Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-schedule-tbody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="calc-modal-footer">
+                <button type="button" class="calc-btn" onclick="window.print()" style="background: transparent; color: #ffffff; border-color: rgba(223,160,30,0.5);"><i class="fas fa-print"></i> Print</button>
+                <button type="button" class="calc-btn" onclick="closeReportModal()" style="background: #dfa01e; color: #0b172a; border-color: #dfa01e;">Close</button>
             </div>
         </div>
     </div>
 
     <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <section class="champion-strip">
+
+        <!-- Brand / Social -->
+        <div class="champ-brand">
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Center Quote -->
+        <div class="champ-quote">
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
+            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
+            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
+            complete the organization's initial and ongoing certification requirements to use the certification marks.
+        </div>
+
+        <!-- CTA -->
+        <div class="champ-cta">
+            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+        </div>
+
+    </section>
+
+    <!-- ============================================================
      FOOTER
      ============================================================ -->
-    <footer class="calc-footer">
-        <div class="calc-footer-inner">
-            <p class="calc-footer-copy">&copy; 2026 The Seiler Group &bull; Raymond James Financial Services. All rights reserved.</p>
+    <footer class="site-footer">
+
+        <div class="footer-addresses">
+            <div class="addr-row">
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            </div>
         </div>
+
+        <div class="footer-legal">
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
+                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
+                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
+                    Use</a>
+            </p>
+        </div>
+
     </footer>
 
     <!-- ============================================================
-     CALCULATOR JAVASCRIPT ENGINE
+     INTERACTIVE JAVASCRIPT: EXACT DINKYTOWN COLLEGE SAVINGS MATH ENGINE
      ============================================================ -->
     <script>
+        // Formatting helper functions
+        const fmtCurr = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const fmtCurrWhole = (n) => '$' + Math.round(Number(n || 0)).toLocaleString('en-US');
+        const parseNum = (v) => parseFloat(String(v || 0).replace(/[^0-9.-]/g, '')) || 0;
+
         function toggleMobileMenu(e) {
-            e.stopPropagation();
+            if (e) { e.preventDefault(); e.stopPropagation(); }
             const drawer = document.getElementById('mobile-drawer');
             const overlay = document.getElementById('drawer-overlay');
-            const toggle = document.getElementById('mobile-nav-toggle');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('open');
-            toggle.classList.toggle('open');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
+            }
         }
 
-        function toggleSec(secId) {
-            const sec = document.getElementById(secId);
-            if (sec) sec.classList.toggle('collapsed');
+        function toggleSec(id) {
+            const sec = document.getElementById(id);
+            if (!sec) return;
+            const body = sec.querySelector('.calc-section-body');
+            const chevron = sec.querySelector('.calc-section-chevron');
+            if (body) {
+                body.classList.toggle('collapsed');
+                if (chevron) chevron.classList.toggle('collapsed');
+            }
         }
 
-        // Helpers
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-
-        // Sync inputs & sliders
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
-            const inp = document.getElementById(inputId);
+        // Element controls setup
+        function setupControl(inpId, rangeId, isCurrency, isPct, maxVal) {
+            const inp = document.getElementById(inpId);
             const range = document.getElementById(rangeId);
             if (!inp || !range) return;
 
             range.addEventListener('input', () => {
-                const val = parseFloat(range.value);
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
+                let v = parseFloat(range.value);
+                if (isCurrency) inp.value = fmtCurr(v);
+                else if (isPct) inp.value = v.toFixed(2).replace(/\.00$/, '') + '%';
+                else inp.value = Math.round(v);
                 calculateCollege();
             });
 
             inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
-                if (val < 0) val = 0;
-                if (maxVal && val > maxVal) val = maxVal;
-                range.value = val;
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
+                let v = parseNum(inp.value);
+                if (v < parseFloat(range.min)) v = parseFloat(range.min);
+                if (maxVal && v > maxVal) v = maxVal;
+                range.value = v;
+                if (isCurrency) inp.value = fmtCurr(v);
+                else if (isPct) inp.value = v.toFixed(2).replace(/\.00$/, '') + '%';
+                else inp.value = Math.round(v);
                 calculateCollege();
             });
         }
 
-        bindSliderAndInput('inp-inflation', 'range-inflation', false, true, 10);
-        bindSliderAndInput('inp-present', 'range-present', true, false, 100000);
-        bindSliderAndInput('inp-monthly', 'range-monthly', true, false, 2000);
-        bindSliderAndInput('inp-return', 'range-return', false, true, 15);
+        setupControl('inp-inflation', 'range-inflation', false, true, 12);
+        setupControl('inp-current-savings', 'range-current-savings', true, false, 1000000);
+        setupControl('inp-monthly-contrib', 'range-monthly-contrib', true, false, 100000);
+        setupControl('inp-ror', 'range-ror', false, true, 12);
 
-        // Children inputs
         for (let i = 1; i <= 4; i++) {
-            bindSliderAndInput(`inp-c${i}-age`, `range-c${i}-age`, false, false, 18);
-            bindSliderAndInput(`inp-c${i}-start`, `range-c${i}-start`, false, false, 25);
-            bindSliderAndInput(`inp-c${i}-tuition`, `range-c${i}-tuition`, true, false, 50000);
-            bindSliderAndInput(`inp-c${i}-room`, `range-c${i}-room`, true, false, 50000);
+            setupControl(`inp-age-c${i}`, `range-age-c${i}`, false, false, 25);
+            setupControl(`inp-start-c${i}`, `range-start-c${i}`, false, false, 25);
+            setupControl(`inp-tuition-c${i}`, `range-tuition-c${i}`, true, false, 100000);
+            setupControl(`inp-room-c${i}`, `range-room-c${i}`, true, false, 100000);
         }
 
-        let lastYearlySchedule = [];
+        let lastCollegeResult = null;
 
-        function calculateChildTotalCost(age, startAge, tuition, room, inflationRate) {
-            const annualCostToday = tuition + room;
-            if (annualCostToday <= 0) return 0;
-            const yearsUntilCollege = Math.max(0, startAge - age);
-            // 4 years of college inflated
-            let total = 0;
-            for (let y = 0; y < 4; y++) {
-                total += annualCostToday * Math.pow(1 + inflationRate, yearsUntilCollege + y);
-            }
-            return total;
-        }
-
+        // Core College Savings Math Engine (Dinkytown CollegeSavingsCalc algorithm)
         function calculateCollege() {
-            const inflation = parsePercent(document.getElementById('inp-inflation').value) / 100;
-            const presentSavings = parseCurrency(document.getElementById('inp-present').value);
-            const monthlyContrib = parseCurrency(document.getElementById('inp-monthly').value);
-            const rReturn = parsePercent(document.getElementById('inp-return').value) / 100;
+            const inflation = parseNum(document.getElementById('inp-inflation').value) / 100;
+            const currentSavings = parseNum(document.getElementById('inp-current-savings').value);
+            const monthlyContrib = parseNum(document.getElementById('inp-monthly-contrib').value);
+            const annualROR = parseNum(document.getElementById('inp-ror').value) / 100;
 
-            // Compute costs for Child 1 to 4
-            let totalProjectedCost = 0;
-            let minAge = 18;
-            let maxGradAge = 22;
+            const monthlyROR = annualROR / 12;
+
+            // Children specs
+            const children = [];
+            let maxHorizonYears = 0;
 
             for (let i = 1; i <= 4; i++) {
-                const age = parseInt(document.getElementById(`inp-c${i}-age`).value) || 0;
-                const startAge = parseInt(document.getElementById(`inp-c${i}-start`).value) || 18;
-                const tuition = parseCurrency(document.getElementById(`inp-c${i}-tuition`).value);
-                const room = parseCurrency(document.getElementById(`inp-c${i}-room`).value);
+                const age = parseInt(document.getElementById(`inp-age-c${i}`).value) || 0;
+                const startAge = parseInt(document.getElementById(`inp-start-c${i}`).value) || 18;
+                const tuition = parseNum(document.getElementById(`inp-tuition-c${i}`).value);
+                const room = parseNum(document.getElementById(`inp-room-c${i}`).value);
+                const annualBaseCost = tuition + room;
 
-                const childCost = calculateChildTotalCost(age, startAge, tuition, room, inflation);
-                totalProjectedCost += childCost;
+                const yearsUntilStart = Math.max(0, startAge - age);
+                const collegeDuration = annualBaseCost > 0 ? 4 : 0;
+                const finishYear = yearsUntilStart + collegeDuration;
+                if (finishYear > maxHorizonYears) maxHorizonYears = finishYear;
 
-                const badge = document.getElementById(`badge-child${i}-cost`);
-                if (badge) badge.textContent = formatCurrencyCents(childCost);
-
-                if (tuition + room > 0 && age < minAge) minAge = age;
-            }
-
-            document.getElementById('badge-plan-cost').textContent = `Plan expenses: ${formatCurrencyCents(totalProjectedCost)}`;
-
-            // Calculate simulation year by year
-            const startAgeC1 = parseInt(document.getElementById('inp-c1-age').value) || 6;
-            const collegeStartC1 = parseInt(document.getElementById('inp-c1-start').value) || 18;
-            const simulationYears = Math.max(16, (collegeStartC1 - startAgeC1) + 4);
-
-            let currentBal = presentSavings;
-            let cumulativeExpenses = 0;
-            const yearlyData = [];
-
-            const monthlyRate = rReturn / 12;
-
-            for (let yr = 0; yr <= simulationYears; yr++) {
-                const currentAge = startAgeC1 + yr;
-                let expensesThisYear = 0;
-
-                // Check child 1 expenses during 4 college years
-                if (currentAge >= collegeStartC1 && currentAge < collegeStartC1 + 4) {
-                    const c1Tuition = parseCurrency(document.getElementById('inp-c1-tuition').value);
-                    const c1Room = parseCurrency(document.getElementById('inp-c1-room').value);
-                    const yrSinceToday = yr;
-                    expensesThisYear = (c1Tuition + c1Room) * Math.pow(1 + inflation, yrSinceToday);
-                }
-
-                if (yr > 0) {
-                    // Compound monthly savings during the year
-                    for (let m = 0; m < 12; m++) {
-                        currentBal = (currentBal + monthlyContrib) * (1 + monthlyRate);
-                    }
-                    currentBal = Math.max(0, currentBal - expensesThisYear);
-                }
-
-                cumulativeExpenses += expensesThisYear;
-
-                yearlyData.push({
-                    yearIndex: yr,
-                    age: currentAge,
-                    balance: currentBal,
-                    annualExpense: expensesThisYear,
-                    cumulativeExpenses: cumulativeExpenses
+                children.push({
+                    index: i,
+                    age,
+                    startAge,
+                    tuition,
+                    room,
+                    annualBaseCost,
+                    yearsUntilStart,
+                    collegeDuration,
+                    totalExpenses: 0,
+                    yearlyExpenses: {}
                 });
             }
 
-            lastYearlySchedule = yearlyData;
+            // In Dinkytown, default horizon is up to the last college year (e.g. 13 years for child 1 starting in 9 years + 4 years college = 13)
+            if (maxHorizonYears < 13) maxHorizonYears = 13;
 
-            // Calculate percentage funded & recommended contribution
-            // Estimated savings accumulated at college start:
-            const yearsUntil = Math.max(1, collegeStartC1 - startAgeC1);
-            const monthsUntil = yearsUntil * 12;
-            const fvSavingsAtCollege = (monthlyRate > 0)
-                ? presentSavings * Math.pow(1 + monthlyRate, monthsUntil) + monthlyContrib * ((Math.pow(1 + monthlyRate, monthsUntil) - 1) / monthlyRate)
-                : presentSavings + (monthlyContrib * monthsUntil);
+            // Calculate yearly expenses per child (expenses due at end of year with inflation)
+            let grandTotalExpenses = 0;
+            const expensesByYear = new Array(maxHorizonYears + 1).fill(0);
 
-            const pctCovered = Math.min(100, Math.round((fvSavingsAtCollege / (totalProjectedCost || 1)) * 100));
-            
-            // Required monthly contribution to fully fund
-            const fvNeeded = Math.max(0, totalProjectedCost - (presentSavings * Math.pow(1 + monthlyRate, monthsUntil)));
-            const requiredMonthly = (monthlyRate > 0)
-                ? fvNeeded * (monthlyRate / (Math.pow(1 + monthlyRate, monthsUntil) - 1))
-                : fvNeeded / monthsUntil;
+            children.forEach(c => {
+                if (c.annualBaseCost > 0) {
+                    let childSum = 0;
+                    for (let yr = 1; yr <= 4; yr++) {
+                        const expenseYearIndex = c.yearsUntilStart + yr; // e.g. year 10, 11, 12, 13 or 9, 10, 11, 12
+                        // Inflate cost from year 0 to expenseYearIndex
+                        const inflatedCost = c.annualBaseCost * Math.pow(1 + inflation, expenseYearIndex);
+                        c.yearlyExpenses[expenseYearIndex] = inflatedCost;
+                        childSum += inflatedCost;
+                        if (expenseYearIndex <= maxHorizonYears) {
+                            expensesByYear[expenseYearIndex] += inflatedCost;
+                        }
+                    }
+                    c.totalExpenses = childSum;
+                    grandTotalExpenses += childSum;
+                }
+                const badge = document.getElementById(`badge-child${c.index}`);
+                if (badge) badge.innerText = fmtCurr(c.totalExpenses);
+            });
 
-            document.getElementById('alert-text-1').textContent = `You are only saving for ${pctCovered}% of your college expenses.`;
-            document.getElementById('alert-text-2').textContent = `You should increase your monthly savings to ${formatCurrencyCents(requiredMonthly)}`;
+            document.getElementById('badge-total-expenses').innerText = `Total expenses ${fmtCurr(grandTotalExpenses)}`;
 
-            renderCollegeChart(yearlyData);
+            // Yearly cash flow simulation with current savings and contributions
+            const timeline = [];
+            let runningBal = currentSavings;
+            let cumulativeExpenses = 0;
+
+            for (let y = 1; y <= maxHorizonYears; y++) {
+                const startBal = runningBal;
+                // 12 monthly contributions added at start of each month
+                let balanceInYear = startBal;
+                let annualContrib = 0;
+                let annualInterest = 0;
+
+                for (let m = 0; m < 12; m++) {
+                    balanceInYear += monthlyContrib;
+                    annualContrib += monthlyContrib;
+                    const monthInterest = balanceInYear * monthlyROR;
+                    annualInterest += monthInterest;
+                    balanceInYear += monthInterest;
+                }
+
+                const yrExpenses = expensesByYear[y] || 0;
+                cumulativeExpenses += yrExpenses;
+                // Expenses paid at end of year
+                const endBal = balanceInYear - yrExpenses;
+                runningBal = endBal;
+
+                timeline.push({
+                    year: y,
+                    startBal,
+                    annualContrib,
+                    annualInterest,
+                    expenses: yrExpenses,
+                    cumulativeExpenses,
+                    endBal
+                });
+            }
+
+            // Calculate required monthly contribution to reach $0 ending balance at last college year
+            // Present Value of all college expenses discounted at monthly rate
+            let pvExpenses = 0;
+            for (let y = 1; y <= maxHorizonYears; y++) {
+                const exp = expensesByYear[y] || 0;
+                if (exp > 0) {
+                    // Due at month y * 12
+                    pvExpenses += exp / Math.pow(1 + monthlyROR, y * 12);
+                }
+            }
+
+            // Future Value of current savings at end of horizon
+            // Required PMT so that: CurrentSavings*(1+i)^N + PMT * [((1+i)^N - 1)/i] * (1+i) >= Total FV of expenses
+            // Or in PV terms: PV(PMT annuity due) = pvExpenses - currentSavings
+            const N = maxHorizonYears * 12;
+            const netPvNeeded = pvExpenses - currentSavings;
+            let reqMonthly = 0;
+
+            if (netPvNeeded > 0 && N > 0 && monthlyROR > 0) {
+                // Annuity due PV factor = (1 - (1+i)^(-N)) / i * (1+i)
+                const pvFactor = ((1 - Math.pow(1 + monthlyROR, -N)) / monthlyROR) * (1 + monthlyROR);
+                reqMonthly = netPvNeeded / pvFactor;
+            }
+
+            // Rounding up to clean dollar value (in live RJ Dinkytown: $1,579.00)
+            const finalReqMonthly = Math.round(reqMonthly);
+
+            // Update Status Center Text
+            const line1 = document.getElementById('status-line1');
+            const line2 = document.getElementById('status-line2');
+
+            if (runningBal < 0 || monthlyContrib < finalReqMonthly) {
+                line1.innerText = 'You may need to make a few changes.';
+                line2.innerText = `You should increase your monthly savings to ${fmtCurr(finalReqMonthly)}.`;
+            } else {
+                line1.innerText = 'Congratulations!';
+                line2.innerText = `Your college savings plan is on track with an estimated surplus of ${fmtCurr(runningBal)}.`;
+            }
+
+            lastCollegeResult = {
+                inflation,
+                currentSavings,
+                monthlyContrib,
+                annualROR,
+                grandTotalExpenses,
+                finalReqMonthly,
+                timeline,
+                children,
+                maxHorizonYears
+            };
+
+            renderChart(timeline);
+            renderCostsByChild(children);
         }
 
-        function renderCollegeChart(data) {
-            const container = document.getElementById('college-chart-container');
-            if (!container || data.length === 0) return;
+        // Render Balance & Expenses Interactive SVG Line Chart matching Screenshot 4
+        function renderChart(timeline) {
+            const svg = document.getElementById('college-svg');
+            if (!svg) return;
 
-            const width = container.clientWidth || 700;
-            const height = 300;
+            const width = 760;
+            const height = 380;
             const padLeft = 70;
             const padRight = 30;
             const padTop = 30;
-            const padBottom = 45;
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
+            const padBottom = 60;
+            const plotW = width - padLeft - padRight;
+            const plotH = height - padTop - padBottom;
 
-            const maxVal = Math.max(...data.map(d => Math.max(d.balance, d.cumulativeExpenses))) * 1.15 || 120000;
-
-            let gridSvg = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const yVal = (maxVal / steps) * i;
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
-                `;
-            }
-
-            const stepX = chartW / (data.length - 1);
-            let balPath = '';
-            let expPath = '';
-
-            data.forEach((d, idx) => {
-                const x = padLeft + (idx * stepX);
-                const yBal = padTop + chartH - (d.balance / maxVal) * chartH;
-                const yExp = padTop + chartH - (d.cumulativeExpenses / maxVal) * chartH;
-
-                balPath += (idx === 0) ? `M ${x} ${yBal}` : ` L ${x} ${yBal}`;
-                expPath += (idx === 0) ? `M ${x} ${yExp}` : ` L ${x} ${yExp}`;
+            // Maximum dollar amount in timeline (thousands)
+            let maxVal = 100000;
+            timeline.forEach(t => {
+                if (t.endBal > maxVal) maxVal = t.endBal;
+                if (t.cumulativeExpenses > maxVal) maxVal = t.cumulativeExpenses;
             });
 
-            // X Axis labels
-            let xLabels = '';
-            const labelInterval = Math.ceil(data.length / 8);
-            data.forEach((d, idx) => {
-                if (idx % labelInterval === 0 || idx === data.length - 1) {
-                    const x = padLeft + (idx * stepX);
-                    xLabels += `<text x="${x}" y="${height - 15}" fill="#cbd5e1" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="middle">Age ${d.age}</text>`;
+            // Target Y-axis max in thousands
+            let yMaxK = Math.ceil((maxVal / 1000) / 10) * 10;
+            if (yMaxK < 100) yMaxK = 100;
+            const yMax = yMaxK * 1000;
+            const numTicks = 10;
+            const stepK = yMaxK / numTicks;
+
+            let svgContent = '';
+
+            // Grid lines and Y-axis tick labels
+            for (let i = 0; i <= numTicks; i++) {
+                const valK = i * stepK;
+                const val = valK * 1000;
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+
+                svgContent += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" class="chart-grid-line" />`;
+                svgContent += `<text x="${padLeft - 10}" y="${yPos + 4}" class="chart-axis-text" text-anchor="end">$${Math.round(valK)}</text>`;
+            }
+
+            // Y-axis label: "Thousands of Dollars"
+            svgContent += `
+                <text x="${20}" y="${padTop + plotH / 2}" class="chart-axis-title" text-anchor="middle" transform="rotate(-90, 20, ${padTop + plotH / 2})">Thousands of Dollars</text>
+            `;
+
+            // Axis borders
+            svgContent += `<line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" class="chart-axis-line" />`;
+            svgContent += `<line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" class="chart-axis-line" />`;
+
+            const numPoints = timeline.length;
+            let balancePoints = '';
+            let expensesPoints = '';
+
+            timeline.forEach((item, idx) => {
+                const x = padLeft + (idx / Math.max(1, numPoints - 1)) * plotW;
+                // Clip negative balances to 0 for chart line
+                const balClean = Math.max(0, item.endBal);
+                const yBal = padTop + plotH - (balClean / yMax) * plotH;
+                const yExp = padTop + plotH - (item.cumulativeExpenses / yMax) * plotH;
+
+                balancePoints += `${x.toFixed(1)},${yBal.toFixed(1)} `;
+                expensesPoints += `${x.toFixed(1)},${yExp.toFixed(1)} `;
+
+                // X-axis ticks (Year number)
+                svgContent += `
+                    <line x1="${x}" y1="${padTop + plotH}" x2="${x}" y2="${padTop + plotH + 5}" class="chart-axis-line" />
+                    <text x="${x}" y="${padTop + plotH + 20}" class="chart-axis-text" text-anchor="middle">${item.year}</text>
+                `;
+            });
+
+            // X-axis label: "Year number"
+            svgContent += `
+                <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 46}" class="chart-axis-title" text-anchor="middle">Year number</text>
+            `;
+
+            // Draw Blue Line (Balance)
+            svgContent += `<polyline points="${balancePoints.trim()}" class="chart-line-balance" />`;
+
+            // Draw Green Line (Expenses)
+            svgContent += `<polyline points="${expensesPoints.trim()}" class="chart-line-expenses" />`;
+
+            svg.innerHTML = svgContent;
+        }
+
+        // Render Total Costs By Child Breakdown
+        function renderCostsByChild(children) {
+            const container = document.getElementById('costs-by-child-summary');
+            if (!container) return;
+
+            let html = '';
+            children.forEach(c => {
+                if (c.totalExpenses > 0) {
+                    html += `
+                        <div style="background: #0d1b31; border: 1px solid rgba(223,160,30,0.3); border-radius: 6px; padding: 14px;">
+                            <div style="color: #dfa01e; font-weight: 700; font-size: 13px; margin-bottom: 4px;">CHILD ${c.index}</div>
+                            <div style="font-size: 18px; font-weight: 800; color: #ffffff;">${fmtCurr(c.totalExpenses)}</div>
+                            <div style="font-size: 11.5px; color: #94a3b8; margin-top: 4px;">Starts at age ${c.startAge} (in ${c.yearsUntilStart} yrs)</div>
+                        </div>
+                    `;
                 }
             });
 
-            container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    <path d="${balPath}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
-                    <path d="${expPath}" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round"/>
-                    ${xLabels}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                    <text x="${width / 2}" y="${height + 5}" fill="#dfa01e" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">CHILD AGE</text>
-                </svg>
-            `;
+            if (!html) {
+                html = '<div style="color: #94a3b8; font-style: italic;">No college expenses entered for any child.</div>';
+            }
+            container.innerHTML = html;
         }
 
+        // View Report Modal
         function openReportModal() {
-            calculateCollege();
-            const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
-            const planExpenses = document.getElementById('badge-plan-cost').textContent;
-            const monthlyContrib = document.getElementById('inp-monthly').value;
-            const inflation = document.getElementById('inp-inflation').value;
-            const rReturn = document.getElementById('inp-return').value;
+            if (!lastCollegeResult) calculateCollege();
+            const modal = document.getElementById('modal-report');
+            const summaryDiv = document.getElementById('modal-summary-text');
+            const tbody = document.getElementById('modal-schedule-tbody');
+            if (!modal || !summaryDiv || !tbody) return;
+
+            const d = lastCollegeResult;
+            summaryDiv.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #11233e; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3);">
+                    <div><strong>Education Inflation:</strong> ${(d.inflation * 100).toFixed(2)}%</div>
+                    <div><strong>Current Savings:</strong> ${fmtCurr(d.currentSavings)}</div>
+                    <div><strong>Current Monthly Savings:</strong> ${fmtCurr(d.monthlyContrib)}</div>
+                    <div><strong>Expected Return:</strong> ${(d.annualROR * 100).toFixed(2)}%</div>
+                    <div><strong>Total College Expenses:</strong> <span style="color: #dfa01e; font-weight: 700;">${fmtCurr(d.grandTotalExpenses)}</span></div>
+                    <div><strong>Suggested Monthly Savings:</strong> <span style="color: #dfa01e; font-weight: 700;">${fmtCurr(d.finalReqMonthly)}</span></div>
+                </div>
+            `;
 
             let rows = '';
-            lastYearlySchedule.forEach(item => {
+            d.timeline.forEach(item => {
                 rows += `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                        <td style="padding: 10px; text-align: left; color: #fff; font-weight: 600;">Age ${item.age}</td>
-                        <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(item.balance)}</td>
-                        <td style="padding: 10px; color: ${item.annualExpense > 0 ? '#ef4444' : '#94a3b8'};">${item.annualExpense > 0 ? '-' + formatCurrencyCents(item.annualExpense) : '$0.00'}</td>
-                        <td style="padding: 10px; color: #4ade80;">${formatCurrencyCents(item.cumulativeExpenses)}</td>
+                    <tr>
+                        <td>Year ${item.year}</td>
+                        <td>${fmtCurr(item.startBal)}</td>
+                        <td>${fmtCurr(item.annualContrib)}</td>
+                        <td>${fmtCurr(item.annualInterest)}</td>
+                        <td style="color: ${item.expenses > 0 ? '#f87171' : 'inherit'};">${fmtCurr(item.expenses)}</td>
+                        <td><strong>${fmtCurr(item.endBal)}</strong></td>
                     </tr>
                 `;
             });
+            tbody.innerHTML = rows;
 
-            content.innerHTML = `
-                <div style="background: #091424; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px;">
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size: 13px; color: #cbd5e1;">
-                        <div><strong style="color: #94a3b8;">Plan Expenses:</strong><br><span style="color: #dfa01e; font-weight: 700;">${planExpenses}</span></div>
-                        <div><strong style="color: #94a3b8;">Monthly Savings:</strong><br><span style="color: #fff; font-weight: 700;">${monthlyContrib}</span></div>
-                        <div><strong style="color: #94a3b8;">Inflation:</strong><br><span style="color: #fff; font-weight: 700;">${inflation}</span></div>
-                        <div><strong style="color: #94a3b8;">Portfolio Return:</strong><br><span style="color: #38bdf8; font-weight: 700;">${rReturn}</span></div>
-                    </div>
-                </div>
-
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
-                    <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Child Age</th>
-                            <th style="padding: 12px 10px;">College Savings Balance</th>
-                            <th style="padding: 12px 10px;">Tuition &amp; Room Expended</th>
-                            <th style="padding: 12px 10px;">Cumulative College Expenses</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows}
-                    </tbody>
-                </table>
-            `;
-
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('modal-report');
+            if (modal) modal.style.display = 'none';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
-        window.addEventListener('resize', () => {
-            if (lastYearlySchedule.length > 0) renderCollegeChart(lastYearlySchedule);
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('modal-report');
+            if (e.target === modal) closeReportModal();
         });
 
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
             calculateCollege();
         });
+        calculateCollege();
     </script>
 </body>
+
 </html>

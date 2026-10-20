@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amortizing Loan Calculator | The Seiler Group of Raymond James</title>
     <meta name="description"
-        content="Enter your desired payment - and let us calculate your loan amount. Or enter the loan amount and calculate your monthly payment, total interest paid, and full amortization schedule.">
+        content="Enter your desired payment - and let us calculate your loan amount. Or enter in the loan amount, and we will calculate your monthly payment. Examine your principal balances by payment, total payments, and interest paid.">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <link rel="stylesheet" href="amortizing-loan-calculator.css?v=1">
 </head>
 
 <body class="calc-white-page">
@@ -100,15 +100,18 @@
                     <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
                         PRESS RELEASES
                     </a>
-                    <a href="media.html" class="nav-dropdown-item" id="nav-item-media">
-                        MEDIA
+                    <a href="resources.html" class="nav-dropdown-item" id="nav-item-insights">
+                        ALL RESOURCES
                     </a>
-                    <a href="articles.html" class="nav-dropdown-item" id="nav-item-articles">
-                        ARTICLES &amp; INSIGHTS
-                    </a>
-                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
-                        RESOURCES &amp; PERSPECTIVES
-                    </a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
                     <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
                         INTRODUCE US
                     </a>
@@ -171,40 +174,64 @@
         <article class="calc-white-container">
 
             <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/calculator-hero.jpg" alt="Amortizing Loan Planning" style="width: 100%; height: 260px; object-fit: cover; object-position: center 35%; display: block;">
+            <div class="calc-hero-banner-wrap">
+                <img src="assets/resources/calculator-hero.jpg" alt="Calculator" class="calc-hero-banner-img">
             </div>
 
             <!-- Title & Meta Header -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">AMORTIZING LOAN CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Loans &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <div class="calc-meta-left">
+                        <span class="calc-meta-category">Loans</span>
+                        <span class="calc-meta-divider">//</span>
+                        <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    </div>
+                    <div class="calc-share-wrapper" id="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Share Calculator">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown" role="menu" aria-label="Social Share Options">
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
+                                <i class="fab fa-x-twitter"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-em" title="Share via Email" aria-label="Share via Email" onclick="shareToSocial('email', event)">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Enter your desired payment - and let us calculate your loan amount. Or enter in the loan amount, and we will calculate your monthly payment. You can also examine your principal balances by payment, total of all payments made, and total interest paid. Press the "Report" button to see a monthly payment schedule.
+                    Enter your desired payment - and let us calculate your loan amount. Or enter in the loan amount, and we will calculate your monthly payment. You can then examine your principal balances by payment, total of all payments made and total interest paid. Press the "Report" button to see a monthly payment schedule.
                 </p>
             </header>
 
             <!-- Sticky Floating Action Box -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
-                    <div class="calc-btn-row">
-                        <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
-                        <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                    <div class="calc-action-top-row">
+                        <div class="calc-btn-row">
+                            <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
+                            <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                        </div>
+                        <div class="calc-action-right-icons">
+                            <div class="calc-action-help-box">
+                                <span class="calc-help-bubble" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">?</span>
+                                <button type="button" class="calc-menu-btn" id="btn-menu-report" title="View Full Report">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="calc-action-subtitle" id="sticky-subtitle">Monthly loan payment is $202.76 for 60 payments at 8.00%.</div>
-                    <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
-                            <i class="fas fa-question-circle"></i>
-                        </button>
-                        <button type="button" class="calc-icon-btn" id="btn-menu-report" title="View Full Report">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <span class="calc-req-text">*indicates required</span>
+                    <div class="calc-action-subtitle" id="sticky-subtitle">Monthly loan payment is $457.52 for 60 payments at 13.24%.</div>
+                    <div class="calc-req-row">
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
@@ -219,33 +246,37 @@
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Calculation Choice Dropdown -->
-                    <div class="calc-input-row">
+                    <!-- Calculate Radio Choice -->
+                    <div class="calc-radio-group-row">
                         <div class="calc-label-col">
-                            <label for="sel-calc-type" class="calc-field-label">Calculation:</label>
-                            <span class="calc-q-dot" title="Choose whether to calculate monthly payment or maximum loan amount.">?</span>
+                            <label class="calc-field-label">Calculate:</label>
                         </div>
-                        <div style="flex: 1; max-width: 220px;">
-                            <select id="sel-calc-type" class="calc-text-input" style="flex: 1; width: 100%; text-align: left; padding: 7px 12px; cursor: pointer;">
-                                <option value="payment" selected>Payment</option>
-                                <option value="amount">Loan amount</option>
-                            </select>
+                        <div class="calc-radio-options">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="calc-mode" id="mode-payment" value="payment" checked>
+                                <span>Payment</span>
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="calc-mode" id="mode-amount" value="amount">
+                                <span>Amount</span>
+                            </label>
                         </div>
                     </div>
 
                     <!-- Loan amount -->
                     <div class="calc-input-row" id="row-loan-amt">
                         <div class="calc-label-col">
-                            <label for="inp-loan-amt" class="calc-field-label">Loan amount:</label>
+                            <label for="inp-loan-amt" class="calc-field-label">Loan amount:*</label>
                             <span class="calc-q-dot" title="Total amount of your loan.">?</span>
                         </div>
-                        <input type="text" id="inp-loan-amt" class="calc-text-input" value="$10,000.00">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-loan-amt" class="calc-range-slider" min="1000" max="100000" step="500" value="10000">
+                        <input type="text" id="inp-loan-amt" class="calc-text-input" value="$20,000">
+                        <div class="calc-slider-col" id="col-slider-amt">
+                            <input type="range" id="range-loan-amt" class="calc-range-slider" min="0" max="100" step="0.25" value="43.33">
                             <div class="calc-tick-labels">
-                                <span>$1,000</span>
-                                <span>$50,000</span>
-                                <span>$100,000</span>
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
@@ -253,16 +284,17 @@
                     <!-- Monthly payment -->
                     <div class="calc-input-row" id="row-monthly-pmt">
                         <div class="calc-label-col">
-                            <label for="inp-monthly-pmt" class="calc-field-label">Monthly payment:</label>
+                            <label for="inp-monthly-pmt" class="calc-field-label">Monthly payment:*</label>
                             <span class="calc-q-dot" title="Monthly payment for this loan.">?</span>
                         </div>
-                        <input type="text" id="inp-monthly-pmt" class="calc-text-input" value="$202.76" readonly style="opacity: 0.9; background: #07101c; color: #dfa01e; border-color: rgba(223, 160, 30, 0.6);">
-                        <div class="calc-slider-col" id="slider-col-pmt" style="display: none;">
-                            <input type="range" id="range-monthly-pmt" class="calc-range-slider" min="50" max="5000" step="10" value="202.76">
+                        <input type="text" id="inp-monthly-pmt" class="calc-text-input calc-input-disabled" value="$457.52" readonly>
+                        <div class="calc-slider-col" id="col-slider-pmt" style="display: none;">
+                            <input type="range" id="range-monthly-pmt" class="calc-range-slider" min="0" max="100" step="0.25" value="30.5">
                             <div class="calc-tick-labels">
-                                <span>$50</span>
-                                <span>$2,500</span>
-                                <span>$5,000</span>
+                                <span>$0</span>
+                                <span>$500</span>
+                                <span>$2k</span>
+                                <span>$10k</span>
                             </div>
                         </div>
                     </div>
@@ -270,18 +302,17 @@
                     <!-- Interest rate -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-rate" class="calc-field-label">Interest rate:</label>
+                            <label for="inp-rate" class="calc-field-label">Interest rate:*</label>
                             <span class="calc-q-dot" title="Annual interest rate for this loan. Compounded monthly.">?</span>
                         </div>
-                        <input type="text" id="inp-rate" class="calc-text-input" value="8.00%">
+                        <input type="text" id="inp-rate" class="calc-text-input" value="13.24%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="20" step="0.125" value="8.00">
+                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="36" step="0.01" value="13.24">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>5%</span>
-                                <span>10%</span>
-                                <span>15%</span>
-                                <span>20%</span>
+                                <span>12%</span>
+                                <span>24%</span>
+                                <span>36%</span>
                             </div>
                         </div>
                     </div>
@@ -289,29 +320,28 @@
                     <!-- Term in months -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-term" class="calc-field-label">Term in months:</label>
+                            <label for="inp-term" class="calc-field-label">Term in months:*</label>
                             <span class="calc-q-dot" title="Number of months for this loan.">?</span>
                         </div>
                         <input type="text" id="inp-term" class="calc-text-input" value="60">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-term" class="calc-range-slider" min="12" max="360" step="6" value="60">
+                            <input type="range" id="range-term" class="calc-range-slider" min="1" max="480" step="1" value="60">
                             <div class="calc-tick-labels">
-                                <span>12</span>
-                                <span>60 (5 yr)</span>
-                                <span>120 (10 yr)</span>
-                                <span>240 (20 yr)</span>
-                                <span>360 (30 yr)</span>
+                                <span>1</span>
+                                <span>161</span>
+                                <span>320</span>
+                                <span>480</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Subtotal Outputs -->
-                    <div style="margin-top: 24px; padding-top: 14px; border-top: 1px dashed rgba(223, 160, 30, 0.3); display: flex; flex-direction: column; gap: 8px;">
-                        <div id="lbl-total-interest" style="font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 700; color: #dfa01e;">
-                            Total interest paid: $2,165.89
+                    <!-- Subtotal Outputs matching screenshot -->
+                    <div class="calc-subtotal-box">
+                        <div class="calc-subtotal-val gold" id="lbl-total-interest">
+                            Total interest paid: $7,451.42
                         </div>
-                        <div id="lbl-total-payments" style="font-family: 'Open Sans', sans-serif; font-size: 14px; font-weight: 700; color: #ffffff;">
-                            Total payments: $12,165.89
+                        <div class="calc-subtotal-val white" id="lbl-total-payments">
+                            Total payments: $27,451.42
                         </div>
                     </div>
 
@@ -319,32 +349,20 @@
             </section>
 
             <!-- ============================================================
-             SECTION 2: BALANCES FOR A LOAN (CHART)
+             SECTION 2: BALANCES FOR A LOAN (AREA CHART)
              ============================================================ -->
             <section class="calc-section" id="sec-chart">
                 <div class="calc-sec-header" onclick="toggleSec('sec-chart')">
-                    <h2 class="calc-sec-title" id="chart-heading">BALANCES FOR A $10,000.00 LOAN</h2>
+                    <h2 class="calc-sec-title" id="chart-heading">BALANCES FOR A $20,000.00 LOAN</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
 
                     <div class="calc-chart-box">
                         <div class="calc-tip-box" id="chart-tip"></div>
-                        <svg class="calc-chart-svg" id="loan-chart-svg" viewBox="0 0 760 330" preserveAspectRatio="none">
+                        <svg class="calc-chart-svg" id="loan-chart-svg" viewBox="0 0 880 340" preserveAspectRatio="none">
                             <!-- Injected dynamically via JS -->
                         </svg>
-                    </div>
-
-                    <!-- Chart Legend -->
-                    <div style="display: flex; justify-content: center; gap: 28px; margin-top: 18px; font-family: 'Open Sans', sans-serif; font-size: 13.5px; color: #cbd5e1;">
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #2563eb; display: inline-block; box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);"></span>
-                            <span style="color: #ffffff; font-weight: 600;">Remaining Principal Balance</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #d89e1b; display: inline-block; box-shadow: 0 0 8px rgba(216, 158, 27, 0.5);"></span>
-                            <span style="color: #dfa01e; font-weight: 600;">Cumulative Principal Paid</span>
-                        </div>
                     </div>
 
                 </div>
@@ -353,7 +371,7 @@
             <!-- ============================================================
              SECTION 3: TOTAL PRINCIPAL AND INTEREST BY PAYMENT
              ============================================================ -->
-            <section class="calc-section" id="sec-breakdown">
+            <section class="calc-section collapsed" id="sec-breakdown">
                 <div class="calc-sec-header" onclick="toggleSec('sec-breakdown')">
                     <h2 class="calc-sec-title">TOTAL PRINCIPAL AND INTEREST BY PAYMENT</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
@@ -361,14 +379,14 @@
                 <div class="calc-sec-body">
 
                     <!-- Visual Comparison Bar -->
-                    <div style="margin-bottom: 20px;">
-                        <div style="display: flex; justify-content: space-between; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 8px;">
-                            <span style="color: #2563eb;" id="bar-lbl-principal">Principal: $10,000.00 (82.2%)</span>
-                            <span style="color: #dfa01e;" id="bar-lbl-interest">Interest: $2,165.89 (17.8%)</span>
+                    <div class="calc-bar-container">
+                        <div class="calc-bar-labels">
+                            <span style="color: #2563eb;" id="bar-lbl-principal">Principal: $20,000.00 (72.9%)</span>
+                            <span style="color: #dfa01e;" id="bar-lbl-interest">Interest: $7,451.42 (27.1%)</span>
                         </div>
-                        <div style="height: 18px; width: 100%; border-radius: 9px; overflow: hidden; display: flex; background: #091424; border: 1px solid rgba(223, 160, 30, 0.3);">
-                            <div id="bar-fill-principal" style="width: 82.2%; background: linear-gradient(90deg, #1d4ed8, #3b82f6); transition: width 0.3s ease;"></div>
-                            <div id="bar-fill-interest" style="width: 17.8%; background: linear-gradient(90deg, #d89e1b, #f5b938); transition: width 0.3s ease;"></div>
+                        <div class="calc-bar-strip">
+                            <div class="calc-bar-fill-pri" id="bar-fill-principal" style="width: 72.9%;"></div>
+                            <div class="calc-bar-fill-int" id="bar-fill-interest" style="width: 27.1%;"></div>
                         </div>
                     </div>
 
@@ -377,27 +395,27 @@
                         <tbody>
                             <tr>
                                 <td>Original Loan Principal:</td>
-                                <td id="tbl-principal">$10,000.00</td>
+                                <td id="tbl-principal" style="text-align: right; font-weight: 700; color: #ffffff;">$20,000.00</td>
                             </tr>
                             <tr>
                                 <td>Total Interest Charges:</td>
-                                <td id="tbl-interest">$2,165.89</td>
+                                <td id="tbl-interest" style="text-align: right; font-weight: 700; color: #dfa01e;">$7,451.42</td>
                             </tr>
                             <tr>
                                 <td>Monthly Payment:</td>
-                                <td id="tbl-monthly-pmt">$202.76</td>
+                                <td id="tbl-monthly-pmt" style="text-align: right; font-weight: 700; color: #3b82f6;">$457.52</td>
                             </tr>
                             <tr>
-                                <td>Annual Nominal Rate:</td>
-                                <td id="tbl-rate">8.00%</td>
+                                <td>Annual Interest Rate:</td>
+                                <td id="tbl-rate" style="text-align: right;">13.24%</td>
                             </tr>
                             <tr>
                                 <td>Total Loan Payments:</td>
-                                <td id="tbl-total">$12,165.89</td>
+                                <td id="tbl-total" style="text-align: right; font-weight: 800; color: #ffffff;">$27,451.42</td>
                             </tr>
-                            <tr class="calc-breakdown-total">
+                            <tr>
                                 <td>Payoff Period:</td>
-                                <td id="tbl-term">60 months (5.0 years)</td>
+                                <td id="tbl-term" style="text-align: right;">60 months (5.0 years)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -435,7 +453,7 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">INTEREST RATE</h4>
                     <p class="calc-term-desc">
-                        Annual interest rate for this loan. Interest is calculated monthly, so the current compounding frequency of your loan is 1/12 of the annual rate.
+                        Annual interest rate for this loan. Interest is calculated monthly on the current outstanding balance of your loan at 1/12 of the annual rate.
                     </p>
                 </div>
 
@@ -443,7 +461,7 @@
                 <div class="calc-disclaimer-strip">
                     <hr class="calc-divider">
                     <p class="calc-disclaimer-text">
-                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                     </p>
                 </div>
 
@@ -457,19 +475,20 @@
         <div class="calc-modal-content">
             <div class="calc-modal-head">
                 <h3>Amortizing Loan Schedule &amp; Breakdown</h3>
-                <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
+                <button type="button" class="calc-modal-close" id="modal-close" aria-label="Close report">&times;</button>
             </div>
             <div class="calc-modal-body">
-                <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
-                <table class="calc-breakdown-table" style="font-size: 13px;">
+                <div class="calc-report-metrics-grid" id="modal-metrics"></div>
+                <div class="calc-report-narrative" id="modal-narrative"></div>
+                <table class="calc-breakdown-table">
                     <thead>
-                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Pmt #</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Payment</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Principal</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Interest</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Total Interest</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Ending Balance</th>
+                        <tr>
+                            <th style="text-align: left;">Pmt #</th>
+                            <th style="text-align: right;">Payment</th>
+                            <th style="text-align: right;">Principal</th>
+                            <th style="text-align: right;">Interest</th>
+                            <th style="text-align: right;">Total Interest</th>
+                            <th style="text-align: right;">Ending Balance</th>
                         </tr>
                     </thead>
                     <tbody id="modal-table-rows"></tbody>
@@ -486,27 +505,44 @@
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
+
+        <!-- Brand / Social -->
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
         </div>
+
+        <!-- Center Quote -->
         <div class="champ-quote">
             Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
             certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
             to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
             complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
+
+        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
             <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
         </div>
+
     </section>
 
     <!-- ============================================================
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
@@ -547,18 +583,43 @@
                     Use</a>
             </p>
         </div>
+
     </footer>
 
     <!-- Interactive Script -->
     <script>
+        // Formatting helpers
         const fmtCurr = (num) => '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const fmtCurrWhole = (num) => '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
         const parseNum = (val) => parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
 
+        // Non-linear scale mapping utilities
+        function valToSliderPos(val, scalePoints) {
+            for (let i = 0; i < scalePoints.length - 1; i++) {
+                if (val <= scalePoints[i + 1]) {
+                    const segRatio = (val - scalePoints[i]) / (scalePoints[i + 1] - scalePoints[i]);
+                    const segWidth = 100 / (scalePoints.length - 1);
+                    return i * segWidth + segRatio * segWidth;
+                }
+            }
+            return 100;
+        }
+
+        function sliderPosToVal(pos, scalePoints, step) {
+            const segs = scalePoints.length - 1;
+            const scaled = (pos / 100) * segs;
+            const i = Math.min(segs - 1, Math.floor(scaled));
+            const frac = scaled - i;
+            const raw = scalePoints[i] + frac * (scalePoints[i + 1] - scalePoints[i]);
+            return Math.round(raw / step) * step;
+        }
+
+        // Section collapsible toggling
         function toggleSec(id) {
             document.getElementById(id)?.classList.toggle('collapsed');
         }
 
+        // Mobile drawer toggling
         function toggleMobileMenu(e) {
             if (e) { e.preventDefault(); e.stopPropagation(); }
             const drawer = document.getElementById('mobile-drawer');
@@ -579,14 +640,56 @@
             }
         }
 
+        // Social sharing dropdown
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const wrap = document.getElementById('calc-share-wrapper');
+            const btn = document.getElementById('calc-share-btn');
+            if (!wrap) return;
+            const isOpen = wrap.classList.toggle('open');
+            if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        function shareToSocial(network, e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+            if (network === 'facebook') {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            } else if (network === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            } else if (network === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            } else if (network === 'email') {
+                shareUrl = `mailto:?subject=${title}&body=Check out this calculator: ${url}`;
+            }
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=450');
+            }
+            document.getElementById('calc-share-wrapper')?.classList.remove('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrap = document.getElementById('calc-share-wrapper');
+            if (wrap && !wrap.contains(e.target)) {
+                wrap.classList.remove('open');
+            }
+        });
+
         // Form elements
-        const selCalcType = document.getElementById('sel-calc-type');
+        const modePayment = document.getElementById('mode-payment');
+        const modeAmount = document.getElementById('mode-amount');
+
         const inpLoanAmt = document.getElementById('inp-loan-amt');
         const rangeLoanAmt = document.getElementById('range-loan-amt');
+        const colSliderAmt = document.getElementById('col-slider-amt');
+        const loanAmtScale = [0, 10000, 100000, 1000000];
 
         const inpMonthlyPmt = document.getElementById('inp-monthly-pmt');
         const rangeMonthlyPmt = document.getElementById('range-monthly-pmt');
-        const sliderColPmt = document.getElementById('slider-col-pmt');
+        const colSliderPmt = document.getElementById('col-slider-pmt');
+        const pmtScale = [0, 500, 2000, 10000];
 
         const inpRate = document.getElementById('inp-rate');
         const rangeRate = document.getElementById('range-rate');
@@ -594,108 +697,171 @@
         const inpTerm = document.getElementById('inp-term');
         const rangeTerm = document.getElementById('range-term');
 
-        // Toggle Calculation Type (Payment vs Loan Amount)
-        selCalcType.addEventListener('change', () => {
-            const isAmount = (selCalcType.value === 'amount');
+        function updateSliderFill(range) {
+            const min = parseFloat(range.min) || 0;
+            const max = parseFloat(range.max) || 100;
+            const val = parseFloat(range.value) || 0;
+            const pct = ((val - min) / (max - min)) * 100;
+            range.style.background = `linear-gradient(to right, #1d68d8 0%, #1d68d8 ${pct}%, #203148 ${pct}%, #203148 100%)`;
+        }
+
+        // Mode toggling (Calculate Payment vs Calculate Loan Amount)
+        function updateCalcMode() {
+            const isAmount = modeAmount.checked;
             if (isAmount) {
+                // Calculate Loan Amount based on entered Payment
                 inpLoanAmt.readOnly = true;
-                inpLoanAmt.style.background = '#07101c';
-                inpLoanAmt.style.color = '#dfa01e';
-                rangeLoanAmt.parentElement.style.display = 'none';
+                inpLoanAmt.classList.add('calc-input-disabled');
+                colSliderAmt.style.display = 'none';
 
                 inpMonthlyPmt.readOnly = false;
-                inpMonthlyPmt.style.background = '#091424';
-                inpMonthlyPmt.style.color = '#ffffff';
-                sliderColPmt.style.display = 'flex';
+                inpMonthlyPmt.classList.remove('calc-input-disabled');
+                colSliderPmt.style.display = 'flex';
+                updateSliderFill(rangeMonthlyPmt);
             } else {
+                // Calculate Monthly Payment based on entered Loan Amount
                 inpLoanAmt.readOnly = false;
-                inpLoanAmt.style.background = '#091424';
-                inpLoanAmt.style.color = '#ffffff';
-                rangeLoanAmt.parentElement.style.display = 'flex';
+                inpLoanAmt.classList.remove('calc-input-disabled');
+                colSliderAmt.style.display = 'flex';
+                updateSliderFill(rangeLoanAmt);
 
                 inpMonthlyPmt.readOnly = true;
-                inpMonthlyPmt.style.background = '#07101c';
-                inpMonthlyPmt.style.color = '#dfa01e';
-                sliderColPmt.style.display = 'none';
+                inpMonthlyPmt.classList.add('calc-input-disabled');
+                colSliderPmt.style.display = 'none';
             }
+            calculate();
+        }
+
+        modePayment.addEventListener('change', updateCalcMode);
+        modeAmount.addEventListener('change', updateCalcMode);
+
+        // Bind Loan Amount slider & input
+        rangeLoanAmt.addEventListener('input', () => {
+            const pos = parseFloat(rangeLoanAmt.value);
+            const val = sliderPosToVal(pos, loanAmtScale, 500);
+            inpLoanAmt.value = fmtCurrWhole(val);
+            updateSliderFill(rangeLoanAmt);
             calculate();
         });
 
-        // Event bindings
-        function bindInput(inp, range, type) {
-            range.addEventListener('input', () => {
-                const v = parseFloat(range.value);
-                if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
-                else inp.value = v;
-                calculate();
-            });
-            inp.addEventListener('change', () => {
-                const v = parseNum(inp.value);
-                range.value = v;
-                if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
-                else inp.value = v;
-                calculate();
-            });
-        }
+        inpLoanAmt.addEventListener('change', () => {
+            const val = parseNum(inpLoanAmt.value);
+            rangeLoanAmt.value = valToSliderPos(val, loanAmtScale);
+            inpLoanAmt.value = fmtCurrWhole(val);
+            updateSliderFill(rangeLoanAmt);
+            calculate();
+        });
 
-        bindInput(inpLoanAmt, rangeLoanAmt, 'curr');
-        bindInput(inpMonthlyPmt, rangeMonthlyPmt, 'curr');
-        bindInput(inpRate, rangeRate, 'pct');
-        bindInput(inpTerm, rangeTerm, 'num');
+        // Bind Monthly Payment slider & input
+        rangeMonthlyPmt.addEventListener('input', () => {
+            const pos = parseFloat(rangeMonthlyPmt.value);
+            const val = sliderPosToVal(pos, pmtScale, 10);
+            inpMonthlyPmt.value = fmtCurr(val);
+            updateSliderFill(rangeMonthlyPmt);
+            calculate();
+        });
 
-        let schedule = [];
+        inpMonthlyPmt.addEventListener('change', () => {
+            const val = parseNum(inpMonthlyPmt.value);
+            rangeMonthlyPmt.value = valToSliderPos(val, pmtScale);
+            inpMonthlyPmt.value = fmtCurr(val);
+            updateSliderFill(rangeMonthlyPmt);
+            calculate();
+        });
 
+        // Bind Interest Rate
+        rangeRate.addEventListener('input', () => {
+            const val = parseFloat(rangeRate.value);
+            inpRate.value = `${val.toFixed(2)}%`;
+            updateSliderFill(rangeRate);
+            calculate();
+        });
+
+        inpRate.addEventListener('change', () => {
+            const val = parseNum(inpRate.value);
+            rangeRate.value = val;
+            inpRate.value = `${val.toFixed(2)}%`;
+            updateSliderFill(rangeRate);
+            calculate();
+        });
+
+        // Bind Term
+        rangeTerm.addEventListener('input', () => {
+            const val = parseInt(rangeTerm.value, 10);
+            inpTerm.value = val;
+            updateSliderFill(rangeTerm);
+            calculate();
+        });
+
+        inpTerm.addEventListener('change', () => {
+            const val = parseInt(inpTerm.value, 10) || 60;
+            rangeTerm.value = val;
+            inpTerm.value = val;
+            updateSliderFill(rangeTerm);
+            calculate();
+        });
+
+        // Initial positions & fills
+        rangeLoanAmt.value = valToSliderPos(20000, loanAmtScale);
+        updateSliderFill(rangeLoanAmt);
+        updateSliderFill(rangeRate);
+        updateSliderFill(rangeTerm);
+
+        let currentSchedule = [];
+        let currentSummary = {};
+
+        // Calculation Engine (Exact KJE / SimpleLoan.js parity)
         function calculate() {
-            const isAmount = (selCalcType.value === 'amount');
+            const isAmount = modeAmount.checked;
             const annualRate = parseNum(rangeRate.value) / 100;
             const r = annualRate / 12;
             const n = Math.max(1, Math.round(parseNum(rangeTerm.value)));
 
-            let P = parseNum(rangeLoanAmt.value);
-            let PMT = parseNum(rangeMonthlyPmt.value);
+            let P = sliderPosToVal(parseFloat(rangeLoanAmt.value), loanAmtScale, 500);
+            let PMT = parseNum(inpMonthlyPmt.value);
 
             if (isAmount) {
-                // Calculate P from PMT
+                // Calculate Loan Principal from desired Payment
+                PMT = sliderPosToVal(parseFloat(rangeMonthlyPmt.value), pmtScale, 10);
                 if (r > 0) {
                     P = PMT * (Math.pow(1 + r, n) - 1) / (r * Math.pow(1 + r, n));
                 } else {
                     P = PMT * n;
                 }
-                inpLoanAmt.value = fmtCurr(P);
-                rangeLoanAmt.value = Math.min(100000, Math.round(P));
+                inpLoanAmt.value = fmtCurrWhole(P);
+                rangeLoanAmt.value = valToSliderPos(P, loanAmtScale);
             } else {
-                // Calculate PMT from P
+                // Calculate Monthly Payment from Loan Principal
                 if (r > 0) {
                     PMT = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
                 } else {
                     PMT = P / n;
                 }
                 inpMonthlyPmt.value = fmtCurr(PMT);
-                rangeMonthlyPmt.value = Math.min(5000, Math.round(PMT));
+                rangeMonthlyPmt.value = valToSliderPos(PMT, pmtScale);
             }
 
             // Build Amortization Schedule
+            const pmtRounded = Math.round(PMT * 100) / 100;
             let balance = P;
             let totalInterest = 0;
             let cumPrincipal = 0;
-            schedule = [];
+            currentSchedule = [];
 
             for (let m = 1; m <= n; m++) {
-                const interestPayment = balance * r;
-                let principalPayment = PMT - interestPayment;
+                const interestPayment = Math.round(balance * r * 100) / 100;
+                let principalPayment = pmtRounded - interestPayment;
                 if (m === n || principalPayment > balance) {
                     principalPayment = balance;
                 }
-                const pmtActual = principalPayment + interestPayment;
+                const actualPayment = principalPayment + interestPayment;
                 totalInterest += interestPayment;
                 cumPrincipal += principalPayment;
                 balance = Math.max(0, balance - principalPayment);
 
-                schedule.push({
+                currentSchedule.push({
                     month: m,
-                    payment: pmtActual,
+                    payment: actualPayment,
                     principal: principalPayment,
                     interest: interestPayment,
                     cumInterest: totalInterest,
@@ -706,15 +872,24 @@
 
             const totalPayments = P + totalInterest;
 
-            // Update UI elements
+            currentSummary = {
+                P,
+                PMT: pmtRounded,
+                ratePercent: parseNum(rangeRate.value).toFixed(2),
+                n,
+                totalInterest,
+                totalPayments
+            };
+
+            // Update Subtotals and Banner matching screenshots exactly
             document.getElementById('lbl-total-interest').textContent = `Total interest paid: ${fmtCurr(totalInterest)}`;
             document.getElementById('lbl-total-payments').textContent = `Total payments: ${fmtCurr(totalPayments)}`;
-            document.getElementById('sticky-subtitle').textContent = `Monthly loan payment is ${fmtCurr(PMT)} for ${n} payments at ${parseNum(rangeRate.value).toFixed(2)}%.`;
+            document.getElementById('sticky-subtitle').textContent = `Monthly loan payment is ${fmtCurr(pmtRounded)} for ${n} payments at ${currentSummary.ratePercent}%.`;
             document.getElementById('chart-heading').textContent = `BALANCES FOR A ${fmtCurr(P)} LOAN`;
 
-            // Update Section 3 Table & Progress bar
-            const pctPrincipal = (P / totalPayments) * 100;
-            const pctInterest = (totalInterest / totalPayments) * 100;
+            // Update Breakdown Bar & Summary Table
+            const pctPrincipal = totalPayments > 0 ? (P / totalPayments) * 100 : 100;
+            const pctInterest = totalPayments > 0 ? (totalInterest / totalPayments) * 100 : 0;
 
             document.getElementById('bar-lbl-principal').textContent = `Principal: ${fmtCurr(P)} (${pctPrincipal.toFixed(1)}%)`;
             document.getElementById('bar-lbl-interest').textContent = `Interest: ${fmtCurr(totalInterest)} (${pctInterest.toFixed(1)}%)`;
@@ -723,60 +898,89 @@
 
             document.getElementById('tbl-principal').textContent = fmtCurr(P);
             document.getElementById('tbl-interest').textContent = fmtCurr(totalInterest);
-            document.getElementById('tbl-monthly-pmt').textContent = fmtCurr(PMT);
-            document.getElementById('tbl-rate').textContent = `${parseNum(rangeRate.value).toFixed(2)}%`;
+            document.getElementById('tbl-monthly-pmt').textContent = fmtCurr(pmtRounded);
+            document.getElementById('tbl-rate').textContent = `${currentSummary.ratePercent}%`;
             document.getElementById('tbl-total').textContent = fmtCurr(totalPayments);
             document.getElementById('tbl-term').textContent = `${n} months (${(n / 12).toFixed(1)} years)`;
 
-            renderChart(P, schedule);
+            renderChart(P, currentSchedule);
         }
 
+        // Render Area Chart for Declining Balance
         function renderChart(loanAmount, data) {
             const svg = document.getElementById('loan-chart-svg');
             const tip = document.getElementById('chart-tip');
             svg.innerHTML = '';
             if (!data.length) return;
 
-            const w = 760;
-            const h = 330;
-            const padL = 75;
-            const padR = 30;
-            const padT = 25;
-            const padB = 40;
+            const w = 880;
+            const h = 340;
+            const padL = 78;
+            const padR = 25;
+            const padT = 20;
+            const padB = 42;
 
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
             const maxVal = Math.max(1000, loanAmount);
-            const steps = 5;
-            const stepVal = maxVal / steps;
+            // 10 intervals matching Screenshot 3: $0, $2k, $4k, $6k, ..., $20k
+            const intervals = 10;
+            const yStep = maxVal / intervals;
 
-            // Y Grid Lines & Labels
-            for (let i = 0; i <= steps; i++) {
-                const val = i * stepVal;
-                const yPos = padT + chartH - (i / steps) * chartH;
+            // Plot background rectangle
+            const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotRect.setAttribute('x', padL);
+            plotRect.setAttribute('y', padT);
+            plotRect.setAttribute('width', chartW);
+            plotRect.setAttribute('height', chartH);
+            plotRect.setAttribute('fill', '#07101e');
+            plotRect.setAttribute('stroke', 'rgba(223, 160, 30, 0.35)');
+            plotRect.setAttribute('stroke-width', '1');
+            plotRect.setAttribute('rx', '3');
+            svg.appendChild(plotRect);
 
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', padL);
-                line.setAttribute('x2', w - padR);
-                line.setAttribute('y1', yPos);
-                line.setAttribute('y2', yPos);
-                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
-                line.setAttribute('stroke-width', '1');
-                svg.appendChild(line);
+            // Draw Y-axis grid lines and labels
+            for (let i = 0; i <= intervals; i++) {
+                const val = i * yStep;
+                const yPos = padT + chartH - (i / intervals) * chartH;
+
+                if (i > 0 && i < intervals) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', padL);
+                    line.setAttribute('x2', padL + chartW);
+                    line.setAttribute('y1', yPos);
+                    line.setAttribute('y2', yPos);
+                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke-width', '1');
+                    svg.appendChild(line);
+                }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', padL - 10);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
                 text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11');
+                text.setAttribute('font-size', '11.5');
+                text.setAttribute('font-weight', '600');
                 text.setAttribute('fill', '#94a3b8');
                 text.textContent = `$${Math.round(val).toLocaleString()}`;
                 svg.appendChild(text);
             }
 
-            // Draw Area Chart for Remaining Balance
+            // X-Axis Title: "Payment Number"
+            const xTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            xTitle.setAttribute('x', padL + chartW / 2);
+            xTitle.setAttribute('y', padT + chartH + 34);
+            xTitle.setAttribute('text-anchor', 'middle');
+            xTitle.setAttribute('font-family', 'Montserrat, sans-serif');
+            xTitle.setAttribute('font-size', '11.5');
+            xTitle.setAttribute('font-weight', '700');
+            xTitle.setAttribute('fill', '#dfa01e');
+            xTitle.textContent = 'Payment Number';
+            svg.appendChild(xTitle);
+
+            // Build Area Polygon Points
             const n = data.length;
             const points = [];
             points.push(`${padL},${padT + chartH - (loanAmount / maxVal) * chartH}`);
@@ -787,33 +991,35 @@
                 points.push(`${x},${y}`);
             });
 
-            // SVG Gradient
+            // SVG Gradient Definition
             const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
             defs.innerHTML = `
-                <linearGradient id="loanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" stop-color="#2563eb" stop-opacity="0.85" />
-                    <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.25" />
+                <linearGradient id="loanAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#0038d1" stop-opacity="0.95" />
+                    <stop offset="100%" stop-color="#001a75" stop-opacity="0.8" />
                 </linearGradient>
             `;
             svg.appendChild(defs);
 
-            // Shaded Area Polygon
+            // Shaded Area Polygon (Deep Blue matching Screenshot 3)
             const polyPoints = [`${padL},${padT + chartH}`, ...points, `${padL + chartW},${padT + chartH}`].join(' ');
             const polygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
             polygon.setAttribute('points', polyPoints);
-            polygon.setAttribute('fill', 'url(#loanGrad)');
+            polygon.setAttribute('fill', 'url(#loanAreaGrad)');
             svg.appendChild(polygon);
 
             // Top Contour Line
             const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
             polyline.setAttribute('points', points.join(' '));
             polyline.setAttribute('fill', 'none');
-            polyline.setAttribute('stroke', '#3b82f6');
-            polyline.setAttribute('stroke-width', '2.5');
+            polyline.setAttribute('stroke', '#2563eb');
+            polyline.setAttribute('stroke-width', '2');
             svg.appendChild(polyline);
 
-            // Transparent overlay bars for hover interactivity
+            // Interactive hover overlays and X-axis ticks (step = 3 for 60 months)
             const colW = chartW / n;
+            const step = n <= 60 ? 3 : (n <= 120 ? 6 : (n <= 240 ? 12 : 24));
+
             data.forEach((d, idx) => {
                 const xCenter = padL + idx * colW;
                 const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -829,19 +1035,18 @@
                     const xRel = ((xCenter + colW / 2) / w) * rectSvg.width;
                     const yVal = padT + chartH - (d.balance / maxVal) * chartH;
                     const yRel = (yVal / h) * rectSvg.height;
-                    tip.innerHTML = `Month ${d.month}: <strong>${fmtCurr(d.balance)}</strong> remaining`;
+                    tip.innerHTML = `Payment #${d.month}: <strong>${fmtCurr(d.balance)}</strong> remaining`;
                     tip.style.left = `${xRel}px`;
                     tip.style.top = `${yRel - 12}px`;
                     tip.style.display = 'block';
                 });
-                rect.addEventListener('mouseleave', () => tip.style.display = 'none');
+                rect.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
                 svg.appendChild(rect);
 
-                // X-axis ticks (every 10 or 12 months)
-                const step = n > 120 ? 24 : (n > 60 ? 12 : (n > 24 ? 6 : 2));
-                if (d.month === 1 || d.month % step === 0 || d.month === n) {
+                // X-axis ticks (3, 6, 9, 12, ..., 60)
+                if (d.month % step === 0 || d.month === n) {
                     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                    xLabel.setAttribute('x', xCenter + colW / 2);
+                    xLabel.setAttribute('x', xCenter + colW);
                     xLabel.setAttribute('y', padT + chartH + 18);
                     xLabel.setAttribute('text-anchor', 'middle');
                     xLabel.setAttribute('font-family', 'Open Sans, sans-serif');
@@ -852,13 +1057,13 @@
                 }
             });
 
-            // Bottom axis line
+            // Bottom baseline axis
             const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             axisLine.setAttribute('x1', padL);
-            axisLine.setAttribute('x2', w - padR);
+            axisLine.setAttribute('x2', padL + chartW);
             axisLine.setAttribute('y1', padT + chartH);
             axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.15)');
+            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.2)');
             axisLine.setAttribute('stroke-width', '1.5');
             svg.appendChild(axisLine);
         }
@@ -866,23 +1071,49 @@
         // View Report Modal
         const modal = document.getElementById('modal-report');
         function openReport() {
-            const P = parseNum(rangeLoanAmt.value);
-            const totalInt = schedule[schedule.length - 1]?.cumInterest || 0;
-            document.getElementById('modal-summary').innerHTML = `
-                Amortization schedule for a <strong>${fmtCurr(P)}</strong> loan at <strong>${parseNum(rangeRate.value).toFixed(2)}%</strong> 
-                over <strong>${rangeTerm.value} months</strong>. Total payments: <strong>${fmtCurr(P + totalInt)}</strong> (Principal: ${fmtCurr(P)}, Interest: ${fmtCurr(totalInt)}).
+            const metricsEl = document.getElementById('modal-metrics');
+            metricsEl.innerHTML = `
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Loan Principal</span>
+                    <span class="calc-metric-card-value">${fmtCurr(currentSummary.P)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Monthly Payment</span>
+                    <span class="calc-metric-card-value blue">${fmtCurr(currentSummary.PMT)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Interest Rate</span>
+                    <span class="calc-metric-card-value">${currentSummary.ratePercent}%</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Total Interest</span>
+                    <span class="calc-metric-card-value gold">${fmtCurr(currentSummary.totalInterest)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Total Cost</span>
+                    <span class="calc-metric-card-value">${fmtCurr(currentSummary.totalPayments)}</span>
+                </div>
             `;
-            const rows = document.getElementById('modal-table-rows');
-            rows.innerHTML = schedule.map(d => `
+
+            const narrativeEl = document.getElementById('modal-narrative');
+            narrativeEl.innerHTML = `
+                For a loan amount of <strong>${fmtCurr(currentSummary.P)}</strong> financed over <strong>${currentSummary.n} months</strong> at an annual rate of <strong>${currentSummary.ratePercent}%</strong>, 
+                your monthly payment will be <strong>${fmtCurr(currentSummary.PMT)}</strong>. Over the life of the loan, you will pay <strong>${fmtCurr(currentSummary.totalInterest)}</strong> in interest, 
+                bringing the total amount repaid to <strong>${fmtCurr(currentSummary.totalPayments)}</strong>.
+            `;
+
+            const rowsEl = document.getElementById('modal-table-rows');
+            rowsEl.innerHTML = currentSchedule.map(d => `
                 <tr>
-                    <td style="padding: 6px 10px;">${d.month}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurr(d.payment)}</td>
-                    <td style="padding: 6px 10px; text-align: right; color: #2563eb;">${fmtCurr(d.principal)}</td>
-                    <td style="padding: 6px 10px; text-align: right; color: #dfa01e;">${fmtCurr(d.interest)}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurr(d.cumInterest)}</td>
-                    <td style="padding: 6px 10px; text-align: right; font-weight: 700;">${fmtCurr(d.balance)}</td>
+                    <td style="padding: 6px 8px; font-weight: 600;">Payment #${d.month}</td>
+                    <td style="padding: 6px 8px; text-align: right;">${fmtCurr(d.payment)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #3b82f6;">${fmtCurr(d.principal)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #dfa01e;">${fmtCurr(d.interest)}</td>
+                    <td style="padding: 6px 8px; text-align: right;">${fmtCurr(d.cumInterest)}</td>
+                    <td style="padding: 6px 8px; text-align: right; font-weight: 700; color: #ffffff;">${fmtCurr(d.balance)}</td>
                 </tr>
             `).join('');
+
             modal.classList.add('active');
         }
 
@@ -897,9 +1128,19 @@
             document.getElementById('sec-chart').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        // Initial Run
+        // Initialize calculation on page load
         calculate();
+
+        // Header shadow on scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+        });
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>

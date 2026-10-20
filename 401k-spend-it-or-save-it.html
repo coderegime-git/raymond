@@ -178,9 +178,25 @@
                 <h1 class="calc-white-title">401(K): SPEND IT OR SAVE IT</h1>
                 <div class="calc-meta-bar">
                     <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <div class="calc-share-wrapper" id="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Share Calculator">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown" role="menu" aria-label="Social Share Options">
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
+                                <i class="fab fa-x-twitter"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-em" title="Share via Email" aria-label="Share via Email" onclick="shareToSocial('email', event)">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
                     There are several ways to manage your 401(k) balance when you leave an employer. The most fundamental of which is should you spend it or save it? Depending on your age and tax bracket, making the wrong decision can cost you thousands of dollars both in taxes and lost earnings. This calculator helps illustrate the difference.
@@ -190,19 +206,23 @@
             <!-- Sticky Floating Action Box (Pinned to top when scrolling) -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
-                    <div class="calc-btn-row">
-                        <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
-                        <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                    <div class="calc-action-top-row">
+                        <div class="calc-btn-row">
+                            <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
+                            <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                        </div>
+                        <div class="calc-action-right-icons">
+                            <div class="calc-action-help-box">
+                                <span class="calc-help-bubble" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">?</span>
+                                <button type="button" class="calc-menu-btn" id="btn-menu-report" title="View Full Report">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="calc-action-subtitle">401(k) Spend It or Save It?</div>
-                    <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
-                            <i class="fas fa-question-circle"></i>
-                        </button>
-                        <button type="button" class="calc-icon-btn" id="btn-menu-report" title="View Full Report">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <span class="calc-req-text">*indicates required</span>
+                    <div class="calc-req-row">
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
@@ -360,32 +380,20 @@
                     <table class="calc-breakdown-table">
                         <tbody>
                             <tr>
-                                <td>Initial 401(k) Balance:</td>
-                                <td id="bk-init">$1,000.00</td>
+                                <td>Taxes:</td>
+                                <td id="bk-taxes">$300.00</td>
                             </tr>
                             <tr>
-                                <td>Federal Income Tax:</td>
-                                <td id="bk-fed">-$250.00</td>
+                                <td>Penalties:</td>
+                                <td id="bk-penalty">$100.00</td>
                             </tr>
                             <tr>
-                                <td>State Income Tax:</td>
-                                <td id="bk-state">-$50.00</td>
-                            </tr>
-                            <tr>
-                                <td>IRS Early Withdrawal Penalty (10%):</td>
-                                <td id="bk-penalty">-$100.00</td>
+                                <td>Lost interest:</td>
+                                <td id="bk-lost-interest">$10,424.00</td>
                             </tr>
                             <tr class="calc-breakdown-total">
-                                <td>Cash Received If Spent Today:</td>
-                                <td id="bk-cash">$600.00</td>
-                            </tr>
-                            <tr>
-                                <td>Future Compound Value If Kept Saved:</td>
-                                <td id="bk-future">$11,424.00</td>
-                            </tr>
-                            <tr style="color: #c00000; font-weight: 800;">
-                                <td>Total Opportunity Cost of Cashing Out:</td>
-                                <td id="bk-cost">-$10,824.00</td>
+                                <td>Total:</td>
+                                <td id="bk-total">$10,824.00</td>
                             </tr>
                         </tbody>
                     </table>
@@ -528,53 +536,68 @@
     <div class="calc-modal-bg" id="modal-report">
         <div class="calc-modal-content">
             <div class="calc-modal-head">
-                <h3>401(k) Rollover vs. Cash Out Amortization Report</h3>
+                <h3>401(k): Spend It or Save It Report</h3>
                 <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
             </div>
             <div class="calc-modal-body">
-                <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
-                <table class="calc-breakdown-table" style="font-size: 13px;">
-                    <thead>
-                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                            <th style="padding: 10px 12px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Category</th>
-                            <th style="padding: 10px 12px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody id="modal-table-rows"></tbody>
-                </table>
+                <div style="margin-bottom: 20px; font-size: 13.5px; line-height: 1.65; color: #cbd5e1; background: #0d1b31; padding: 16px 20px; border-radius: 4px; border-left: 4px solid #dfa01e;" id="modal-summary"></div>
+                
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e; margin: 0 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">Results Summary</h4>
+                <div id="modal-results-summary-wrapper"></div>
+
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e; margin: 20px 0 10px; text-transform: uppercase; letter-spacing: 0.5px;">Comparison Analysis</h4>
+                <div id="modal-options-wrapper"></div>
             </div>
             <div class="calc-modal-foot">
-                <button type="button" class="calc-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+                <button type="button" class="calc-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Report</button>
                 <button type="button" class="calc-btn" id="modal-btn-done" style="background: #dfa01e; color: #080a0f; font-weight: 700;">Close</button>
             </div>
         </div>
     </div>
 
-    <!-- ============================================================
+        <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
+
+        <!-- Brand / Social -->
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <!-- Official logo -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
+                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
+            <!-- Social icons -->
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
         </div>
+
+        <!-- Center Quote -->
         <div class="champ-quote">
             Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
             certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
             to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
             complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
+
+        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
             <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
         </div>
+
     </section>
 
     <!-- ============================================================
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
@@ -615,6 +638,7 @@
                     Use</a>
             </p>
         </div>
+
     </footer>
 
     <!-- Interactive Script -->
@@ -646,6 +670,83 @@
             }
         }
 
+        // Share Dropdown Handlers
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            document.getElementById('calc-share-wrapper')?.classList.toggle('open');
+        }
+
+        function shareToSocial(platform, e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title || '401(k): Spend It or Save It | The Seiler Group');
+            let shareUrl = '';
+
+            if (platform === 'facebook') {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            } else if (platform === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            } else if (platform === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            } else if (platform === 'email') {
+                window.location.href = `mailto:?subject=${title}&body=${encodeURIComponent('Check out this calculator: ')}%0A${url}`;
+                return;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=620,height=520,scrollbars=yes,resizable=yes');
+            }
+            document.getElementById('calc-share-wrapper')?.classList.remove('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrapper = document.getElementById('calc-share-wrapper');
+            if (wrapper && !wrapper.contains(e.target)) {
+                wrapper.classList.remove('open');
+            }
+        });
+
+        // Piecewise scale conversion for Current 401(k) balance ($0, $10k, $100k, $1m)
+        const balanceScalePoints = [0, 10000, 100000, 1000000];
+
+        function valToSliderPos(val, scalePoints) {
+            if (!scalePoints) return val;
+            const n = scalePoints.length - 1;
+            const segWidth = 100 / n;
+            for (let i = 0; i < n; i++) {
+                const p1 = scalePoints[i];
+                const p2 = scalePoints[i + 1];
+                if (val <= p2) {
+                    const frac = (val - p1) / (p2 - p1);
+                    return i * segWidth + frac * segWidth;
+                }
+            }
+            return 100;
+        }
+
+        function sliderPosToVal(pct, scalePoints) {
+            if (!scalePoints) return pct;
+            const n = scalePoints.length - 1;
+            const segWidth = 100 / n;
+            const segIdx = Math.min(n - 1, Math.floor(pct / segWidth));
+            const segFrac = (pct - segIdx * segWidth) / segWidth;
+            const p1 = scalePoints[segIdx];
+            const p2 = scalePoints[segIdx + 1];
+            let val = p1 + segFrac * (p2 - p1);
+            if (val < 10000) val = Math.round(val / 100) * 100;
+            else if (val < 100000) val = Math.round(val / 500) * 500;
+            else val = Math.round(val / 1000) * 1000;
+            return Math.max(scalePoints[0], Math.min(scalePoints[scalePoints.length - 1], val));
+        }
+
+        function updateSliderTrack(range) {
+            const min = parseFloat(range.min) || 0;
+            const max = parseFloat(range.max) || 100;
+            const val = parseFloat(range.value) || 0;
+            const pct = Math.max(0, Math.min(100, ((val - min) / (max - min)) * 100));
+            range.style.background = `linear-gradient(to right, #1d68d8 0%, #1d68d8 ${pct}%, #203148 ${pct}%, #203148 100%)`;
+        }
+
         // Form controls
         const inpBalance = document.getElementById('inp-balance');
         const rangeBalance = document.getElementById('range-balance');
@@ -665,12 +766,39 @@
         const inpStateTax = document.getElementById('inp-state-tax');
         const rangeStateTax = document.getElementById('range-state-tax');
 
-        function bindCtl(inp, range, type) {
+        // Configure balance piecewise slider
+        rangeBalance.min = 0;
+        rangeBalance.max = 100;
+        rangeBalance.step = 0.1;
+        rangeBalance.value = valToSliderPos(1000, balanceScalePoints);
+        updateSliderTrack(rangeBalance);
+
+        rangeBalance.addEventListener('input', () => {
+            const pos = parseFloat(rangeBalance.value);
+            const val = sliderPosToVal(pos, balanceScalePoints);
+            inpBalance.value = fmtCurr(val);
+            rangeBalance.dataset.realVal = val;
+            updateSliderTrack(rangeBalance);
+            calculate();
+        });
+
+        inpBalance.addEventListener('change', () => {
+            const val = parseNum(inpBalance.value);
+            inpBalance.value = fmtCurr(val);
+            rangeBalance.value = valToSliderPos(val, balanceScalePoints);
+            rangeBalance.dataset.realVal = val;
+            updateSliderTrack(rangeBalance);
+            calculate();
+        });
+
+        function bindLinearCtl(inp, range, type) {
+            updateSliderTrack(range);
             range.addEventListener('input', () => {
                 const v = parseFloat(range.value);
                 if (type === 'curr') inp.value = fmtCurr(v);
                 else if (type === 'pct') inp.value = `${v}%`;
                 else inp.value = v;
+                updateSliderTrack(range);
                 calculate();
             });
             inp.addEventListener('change', () => {
@@ -679,22 +807,22 @@
                 if (type === 'curr') inp.value = fmtCurr(v);
                 else if (type === 'pct') inp.value = `${v}%`;
                 else inp.value = v;
+                updateSliderTrack(range);
                 calculate();
             });
         }
 
-        bindCtl(inpBalance, rangeBalance, 'curr');
-        bindCtl(inpReturn, rangeReturn, 'pct');
-        bindCtl(inpAge, rangeAge, 'num');
-        bindCtl(inpRetireAge, rangeRetireAge, 'num');
-        bindCtl(inpFedTax, rangeFedTax, 'pct');
-        bindCtl(inpStateTax, rangeStateTax, 'pct');
+        bindLinearCtl(inpReturn, rangeReturn, 'pct');
+        bindLinearCtl(inpAge, rangeAge, 'num');
+        bindLinearCtl(inpRetireAge, rangeRetireAge, 'num');
+        bindLinearCtl(inpFedTax, rangeFedTax, 'pct');
+        bindLinearCtl(inpStateTax, rangeStateTax, 'pct');
 
         let spendVal = 600;
         let saveVal = 11424;
 
         function calculate() {
-            const P = parseNum(rangeBalance.value);
+            const P = rangeBalance.dataset.realVal ? parseFloat(rangeBalance.dataset.realVal) : parseNum(inpBalance.value);
             const r = parseNum(rangeReturn.value) / 100;
             const age = parseNum(rangeAge.value);
             const retireAge = Math.max(age + 1, parseNum(rangeRetireAge.value));
@@ -703,29 +831,28 @@
 
             const years = retireAge - age;
 
-            // 10% penalty if cashing out before 59.5
-            const penaltyRate = age < 59.5 ? 0.10 : 0.00;
-            const totalTaxAndPenaltyRate = fedTaxRate + stateTaxRate + penaltyRate;
+            // Penalty is 10% if age < 55 (matching official IRS 401(k) rule and Rollover401k.js)
+            const penaltyRate = age < 55 ? 0.10 : 0.00;
+
+            const taxesAmount = Math.round(P * (fedTaxRate + stateTaxRate));
+            const penaltyAmount = Math.round(P * penaltyRate);
+            const totalTaxPenalty = taxesAmount + penaltyAmount;
 
             // Cash received today if spent
-            spendVal = Math.round(P * (1 - totalTaxAndPenaltyRate));
+            spendVal = Math.round(P - totalTaxPenalty);
 
-            // Future value if saved and compounded at r
+            // Future value if saved and compounded annually
             saveVal = Math.round(P * Math.pow(1 + r, years));
 
-            // Update Breakdown Table
-            const fedTaxAmount = Math.round(P * fedTaxRate);
-            const stateTaxAmount = Math.round(P * stateTaxRate);
-            const penaltyAmount = Math.round(P * penaltyRate);
-            const costLostGrowth = Math.max(0, saveVal - spendVal);
+            // Lost interest
+            const lostInterest = Math.max(0, saveVal - P);
+            const totalCost = totalTaxPenalty + lostInterest;
 
-            document.getElementById('bk-init').textContent = fmtCurr(P);
-            document.getElementById('bk-fed').textContent = '-' + fmtCurr(fedTaxAmount);
-            document.getElementById('bk-state').textContent = '-' + fmtCurr(stateTaxAmount);
-            document.getElementById('bk-penalty').textContent = '-' + fmtCurr(penaltyAmount);
-            document.getElementById('bk-cash').textContent = fmtCurr(spendVal);
-            document.getElementById('bk-future').textContent = fmtCurr(saveVal);
-            document.getElementById('bk-cost').textContent = '-' + fmtCurr(costLostGrowth);
+            // Update Breakdown Table
+            document.getElementById('bk-taxes').textContent = fmtCurr(taxesAmount);
+            document.getElementById('bk-penalty').textContent = fmtCurr(penaltyAmount);
+            document.getElementById('bk-lost-interest').textContent = fmtCurr(lostInterest);
+            document.getElementById('bk-total').textContent = fmtCurr(totalCost);
 
             renderBarChart(spendVal, saveVal);
         }
@@ -736,40 +863,53 @@
             svg.innerHTML = '';
 
             const w = 760;
-            const h = 330;
+            const h = 360;
             const padL = 75;
             const padR = 30;
             const padT = 30;
-            const padB = 40;
+            const padB = 55;
 
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
-            // Round max scale to multiple of $2,000 (at least $14,000)
+            // Maximum value on Y-axis (multiples of $2,000, minimum $14,000)
             const maxVal = Math.max(14000, Math.ceil(Math.max(spend, save) / 2000) * 2000);
             const steps = 7;
             const stepVal = maxVal / steps;
+
+            // Plot background rect
+            const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotRect.setAttribute('x', padL);
+            plotRect.setAttribute('y', padT);
+            plotRect.setAttribute('width', chartW);
+            plotRect.setAttribute('height', chartH);
+            plotRect.setAttribute('fill', 'rgba(11, 23, 42, 0.45)');
+            plotRect.setAttribute('rx', '3');
+            svg.appendChild(plotRect);
 
             // Y Grid Lines & Labels
             for (let i = 0; i <= steps; i++) {
                 const val = i * stepVal;
                 const yPos = padT + chartH - (i / steps) * chartH;
 
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', padL);
-                line.setAttribute('x2', w - padR);
-                line.setAttribute('y1', yPos);
-                line.setAttribute('y2', yPos);
-                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
-                line.setAttribute('stroke-width', '1');
-                svg.appendChild(line);
+                if (i > 0 && i < steps) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', padL);
+                    line.setAttribute('x2', w - padR);
+                    line.setAttribute('y1', yPos);
+                    line.setAttribute('y2', yPos);
+                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke-width', '1');
+                    svg.appendChild(line);
+                }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                 text.setAttribute('x', padL - 10);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
                 text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11');
+                text.setAttribute('font-size', '11.5');
+                text.setAttribute('font-weight', '600');
                 text.setAttribute('fill', '#94a3b8');
                 text.textContent = fmtCurr(val);
                 svg.appendChild(text);
@@ -777,9 +917,9 @@
 
             // Two Bars: Spend it & Save it
             const colWidth = chartW / 2;
-            const barW = Math.min(150, colWidth * 0.55);
+            const barW = Math.min(140, colWidth * 0.55);
 
-            // 1. Spend It (Royal Blue)
+            // 1. Spend It (Royal Blue - #1d4ed8)
             const xSpend = padL + colWidth * 0.5;
             const hSpend = (spend / maxVal) * chartH;
             const ySpend = padT + chartH - hSpend;
@@ -788,15 +928,16 @@
             rectSpend.setAttribute('x', xSpend - barW / 2);
             rectSpend.setAttribute('y', ySpend);
             rectSpend.setAttribute('width', barW);
-            rectSpend.setAttribute('height', Math.max(2, hSpend));
-            rectSpend.setAttribute('fill', '#2563eb');
+            rectSpend.setAttribute('height', Math.max(3, hSpend));
+            rectSpend.setAttribute('fill', '#1d4ed8');
             rectSpend.setAttribute('stroke', '#3b82f6');
-            rectSpend.setAttribute('rx', '3');
+            rectSpend.setAttribute('stroke-width', '1');
+            rectSpend.setAttribute('rx', '2');
             rectSpend.setAttribute('cursor', 'pointer');
 
             const txtSpendVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSpendVal.setAttribute('x', xSpend);
-            txtSpendVal.setAttribute('y', ySpend - 8);
+            txtSpendVal.setAttribute('y', Math.max(padT + 16, ySpend - 8));
             txtSpendVal.setAttribute('text-anchor', 'middle');
             txtSpendVal.setAttribute('font-family', 'Montserrat, sans-serif');
             txtSpendVal.setAttribute('font-size', '13');
@@ -806,16 +947,15 @@
 
             const txtSpendLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSpendLabel.setAttribute('x', xSpend);
-            txtSpendLabel.setAttribute('y', padT + chartH + 22);
+            txtSpendLabel.setAttribute('y', padT + chartH + 26);
             txtSpendLabel.setAttribute('text-anchor', 'middle');
-            txtSpendLabel.setAttribute('font-family', 'Montserrat, sans-serif');
-            txtSpendLabel.setAttribute('font-size', '12');
-            txtSpendLabel.setAttribute('font-weight', '700');
-            txtSpendLabel.setAttribute('letter-spacing', '0.5px');
-            txtSpendLabel.setAttribute('fill', '#cbd5e1');
-            txtSpendLabel.textContent = 'SPEND IT';
+            txtSpendLabel.setAttribute('font-family', 'Open Sans, sans-serif');
+            txtSpendLabel.setAttribute('font-size', '13');
+            txtSpendLabel.setAttribute('font-weight', '600');
+            txtSpendLabel.setAttribute('fill', '#e2e8f0');
+            txtSpendLabel.textContent = 'Spend it';
 
-            // 2. Save It (Luxury Gold)
+            // 2. Save It (Raymond James Muted Green - #5a9e52)
             const xSave = padL + colWidth * 1.5;
             const hSave = (save / maxVal) * chartH;
             const ySave = padT + chartH - hSave;
@@ -824,32 +964,32 @@
             rectSave.setAttribute('x', xSave - barW / 2);
             rectSave.setAttribute('y', ySave);
             rectSave.setAttribute('width', barW);
-            rectSave.setAttribute('height', Math.max(2, hSave));
-            rectSave.setAttribute('fill', '#d89e1b');
-            rectSave.setAttribute('stroke', '#f5b938');
-            rectSave.setAttribute('rx', '3');
+            rectSave.setAttribute('height', Math.max(3, hSave));
+            rectSave.setAttribute('fill', '#5a9e52');
+            rectSave.setAttribute('stroke', '#6cb763');
+            rectSave.setAttribute('stroke-width', '1');
+            rectSave.setAttribute('rx', '2');
             rectSave.setAttribute('cursor', 'pointer');
 
             const txtSaveVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSaveVal.setAttribute('x', xSave);
-            txtSaveVal.setAttribute('y', ySave - 8);
+            txtSaveVal.setAttribute('y', Math.max(padT + 16, ySave - 8));
             txtSaveVal.setAttribute('text-anchor', 'middle');
             txtSaveVal.setAttribute('font-family', 'Montserrat, sans-serif');
             txtSaveVal.setAttribute('font-size', '13');
             txtSaveVal.setAttribute('font-weight', '700');
-            txtSaveVal.setAttribute('fill', '#dfa01e');
+            txtSaveVal.setAttribute('fill', '#ffffff');
             txtSaveVal.textContent = fmtCurr(save);
 
             const txtSaveLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSaveLabel.setAttribute('x', xSave);
-            txtSaveLabel.setAttribute('y', padT + chartH + 22);
+            txtSaveLabel.setAttribute('y', padT + chartH + 26);
             txtSaveLabel.setAttribute('text-anchor', 'middle');
-            txtSaveLabel.setAttribute('font-family', 'Montserrat, sans-serif');
-            txtSaveLabel.setAttribute('font-size', '12');
-            txtSaveLabel.setAttribute('font-weight', '700');
-            txtSaveLabel.setAttribute('letter-spacing', '0.5px');
-            txtSaveLabel.setAttribute('fill', '#cbd5e1');
-            txtSaveLabel.textContent = 'SAVE IT';
+            txtSaveLabel.setAttribute('font-family', 'Open Sans, sans-serif');
+            txtSaveLabel.setAttribute('font-size', '13');
+            txtSaveLabel.setAttribute('font-weight', '600');
+            txtSaveLabel.setAttribute('fill', '#e2e8f0');
+            txtSaveLabel.textContent = 'Save it';
 
             svg.appendChild(rectSpend);
             svg.appendChild(txtSpendVal);
@@ -865,7 +1005,7 @@
             axisLine.setAttribute('x2', w - padR);
             axisLine.setAttribute('y1', padT + chartH);
             axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.15)');
+            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.25)');
             axisLine.setAttribute('stroke-width', '1.5');
             svg.appendChild(axisLine);
         }
@@ -873,17 +1013,75 @@
         // View Report Modal
         const modal = document.getElementById('modal-report');
         function openReport() {
+            const P = rangeBalance.dataset.realVal ? parseFloat(rangeBalance.dataset.realVal) : parseNum(inpBalance.value);
+            const r = parseNum(inpReturn.value);
+            const age = parseNum(inpAge.value);
+            const retireAge = parseNum(inpRetireAge.value);
+            const years = Math.max(1, retireAge - age);
+            const fedTax = parseNum(inpFedTax.value);
+            const stateTax = parseNum(inpStateTax.value);
+            const penaltyRate = age < 55 ? 10 : 0;
+            const taxesAmount = Math.round(P * ((fedTax + stateTax) / 100));
+            const penaltyAmount = Math.round(P * (penaltyRate / 100));
+            const totalTaxPenalty = taxesAmount + penaltyAmount;
+            const lostInterest = Math.max(0, saveVal - P);
+            const totalCost = totalTaxPenalty + lostInterest;
+
             document.getElementById('modal-summary').innerHTML = `
-                Comparing cashing out vs rolling over a <strong>${fmtCurr(parseNum(rangeBalance.value))}</strong> 401(k) balance. 
-                If spent today at age ${rangeAge.value}, after taxes &amp; early withdrawal penalties you receive <strong>${fmtCurr(spendVal)}</strong>. 
-                If kept saved until retirement at age ${rangeRetireAge.value} earning ${rangeReturn.value}%, it will grow to <strong>${fmtCurr(saveVal)}</strong>.
+                If you cash out your 401(k) balance today, you will pay taxes and penalties totaling <strong style="color: #dfa01e;">${fmtCurr(totalTaxPenalty)}</strong>, leaving you with <strong style="color: #60a5fa;">${fmtCurr(spendVal)}</strong> in cash. 
+                If instead you keep the funds saved in a tax-deferred account earning ${r.toFixed(2)}% annually until retirement at age ${retireAge} (${years} years), your balance would grow to <strong style="color: #5a9e52;">${fmtCurr(saveVal)}</strong>. 
+                By spending the money today, you lose <strong style="color: #f87171;">${fmtCurr(lostInterest)}</strong> in compound investment growth.
             `;
-            const rows = document.getElementById('modal-table-rows');
-            rows.innerHTML = `
-                <tr><td>Cash Today If Spent:</td><td style="text-align: right;"><strong>${fmtCurr(spendVal)}</strong></td></tr>
-                <tr><td>Savings at Retirement:</td><td style="text-align: right; color: #2e7d32;"><strong>${fmtCurr(saveVal)}</strong></td></tr>
-                <tr><td>Net Opportunity Cost:</td><td style="text-align: right; color: #c62828;"><strong>-${fmtCurr(saveVal - spendVal)}</strong></td></tr>
+
+            document.getElementById('modal-results-summary-wrapper').innerHTML = `
+                <table class="calc-results-summary-table">
+                    <tbody>
+                        <tr><td class="summary-label">Current 401(k) balance</td><td class="summary-value">${fmtCurr(P)}</td></tr>
+                        <tr><td class="summary-label">Current age</td><td class="summary-value">${age}</td></tr>
+                        <tr><td class="summary-label">Age at retirement</td><td class="summary-value">${retireAge}</td></tr>
+                        <tr><td class="summary-label">Years until retirement</td><td class="summary-value">${years}</td></tr>
+                        <tr><td class="summary-label">Annual rate of return</td><td class="summary-value">${r.toFixed(2)}%</td></tr>
+                        <tr><td class="summary-label">Federal income tax rate</td><td class="summary-value">${fedTax.toFixed(2)}%</td></tr>
+                        <tr><td class="summary-label">State income tax rate</td><td class="summary-value">${stateTax.toFixed(2)}%</td></tr>
+                        <tr class="summary-row-highlight"><td class="summary-label">Cash received if spent today</td><td class="summary-value" style="color: #60a5fa;">${fmtCurr(spendVal)}</td></tr>
+                        <tr class="summary-row-highlight"><td class="summary-label">Savings at retirement if saved</td><td class="summary-value" style="color: #5a9e52;">${fmtCurr(saveVal)}</td></tr>
+                        <tr><td class="summary-label">Total taxes &amp; penalties paid</td><td class="summary-value">${fmtCurr(totalTaxPenalty)}</td></tr>
+                        <tr><td class="summary-label">Total lost interest</td><td class="summary-value">${fmtCurr(lostInterest)}</td></tr>
+                        <tr class="summary-row-highlight"><td class="summary-label">Total opportunity cost of cashing out</td><td class="summary-value" style="color: #f87171;">-${fmtCurr(totalCost)}</td></tr>
+                    </tbody>
+                </table>
             `;
+
+            document.getElementById('modal-options-wrapper').innerHTML = `
+                <table class="calc-options-table">
+                    <thead>
+                        <tr>
+                            <th>Option</th>
+                            <th>Cash Today</th>
+                            <th>Taxes &amp; Penalties</th>
+                            <th>Value at Age ${retireAge}</th>
+                            <th>Opportunity Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: #60a5fa;">Spend it</strong></td>
+                            <td>${fmtCurr(spendVal)}</td>
+                            <td>${fmtCurr(totalTaxPenalty)}</td>
+                            <td>${fmtCurr(spendVal)}</td>
+                            <td style="color: #f87171;">-${fmtCurr(totalCost)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #5a9e52;">Save it</strong></td>
+                            <td>$0.00</td>
+                            <td>$0.00</td>
+                            <td><strong>${fmtCurr(saveVal)}</strong></td>
+                            <td style="color: #5a9e52;">$0.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+
             modal.classList.add('active');
         }
 
@@ -910,6 +1108,7 @@
             }
         });
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>

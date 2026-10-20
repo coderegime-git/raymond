@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asset Allocation Calculator | The Seiler Group of Raymond James</title>
     <meta name="description"
-        content="Asset allocation is designed to help you create a balanced portfolio of investments. Calculate your optimal mix of stocks, bonds, and cash based on your age, risk tolerance, and goals.">
+        content="Asset allocation is designed to help you create a balanced portfolio of investments. Your age, ability to tolerate risk and several other factors are used to calculate a desirable mix of stocks, bonds and cash.">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <link rel="stylesheet" href="asset-allocation-calculator.css?v=1">
 </head>
 
 <body class="calc-white-page">
@@ -100,32 +100,71 @@
                     <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
                         PRESS RELEASES
                     </a>
-                    <a href="media.html" class="nav-dropdown-item" id="nav-item-media">
-                        MEDIA
+                    <a href="resources.html" class="nav-dropdown-item" id="nav-item-insights">
+                        ALL RESOURCES
                     </a>
-                    <a href="articles.html" class="nav-dropdown-item" id="nav-item-articles">
-                        ARTICLES &amp; INSIGHTS
-                    </a>
-                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
-                        RESOURCES &amp; PERSPECTIVES
-                    </a>
+                </div>
+            </div>
+
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Us Submenu">
                     <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
                         INTRODUCE US
                     </a>
                 </div>
             </div>
 
-            <!-- Client Access Button -->
-            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
-                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+            <!-- Client Access (Golden Button with User Dropdown) -->
+            <div class="nav-dropdown-wrapper client-access-wrapper" id="client-access-dropdown">
+                <a href="client-access.html" class="btn-client-access nav-dropdown-trigger" id="client-access-trigger">
+                    <i class="fas fa-lock"></i>
                     <span>CLIENT ACCESS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
                 </a>
+                <div class="nav-dropdown-menu login-dropdown-panel" id="login-panel" role="menu"
+                    aria-label="Client Login Submenu">
+                    <div class="login-panel-inner">
+                        <div class="login-input-group">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" placeholder="ENTER YOUR USERNAME" class="login-input"
+                                id="header-username">
+                        </div>
+                        <div class="login-input-group">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" placeholder="••••••••••" class="login-input" id="header-password">
+                        </div>
+                        <button type="button" class="btn-login-submit">LOGIN</button>
+                        <div class="login-remember">
+                            <label class="remember-label">
+                                <input type="checkbox" id="header-remember"> Remember Me
+                            </label>
+                        </div>
+                        <div class="login-links">
+                            <a href="https://clientaccess.rjf.com/Support/Password" target="_blank"
+                                rel="noopener noreferrer">Forgot your password?</a>
+                            <a href="https://clientaccess.rjf.com/Enroll/ClientEnrollment" target="_blank"
+                                rel="noopener noreferrer">Enroll</a>
+                            <a href="https://clientaccess.rjf.com/Support/LoginHelp" target="_blank"
+                                rel="noopener noreferrer">Need Help?</a>
+                            <a href="https://clientaccess.rjf.com/FAQ" target="_blank"
+                                rel="noopener noreferrer">Contact Us / FAQ</a>
+                            <a href="https://www.raymondjames.com/privacy_security/index.htm" target="_blank"
+                                rel="noopener noreferrer">Privacy / Security</a>
+                            <a href="https://www.raymondjames.com/personal_investing/client_resources.htm"
+                                target="_blank" rel="noopener noreferrer">Client Resources</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
 
         <!-- Mobile Hamburger Button -->
-        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
-            aria-label="Toggle navigation menu">
+        <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Open mobile menu"
+            onclick="toggleMobileMenu(event)">
             <span></span>
             <span></span>
             <span></span>
@@ -171,37 +210,49 @@
         <article class="calc-white-container">
 
             <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/calculator-hero.jpg" alt="Asset Allocation Analysis" style="width: 100%; height: 260px; object-fit: cover; object-position: center 25%; display: block;">
+            <div class="calc-hero-banner-wrap">
+                <img src="assets/resources/managing-cash-hero.jpg?v=2" alt="Managing Cash, the Lifeblood of Your Business" class="calc-hero-banner-img">
             </div>
 
             <!-- Title & Meta Header -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">ASSET ALLOCATION CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <div class="calc-meta-left">
+                        <a href="resources.html" class="calc-meta-category">Savings &amp; Investments</a>
+                        <span class="calc-meta-divider">//</span>
+                        <a href="resources.html" class="calc-cat-link">Calculator</a>
+                    </div>
+                    <div class="calc-share-wrapper" id="calc-share-wrap">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fa fa-share-alt"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown">
+                            <a href="javascript:void(0)" onclick="shareSocial('facebook', event)" class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareSocial('twitter', event)" class="calc-share-item" title="Share on Twitter"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareSocial('linkedin', event)" class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareSocial('email', event)" class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Asset allocation is designed to help you create a balanced portfolio of investments. Your age, ability to tolerate risk, and several other factors are used to calculate a desirable mix of stocks, bonds, and cash. This tool could serve as a model and a good place to start your analysis in building a beneficial portfolio! Click on the "View Report" button for a detailed look at your results.
+                    Asset allocation is designed to help you create a balanced portfolio of investments. Your age, ability to tolerate risk and several other factors are used to calculate a desirable mix of stocks, bonds and cash. The calculated asset allocation is a great place to start your analysis in building a balanced portfolio. Click on the &quot;View Report&quot; button for a detailed look at your results.
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Action Box -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
-                        <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculate()">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
-                    <div class="calc-action-subtitle" id="sticky-subtitle">Suggested Mix: 75% Stocks, 20% Bonds, 5% Cash</div>
+                    <div class="calc-action-subtitle" id="sticky-subtitle">Asset Allocator</div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" id="btn-menu-report" title="View Full Report">
+                        <button type="button" class="calc-icon-btn" id="btn-menu-report" onclick="openReportModal()" title="View Full Report">
                             <i class="fas fa-bars"></i>
                         </button>
                         <span class="calc-req-text">*indicates required</span>
@@ -222,18 +273,17 @@
                     <!-- Age -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-age" class="calc-field-label">Age:</label>
-                            <span class="calc-q-dot" title="Your current age. Crucial for retirement time horizon.">?</span>
+                            <label for="inp-age" class="calc-field-label">Age:*</label>
+                            <span class="calc-q-dot" title="Your current age. This is by far the most important aspect of asset allocation.">?</span>
                         </div>
-                        <input type="text" id="inp-age" class="calc-text-input" value="35">
+                        <input type="text" id="inp-age" class="calc-text-input" value="45">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-age" class="calc-range-slider" min="18" max="85" step="1" value="35">
+                            <input type="range" id="range-age" class="calc-range-slider" min="20" max="90" step="1" value="45">
                             <div class="calc-tick-labels">
-                                <span>18</span>
-                                <span>35</span>
-                                <span>50</span>
-                                <span>65</span>
-                                <span>85</span>
+                                <span>20</span>
+                                <span>43</span>
+                                <span>67</span>
+                                <span>90</span>
                             </div>
                         </div>
                     </div>
@@ -241,18 +291,17 @@
                     <!-- Current assets -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-assets" class="calc-field-label">Current assets:</label>
+                            <label for="inp-assets" class="calc-field-label">Current assets:*</label>
                             <span class="calc-q-dot" title="Total current value of your investment portfolio.">?</span>
                         </div>
-                        <input type="text" id="inp-assets" class="calc-text-input" value="$100,000.00">
+                        <input type="text" id="inp-assets" class="calc-text-input" value="$100,000">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-assets" class="calc-range-slider" min="5000" max="1000000" step="5000" value="100000">
+                            <input type="range" id="range-assets" class="calc-range-slider" min="0" max="500000" step="5000" value="100000">
                             <div class="calc-tick-labels">
-                                <span>$5,000</span>
-                                <span>$250,000</span>
-                                <span>$500,000</span>
-                                <span>$750,000</span>
-                                <span>$1,000,000</span>
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$50k</span>
+                                <span>$500k</span>
                             </div>
                         </div>
                     </div>
@@ -260,18 +309,17 @@
                     <!-- Savings per year -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-savings" class="calc-field-label">Savings per year:</label>
+                            <label for="inp-savings" class="calc-field-label">Savings per year:*</label>
                             <span class="calc-q-dot" title="Amount added to your investments annually.">?</span>
                         </div>
-                        <input type="text" id="inp-savings" class="calc-text-input" value="$6,000.00">
+                        <input type="text" id="inp-savings" class="calc-text-input" value="$5,000">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-savings" class="calc-range-slider" min="0" max="100000" step="500" value="6000">
+                            <input type="range" id="range-savings" class="calc-range-slider" min="0" max="20000" step="500" value="5000">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$25,000</span>
-                                <span>$50,000</span>
-                                <span>$75,000</span>
-                                <span>$100,000</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$20k</span>
                             </div>
                         </div>
                     </div>
@@ -279,18 +327,22 @@
                     <!-- Marginal tax rate -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-tax" class="calc-field-label">Marginal tax rate:</label>
-                            <span class="calc-q-dot" title="Expected federal and state tax rate.">?</span>
+                            <label for="sel-tax" class="calc-field-label">Marginal tax rate:*</label>
+                            <span class="calc-q-dot" title="The tax rate you expect to pay on your investments.">?</span>
                         </div>
-                        <input type="text" id="inp-tax" class="calc-text-input" value="25.00%">
+                        <select id="sel-tax" class="calc-select-input">
+                            <option value="0">&lt;15%</option>
+                            <option value="1">25%</option>
+                            <option value="2" selected>28%</option>
+                            <option value="3">33%&gt;</option>
+                        </select>
                         <div class="calc-slider-col">
-                            <input type="range" id="range-tax" class="calc-range-slider" min="0" max="50" step="1" value="25">
+                            <input type="range" id="range-tax" class="calc-range-slider" min="0" max="3" step="1" value="2">
                             <div class="calc-tick-labels">
-                                <span>0%</span>
-                                <span>15%</span>
+                                <span>&lt;15%</span>
                                 <span>25%</span>
-                                <span>35%</span>
-                                <span>50%</span>
+                                <span>28%</span>
+                                <span>33%&gt;</span>
                             </div>
                         </div>
                     </div>
@@ -298,16 +350,16 @@
                     <!-- Income required -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-income" class="calc-field-label">Income required?</label>
-                            <span class="calc-q-dot" title="Percentage of income you need from your portfolio.">?</span>
+                            <label for="inp-income" class="calc-field-label">Income required:*</label>
+                            <span class="calc-q-dot" title="Percentage of income you need from your investments.">?</span>
                         </div>
-                        <input type="text" id="inp-income" class="calc-text-input" value="None" readonly style="background: #07101c; color: #dfa01e; border-color: rgba(223, 160, 30, 0.6);">
+                        <input type="text" id="inp-income" class="calc-text-input" value="0%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-income" class="calc-range-slider" min="0" max="2" step="1" value="0">
+                            <input type="range" id="range-income" class="calc-range-slider" min="0" max="4" step="0.5" value="0">
                             <div class="calc-tick-labels">
-                                <span>None</span>
-                                <span>Some</span>
-                                <span>All</span>
+                                <span>0%</span>
+                                <span>2%</span>
+                                <span>4%</span>
                             </div>
                         </div>
                     </div>
@@ -315,33 +367,16 @@
                     <!-- Risk tolerance -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-risk" class="calc-field-label">Risk tolerance:</label>
-                            <span class="calc-q-dot" title="Scale of 1 (Conservative) to 10 (Aggressive).">?</span>
+                            <label for="inp-risk" class="calc-field-label">Risk tolerance:*</label>
+                            <span class="calc-q-dot" title="Personal ability to tolerate portfolio value fluctuations on a scale of 0 to 10.">?</span>
                         </div>
                         <input type="text" id="inp-risk" class="calc-text-input" value="5">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-risk" class="calc-range-slider" min="1" max="10" step="1" value="5">
+                            <input type="range" id="range-risk" class="calc-range-slider" min="0" max="10" step="1" value="5">
                             <div class="calc-tick-labels">
-                                <span>1 (Conservative)</span>
-                                <span>5 (Moderate)</span>
-                                <span>10 (Aggressive)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Financial Outlook -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-outlook" class="calc-field-label">Financial Outlook:</label>
-                            <span class="calc-q-dot" title="Expectation for economic health and growth on a scale of 1 to 10.">?</span>
-                        </div>
-                        <input type="text" id="inp-outlook" class="calc-text-input" value="5">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-outlook" class="calc-range-slider" min="1" max="10" step="1" value="5">
-                            <div class="calc-tick-labels">
-                                <span>1 (Poor)</span>
-                                <span>5 (Average)</span>
-                                <span>10 (Excellent)</span>
+                                <span>Conservative</span>
+                                <span>Balanced</span>
+                                <span>Aggressive</span>
                             </div>
                         </div>
                     </div>
@@ -359,81 +394,48 @@
                 </div>
                 <div class="calc-sec-body">
 
-                    <div class="calc-chart-box" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 25px 20px;">
+                    <div class="calc-chart-box">
                         <div class="calc-tip-box" id="chart-tip"></div>
 
                         <!-- Pie Chart & Legend Container -->
-                        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 40px; width: 100%; max-width: 680px;">
+                        <div class="calc-chart-container">
                             
                             <!-- SVG Pie Chart -->
-                            <div style="position: relative; width: 280px; height: 280px;">
-                                <svg id="pie-chart-svg" width="280" height="280" viewBox="-140 -140 280 280" style="display: block; overflow: visible;">
-                                    <!-- Injected dynamically via JS -->
+                            <div class="calc-pie-wrap">
+                                <svg id="pie-chart-svg" class="calc-pie-svg" viewBox="-140 -140 280 280">
+                                    <!-- Slices dynamically rendered via JS -->
                                 </svg>
                             </div>
 
                             <!-- Legend List -->
-                            <div style="display: flex; flex-direction: column; gap: 14px; min-width: 200px;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: 'Montserrat', sans-serif;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <span style="width: 15px; height: 15px; border-radius: 50%; background: #2563eb; display: inline-block; box-shadow: 0 0 8px rgba(37,99,235,0.6);"></span>
-                                        <span style="font-weight: 700; color: #ffffff; font-size: 14px;">Stocks</span>
+                            <div class="calc-chart-legend">
+                                <div class="calc-legend-row">
+                                    <div class="calc-legend-left">
+                                        <span class="calc-legend-dot" style="background: #0026e6; box-shadow: 0 0 8px rgba(0,38,230,0.6);"></span>
+                                        <span class="calc-legend-label">Stocks</span>
                                     </div>
-                                    <span id="leg-stocks" style="font-weight: 800; color: #2563eb; font-size: 15px;">75%</span>
+                                    <span class="calc-legend-pct" id="leg-stocks" style="color: #3b82f6;">65%</span>
                                 </div>
 
-                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: 'Montserrat', sans-serif;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <span style="width: 15px; height: 15px; border-radius: 50%; background: #d89e1b; display: inline-block; box-shadow: 0 0 8px rgba(216,158,27,0.6);"></span>
-                                        <span style="font-weight: 700; color: #ffffff; font-size: 14px;">Bonds</span>
+                                <div class="calc-legend-row">
+                                    <div class="calc-legend-left">
+                                        <span class="calc-legend-dot" style="background: #43a047; box-shadow: 0 0 8px rgba(67,160,71,0.6);"></span>
+                                        <span class="calc-legend-label">Bonds</span>
                                     </div>
-                                    <span id="leg-bonds" style="font-weight: 800; color: #dfa01e; font-size: 15px;">20%</span>
+                                    <span class="calc-legend-pct" id="leg-bonds" style="color: #4ade80;">15%</span>
                                 </div>
 
-                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: 'Montserrat', sans-serif;">
-                                    <div style="display: flex; align-items: center; gap: 10px;">
-                                        <span style="width: 15px; height: 15px; border-radius: 50%; background: #38bdf8; display: inline-block; box-shadow: 0 0 8px rgba(56,189,248,0.6);"></span>
-                                        <span style="font-weight: 700; color: #ffffff; font-size: 14px;">Cash</span>
+                                <div class="calc-legend-row">
+                                    <div class="calc-legend-left">
+                                        <span class="calc-legend-dot" style="background: #0284c7; box-shadow: 0 0 8px rgba(2,132,199,0.6);"></span>
+                                        <span class="calc-legend-label">Cash</span>
                                     </div>
-                                    <span id="leg-cash" style="font-weight: 800; color: #38bdf8; font-size: 15px;">5%</span>
+                                    <span class="calc-legend-pct" id="leg-cash" style="color: #38bdf8;">20%</span>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-
-                    <!-- Allocation Dollar Breakdown Table -->
-                    <table class="calc-breakdown-table" style="margin-top: 24px;">
-                        <thead>
-                            <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                                <th style="padding: 10px 14px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223,160,30,0.3);">Asset Class</th>
-                                <th style="padding: 10px 14px; text-align: center; color: #dfa01e; border-bottom: 1px solid rgba(223,160,30,0.3);">Target %</th>
-                                <th style="padding: 10px 14px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223,160,30,0.3);">Target Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong style="color: #ffffff;">Equities (Stocks):</strong> Large, Mid, Small Cap &amp; International</td>
-                                <td style="text-align: center; font-weight: 700; color: #2563eb;" id="tbl-stocks-pct">75.0%</td>
-                                <td style="text-align: right; font-weight: 700; color: #ffffff;" id="tbl-stocks-amt">$75,000.00</td>
-                            </tr>
-                            <tr>
-                                <td><strong style="color: #ffffff;">Fixed Income (Bonds):</strong> Government, Corporate &amp; Municipal</td>
-                                <td style="text-align: center; font-weight: 700; color: #dfa01e;" id="tbl-bonds-pct">20.0%</td>
-                                <td style="text-align: right; font-weight: 700; color: #ffffff;" id="tbl-bonds-amt">$20,000.00</td>
-                            </tr>
-                            <tr>
-                                <td><strong style="color: #ffffff;">Cash &amp; Equivalents:</strong> Money Market, Treasury Bills &amp; CDs</td>
-                                <td style="text-align: center; font-weight: 700; color: #38bdf8;" id="tbl-cash-pct">5.0%</td>
-                                <td style="text-align: right; font-weight: 700; color: #ffffff;" id="tbl-cash-amt">$5,000.00</td>
-                            </tr>
-                            <tr class="calc-breakdown-total">
-                                <td><strong>Total Portfolio Portfolio:</strong></td>
-                                <td style="text-align: center;">100.0%</td>
-                                <td style="text-align: right;" id="tbl-total-amt">$100,000.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </div>
             </section>
@@ -447,21 +449,21 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">CURRENT AGE</h4>
                     <p class="calc-term-desc">
-                        Your current age. This is by far the most important aspect of asset allocation. For most people, the majority of their portfolio is for their retirement. The younger you are, the less likely you need the money any time soon. This allows you to invest more aggressively to receive what generally have been better long-term returns. As you get older, it is advisable to move more of your investments to securities with less fluctuation such as fixed income/bonds. This can help ensure that money is available when you need it.
+                        Your current age. This is by far the most important aspect of asset allocation. For most people the majority of their portfolio is for their retirement. The younger you are, the less likely you need this money any time soon. This allows you to invest more aggressively in stocks that generally have the best long-term returns. As you get older, it is advisable to move more of your investments to securities with less fluctuation such as cash and bonds. This can help ensure the money is available when you need it.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">CURRENT ASSETS</h4>
                     <p class="calc-term-desc">
-                        This is the total value of your investment portfolio. For asset allocation purposes, you should include the majority of your portfolio. Certain exclusions include securities that must be kept in cash or cash equivalents such as in a market downturn. This allows people with large portfolios to invest with more aggressiveness.
+                        This is the total value of your investment portfolio. Our asset allocator increases your stock exposure as your portfolio increases. Generally speaking, larger portfolios are less likely to leave individuals cash poor in a market downturn. This allows people with large portfolios to invest a bit more aggressively.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">SAVINGS PER YEAR</h4>
                     <p class="calc-term-desc">
-                        This is the amount you will be adding to your investments each year. Like current assets, the more you invest the more aggressive your investments should be.
+                        This is the amount you will be adding to your investments each year. Like portfolio size, the more you invest the more aggressive your investments should be.
                     </p>
                 </div>
 
@@ -482,14 +484,14 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">RISK TOLERANCE</h4>
                     <p class="calc-term-desc">
-                        On a scale of 1 to 10, your personal ability to tolerate your portfolio value fluctuating up and down. Many people overestimate their ability to tolerate risk. Unless you can handle a 20% decline in your portfolio during a broad market correction, you may wish to lower your risk tolerance to below the mid-point.
+                        On a scale of 1 to 10, your personal ability to tolerate your portfolio value fluctuating up and down. Many people overestimate their ability to tolerate risk. Unless you can handle a 20% decline in your portfolio during a stock market correction, you may wish to keep your risk tolerance at or below the mid-point.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">FINANCIAL OUTLOOK</h4>
+                    <h4 class="calc-term-title">ECONOMIC OUTLOOK</h4>
                     <p class="calc-term-desc">
-                        On a scale of 1 to 10, your expectations for economic growth and the overall health of the economy. The better your outlook, the more aggressive you can be with your investments.
+                        On a scale of 1 to 10, is your view of future economic growth and the overall health of the economy. The better your outlook, the more aggressive you can be with your investments.
                     </p>
                 </div>
 
@@ -497,7 +499,7 @@
                 <div class="calc-disclaimer-strip">
                     <hr class="calc-divider">
                     <p class="calc-disclaimer-text">
-                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                     </p>
                 </div>
 
@@ -511,25 +513,70 @@
         <div class="calc-modal-content">
             <div class="calc-modal-head">
                 <h3>Asset Allocation Strategy Report</h3>
-                <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
+                <button type="button" class="calc-modal-close" onclick="closeReportModal()">&times;</button>
             </div>
             <div class="calc-modal-body">
-                <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
-                <table class="calc-breakdown-table" style="font-size: 13px;">
+                <div style="margin-bottom: 20px; font-size: 14px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
+                
+                <!-- Profile Table -->
+                <h4 style="color: #dfa01e; font-size: 15px; margin: 0 0 10px; font-family: 'Montserrat', sans-serif;">Your Profile</h4>
+                <table class="calc-breakdown-table" style="margin-bottom: 24px;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 50%; font-weight: 600; color: #ffffff;">Age</td>
+                            <td id="rep-age">45</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Current assets</td>
+                            <td id="rep-assets">$100,000</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Savings per year</td>
+                            <td id="rep-savings">$5,000</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Income required</td>
+                            <td id="rep-income">0%</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Marginal tax rate</td>
+                            <td id="rep-tax">28%</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Risk tolerance</td>
+                            <td id="rep-risk">Balanced (5 on a scale of 0 to 10)</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Economic outlook</td>
+                            <td id="rep-outlook">Moderate (5 on a scale of 0 to 10)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Suggested Allocation Table -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h4 style="color: #dfa01e; font-size: 15px; margin: 0; font-family: 'Montserrat', sans-serif;">Suggested Asset Allocation</h4>
+                    <button type="button" id="btn-toggle-detail" onclick="toggleDetailedView()" class="calc-btn" style="padding: 5px 12px; font-size: 11px;">
+                        Show Detailed Categories
+                    </button>
+                </div>
+
+                <table class="calc-breakdown-table" id="modal-alloc-table">
                     <thead>
-                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Category</th>
-                            <th style="padding: 10px 10px; text-align: center; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Target %</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Amount</th>
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Typical Holdings</th>
+                        <tr>
+                            <th style="text-align: left;">Category</th>
+                            <th style="text-align: center;">Target %</th>
+                            <th style="text-align: right;">Amount</th>
                         </tr>
                     </thead>
-                    <tbody id="modal-table-rows"></tbody>
+                    <tbody id="modal-table-rows">
+                        <!-- Populated by JS -->
+                    </tbody>
                 </table>
             </div>
             <div class="calc-modal-foot">
                 <button type="button" class="calc-btn" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
-                <button type="button" class="calc-btn" id="modal-btn-done" style="background: #dfa01e; color: #080a0f; font-weight: 700;">Close</button>
+                <button type="button" class="calc-btn" onclick="closeReportModal()" style="background: #dfa01e; color: #080a0f; font-weight: 700;">Close</button>
             </div>
         </div>
     </div>
@@ -539,19 +586,21 @@
      ============================================================ -->
     <section class="champion-strip">
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
         </div>
         <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+            <a href="contact.html" class="champ-link">CONNECT WITH US</a>
         </div>
     </section>
 
@@ -561,48 +610,28 @@
     <footer class="site-footer">
         <div class="footer-addresses">
             <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F: 215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite 1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
                 <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong> <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
                 <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
             </div>
         </div>
-
         <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is not responsible for the content of any website or the collection or use of information regarding any website's users and/or members.</p>
+            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures" target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank" rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Use</a></p>
         </div>
     </footer>
 
     <!-- Interactive Script -->
     <script>
+        // Utilities
         const fmtCurr = (num) => '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const fmtCurrWhole = (num) => '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
         const parseNum = (val) => parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
@@ -631,6 +660,49 @@
             }
         }
 
+        // Share dropdown toggle & handlers
+        function toggleShareDropdown(e) {
+            if (e) e.stopPropagation();
+            const wrap = document.getElementById('calc-share-wrap');
+            wrap?.classList.toggle('open');
+        }
+
+        document.addEventListener('click', function(e) {
+            const wrap = document.getElementById('calc-share-wrap');
+            if (wrap && !wrap.contains(e.target)) {
+                wrap.classList.remove('open');
+            }
+        });
+
+        function shareSocial(network, e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Asset Allocation Calculator | The Seiler Group of Raymond James");
+            let shareUrl = "";
+            switch (network) {
+                case "facebook":
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case "twitter":
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case "linkedin":
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case "email":
+                    shareUrl = `mailto:?subject=${title}&body=Check%20out%20this%20asset%20allocation%20calculator:%20${url}`;
+                    break;
+            }
+            if (shareUrl) {
+                if (network === 'email') {
+                    window.location.href = shareUrl;
+                } else {
+                    window.open(shareUrl, '_blank', 'width=600,height=480,toolbar=0,location=0,menubar=0');
+                }
+            }
+            document.getElementById('calc-share-wrap')?.classList.remove('open');
+        }
+
         // Form elements
         const inpAge = document.getElementById('inp-age');
         const rangeAge = document.getElementById('range-age');
@@ -641,7 +713,7 @@
         const inpSavings = document.getElementById('inp-savings');
         const rangeSavings = document.getElementById('range-savings');
 
-        const inpTax = document.getElementById('inp-tax');
+        const selTax = document.getElementById('sel-tax');
         const rangeTax = document.getElementById('range-tax');
 
         const inpIncome = document.getElementById('inp-income');
@@ -650,232 +722,400 @@
         const inpRisk = document.getElementById('inp-risk');
         const rangeRisk = document.getElementById('range-risk');
 
-        const inpOutlook = document.getElementById('inp-outlook');
-        const rangeOutlook = document.getElementById('range-outlook');
+        const taxLabels = ['<15%', '25%', '28%', '33%>'];
+        const riskDescriptions = ['Conservative', 'Conservative', 'Moderately Conservative', 'Moderately Conservative', 'Balanced', 'Balanced', 'Moderately Aggressive', 'Moderately Aggressive', 'Aggressive', 'Aggressive', 'Aggressive'];
 
-        const incomeMap = ['None', 'Some', 'All'];
+        // Synchronize inputs & sliders
+        rangeAge.addEventListener('input', () => {
+            inpAge.value = rangeAge.value;
+            calculate();
+        });
+        inpAge.addEventListener('change', () => {
+            let v = Math.max(20, Math.min(90, Math.round(parseNum(inpAge.value))));
+            inpAge.value = v;
+            rangeAge.value = v;
+            calculate();
+        });
 
-        function bindCtl(inp, range, type) {
-            range.addEventListener('input', () => {
-                const v = parseFloat(range.value);
-                if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
-                else if (type === 'income') inp.value = incomeMap[v] || 'None';
-                else inp.value = v;
-                calculate();
-            });
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (type === 'income') {
-                    const idx = incomeMap.findIndex(m => m.toLowerCase() === String(inp.value).trim().toLowerCase());
-                    v = (idx !== -1) ? idx : 0;
-                }
-                range.value = v;
-                if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
-                else if (type === 'income') inp.value = incomeMap[v] || 'None';
-                else inp.value = v;
-                calculate();
-            });
-        }
+        rangeAssets.addEventListener('input', () => {
+            inpAssets.value = fmtCurrWhole(rangeAssets.value);
+            calculate();
+        });
+        inpAssets.addEventListener('change', () => {
+            let v = Math.max(0, Math.min(5000000, parseNum(inpAssets.value)));
+            inpAssets.value = fmtCurrWhole(v);
+            rangeAssets.value = Math.min(500000, v);
+            calculate();
+        });
 
-        bindCtl(inpAge, rangeAge, 'num');
-        bindCtl(inpAssets, rangeAssets, 'curr');
-        bindCtl(inpSavings, rangeSavings, 'curr');
-        bindCtl(inpTax, rangeTax, 'pct');
-        bindCtl(inpIncome, rangeIncome, 'income');
-        bindCtl(inpRisk, rangeRisk, 'num');
-        bindCtl(inpOutlook, rangeOutlook, 'num');
+        rangeSavings.addEventListener('input', () => {
+            inpSavings.value = fmtCurrWhole(rangeSavings.value);
+            calculate();
+        });
+        inpSavings.addEventListener('change', () => {
+            let v = Math.max(0, Math.min(1000000, parseNum(inpSavings.value)));
+            inpSavings.value = fmtCurrWhole(v);
+            rangeSavings.value = Math.min(20000, v);
+            calculate();
+        });
 
-        let allocationData = {};
+        selTax.addEventListener('change', () => {
+            rangeTax.value = selTax.value;
+            calculate();
+        });
+        rangeTax.addEventListener('input', () => {
+            selTax.value = rangeTax.value;
+            calculate();
+        });
+
+        rangeIncome.addEventListener('input', () => {
+            inpIncome.value = `${rangeIncome.value}%`;
+            calculate();
+        });
+        inpIncome.addEventListener('change', () => {
+            let v = Math.max(0, Math.min(4, parseNum(inpIncome.value)));
+            inpIncome.value = `${v}%`;
+            rangeIncome.value = v;
+            calculate();
+        });
+
+        rangeRisk.addEventListener('input', () => {
+            inpRisk.value = rangeRisk.value;
+            calculate();
+        });
+        inpRisk.addEventListener('change', () => {
+            let v = Math.max(0, Math.min(10, Math.round(parseNum(inpRisk.value))));
+            inpRisk.value = v;
+            rangeRisk.value = v;
+            calculate();
+        });
+
+        // Exact KJE Dinkytown Asset Allocator Engine
+        let currentResults = {};
+        let isDetailedModal = false;
 
         function calculate() {
-            const age = parseNum(rangeAge.value);
-            const assets = parseNum(rangeAssets.value);
-            const savings = parseNum(rangeSavings.value);
-            const incomeIdx = parseInt(rangeIncome.value, 10); // 0=None, 1=Some, 2=All
-            const risk = parseNum(rangeRisk.value); // 1-10
-            const outlook = parseNum(rangeOutlook.value); // 1-10
+            const age = parseNum(inpAge.value) || 45;
+            const portfolio = parseNum(inpAssets.value) || 100000;
+            const savings = parseNum(inpSavings.value) || 5000;
+            const taxBracket = parseInt(selTax.value, 10) || 2;
+            const incomeNeeded = parseNum(inpIncome.value) || 0;
+            const volatility = parseNum(inpRisk.value) || 5;
+            const outlook = 5; // Default Raymond James economic outlook
 
-            // Baseline Raymond James / CalcXML algorithm:
-            // Base equity allocation at age 35 with default risk (5) is 75%
-            let stockPct = 110 - age; // Age 35 -> 75%
-
-            // Risk adjustment (-12% to +15%)
-            stockPct += (risk - 5) * 3;
-
-            // Financial Outlook adjustment (-8% to +10%)
-            stockPct += (outlook - 5) * 1.5;
-
-            // Income required deduction
-            if (incomeIdx === 1) stockPct -= 15; // Some income
-            else if (incomeIdx === 2) stockPct -= 30; // All income
-
-            // Clamp stocks between 20% and 90%
-            stockPct = Math.max(20, Math.min(90, Math.round(stockPct)));
-
-            // Cash minimum 5%, increases if income needed or high conservative
-            let cashPct = 5;
-            if (incomeIdx === 1) cashPct = 10;
-            else if (incomeIdx === 2) cashPct = 20;
-            if (risk <= 2) cashPct += 5;
-
-            // Bonds is remainder
-            let bondPct = 100 - stockPct - cashPct;
-            if (bondPct < 5) {
-                bondPct = 5;
-                stockPct = 100 - bondPct - cashPct;
+            const PORTFOLIO_MIN = 0, PORTFOLIO_MAX = 500000;
+            const SAVINGS_MIN = 0, SAVINGS_MAX = 20000;
+            const aMin = [20,0,0,0,0,0,0,0,0,0];
+            const aMax = [90,100,100,100,100,2,100,100,10,1];
+            
+            function getPortfolioSliderValue(a) {
+                if (a >= PORTFOLIO_MAX) return 100;
+                if (a <= PORTFOLIO_MIN) return 0;
+                return ((a - PORTFOLIO_MIN) / (PORTFOLIO_MAX - PORTFOLIO_MIN)) * 100;
+            }
+            function getSavingsSliderValue(a) {
+                if (a >= SAVINGS_MAX) return 100;
+                if (a <= SAVINGS_MIN) return 0;
+                return ((a - SAVINGS_MIN) / (SAVINGS_MAX - SAVINGS_MIN)) * 100;
+            }
+            function getTaxBracketFactor(a) {
+                a = a / 1.5;
+                if (a < 0.5) return 0;
+                if (a < 1.15) return 0.66;
+                if (a < 1.7) return 1.33;
+                return 2;
             }
 
-            const stockAmt = (stockPct / 100) * assets;
-            const bondAmt = (bondPct / 100) * assets;
-            const cashAmt = (cashPct / 100) * assets;
+            const u = age;
+            const z = volatility * 10;
+            const q = outlook * 10;
+            const t = 2; // social responsibility
+            const r = portfolio;
+            const o = savings;
+            const j = 0; // spending needs
+            const N = incomeNeeded * 25;
+            const e = getTaxBracketFactor(taxBracket);
+            const v = getPortfolioSliderValue(r);
+            const m = getSavingsSliderValue(o);
 
-            allocationData = {
-                stocks: stockPct,
-                bonds: bondPct,
-                cash: cashPct,
-                stockAmt: stockAmt,
-                bondAmt: bondAmt,
-                cashAmt: cashAmt,
-                totalAmt: assets
+            const value = [u, v, m, j, N, e, z, q, t];
+
+            function rangefinder(idx, h, g, f) {
+                const d = aMin[idx];
+                const c = aMax[idx];
+                const a = (d + c) / 2;
+                const b = value[idx];
+                if (b < a) {
+                    return h + (g - h) * (b - d) / (a - d);
+                } else {
+                    return g + (f - g) * (b - a) / (c - a);
+                }
+            }
+            function transpose(g, f, e, d, c, b, a) {
+                if (g < e) {
+                    return c + (b - c) * (g - f) / (e - f);
+                } else {
+                    return b + (a - b) * (g - e) / (d - e);
+                }
+            }
+
+            let G = value[0];
+            let F = 0;
+            F += G;
+            F += rangefinder(1, 3, -1, -3);
+            F += rangefinder(2, 2, -1, -2);
+            F += rangefinder(3, -3, 4, 10);
+            F += rangefinder(5, 0, -2, -4);
+            F += rangefinder(6, 2, -1, -5);
+            F += rangefinder(7, 2, -5, -8);
+
+            let L = 0;
+            L += rangefinder(1, 0, 15, 20);
+            L += rangefinder(4, 10, 15, 25);
+            L += rangefinder(6, 5, 15, 20);
+            L += rangefinder(7, 20, 10, 0);
+            L = F * L / 100;
+            let M = F - L;
+            let C = 100 - F;
+
+            let I = Math.max(0, 70 - G);
+            I += rangefinder(1, 0, 4, 6);
+            I += rangefinder(2, 0, 2, 8);
+            I += rangefinder(3, 15, 5, 0);
+            I += rangefinder(4, 10, 4, 0);
+            I += rangefinder(5, 0, 5, 10);
+            I += rangefinder(6, 0, 5, 14);
+            I += rangefinder(7, 0, 7, 10);
+            let B = transpose(L, 15, 25, 35, -6, 6, 12);
+            I += B;
+            I = C * I / 200;
+
+            let H = Math.min(100 - G, 40);
+            H += rangefinder(1, 0, 4, 10);
+            H += rangefinder(2, 0, 2, 6);
+            H += rangefinder(3, 10, 4, 0);
+            H += rangefinder(6, 0, 3, 6);
+            H += rangefinder(7, 10, 0, -10);
+            B = transpose(L, 15, 25, 35, 0, 10, 20);
+            H += B;
+            if (H < 0) H = 0;
+            H = H * C / 200;
+
+            let J = C - I - H;
+            let CASH = M;
+            let FIXED_INCOME = L;
+            let LARGE_CAP = J;
+            let SMALL_CAP = I;
+            let FOREIGN_STOCK = H;
+
+            if (CASH > 1) {
+                CASH -= 1;
+                LARGE_CAP += 1;
+            }
+
+            const MAX_FOREIGN = 25;
+            if (MAX_FOREIGN < 33) {
+                const s = MAX_FOREIGN / 33;
+                const a = LARGE_CAP / (LARGE_CAP + SMALL_CAP);
+                const P = FOREIGN_STOCK * s;
+                LARGE_CAP = a * (FOREIGN_STOCK - P) + LARGE_CAP;
+                SMALL_CAP = (1 - a) * (FOREIGN_STOCK - P) + SMALL_CAP;
+                FOREIGN_STOCK = FOREIGN_STOCK - a * (FOREIGN_STOCK - P) - (1 - a) * (FOREIGN_STOCK - P);
+            }
+
+            let A = ((e / 5) + 0.05);
+            if (e < 0.8) A = 0;
+            let MUNI_INCOME = FIXED_INCOME * A;
+            let BOND_INCOME = FIXED_INCOME * (1 - A);
+            let MID_CAP = LARGE_CAP * 0.15 + SMALL_CAP * 0.5;
+            LARGE_CAP = LARGE_CAP * 0.85;
+            SMALL_CAP = SMALL_CAP * 0.5;
+
+            const detailedPcts = [
+                Math.round(LARGE_CAP < 0 ? 0 : LARGE_CAP),
+                Math.round(MID_CAP < 0 ? 0 : MID_CAP),
+                Math.round(SMALL_CAP < 0 ? 0 : SMALL_CAP),
+                Math.round(FOREIGN_STOCK < 0 ? 0 : FOREIGN_STOCK),
+                Math.round(BOND_INCOME < 0 ? 0 : BOND_INCOME),
+                Math.round(MUNI_INCOME < 0 ? 0 : MUNI_INCOME),
+                Math.round(CASH < 0 ? 0 : CASH)
+            ];
+
+            let Q = 0, h = 0;
+            for (let w = 0; w < detailedPcts.length; w++) {
+                Q += detailedPcts[w];
+                if (detailedPcts[h] < detailedPcts[w]) h = w;
+            }
+            if (Q !== 100) detailedPcts[h] -= (Q - 100);
+
+            const stockPct = detailedPcts[0] + detailedPcts[1] + detailedPcts[2] + detailedPcts[3];
+            const bondPct = detailedPcts[4] + detailedPcts[5];
+            const cashPct = detailedPcts[6];
+
+            const stockAmt = (stockPct / 100) * portfolio;
+            const bondAmt = (bondPct / 100) * portfolio;
+            const cashAmt = (cashPct / 100) * portfolio;
+
+            currentResults = {
+                age, portfolio, savings, taxBracket, incomeNeeded, volatility, outlook,
+                stockPct, bondPct, cashPct,
+                stockAmt, bondAmt, cashAmt,
+                detailed: [
+                    { name: "Large cap stock", pct: detailedPcts[0], amt: (detailedPcts[0] / 100) * portfolio },
+                    { name: "Mid cap stock", pct: detailedPcts[1], amt: (detailedPcts[1] / 100) * portfolio },
+                    { name: "Small cap stock", pct: detailedPcts[2], amt: (detailedPcts[2] / 100) * portfolio },
+                    { name: "Foreign stock", pct: detailedPcts[3], amt: (detailedPcts[3] / 100) * portfolio },
+                    { name: "Bonds", pct: detailedPcts[4], amt: (detailedPcts[4] / 100) * portfolio },
+                    { name: "Municipal bonds", pct: detailedPcts[5], amt: (detailedPcts[5] / 100) * portfolio },
+                    { name: "Cash", pct: detailedPcts[6], amt: (detailedPcts[6] / 100) * portfolio }
+                ]
             };
 
-            // Update UI
-            document.getElementById('sticky-subtitle').textContent = `Suggested Mix: ${stockPct}% Stocks, ${bondPct}% Bonds, ${cashPct}% Cash`;
+            // Update UI elements
             document.getElementById('leg-stocks').textContent = `${stockPct}%`;
             document.getElementById('leg-bonds').textContent = `${bondPct}%`;
             document.getElementById('leg-cash').textContent = `${cashPct}%`;
 
-            document.getElementById('tbl-stocks-pct').textContent = `${stockPct}.0%`;
-            document.getElementById('tbl-stocks-amt').textContent = fmtCurr(stockAmt);
+            document.getElementById('sticky-subtitle').textContent = `Suggested Mix: ${stockPct}% Stocks, ${bondPct}% Bonds, ${cashPct}% Cash`;
 
-            document.getElementById('tbl-bonds-pct').textContent = `${bondPct}.0%`;
-            document.getElementById('tbl-bonds-amt').textContent = fmtCurr(bondAmt);
-
-            document.getElementById('tbl-cash-pct').textContent = `${cashPct}.0%`;
-            document.getElementById('tbl-cash-amt').textContent = fmtCurr(cashAmt);
-
-            document.getElementById('tbl-total-amt').textContent = fmtCurr(assets);
-
-            renderPieChart(stockPct, bondPct, cashPct);
+            drawPieChart(stockPct, bondPct, cashPct);
         }
 
-        function renderPieChart(stocks, bonds, cash) {
+        // Render SVG Pie Chart
+        function drawPieChart(stockPct, bondPct, cashPct) {
             const svg = document.getElementById('pie-chart-svg');
-            const tip = document.getElementById('chart-tip');
             svg.innerHTML = '';
 
             const slices = [
-                { label: 'Stocks', pct: stocks, color: '#2563eb', stroke: '#3b82f6' },
-                { label: 'Bonds', pct: bonds, color: '#d89e1b', stroke: '#f5b938' },
-                { label: 'Cash', pct: cash, color: '#38bdf8', stroke: '#7dd3fc' }
+                { name: 'Stocks', pct: stockPct, color: '#0026e6' },
+                { name: 'Bonds', pct: bondPct, color: '#43a047' },
+                { name: 'Cash', pct: cashPct, color: '#0284c7' }
             ];
 
-            let startAngle = -Math.PI / 2; // Start from top 12 o'clock
-            const r = 120;
+            const radius = 120;
+            let currentAngle = 0;
 
             slices.forEach(slice => {
-                const angle = (slice.pct / 100) * (2 * Math.PI);
-                const endAngle = startAngle + angle;
+                if (slice.pct <= 0) return;
+                const angle = (slice.pct / 100) * 360;
+                const startAngle = currentAngle;
+                const endAngle = currentAngle + angle;
+                currentAngle += angle;
 
-                const x1 = r * Math.cos(startAngle);
-                const y1 = r * Math.sin(startAngle);
-                const x2 = r * Math.cos(endAngle);
-                const y2 = r * Math.sin(endAngle);
+                const startRad = (startAngle * Math.PI) / 180;
+                const endRad = (endAngle * Math.PI) / 180;
 
-                const largeArc = slice.pct > 50 ? 1 : 0;
-                const pathData = `M 0 0 L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z`;
+                const x1 = radius * Math.cos(startRad);
+                const y1 = radius * Math.sin(startRad);
+                const x2 = radius * Math.cos(endRad);
+                const y2 = radius * Math.sin(endRad);
+
+                const largeArc = angle > 180 ? 1 : 0;
+
+                const pathData = `M 0 0 L ${x1.toFixed(3)} ${y1.toFixed(3)} A ${radius} ${radius} 0 ${largeArc} 1 ${x2.toFixed(3)} ${y2.toFixed(3)} Z`;
 
                 const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 path.setAttribute('d', pathData);
                 path.setAttribute('fill', slice.color);
-                path.setAttribute('stroke', slice.stroke);
-                path.setAttribute('stroke-width', '1.5');
-                path.setAttribute('cursor', 'pointer');
-                path.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+                path.setAttribute('class', 'calc-pie-slice');
+                path.setAttribute('data-name', slice.name);
+                path.setAttribute('data-pct', slice.pct);
 
-                path.addEventListener('mouseenter', (e) => {
-                    path.style.opacity = '0.9';
-                    const rect = svg.getBoundingClientRect();
-                    const midAngle = startAngle + angle / 2;
-                    const tipX = (r * 0.7) * Math.cos(midAngle) + 140;
-                    const tipY = (r * 0.7) * Math.sin(midAngle) + 140;
-                    tip.innerHTML = `<strong>${slice.label}</strong>: ${slice.pct}% (${fmtCurr((slice.pct / 100) * parseNum(rangeAssets.value))})`;
-                    tip.style.left = `${tipX}px`;
-                    tip.style.top = `${tipY}px`;
-                    tip.style.display = 'block';
+                path.addEventListener('mousemove', (e) => {
+                    const tip = document.getElementById('chart-tip');
+                    if (tip) {
+                        tip.textContent = `${slice.name}: ${slice.pct}%`;
+                        tip.style.display = 'block';
+                        tip.style.left = `${e.clientX + 12}px`;
+                        tip.style.top = `${e.clientY - 25}px`;
+                    }
                 });
+
                 path.addEventListener('mouseleave', () => {
-                    path.style.opacity = '1';
-                    tip.style.display = 'none';
+                    const tip = document.getElementById('chart-tip');
+                    if (tip) tip.style.display = 'none';
                 });
 
                 svg.appendChild(path);
-                startAngle = endAngle;
             });
-
-            // Center Ring / Inner Subtle Glow
-            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('cx', 0);
-            circle.setAttribute('cy', 0);
-            circle.setAttribute('r', 32);
-            circle.setAttribute('fill', '#091424');
-            circle.setAttribute('stroke', 'rgba(223, 160, 30, 0.4)');
-            circle.setAttribute('stroke-width', '1.5');
-            svg.appendChild(circle);
         }
 
-        // View Report Modal
-        const modal = document.getElementById('modal-report');
-        function openReport() {
+        // Report Modal Logic
+        function openReportModal() {
+            if (!currentResults.stockPct) calculate();
+
+            document.getElementById('rep-age').textContent = currentResults.age;
+            document.getElementById('rep-assets').textContent = fmtCurrWhole(currentResults.portfolio);
+            document.getElementById('rep-savings').textContent = fmtCurrWhole(currentResults.savings);
+            document.getElementById('rep-income').textContent = `${currentResults.incomeNeeded}%`;
+            document.getElementById('rep-tax').textContent = taxLabels[currentResults.taxBracket] || '28%';
+            document.getElementById('rep-risk').textContent = `${riskDescriptions[currentResults.volatility] || 'Balanced'} (${currentResults.volatility} on a scale of 0 to 10)`;
+            document.getElementById('rep-outlook').textContent = `Moderate (${currentResults.outlook} on a scale of 0 to 10)`;
+
             document.getElementById('modal-summary').innerHTML = `
-                Target asset allocation for <strong>Age ${rangeAge.value}</strong> with an investment portfolio of <strong>${fmtCurr(allocationData.totalAmt)}</strong>. 
-                Risk tolerance is rated <strong>${rangeRisk.value}/10</strong> with a financial outlook score of <strong>${rangeOutlook.value}/10</strong>.
+                Based on an age of <strong>${currentResults.age}</strong>, current assets of <strong>${fmtCurrWhole(currentResults.portfolio)}</strong>, and a <strong>${riskDescriptions[currentResults.volatility]}</strong> risk profile, your suggested allocation is <strong>${currentResults.stockPct}% Stocks</strong>, <strong>${currentResults.bondPct}% Bonds</strong>, and <strong>${currentResults.cashPct}% Cash</strong>.
             `;
-            const rows = document.getElementById('modal-table-rows');
-            rows.innerHTML = `
-                <tr>
-                    <td style="padding: 8px 10px; font-weight: 700; color: #ffffff;">Equities (Stocks)</td>
-                    <td style="padding: 8px 10px; text-align: center; font-weight: 700; color: #2563eb;">${allocationData.stocks}%</td>
-                    <td style="padding: 8px 10px; text-align: right; font-weight: 700;">${fmtCurr(allocationData.stockAmt)}</td>
-                    <td style="padding: 8px 10px; color: #94a3b8;">U.S. Large Cap, Mid/Small Growth, International Developed &amp; Emerging Index Funds</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px 10px; font-weight: 700; color: #ffffff;">Fixed Income (Bonds)</td>
-                    <td style="padding: 8px 10px; text-align: center; font-weight: 700; color: #dfa01e;">${allocationData.bonds}%</td>
-                    <td style="padding: 8px 10px; text-align: right; font-weight: 700;">${fmtCurr(allocationData.bondAmt)}</td>
-                    <td style="padding: 8px 10px; color: #94a3b8;">U.S. Treasury Notes, Investment Grade Corporate Bonds, Municipal Bond Funds</td>
-                </tr>
-                <tr>
-                    <td style="padding: 8px 10px; font-weight: 700; color: #ffffff;">Cash &amp; Equivalents</td>
-                    <td style="padding: 8px 10px; text-align: center; font-weight: 700; color: #38bdf8;">${allocationData.cash}%</td>
-                    <td style="padding: 8px 10px; text-align: right; font-weight: 700;">${fmtCurr(allocationData.cashAmt)}</td>
-                    <td style="padding: 8px 10px; color: #94a3b8;">Money Market Mutual Funds, High-Yield Savings, Short-Term CDs</td>
-                </tr>
-                <tr style="background: rgba(223, 160, 30, 0.12); font-weight: 800; color: #dfa01e;">
-                    <td style="padding: 8px 10px;">Total Allocated</td>
-                    <td style="padding: 8px 10px; text-align: center;">100%</td>
-                    <td style="padding: 8px 10px; text-align: right;">${fmtCurr(allocationData.totalAmt)}</td>
-                    <td style="padding: 8px 10px;">Fully Diversified Model Portfolio</td>
-                </tr>
-            `;
-            modal.classList.add('active');
+
+            renderModalTable();
+            document.getElementById('modal-report')?.classList.add('active');
         }
 
-        document.getElementById('btn-view-report').addEventListener('click', openReport);
-        document.getElementById('btn-menu-report').addEventListener('click', openReport);
-        document.getElementById('modal-close').addEventListener('click', () => modal.classList.remove('active'));
-        document.getElementById('modal-btn-done').addEventListener('click', () => modal.classList.remove('active'));
-        modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        function closeReportModal() {
+            document.getElementById('modal-report')?.classList.remove('active');
+        }
 
-        document.getElementById('btn-calculate').addEventListener('click', () => {
+        function toggleDetailedView() {
+            isDetailedModal = !isDetailedModal;
+            document.getElementById('btn-toggle-detail').textContent = isDetailedModal ? 'Show Summary Categories' : 'Show Detailed Categories';
+            renderModalTable();
+        }
+
+        function renderModalTable() {
+            const tbody = document.getElementById('modal-table-rows');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            if (!isDetailedModal) {
+                const rows = [
+                    { name: 'Stocks', pct: currentResults.stockPct, amt: currentResults.stockAmt, color: '#3b82f6' },
+                    { name: 'Bonds', pct: currentResults.bondPct, amt: currentResults.bondAmt, color: '#4ade80' },
+                    { name: 'Cash', pct: currentResults.cashPct, amt: currentResults.cashAmt, color: '#38bdf8' }
+                ];
+                rows.forEach(r => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong style="color: #ffffff;">${r.name}</strong></td>
+                        <td style="text-align: center; font-weight: 700; color: ${r.color};">${r.pct}%</td>
+                        <td style="text-align: right; font-weight: 700; color: #ffffff;">${fmtCurr(r.amt)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                currentResults.detailed.forEach(d => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td><strong style="color: #ffffff;">${d.name}</strong></td>
+                        <td style="text-align: center; font-weight: 700; color: #dfa01e;">${d.pct}%</td>
+                        <td style="text-align: right; font-weight: 700; color: #ffffff;">${fmtCurr(d.amt)}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            const totalTr = document.createElement('tr');
+            totalTr.className = 'calc-breakdown-total';
+            totalTr.innerHTML = `
+                <td><strong>Total Portfolio</strong></td>
+                <td style="text-align: center;">100%</td>
+                <td style="text-align: right;">${fmtCurr(currentResults.portfolio)}</td>
+            `;
+            tbody.appendChild(totalTr);
+        }
+
+        // Initialize on load
+        window.addEventListener('DOMContentLoaded', () => {
             calculate();
-            document.getElementById('sec-chart').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-
-        // Initial Run
-        calculate();
     </script>
 </body>
 

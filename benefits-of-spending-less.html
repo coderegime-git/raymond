@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benefits of Spending Less Calculator | The Seiler Group of Raymond James</title>
+    <title>Benefits of Spending Less | The Seiler Group of Raymond James</title>
     <meta name="description"
-        content="Reducing your spending can be worth more than you might think. Use this calculator to see just how much your budget cuts can be worth when invested over time.">
+        content="Reducing your spending can be worth more than you might think. Use this calculator to see just how much your budget reductions may be worth, if you were to invest them. View the value of this new potential nest egg both with and without taxes factored in.">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
+    <link rel="stylesheet" href="benefits-of-spending-less.css?v=1">
 </head>
 
 <body class="calc-white-page">
@@ -100,11 +100,8 @@
                     <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
                         PRESS RELEASES
                     </a>
-                    <a href="media.html" class="nav-dropdown-item" id="nav-item-media">
-                        MEDIA
-                    </a>
-                    <a href="articles.html" class="nav-dropdown-item" id="nav-item-articles">
-                        ARTICLES &amp; INSIGHTS
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
                     </a>
                     <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
                         RESOURCES &amp; PERSPECTIVES
@@ -170,26 +167,28 @@
     <main class="calc-white-wrapper">
         <article class="calc-white-container">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/calculator-hero.jpg" alt="Benefits of Spending Less" style="width: 100%; height: 260px; object-fit: cover; object-position: center 45%; display: block;">
+            <!-- Hero Image Banner: Crisp Authentic $100 Bills matching Screenshot 1 -->
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/money-hero.jpg" alt="Benefits of Spending Less Money" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Title & Meta Header matching Screenshot 1 -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">BENEFITS OF SPENDING LESS</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
                     <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
                 </div>
                 <p class="calc-intro-p">
-                    Reducing your spending can be worth more than you might think. Use this calculator to see just how much your budget cuts can be worth! You'll never believe how much your saved dollars can grow over time! Start with our initial spending categories.
+                    Reducing your spending can be worth more than you might think. Use this calculator to see just how much your budget reductions may be worth, if you were to invest them. View the value of this new potential nest egg both with and without taxes factored in.
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Floating Action Box matching Screenshot 1 & 2 -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
@@ -210,7 +209,7 @@
             </div>
 
             <!-- ============================================================
-             SECTION 1: YOUR INVESTMENT OPTIONS
+             SECTION 1: YOUR INVESTMENT OPTIONS (Expanded)
              ============================================================ -->
             <section class="calc-section" id="sec-invest-options">
                 <div class="calc-sec-header" onclick="toggleSec('sec-invest-options')">
@@ -222,18 +221,17 @@
                     <!-- Years to save -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-years" class="calc-field-label">Years to save:</label>
-                            <span class="calc-q-dot" title="Number of years you plan to save and invest the cuts.">?</span>
+                            <label for="inp-years" class="calc-field-label">Years to save:*</label>
+                            <span class="calc-q-dot" title="The total number of years you plan to save.">?</span>
                         </div>
                         <input type="text" id="inp-years" class="calc-text-input" value="10">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-years" class="calc-range-slider" min="1" max="40" step="1" value="10">
+                            <input type="range" id="range-years" class="calc-range-slider" min="1" max="100" step="1" value="10">
                             <div class="calc-tick-labels">
                                 <span>1</span>
-                                <span>10</span>
-                                <span>20</span>
-                                <span>30</span>
-                                <span>40</span>
+                                <span>34</span>
+                                <span>67</span>
+                                <span>100</span>
                             </div>
                         </div>
                     </div>
@@ -241,18 +239,17 @@
                     <!-- Annual rate of return -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-rate" class="calc-field-label">Annual rate of return:</label>
-                            <span class="calc-q-dot" title="Expected annual compounded rate of return on invested savings.">?</span>
+                            <label for="inp-rate" class="calc-field-label">Annual rate of return:*</label>
+                            <span class="calc-q-dot" title="Annually compounded rate of return expected on investments.">?</span>
                         </div>
-                        <input type="text" id="inp-rate" class="calc-text-input" value="7.00%">
+                        <input type="text" id="inp-rate" class="calc-text-input" value="7%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="15" step="0.25" value="7">
+                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="12" step="0.25" value="7">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>3%</span>
-                                <span>7%</span>
-                                <span>11%</span>
-                                <span>15%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
@@ -260,18 +257,17 @@
                     <!-- Federal tax rate -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-fed-tax" class="calc-field-label">Federal tax rate:</label>
-                            <span class="calc-q-dot" title="Estimated federal income tax rate.">?</span>
+                            <label for="inp-fed-tax" class="calc-field-label">Federal tax rate:*</label>
+                            <span class="calc-q-dot" title="The federal tax rate you expect to pay on your taxable investments.">?</span>
                         </div>
-                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="25.00%">
+                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="25%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="45" step="1" value="25">
+                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="50" step="1" value="25">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>12%</span>
-                                <span>25%</span>
-                                <span>35%</span>
-                                <span>45%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
                             </div>
                         </div>
                     </div>
@@ -279,18 +275,17 @@
                     <!-- State tax rate -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-state-tax" class="calc-field-label">State tax rate:</label>
-                            <span class="calc-q-dot" title="Estimated state income tax rate.">?</span>
+                            <label for="inp-state-tax" class="calc-field-label">State tax rate:*</label>
+                            <span class="calc-q-dot" title="The state tax rate you expect to pay on your taxable investments.">?</span>
                         </div>
-                        <input type="text" id="inp-state-tax" class="calc-text-input" value="5.00%">
+                        <input type="text" id="inp-state-tax" class="calc-text-input" value="6%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
+                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="50" step="1" value="6">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>3%</span>
-                                <span>5%</span>
-                                <span>10%</span>
-                                <span>15%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
                             </div>
                         </div>
                     </div>
@@ -299,68 +294,82 @@
             </section>
 
             <!-- ============================================================
-             SECTION 2: ENTERTAINMENT SAVINGS
+             SECTION 2: ENTERTAINMENT SAVINGS (Accordion)
              ============================================================ -->
-            <section class="calc-section" id="sec-entertainment">
+            <section class="calc-section collapsed" id="sec-entertainment">
                 <div class="calc-sec-header" onclick="toggleSec('sec-entertainment')">
                     <h2 class="calc-sec-title">ENTERTAINMENT SAVINGS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="sub-entertainment" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00 per month</span>
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span id="sub-entertainment" class="calc-sec-badge">$0.00 per month</span>
                         <i class="fas fa-chevron-up calc-sec-chevron"></i>
                     </div>
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Dining Out -->
+                    <!-- Eat out less -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-ent-dining" class="calc-field-label">Dining out &amp; takeouts:</label>
+                            <label for="inp-eat-out" class="calc-field-label">Eat out less:*</label>
                         </div>
-                        <input type="text" id="inp-ent-dining" class="calc-text-input item-ent" value="$0.00">
+                        <input type="text" id="inp-eat-out" class="calc-text-input item-calc item-ent" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-ent-dining" class="calc-range-slider" min="0" max="600" step="10" value="0">
+                            <input type="range" id="range-eat-out" class="calc-range-slider" min="0" max="1000" step="10" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$150</span>
-                                <span>$300</span>
-                                <span>$450</span>
-                                <span>$600</span>
+                                <span>$333</span>
+                                <span>$667</span>
+                                <span>$1,000</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Movies, Concerts & Events -->
+                    <!-- Fewer movies -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-ent-events" class="calc-field-label">Movies, events &amp; tickets:</label>
+                            <label for="inp-fewer-movies" class="calc-field-label">Fewer movies:*</label>
                         </div>
-                        <input type="text" id="inp-ent-events" class="calc-text-input item-ent" value="$0.00">
+                        <input type="text" id="inp-fewer-movies" class="calc-text-input item-calc item-ent" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-ent-events" class="calc-range-slider" min="0" max="300" step="5" value="0">
+                            <input type="range" id="range-fewer-movies" class="calc-range-slider" min="0" max="1000" step="10" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$75</span>
-                                <span>$150</span>
-                                <span>$225</span>
-                                <span>$300</span>
+                                <span>$333</span>
+                                <span>$667</span>
+                                <span>$1,000</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Subscriptions (Streaming/Music) -->
+                    <!-- Fewer vacations -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-ent-stream" class="calc-field-label">Streaming apps &amp; music:</label>
+                            <label for="inp-fewer-vacations" class="calc-field-label">Fewer vacations:*</label>
                         </div>
-                        <input type="text" id="inp-ent-stream" class="calc-text-input item-ent" value="$0.00">
+                        <input type="text" id="inp-fewer-vacations" class="calc-text-input item-calc item-ent" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-ent-stream" class="calc-range-slider" min="0" max="150" step="5" value="0">
+                            <input type="range" id="range-fewer-vacations" class="calc-range-slider" min="0" max="5000" step="50" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$35</span>
-                                <span>$75</span>
-                                <span>$110</span>
-                                <span>$150</span>
+                                <span>$1.7k</span>
+                                <span>$3.3k</span>
+                                <span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other entertainment savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-other-ent" class="calc-field-label">Other entertainment savings:*</label>
+                        </div>
+                        <input type="text" id="inp-other-ent" class="calc-text-input item-calc item-ent" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-ent" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1.7k</span>
+                                <span>$3.3k</span>
+                                <span>$5k</span>
                             </div>
                         </div>
                     </div>
@@ -369,68 +378,82 @@
             </section>
 
             <!-- ============================================================
-             SECTION 3: BUDGET SAVINGS
+             SECTION 3: BUDGET SAVINGS (Accordion)
              ============================================================ -->
-            <section class="calc-section" id="sec-budget">
+            <section class="calc-section collapsed" id="sec-budget">
                 <div class="calc-sec-header" onclick="toggleSec('sec-budget')">
                     <h2 class="calc-sec-title">BUDGET SAVINGS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="sub-budget" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00 per month</span>
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span id="sub-budget" class="calc-sec-badge">$0.00 per month</span>
                         <i class="fas fa-chevron-up calc-sec-chevron"></i>
                     </div>
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Morning Coffee & Snacks -->
+                    <!-- Clip coupons -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-bud-coffee" class="calc-field-label">Morning coffee &amp; snacks:</label>
+                            <label for="inp-clip-coupons" class="calc-field-label">Clip coupons:*</label>
                         </div>
-                        <input type="text" id="inp-bud-coffee" class="calc-text-input item-bud" value="$0.00">
+                        <input type="text" id="inp-clip-coupons" class="calc-text-input item-calc item-bud" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-bud-coffee" class="calc-range-slider" min="0" max="250" step="5" value="0">
+                            <input type="range" id="range-clip-coupons" class="calc-range-slider" min="0" max="240" step="5" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$50</span>
-                                <span>$100</span>
-                                <span>$175</span>
-                                <span>$250</span>
+                                <span>$80</span>
+                                <span>$160</span>
+                                <span>$240</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Groceries / Meal Planning -->
+                    <!-- Pay off credit cards -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-bud-groceries" class="calc-field-label">Grocery optimizations:</label>
+                            <label for="inp-payoff-cards" class="calc-field-label">Pay off credit cards:*</label>
                         </div>
-                        <input type="text" id="inp-bud-groceries" class="calc-text-input item-bud" value="$0.00">
+                        <input type="text" id="inp-payoff-cards" class="calc-text-input item-calc item-bud" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-bud-groceries" class="calc-range-slider" min="0" max="400" step="10" value="0">
+                            <input type="range" id="range-payoff-cards" class="calc-range-slider" min="0" max="5000" step="50" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$100</span>
-                                <span>$200</span>
-                                <span>$300</span>
-                                <span>$400</span>
+                                <span>$1.7k</span>
+                                <span>$3.3k</span>
+                                <span>$5k</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Apparel & Personal Shopping -->
+                    <!-- Wait to purchase new car -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-bud-apparel" class="calc-field-label">Apparel &amp; shopping cuts:</label>
+                            <label for="inp-wait-car" class="calc-field-label">Wait to purchase new car:*</label>
                         </div>
-                        <input type="text" id="inp-bud-apparel" class="calc-text-input item-bud" value="$0.00">
+                        <input type="text" id="inp-wait-car" class="calc-text-input item-calc item-bud" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-bud-apparel" class="calc-range-slider" min="0" max="300" step="10" value="0">
+                            <input type="range" id="range-wait-car" class="calc-range-slider" min="0" max="1000" step="25" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$75</span>
-                                <span>$150</span>
-                                <span>$225</span>
-                                <span>$300</span>
+                                <span>$333</span>
+                                <span>$667</span>
+                                <span>$1,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other budget savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-other-bud" class="calc-field-label">Other budget savings:*</label>
+                        </div>
+                        <input type="text" id="inp-other-bud" class="calc-text-input item-calc item-bud" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-bud" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1.7k</span>
+                                <span>$3.3k</span>
+                                <span>$5k</span>
                             </div>
                         </div>
                     </div>
@@ -439,68 +462,82 @@
             </section>
 
             <!-- ============================================================
-             SECTION 4: UTILITY SAVINGS
+             SECTION 4: UTILITY SAVINGS (Accordion)
              ============================================================ -->
-            <section class="calc-section" id="sec-utility">
+            <section class="calc-section collapsed" id="sec-utility">
                 <div class="calc-sec-header" onclick="toggleSec('sec-utility')">
                     <h2 class="calc-sec-title">UTILITY SAVINGS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="sub-utility" style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; font-weight: 700; color: #dfa01e;">$0.00 per month</span>
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span id="sub-utility" class="calc-sec-badge">$0.00 per month</span>
                         <i class="fas fa-chevron-up calc-sec-chevron"></i>
                     </div>
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Mobile Phone Plan -->
+                    <!-- Disconnect cable TV -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-utl-phone" class="calc-field-label">Mobile phone plan cut:</label>
+                            <label for="inp-disconnect-cable" class="calc-field-label">Disconnect cable TV:*</label>
                         </div>
-                        <input type="text" id="inp-utl-phone" class="calc-text-input item-utl" value="$0.00">
+                        <input type="text" id="inp-disconnect-cable" class="calc-text-input item-calc item-utl" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-utl-phone" class="calc-range-slider" min="0" max="150" step="5" value="0">
+                            <input type="range" id="range-disconnect-cable" class="calc-range-slider" min="0" max="240" step="5" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$35</span>
-                                <span>$75</span>
-                                <span>$110</span>
-                                <span>$150</span>
+                                <span>$80</span>
+                                <span>$160</span>
+                                <span>$240</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Energy & Electricity Conservation -->
+                    <!-- Eliminate cell phone -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-utl-energy" class="calc-field-label">Energy &amp; heating savings:</label>
+                            <label for="inp-eliminate-cell" class="calc-field-label">Eliminate cell phone:*</label>
                         </div>
-                        <input type="text" id="inp-utl-energy" class="calc-text-input item-utl" value="$0.00">
+                        <input type="text" id="inp-eliminate-cell" class="calc-text-input item-calc item-utl" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-utl-energy" class="calc-range-slider" min="0" max="200" step="5" value="0">
+                            <input type="range" id="range-eliminate-cell" class="calc-range-slider" min="0" max="240" step="5" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$50</span>
-                                <span>$100</span>
-                                <span>$150</span>
-                                <span>$200</span>
+                                <span>$80</span>
+                                <span>$160</span>
+                                <span>$240</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Internet & Cable Bundle -->
+                    <!-- Reduce long distance costs -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-utl-internet" class="calc-field-label">Internet / cable renegotiation:</label>
+                            <label for="inp-reduce-ld" class="calc-field-label">Reduce long distance costs:*</label>
                         </div>
-                        <input type="text" id="inp-utl-internet" class="calc-text-input item-utl" value="$0.00">
+                        <input type="text" id="inp-reduce-ld" class="calc-text-input item-calc item-utl" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-utl-internet" class="calc-range-slider" min="0" max="150" step="5" value="0">
+                            <input type="range" id="range-reduce-ld" class="calc-range-slider" min="0" max="240" step="5" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$35</span>
-                                <span>$75</span>
-                                <span>$110</span>
-                                <span>$150</span>
+                                <span>$80</span>
+                                <span>$160</span>
+                                <span>$240</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other utility savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-other-utl" class="calc-field-label">Other utility savings:*</label>
+                        </div>
+                        <input type="text" id="inp-other-utl" class="calc-text-input item-calc item-utl" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-utl" class="calc-range-slider" min="0" max="240" step="5" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$80</span>
+                                <span>$160</span>
+                                <span>$240</span>
                             </div>
                         </div>
                     </div>
@@ -509,7 +546,7 @@
             </section>
 
             <!-- ============================================================
-             SECTION 5: SAVINGS TOTAL BY YEAR (CHART)
+             SECTION 5: SAVINGS TOTAL BY YEAR (CHART) matching Screenshot 3
              ============================================================ -->
             <section class="calc-section" id="sec-chart">
                 <div class="calc-sec-header" onclick="toggleSec('sec-chart')">
@@ -520,54 +557,28 @@
 
                     <div class="calc-chart-box">
                         <div class="calc-tip-box" id="chart-tip"></div>
-                        <svg class="calc-chart-svg" id="spending-chart-svg" viewBox="0 0 760 330" preserveAspectRatio="none">
+                        <svg class="calc-chart-svg" id="spending-chart-svg" viewBox="0 0 760 320" preserveAspectRatio="none">
                             <!-- Injected dynamically via JS -->
                         </svg>
                     </div>
 
-                    <!-- Chart Legend -->
-                    <div style="display: flex; justify-content: center; gap: 28px; margin-top: 18px; font-family: 'Open Sans', sans-serif; font-size: 13.5px; color: #cbd5e1;">
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #2563eb; display: inline-block; box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);"></span>
-                            <span id="leg-invested" style="color: #ffffff; font-weight: 600;">Total with investment return: $0.00</span>
+                    <!-- Chart Legend matching Screenshot 3 -->
+                    <div class="calc-chart-legend">
+                        <div class="calc-legend-item">
+                            <span class="calc-legend-dot blue"></span>
+                            <span id="leg-before-taxes" style="color: #ffffff;">Total before taxes $0</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #d89e1b; display: inline-block; box-shadow: 0 0 8px rgba(216, 158, 27, 0.5);"></span>
-                            <span id="leg-cash" style="color: #dfa01e; font-weight: 600;">Total cash saved: $0.00</span>
+                        <div class="calc-legend-item">
+                            <span class="calc-legend-dot green"></span>
+                            <span id="leg-after-taxes" style="color: #ffffff;">Total after taxes $0</span>
                         </div>
                     </div>
-
-                    <!-- Summary Metrics Table -->
-                    <table class="calc-breakdown-table" style="margin-top: 24px;">
-                        <tbody>
-                            <tr>
-                                <td>Monthly Spending Reduction:</td>
-                                <td id="tbl-monthly-saved" style="font-weight: 700; color: #dfa01e;">$0.00 / month</td>
-                            </tr>
-                            <tr>
-                                <td>Annual Out-of-Pocket Savings:</td>
-                                <td id="tbl-annual-saved" style="font-weight: 700; color: #ffffff;">$0.00 / year</td>
-                            </tr>
-                            <tr>
-                                <td>Total Cash Saved (No Investment):</td>
-                                <td id="tbl-total-cash" style="font-weight: 700; color: #d89e1b;">$0.00</td>
-                            </tr>
-                            <tr>
-                                <td>Net Compounded Growth (Earnings):</td>
-                                <td id="tbl-total-interest" style="font-weight: 700; color: #38bdf8;">$0.00</td>
-                            </tr>
-                            <tr class="calc-breakdown-total">
-                                <td>Total Accumulation (After Taxes):</td>
-                                <td id="tbl-total-accum" style="font-size: 15px;">$0.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </div>
             </section>
 
             <!-- ============================================================
-             SECTION 6: DEFINITIONS
+             SECTION 6: DEFINITIONS matching Screenshots 4 & 5
              ============================================================ -->
             <section class="calc-def-wrap">
                 <h3 class="calc-def-heading">DEFINITIONS</h3>
@@ -575,14 +586,14 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">MONTHLY SAVINGS</h4>
                     <p class="calc-term-desc">
-                        The total amount that you could save per month by spending less. This amount is calculated in each of our initial potential deduction budget areas.
+                        The total amount that you could invest per month by spending less. This amount is calculated by adding up your potential entertainment, budget and utility savings.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">ANNUAL RATE OF RETURN</h4>
                     <p class="calc-term-desc">
-                        The annual rate of return for your investment. This calculator assumes that your return is compounded monthly and your deposits are made monthly. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                        This is the annually compounded rate of return you expect from your investments. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
                     </p>
                     <p class="calc-term-desc">
                         It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
@@ -611,24 +622,23 @@
                 </div>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">TOTAL ACCUMULATION BEFORE TAXES</h4>
+                    <h4 class="calc-term-title">TOTAL SAVINGS BEFORE TAXES</h4>
                     <p class="calc-term-desc">
-                        Total value of your savings before taxes for taxable accounts. Tax-deferred accounts grow tax-free until withdrawal. However, if your savings is being invested into a taxable account, this has been account for and paid by you.
+                        Total value of your savings before taxes are taken into account. Most regular savings accounts and investment accounts are taxable. However, if your savings is being invested into a tax-deferred or tax-free investment this total may be important to you.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">TOTAL ACCUMULATION AFTER TAXES</h4>
+                    <h4 class="calc-term-title">TOTAL SAVINGS AFTER TAXES</h4>
                     <p class="calc-term-desc">
-                        The total amount you would have accumulated in a taxable account, taking into account all federal and state taxes on your annual earnings.
+                        The total amount you would have accumulated in a taxable account. All taxes are assumed to be paid as your earnings accrue.
                     </p>
                 </div>
 
-                <!-- Legal Disclaimer Strip -->
+                <!-- Legal Disclaimer Strip matching Screenshot 5 -->
                 <div class="calc-disclaimer-strip">
-                    <hr class="calc-divider">
                     <p class="calc-disclaimer-text">
-                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                     </p>
                 </div>
 
@@ -637,23 +647,21 @@
         </article>
     </main>
 
-    <!-- Report Modal -->
+    <!-- Report Modal matching Dinkytown VIEW REPORT -->
     <div class="calc-modal-bg" id="modal-report">
         <div class="calc-modal-content">
             <div class="calc-modal-head">
-                <h3>Benefits of Spending Less Amortization Schedule</h3>
+                <h3>Benefits of Spending Less Schedule</h3>
                 <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
             </div>
             <div class="calc-modal-body">
                 <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
-                <table class="calc-breakdown-table" style="font-size: 13px;">
+                <table class="calc-report-table">
                     <thead>
-                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Year</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Annual Savings</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Cum. Cash Saved</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Pre-Tax Growth</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">After-Tax Total</th>
+                        <tr>
+                            <th>Year</th>
+                            <th>Savings Before Taxes</th>
+                            <th>Savings After Taxes</th>
                         </tr>
                     </thead>
                     <tbody id="modal-table-rows"></tbody>
@@ -670,27 +678,44 @@
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
+
+        <!-- Brand / Social -->
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
         </div>
+
+        <!-- Center Quote -->
         <div class="champ-quote">
             Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
             certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
             to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
             complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
+
+        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
             <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
         </div>
+
     </section>
 
     <!-- ============================================================
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
@@ -731,9 +756,10 @@
                     Use</a>
             </p>
         </div>
+
     </footer>
 
-    <!-- Interactive Script -->
+    <!-- Interactive Script with Exact Dinkytown Mathematical Algorithms -->
     <script>
         const fmtCurr = (num) => '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const fmtCurrWhole = (num) => '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
@@ -763,7 +789,7 @@
             }
         }
 
-        // Options Inputs
+        // Section 1: Investment Options Controls
         const inpYears = document.getElementById('inp-years');
         const rangeYears = document.getElementById('range-years');
 
@@ -780,7 +806,7 @@
             range.addEventListener('input', () => {
                 const v = parseFloat(range.value);
                 if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
+                else if (type === 'pct') inp.value = `${v.toFixed(v % 1 === 0 ? 0 : 2)}%`;
                 else inp.value = v;
                 calculate();
             });
@@ -788,7 +814,7 @@
                 const v = parseNum(inp.value);
                 range.value = v;
                 if (type === 'curr') inp.value = fmtCurr(v);
-                else if (type === 'pct') inp.value = `${v.toFixed(2)}%`;
+                else if (type === 'pct') inp.value = `${v.toFixed(v % 1 === 0 ? 0 : 2)}%`;
                 else inp.value = v;
                 calculate();
             });
@@ -799,11 +825,11 @@
         bindCtl(inpFedTax, rangeFedTax, 'pct');
         bindCtl(inpStateTax, rangeStateTax, 'pct');
 
-        // Categories items
+        // Categories input items
         const itemIds = [
-            'ent-dining', 'ent-events', 'ent-stream',
-            'bud-coffee', 'bud-groceries', 'bud-apparel',
-            'utl-phone', 'utl-energy', 'utl-internet'
+            'eat-out', 'fewer-movies', 'fewer-vacations', 'other-ent',
+            'clip-coupons', 'payoff-cards', 'wait-car', 'other-bud',
+            'disconnect-cable', 'eliminate-cell', 'reduce-ld', 'other-utl'
         ];
 
         itemIds.forEach(id => {
@@ -814,19 +840,26 @@
             }
         });
 
+        // Exact KJE Dinkytown Math Formulae
+        function KJE_ROR_MONTH(annualRate) {
+            return Math.pow(1 + annualRate, 1 / 12) - 1;
+        }
+
+        function KJE_FV_BEGIN(ratePerPeriod, numPeriods, payment) {
+            if (ratePerPeriod === 0) {
+                return numPeriods * payment;
+            }
+            return (payment / ratePerPeriod) * (Math.pow(1 + ratePerPeriod, numPeriods + 1) - 1) - payment;
+        }
+
         let schedule = [];
 
         function calculate() {
             const years = Math.max(1, Math.round(parseNum(rangeYears.value)));
-            const rate = parseNum(rangeRate.value) / 100;
-            const fedTax = parseNum(rangeFedTax.value) / 100;
-            const stateTax = parseNum(rangeStateTax.value) / 100;
-            const combTax = Math.min(0.70, fedTax + stateTax);
-
-            // After-tax return
-            const afterTaxRate = rate * (1 - combTax);
-            const iMonthly = Math.pow(1 + afterTaxRate, 1 / 12) - 1;
-            const iMonthlyPre = Math.pow(1 + rate, 1 / 12) - 1;
+            const annualRate = parseNum(rangeRate.value) / 100;
+            const fedTaxRate = parseNum(rangeFedTax.value) / 100;
+            const stateTaxRate = parseNum(rangeStateTax.value) / 100;
+            const marginalTaxRate = Math.min(0.99, fedTaxRate + stateTaxRate);
 
             // Subtotals
             const getSub = (cls) => {
@@ -838,47 +871,35 @@
             const entSub = getSub('item-ent');
             const budSub = getSub('item-bud');
             const utlSub = getSub('item-utl');
-            const totalMonthly = entSub + budSub + utlSub;
+            const monthlySavings = entSub + budSub + utlSub;
 
             document.getElementById('sub-entertainment').textContent = `${fmtCurr(entSub)} per month`;
             document.getElementById('sub-budget').textContent = `${fmtCurr(budSub)} per month`;
             document.getElementById('sub-utility').textContent = `${fmtCurr(utlSub)} per month`;
 
-            // Calculate yearly projection
-            let cumCash = 0;
-            let accumAfterTax = 0;
-            let accumPreTax = 0;
-            schedule = [];
+            // Dinkytown Mathematical Algorithms
+            const monthlyRate = KJE_ROR_MONTH(annualRate);
+            const afterTaxMonthlyRate = monthlyRate * (1 - marginalTaxRate);
 
+            schedule = [];
             for (let y = 1; y <= years; y++) {
-                for (let m = 0; m < 12; m++) {
-                    cumCash += totalMonthly;
-                    accumAfterTax = (accumAfterTax + totalMonthly) * (1 + iMonthly);
-                    accumPreTax = (accumPreTax + totalMonthly) * (1 + iMonthlyPre);
-                }
+                const months = y * 12;
+                const preTaxTotal = Math.round(KJE_FV_BEGIN(monthlyRate, months, monthlySavings));
+                const afterTaxTotal = Math.round(KJE_FV_BEGIN(afterTaxMonthlyRate, months, monthlySavings));
 
                 schedule.push({
                     year: y,
-                    annualSavings: totalMonthly * 12,
-                    cumCash: cumCash,
-                    accumPreTax: accumPreTax,
-                    accumAfterTax: accumAfterTax,
-                    growth: Math.max(0, accumAfterTax - cumCash)
+                    preTaxTotal: preTaxTotal,
+                    afterTaxTotal: afterTaxTotal
                 });
             }
 
-            const finalRow = schedule[schedule.length - 1] || { cumCash: 0, accumAfterTax: 0, growth: 0 };
+            const finalRow = schedule[schedule.length - 1] || { preTaxTotal: 0, afterTaxTotal: 0 };
 
-            // Update UI elements
-            document.getElementById('sticky-subtitle').textContent = `Spending ${fmtCurr(totalMonthly)} less per month adds up to ${fmtCurr(finalRow.accumAfterTax)} in ${years} years.`;
-            document.getElementById('leg-invested').textContent = `Total with investment return: ${fmtCurr(finalRow.accumAfterTax)}`;
-            document.getElementById('leg-cash').textContent = `Total cash saved: ${fmtCurr(finalRow.cumCash)}`;
-
-            document.getElementById('tbl-monthly-saved').textContent = `${fmtCurr(totalMonthly)} / month`;
-            document.getElementById('tbl-annual-saved').textContent = `${fmtCurr(totalMonthly * 12)} / year`;
-            document.getElementById('tbl-total-cash').textContent = fmtCurr(finalRow.cumCash);
-            document.getElementById('tbl-total-interest').textContent = fmtCurr(finalRow.growth);
-            document.getElementById('tbl-total-accum').textContent = fmtCurr(finalRow.accumAfterTax);
+            // Subtitle & Legend Text matching Screenshots 1, 2, 3
+            document.getElementById('sticky-subtitle').textContent = `Spending ${fmtCurr(monthlySavings)} less per month adds up to ${fmtCurr(finalRow.afterTaxTotal)} in ${years} years.`;
+            document.getElementById('leg-before-taxes').textContent = `Total before taxes ${fmtCurrWhole(finalRow.preTaxTotal)}`;
+            document.getElementById('leg-after-taxes').textContent = `Total after taxes ${fmtCurrWhole(finalRow.afterTaxTotal)}`;
 
             renderChart(schedule);
         }
@@ -890,7 +911,7 @@
             if (!data.length) return;
 
             const w = 760;
-            const h = 330;
+            const h = 320;
             const padL = 75;
             const padR = 30;
             const padT = 25;
@@ -899,12 +920,12 @@
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
-            const maxValRaw = Math.max(...data.map(d => Math.max(d.accumAfterTax, d.cumCash)));
-            const maxVal = Math.max(1000, Math.ceil(maxValRaw / 1000) * 1000);
-            const steps = 6;
+            const maxValRaw = Math.max(...data.map(d => Math.max(d.preTaxTotal, d.afterTaxTotal)));
+            const maxVal = maxValRaw <= 0 ? 25 : Math.max(25, Math.ceil(maxValRaw / 5) * 5);
+            const steps = 5;
             const stepVal = maxVal / steps;
 
-            // Y Grid Lines & Labels
+            // Y-Axis Grid Lines & Dollar Labels
             for (let i = 0; i <= steps; i++) {
                 const val = i * stepVal;
                 const yPos = padT + chartH - (i / steps) * chartH;
@@ -914,7 +935,7 @@
                 line.setAttribute('x2', w - padR);
                 line.setAttribute('y1', yPos);
                 line.setAttribute('y2', yPos);
-                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.12)');
                 line.setAttribute('stroke-width', '1');
                 svg.appendChild(line);
 
@@ -929,85 +950,111 @@
                 svg.appendChild(text);
             }
 
-            // Draw Dual Bars per Year
+            // Dual Lines: Pre-Tax (Blue #2563eb) and After-Tax (Green #10b981)
             const n = data.length;
-            const slotW = chartW / n;
-            const barW = Math.max(3, Math.min(14, (slotW - 4) / 2));
+            const getX = (idx) => padL + (n === 1 ? chartW / 2 : (idx / (n - 1)) * chartW);
+            const getY = (val) => padT + chartH - (maxVal > 0 ? (val / maxVal) * chartH : 0);
+
+            // Polyline Points
+            let ptsPre = '';
+            let ptsAfter = '';
 
             data.forEach((d, idx) => {
-                const xCenter = padL + (idx + 0.5) * slotW;
+                const x = getX(idx);
+                const yPre = getY(d.preTaxTotal);
+                const yAfter = getY(d.afterTaxTotal);
 
-                const hInvest = maxVal > 0 ? (d.accumAfterTax / maxVal) * chartH : 0;
-                const hCash = maxVal > 0 ? (d.cumCash / maxVal) * chartH : 0;
+                ptsPre += `${x},${yPre} `;
+                ptsAfter += `${x},${yAfter} `;
+            });
 
-                const yInvest = padT + chartH - hInvest;
-                const yCash = padT + chartH - hCash;
+            // Draw Pre-Tax Line (Blue)
+            const polyPre = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyPre.setAttribute('fill', 'none');
+            polyPre.setAttribute('stroke', '#2563eb');
+            polyPre.setAttribute('stroke-width', '2.5');
+            polyPre.setAttribute('points', ptsPre.trim());
+            svg.appendChild(polyPre);
 
-                // Bar 1: Invested Total (Royal Blue)
-                const rectInvest = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectInvest.setAttribute('x', xCenter - barW - 1);
-                rectInvest.setAttribute('y', yInvest);
-                rectInvest.setAttribute('width', barW);
-                rectInvest.setAttribute('height', Math.max(1, hInvest));
-                rectInvest.setAttribute('fill', '#2563eb');
-                rectInvest.setAttribute('rx', '1');
-                rectInvest.setAttribute('cursor', 'pointer');
+            // Draw After-Tax Line (Green)
+            const polyAfter = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+            polyAfter.setAttribute('fill', 'none');
+            polyAfter.setAttribute('stroke', '#10b981');
+            polyAfter.setAttribute('stroke-width', '2.5');
+            polyAfter.setAttribute('points', ptsAfter.trim());
+            svg.appendChild(polyAfter);
 
-                // Bar 2: Cash Saved (Luxury Gold)
-                const rectCash = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectCash.setAttribute('x', xCenter + 1);
-                rectCash.setAttribute('y', yCash);
-                rectCash.setAttribute('width', barW);
-                rectCash.setAttribute('height', Math.max(1, hCash));
-                rectCash.setAttribute('fill', '#d89e1b');
-                rectCash.setAttribute('rx', '1');
-                rectCash.setAttribute('cursor', 'pointer');
+            // Interactive Circle Nodes & Tooltips
+            data.forEach((d, idx) => {
+                const x = getX(idx);
+                const yPre = getY(d.preTaxTotal);
+                const yAfter = getY(d.afterTaxTotal);
+
+                // Circle Pre-Tax
+                const circPre = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circPre.setAttribute('cx', x);
+                circPre.setAttribute('cy', yPre);
+                circPre.setAttribute('r', '4');
+                circPre.setAttribute('fill', '#2563eb');
+                circPre.setAttribute('stroke', '#ffffff');
+                circPre.setAttribute('stroke-width', '1.5');
+                circPre.setAttribute('cursor', 'pointer');
+
+                // Circle After-Tax
+                const circAfter = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circAfter.setAttribute('cx', x);
+                circAfter.setAttribute('cy', yAfter);
+                circAfter.setAttribute('r', '4');
+                circAfter.setAttribute('fill', '#10b981');
+                circAfter.setAttribute('stroke', '#ffffff');
+                circAfter.setAttribute('stroke-width', '1.5');
+                circAfter.setAttribute('cursor', 'pointer');
 
                 function showTip(e, text) {
                     const rect = svg.getBoundingClientRect();
-                    const xRel = (xCenter / w) * rect.width;
-                    const yRel = (Math.min(yInvest, yCash) / h) * rect.height;
+                    const xRel = (x / w) * rect.width;
+                    const yRel = (Math.min(yPre, yAfter) / h) * rect.height;
                     tip.innerHTML = text;
                     tip.style.left = `${xRel}px`;
                     tip.style.top = `${yRel - 10}px`;
                     tip.style.display = 'block';
                 }
 
-                rectInvest.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Year ${d.year}: <strong>${fmtCurr(d.accumAfterTax)}</strong> with interest`);
+                circPre.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Year ${d.year} (Before Taxes): <strong>${fmtCurr(d.preTaxTotal)}</strong>`);
                 });
-                rectInvest.addEventListener('mouseleave', () => tip.style.display = 'none');
+                circPre.addEventListener('mouseleave', () => tip.style.display = 'none');
 
-                rectCash.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Year ${d.year}: <strong>${fmtCurr(d.cumCash)}</strong> cash saved`);
+                circAfter.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Year ${d.year} (After Taxes): <strong>${fmtCurr(d.afterTaxTotal)}</strong>`);
                 });
-                rectCash.addEventListener('mouseleave', () => tip.style.display = 'none');
+                circAfter.addEventListener('mouseleave', () => tip.style.display = 'none');
 
-                svg.appendChild(rectInvest);
-                svg.appendChild(rectCash);
+                svg.appendChild(circPre);
+                svg.appendChild(circAfter);
 
-                // X-axis Year Label
-                const step = n > 25 ? 5 : (n > 12 ? 2 : 1);
+                // X-axis Year Labels
+                const step = n > 25 ? 10 : (n > 12 ? 2 : 1);
                 if (d.year === 1 || d.year % step === 0 || d.year === n) {
                     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                    xLabel.setAttribute('x', xCenter);
+                    xLabel.setAttribute('x', x);
                     xLabel.setAttribute('y', padT + chartH + 18);
                     xLabel.setAttribute('text-anchor', 'middle');
                     xLabel.setAttribute('font-family', 'Open Sans, sans-serif');
                     xLabel.setAttribute('font-size', '11');
                     xLabel.setAttribute('fill', '#94a3b8');
-                    xLabel.textContent = `Yr ${d.year}`;
+                    xLabel.textContent = d.year;
                     svg.appendChild(xLabel);
                 }
             });
 
-            // Bottom axis line
+            // Baseline axis
             const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             axisLine.setAttribute('x1', padL);
             axisLine.setAttribute('x2', w - padR);
             axisLine.setAttribute('y1', padT + chartH);
             axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.15)');
+            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.25)');
             axisLine.setAttribute('stroke-width', '1.5');
             svg.appendChild(axisLine);
         }
@@ -1016,19 +1063,24 @@
         const modal = document.getElementById('modal-report');
         function openReport() {
             const final = schedule[schedule.length - 1] || {};
+            const years = Math.max(1, Math.round(parseNum(rangeYears.value)));
+            const entSub = document.getElementById('sub-entertainment').textContent.replace(' per month', '');
+            const budSub = document.getElementById('sub-budget').textContent.replace(' per month', '');
+            const utlSub = document.getElementById('sub-utility').textContent.replace(' per month', '');
+
             document.getElementById('modal-summary').innerHTML = `
-                Saving an extra <strong>${document.getElementById('tbl-monthly-saved').textContent}</strong> each month for 
-                <strong>${rangeYears.value} years</strong> at <strong>${parseNum(rangeRate.value).toFixed(2)}%</strong> return 
-                yields <strong>${fmtCurr(final.accumAfterTax || 0)}</strong> after taxes (including <strong>${fmtCurr(final.growth || 0)}</strong> in compound investment earnings).
+                <div style="background: rgba(11,23,42,0.6); padding: 12px 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 16px;">
+                    <div style="font-size: 14px; font-weight: 700; color: #dfa01e; margin-bottom: 6px;">Benefit of Spending Less Summary:</div>
+                    <div>By reducing your monthly budget by <strong>${document.getElementById('sticky-subtitle').textContent.split(' less')[0].replace('Spending ', '')}</strong>, 
+                    you could accumulate <strong>${fmtCurrWhole(final.preTaxTotal || 0)}</strong> before taxes, or <strong>${fmtCurrWhole(final.afterTaxTotal || 0)}</strong> after taxes over <strong>${years} years</strong> at <strong>${parseNum(rangeRate.value).toFixed(2)}%</strong> return.</div>
+                </div>
             `;
             const rows = document.getElementById('modal-table-rows');
             rows.innerHTML = schedule.map(d => `
                 <tr>
-                    <td style="padding: 6px 10px;">${d.year}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurr(d.annualSavings)}</td>
-                    <td style="padding: 6px 10px; text-align: right; color: #dfa01e;">${fmtCurr(d.cumCash)}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurr(d.accumPreTax)}</td>
-                    <td style="padding: 6px 10px; text-align: right; font-weight: 700; color: #2563eb;">${fmtCurr(d.accumAfterTax)}</td>
+                    <td>${d.year}</td>
+                    <td>${fmtCurrWhole(d.preTaxTotal)}</td>
+                    <td style="font-weight: 700; color: #dfa01e;">${fmtCurrWhole(d.afterTaxTotal)}</td>
                 </tr>
             `).join('');
             modal.classList.add('active');
@@ -1045,9 +1097,10 @@
             document.getElementById('sec-chart').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        // Initial Run
+        // Initial Calculation
         calculate();
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>

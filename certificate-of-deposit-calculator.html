@@ -1,77 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate of Deposit Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your certificate of deposit (CD) earnings, interest compounding frequencies, annual percentage yield (APY), and tax implications.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Certificate of Deposit Calculator | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Use this calculator to find out how much interest you can earn on a certificate of deposit (CD). Just enter a few pieces of information and we will calculate your annual percentage yield (APY) and ending balance. Click on the 'View Report' button to see a detailed schedule of your CD's balance and interest earned.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .cd-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .cd-stat-card {
-            background: rgba(11, 23, 42, 0.85);
-            border: 1px solid rgba(223, 160, 30, 0.3);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-        }
-        .cd-stat-val {
-            font-size: 24px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .cd-stat-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .cd-bar-rect {
-            transition: height 0.4s ease, y 0.4s ease, fill 0.2s ease;
-            cursor: pointer;
-        }
-        .cd-bar-rect:hover {
-            fill: #dfa01e !important;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="certificate-of-deposit-calculator.css?v=2">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
             <span></span>
@@ -83,7 +134,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -115,250 +167,204 @@
     <main class="calc-white-wrapper">
         <article class="calc-white-container">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-9.jpg" alt="Certificate of Deposit" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Image Banner: Matching Screenshot 1 -->
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/5-Considerations-for-Your-Social-Security-Strategy.jpg" alt="Certificate of Deposit Calculator - Raymond James" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Title & Meta Header matching Screenshot 1 -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">CERTIFICATE OF DEPOSIT CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
+                    <a href="resources.html?category=Savings%20%26%20Investments" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
                     <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
                 </div>
                 <p class="calc-intro-p">
-                    Use this calculator to find out how much interest you can earn on a certificate of deposit (CD) and determine how federal and state taxes will affect your rate of return. To calculate federal and state taxes, enter your details under "Your Taxes" below to see a detailed estimate of your CD earnings and tax implications.
+                    Use this calculator to find out how much interest you can earn on a certificate of deposit (CD). Just enter a few pieces of information and we will calculate your annual percentage yield (APY) and ending balance. Click on the "View Report" button to see a detailed schedule of your CD's balance and interest earned.
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Floating Action Box matching Screenshot 1 & 2 -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateCD()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateCD()">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
+                    <div class="calc-action-subtitle" id="sticky-subtitle">Certificate of Deposit Calculator</div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Detailed Report Schedule">
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <span class="calc-req-text">*indicates required</span>
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Form Card: Certificate of Deposit Calculator -->
-            <div style="background: #0d1b31; border: 1px solid rgba(223, 160, 30, 0.35); border-radius: 6px; padding: 24px; margin-bottom: 25px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223, 160, 30, 0.2); padding-bottom: 12px; margin-bottom: 20px;">
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0; font-weight: 700;">Certificate of Deposit Calculator</h2>
-                    <span style="font-size: 11px; color: #94a3b8; font-style: italic;">*indicates required</span>
-                </div>
+            <!-- ============================================================
+             INPUT FIELDS PANEL matching Screenshot 2
+             ============================================================ -->
+            <div class="cd-calc-panel">
 
-                <!-- Initial Deposit -->
+                <!-- Initial deposit:* -->
                 <div class="calc-input-row">
                     <div class="calc-label-col">
-                        <label for="inp-deposit" class="calc-field-label">Initial deposit:*</label>
-                        <span class="calc-q-dot" title="The opening balance of your certificate of deposit.">?</span>
+                        <label for="inp-principal" class="calc-field-label">Initial deposit:*</label>
+                        <span class="calc-q-dot" title="The amount of money you choose to open your CD with.">?</span>
                     </div>
-                    <input type="text" id="inp-deposit" class="calc-text-input" value="$10,000">
+                    <input type="text" id="inp-principal" class="calc-text-input" value="$1,000">
                     <div class="calc-slider-col">
-                        <input type="range" id="range-deposit" class="calc-range-slider" min="0" max="100000" step="500" value="10000">
+                        <input type="range" id="range-principal" class="calc-range-slider" min="0" max="1000000" step="500" value="1000">
                         <div class="calc-tick-labels">
                             <span>$0</span>
-                            <span>$25,000</span>
-                            <span>$50,000</span>
-                            <span>$75,000</span>
-                            <span>$100,000</span>
+                            <span>$10k</span>
+                            <span>$100k</span>
+                            <span>$1m</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Term in months -->
+                <!-- Months:* -->
                 <div class="calc-input-row">
                     <div class="calc-label-col">
-                        <label for="inp-term" class="calc-field-label">Term in:*</label>
-                        <span class="calc-q-dot" title="The duration of the CD expressed in months.">?</span>
+                        <label for="inp-months" class="calc-field-label">Months:*</label>
+                        <span class="calc-q-dot" title="The term of the CD, expressed in months.">?</span>
                     </div>
-                    <input type="text" id="inp-term" class="calc-text-input" value="60">
+                    <input type="text" id="inp-months" class="calc-text-input" value="60">
                     <div class="calc-slider-col">
-                        <input type="range" id="range-term" class="calc-range-slider" min="3" max="120" step="1" value="60">
+                        <input type="range" id="range-months" class="calc-range-slider" min="1" max="120" step="1" value="60">
                         <div class="calc-tick-labels">
-                            <span>3</span>
-                            <span>30</span>
-                            <span>60</span>
-                            <span>90</span>
+                            <span>1</span>
+                            <span>41</span>
+                            <span>80</span>
                             <span>120</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Interest rate -->
+                <!-- Interest rate:* -->
                 <div class="calc-input-row">
                     <div class="calc-label-col">
                         <label for="inp-rate" class="calc-field-label">Interest rate:*</label>
-                        <span class="calc-q-dot" title="The nominal annual interest rate paid on the CD.">?</span>
+                        <span class="calc-q-dot" title="The published interest rate for this CD. Make sure to enter the actual interest rate, not the annual percentage yield (APY).">?</span>
                     </div>
-                    <input type="text" id="inp-rate" class="calc-text-input" value="4%">
+                    <input type="text" id="inp-rate" class="calc-text-input" value="1%">
                     <div class="calc-slider-col">
-                        <input type="range" id="range-rate" class="calc-range-slider" min="0" max="15" step="0.1" value="4">
+                        <input type="range" id="range-rate" class="calc-range-slider" min="0" max="12" step="0.05" value="1">
                         <div class="calc-tick-labels">
                             <span>0%</span>
                             <span>4%</span>
                             <span>8%</span>
                             <span>12%</span>
-                            <span>15%</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Compound period -->
+                <!-- Compounding:* -->
                 <div class="calc-input-row">
                     <div class="calc-label-col">
-                        <label for="sel-compound" class="calc-field-label">Compound period:*</label>
-                        <span class="calc-q-dot" title="How frequently earned interest is compounded.">?</span>
+                        <label for="select-compounding" class="calc-field-label">Compounding:*</label>
+                        <span class="calc-q-dot" title="The interest earned on your CD is added to your CD balance at regular intervals. This calculator allows you to choose the frequency that your CD's interest income is compounded.">?</span>
                     </div>
-                    <div style="flex: 1; max-width: 260px;">
-                        <select id="sel-compound" class="calc-text-input" style="width: 100%; text-align: left; padding: 7px 12px; cursor: pointer; background: #0b172a; border: 1px solid rgba(223,160,30,0.4); color: #fff;">
+                    <div style="grid-column: span 2;">
+                        <select id="select-compounding" class="calc-select-input" onchange="calculateCD()">
                             <option value="1" selected>compounded annually</option>
                             <option value="2">compounded semi-annually</option>
                             <option value="4">compounded quarterly</option>
                             <option value="12">compounded monthly</option>
-                            <option value="365">compounded daily</option>
+                            <option value="365">compounded daily (365 days)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Annual percentage yield (APY) -->
-                <div class="calc-input-row" style="margin-bottom: 0;">
+                <!-- Annual percentage yield (APY): -->
+                <div class="calc-input-row">
                     <div class="calc-label-col">
-                        <span class="calc-field-label">Annual percentage yield (APY):</span>
-                        <span class="calc-q-dot" title="Effective annual return incorporating compounding frequency.">?</span>
+                        <span class="calc-field-label">Annual percentage yield<br>(APY):</span>
+                        <span class="calc-q-dot" title="This is the effective annual interest rate earned for this CD. A CD's APY depends on the frequency of compounding and the interest rate.">?</span>
                     </div>
-                    <div style="flex: 1; max-width: 260px;">
-                        <span id="disp-apy" style="font-family: 'Open Sans', sans-serif; font-size: 16px; font-weight: 700; color: #dfa01e; display: inline-block; padding: 6px 12px; background: rgba(11,23,42,0.9); border: 1px solid rgba(223,160,30,0.3); border-radius: 4px; width: 100%;">4.00%</span>
+                    <div>
+                        <div id="out-apy" class="calc-readonly-output">1%</div>
                     </div>
-                </div>
-
-                <!-- Collapsible: Your Taxes (Optional) -->
-                <div style="margin-top: 22px; padding-top: 16px; border-top: 1px dashed rgba(223,160,30,0.25);">
-                    <button type="button" onclick="toggleTaxesSection()" style="background: transparent; border: none; color: #dfa01e; font-size: 13.5px; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 0;">
-                        <i class="fas fa-chevron-down" id="taxes-chevron"></i>
-                        <span>YOUR TAXES (OPTIONAL ESTIMATION)</span>
-                    </button>
-                    <div id="taxes-body" style="display: none; margin-top: 16px; padding: 16px; background: #091424; border-radius: 6px; border: 1px solid rgba(223,160,30,0.2);">
-                        <div class="calc-input-row">
-                            <div class="calc-label-col">
-                                <label for="inp-fed-tax" class="calc-field-label">Marginal Federal Tax Rate (%):</label>
-                            </div>
-                            <input type="text" id="inp-fed-tax" class="calc-text-input" value="24%">
-                            <div class="calc-slider-col">
-                                <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="37" step="1" value="24">
-                            </div>
-                        </div>
-                        <div class="calc-input-row" style="margin-bottom: 0;">
-                            <div class="calc-label-col">
-                                <label for="inp-state-tax" class="calc-field-label">State Tax Rate (%):</label>
-                            </div>
-                            <input type="text" id="inp-state-tax" class="calc-text-input" value="5%">
-                            <div class="calc-slider-col">
-                                <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
-                            </div>
-                        </div>
-                    </div>
+                    <div></div>
                 </div>
 
             </div>
-
-            <!-- Result Hero Banner -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 20px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <div style="font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; font-weight: 600; margin-bottom: 6px;">PROJECTED MATURITY VALUE</div>
-                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #ffffff; margin: 0; font-weight: 700; letter-spacing: 0.5px;">
-                    YOUR TOTAL IS <span style="color: #dfa01e;">$12,166.53</span> AFTER 5 YEARS
-                </h2>
-            </div>
-
-            <!-- Key Summary Metric Cards -->
-            <div class="cd-stat-grid">
-                <div class="cd-stat-card">
-                    <div class="cd-stat-val" id="card-principal">$10,000.00</div>
-                    <div class="cd-stat-label">Initial Deposit</div>
-                </div>
-                <div class="cd-stat-card">
-                    <div class="cd-stat-val" id="card-interest">$2,166.53</div>
-                    <div class="cd-stat-label">Total Interest Earned</div>
-                </div>
-                <div class="cd-stat-card">
-                    <div class="cd-stat-val" id="card-apy">4.00%</div>
-                    <div class="cd-stat-label">Annual Percentage Yield</div>
-                </div>
-                <div class="cd-stat-card">
-                    <div class="cd-stat-val" id="card-aftertax">$11,538.23</div>
-                    <div class="cd-stat-label">Estimated After-Tax Total</div>
-                </div>
-            </div>
-
-            <!-- Chart Section: Balance Over Time -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title">CD BALANCE GROWTH OVER TERM</h2>
-                    <span style="font-size: 12px; color: #dfa01e; font-weight: 600;">Year-by-Year Value</span>
-                </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-                    <div id="cd-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- SVG Bar Chart inserted dynamically -->
-                    </div>
-                </div>
-            </section>
 
             <!-- ============================================================
-             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT)
+             RESULT ACCORDION HEADER matching Screenshot 2
              ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
+            <div class="calc-result-accordion-header" onclick="toggleChartAccordion()">
+                <h2 class="calc-result-title" id="accordion-title">YOUR TOTAL IS $1,051.01 AFTER 5 YEARS</h2>
+                <i class="fas fa-chevron-up calc-result-chevron" id="chart-chevron"></i>
+            </div>
+
+            <!-- ============================================================
+             INTERACTIVE YEAR-BY-YEAR SVG BAR CHART matching Screenshot 2
+             ============================================================ -->
+            <div class="cd-chart-card" id="chart-card-container">
+                <div class="cd-chart-wrapper">
+                    <svg class="cd-svg-chart" id="cd-svg" viewBox="0 0 760 380" preserveAspectRatio="xMidYMid meet">
+                        <!-- Dynamically drawn via JavaScript -->
+                    </svg>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             DEFINITIONS matching Screenshot 3 & 4
+             ============================================================ -->
+            <section class="calc-def-wrap">
+                <h3 class="calc-def-heading">DEFINITIONS</h3>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">INITIAL DEPOSIT</h4>
+                    <div class="calc-def-term">INITIAL DEPOSIT</div>
                     <p class="calc-def-desc">
                         The amount of money you choose to open your CD with.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">TERM</h4>
+                    <div class="calc-def-term">MONTHS</div>
                     <p class="calc-def-desc">
                         The term of the CD, expressed in months.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">INTEREST RATE</h4>
+                    <div class="calc-def-term">INTEREST RATE</div>
                     <p class="calc-def-desc">
-                        The published interest rate for this CD. Make sure to enter the actual interest rate, not the annual percentage yield (APY). It is important to remember that most quotations are foundation, not that future reinvestment rates can be predicted with certainty.
+                        The published interest rate for this CD. Make sure to enter the actual interest rate, not the annual percentage yield (APY). It is important to remember that these scenarios are hypothetical and that future interest rates can't be predicted with certainty.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">COMPOUNDING</h4>
+                    <div class="calc-def-term">COMPOUNDING</div>
                     <p class="calc-def-desc">
-                        The interest earned on your CD is added to your contribution at regular intervals. This is called "compounding." This calculator allows you to choose the frequency that your CD's interest returns are compounded. The more frequently this occurs, the sooner your reinvested interest for you will generate additional returns. You may want to check with your financial institution or account opening documents to find out how often interest is being compounded on your CD.
+                        The interest earned on your CD is added to your CD balance at regular intervals. This is called "compounding." This calculator allows you to choose the frequency that your CD's interest income is compounded. The more frequently this occurs, the sooner your accumulated interest income will generate additional interest. You may wish to check with your financial institution or account opening documents to find out how often interest is being compounded on your CD.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">ANNUAL PERCENTAGE YIELD (APY)</h4>
+                    <div class="calc-def-term">ANNUAL PERCENTAGE YIELD (APY)</div>
                     <p class="calc-def-desc">
-                        This is the effective annual interest rate earned for the CD. In CD terms APY depends on the frequency of compounding and the interest rate. Since APY expresses your actual interest earned per year, you can use it to compare CDs that have different interest rates and compounding frequencies.
+                        This is the effective annual interest rate earned for this CD. A CD's APY depends on the frequency of compounding and the interest rate. Since APY measures your actual interest earned per year, you can use it to compare CDs that have different interest rates and compounding frequencies.
                     </p>
                 </div>
+            </section>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+            <!-- ============================================================
+             DISCLAIMER matching Screenshot 4 & Live RJ Source
+             ============================================================ -->
+            <div class="calc-disclaimer-wrap">
+                <p class="calc-disclaimer-p">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                 </p>
             </div>
 
@@ -366,296 +372,464 @@
     </main>
 
     <!-- ============================================================
-     VIEW REPORT MODAL
+     VIEW REPORT MODAL SCHEDULE
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 850px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Certificate of Deposit Schedule &amp; Analysis Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
-                </div>
+    <div class="calc-modal-overlay" id="modal-report">
+        <div class="calc-modal">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Certificate of Deposit Schedule Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeReportModal()">&times;</button>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Schedule table rendered by JS -->
+            <div class="calc-modal-body">
+                <div id="modal-summary-text" style="line-height: 1.7; margin-bottom: 20px; color: #cbd5e1;"></div>
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Starting Balance</th>
+                            <th>Interest Earned</th>
+                            <th>Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-schedule-tbody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="calc-modal-footer">
+                <button type="button" class="calc-btn" onclick="window.print()" style="background: transparent; color: #ffffff; border-color: rgba(223,160,30,0.5);"><i class="fas fa-print"></i> Print</button>
+                <button type="button" class="calc-btn" onclick="closeReportModal()" style="background: #dfa01e; color: #0b172a; border-color: #dfa01e;">Close</button>
             </div>
         </div>
     </div>
 
     <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <section class="champion-strip">
+
+        <!-- Brand / Social -->
+        <div class="champ-brand">
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Center Quote -->
+        <div class="champ-quote">
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
+            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
+            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
+            complete the organization's initial and ongoing certification requirements to use the certification marks.
+        </div>
+
+        <!-- CTA -->
+        <div class="champ-cta">
+            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+        </div>
+
+    </section>
+
+    <!-- ============================================================
      FOOTER
      ============================================================ -->
-    <footer class="calc-footer">
-        <div class="calc-footer-inner">
-            <p class="calc-footer-copy">&copy; 2026 The Seiler Group &bull; Raymond James Financial Services. All rights reserved.</p>
+    <footer class="site-footer">
+
+        <div class="footer-addresses">
+            <div class="addr-row">
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
+                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
+                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
+            </div>
+            <div class="addr-row">
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
+                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            </div>
         </div>
+
+        <div class="footer-legal">
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
+                jurisdictions for which they are properly registered. Therefore, a response to a request for information
+                may be delayed. Please note that not all of the investments and services mentioned are available in
+                every state. Investors outside of the United States are subject to securities and tax regulations within
+                their applicable jurisdictions that are not addressed on this site. Contact our office for information
+                and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
+                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
+                not responsible for the content of any website or the collection or use of information regarding any
+                website's users and/or members.</p>
+            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
+                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
+                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
+                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
+                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
+                    Use</a>
+            </p>
+        </div>
+
     </footer>
 
     <!-- ============================================================
-     CALCULATOR JAVASCRIPT ENGINE
+     INTERACTIVE JAVASCRIPT: EXACT DINKYTOWN CD CALCULATION ENGINE
      ============================================================ -->
     <script>
+        // Formatting helper functions
+        const fmtCurr = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const fmtCurrWhole = (n) => '$' + Math.round(Number(n || 0)).toLocaleString('en-US');
+        const parseNum = (v) => parseFloat(String(v || 0).replace(/[^0-9.-]/g, '')) || 0;
+
         function toggleMobileMenu(e) {
-            e.stopPropagation();
+            if (e) { e.preventDefault(); e.stopPropagation(); }
             const drawer = document.getElementById('mobile-drawer');
             const overlay = document.getElementById('drawer-overlay');
-            const toggle = document.getElementById('mobile-nav-toggle');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('open');
-            toggle.classList.toggle('open');
-        }
-
-        function toggleTaxesSection() {
-            const body = document.getElementById('taxes-body');
-            const chevron = document.getElementById('taxes-chevron');
-            if (body.style.display === 'none') {
-                body.style.display = 'block';
-                chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
             } else {
-                body.style.display = 'none';
-                chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
             }
-            calculateCD();
         }
 
-        // Helpers
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        function toggleChartAccordion() {
+            const card = document.getElementById('chart-card-container');
+            const chevron = document.getElementById('chart-chevron');
+            if (!card) return;
+            if (card.style.display === 'none') {
+                card.style.display = 'block';
+                chevron.classList.remove('collapsed');
+            } else {
+                card.style.display = 'none';
+                chevron.classList.add('collapsed');
+            }
         }
 
-        // Sync slider & text inputs
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
+        // Element references
+        const inpPrincipal = document.getElementById('inp-principal');
+        const rangePrincipal = document.getElementById('range-principal');
+        const inpMonths = document.getElementById('inp-months');
+        const rangeMonths = document.getElementById('range-months');
+        const inpRate = document.getElementById('inp-rate');
+        const rangeRate = document.getElementById('range-rate');
+        const selectCompounding = document.getElementById('select-compounding');
+        const outApy = document.getElementById('out-apy');
+        const accordionTitle = document.getElementById('accordion-title');
+        const cdSvg = document.getElementById('cd-svg');
 
-            range.addEventListener('input', () => {
-                const val = parseFloat(range.value);
-                if (isCurrency) {
-                    inp.value = '$' + Math.round(val).toLocaleString('en-US');
-                } else if (isPct) {
-                    inp.value = val + '%';
-                } else {
-                    inp.value = val;
-                }
+        // Bidirectional Input + Slider Binding
+        function bindPrincipal() {
+            rangePrincipal.addEventListener('input', () => {
+                inpPrincipal.value = fmtCurrWhole(rangePrincipal.value);
                 calculateCD();
             });
-
-            inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
-                if (val < 0) val = 0;
-                if (maxVal && val > maxVal) val = maxVal;
-                range.value = val;
-                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
+            inpPrincipal.addEventListener('change', () => {
+                let v = parseNum(inpPrincipal.value);
+                if (v < 0) v = 0;
+                if (v > 1000000) v = 1000000;
+                rangePrincipal.value = v;
+                inpPrincipal.value = fmtCurrWhole(v);
                 calculateCD();
             });
         }
 
-        bindSliderAndInput('inp-deposit', 'range-deposit', true, false, 100000);
-        bindSliderAndInput('inp-term', 'range-term', false, false, 120);
-        bindSliderAndInput('inp-rate', 'range-rate', false, true, 15);
-        bindSliderAndInput('inp-fed-tax', 'range-fed-tax', false, true, 37);
-        bindSliderAndInput('inp-state-tax', 'range-state-tax', false, true, 15);
+        function bindMonths() {
+            rangeMonths.addEventListener('input', () => {
+                inpMonths.value = rangeMonths.value;
+                calculateCD();
+            });
+            inpMonths.addEventListener('change', () => {
+                let v = Math.round(parseNum(inpMonths.value));
+                if (v < 1) v = 1;
+                if (v > 120) v = 120;
+                rangeMonths.value = v;
+                inpMonths.value = v;
+                calculateCD();
+            });
+        }
 
-        document.getElementById('sel-compound').addEventListener('change', calculateCD);
+        function bindRate() {
+            rangeRate.addEventListener('input', () => {
+                inpRate.value = parseFloat(rangeRate.value).toFixed(2).replace(/\.00$/, '') + '%';
+                calculateCD();
+            });
+            inpRate.addEventListener('change', () => {
+                let v = parseNum(inpRate.value);
+                if (v < 0) v = 0;
+                if (v > 12) v = 12;
+                rangeRate.value = v;
+                inpRate.value = v.toFixed(2).replace(/\.00$/, '') + '%';
+                calculateCD();
+            });
+        }
 
-        let lastSchedule = [];
+        bindPrincipal();
+        bindMonths();
+        bindRate();
 
+        let lastCalculatedData = null;
+
+        // Core CD Calculation
         function calculateCD() {
-            const principal = parseCurrency(document.getElementById('inp-deposit').value);
-            const termMonths = parseInt(document.getElementById('inp-term').value) || 1;
-            const nominalRate = (parsePercent(document.getElementById('inp-rate').value)) / 100;
-            const compoundFreq = parseInt(document.getElementById('sel-compound').value) || 1;
-            const fedTaxRate = (parsePercent(document.getElementById('inp-fed-tax').value)) / 100;
-            const stateTaxRate = (parsePercent(document.getElementById('inp-state-tax').value)) / 100;
-            const totalTaxRate = fedTaxRate + stateTaxRate;
+            const principal = parseNum(inpPrincipal.value);
+            const months = Math.max(1, Math.round(parseNum(inpMonths.value)));
+            const nominalRate = parseNum(inpRate.value) / 100; // e.g. 0.01
+            const compoundFreq = parseInt(selectCompounding.value) || 1; // 1, 2, 4, 12, 365
 
-            // APY Formula: (1 + r/n)^n - 1
-            const apy = Math.pow(1 + (nominalRate / compoundFreq), compoundFreq) - 1;
-            document.getElementById('disp-apy').textContent = (apy * 100).toFixed(2) + '%';
-            document.getElementById('card-apy').textContent = (apy * 100).toFixed(2) + '%';
+            // Annual Percentage Yield (APY) formula:
+            // APY = (1 + r / n)^n - 1
+            let apy = 0;
+            if (compoundFreq > 0) {
+                apy = Math.pow(1 + (nominalRate / compoundFreq), compoundFreq) - 1;
+            }
+            const apyPct = apy * 100;
+            // Format APY: if integer like 1, show "1%", if fractional, show up to 2 decimal places e.g. "1.05%"
+            let apyStr = apyPct.toFixed(2);
+            if (apyStr.endsWith('.00')) {
+                apyStr = parseInt(apyStr).toString();
+            } else if (apyStr.endsWith('0')) {
+                apyStr = apyPct.toFixed(1);
+            }
+            outApy.innerText = apyStr + '%';
 
-            const termYears = termMonths / 12;
+            // CD Term in Years
+            const totalYears = months / 12;
 
-            // Future Value: A = P * (1 + r/n)^(n * t)
-            const maturityValue = principal * Math.pow(1 + (nominalRate / compoundFreq), compoundFreq * termYears);
-            const totalInterest = maturityValue - principal;
+            // Total Ending Balance
+            // Standard Compound Interest formula for exact months:
+            // Total compounding periods N = compoundFreq * (months / 12)
+            const totalPeriods = compoundFreq * (months / 12);
+            const endingBalance = principal * Math.pow(1 + (nominalRate / compoundFreq), totalPeriods);
+            const totalInterest = endingBalance - principal;
 
-            // After-tax calculation
-            const taxesPaid = totalInterest * totalTaxRate;
-            const afterTaxTotal = maturityValue - taxesPaid;
+            // Accordion Title format:
+            // e.g. "YOUR TOTAL IS $1,051.01 AFTER 5 YEARS"
+            let timeStr = '';
+            if (months % 12 === 0) {
+                const y = months / 12;
+                timeStr = y === 1 ? '1 YEAR' : `${y} YEARS`;
+            } else if (months < 12) {
+                timeStr = months === 1 ? '1 MONTH' : `${months} MONTHS`;
+            } else {
+                const y = (months / 12).toFixed(1).replace(/\.0$/, '');
+                timeStr = `${y} YEARS`;
+            }
+            accordionTitle.innerHTML = `YOUR TOTAL IS ${fmtCurr(endingBalance)} AFTER ${timeStr}`;
 
-            // Update Header & Cards
-            const yearsLabel = (termYears % 1 === 0) ? `${termYears} YEARS` : `${termMonths} MONTHS`;
-            document.getElementById('res-headline').innerHTML = `YOUR TOTAL IS <span style="color: #dfa01e;">${formatCurrencyCents(maturityValue)}</span> AFTER ${yearsLabel}`;
-            document.getElementById('card-principal').textContent = formatCurrencyCents(principal);
-            document.getElementById('card-interest').textContent = formatCurrencyCents(totalInterest);
-            document.getElementById('card-aftertax').textContent = formatCurrencyCents(afterTaxTotal);
-
-            // Generate Year-by-Year Schedule for Chart and Report
-            const fullYears = Math.max(1, Math.ceil(termYears));
-            const yearlyData = [];
+            // Year by year schedule for Chart and Report
+            const yearSchedule = [];
             let currentBal = principal;
-            lastSchedule = [];
+            const numFullYears = Math.floor(months / 12);
+            const remMonths = months % 12;
 
-            for (let y = 1; y <= fullYears; y++) {
-                const effectiveTime = Math.min(y, termYears);
-                const balAtYear = principal * Math.pow(1 + (nominalRate / compoundFreq), compoundFreq * effectiveTime);
+            for (let y = 1; y <= numFullYears; y++) {
+                const balAtYear = principal * Math.pow(1 + (nominalRate / compoundFreq), compoundFreq * y);
                 const interestThisYear = balAtYear - currentBal;
-                yearlyData.push({
-                    year: y,
-                    label: (y <= termYears) ? `Year ${y}` : `Mo ${termMonths}`,
-                    balance: balAtYear,
+                yearSchedule.push({
+                    periodLabel: `${y}`,
+                    yearNum: y,
+                    startBal: currentBal,
                     interest: interestThisYear,
-                    cumulativeInterest: balAtYear - principal
+                    endBal: balAtYear
                 });
                 currentBal = balAtYear;
             }
-            lastSchedule = yearlyData;
 
-            renderCDChart(yearlyData);
-        }
-
-        function renderCDChart(data) {
-            const container = document.getElementById('cd-chart-container');
-            if (!container || data.length === 0) return;
-
-            const width = container.clientWidth || 700;
-            const height = 300;
-            const padLeft = 70;
-            const padRight = 30;
-            const padTop = 35;
-            const padBottom = 45;
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            const maxBal = Math.max(...data.map(d => d.balance)) * 1.08;
-            const minBal = 0;
-
-            const barWidth = Math.min(65, (chartW / data.length) * 0.65);
-            const gap = chartW / data.length;
-
-            let gridSvg = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const yVal = minBal + ((maxBal - minBal) * (i / steps));
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
-                `;
+            if (remMonths > 0) {
+                const finalBal = endingBalance;
+                const interestRem = finalBal - currentBal;
+                const label = numFullYears > 0 ? `${(months / 12).toFixed(1)}` : `${months}m`;
+                yearSchedule.push({
+                    periodLabel: label,
+                    yearNum: months / 12,
+                    startBal: currentBal,
+                    interest: interestRem,
+                    endBal: finalBal
+                });
             }
 
-            let barsSvg = '';
-            data.forEach((d, idx) => {
-                const xPos = padLeft + (idx * gap) + (gap - barWidth) / 2;
-                const barH = (d.balance / maxBal) * chartH;
-                const yPos = padTop + chartH - barH;
+            lastCalculatedData = {
+                principal,
+                months,
+                nominalRate,
+                compoundFreq,
+                apy,
+                endingBalance,
+                totalInterest,
+                yearSchedule
+            };
 
-                barsSvg += `
-                    <rect class="cd-bar-rect" x="${xPos}" y="${yPos}" width="${barWidth}" height="${barH}" fill="#2563eb" rx="3">
-                        <title>${d.label}: ${formatCurrencyCents(d.balance)}</title>
-                    </rect>
-                    <text x="${xPos + barWidth / 2}" y="${yPos - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">
-                        ${formatCurrency(d.balance)}
-                    </text>
-                    <text x="${xPos + barWidth / 2}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">
-                        ${d.year}
-                    </text>
-                `;
-            });
-
-            container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    ${barsSvg}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                    <text x="${width / 2}" y="${height + 5}" fill="#dfa01e" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">YEAR</text>
-                </svg>
-            `;
+            renderChart(yearSchedule, endingBalance);
         }
 
-        function openReportModal() {
-            calculateCD();
-            const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
-            const principal = parseCurrency(document.getElementById('inp-deposit').value);
-            const termMonths = document.getElementById('inp-term').value;
-            const nominalRate = document.getElementById('inp-rate').value;
-            const apy = document.getElementById('disp-apy').textContent;
+        // Render Year-by-Year SVG Bar Chart matching Screenshot 2
+        function renderChart(schedule, maxBal) {
+            if (!cdSvg) return;
 
-            let rows = '';
-            lastSchedule.forEach(item => {
-                rows += `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                        <td style="padding: 10px; text-align: left; color: #fff; font-weight: 600;">Year ${item.year}</td>
-                        <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(item.balance - item.interest)}</td>
-                        <td style="padding: 10px; color: #dfa01e;">+${formatCurrencyCents(item.interest)}</td>
-                        <td style="padding: 10px; color: #38bdf8;">${formatCurrencyCents(item.cumulativeInterest)}</td>
-                        <td style="padding: 10px; color: #ffffff; font-weight: 700;">${formatCurrencyCents(item.balance)}</td>
+            const width = 760;
+            const height = 380;
+            const padLeft = 70;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 60;
+            const plotW = width - padLeft - padRight;
+            const plotH = height - padTop - padBottom;
+
+            // Determine upper Y-axis bound
+            // In Screenshot 2: Ending balance is $1,051, Y-axis max is $1,200 with step $200
+            let targetMax = maxBal * 1.15;
+            if (targetMax <= 0) targetMax = 1000;
+
+            // Find a nice step for 5 to 6 ticks
+            const roughStep = targetMax / 5;
+            const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+            const normalized = roughStep / magnitude;
+            let step = 200;
+            if (normalized < 1.5) step = 1 * magnitude;
+            else if (normalized < 3) step = 2 * magnitude;
+            else if (normalized < 7) step = 5 * magnitude;
+            else step = 10 * magnitude;
+
+            const yMax = Math.ceil(targetMax / step) * step;
+            const numTicks = Math.round(yMax / step);
+
+            let svgContent = '';
+
+            // Draw Horizontal Gridlines & Y-Axis Labels
+            for (let i = 0; i <= numTicks; i++) {
+                const val = i * step;
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+
+                // Grid line
+                svgContent += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" class="cd-grid-line" />`;
+                // Y label
+                svgContent += `<text x="${padLeft - 10}" y="${yPos + 4}" class="cd-axis-text" text-anchor="end">${fmtCurrWhole(val)}</text>`;
+            }
+
+            // Draw Y and X axis borders
+            svgContent += `<line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" class="cd-axis-line" />`;
+            svgContent += `<line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" class="cd-axis-line" />`;
+
+            // Draw Bars
+            const numBars = schedule.length;
+            if (numBars > 0) {
+                const totalSlotW = plotW / numBars;
+                // Bar width between 30 and 70px
+                const barW = Math.min(65, Math.max(24, totalSlotW * 0.55));
+
+                schedule.forEach((item, idx) => {
+                    const cx = padLeft + (idx + 0.5) * totalSlotW;
+                    const bx = cx - barW / 2;
+                    const barH = (item.endBal / yMax) * plotH;
+                    const by = padTop + plotH - barH;
+
+                    // Bar element (Royal Blue solid bar)
+                    svgContent += `
+                        <rect x="${bx}" y="${by}" width="${barW}" height="${barH}" class="cd-bar" rx="2" ry="2">
+                            <title>Year ${item.periodLabel}: Ending Balance ${fmtCurr(item.endBal)}</title>
+                        </rect>
+                    `;
+
+                    // Value label above bar (e.g. $1,010, $1,020, etc.)
+                    svgContent += `
+                        <text x="${cx}" y="${by - 8}" class="cd-bar-val">${fmtCurrWhole(item.endBal)}</text>
+                    `;
+
+                    // X tick label (1, 2, 3...)
+                    svgContent += `
+                        <text x="${cx}" y="${padTop + plotH + 20}" class="cd-axis-text" text-anchor="middle">${item.periodLabel}</text>
+                    `;
+                });
+            }
+
+            // X-Axis Title: "Year" (matching Screenshot 2)
+            svgContent += `
+                <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 46}" class="cd-axis-label" text-anchor="middle">Year</text>
+            `;
+
+            cdSvg.innerHTML = svgContent;
+        }
+
+        // View Report Modal Logic
+        function openReportModal() {
+            if (!lastCalculatedData) calculateCD();
+            const modal = document.getElementById('modal-report');
+            const summaryDiv = document.getElementById('modal-summary-text');
+            const tbody = document.getElementById('modal-schedule-tbody');
+            if (!modal || !summaryDiv || !tbody) return;
+
+            const d = lastCalculatedData;
+            summaryDiv.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; background: #11233e; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3);">
+                    <div><strong>Initial Deposit:</strong> ${fmtCurr(d.principal)}</div>
+                    <div><strong>Term:</strong> ${d.months} Months (${(d.months/12).toFixed(1)} Years)</div>
+                    <div><strong>Interest Rate:</strong> ${(d.nominalRate * 100).toFixed(2)}%</div>
+                    <div><strong>APY:</strong> ${(d.apy * 100).toFixed(2)}%</div>
+                    <div><strong>Total Interest:</strong> <span style="color: #dfa01e; font-weight: 700;">${fmtCurr(d.totalInterest)}</span></div>
+                    <div><strong>Ending Balance:</strong> <span style="color: #dfa01e; font-weight: 700;">${fmtCurr(d.endingBalance)}</span></div>
+                </div>
+            `;
+
+            let rowsHtml = '';
+            d.yearSchedule.forEach(item => {
+                rowsHtml += `
+                    <tr>
+                        <td>Year ${item.periodLabel}</td>
+                        <td>${fmtCurr(item.startBal)}</td>
+                        <td>${fmtCurr(item.interest)}</td>
+                        <td><strong>${fmtCurr(item.endBal)}</strong></td>
                     </tr>
                 `;
             });
+            tbody.innerHTML = rowsHtml;
 
-            content.innerHTML = `
-                <div style="background: #091424; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px;">
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; font-size: 13px; color: #cbd5e1;">
-                        <div><strong style="color: #94a3b8;">Principal:</strong><br><span style="color: #fff; font-weight: 700;">${formatCurrencyCents(principal)}</span></div>
-                        <div><strong style="color: #94a3b8;">Term:</strong><br><span style="color: #fff; font-weight: 700;">${termMonths} Months</span></div>
-                        <div><strong style="color: #94a3b8;">Nominal Rate:</strong><br><span style="color: #fff; font-weight: 700;">${nominalRate}</span></div>
-                        <div><strong style="color: #94a3b8;">APY:</strong><br><span style="color: #dfa01e; font-weight: 700;">${apy}</span></div>
-                    </div>
-                </div>
-
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
-                    <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Period</th>
-                            <th style="padding: 12px 10px;">Starting Balance</th>
-                            <th style="padding: 12px 10px;">Interest Earned</th>
-                            <th style="padding: 12px 10px;">Cumulative Interest</th>
-                            <th style="padding: 12px 10px;">Ending Balance</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows}
-                    </tbody>
-                </table>
-            `;
-
-            modal.style.display = 'block';
+            modal.style.display = 'flex';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('modal-report');
+            if (modal) modal.style.display = 'none';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
-        window.addEventListener('resize', () => {
-            if (lastSchedule.length > 0) renderCDChart(lastSchedule);
+        // Close modal on click outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('modal-report');
+            if (e.target === modal) {
+                closeReportModal();
+            }
         });
 
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             calculateCD();
         });
+        calculateCD();
     </script>
 </body>
+
 </html>

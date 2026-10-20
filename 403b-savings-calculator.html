@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403(b) Savings Calculator | The Seiler Group of Raymond James</title>
     <meta name="description"
-        content="A 403(b) plan is commonly available to employees of non-profit organizations, hospitals, and universities. Calculate your tax-deferred retirement accumulation and employer match.">
+        content="403(b) plans are only available for employees of certain nonprofit tax-exempt organizations: 501c(3) corps, including colleges, universities, schools, hospitals, etc. Calculate your retirement accumulation before and after investment fees.">
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=2">
+    <link rel="stylesheet" href="403b-savings-calculator.css?v=1">
 </head>
 
 <body class="calc-white-page">
@@ -177,32 +177,55 @@
             <header class="calc-white-header">
                 <h1 class="calc-white-title">403(B) SAVINGS CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <span style="font-family: 'Open Sans', sans-serif; font-size: 13.5px; color: #666;">Retirement &amp; Longevity &nbsp;//&nbsp;</span>
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <div class="calc-meta-left">
+                        <span class="calc-meta-category">Retirement &amp; Longevity</span>
+                        <span class="calc-meta-divider">//</span>
+                        <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    </div>
+                    <div class="calc-share-wrapper" id="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)" aria-haspopup="true" aria-expanded="false" title="Share Calculator">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown" role="menu" aria-label="Social Share Options">
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
+                                <i class="fab fa-x-twitter"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-em" title="Share via Email" aria-label="Share via Email" onclick="shareToSocial('email', event)">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    A 403(b) plan, commonly available to employees of certain non-profit (tax-exempt) organizations (public school systems, non-profit hospitals, churches, universities), is a special type of retirement plan that provides you with two important advantages. First, all contributions and earnings to your plan are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide matching contributions to your plan.
+                    403(b) plans are only available for employees of certain nonprofit tax-exempt organizations: 501c(3) corps, including colleges, universities, schools, hospitals, etc. If you are an employee of one of these organizations, a 403(b) can be one of your best tools for creating a secure retirement. It provides you with two important advantages. First, all contributions and earnings to your 403(b) are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide additional contributions to your 403(b).
                 </p>
             </header>
 
             <!-- Sticky Floating Action Box -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
-                    <div class="calc-btn-row">
-                        <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
-                        <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                    <div class="calc-action-top-row">
+                        <div class="calc-btn-row">
+                            <button type="button" class="calc-btn" id="btn-calculate">CALCULATE</button>
+                            <button type="button" class="calc-btn" id="btn-view-report">VIEW REPORT</button>
+                        </div>
+                        <div class="calc-action-right-icons">
+                            <div class="calc-action-help-box">
+                                <span class="calc-help-bubble" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">?</span>
+                                <button type="button" class="calc-menu-btn" id="btn-menu-report" title="View Full Report">
+                                    <i class="fas fa-bars"></i>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="calc-action-subtitle" id="calc-summary-banner">403(b) Savings Calculator</div>
-                    <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
-                            <i class="fas fa-question-circle"></i>
-                        </button>
-                        <button type="button" class="calc-icon-btn" id="btn-menu-report" title="View Full Report">
-                            <i class="fas fa-bars"></i>
-                        </button>
+                    <div class="calc-action-subtitle">403(b) Savings Calculator</div>
+                    <div class="calc-req-row">
                         <span class="calc-req-text">*indicates required</span>
                     </div>
                 </section>
@@ -226,7 +249,7 @@
                         </div>
                         <input type="text" id="inp-salary" class="calc-text-input" value="$40,000.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-salary" class="calc-range-slider" min="0" max="1000000" step="1000" value="40000">
+                            <input type="range" id="range-salary" class="calc-range-slider" min="0" max="100" step="0.25" value="50">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
                                 <span>$10k</span>
@@ -298,7 +321,7 @@
                         </div>
                         <input type="text" id="inp-balance" class="calc-text-input" value="$1,000.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-balance" class="calc-range-slider" min="0" max="10000000" step="500" value="1000">
+                            <input type="range" id="range-balance" class="calc-range-slider" min="0" max="100" step="0.25" value="10">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
                                 <span>$100k</span>
@@ -348,21 +371,21 @@
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-fee" class="calc-field-label">Annual investment fee:*</label>
-                            <span class="calc-q-dot" title="Annual plan administrative and expense ratio fees">?</span>
+                            <span class="calc-q-dot" title="Annual plan administrative and investment management fees">?</span>
                         </div>
                         <input type="text" id="inp-fee" class="calc-text-input" value="1%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fee" class="calc-range-slider" min="0" max="5" step="0.25" value="1">
+                            <input type="range" id="range-fee" class="calc-range-slider" min="0" max="12" step="0.25" value="1">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>2%</span>
-                                <span>3%</span>
-                                <span>5%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div style="font-family: 'Montserrat', sans-serif; font-size: 14.5px; font-weight: 800; color: #111; margin-top: 15px;" id="lbl-emp-total">
+                    <div class="calc-subtotal-line" id="lbl-emp-total">
                         Total employee contributions: $140,000.00
                     </div>
 
@@ -370,29 +393,29 @@
             </section>
 
             <!-- ============================================================
-             SECTION 2: 403(B) EMPLOYER CONTRIBUTION MATCH
+             SECTION 2: 403(B) EMPLOYER CONTRIBUTION/MATCH
              ============================================================ -->
             <section class="calc-section" id="sec-employer-match">
                 <div class="calc-sec-header" onclick="toggleSec('sec-employer-match')">
-                    <h2 class="calc-sec-title">403(B) EMPLOYER CONTRIBUTION MATCH:</h2>
+                    <h2 class="calc-sec-title">403(B) EMPLOYER CONTRIBUTION/MATCH:</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Percent of contribution -->
+                    <!-- Percent of salary -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-match-pct" class="calc-field-label">Percent of contribution:*</label>
-                            <span class="calc-q-dot" title="Percent of employee contribution matched by employer">?</span>
+                            <label for="inp-match-pct" class="calc-field-label">Percent of salary:*</label>
+                            <span class="calc-q-dot" title="Employer match expressed as a percentage of your annual salary">?</span>
                         </div>
                         <input type="text" id="inp-match-pct" class="calc-text-input" value="0%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-match-pct" class="calc-range-slider" min="0" max="100" step="1" value="0">
+                            <input type="range" id="range-match-pct" class="calc-range-slider" min="0" max="24" step="0.5" value="0">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>33%</span>
-                                <span>67%</span>
-                                <span>100%</span>
+                                <span>8%</span>
+                                <span>16%</span>
+                                <span>24%</span>
                             </div>
                         </div>
                     </div>
@@ -401,21 +424,21 @@
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-match-amt" class="calc-field-label">Amount per year:*</label>
-                            <span class="calc-q-dot" title="Employer flat dollar contribution per year">?</span>
+                            <span class="calc-q-dot" title="Employer match expressed as a flat dollar amount per year">?</span>
                         </div>
                         <input type="text" id="inp-match-amt" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-match-amt" class="calc-range-slider" min="0" max="50000" step="500" value="0">
+                            <input type="range" id="range-match-amt" class="calc-range-slider" min="0" max="100" step="0.25" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$15k</span>
-                                <span>$35k</span>
-                                <span>$50k</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$20k</span>
                             </div>
                         </div>
                     </div>
 
-                    <div style="font-family: 'Montserrat', sans-serif; font-size: 14.5px; font-weight: 800; color: #111; margin-top: 15px;" id="lbl-match-total">
+                    <div class="calc-subtotal-line" id="lbl-match-total">
                         Total employer contributions: $0.00
                     </div>
 
@@ -423,30 +446,30 @@
             </section>
 
             <!-- ============================================================
-             SECTION 3: CHART ACCUMULATION
+             SECTION 3: SUMMARY BANNER & ACCUMULATION CHART
              ============================================================ -->
             <section class="calc-section" id="sec-chart">
                 <div class="calc-sec-header" onclick="toggleSec('sec-chart')">
-                    <h2 class="calc-sec-title" id="chart-heading">YOUR TOTAL ACCUMULATION WITHOUT FEES AND TAXES: $756,476.60 AFTER 35 YEARS.</h2>
+                    <h2 class="calc-sec-title calc-summary-banner-title" id="chart-heading">YOUR TOTAL IS $584,367.58 WITHOUT FEES AND $467,778.17 WITH FEES, AFTER 35 YEARS.</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
 
                     <div class="calc-chart-box">
                         <div class="calc-tip-box" id="chart-tip"></div>
-                        <svg class="calc-chart-svg" id="chart-svg" viewBox="0 0 760 330" preserveAspectRatio="none">
+                        <svg class="calc-chart-svg" id="chart-svg" viewBox="0 0 880 340" preserveAspectRatio="none">
                             <!-- Injected dynamically via JS -->
                         </svg>
                     </div>
 
-                    <div style="display: flex; justify-content: center; gap: 28px; margin-top: 18px; font-family: 'Open Sans', sans-serif; font-size: 13.5px; color: #cbd5e1;">
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #2563eb; display: inline-block; box-shadow: 0 0 8px rgba(37, 99, 235, 0.5);"></span>
-                            <span id="leg-with" style="color: #ffffff; font-weight: 600;">With employer match $756,476.60</span>
+                    <div class="calc-legend-row">
+                        <div class="calc-legend-item">
+                            <span class="calc-legend-circle circle-blue"></span>
+                            <span class="calc-legend-label" id="leg-blue">Before investment fees</span>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 9px;">
-                            <span style="width: 14px; height: 14px; border-radius: 3px; background: #d89e1b; display: inline-block; box-shadow: 0 0 8px rgba(216, 158, 27, 0.5);"></span>
-                            <span id="leg-without" style="color: #dfa01e; font-weight: 600;">Without employer match $756,476.60</span>
+                        <div class="calc-legend-item">
+                            <span class="calc-legend-circle circle-green"></span>
+                            <span class="calc-legend-label" id="leg-green">After investment fees</span>
                         </div>
                     </div>
 
@@ -460,16 +483,16 @@
                 <h3 class="calc-def-heading">DEFINITIONS</h3>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">PERCENT TO CONTRIBUTE</h4>
+                    <h4 class="calc-term-title">AMOUNT TO CONTRIBUTE</h4>
                     <p class="calc-term-desc">
-                        The total amount/rate that you contribute to your 403(b) plan each month. Note that your employer can contribute up to 100% of an amount to be subject to annual maximums.
+                        This is the amount that you contribute to your 403(b) plan each year. Participants can contribute up to 100% of their annual income, subject to an annual maximum.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">ANNUAL SALARY</h4>
                     <p class="calc-term-desc">
-                        This is your annual salary from your employer, before taxes and other benefit deductions. Since your contribution and any employer match are based on the salary paid to you by your employer, do not include any income you may receive from sources other than your employer.
+                        This is your annual salary from your employer before taxes and other benefit deductions. Since your contribution and any company match are based on the salary paid to you by your employer, do not include any income you may receive from sources other than your employer.
                     </p>
                 </div>
 
@@ -481,7 +504,7 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">AGE AT RETIREMENT</h4>
                     <p class="calc-term-desc">
-                        Age you wish to retire. This calculator assumes that in the year you retire, you do not make any contributions to your 403(b). For example, if you enter age 65, your last contribution occurs when you are 64 years old.
+                        Age you wish to retire. This calculator assumes that the year you retire, you do not make any contributions to your 403(b). For example, if you retire at age 65, your last contribution occurs when you are actually 64.
                     </p>
                 </div>
 
@@ -495,7 +518,7 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">ANNUAL RATE OF RETURN</h4>
                     <p class="calc-term-desc">
-                        The annual rate of return for your 403(b) account. This calculator assumes that your return is compounded monthly and your deposits are made monthly. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                        The annual rate of return for your 403(b) account. This calculator assumes that your return is compounded annually and your deposits are made monthly. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
                     </p>
                     <p class="calc-term-desc">
                         It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
@@ -512,31 +535,34 @@
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">ANNUAL INVESTMENT FEE</h4>
                     <p class="calc-term-desc">
-                        The total annual fee rate as a percent of the balance of the account.
+                        This is an annual fee based on the balance of the account.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">EMPLOYER MATCH CONTRIBUTION MATCH (PERCENT)</h4>
+                    <h4 class="calc-term-title">403(B) EMPLOYER CONTRIBUTION/MATCH (PERCENT)</h4>
                     <p class="calc-term-desc">
-                        An employer contribution match in addition to your annual contribution. If it is based on a percentage of your annual salary, enter that percentage and the dollar amount will be calculated.
+                        An employer contribution or match is in addition to your annual contributions. If it is based on a percentage of your annual salary enter that amount here and the dollar amount will be calculated.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
-                    <h4 class="calc-term-title">EMPLOYER MATCH CONTRIBUTION MATCH (DOLLARS)</h4>
+                    <h4 class="calc-term-title">403(B) EMPLOYER CONTRIBUTION/MATCH (DOLLARS)</h4>
                     <p class="calc-term-desc">
-                        An employer contribution match in addition to your annual contribution. If it is based on a flat annual dollar amount, enter that amount and the percentage will be calculated.
+                        An employer contribution or match is in addition to your annual contributions. If it is based on an annual dollar amount, enter that amount here and the annual percentage will be calculated.
                     </p>
                 </div>
 
                 <div class="calc-def-block">
                     <h4 class="calc-term-title">ANNUAL CONTRIBUTION LIMITS</h4>
                     <p class="calc-term-desc">
-                        The base contribution for one year is limited to your current salary level; the percent you set for your annual contribution is also subject to generic statutory limitations each year. The annual limit for 2026 is $24,500. If you are age 50 or over, a 'catch-up' provision allows you to contribute an additional $8,000 into your account, and beginning in 2025 the SECURE 2.0 Act increased this catch-up contribution for individuals aged 60-63 to $11,250. The SECURE 2.0 Act requires high earners to make catch-up contributions on a Roth (after-tax) basis. For catch-up contributions made in 2026 this includes anyone with more than $150,000 in 2025 FICA wages from the employer sponsoring the plan. Employer contributions do not count toward the IRS annual contribution limit.
+                        Your total contribution for one year is based on your annual salary times the percent you contribute. However, your annual contribution is also subject to certain maximum total contributions per year. The annual maximum for 2026 is $24,500. Beginning in 2026, subject to pending IRS rules and clarification, catch-up contributions must be made as Roth contributions for high income individuals. For 2026, high income individuals are those who made more than $150,000 in FICA wages in the previous year from the employer sponsoring the plan. The current calculator does not incorporate the impact of the Roth requirement. Some governmental employees may not have wages subject to FICA and may not be required to make catch-up contributions on a Roth basis. For 2026, the catch-up contribution is $8,000 for individuals age 50 or over. In addition, individuals who are age 60, 61, 62, or 63 have a higher catch-up limit of $11,250.
                     </p>
                     <p class="calc-term-desc">
                         In addition, an additional catch-up provision for participants that are long-service employees can allows them to be eligible for special provisions, based on length of employment. If you have been with your current employer for 15 or more years, you may have an additional catch-up allowance of up to $3,000 per year ($15,000 lifetime limit).
+                    </p>
+                    <p class="calc-term-desc">
+                        Employer contributions do not count toward the IRS annual contribution limit.
                     </p>
                 </div>
 
@@ -553,24 +579,28 @@
         </article>
     </main>
 
-    <!-- Report Modal -->
+    <!-- View Report Modal -->
     <div class="calc-modal-bg" id="modal-report">
         <div class="calc-modal-content">
             <div class="calc-modal-head">
-                <h3>403(b) Savings Plan Amortization Schedule</h3>
-                <button type="button" class="calc-modal-close" id="modal-close">&times;</button>
+                <h3>403(b) Savings Plan Projection Analysis</h3>
+                <button type="button" class="calc-modal-close" id="modal-close" aria-label="Close report">&times;</button>
             </div>
             <div class="calc-modal-body">
-                <div style="margin-bottom: 16px; font-size: 13.5px; line-height: 1.6; color: #cbd5e1;" id="modal-summary"></div>
-                <table class="calc-breakdown-table" style="font-size: 13px;">
+                <div class="calc-report-metrics-grid" id="modal-metrics"></div>
+                <div class="calc-report-narrative" id="modal-narrative"></div>
+                <table class="calc-breakdown-table">
                     <thead>
-                        <tr style="background: #0d1b31; color: #dfa01e; font-weight: 700;">
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Year</th>
-                            <th style="padding: 10px 10px; text-align: left; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Age</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Salary</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Contrib.</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Match</th>
-                            <th style="padding: 10px 10px; text-align: right; color: #dfa01e; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">Balance</th>
+                        <tr>
+                            <th style="text-align: left;">Year</th>
+                            <th style="text-align: left;">Age</th>
+                            <th style="text-align: right;">Salary</th>
+                            <th style="text-align: right;">Employee Contrib.</th>
+                            <th style="text-align: right;">Employer Match</th>
+                            <th style="text-align: right;">Total Contrib.</th>
+                            <th style="text-align: right;">Balance (No Fees)</th>
+                            <th style="text-align: right;">Balance (With Fees)</th>
+                            <th style="text-align: right;">Lost to Fees</th>
                         </tr>
                     </thead>
                     <tbody id="modal-table-rows"></tbody>
@@ -587,27 +617,44 @@
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
+
+        <!-- Brand / Social -->
         <div class="champ-brand">
-            <span class="champ-the">THE</span>
-            <span class="champ-name">SEILER GROUP</span>
-            <span class="champ-sub">OF RAYMOND JAMES</span>
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
+            <div class="champ-socials">
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
+                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
+                        class="fas fa-envelope"></i></a>
+            </div>
         </div>
+
+        <!-- Center Quote -->
         <div class="champ-quote">
             Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
             certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
             to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
             complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
+
+        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
             <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
         </div>
+
     </section>
 
     <!-- ============================================================
      FOOTER
      ============================================================ -->
     <footer class="site-footer">
+
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
@@ -648,18 +695,43 @@
                     Use</a>
             </p>
         </div>
+
     </footer>
 
     <!-- Interactive Script -->
     <script>
+        // Formatting helpers
         const fmtCurr = (num) => '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         const fmtCurrWhole = (num) => '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
         const parseNum = (val) => parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
 
+        // Non-linear scale mapping utilities
+        function valToSliderPos(val, scalePoints) {
+            for (let i = 0; i < scalePoints.length - 1; i++) {
+                if (val <= scalePoints[i + 1]) {
+                    const segRatio = (val - scalePoints[i]) / (scalePoints[i + 1] - scalePoints[i]);
+                    const segWidth = 100 / (scalePoints.length - 1);
+                    return i * segWidth + segRatio * segWidth;
+                }
+            }
+            return 100;
+        }
+
+        function sliderPosToVal(pos, scalePoints, step) {
+            const segs = scalePoints.length - 1;
+            const scaled = (pos / 100) * segs;
+            const i = Math.min(segs - 1, Math.floor(scaled));
+            const frac = scaled - i;
+            const raw = scalePoints[i] + frac * (scalePoints[i + 1] - scalePoints[i]);
+            return Math.round(raw / step) * step;
+        }
+
+        // Section collapsible toggling
         function toggleSec(id) {
             document.getElementById(id)?.classList.toggle('collapsed');
         }
 
+        // Mobile drawer toggling
         function toggleMobileMenu(e) {
             if (e) { e.preventDefault(); e.stopPropagation(); }
             const drawer = document.getElementById('mobile-drawer');
@@ -680,9 +752,47 @@
             }
         }
 
-        // Form controls
+        // Social sharing dropdown
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const wrap = document.getElementById('calc-share-wrapper');
+            const btn = document.getElementById('calc-share-btn');
+            if (!wrap) return;
+            const isOpen = wrap.classList.toggle('open');
+            if (btn) btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        function shareToSocial(network, e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+            if (network === 'facebook') {
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            } else if (network === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            } else if (network === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            } else if (network === 'email') {
+                shareUrl = `mailto:?subject=${title}&body=Check out this calculator: ${url}`;
+            }
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=450');
+            }
+            document.getElementById('calc-share-wrapper')?.classList.remove('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const wrap = document.getElementById('calc-share-wrapper');
+            if (wrap && !wrap.contains(e.target)) {
+                wrap.classList.remove('open');
+            }
+        });
+
+        // Form Controls
         const inpSalary = document.getElementById('inp-salary');
         const rangeSalary = document.getElementById('range-salary');
+        const salaryScale = [0, 10000, 100000, 1000000];
 
         const inpPercent = document.getElementById('inp-percent');
         const rangePercent = document.getElementById('range-percent');
@@ -695,6 +805,7 @@
 
         const inpBalance = document.getElementById('inp-balance');
         const rangeBalance = document.getElementById('range-balance');
+        const balanceScale = [0, 100000, 1000000, 10000000];
 
         const inpReturn = document.getElementById('inp-return');
         const rangeReturn = document.getElementById('range-return');
@@ -710,13 +821,25 @@
 
         const inpMatchAmt = document.getElementById('inp-match-amt');
         const rangeMatchAmt = document.getElementById('range-match-amt');
+        const matchAmtScale = [0, 1000, 5000, 20000];
 
-        function bindCtl(inp, range, type) {
+        function updateSliderFill(range) {
+            const min = parseFloat(range.min) || 0;
+            const max = parseFloat(range.max) || 100;
+            const val = parseFloat(range.value) || 0;
+            const pct = ((val - min) / (max - min)) * 100;
+            range.style.background = `linear-gradient(to right, #1d68d8 0%, #1d68d8 ${pct}%, #203148 ${pct}%, #203148 100%)`;
+        }
+
+        // Bind standard linear controls
+        function bindLinearCtl(inp, range, type) {
+            updateSliderFill(range);
             range.addEventListener('input', () => {
                 const v = parseFloat(range.value);
                 if (type === 'curr') inp.value = fmtCurr(v);
                 else if (type === 'pct') inp.value = `${v}%`;
                 else inp.value = v;
+                updateSliderFill(range);
                 calculate();
             });
             inp.addEventListener('change', () => {
@@ -725,187 +848,349 @@
                 if (type === 'curr') inp.value = fmtCurr(v);
                 else if (type === 'pct') inp.value = `${v}%`;
                 else inp.value = v;
+                updateSliderFill(range);
                 calculate();
             });
         }
 
-        bindCtl(inpSalary, rangeSalary, 'curr');
-        bindCtl(inpPercent, rangePercent, 'pct');
-        bindCtl(inpAge, rangeAge, 'num');
-        bindCtl(inpRetireAge, rangeRetireAge, 'num');
-        bindCtl(inpBalance, rangeBalance, 'curr');
-        bindCtl(inpReturn, rangeReturn, 'pct');
-        bindCtl(inpIncrease, rangeIncrease, 'pct');
-        bindCtl(inpFee, rangeFee, 'pct');
-        bindCtl(inpMatchPct, rangeMatchPct, 'pct');
-        bindCtl(inpMatchAmt, rangeMatchAmt, 'curr');
+        // Bind non-linear controls
+        function bindNonLinearCtl(inp, range, scalePoints, step) {
+            updateSliderFill(range);
+            range.addEventListener('input', () => {
+                const pos = parseFloat(range.value);
+                const realVal = sliderPosToVal(pos, scalePoints, step);
+                inp.value = fmtCurr(realVal);
+                updateSliderFill(range);
+                calculate();
+            });
+            inp.addEventListener('change', () => {
+                const realVal = parseNum(inp.value);
+                range.value = valToSliderPos(realVal, scalePoints);
+                inp.value = fmtCurr(realVal);
+                updateSliderFill(range);
+                calculate();
+            });
+        }
 
-        let schedule = [];
+        // Initialize sliders
+        bindNonLinearCtl(inpSalary, rangeSalary, salaryScale, 1000);
+        bindLinearCtl(inpPercent, rangePercent, 'pct');
+        bindLinearCtl(inpAge, rangeAge, 'num');
+        bindLinearCtl(inpRetireAge, rangeRetireAge, 'num');
+        bindNonLinearCtl(inpBalance, rangeBalance, balanceScale, 500);
+        bindLinearCtl(inpReturn, rangeReturn, 'pct');
+        bindLinearCtl(inpIncrease, rangeIncrease, 'pct');
+        bindLinearCtl(inpFee, rangeFee, 'pct');
 
+        // Initial positions for non-linear sliders
+        rangeSalary.value = valToSliderPos(40000, salaryScale);
+        updateSliderFill(rangeSalary);
+
+        rangeBalance.value = valToSliderPos(1000, balanceScale);
+        updateSliderFill(rangeBalance);
+
+        // Section 2: Synchronized Employer Contribution controls
+        updateSliderFill(rangeMatchPct);
+        updateSliderFill(rangeMatchAmt);
+
+        rangeMatchPct.addEventListener('input', () => {
+            const pct = parseFloat(rangeMatchPct.value) || 0;
+            inpMatchPct.value = `${pct}%`;
+            const sal = sliderPosToVal(parseFloat(rangeSalary.value), salaryScale, 1000);
+            const amt = Math.round(sal * (pct / 100));
+            inpMatchAmt.value = fmtCurrWhole(amt);
+            rangeMatchAmt.value = valToSliderPos(amt, matchAmtScale);
+            updateSliderFill(rangeMatchPct);
+            updateSliderFill(rangeMatchAmt);
+            calculate();
+        });
+
+        inpMatchPct.addEventListener('change', () => {
+            const pct = parseNum(inpMatchPct.value);
+            rangeMatchPct.value = pct;
+            inpMatchPct.value = `${pct}%`;
+            const sal = sliderPosToVal(parseFloat(rangeSalary.value), salaryScale, 1000);
+            const amt = Math.round(sal * (pct / 100));
+            inpMatchAmt.value = fmtCurrWhole(amt);
+            rangeMatchAmt.value = valToSliderPos(amt, matchAmtScale);
+            updateSliderFill(rangeMatchPct);
+            updateSliderFill(rangeMatchAmt);
+            calculate();
+        });
+
+        rangeMatchAmt.addEventListener('input', () => {
+            const pos = parseFloat(rangeMatchAmt.value);
+            const amt = sliderPosToVal(pos, matchAmtScale, 250);
+            inpMatchAmt.value = fmtCurrWhole(amt);
+            const sal = sliderPosToVal(parseFloat(rangeSalary.value), salaryScale, 1000);
+            const pct = sal > 0 ? Math.round((amt / sal) * 1000) / 10 : 0;
+            inpMatchPct.value = `${pct}%`;
+            rangeMatchPct.value = pct;
+            updateSliderFill(rangeMatchPct);
+            updateSliderFill(rangeMatchAmt);
+            calculate();
+        });
+
+        inpMatchAmt.addEventListener('change', () => {
+            const amt = parseNum(inpMatchAmt.value);
+            inpMatchAmt.value = fmtCurrWhole(amt);
+            rangeMatchAmt.value = valToSliderPos(amt, matchAmtScale);
+            const sal = sliderPosToVal(parseFloat(rangeSalary.value), salaryScale, 1000);
+            const pct = sal > 0 ? Math.round((amt / sal) * 1000) / 10 : 0;
+            inpMatchPct.value = `${pct}%`;
+            rangeMatchPct.value = pct;
+            updateSliderFill(rangeMatchPct);
+            updateSliderFill(rangeMatchAmt);
+            calculate();
+        });
+
+        let currentSchedule = [];
+        let currentSummary = {};
+
+        // Calculation Algorithm (Exact KJE / Retire403b.js parity)
         function calculate() {
-            const salary = parseNum(rangeSalary.value);
-            const contribRate = parseNum(rangePercent.value) / 100;
-            const currentAge = parseNum(rangeAge.value);
-            const retireAge = Math.max(currentAge + 1, parseNum(rangeRetireAge.value));
-            const initialBal = parseNum(rangeBalance.value);
-            const rate = parseNum(rangeReturn.value) / 100;
-            const wageGrowth = parseNum(rangeIncrease.value) / 100;
-            const feeRate = parseNum(rangeFee.value) / 100;
+            const salary = sliderPosToVal(parseFloat(rangeSalary.value), salaryScale, 1000);
+            const contribPct = parseFloat(rangePercent.value) || 0;
+            const curAge = parseInt(rangeAge.value, 10) || 30;
+            const retAge = Math.max(curAge + 1, parseInt(rangeRetireAge.value, 10) || 65);
+            const startBal = sliderPosToVal(parseFloat(rangeBalance.value), balanceScale, 500);
+            const ror = parseFloat(rangeReturn.value) || 0;
+            const salaryIncrease = parseFloat(rangeIncrease.value) || 0;
+            const fee = parseFloat(rangeFee.value) || 0;
+            const matchPct = parseFloat(rangeMatchPct.value) || 0;
+            const matchAmt = sliderPosToVal(parseFloat(rangeMatchAmt.value), matchAmtScale, 250);
 
-            const matchPct = parseNum(rangeMatchPct.value) / 100;
-            const matchFlat = parseNum(rangeMatchAmt.value);
+            const years = retAge - curAge;
+            const U = 12; // Monthly compounding and deposits
 
-            const years = retireAge - currentAge;
-            const netReturn = Math.max(0, rate); // standard gross return curve
-            const iMonthly = Math.pow(1 + netReturn, 1 / 12) - 1;
+            // Monthly compounding rates
+            const F = ror / 100;
+            const af = ror > 0 ? (Math.pow(1 + F, 1 / U) - 1) : 0;
+
+            const netRor = Math.max(0, ror - fee);
+            const F_net = netRor / 100;
+            const af_net = netRor > 0 ? (Math.pow(1 + F_net, 1 / U) - 1) : 0;
+
+            // 2026 Statutory IRS Limits
+            const getCapByAge = (age) => {
+                if (age >= 60 && age <= 63) return 24500 + 11250;
+                if (age >= 50) return 24500 + 8000;
+                return 24500;
+            };
 
             let curSalary = salary;
-            let balWith = initialBal;
-            let balWithout = initialBal;
-            let totalEmp = 0;
-            let totalMatch = 0;
-            schedule = [];
+            let balWithoutFees = startBal;
+            let balWithFees = startBal;
+
+            let totalEmployeeContrib = 0;
+            let totalEmployerContrib = 0;
+
+            currentSchedule = [];
 
             for (let y = 1; y <= years; y++) {
-                const age = currentAge + y - 1;
-                const empAnnual = curSalary * contribRate;
-                const matchAnnual = (empAnnual * matchPct) + matchFlat;
+                const age = curAge + y - 1;
+                const curCap = getCapByAge(age);
 
-                totalEmp += empAnnual;
-                totalMatch += matchAnnual;
+                // Annual employee contribution
+                const unconstrainedEmp = Math.round((contribPct / 100) * curSalary * 100) / 100;
+                const empAnnual = Math.min(unconstrainedEmp, curCap);
 
-                const cEmpMonthly = Math.round((empAnnual / 12) * 100) / 100;
-                const cTotalMonthly = cEmpMonthly + Math.round((matchAnnual / 12) * 100) / 100;
-
-                for (let m = 0; m < 12; m++) {
-                    balWith = (balWith + cTotalMonthly) * (1 + iMonthly);
-                    balWithout = (balWithout + cEmpMonthly) * (1 + iMonthly);
+                // Annual employer contribution
+                let employerAnnual = 0;
+                if (matchAmt > 0 && matchPct === 0) {
+                    employerAnnual = matchAmt;
+                } else {
+                    employerAnnual = Math.round((matchPct / 100) * curSalary * 100) / 100;
                 }
 
-                schedule.push({
+                totalEmployeeContrib += empAnnual;
+                totalEmployerContrib += employerAnnual;
+
+                // Monthly deposit amounts rounded to cents
+                const bEmp = Math.round((empAnnual / 12) * 100) / 100;
+                const bMatch = Math.round((employerAnnual / 12) * 100) / 100;
+                const totalMonthlyDeposit = Math.round((bEmp + bMatch) * 100) / 100;
+
+                for (let m = 0; m < 12; m++) {
+                    balWithoutFees += totalMonthlyDeposit;
+                    balWithoutFees += af * balWithoutFees;
+
+                    balWithFees += totalMonthlyDeposit;
+                    balWithFees += af_net * balWithFees;
+                }
+
+                currentSchedule.push({
                     year: y,
                     age: age,
                     salary: curSalary,
-                    contrib: empAnnual,
-                    match: matchAnnual,
-                    balWith: balWith,
-                    balWithout: balWithout
+                    empContrib: empAnnual,
+                    employerContrib: employerAnnual,
+                    totalContrib: empAnnual + employerAnnual,
+                    balWithoutFees: balWithoutFees,
+                    balWithFees: balWithFees,
+                    feeImpact: balWithoutFees - balWithFees
                 });
 
-                curSalary *= (1 + wageGrowth);
+                curSalary = curSalary * (1 + salaryIncrease / 100);
             }
 
-            document.getElementById('lbl-emp-total').textContent = `Total employee contributions: ${fmtCurr(totalEmp)}`;
-            document.getElementById('lbl-match-total').textContent = `Total employer contributions: ${fmtCurr(totalMatch)}`;
-            document.getElementById('chart-heading').textContent = `YOUR TOTAL ACCUMULATION WITHOUT FEES AND TAXES: ${fmtCurr(balWith)} AFTER ${years} YEARS.`;
-            document.getElementById('leg-with').textContent = `With employer match ${fmtCurr(balWith)}`;
-            document.getElementById('leg-without').textContent = `Without employer match ${fmtCurr(balWithout)}`;
+            currentSummary = {
+                years,
+                curAge,
+                retAge,
+                salary,
+                contribPct,
+                ror,
+                fee,
+                totalEmployeeContrib,
+                totalEmployerContrib,
+                finalBalWithoutFees: balWithoutFees,
+                finalBalWithFees: balWithFees,
+                totalFeesImpact: balWithoutFees - balWithFees
+            };
 
-            renderChart(schedule);
+            // Update subtotals and heading banner matching screenshot exactly
+            document.getElementById('lbl-emp-total').textContent = `Total employee contributions: ${fmtCurr(totalEmployeeContrib)}`;
+            document.getElementById('lbl-match-total').textContent = `Total employer contributions: ${fmtCurr(totalEmployerContrib)}`;
+            document.getElementById('chart-heading').textContent = `YOUR TOTAL IS ${fmtCurr(balWithoutFees)} WITHOUT FEES AND ${fmtCurr(balWithFees)} WITH FEES, AFTER ${years} YEARS.`;
+
+            renderChart(currentSchedule);
         }
 
+        // Render SVG Dual-Bar Chart
         function renderChart(data) {
             const svg = document.getElementById('chart-svg');
             const tip = document.getElementById('chart-tip');
             svg.innerHTML = '';
-            if (!data.length) return;
+            if (!data || data.length === 0) return;
 
-            const w = 760;
-            const h = 330;
-            const padL = 75;
-            const padR = 30;
-            const padT = 25;
-            const padB = 40;
+            const w = 880;
+            const h = 340;
+            const padL = 74;
+            const padR = 25;
+            const padT = 20;
+            const padB = 42;
 
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
-            const maxValRaw = Math.max(...data.map(d => Math.max(d.balWith, d.balWithout)));
-            const maxVal = Math.max(100000, Math.ceil(maxValRaw / 100000) * 100000);
-            const steps = 8;
-            const stepVal = maxVal / steps;
+            const maxValRaw = Math.max(...data.map(d => Math.max(d.balWithoutFees, d.balWithFees)));
+            // Tick interval alignment to match screenshot ($0, $100, $200, $300, $400, $500, $600)
+            const stepUnit = maxValRaw > 2000000 ? 500000 : 100000;
+            const maxVal = Math.max(100000, Math.ceil(maxValRaw / stepUnit) * stepUnit);
+            const intervals = Math.min(8, Math.max(4, Math.round(maxVal / stepUnit)));
+            const yStep = maxVal / intervals;
 
-            // Y Grid
-            for (let i = 0; i <= steps; i++) {
-                const val = i * stepVal;
-                const yPos = padT + chartH - (i / steps) * chartH;
+            // Plot background rectangle
+            const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotRect.setAttribute('x', padL);
+            plotRect.setAttribute('y', padT);
+            plotRect.setAttribute('width', chartW);
+            plotRect.setAttribute('height', chartH);
+            plotRect.setAttribute('fill', '#07101e');
+            plotRect.setAttribute('stroke', 'rgba(223, 160, 30, 0.35)');
+            plotRect.setAttribute('stroke-width', '1');
+            plotRect.setAttribute('rx', '3');
+            svg.appendChild(plotRect);
 
-                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                line.setAttribute('x1', padL);
-                line.setAttribute('x2', w - padR);
-                line.setAttribute('y1', yPos);
-                line.setAttribute('y2', yPos);
-                line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
-                line.setAttribute('stroke-width', '1');
-                svg.appendChild(line);
+            // Draw Y-axis grid lines and labels
+            for (let i = 0; i <= intervals; i++) {
+                const val = i * yStep;
+                const yPos = padT + chartH - (i / intervals) * chartH;
+
+                if (i > 0 && i < intervals) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', padL);
+                    line.setAttribute('x2', padL + chartW);
+                    line.setAttribute('y1', yPos);
+                    line.setAttribute('y2', yPos);
+                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke-width', '1');
+                    svg.appendChild(line);
+                }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', padL - 8);
+                text.setAttribute('x', padL - 10);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
                 text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11');
+                text.setAttribute('font-size', '11.5');
+                text.setAttribute('font-weight', '600');
                 text.setAttribute('fill', '#94a3b8');
-                text.textContent = `$${Math.round(val / 1000)}`;
+                text.textContent = `$${Math.round(val / 1000).toLocaleString('en-US')}`;
                 svg.appendChild(text);
             }
 
-            // Draw grouped bars
+            // Rotated Y-Axis Title: "Thousands of Dollars"
+            const yTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            yTitle.setAttribute('x', -(padT + chartH / 2));
+            yTitle.setAttribute('y', 16);
+            yTitle.setAttribute('transform', 'rotate(-90)');
+            yTitle.setAttribute('text-anchor', 'middle');
+            yTitle.setAttribute('font-family', 'Montserrat, sans-serif');
+            yTitle.setAttribute('font-size', '12');
+            yTitle.setAttribute('font-weight', '700');
+            yTitle.setAttribute('fill', '#dfa01e');
+            yTitle.textContent = 'Thousands of Dollars';
+            svg.appendChild(yTitle);
+
+            // Draw Grouped Dual Bars
             const n = data.length;
             const slotW = chartW / n;
             const barW = Math.max(2, Math.min(10, (slotW - 3) / 2));
 
             data.forEach((d, idx) => {
                 const xCenter = padL + (idx + 0.5) * slotW;
-                const hWith = (d.balWith / maxVal) * chartH;
-                const hWithout = (d.balWithout / maxVal) * chartH;
+                const hGross = (d.balWithoutFees / maxVal) * chartH;
+                const hNet = (d.balWithFees / maxVal) * chartH;
+                const yGross = padT + chartH - hGross;
+                const yNet = padT + chartH - hNet;
 
-                const yWith = padT + chartH - hWith;
-                const yWithout = padT + chartH - hWithout;
+                // Blue Bar: Before investment fees
+                const rectBlue = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rectBlue.setAttribute('x', xCenter - barW - 0.5);
+                rectBlue.setAttribute('y', yGross);
+                rectBlue.setAttribute('width', barW);
+                rectBlue.setAttribute('height', Math.max(1, hGross));
+                rectBlue.setAttribute('fill', '#2563eb');
+                rectBlue.setAttribute('rx', '1.5');
+                rectBlue.setAttribute('cursor', 'pointer');
 
-                const rectWith = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectWith.setAttribute('x', xCenter - barW - 0.5);
-                rectWith.setAttribute('y', yWith);
-                rectWith.setAttribute('width', barW);
-                rectWith.setAttribute('height', Math.max(1, hWith));
-                rectWith.setAttribute('fill', '#2563eb');
-                rectWith.setAttribute('rx', '1');
-                rectWith.setAttribute('cursor', 'pointer');
-
-                const rectWithout = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectWithout.setAttribute('x', xCenter + 0.5);
-                rectWithout.setAttribute('y', yWithout);
-                rectWithout.setAttribute('width', barW);
-                rectWithout.setAttribute('height', Math.max(1, hWithout));
-                rectWithout.setAttribute('fill', '#d89e1b');
-                rectWithout.setAttribute('rx', '1');
-                rectWithout.setAttribute('cursor', 'pointer');
+                // Green Bar: After investment fees
+                const rectGreen = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rectGreen.setAttribute('x', xCenter + 0.5);
+                rectGreen.setAttribute('y', yNet);
+                rectGreen.setAttribute('width', barW);
+                rectGreen.setAttribute('height', Math.max(1, hNet));
+                rectGreen.setAttribute('fill', '#10b981');
+                rectGreen.setAttribute('rx', '1.5');
+                rectGreen.setAttribute('cursor', 'pointer');
 
                 function showTip(e, text) {
                     const rect = svg.getBoundingClientRect();
                     const xRel = (xCenter / w) * rect.width;
-                    const yRel = (Math.min(yWith, yWithout) / h) * rect.height;
+                    const yRel = ((Math.min(yGross, yNet)) / h) * rect.height;
                     tip.innerHTML = text;
                     tip.style.left = `${xRel}px`;
                     tip.style.top = `${yRel - 10}px`;
                     tip.style.display = 'block';
                 }
 
-                rectWith.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Age ${d.age}: <strong>${fmtCurrWhole(d.balWith)}</strong> with match`);
+                rectBlue.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Age ${d.age} (Year ${d.year}): <strong style="color: #3b82f6;">${fmtCurr(d.balWithoutFees)}</strong> Before Fees`);
                 });
-                rectWith.addEventListener('mouseleave', () => tip.style.display = 'none');
+                rectBlue.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
 
-                rectWithout.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Age ${d.age}: <strong>${fmtCurrWhole(d.balWithout)}</strong> without match`);
+                rectGreen.addEventListener('mouseenter', (e) => {
+                    showTip(e, `Age ${d.age} (Year ${d.year}): <strong style="color: #10b981;">${fmtCurr(d.balWithFees)}</strong> After Fees`);
                 });
-                rectWithout.addEventListener('mouseleave', () => tip.style.display = 'none');
+                rectGreen.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
 
-                svg.appendChild(rectWith);
-                svg.appendChild(rectWithout);
+                svg.appendChild(rectBlue);
+                svg.appendChild(rectGreen);
 
-                const step = n > 30 ? 2 : 1;
-                if (idx % step === 0 || idx === n - 1) {
+                // Print even ages on X-axis matching screenshot: 30, 32, 34, ..., 64
+                if (d.age % 2 === 0) {
                     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     xLabel.setAttribute('x', xCenter);
                     xLabel.setAttribute('y', padT + chartH + 18);
@@ -918,13 +1203,13 @@
                 }
             });
 
-            // Bottom axis line
+            // Bottom baseline axis
             const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
             axisLine.setAttribute('x1', padL);
-            axisLine.setAttribute('x2', w - padR);
+            axisLine.setAttribute('x2', padL + chartW);
             axisLine.setAttribute('y1', padT + chartH);
             axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.15)');
+            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.2)');
             axisLine.setAttribute('stroke-width', '1.5');
             svg.appendChild(axisLine);
         }
@@ -932,21 +1217,53 @@
         // View Report Modal
         const modal = document.getElementById('modal-report');
         function openReport() {
-            document.getElementById('modal-summary').innerHTML = `
-                403(b) plan projection from age ${rangeAge.value} to ${rangeRetireAge.value}. 
-                Final balance: <strong>${fmtCurr(schedule[schedule.length - 1]?.balWith || 0)}</strong>.
+            const metricsEl = document.getElementById('modal-metrics');
+            metricsEl.innerHTML = `
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Employee Contributions</span>
+                    <span class="calc-metric-card-value gold">${fmtCurr(currentSummary.totalEmployeeContrib)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Employer Contributions</span>
+                    <span class="calc-metric-card-value">${fmtCurr(currentSummary.totalEmployerContrib)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Total Before Fees</span>
+                    <span class="calc-metric-card-value blue">${fmtCurr(currentSummary.finalBalWithoutFees)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Total After Fees</span>
+                    <span class="calc-metric-card-value green">${fmtCurr(currentSummary.finalBalWithFees)}</span>
+                </div>
+                <div class="calc-metric-card">
+                    <span class="calc-metric-card-label">Lost to Investment Fees</span>
+                    <span class="calc-metric-card-value" style="color: #f87171;">${fmtCurr(currentSummary.totalFeesImpact)}</span>
+                </div>
             `;
-            const rows = document.getElementById('modal-table-rows');
-            rows.innerHTML = schedule.map(d => `
+
+            const narrativeEl = document.getElementById('modal-narrative');
+            narrativeEl.innerHTML = `
+                Based on your annual salary of <strong>${fmtCurrWhole(currentSummary.salary)}</strong> and contribution rate of <strong>${currentSummary.contribPct}%</strong>, 
+                you will accumulate <strong>${fmtCurr(currentSummary.finalBalWithoutFees)}</strong> before fees over <strong>${currentSummary.years} years</strong> (from age ${currentSummary.curAge} to ${currentSummary.retAge}). 
+                With an annual investment fee of <strong>${currentSummary.fee}%</strong>, your net retirement accumulation is <strong>${fmtCurr(currentSummary.finalBalWithFees)}</strong>. 
+                Investment fees reduce your potential total by <strong>${fmtCurr(currentSummary.totalFeesImpact)}</strong>.
+            `;
+
+            const rowsEl = document.getElementById('modal-table-rows');
+            rowsEl.innerHTML = currentSchedule.map(d => `
                 <tr>
-                    <td style="padding: 6px 10px;">${d.year}</td>
-                    <td style="padding: 6px 10px;">${d.age}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurrWhole(d.salary)}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurrWhole(d.contrib)}</td>
-                    <td style="padding: 6px 10px; text-align: right;">${fmtCurrWhole(d.match)}</td>
-                    <td style="padding: 6px 10px; text-align: right; font-weight: 700;">${fmtCurrWhole(d.balWith)}</td>
+                    <td style="padding: 6px 8px; font-weight: 600;">Year ${d.year}</td>
+                    <td style="padding: 6px 8px;">Age ${d.age}</td>
+                    <td style="padding: 6px 8px; text-align: right;">${fmtCurrWhole(d.salary)}</td>
+                    <td style="padding: 6px 8px; text-align: right;">${fmtCurrWhole(d.empContrib)}</td>
+                    <td style="padding: 6px 8px; text-align: right;">${fmtCurrWhole(d.employerContrib)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #dfa01e;">${fmtCurrWhole(d.totalContrib)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #3b82f6; font-weight: 600;">${fmtCurr(d.balWithoutFees)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #10b981; font-weight: 700;">${fmtCurr(d.balWithFees)}</td>
+                    <td style="padding: 6px 8px; text-align: right; color: #f87171;">${fmtCurr(d.feeImpact)}</td>
                 </tr>
             `).join('');
+
             modal.classList.add('active');
         }
 
@@ -961,10 +1278,10 @@
             document.getElementById('sec-chart').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
 
-        // Initialize calculation
+        // Initialize calculation on page load
         calculate();
 
-        // Header scroll
+        // Header shadow on scroll
         const header = document.getElementById('main-header');
         window.addEventListener('scroll', () => {
             if (header) {
@@ -973,6 +1290,7 @@
             }
         });
     </script>
+    <script src="email-handler.js"></script>
 </body>
 
 </html>

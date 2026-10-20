@@ -472,16 +472,36 @@
             const isChecklist = card.getAttribute('data-media') === 'Checklist' || card.getAttribute('data-media') === 'Checklists';
             if (isVideo || isChecklist) return;
 
-            // Hijack card clicks
+            const customHref = card.getAttribute('data-href');
+            if (customHref) {
+                // Card has a dedicated calculator page — allow direct navigation
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.calc-card-share-wrapper') || e.target.closest('.calc-card-share-btn')) {
+                        return; // Allow share dropdown
+                    }
+                    if (e.target.tagName === 'A' && e.target.getAttribute('href') && e.target.getAttribute('href') !== 'javascript:void(0)') {
+                        return; // Let native link navigate
+                    }
+                    if (card.getAttribute('data-target') === '_blank' || customHref.startsWith('http')) {
+                        window.open(customHref, '_blank');
+                    } else {
+                        window.location.href = customHref;
+                    }
+                });
+                return;
+            }
+
+            // Fallback for cards without data-href: open generic modal
             card.addEventListener('click', (e) => {
+                if (e.target.closest('.calc-card-share-wrapper')) return;
                 e.preventDefault();
                 e.stopPropagation();
                 window.openCalculatorModal(card);
             });
 
-            // Also hijack START links inside footer
             const startLink = card.querySelector('.m-card-footer a');
-            if (startLink) {
+            if (startLink && (!startLink.getAttribute('href') || startLink.getAttribute('href') === 'javascript:void(0)')) {
                 startLink.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
