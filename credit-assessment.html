@@ -1,66 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Assessment | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Assess your credit profile across consumer debt, mortgage payments, public records, and see if your credit rating qualifies for the best terms.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Credit Assessment | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Use this calculator to assess your credit. After entering your information, your credit is assessed as 'Good,' 'Fair' or 'Needs Improvement.' Press the report button for more information about what this assessment means to you.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .radio-toggle-group {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-        .radio-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            color: #cbd5e1;
-        }
-        .radio-pill input {
-            accent-color: #dfa01e;
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="credit-assessment.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for CONTACT US -->
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Submenu">
+                    <a href="contact.html" class="nav-dropdown-item" id="nav-item-contact">
+                        CONTACT US
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us-contact">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Client Access Button -->
+        <div class="header-action">
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer" class="btn-client-access">
+                <span>CLIENT ACCESS</span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu"
+            onclick="toggleMobileMenu(event)">
             <span></span>
             <span></span>
             <span></span>
         </button>
+
     </header>
 
     <!-- Mobile Navigation Drawer Overlay -->
@@ -68,7 +151,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -78,18 +162,22 @@
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
             <a href="resources.html" class="drawer-link active">RESOURCES</a>
             <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
         </nav>
     </div>
 
     <!-- ============================================================
      FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
      ============================================================ -->
-    <a href="comprehensive-life-insurance-analysis.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Comprehensive Life Insurance Analysis">
+    <a href="comprehensive-life-insurance-analysis.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Comprehensive Life Insurance Analysis">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="disability-insurance.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Disability Insurance">
+    <a href="disability-insurance.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Disability Insurance">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
@@ -101,21 +189,37 @@
         <article class="calc-white-container">
 
             <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-15.jpg" alt="Credit Assessment" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/card-15.jpg" alt="Credit Assessment" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Page Title & Meta -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">CREDIT ASSESSMENT</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Personal Finance &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=personal-finance" class="calc-cat-link">Personal Finance</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <div class="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calcShareDropdown">
+                            <a href="javascript:void(0)" onclick="shareToSocial('facebook', event)"
+                                class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('twitter', event)"
+                                class="calc-share-item" title="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('linkedin', event)"
+                                class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('email', event)"
+                                class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Use this calculator to assess your credit. After entering your information, your credit is assessed as 'Good', 'Fair', or 'Needs Improvement'. Utilize this opportunity to learn information about what the assessment means to you.
+                    Use this calculator to assess your credit. After entering your information, your credit is assessed as
+                    "Good," "Fair" or "Needs Improvement." Press the report button for more information about what this
+                    assessment means to you.
                 </p>
             </header>
 
@@ -123,91 +227,95 @@
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateCredit()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateCredit(true)">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
                     <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                        <button type="button" class="calc-icon-btn" onclick="scrollToDefinitions()" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Assessment Summary">
+                            <i class="fas fa-bars"></i>
                         </button>
                         <span class="calc-req-text">*indicates required</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Header Badge -->
-            <div style="background: #0d1b31; border: 1px solid rgba(223, 160, 30, 0.35); border-radius: 6px; padding: 14px 20px; margin-bottom: 25px; text-align: center;">
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0; font-weight: 700;">
-                    Credit Assessment: The First Steps
-                </h2>
+            <!-- Current Credit Assessment Status Line -->
+            <div class="calc-status-callout" id="calc-status-callout">
+                Current credit assessment: <strong id="status-rating-text">Your credit is good</strong>
             </div>
 
             <!-- ============================================================
              ACCORDION 1: CONSUMER LOAN PAYMENTS
              ============================================================ -->
-            <section class="calc-section" id="sec-consumer">
-                <div class="calc-sec-header" onclick="toggleSec('sec-consumer')">
-                    <h2 class="calc-sec-title">CONSUMER LOAN PAYMENTS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-consumer" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">No late payments</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-consumer">
+                <div class="calc-section-header" onclick="toggleSec('sec-consumer')">
+                    <h2 class="calc-section-title">CONSUMER LOAN PAYMENTS:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-consumer">No late payments</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Loan payments 30 -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c-30" class="calc-field-label">30 day payments late:*</label>
-                            <span class="calc-q-dot" title="Number of 30-day late payments on credit cards or auto/student loans in past 2 years.">?</span>
+                            <label for="inp-loan-30" class="calc-field-label">Loan payments 30:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late consumer loan payments you have had in the last two years (30 to 59 days).">?</span>
                         </div>
-                        <input type="text" id="inp-c-30" class="calc-text-input" value="0">
+                        <input type="text" id="inp-loan-30" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c-30" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-loan-30" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Loan payments 60 -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c-60" class="calc-field-label">60 day payments late:*</label>
-                            <span class="calc-q-dot" title="Number of 60-day late payments on consumer debt.">?</span>
+                            <label for="inp-loan-60" class="calc-field-label">Loan payments 60:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late consumer loan payments you have had in the last two years (60 to 89 days).">?</span>
                         </div>
-                        <input type="text" id="inp-c-60" class="calc-text-input" value="0">
+                        <input type="text" id="inp-loan-60" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c-60" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-loan-60" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Loan payments 90 -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-c-90" class="calc-field-label">90+ day payments late:*</label>
-                            <span class="calc-q-dot" title="Number of 90+ day severely delinquent payments.">?</span>
+                            <label for="inp-loan-90" class="calc-field-label">Loan payments 90:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late consumer loan payments you have had in the last two years (more than 90 days).">?</span>
                         </div>
-                        <input type="text" id="inp-c-90" class="calc-text-input" value="0">
+                        <input type="text" id="inp-loan-90" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-c-90" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-loan-90" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
@@ -218,63 +326,72 @@
             <!-- ============================================================
              ACCORDION 2: MORTGAGE AND RENT PAYMENTS
              ============================================================ -->
-            <section class="calc-section" id="sec-mortgage">
-                <div class="calc-sec-header" onclick="toggleSec('sec-mortgage')">
-                    <h2 class="calc-sec-title">MORTGAGE AND RENT PAYMENTS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-mortgage" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">No late payments</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-mortgage">
+                <div class="calc-section-header" onclick="toggleSec('sec-mortgage')">
+                    <h2 class="calc-section-title">MORTGAGE AND RENT PAYMENTS:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-mortgage">No late payments</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Mortgage payments 30 -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-m-30" class="calc-field-label">30 day mortgage payments late:*</label>
+                            <label for="inp-mort-30" class="calc-field-label">Mortgage payments 30:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late mortgage or rent payments in the last two years (30 to 59 days).">?</span>
                         </div>
-                        <input type="text" id="inp-m-30" class="calc-text-input" value="0">
+                        <input type="text" id="inp-mort-30" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-m-30" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-mort-30" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Mortgage payments 60 -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-m-60" class="calc-field-label">60 day mortgage payments late:*</label>
+                            <label for="inp-mort-60" class="calc-field-label">Mortgage payments 60:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late mortgage or rent payments in the last two years (60 to 89 days).">?</span>
                         </div>
-                        <input type="text" id="inp-m-60" class="calc-text-input" value="0">
+                        <input type="text" id="inp-mort-60" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-m-60" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-mort-60" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Mortgage payments 90 -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-m-90" class="calc-field-label">90+ day mortgage payments late:*</label>
+                            <label for="inp-mort-90" class="calc-field-label">Mortgage payments 90:*</label>
+                            <span class="calc-q-dot"
+                                title="Enter the number of late mortgage or rent payments in the last two years (more than 90 days).">?</span>
                         </div>
-                        <input type="text" id="inp-m-90" class="calc-text-input" value="0">
+                        <input type="text" id="inp-mort-90" class="calc-text-input" value="0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-m-90" class="calc-range-slider" min="0" max="10" step="1" value="0">
+                            <input type="range" id="range-mort-90" class="calc-range-slider" min="0" max="20" step="1"
+                                value="0">
                             <div class="calc-tick-labels">
                                 <span>0</span>
-                                <span>3</span>
-                                <span>5</span>
-                                <span>8</span>
-                                <span>10</span>
+                                <span>7</span>
+                                <span>13</span>
+                                <span>20</span>
                             </div>
                         </div>
                     </div>
@@ -283,151 +400,228 @@
             </section>
 
             <!-- ============================================================
-             ACCORDION 3: BANKRUPTCY, REPOSSESSION OR OTHER
+             ACCORDION 3: BANKRUPTCY, FORECLOSURE OR LIENS
              ============================================================ -->
-            <section class="calc-section" id="sec-public-records">
-                <div class="calc-sec-header" onclick="toggleSec('sec-public-records')">
-                    <h2 class="calc-sec-title">BANKRUPTCY, REPOSSESSION OR OTHER:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-records" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">No issues</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-issues">
+                <div class="calc-section-header" onclick="toggleSec('sec-issues')">
+                    <h2 class="calc-section-title">BANKRUPTCY, FORECLOSURE OR LIENS:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-issues">No issues</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Bankruptcy last 2 years -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <span class="calc-field-label">Bankruptcy in the last two years:</span>
+                            <span class="calc-field-label">Bankruptcy last 2 years:*</span>
+                            <span class="calc-q-dot"
+                                title="If you or any of your co-borrowers filed for bankruptcy within the last two years, mark this entry as 'Yes'.">?</span>
                         </div>
-                        <div class="radio-toggle-group">
-                            <label class="radio-pill"><input type="radio" name="bk-2" value="no" checked onchange="calculateCredit()"> No</label>
-                            <label class="radio-pill"><input type="radio" name="bk-2" value="yes" onchange="calculateCredit()"> Yes</label>
+                        <div class="calc-radio-group">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="bankruptcy_last_2" value="yes" onchange="calculateCredit()">
+                                Yes bankruptcy
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="bankruptcy_last_2" value="no" checked onchange="calculateCredit()">
+                                No bankruptcy
+                            </label>
                         </div>
                     </div>
 
+                    <!-- Bankruptcy 3 to 7 years -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <span class="calc-field-label">Bankruptcy in the last three to seven years:</span>
+                            <span class="calc-field-label">Bankruptcy 3 to 7 years:*</span>
+                            <span class="calc-q-dot"
+                                title="If you or any of your co-borrowers filed for bankruptcy within the last seven years, mark this entry as 'Yes'.">?</span>
                         </div>
-                        <div class="radio-toggle-group">
-                            <label class="radio-pill"><input type="radio" name="bk-7" value="no" checked onchange="calculateCredit()"> No</label>
-                            <label class="radio-pill"><input type="radio" name="bk-7" value="yes" onchange="calculateCredit()"> Yes</label>
+                        <div class="calc-radio-group">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="bankruptcy_3_7" value="yes" onchange="calculateCredit()">
+                                Yes bankruptcy
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="bankruptcy_3_7" value="no" checked onchange="calculateCredit()">
+                                No bankruptcy
+                            </label>
                         </div>
                     </div>
 
+                    <!-- Foreclosure last 2 years -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <span class="calc-field-label">Repossession or foreclosure in last two years:</span>
+                            <span class="calc-field-label">Foreclosure last 2 years:*</span>
+                            <span class="calc-q-dot"
+                                title="If you or any of your co-borrowers had a property sold under foreclosure within the last two years, mark this entry as 'Yes'.">?</span>
                         </div>
-                        <div class="radio-toggle-group">
-                            <label class="radio-pill"><input type="radio" name="repo-2" value="no" checked onchange="calculateCredit()"> No</label>
-                            <label class="radio-pill"><input type="radio" name="repo-2" value="yes" onchange="calculateCredit()"> Yes</label>
+                        <div class="calc-radio-group">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="foreclosure_last_2" value="yes" onchange="calculateCredit()">
+                                Yes foreclosure
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="foreclosure_last_2" value="no" checked onchange="calculateCredit()">
+                                No foreclosure
+                            </label>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Foreclosure 3 to 7 years -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <span class="calc-field-label">Unpaid tax liens, judgments or collections:</span>
+                            <span class="calc-field-label">Foreclosure 3 to 7 years:*</span>
+                            <span class="calc-q-dot"
+                                title="If you or any of your co-borrowers had a property sold under foreclosure within the last seven years, mark this entry as 'Yes'.">?</span>
                         </div>
-                        <div class="radio-toggle-group">
-                            <label class="radio-pill"><input type="radio" name="liens" value="no" checked onchange="calculateCredit()"> No</label>
-                            <label class="radio-pill"><input type="radio" name="liens" value="yes" onchange="calculateCredit()"> Yes</label>
+                        <div class="calc-radio-group">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="foreclosure_3_7" value="yes" onchange="calculateCredit()">
+                                Yes foreclosure
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="foreclosure_3_7" value="no" checked onchange="calculateCredit()">
+                                No foreclosure
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Open liens -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <span class="calc-field-label">Open liens:*</span>
+                            <span class="calc-q-dot"
+                                title="If you or any co-borrowers have open collection items, charge-offs, judgments, or liens mark this entry as 'Yes'.">?</span>
+                        </div>
+                        <div class="calc-radio-group">
+                            <label class="calc-radio-label">
+                                <input type="radio" name="open_lien" value="yes" onchange="calculateCredit()">
+                                Yes open liens
+                            </label>
+                            <label class="calc-radio-label">
+                                <input type="radio" name="open_lien" value="no" checked onchange="calculateCredit()">
+                                No open liens
+                            </label>
                         </div>
                     </div>
 
                 </div>
             </section>
 
-            <!-- Dynamic Result Banner -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 20px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: #22c55e; margin: 0 0 6px 0; font-weight: 700; letter-spacing: 0.5px;">
-                    YOUR CREDIT IS GOOD
-                </h2>
-                <p id="res-subline" style="font-size: 12.5px; color: #cbd5e1; margin: 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">
-                    A good credit assessment means you will most likely be able to qualify for the best available rates and terms.
-                </p>
-            </div>
-
             <!-- ============================================================
-             SECTION 4: CREDIT RATING CHART
+             ACCORDION 4: CREDIT ASSESSMENT RESULT & VISUAL CHART
              ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title">CREDIT ASSESSMENT RATING</h2>
-                    <span style="font-size: 11.5px; color: #dfa01e; font-weight: 600;">Visual Assessment</span>
+            <section class="calc-collapsible-section" id="sec-result">
+                <div class="calc-section-header" onclick="toggleSec('sec-result')">
+                    <h2 class="calc-section-title" id="res-accordion-title">YOUR CREDIT IS GOOD</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-                    <div id="credit-chart-container" style="width: 100%; height: 260px; position: relative;">
-                        <!-- Dynamic SVG Credit Bar -->
+                <div class="calc-section-body">
+                    <div class="calc-result-subline" id="res-accordion-subline">
+                        A GOOD CREDIT ASSESSMENT MEANS YOU SHOULD BE ABLE TO QUALIFY, WITHIN THE LIMITS OF YOUR INCOME, FOR
+                        MOST LOANS. YOU ARE ALSO MUCH MORE LIKELY TO RECEIVE THE BEST INTEREST RATES AVAILABLE.
+                    </div>
+
+                    <div class="calc-chart-wrapper">
+                        <div class="calc-chart-inner" id="credit-assessment-chart">
+                            <!-- SVG Bar Chart rendered dynamically -->
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- ============================================================
-             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT)
+             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT & SOURCE)
              ============================================================ -->
-            <div class="calc-def-wrap">
+            <div class="calc-def-wrap" id="definitions-section">
                 <h3 class="calc-def-head">DEFINITIONS</h3>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">CREDIT ASSESSMENT</h4>
                     <p class="calc-def-desc">
-                        Your credit is calculated as 'Good', 'Fair' or 'Needs Improvement'. A good credit assessment means you should be able to qualify under the terms of your choice for most loans. You are also much more likely to receive the best market rates available. If your credit is 'Fair' you will probably still have trouble qualifying for a loan, but you may not receive the best available interest rate. If your credit rating 'Needs Improvement' you may have issues that could limit your ability to qualify for most loans.
+                        Your credit is calculated as 'Good', 'Fair' or 'Needs Improvement'. A good credit assessment means you
+                        should be able to qualify, within the limits of your income, for most loans. You are also much more
+                        likely to receive the best interest rates available. If your credit is fair, you will probably not have
+                        trouble qualifying for a loan, but you may not receive the best available interest rate. If your credit
+                        rating needs improvement, you may have issues that could limit your ability to qualify for many loans.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">CONSUMER LOAN PAYMENTS</h4>
                     <p class="calc-def-desc">
-                        Enter the number of late consumer loan payments you have had in the last two years. Consumer loan payments include car loans, student loans, and credit cards.
+                        Enter the number of late consumer loan payments you have had in the last two years. Consumer loan
+                        payments include car loans, student loans, and credit cards.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">MORTGAGE/RENT PAYMENTS</h4>
+                    <h4 class="calc-def-term">MORTGAGE OR RENT PAYMENTS</h4>
                     <p class="calc-def-desc">
-                        Enter the number of late mortgage or rent payments in the last two years. Mortgage and rent payments include the following types of payments: mortgage, rent, equity line and second mortgage payments.
+                        Enter the number of late mortgage or rent payments in the last two years. Mortgage and rent payments
+                        include the following types of payments: mortgage, rent, equity line and second mortgage payments.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">BANKRUPTCY LAST TWO YEARS</h4>
                     <p class="calc-def-desc">
-                        If you or any of your co-borrowers filed for bankruptcy within the last two years, mark the entry as 'Yes'.
+                        If you or any of your co-borrowers filed for bankruptcy within the last two years, mark this entry as
+                        'Yes'.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">BANKRUPTCY THREE TO SEVEN YEARS</h4>
                     <p class="calc-def-desc">
-                        If you or any of your co-borrowers filed for bankruptcy within the last seven years, mark the entry as 'Yes'.
+                        If you or any of your co-borrowers filed for bankruptcy within the last seven years, mark this entry as
+                        'Yes'.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">REPOSSESSION LAST TWO YEARS</h4>
+                    <h4 class="calc-def-term">FORECLOSURE LAST TWO YEARS</h4>
                     <p class="calc-def-desc">
-                        If you or any of your co-borrowers had a property sold under foreclosure within the last two years, mark the entry as 'Yes'.
+                        If you or any of your co-borrowers had a property sold under foreclosure within the last two years, mark
+                        this entry as 'Yes'.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">REPOSSESSION THREE TO SEVEN YEARS</h4>
+                    <h4 class="calc-def-term">FORECLOSURE THREE TO SEVEN YEARS</h4>
                     <p class="calc-def-desc">
-                        If you or any of your co-borrowers had a property sold under foreclosure within the last seven years, mark the entry as 'Yes'.
+                        If you or any of your co-borrowers had a property sold under foreclosure within the last seven years,
+                        mark this entry as 'Yes'.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">OTHER LIENS</h4>
+                    <h4 class="calc-def-term">OPEN LIEN</h4>
                     <p class="calc-def-desc">
-                        If you or any co-borrowers have open collection items, charge-offs, judgments, or tax liens, mark the entry as 'Yes'.
+                        If you or any co-borrowers have open collection items, charge-offs, judgments, or liens mark this entry
+                        as 'Yes'.
                     </p>
                 </div>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
-                </p>
+                <div class="calc-disclaimer-wrap">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your
+                        independent use and are not intended to provide investment advice. We cannot and do not guarantee their
+                        applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and
+                        are for illustrative purposes. We encourage you to seek personalized advice from qualified
+                        professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500
+                        widely held stocks. It is not possible to invest directly in an index. The performance mentioned does
+                        not include fees and charges which would reduce an investor returns. While interest on municipal bonds
+                        is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax,
+                        or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains
+                        tax treatment. Fixed income risks include, but are not limited to, changes in interest rates,
+                        liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
             </div>
 
         </article>
@@ -436,43 +630,45 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 800px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
+    <div id="report-modal" class="calc-modal" onclick="handleModalBackdropClick(event)">
+        <div class="calc-modal-dialog">
+            <div class="calc-modal-header">
                 <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Credit Assessment Summary Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
+                    <h2 class="calc-modal-title">Credit Assessment Report</h2>
+                    <p class="calc-modal-subtitle">The Seiler Group of Raymond James &bull; Confidential Assessment</p>
                 </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button type="button" class="calc-btn" id="btn-print-report" onclick="window.print()"
+                        style="background: #dfa01e; color: #080a0f; padding: 6px 14px; font-size: 11px;">
+                        <i class="fas fa-print"></i> PRINT
+                    </button>
+                    <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()"
+                        aria-label="Close report">&times;</button>
                 </div>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Assessment details rendered by JS -->
+            <div class="calc-modal-body" id="report-modal-content">
+                <!-- Injected dynamically via JavaScript -->
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
+    <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
 
         <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                    rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+                    aria-label="Email" title="theseilergroup@raymondjames.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
 
@@ -487,7 +683,7 @@
         <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+            <a href="contact.html" class="champ-link">CONNECT WITH US</a>
         </div>
 
     </section>
@@ -502,7 +698,8 @@
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
                         class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
                 <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W"
+                        target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
                 <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
@@ -527,10 +724,11 @@
                 endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
                 not responsible for the content of any website or the collection or use of information regarding any
                 website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a
+                    href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a
+                    href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/legal-disclosures" target="_blank"
+                    rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
                     href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
                     rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
                     href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
@@ -541,9 +739,10 @@
     </footer>
 
     <!-- ============================================================
-     CALCULATOR JAVASCRIPT ENGINE
+     CALCULATOR JAVASCRIPT ENGINE (Dinkytown CreditAssessment Exact Logic)
      ============================================================ -->
     <script>
+        // Mobile menu toggle
         function toggleMobileMenu(e) {
             e.stopPropagation();
             const drawer = document.getElementById('mobile-drawer');
@@ -554,11 +753,47 @@
             toggle.classList.toggle('open');
         }
 
+        // Section collapse toggle
         function toggleSec(secId) {
             const sec = document.getElementById(secId);
             if (sec) sec.classList.toggle('collapsed');
         }
 
+        // Scroll to definitions
+        function scrollToDefinitions() {
+            const defSec = document.getElementById('definitions-section');
+            if (defSec) defSec.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Share dropdown toggle
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('calcShareDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('calcShareDropdown');
+            if (dropdown && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function shareToSocial(platform, e) {
+            e.stopPropagation();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Credit Assessment | The Seiler Group of Raymond James");
+            let shareUrl = '';
+            if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            else if (platform === 'linkedin') shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            else if (platform === 'email') shareUrl = `mailto:?subject=${title}&body=Check out this Credit Assessment tool: ${url}`;
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+            const dropdown = document.getElementById('calcShareDropdown');
+            if (dropdown) dropdown.classList.remove('active');
+        }
+
+        // Setup two-way sync for sliders and inputs
         function bindSliderAndInput(inputId, rangeId) {
             const inp = document.getElementById(inputId);
             const range = document.getElementById(rangeId);
@@ -569,185 +804,358 @@
                 calculateCredit();
             });
 
-            inp.addEventListener('change', () => {
-                let val = parseInt(inp.value) || 0;
+            inp.addEventListener('input', () => {
+                let val = parseInt(inp.value.replace(/[^0-9]/g, '')) || 0;
                 if (val < 0) val = 0;
-                if (val > 10) val = 10;
+                if (val > 20) val = 20;
                 range.value = val;
+                calculateCredit();
+            });
+
+            inp.addEventListener('blur', () => {
+                let val = parseInt(inp.value.replace(/[^0-9]/g, '')) || 0;
+                if (val < 0) val = 0;
+                if (val > 20) val = 20;
                 inp.value = val;
+                range.value = val;
                 calculateCredit();
             });
         }
 
-        ['c-30', 'c-60', 'c-90', 'm-30', 'm-60', 'm-90'].forEach(id => {
-            bindSliderAndInput(`inp-${id}`, `range-${id}`);
-        });
+        const sliderFieldIds = [
+            ['inp-loan-30', 'range-loan-30'],
+            ['inp-loan-60', 'range-loan-60'],
+            ['inp-loan-90', 'range-loan-90'],
+            ['inp-mort-30', 'range-mort-30'],
+            ['inp-mort-60', 'range-mort-60'],
+            ['inp-mort-90', 'range-mort-90']
+        ];
 
-        let currentRating = 'Good';
+        sliderFieldIds.forEach(([inpId, rangeId]) => bindSliderAndInput(inpId, rangeId));
 
-        function calculateCredit() {
-            const c30 = parseInt(document.getElementById('inp-c-30').value) || 0;
-            const c60 = parseInt(document.getElementById('inp-c-60').value) || 0;
-            const c90 = parseInt(document.getElementById('inp-c-90').value) || 0;
+        // Dinkytown exact calculation variables and assessment state
+        let assessmentState = {
+            ratingNumber: 3, // 3: Good, 2: Fair, 1: Needs Improvement
+            ratingMessage: "Your credit is good",
+            ratingDescription: "A good credit assessment means you should be able to qualify, within the limits of your income, for most loans. You are also much more likely to receive the best interest rates available.",
+            loan30: 0,
+            loan60: 0,
+            loan90: 0,
+            mort30: 0,
+            mort60: 0,
+            mort90: 0,
+            bkLast2: false,
+            bk3to7: false,
+            foreclosureLast2: false,
+            foreclosure3to7: false,
+            openLien: false,
+            loanLateTotal: 0,
+            mortgageLateTotal: 0,
+            hasIssues: false
+        };
 
-            const m30 = parseInt(document.getElementById('inp-m-30').value) || 0;
-            const m60 = parseInt(document.getElementById('inp-m-60').value) || 0;
-            const m90 = parseInt(document.getElementById('inp-m-90').value) || 0;
+        /*
+           Exact Dinkytown CreditAssessment logic:
+           var a = 3;
+           if (k > 0) { a = 2; }
+           if (h > 0) { a = 2; }
+           if (j > 1) { a = 2; }
+           if (d) { a = 2; }
+           if (n) { a = 2; }
 
-            const totalConsumerLate = c30 + c60 + c90;
-            const totalMortgageLate = m30 + m60 + m90;
+           if (j > 1 && h > 0) { a = 1; }
+           if (k > 0 && h > 0) { a = 1; }
+           if (k > 0 && n) { a = 1; }
+           if (k > 0 && d) { a = 1; }
+           if (n && h > 0) { a = 1; }
+           if (d && h > 0) { a = 1; }
+           if (n && j > 1) { a = 1; }
+           if (d && j > 1) { a = 1; }
+           if (d && n) { a = 1; }
+           if (k > 1 || i > 0 || g > 0 || j > 2 || h > 1 || f > 0 || e || c || l) { a = 1; }
+        */
+        function calculateCredit(scrollToResult = false) {
+            const j = parseInt(document.getElementById('inp-loan-30').value) || 0;
+            const h = parseInt(document.getElementById('inp-loan-60').value) || 0;
+            const f = parseInt(document.getElementById('inp-loan-90').value) || 0;
 
-            document.getElementById('badge-consumer').textContent = (totalConsumerLate === 0) ? 'No late payments' : `${totalConsumerLate} late payment${totalConsumerLate > 1 ? 's' : ''}`;
-            document.getElementById('badge-mortgage').textContent = (totalMortgageLate === 0) ? 'No late payments' : `${totalMortgageLate} late payment${totalMortgageLate > 1 ? 's' : ''}`;
+            const k = parseInt(document.getElementById('inp-mort-30').value) || 0;
+            const i = parseInt(document.getElementById('inp-mort-60').value) || 0;
+            const g = parseInt(document.getElementById('inp-mort-90').value) || 0;
 
-            const bk2 = document.querySelector('input[name="bk-2"]:checked').value === 'yes';
-            const bk7 = document.querySelector('input[name="bk-7"]:checked').value === 'yes';
-            const repo2 = document.querySelector('input[name="repo-2"]:checked').value === 'yes';
-            const liens = document.querySelector('input[name="liens"]:checked').value === 'yes';
+            const e = document.querySelector('input[name="bankruptcy_last_2"]:checked').value === 'yes';
+            const d = document.querySelector('input[name="bankruptcy_3_7"]:checked').value === 'yes';
+            const c = document.querySelector('input[name="foreclosure_last_2"]:checked').value === 'yes';
+            const n = document.querySelector('input[name="foreclosure_3_7"]:checked').value === 'yes';
+            const l = document.querySelector('input[name="open_lien"]:checked').value === 'yes';
 
-            const hasPublicRecords = bk2 || bk7 || repo2 || liens;
-            document.getElementById('badge-records').textContent = hasPublicRecords ? 'Derogatory items reported' : 'No issues';
+            const loanLate = j + h + f;
+            const mortLate = k + i + g;
+            const foreclosureAny = e || d || c || n || l;
 
-            // Determine Assessment
-            let rating = 'Good';
-            let headlineText = 'YOUR CREDIT IS GOOD';
-            let headlineColor = '#22c55e';
-            let sublineText = 'A good credit assessment means you will most likely be able to qualify for the best available rates and terms.';
+            // Badges update
+            document.getElementById('badge-consumer').textContent = (loanLate === 0) ? "No late payments" : `${loanLate} late payment${loanLate > 1 ? 's' : ''}`;
+            document.getElementById('badge-mortgage').textContent = (mortLate === 0) ? "No late payments" : `${mortLate} late payment${mortLate > 1 ? 's' : ''}`;
+            document.getElementById('badge-issues').textContent = foreclosureAny ? "Issues reported" : "No issues";
 
-            if (bk2 || repo2 || c90 > 0 || m60 > 0 || m90 > 0 || totalConsumerLate >= 4) {
-                rating = 'Needs Improvement';
-                headlineText = 'YOUR CREDIT NEEDS IMPROVEMENT';
-                headlineColor = '#ef4444';
-                sublineText = 'You may have issues that could limit your ability to qualify for most standard loans.';
-            } else if (bk7 || liens || c60 > 0 || c30 >= 2 || m30 >= 1) {
-                rating = 'Fair';
-                headlineText = 'YOUR CREDIT IS FAIR';
-                headlineColor = '#eab308';
-                sublineText = 'You will probably still be able to qualify for a loan, but you may not receive the best available interest rate.';
+            // Dinkytown exact logic
+            let a = 3;
+            if (k > 0) a = 2;
+            if (h > 0) a = 2;
+            if (j > 1) a = 2;
+            if (d) a = 2;
+            if (n) a = 2;
+
+            if (j > 1 && h > 0) a = 1;
+            if (k > 0 && h > 0) a = 1;
+            if (k > 0 && n) a = 1;
+            if (k > 0 && d) a = 1;
+            if (n && h > 0) a = 1;
+            if (d && h > 0) a = 1;
+            if (n && j > 1) a = 1;
+            if (d && j > 1) a = 1;
+            if (d && n) a = 1;
+            if (k > 1 || i > 0 || g > 0 || j > 2 || h > 1 || f > 0 || e || c || l) a = 1;
+
+            const creditMessages = ["", "Your credit needs improvement", "Your credit is fair", "Your credit is good"];
+            const creditDescriptions = [
+                "",
+                "Your credit rating needs improvement, you seem to have issues that could limit your ability to qualify for many loans.",
+                "A fair credit assessment usually means you will not have trouble qualifying for a loan, but you may not receive the best available interest rate.",
+                "A good credit assessment means you should be able to qualify, within the limits of your income, for most loans. You are also much more likely to receive the best interest rates available."
+            ];
+
+            assessmentState = {
+                ratingNumber: a,
+                ratingMessage: creditMessages[a],
+                ratingDescription: creditDescriptions[a],
+                loan30: j,
+                loan60: h,
+                loan90: f,
+                mort30: k,
+                mort60: i,
+                mort90: g,
+                bkLast2: e,
+                bk3to7: d,
+                foreclosureLast2: c,
+                foreclosure3to7: n,
+                openLien: l,
+                loanLateTotal: loanLate,
+                mortgageLateTotal: mortLate,
+                hasIssues: foreclosureAny
+            };
+
+            // Update UI elements
+            const statusCallout = document.getElementById('status-rating-text');
+            statusCallout.textContent = assessmentState.ratingMessage;
+            if (a === 3) {
+                statusCallout.style.color = '#22c55e'; // Green
+            } else if (a === 2) {
+                statusCallout.style.color = '#eab308'; // Amber/Yellow
+            } else {
+                statusCallout.style.color = '#ef4444'; // Red
             }
 
-            currentRating = rating;
+            // Accordion Title & Subline
+            const resTitle = document.getElementById('res-accordion-title');
+            const resSubline = document.getElementById('res-accordion-subline');
+            resTitle.textContent = assessmentState.ratingMessage.toUpperCase();
+            resSubline.textContent = assessmentState.ratingDescription.toUpperCase();
 
-            const headEl = document.getElementById('res-headline');
-            headEl.textContent = headlineText;
-            headEl.style.color = headlineColor;
-            document.getElementById('res-subline').textContent = sublineText;
+            // Render Bar Chart
+            renderChart(a);
 
-            renderCreditChart(rating);
+            if (scrollToResult) {
+                const resSec = document.getElementById('sec-result');
+                if (resSec) resSec.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        function renderCreditChart(rating) {
-            const container = document.getElementById('credit-chart-container');
+        // Render Credit Assessment 3-Tier Chart
+        function renderChart(ratingNumber) {
+            const container = document.getElementById('credit-assessment-chart');
             if (!container) return;
 
             const width = container.clientWidth || 700;
-            const height = 240;
+            const height = 280;
             const padLeft = 80;
-            const padRight = 40;
-            const padTop = 20;
-            const padBottom = 30;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 40;
+
             const chartW = width - padLeft - padRight;
             const chartH = height - padTop - padBottom;
 
-            // Rating levels: Poor (0), Fair (1), Good (2)
-            const levels = ['Poor', 'Fair', 'Good'];
-            const stepY = chartH / 2;
+            // Rating levels: Poor (1), Fair (2), Good (3)
+            // Top: Good (y = padTop)
+            // Middle: Fair (y = padTop + chartH / 2)
+            // Bottom: Poor (y = padTop + chartH)
+            const yGood = padTop;
+            const yFair = padTop + (chartH / 2);
+            const yPoor = padTop + chartH;
 
-            let grid = '';
-            levels.forEach((lvl, idx) => {
-                const y = padTop + chartH - (idx * stepY);
-                grid += `
-                    <line x1="${padLeft}" y1="${y}" x2="${width - padRight}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 15}" y="${y + 4}" fill="#94a3b8" font-size="12" font-family="'Open Sans', sans-serif" text-anchor="end" font-weight="600">${lvl}</text>
-                `;
-            });
+            let barH = 0;
+            let barY = yPoor;
+            let barColor = '#00ff00'; // Bright Green default
 
-            let fillH = chartH;
-            let fillColor = '#22c55e';
-            if (rating === 'Fair') {
-                fillH = chartH * 0.5;
-                fillColor = '#eab308';
-            } else if (rating === 'Needs Improvement') {
-                fillH = chartH * 0.15;
-                fillColor = '#ef4444';
+            if (ratingNumber === 3) {
+                // Good - full height to Good line
+                barY = yGood;
+                barH = chartH;
+                barColor = '#00ff00'; // Green
+            } else if (ratingNumber === 2) {
+                // Fair - half height to Fair line
+                barY = yFair;
+                barH = chartH / 2;
+                barColor = '#eab308'; // Yellow/Amber
+            } else {
+                // Poor / Needs Improvement - small height up to Poor baseline area
+                barH = chartH * 0.15;
+                barY = padTop + chartH - barH;
+                barColor = '#ef4444'; // Red
             }
 
-            const barW = Math.min(260, chartW * 0.6);
+            const barW = Math.min(300, Math.max(160, chartW * 0.45));
             const barX = padLeft + (chartW - barW) / 2;
-            const barY = padTop + chartH - fillH;
 
             container.innerHTML = `
                 <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${grid}
-                    <rect x="${barX}" y="${barY}" width="${barW}" height="${fillH}" fill="${fillColor}" rx="4">
-                        <title>Assessment: ${rating}</title>
+                    <!-- Chart Border Box -->
+                    <rect x="${padLeft}" y="${padTop}" width="${chartW}" height="${chartH}" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
+                    
+                    <!-- Horizontal Grid Lines & Y-Axis Labels -->
+                    <!-- Good Line -->
+                    <line x1="${padLeft}" y1="${yGood}" x2="${padLeft + chartW}" y2="${yGood}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                    <text x="${padLeft - 18}" y="${yGood + 5}" fill="#cbd5e1" font-size="13" font-family="'Montserrat', sans-serif" font-weight="600" text-anchor="end">Good</text>
+
+                    <!-- Fair Line -->
+                    <line x1="${padLeft}" y1="${yFair}" x2="${padLeft + chartW}" y2="${yFair}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                    <text x="${padLeft - 18}" y="${yFair + 5}" fill="#cbd5e1" font-size="13" font-family="'Montserrat', sans-serif" font-weight="600" text-anchor="end">Fair</text>
+
+                    <!-- Poor Line -->
+                    <line x1="${padLeft}" y1="${yPoor}" x2="${padLeft + chartW}" y2="${yPoor}" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                    <text x="${padLeft - 18}" y="${yPoor + 5}" fill="#cbd5e1" font-size="13" font-family="'Montserrat', sans-serif" font-weight="600" text-anchor="end">Poor</text>
+
+                    <!-- Vertical Credit Assessment Bar -->
+                    <rect x="${barX}" y="${barY}" width="${barW}" height="${barH}" fill="${barColor}" stroke="none">
+                        <title>Credit Assessment: ${assessmentState.ratingMessage}</title>
                     </rect>
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
                 </svg>
             `;
         }
 
+        // Open Report Modal
         function openReportModal() {
             calculateCredit();
             const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
+            const content = document.getElementById('report-modal-content');
+
+            const ratingColor = assessmentState.ratingNumber === 3 ? '#22c55e' : (assessmentState.ratingNumber === 2 ? '#eab308' : '#ef4444');
 
             content.innerHTML = `
-                <div style="background: #091424; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px; text-align: center;">
-                    <div style="font-size: 12px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Assessed Credit Tier</div>
-                    <div style="font-size: 26px; font-weight: 700; color: ${currentRating === 'Good' ? '#22c55e' : (currentRating === 'Fair' ? '#eab308' : '#ef4444')};">
-                        ${currentRating.toUpperCase()}
-                    </div>
+                <div style="background: #091424; padding: 20px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.35); text-align: center; margin-bottom: 24px;">
+                    <span style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Overall Evaluation</span>
+                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; color: ${ratingColor}; margin: 6px 0 10px 0;">
+                        ${assessmentState.ratingMessage}
+                    </h3>
+                    <p style="font-size: 13.5px; line-height: 1.6; color: #cbd5e1; margin: 0; max-width: 660px; margin: 0 auto;">
+                        ${assessmentState.ratingDescription}
+                    </p>
                 </div>
 
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: #dfa01e; margin: 0 0 10px 0; text-transform: uppercase;">
+                    Your Credit Assessment Inputs
+                </h4>
+
+                <table class="calc-report-table">
                     <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: left; color: #dfa01e;">
-                            <th style="padding: 12px 10px;">Factor</th>
-                            <th style="padding: 12px 10px;">Status / Count</th>
-                            <th style="padding: 12px 10px;">Impact</th>
+                        <tr>
+                            <th style="width: 38%;">Late payments</th>
+                            <th style="width: 20%; text-align: center;">30 to 59 days</th>
+                            <th style="width: 20%; text-align: center;">60 to 89 days</th>
+                            <th style="width: 22%; text-align: center;">more than 90 days</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                            <td style="padding: 10px; color: #fff;">Consumer Late Payments (30 / 60 / 90+ days)</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${document.getElementById('badge-consumer').textContent}</td>
-                            <td style="padding: 10px; color: #dfa01e;">Evaluated</td>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Consumer loans</td>
+                            <td style="text-align: center;">${assessmentState.loan30}</td>
+                            <td style="text-align: center;">${assessmentState.loan60}</td>
+                            <td style="text-align: center;">${assessmentState.loan90}</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                            <td style="padding: 10px; color: #fff;">Mortgage/Rent Late Payments (30 / 60 / 90+ days)</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${document.getElementById('badge-mortgage').textContent}</td>
-                            <td style="padding: 10px; color: #dfa01e;">High Impact</td>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Mortgage or rent</td>
+                            <td style="text-align: center;">${assessmentState.mort30}</td>
+                            <td style="text-align: center;">${assessmentState.mort60}</td>
+                            <td style="text-align: center;">${assessmentState.mort90}</td>
                         </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-                            <td style="padding: 10px; color: #fff;">Public Records (Bankruptcy, Foreclosure, Liens)</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${document.getElementById('badge-records').textContent}</td>
-                            <td style="padding: 10px; color: #dfa01e;">Critical</td>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Bankruptcy last two years?</td>
+                            <td colspan="3" style="text-align: left; padding-left: 20px; color: ${assessmentState.bkLast2 ? '#ef4444; font-weight: 700;' : '#cbd5e1;'}">
+                                ${assessmentState.bkLast2 ? 'Yes' : 'No'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Bankruptcy three to seven years?</td>
+                            <td colspan="3" style="text-align: left; padding-left: 20px; color: ${assessmentState.bk3to7 ? '#eab308; font-weight: 700;' : '#cbd5e1;'}">
+                                ${assessmentState.bk3to7 ? 'Yes' : 'No'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Foreclosure last two years?</td>
+                            <td colspan="3" style="text-align: left; padding-left: 20px; color: ${assessmentState.foreclosureLast2 ? '#ef4444; font-weight: 700;' : '#cbd5e1;'}">
+                                ${assessmentState.foreclosureLast2 ? 'Yes' : 'No'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Foreclosure three to seven years?</td>
+                            <td colspan="3" style="text-align: left; padding-left: 20px; color: ${assessmentState.foreclosure3to7 ? '#eab308; font-weight: 700;' : '#cbd5e1;'}">
+                                ${assessmentState.foreclosure3to7 ? 'Yes' : 'No'}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight: 600; color: #ffffff;">Open lien</td>
+                            <td colspan="3" style="text-align: left; padding-left: 20px; color: ${assessmentState.openLien ? '#ef4444; font-weight: 700;' : '#cbd5e1;'}">
+                                ${assessmentState.openLien ? 'Yes' : 'No'}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div style="margin-top: 25px; padding: 16px; background: rgba(11,23,42,0.6); border-left: 3px solid #dfa01e; border-radius: 4px;">
+                    <h5 style="margin: 0 0 6px 0; color: #dfa01e; font-size: 13px; font-weight: 700;">Wealth Advisor Recommendation</h5>
+                    <p style="margin: 0; font-size: 12.5px; color: #94a3b8; line-height: 1.6;">
+                        A strong credit profile directly lowers your borrowing costs across residential mortgages, securities-backed credit lines, and commercial financing. For customized debt structuring or personal wealth advisory, contact The Seiler Group of Raymond James.
+                    </p>
+                </div>
             `;
 
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('report-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
+        function handleModalBackdropClick(e) {
+            if (e.target.id === 'report-modal') {
+                closeReportModal();
+            }
+        }
 
         window.addEventListener('resize', () => {
-            renderCreditChart(currentRating);
+            renderChart(assessmentState.ratingNumber);
         });
 
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
             calculateCredit();
         });
     </script>
-    <script src="email-handler.js"></script>
+
 </body>
+
 </html>

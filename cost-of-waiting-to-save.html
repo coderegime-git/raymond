@@ -1,74 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cost of Waiting to Save | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate the powerful cost of delaying your savings plan and see the difference between starting now versus postponing.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Cost of Waiting to Save | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Waiting to begin your savings plan may have an important impact on your results. A delay of even a few years could cost thousands of dollars. This calculator helps show you how much postponing your savings plan may really cost.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .wait-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .wait-stat-card {
-            background: rgba(11, 23, 42, 0.85);
-            border: 1px solid rgba(223, 160, 30, 0.3);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-        }
-        .wait-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .wait-stat-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="cost-of-waiting-to-save.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for CONTACT US -->
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Submenu">
+                    <a href="contact.html" class="nav-dropdown-item" id="nav-item-contact">
+                        CONTACT US
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us-contact">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Client Access Button -->
+        <div class="header-action">
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer" class="btn-client-access">
+                <span>CLIENT ACCESS</span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu"
+            onclick="toggleMobileMenu(event)">
             <span></span>
             <span></span>
             <span></span>
         </button>
+
     </header>
 
     <!-- Mobile Navigation Drawer Overlay -->
@@ -76,7 +151,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -86,18 +162,22 @@
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
             <a href="resources.html" class="drawer-link active">RESOURCES</a>
             <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
         </nav>
     </div>
 
     <!-- ============================================================
      FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
      ============================================================ -->
-    <a href="disability-insurance.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Disability Insurance">
+    <a href="disability-insurance.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Disability Insurance">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="emergency-savings-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Emergency Savings Calculator">
+    <a href="emergency-savings-calculator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Emergency Savings Calculator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
@@ -109,21 +189,37 @@
         <article class="calc-white-container">
 
             <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-17.jpg" alt="Cost of Waiting to Save" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/card-17.jpg" alt="Cost of Waiting to Save" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Page Title & Meta -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">COST OF WAITING TO SAVE</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=savings-and-investments" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <div class="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calcShareDropdown">
+                            <a href="javascript:void(0)" onclick="shareToSocial('facebook', event)"
+                                class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('twitter', event)"
+                                class="calc-share-item" title="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('linkedin', event)"
+                                class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('email', event)"
+                                class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Deciding to delay your savings plan can have a dramatic impact on your results. A delay of even a few years can cost you thousands of dollars. This calculator helps illustrate how much postponing your savings plan may really cost.
+                    Waiting to begin your savings plan may have an important impact on your results. A delay of even a few
+                    years could cost thousands of dollars. This calculator helps show you how much postponing your savings
+                    plan may really cost.
                 </p>
             </header>
 
@@ -131,74 +227,77 @@
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateCostOfWaiting()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateWaitCost(true)">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
                     <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                        <button type="button" class="calc-icon-btn" onclick="scrollToDefinitions()" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Savings Balances">
+                            <i class="fas fa-bars"></i>
                         </button>
                         <span class="calc-req-text">*indicates required</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Dynamic Estimated Cost Banner -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 18px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #ffffff; margin: 0; font-weight: 700;">
-                    Postponing 3 years could cost you <span style="color: #ef4444;">$17,452.88</span> as compared to a savings balance of <span style="color: #dfa01e;">$55,319.82</span>.
-                </h2>
+            <!-- Cost of Waiting Callout Subtitle -->
+            <div class="calc-status-callout" id="calc-status-callout">
+                Postponing <span id="status-years-text">2 years</span> could cost you <span class="highlight" id="status-cost-text">$5,251.94</span>*
+                <span class="subnote">*All returns and total savings are before tax.</span>
             </div>
 
-            <!-- Top Input: Years to Postpone -->
-            <div style="background: #0d1b31; border: 1px solid rgba(223, 160, 30, 0.35); border-radius: 6px; padding: 20px; margin-bottom: 25px;">
-                <div class="calc-input-row" style="margin-bottom: 0;">
+            <!-- Top Input Card: Years to postpone saving -->
+            <div class="calc-single-input-card">
+                <div class="calc-input-row">
                     <div class="calc-label-col">
-                        <label for="inp-delay-yrs" class="calc-field-label">Years to postpone saving:*</label>
-                        <span class="calc-q-dot" title="How many years you plan to wait before starting contributions.">?</span>
+                        <label for="inp-wait-years" class="calc-field-label">Years to postpone saving:*</label>
+                        <span class="calc-q-dot"
+                            title="The number of years you might wait before you begin saving. The tool will then delay your new contributions for that number of years.">?</span>
                     </div>
-                    <input type="text" id="inp-delay-yrs" class="calc-text-input" value="3">
+                    <input type="text" id="inp-wait-years" class="calc-text-input" value="2">
                     <div class="calc-slider-col">
-                        <input type="range" id="range-delay-yrs" class="calc-range-slider" min="1" max="10" step="1" value="3">
+                        <input type="range" id="range-wait-years" class="calc-range-slider" min="1" max="45" step="1"
+                            value="2">
                         <div class="calc-tick-labels">
                             <span>1</span>
-                            <span>3</span>
-                            <span>5</span>
-                            <span>8</span>
-                            <span>10</span>
+                            <span>16</span>
+                            <span>30</span>
+                            <span>45</span>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- ============================================================
-             SECTION 1: SAVINGS PLAN
+             ACCORDION: SAVINGS PLAN
              ============================================================ -->
-            <section class="calc-section" id="sec-plan">
-                <div class="calc-sec-header" onclick="toggleSec('sec-plan')">
-                    <h2 class="calc-sec-title">SAVINGS PLAN:</h2>
-                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-savings-plan">
+                <div class="calc-section-header" onclick="toggleSec('sec-savings-plan')">
+                    <h2 class="calc-section-title">SAVINGS PLAN:</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
                     <!-- Starting amount -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-start-amt" class="calc-field-label">Starting amount:*</label>
-                            <span class="calc-q-dot" title="Initial capital in savings account.">?</span>
+                            <span class="calc-q-dot"
+                                title="The starting balance or current amount you have invested or saved.">?</span>
                         </div>
                         <input type="text" id="inp-start-amt" class="calc-text-input" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-start-amt" class="calc-range-slider" min="0" max="100000" step="1000" value="0">
+                            <input type="range" id="range-start-amt" class="calc-range-slider" min="0" max="10000000"
+                                step="1000" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$25,000</span>
-                                <span>$50,000</span>
-                                <span>$75,000</span>
-                                <span>$100,000</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                                <span>$10m</span>
                             </div>
                         </div>
                     </div>
@@ -206,18 +305,19 @@
                     <!-- Years -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-total-yrs" class="calc-field-label">Years:*</label>
-                            <span class="calc-q-dot" title="Overall total savings horizon.">?</span>
+                            <label for="inp-years" class="calc-field-label">Years:*</label>
+                            <span class="calc-q-dot"
+                                title="The total number of years you are planning to save or invest.">?</span>
                         </div>
-                        <input type="text" id="inp-total-yrs" class="calc-text-input" value="10">
+                        <input type="text" id="inp-years" class="calc-text-input" value="10">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-total-yrs" class="calc-range-slider" min="1" max="50" step="1" value="10">
+                            <input type="range" id="range-years" class="calc-range-slider" min="1" max="45" step="1"
+                                value="10">
                             <div class="calc-tick-labels">
                                 <span>1</span>
-                                <span>12</span>
-                                <span>25</span>
-                                <span>37</span>
-                                <span>50</span>
+                                <span>16</span>
+                                <span>30</span>
+                                <span>45</span>
                             </div>
                         </div>
                     </div>
@@ -225,154 +325,183 @@
                     <!-- Rate of return -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-rate" class="calc-field-label">Rate of return:*</label>
-                            <span class="calc-q-dot" title="Annual compound rate of return.">?</span>
+                            <label for="inp-ror" class="calc-field-label">Rate of return:*</label>
+                            <span class="calc-q-dot"
+                                title="The annual rate of return for this investment or savings account.">?</span>
                         </div>
-                        <input type="text" id="inp-rate" class="calc-text-input" value="7%">
+                        <input type="text" id="inp-ror" class="calc-text-input" value="1%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="15" step="0.5" value="7">
+                            <input type="range" id="range-ror" class="calc-range-slider" min="0" max="12" step="0.5"
+                                value="1">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>4%</span>
-                                <span>7%</span>
-                                <span>11%</span>
-                                <span>15%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Additional contribution -->
+                    <!-- Additional contributions -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-contrib" class="calc-field-label">Additional contribution:*</label>
-                            <span class="calc-q-dot" title="Recurring amount added each period.">?</span>
+                            <label for="inp-add-contrib" class="calc-field-label">Additional contributions:*</label>
+                            <span class="calc-q-dot"
+                                title="The amount that you plan on adding to your savings or investment each period.">?</span>
                         </div>
-                        <input type="text" id="inp-contrib" class="calc-text-input" value="$300.00">
+                        <input type="text" id="inp-add-contrib" class="calc-text-input" value="$200.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-contrib" class="calc-range-slider" min="0" max="2000" step="25" value="300">
+                            <input type="range" id="range-add-contrib" class="calc-range-slider" min="0" max="100000"
+                                step="50" value="200">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$500</span>
-                                <span>$1,000</span>
-                                <span>$1,500</span>
-                                <span>$2,000</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Frequency -->
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="sel-freq" class="calc-field-label">Frequency:*</label>
+                            <label for="sel-frequency" class="calc-field-label">Frequency:*</label>
+                            <span class="calc-q-dot"
+                                title="How often you make contributions to your account. The options include monthly, quarterly and annually.">?</span>
                         </div>
-                        <div style="flex: 1; max-width: 260px;">
-                            <select id="sel-freq" class="calc-text-input" style="width: 100%; text-align: left; padding: 7px 12px; cursor: pointer; background: #0b172a; border: 1px solid rgba(223,160,30,0.4); color: #fff;">
-                                <option value="12" selected>per month</option>
-                                <option value="4">quarterly</option>
-                                <option value="1">annually</option>
-                            </select>
-                        </div>
+                        <select id="sel-frequency" class="calc-select-input" onchange="calculateWaitCost()">
+                            <option value="12" selected>per month</option>
+                            <option value="4">per quarter</option>
+                            <option value="1">per year</option>
+                        </select>
                     </div>
 
                 </div>
             </section>
 
-            <!-- Key Metric Cards -->
-            <div class="wait-stat-grid">
-                <div class="wait-stat-card">
-                    <div class="wait-stat-val" style="color: #2563eb;" id="card-start-now">$55,319.82</div>
-                    <div class="wait-stat-label">Accumulation If Starting Now</div>
-                </div>
-                <div class="wait-stat-card">
-                    <div class="wait-stat-val" style="color: #16a34a;" id="card-wait-bal">$37,866.94</div>
-                    <div class="wait-stat-label" id="card-wait-label">Accumulation If Waiting 3 Yrs</div>
-                </div>
-                <div class="wait-stat-card">
-                    <div class="wait-stat-val" style="color: #ef4444;" id="card-cost-wait">$17,452.88</div>
-                    <div class="wait-stat-label">Total Cost of Postponing</div>
-                </div>
-            </div>
-
             <!-- ============================================================
-             CHART SECTION
+             RESULT ACCORDION & INTERACTIVE AREA CHART
              ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title" id="chart-headline">IF YOU START NOW YOUR SAVINGS COULD BE $55,319.82 AFTER 10 YEARS.</h2>
-                    <div style="display: flex; gap: 20px; align-items: center; font-size: 12px; font-weight: 600;">
-                        <span style="display: flex; align-items: center; gap: 6px; color: #60a5fa;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #2563eb; display: inline-block;"></span> Start Now
-                        </span>
-                        <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #16a34a; display: inline-block;"></span> Wait Period
-                        </span>
+            <section class="calc-collapsible-section" id="sec-result">
+                <div class="calc-section-header" onclick="toggleSec('sec-result')">
+                    <h2 class="calc-section-title" id="res-savings-title">
+                        IF YOU START NOW YOUR SAVINGS COULD BE $25,245.12 AFTER 10 YEARS.
+                    </h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-                    <div id="wait-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- Dynamic Area Chart -->
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-legend">
+                            <span class="calc-legend-item">
+                                <span class="calc-legend-dot blue"></span>
+                                <span id="legend-start-now">Start saving now $25,245.12</span>
+                            </span>
+                            <span class="calc-legend-item">
+                                <span class="calc-legend-dot green"></span>
+                                <span id="legend-start-later">Wait 2 years $19,993.18</span>
+                            </span>
+                        </div>
+                        <div class="calc-chart-svg-wrap" id="chart-container">
+                            <!-- Rendered dynamically via SVG Area Chart -->
+                        </div>
                     </div>
                 </div>
             </section>
 
             <!-- ============================================================
-             DEFINITIONS SECTION
+             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT & SOURCE)
              ============================================================ -->
-            <div class="calc-def-wrap">
+            <div class="calc-def-wrap" id="definitions-section">
                 <h3 class="calc-def-head">DEFINITIONS</h3>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">STARTING AMOUNT</h4>
                     <p class="calc-def-desc">
-                        The starting balance or current amount you have invested or saved. For this calculator, the tool assumes your current savings is earning your stated rate of return whether you decide to delay your new contributions or not.
+                        The starting balance or current amount you have invested or saved. For this calculator, the tool assumes
+                        your current savings is earning your annual rate of return whether you decide to delay your new
+                        contributions or not. For example, if you have a current balance of $1000 and never make any new
+                        contributions, your delayed and non-delayed results will be the same.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">ADDITIONAL CONTRIBUTIONS</h4>
                     <p class="calc-def-desc">
-                        The amount that you plan on adding to your savings or investment each period.
+                        The amount that you plan on adding to your savings or investment each period. The options include
+                        monthly, quarterly and annually. This calculator assumes that you make your contributions at the
+                        beginning of each period.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">YEARS</h4>
                     <p class="calc-def-desc">
-                        The total number of years you plan on allowing to save or invest.
+                        The total number of years you are planning to save or invest.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">RATE OF RETURN</h4>
                     <p class="calc-def-desc">
-                        The annual rate of return for this investment or savings account. The Standard &amp; Poor's 500 (S&amp;P 500) had a long-term return of ~11.1% from 1970 to 2023.
+                        The annual rate of return for this investment or savings account. The actual rate of return is largely
+                        dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for
+                        the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%,
+                        including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average
+                        annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was
+                        approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June
+                        1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings
+                        accounts at a financial institution pay less but carry significantly lower risk of loss of principal
+                        balances.<br><br>
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't
+                        be predicted with certainty and that investments that pay higher rates of return are generally subject
+                        to higher risk and volatility. The actual rate of return on investments can vary widely over time,
+                        especially for long-term investments. This includes the potential loss of principal on your investment.
+                        It is not possible to invest directly in an index and the compounded rate of return noted above does not
+                        reflect sales charges and other fees that investment funds and/or investment companies may charge.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">YEARS TO POSTPONE SAVING</h4>
                     <p class="calc-def-desc">
-                        The number of years you might wait before you begin saving. This calculator will then delay your new contributions for this number of years.
+                        The number of years you might wait before you begin saving. The tool will then delay your new
+                        contributions for that number of years.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">FREQUENCY OF CONTRIBUTIONS</h4>
                     <p class="calc-def-desc">
-                        How often you make contributions to your account.
+                        How often you make contributions to your account. The options include monthly, quarterly and annually.
+                        This calculator assumes that you make your contributions at the beginning of each period.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">COST OF WAITING</h4>
                     <p class="calc-def-desc">
-                        The difference in your savings or investment balance between your delayed and non-delayed plans. All returns and future savings are before tax.
+                        The difference in your savings or investment balance between your delayed and non-delayed plans. All
+                        returns and total savings are before tax.
                     </p>
                 </div>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
-                </p>
+                <div class="calc-disclaimer-wrap">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your
+                        independent use and are not intended to provide investment advice. We cannot and do not guarantee their
+                        applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and
+                        are for illustrative purposes. We encourage you to seek personalized advice from qualified
+                        professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500
+                        widely held stocks. It is not possible to invest directly in an index. The performance mentioned does
+                        not include fees and charges which would reduce an investor returns. While interest on municipal bonds
+                        is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax,
+                        or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains
+                        tax treatment. Fixed income risks include, but are not limited to, changes in interest rates,
+                        liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
             </div>
 
         </article>
@@ -381,43 +510,45 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 850px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
+    <div id="report-modal" class="calc-modal" onclick="handleModalBackdropClick(event)">
+        <div class="calc-modal-dialog">
+            <div class="calc-modal-header">
                 <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Cost of Delay Schedule &amp; Analysis Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
+                    <h2 class="calc-modal-title">Cost of Waiting Analysis Report</h2>
+                    <p class="calc-modal-subtitle">The Seiler Group of Raymond James &bull; Long-Term Wealth Projection</p>
                 </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button type="button" class="calc-btn" id="btn-print-report" onclick="window.print()"
+                        style="background: #dfa01e; color: #080a0f; padding: 6px 14px; font-size: 11px;">
+                        <i class="fas fa-print"></i> PRINT
+                    </button>
+                    <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()"
+                        aria-label="Close report">&times;</button>
                 </div>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Comparison table -->
+            <div class="calc-modal-body" id="report-modal-content">
+                <!-- Injected dynamically via JavaScript -->
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
+    <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
 
         <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
+                    aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
+                    rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+                    aria-label="Email" title="theseilergroup@raymondjames.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
 
@@ -432,7 +563,7 @@
         <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+            <a href="contact.html" class="champ-link">CONNECT WITH US</a>
         </div>
 
     </section>
@@ -447,7 +578,8 @@
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
                         class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
                 <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W"
+                        target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
                 <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
@@ -472,10 +604,11 @@
                 endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
                 not responsible for the content of any website or the collection or use of information regarding any
                 website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
+            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a
+                    href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a
+                    href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a
+                    href="https://www.raymondjames.com/legal-disclosures" target="_blank"
+                    rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
                     href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
                     rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
                     href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
@@ -486,9 +619,10 @@
     </footer>
 
     <!-- ============================================================
-     CALCULATOR JAVASCRIPT ENGINE
+     CALCULATOR JAVASCRIPT ENGINE (Dinkytown WaitCost.js Exact Logic)
      ============================================================ -->
     <script>
+        // Mobile menu toggle
         function toggleMobileMenu(e) {
             e.stopPropagation();
             const drawer = document.getElementById('mobile-drawer');
@@ -499,241 +633,522 @@
             toggle.classList.toggle('open');
         }
 
+        // Section collapse toggle
         function toggleSec(secId) {
             const sec = document.getElementById(secId);
             if (sec) sec.classList.toggle('collapsed');
         }
 
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        // Scroll to definitions
+        function scrollToDefinitions() {
+            const defSec = document.getElementById('definitions-section');
+            if (defSec) defSec.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+        // Share dropdown toggle
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            const dropdown = document.getElementById('calcShareDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        document.addEventListener('click', (e) => {
+            const dropdown = document.getElementById('calcShareDropdown');
+            if (dropdown && !dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        function shareToSocial(platform, e) {
+            e.stopPropagation();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Cost of Waiting to Save | The Seiler Group of Raymond James");
+            let shareUrl = '';
+            if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            else if (platform === 'linkedin') shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+            else if (platform === 'email') shareUrl = `mailto:?subject=${title}&body=Check out this Cost of Waiting to Save Calculator: ${url}`;
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+            const dropdown = document.getElementById('calcShareDropdown');
+            if (dropdown) dropdown.classList.remove('active');
+        }
+
+        // Currency and Number Helpers
+        function formatDollar(val, decimals = 2) {
+            return '$' + Number(val).toLocaleString('en-US', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function parseDollar(val) {
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        // Setup input & slider bindings
+        function setupCurrencyBinding(inputId, rangeId) {
             const inp = document.getElementById(inputId);
             const range = document.getElementById(rangeId);
             if (!inp || !range) return;
 
             range.addEventListener('input', () => {
-                const val = parseFloat(range.value);
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
-                calculateCostOfWaiting();
+                inp.value = formatDollar(range.value);
+                calculateWaitCost();
             });
 
-            inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
-                if (val < 0) val = 0;
-                if (maxVal && val > maxVal) val = maxVal;
-                range.value = val;
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
-                calculateCostOfWaiting();
+            inp.addEventListener('input', () => {
+                let num = parseDollar(inp.value);
+                range.value = num;
+                calculateWaitCost();
+            });
+
+            inp.addEventListener('blur', () => {
+                let num = parseDollar(inp.value);
+                inp.value = formatDollar(num);
+                range.value = num;
+                calculateWaitCost();
             });
         }
 
-        bindSliderAndInput('inp-delay-yrs', 'range-delay-yrs', false, false, 10);
-        bindSliderAndInput('inp-start-amt', 'range-start-amt', true, false, 100000);
-        bindSliderAndInput('inp-total-yrs', 'range-total-yrs', false, false, 50);
-        bindSliderAndInput('inp-rate', 'range-rate', false, true, 15);
-        bindSliderAndInput('inp-contrib', 'range-contrib', true, false, 2000);
+        function setupNumberBinding(inputId, rangeId, suffix = '') {
+            const inp = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+            if (!inp || !range) return;
 
-        document.getElementById('sel-freq').addEventListener('change', calculateCostOfWaiting);
+            range.addEventListener('input', () => {
+                inp.value = range.value + suffix;
+                calculateWaitCost();
+            });
 
-        let lastComparisonSchedule = [];
+            inp.addEventListener('input', () => {
+                let num = parseFloat(inp.value.replace(/[^0-9.]/g, '')) || 0;
+                range.value = num;
+                calculateWaitCost();
+            });
 
-        function calculateCostOfWaiting() {
-            const delayYrs = parseInt(document.getElementById('inp-delay-yrs').value) || 3;
-            const startAmt = parseCurrency(document.getElementById('inp-start-amt').value);
-            const totalYrs = parseInt(document.getElementById('inp-total-yrs').value) || 10;
-            const r = parsePercent(document.getElementById('inp-rate').value) / 100;
-            const contrib = parseCurrency(document.getElementById('inp-contrib').value);
-            const freq = parseInt(document.getElementById('sel-freq').value) || 12;
+            inp.addEventListener('blur', () => {
+                let num = parseFloat(inp.value.replace(/[^0-9.]/g, '')) || 0;
+                inp.value = num + suffix;
+                range.value = num;
+                calculateWaitCost();
+            });
+        }
 
-            const periodicRate = r / freq;
+        setupNumberBinding('inp-wait-years', 'range-wait-years');
+        setupCurrencyBinding('inp-start-amt', 'range-start-amt');
+        setupNumberBinding('inp-years', 'range-years');
+        setupNumberBinding('inp-ror', 'range-ror', '%');
+        setupCurrencyBinding('inp-add-contrib', 'range-add-contrib');
+
+        // Calculation State
+        let calcData = {
+            yearsToWait: 2,
+            startingAmount: 0,
+            years: 10,
+            rateOfReturn: 1.0,
+            additionalContributions: 200,
+            frequency: 12,
+            freqDesc: "per month",
+            startNowTotal: 25245.12,
+            startLaterTotal: 19993.18,
+            costOfWaiting: 5251.94,
+            requiredContribution: 252.54,
+            schedule: [],
+            chartSeriesDont: [],
+            chartSeriesWait: []
+        };
+
+        /*
+           Exact Dinkytown WaitCost.js algorithm:
+           Periodic effective rate: y = Math.pow(1 + g/100, 1 / freq) - 1
+           Loop v from 1 to q * freq:
+             if (v > j * freq) r += u;
+             e += u;
+             o = Math.round(r * y * 100) / 100;
+             b = Math.round(e * y * 100) / 100;
+             r += o;
+             e += b;
+        */
+        function calculateWaitCost(scrollToResult = false) {
+            const a = parseDollar(document.getElementById('inp-start-amt').value);
+            const u = parseDollar(document.getElementById('inp-add-contrib').value);
+            const h = Math.max(1, parseInt(document.getElementById('inp-years').value) || 1);
+            const g = parseFloat(document.getElementById('inp-ror').value.replace(/[^0-9.]/g, '')) || 0;
+            let j = Math.max(1, parseInt(document.getElementById('inp-wait-years').value) || 1);
+            if (j > h) j = h;
+
+            const freqSelect = document.getElementById('sel-frequency');
+            const freq = parseInt(freqSelect.value) || 12;
+            const freqDesc = freqSelect.options[freqSelect.selectedIndex].text;
+
+            const y = freq === 1 ? (g / 100) : (Math.pow(1 + g / 100, 1 / freq) - 1);
+
+            let e = a;
+            let r = a;
+            let t = 0;
+            let c = 0;
+            let o = 0;
+            let b = 0;
+
             const schedule = [];
+            schedule.push({
+                year: 0,
+                startNowAdditions: 0,
+                startNowInterest: 0,
+                startNowBalance: a,
+                waitAdditions: 0,
+                waitInterest: 0,
+                waitBalance: a
+            });
 
-            let balNow = startAmt;
-            let balDelayed = startAmt;
+            const dsDont = [];
+            const dsWait = [];
 
-            for (let y = 1; y <= totalYrs; y++) {
-                // Year simulation for starting now
-                for (let p = 0; p < freq; p++) {
-                    balNow = (balNow + contrib) * (1 + periodicRate);
+            for (let v = 1; v <= h * freq; v++) {
+                if (v > j * freq) {
+                    r += u;
                 }
+                e += u;
 
-                // Year simulation for delayed plan
-                for (let p = 0; p < freq; p++) {
-                    const c = (y > delayYrs) ? contrib : 0;
-                    balDelayed = (balDelayed + c) * (1 + periodicRate);
+                o = Math.round(r * y * 100) / 100;
+                b = Math.round(e * y * 100) / 100;
+                r += o;
+                e += b;
+                t += o;
+                c += b;
+
+                if (v % freq === 0) {
+                    const yr = v / freq;
+                    const startNowAddYr = u * freq;
+                    const waitAddYr = (yr > j) ? u * freq : 0;
+
+                    schedule.push({
+                        year: yr,
+                        startNowAdditions: startNowAddYr,
+                        startNowInterest: c,
+                        startNowBalance: e,
+                        waitAdditions: waitAddYr,
+                        waitInterest: t,
+                        waitBalance: r
+                    });
+
+                    dsDont.push(e);
+                    dsWait.push(r);
+
+                    t = 0;
+                    c = 0;
                 }
-
-                schedule.push({
-                    year: y,
-                    balNow: balNow,
-                    balDelayed: balDelayed,
-                    cost: balNow - balDelayed
-                });
             }
 
-            lastComparisonSchedule = schedule;
+            const startNow = e;
+            const startLater = r;
+            const costOfWaiting = startNow - startLater;
 
-            const finalNow = schedule[schedule.length - 1].balNow;
-            const finalDelayed = schedule[schedule.length - 1].balDelayed;
-            const finalCost = finalNow - finalDelayed;
+            // Required contribution calculation
+            const remainingPeriods = (h - j) * freq;
+            let requiredContribution = u;
+            if (remainingPeriods > 0) {
+                const target = startNow - (a * Math.pow(1 + y, h * freq));
+                const fvFactor = ((Math.pow(1 + y, remainingPeriods) - 1) / y) * (1 + y);
+                if (fvFactor > 0) {
+                    requiredContribution = target / fvFactor;
+                }
+            }
 
-            // Update Headline & Badges
-            document.getElementById('res-headline').innerHTML = `Postponing ${delayYrs} years could cost you <span style="color: #ef4444;">${formatCurrencyCents(finalCost)}</span> as compared to a savings balance of <span style="color: #dfa01e;">${formatCurrencyCents(finalNow)}</span>.`;
-            document.getElementById('chart-headline').textContent = `IF YOU START NOW YOUR SAVINGS COULD BE ${formatCurrencyCents(finalNow)} AFTER ${totalYrs} YEARS.`;
+            calcData = {
+                yearsToWait: j,
+                startingAmount: a,
+                years: h,
+                rateOfReturn: g,
+                additionalContributions: u,
+                frequency: freq,
+                freqDesc: freqDesc,
+                startNowTotal: startNow,
+                startLaterTotal: startLater,
+                costOfWaiting: costOfWaiting,
+                requiredContribution: requiredContribution,
+                schedule: schedule,
+                chartSeriesDont: dsDont,
+                chartSeriesWait: dsWait
+            };
 
-            document.getElementById('card-start-now').textContent = formatCurrencyCents(finalNow);
-            document.getElementById('card-wait-bal').textContent = formatCurrencyCents(finalDelayed);
-            document.getElementById('card-wait-label').textContent = `Accumulation If Waiting ${delayYrs} Yrs`;
-            document.getElementById('card-cost-wait').textContent = formatCurrencyCents(finalCost);
+            // Update Status Callout
+            document.getElementById('status-years-text').textContent = `${j} ${j === 1 ? 'year' : 'years'}`;
+            document.getElementById('status-cost-text').textContent = formatDollar(costOfWaiting);
 
-            renderWaitChart(schedule);
+            // Update Result Accordion Header
+            const yrLabel = h === 1 ? 'YEAR' : 'YEARS';
+            document.getElementById('res-savings-title').textContent =
+                `IF YOU START NOW YOUR SAVINGS COULD BE ${formatDollar(startNow)} AFTER ${h} ${yrLabel}.`;
+
+            // Update Legend Labels
+            document.getElementById('legend-start-now').textContent = `Start saving now ${formatDollar(startNow)}`;
+            document.getElementById('legend-start-later').textContent = `Wait ${j} ${j === 1 ? 'year' : 'years'} ${formatDollar(startLater)}`;
+
+            // Render SVG Area Chart
+            renderWaitCostChart();
+
+            if (scrollToResult) {
+                const resSec = document.getElementById('sec-result');
+                if (resSec) resSec.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        function renderWaitChart(data) {
-            const container = document.getElementById('wait-chart-container');
-            if (!container || data.length === 0) return;
+        // Render Stacked / Overlaid Area Chart matching Screenshot 3
+        function renderWaitCostChart() {
+            const container = document.getElementById('chart-container');
+            if (!container) return;
 
             const width = container.clientWidth || 700;
-            const height = 300;
-            const padLeft = 70;
+            const height = 330;
+            const padLeft = 80;
             const padRight = 30;
-            const padTop = 30;
+            const padTop = 25;
             const padBottom = 45;
+
             const chartW = width - padLeft - padRight;
             const chartH = height - padTop - padBottom;
 
-            const maxVal = Math.max(...data.map(d => d.balNow)) * 1.15;
+            const h = calcData.years;
+            const dsDont = calcData.chartSeriesDont;
+            const dsWait = calcData.chartSeriesWait;
 
-            let gridSvg = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const yVal = (maxVal / steps) * i;
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
+            // Determine maximum Y value for nice round tick levels ($5,000, $10,000, etc.)
+            const maxVal = Math.max(calcData.startNowTotal, 100);
+            let yMax = 30000;
+            if (maxVal > 30000) {
+                yMax = Math.ceil((maxVal * 1.15) / 10000) * 10000;
+            } else if (maxVal <= 5000) {
+                yMax = 6000;
+            } else if (maxVal <= 15000) {
+                yMax = 20000;
+            } else {
+                yMax = Math.ceil((maxVal * 1.15) / 5000) * 5000;
+            }
+
+            const numTicks = 6;
+            const yStep = yMax / numTicks;
+
+            let gridLines = '';
+            for (let i = 0; i <= numTicks; i++) {
+                const val = i * yStep;
+                const yPos = padTop + chartH - (val / yMax) * chartH;
+                gridLines += `
+                    <line x1="${padLeft}" y1="${yPos}" x2="${padLeft + chartW}" y2="${yPos}" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                    <text x="${padLeft - 12}" y="${yPos + 4}" fill="#94a3b8" font-size="11.5" font-family="'Montserrat', sans-serif" font-weight="600" text-anchor="end">${formatDollar(val, 0)}</text>
                 `;
             }
 
-            const stepX = chartW / (data.length - 1 || 1);
-
-            // Area path for Starting Now (Blue)
-            let pathNowArea = `M ${padLeft} ${padTop + chartH}`;
-            let lineNow = '';
-            data.forEach((d, idx) => {
-                const x = padLeft + (idx * stepX);
-                const y = padTop + chartH - (d.balNow / maxVal) * chartH;
-                pathNowArea += ` L ${x} ${y}`;
-                lineNow += (idx === 0) ? `M ${x} ${y}` : ` L ${x} ${y}`;
-            });
-            pathNowArea += ` L ${padLeft + chartW} ${padTop + chartH} Z`;
-
-            // Area path for Delayed (Green)
-            let pathDelayArea = `M ${padLeft} ${padTop + chartH}`;
-            let lineDelay = '';
-            data.forEach((d, idx) => {
-                const x = padLeft + (idx * stepX);
-                const y = padTop + chartH - (d.balDelayed / maxVal) * chartH;
-                pathDelayArea += ` L ${x} ${y}`;
-                lineDelay += (idx === 0) ? `M ${x} ${y}` : ` L ${x} ${y}`;
-            });
-            pathDelayArea += ` L ${padLeft + chartW} ${padTop + chartH} Z`;
+            // X-Coordinates for year 1 to h
+            function getX(yrIdx) {
+                if (h === 1) return padLeft + chartW / 2;
+                return padLeft + (yrIdx / (h - 1)) * chartW;
+            }
 
             let xLabels = '';
-            const labelInterval = Math.max(1, Math.ceil(data.length / 8));
-            data.forEach((d, idx) => {
-                if (idx % labelInterval === 0 || idx === data.length - 1) {
-                    const x = padLeft + (idx * stepX);
-                    xLabels += `<text x="${x}" y="${height - 15}" fill="#cbd5e1" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="middle">Year ${d.year}</text>`;
+            let xStep = 1;
+            if (h > 30) xStep = 5;
+            else if (h > 15) xStep = 2;
+
+            for (let i = 0; i < h; i++) {
+                const yrNum = i + 1;
+                if (yrNum === 1 || yrNum === h || (yrNum % xStep === 0)) {
+                    const xPos = getX(i);
+                    xLabels += `
+                        <line x1="${xPos}" y1="${padTop + chartH}" x2="${xPos}" y2="${padTop + chartH + 5}" stroke="#dfa01e" stroke-width="1"/>
+                        <text x="${xPos}" y="${padTop + chartH + 18}" fill="#cbd5e1" font-size="11" font-family="'Montserrat', sans-serif" font-weight="600" text-anchor="middle">${yrNum}</text>
+                    `;
                 }
-            });
+            }
+
+            // Build polygons for Area Chart
+            // Base line Y
+            const yBase = padTop + chartH;
+
+            // 1. Blue Area (Start Now)
+            let pathDont = `M ${getX(0)} ${yBase}`;
+            for (let i = 0; i < h; i++) {
+                const val = dsDont[i] || 0;
+                const yPos = padTop + chartH - (val / yMax) * chartH;
+                pathDont += ` L ${getX(i)} ${yPos}`;
+            }
+            pathDont += ` L ${getX(h - 1)} ${yBase} Z`;
+
+            // 2. Green Area (Wait)
+            let pathWait = `M ${getX(0)} ${yBase}`;
+            for (let i = 0; i < h; i++) {
+                const val = dsWait[i] || 0;
+                const yPos = padTop + chartH - (val / yMax) * chartH;
+                pathWait += ` L ${getX(i)} ${yPos}`;
+            }
+            pathWait += ` L ${getX(h - 1)} ${yBase} Z`;
 
             container.innerHTML = `
                 <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    <!-- Blue Area (Start Now) -->
-                    <path d="${pathNowArea}" fill="rgba(37, 99, 235, 0.75)"/>
-                    <path d="${lineNow}" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+                    <!-- Border box -->
+                    <rect x="${padLeft}" y="${padTop}" width="${chartW}" height="${chartH}" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.2"/>
 
-                    <!-- Green Area (Delayed) -->
-                    <path d="${pathDelayArea}" fill="rgba(22, 163, 74, 0.85)"/>
-                    <path d="${lineDelay}" fill="none" stroke="#16a34a" stroke-width="2.5"/>
+                    <!-- Grid lines & Y Labels -->
+                    ${gridLines}
 
+                    <!-- Blue Area (Start Saving Now) -->
+                    <path d="${pathDont}" fill="#0033cc" opacity="0.95" stroke="#2563eb" stroke-width="2"/>
+
+                    <!-- Green Area (Wait Years) -->
+                    <path d="${pathWait}" fill="#4d994d" opacity="0.95" stroke="#10b981" stroke-width="2"/>
+
+                    <!-- X-Axis Labels & Ticks -->
                     ${xLabels}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                    <text x="${width / 2}" y="${height + 5}" fill="#dfa01e" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">YEARS</text>
                 </svg>
             `;
         }
 
+        // Open Report Modal
         function openReportModal() {
-            calculateCostOfWaiting();
+            calculateWaitCost();
             const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
+            const content = document.getElementById('report-modal-content');
 
-            let rows = '';
-            lastComparisonSchedule.forEach(item => {
-                rows += `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                        <td style="padding: 10px; text-align: left; color: #fff; font-weight: 600;">Year ${item.year}</td>
-                        <td style="padding: 10px; color: #60a5fa;">${formatCurrencyCents(item.balNow)}</td>
-                        <td style="padding: 10px; color: #4ade80;">${formatCurrencyCents(item.balDelayed)}</td>
-                        <td style="padding: 10px; color: #ef4444; font-weight: 700;">-${formatCurrencyCents(item.cost)}</td>
+            const j = calcData.yearsToWait;
+            const h = calcData.years;
+            const remaining = h - j;
+
+            let scheduleRows = '';
+            calcData.schedule.forEach(row => {
+                if (row.year === 0) return; // Skip year 0
+                scheduleRows += `
+                    <tr>
+                        <td style="text-align: center; font-weight: 700; color: #ffffff;">${row.year}</td>
+                        <td style="text-align: right;">${formatDollar(row.startNowAdditions)}</td>
+                        <td style="text-align: right;">${formatDollar(row.startNowInterest)}</td>
+                        <td style="text-align: right; font-weight: 700; color: #2563eb;">${formatDollar(row.startNowBalance)}</td>
+                        <td style="text-align: right;">${formatDollar(row.waitAdditions)}</td>
+                        <td style="text-align: right;">${formatDollar(row.waitInterest)}</td>
+                        <td style="text-align: right; font-weight: 700; color: #10b981;">${formatDollar(row.waitBalance)}</td>
                     </tr>
                 `;
             });
 
             content.innerHTML = `
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                <div style="background: #091424; padding: 22px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.35); text-align: center; margin-bottom: 24px;">
+                    <span style="font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Analysis Summary</span>
+                    <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #dfa01e; margin: 8px 0 10px 0; line-height: 1.35;">
+                        Postponing your savings ${j} ${j === 1 ? 'year' : 'years'} could cost you ${formatDollar(calcData.costOfWaiting)}. To get the same savings you would need to save ${formatDollar(calcData.requiredContribution)} ${calcData.freqDesc} instead of ${formatDollar(calcData.additionalContributions)} ${calcData.freqDesc}.*
+                    </h3>
+                    <p style="font-size: 13.5px; line-height: 1.6; color: #cbd5e1; margin: 0; max-width: 760px; margin: 0 auto;">
+                        If you start your savings plan now you could have ${formatDollar(calcData.startNowTotal)} in savings after ${h} ${h === 1 ? 'year' : 'years'}. Postponing ${j} ${j === 1 ? 'year' : 'years'} would give you ${formatDollar(calcData.startLaterTotal)}.
+                    </p>
+                    <span style="display: block; font-size: 11px; color: #64748b; margin-top: 10px;">*All returns and total savings are before tax.</span>
+                </div>
+
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: #dfa01e; margin: 0 0 10px 0; text-transform: uppercase;">
+                    Results Summary
+                </h4>
+
+                <table class="calc-report-table" style="margin-bottom: 25px;">
                     <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Year</th>
-                            <th style="padding: 12px 10px;">Starting Now Balance</th>
-                            <th style="padding: 12px 10px;">Delayed Plan Balance</th>
-                            <th style="padding: 12px 10px;">Cumulative Cost of Delay</th>
+                        <tr>
+                            <th style="width: 34%;"></th>
+                            <th style="width: 33%; text-align: left;">Start Now</th>
+                            <th style="width: 33%; text-align: left;">Start Later</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${rows}
+                        <tr>
+                            <th style="color: #ffffff;">Starting amount</th>
+                            <td>${formatDollar(calcData.startingAmount)}</td>
+                            <td>${formatDollar(calcData.startingAmount)}</td>
+                        </tr>
+                        <tr>
+                            <th style="color: #ffffff;">Savings plan</th>
+                            <td>Save ${formatDollar(calcData.additionalContributions)} ${calcData.freqDesc} for ${h} ${h === 1 ? 'year' : 'years'}.</td>
+                            <td>
+                                Postpone saving for ${j} ${j === 1 ? 'year' : 'years'} then save ${formatDollar(calcData.additionalContributions)} ${calcData.freqDesc} for ${remaining} ${remaining === 1 ? 'year' : 'years'}.
+                                <div style="margin-top: 6px; font-size: 12px; color: #dfa01e;">
+                                    To get the same savings you would need to save ${formatDollar(calcData.requiredContribution)} ${calcData.freqDesc} instead of ${formatDollar(calcData.additionalContributions)} ${calcData.freqDesc}.
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="color: #ffffff;">Rate of return</th>
+                            <td>${calcData.rateOfReturn.toFixed(1)}%</td>
+                            <td>${calcData.rateOfReturn.toFixed(1)}%</td>
+                        </tr>
+                        <tr>
+                            <th style="color: #ffffff;">Ending balances</th>
+                            <td style="font-weight: 700; color: #2563eb;">${formatDollar(calcData.startNowTotal)}</td>
+                            <td style="font-weight: 700; color: #10b981;">${formatDollar(calcData.startLaterTotal)}</td>
+                        </tr>
+                        <tr style="background: rgba(223,160,30,0.12);">
+                            <th style="color: #dfa01e; font-weight: 800;">Cost of waiting</th>
+                            <td colspan="2" style="font-weight: 800; color: #dfa01e; font-size: 14px;">
+                                ${formatDollar(calcData.costOfWaiting)}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: #dfa01e; margin: 0 0 10px 0; text-transform: uppercase;">
+                    Savings Balances by Year
+                </h4>
+
+                <div style="max-height: 320px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px;">
+                    <table class="calc-report-table" style="margin-top: 0;">
+                        <thead style="position: sticky; top: 0; z-index: 5;">
+                            <tr>
+                                <th rowspan="2" style="text-align: center; vertical-align: middle; width: 10%;">Year</th>
+                                <th colspan="3" style="text-align: center; border-left: 2px solid #2563eb; background: #0f2444;">Start Savings Now</th>
+                                <th colspan="3" style="text-align: center; border-left: 2px solid #10b981; background: #0d2c25;">Postpone Saving ${j} Years</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: right; width: 15%; border-left: 2px solid #2563eb;">Additions</th>
+                                <th style="text-align: right; width: 15%;">Interest</th>
+                                <th style="text-align: right; width: 15%;">Balance</th>
+                                <th style="text-align: right; width: 15%; border-left: 2px solid #10b981;">Additions</th>
+                                <th style="text-align: right; width: 15%;">Interest</th>
+                                <th style="text-align: right; width: 15%;">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${scheduleRows}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 25px; padding: 16px; background: rgba(11,23,42,0.6); border-left: 3px solid #dfa01e; border-radius: 4px;">
+                    <h5 style="margin: 0 0 6px 0; color: #dfa01e; font-size: 13px; font-weight: 700;">Wealth Advisor Insight</h5>
+                    <p style="margin: 0; font-size: 12.5px; color: #94a3b8; line-height: 1.6;">
+                        Compound growth rewards early and consistent execution. Delaying contributions even by a short duration dramatically magnifies the required monthly savings needed later to achieve your original goals. For personalized accumulation and tax-efficient wealth management strategies, contact The Seiler Group of Raymond James.
+                    </p>
+                </div>
             `;
 
             modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('report-modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
+        function handleModalBackdropClick(e) {
+            if (e.target.id === 'report-modal') {
+                closeReportModal();
+            }
+        }
 
         window.addEventListener('resize', () => {
-            if (lastComparisonSchedule.length > 0) renderWaitChart(lastComparisonSchedule);
+            renderWaitCostChart();
         });
 
+        // Initialize calculation on load
         document.addEventListener('DOMContentLoaded', () => {
-            calculateCostOfWaiting();
+            calculateWaitCost();
         });
     </script>
-    <script src="email-handler.js"></script>
+
 </body>
+
 </html>

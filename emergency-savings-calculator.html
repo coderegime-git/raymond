@@ -1,116 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Savings Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your optimal emergency fund safety cushion based on living expenses, deductibles, insurance, and see when you will achieve your target.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Emergency Savings Calculator | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Having adequate emergency savings can make unforeseen unemployment, auto repairs, medical emergencies, property damage and even legal issues more manageable. This calculator helps you determine how much emergency savings you may need, and how you can begin saving toward this important goal.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .em-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .em-stat-card {
-            background: rgba(11, 23, 42, 0.85);
-            border: 1px solid rgba(223, 160, 30, 0.3);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-        }
-        .em-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .em-stat-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .em-bar-rect {
-            transition: height 0.4s ease, y 0.4s ease, fill 0.2s ease;
-            cursor: pointer;
-        }
-        .em-bar-rect:hover {
-            fill: #dfa01e !important;
-        }
-        .tax-bracket-tbl {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin: 14px 0 20px 0;
-            background: #091424;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-        .tax-bracket-tbl th {
-            background: #11233e;
-            color: #dfa01e;
-            padding: 9px 12px;
-            font-weight: 700;
-            text-align: right;
-            border-bottom: 1px solid rgba(223, 160, 30, 0.3);
-        }
-        .tax-bracket-tbl th:first-child { text-align: left; }
-        .tax-bracket-tbl td {
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #cbd5e1;
-            text-align: right;
-        }
-        .tax-bracket-tbl td:first-child { text-align: left; color: #ffffff; font-weight: 600; }
-        .tax-bracket-tbl tr:last-child td { border-bottom: none; }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="emergency-savings-calculator.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="investment-strategy-quarterly.html" class="nav-dropdown-item" id="nav-item-isq">
+                        INVESTOR STRATEGY QUARTERLY
+                    </a>
+                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                        WORTHWHILE
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-calculators">
+                        ALL RESOURCES &amp; CALCULATORS
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for CONTACT US -->
+            <div class="nav-dropdown-wrapper" id="contact-dropdown">
+                <a href="contact.html" class="nav-link nav-dropdown-trigger" id="contact-trigger">
+                    <span>CONTACT US</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="contact-menu" role="menu" aria-label="Contact Submenu">
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Client Access Button -->
+        <div class="header-action">
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer" class="btn-client-access">
+                <span>CLIENT ACCESS</span>
+            </a>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu"
+            onclick="toggleMobileMenu(event)">
             <span></span>
             <span></span>
             <span></span>
         </button>
+
     </header>
 
     <!-- Mobile Navigation Drawer Overlay -->
     <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+
+    <!-- Mobile Navigation Drawer -->
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -120,18 +161,22 @@
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
             <a href="resources.html" class="drawer-link active">RESOURCES</a>
             <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
         </nav>
     </div>
 
     <!-- ============================================================
      FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
      ============================================================ -->
-    <a href="cost-of-waiting-to-save.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Cost of Waiting to Save">
+    <a href="cost-of-waiting-to-save.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Cost of Waiting to Save">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="estate-tax-planning.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Estate Tax Planning">
+    <a href="estate-tax-planning.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Estate Tax Planning">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
@@ -139,25 +184,45 @@
     <!-- ============================================================
      MAIN CALCULATOR CONTENT
      ============================================================ -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-18.jpg" alt="Emergency Savings" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/emergency-savings-hero.jpg" alt="Caregiver Connections - Emergency Savings"
+                    class="calc-banner-img"
+                    onerror="this.src='https://images.unsplash.com/photo-1516534775068-ba3e7458af70?auto=format&fit=crop&w=1200&q=80'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">EMERGENCY SAVINGS CALCULATOR</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-page-title">EMERGENCY SAVINGS CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=savings-and-investments" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <div class="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calcShareDropdown">
+                            <a href="javascript:void(0)" onclick="shareToSocial('facebook', event)"
+                                class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('twitter', event)"
+                                class="calc-share-item" title="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('linkedin', event)"
+                                class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('email', event)"
+                                class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Having adequate emergency savings can make unforeseen expenses manageable. Automobile repairs, medical emergencies, property damage and even legal events can all be managed better from an adequate emergency savings reserve that can move obstacles and protect your family's future so that you won't worry about finding the money to handle these difficult situations. This calculator helps you determine how much emergency savings you may need, and how you can save toward this important goal.
+                    Having adequate emergency savings can make unforeseen unemployment, auto repairs, medical emergencies,
+                    property damage and even legal issues more manageable. With adequate emergency savings, you can focus on
+                    how to best meet your family's needs, rather than worrying about finding the money to handle these difficult
+                    situations. This calculator helps you determine how much emergency savings you may need, and how you can
+                    begin saving toward this important goal.
                 </p>
             </header>
 
@@ -165,71 +230,74 @@
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateEmergency()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateEmergency(true)">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
                     <div class="calc-action-right-icons">
-                        <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
+                        <button type="button" class="calc-icon-btn" onclick="scrollToDefinitions()" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Savings Balances">
+                            <i class="fas fa-bars"></i>
                         </button>
                         <span class="calc-req-text">*indicates required</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Target Header Banner -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 18px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; font-weight: 600; margin-bottom: 4px;">RECOMMENDED EMERGENCY CUSHION</div>
-                <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #ffffff; margin: 0; font-weight: 700;">
-                    Typical emergency savings goal for your circumstances would be: <span style="color: #dfa01e;" id="banner-goal-val">$18,000</span>
-                </h2>
+            <!-- Emergency Savings Goal Callout Subtitle -->
+            <div class="calc-status-callout" id="calc-status-callout">
+                Typical emergency savings goal for your circumstances would be <span class="highlight" id="status-goal-text">$15,000</span>
             </div>
 
             <!-- ============================================================
-             SECTION 1: EMERGENCY SAVINGS
+             SECTION 1: ACCORDION: EMERGENCY SAVINGS:
              ============================================================ -->
-            <section class="calc-section" id="sec-em-savings">
-                <div class="calc-sec-header" onclick="toggleSec('sec-em-savings')">
-                    <h2 class="calc-sec-title">EMERGENCY SAVINGS:</h2>
-                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-emergency-savings">
+                <div class="calc-section-header" onclick="toggleSec('sec-emergency-savings')">
+                    <h2 class="calc-section-title">EMERGENCY SAVINGS:</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Amount currently saved -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-curr-fund" class="calc-field-label">Approximate current savings:*</label>
-                            <span class="calc-q-dot" title="Current emergency reserve on hand.">?</span>
+                            <label for="inp-amt-current" class="calc-field-label">Amount currently saved:*</label>
+                            <span class="calc-q-dot"
+                                title="Total you currently have saved that should be included in this analysis.">?</span>
                         </div>
-                        <input type="text" id="inp-curr-fund" class="calc-text-input" value="$0.00">
+                        <input type="text" id="inp-amt-current" class="calc-text-input" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-curr-fund" class="calc-range-slider" min="0" max="50000" step="500" value="0">
+                            <input type="range" id="range-amt-current" class="calc-range-slider" min="0" max="1000000"
+                                step="100" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$12,500</span>
-                                <span>$25,000</span>
-                                <span>$37,500</span>
-                                <span>$50,000</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Monthly contribution -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-monthly-contrib" class="calc-field-label">Monthly contribution:*</label>
-                            <span class="calc-q-dot" title="Recurring amount added each month to your emergency fund.">?</span>
+                            <label for="inp-amt-save-month" class="calc-field-label">Monthly contribution:*</label>
+                            <span class="calc-q-dot"
+                                title="The amount you will contribute each month to your emergency savings.">?</span>
                         </div>
-                        <input type="text" id="inp-monthly-contrib" class="calc-text-input" value="$200.00">
+                        <input type="text" id="inp-amt-save-month" class="calc-text-input" value="$200.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-monthly-contrib" class="calc-range-slider" min="0" max="2000" step="25" value="200">
+                            <input type="range" id="range-amt-save-month" class="calc-range-slider" min="0" max="100000"
+                                step="10" value="200">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$500</span>
-                                <span>$1,000</span>
-                                <span>$1,500</span>
-                                <span>$2,000</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
@@ -238,69 +306,327 @@
             </section>
 
             <!-- ============================================================
-             SECTION 2: EMERGENCY SAVINGS NEED
+             SECTION 2: ACCORDION: EMERGENCY SAVINGS NEED:
              ============================================================ -->
-            <section class="calc-section" id="sec-em-need">
-                <div class="calc-sec-header" onclick="toggleSec('sec-em-need')">
-                    <h2 class="calc-sec-title">EMERGENCY SAVINGS NEED:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-need-val" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">Goal: $18,000.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-savings-need">
+                <div class="calc-section-header" onclick="toggleSec('sec-savings-need')">
+                    <h2 class="calc-section-title">EMERGENCY SAVINGS NEED:</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Monthly living expenses -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-living-exp" class="calc-field-label">Monthly living expenses:*</label>
+                            <label for="inp-monthly-expenses" class="calc-field-label">Monthly living expenses:*</label>
+                            <span class="calc-q-dot"
+                                title="Your total monthly living expenses. This amount should be your total expenses, not your total monthly income.">?</span>
                         </div>
-                        <input type="text" id="inp-living-exp" class="calc-text-input" value="$3,000.00">
+                        <input type="text" id="inp-monthly-expenses" class="calc-text-input" value="$2,500.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-living-exp" class="calc-range-slider" min="0" max="15000" step="100" value="3000">
+                            <input type="range" id="range-monthly-expenses" class="calc-range-slider" min="0"
+                                max="100000" step="50" value="2500">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$3,750</span>
-                                <span>$7,500</span>
-                                <span>$11,250</span>
-                                <span>$15,000</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Months of unemployment -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-months-needed" class="calc-field-label">Months of living expenses:*</label>
+                            <label for="inp-months-unemployment" class="calc-field-label">Months of unemployment:*</label>
+                            <span class="calc-q-dot"
+                                title="The number of months you expect it will take to find a new employer if you become unemployed.">?</span>
                         </div>
-                        <input type="text" id="inp-months-needed" class="calc-text-input" value="6">
+                        <input type="text" id="inp-months-unemployment" class="calc-text-input" value="6">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-months-needed" class="calc-range-slider" min="1" max="12" step="1" value="6">
+                            <input type="range" id="range-months-unemployment" class="calc-range-slider" min="1"
+                                max="100" step="1" value="6">
                             <div class="calc-tick-labels">
                                 <span>1</span>
-                                <span>3</span>
-                                <span>6</span>
-                                <span>9</span>
-                                <span>12</span>
+                                <span>34</span>
+                                <span>67</span>
+                                <span>100</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Subtotal: Living expense total -->
+                    <div class="calc-subtotal-row">
+                        Living expense total: <span id="subtotal-living-expense" style="margin-left: 8px;">$15,000.00</span>
+                    </div>
+
+                    <!-- Insurance deductible medical -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-deduct-car" class="calc-field-label">Auto insurance deductible:</label>
+                            <label for="inp-deductible-med" class="calc-field-label">Insurance deductible medical:*</label>
+                            <span class="calc-q-dot"
+                                title="The amount you are required to pay for medical expenses before your insurance coverage begins.">?</span>
                         </div>
-                        <input type="text" id="inp-deduct-car" class="calc-text-input" value="$0.00">
+                        <input type="text" id="inp-deductible-med" class="calc-text-input" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-deduct-car" class="calc-range-slider" min="0" max="2500" step="100" value="0">
+                            <input type="range" id="range-deductible-med" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Insurance deductible auto -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-deduct-home" class="calc-field-label">Home/renters deductible:</label>
+                            <label for="inp-deductible-auto" class="calc-field-label">Insurance deductible auto:*</label>
+                            <span class="calc-q-dot"
+                                title="The amount you are responsible to pay on auto insurance claims before your insurance covers any expenses.">?</span>
                         </div>
-                        <input type="text" id="inp-deduct-home" class="calc-text-input" value="$0.00">
+                        <input type="text" id="inp-deductible-auto" class="calc-text-input" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-deduct-home" class="calc-range-slider" min="0" max="5000" step="250" value="0">
+                            <input type="range" id="range-deductible-auto" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance deductible property -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-deductible-prop" class="calc-field-label">Insurance deductible property:*</label>
+                            <span class="calc-q-dot"
+                                title="The amount you are responsible to pay on property claims before your insurance covers any expenses.">?</span>
+                        </div>
+                        <input type="text" id="inp-deductible-prop" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-deductible-prop" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance deductible other -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-deductible-oth" class="calc-field-label">Insurance deductible other:*</label>
+                            <span class="calc-q-dot"
+                                title="Any other insurance deductibles that may be required in your emergency fund.">?</span>
+                        </div>
+                        <input type="text" id="inp-deductible-oth" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-deductible-oth" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subtotal: Insurance savings total -->
+                    <div class="calc-subtotal-row">
+                        Insurance savings total: <span id="subtotal-insurance-savings" style="margin-left: 8px;">$0.00</span>
+                    </div>
+
+                    <!-- Emergency medical -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-em-med" class="calc-field-label">Emergency medical:*</label>
+                            <span class="calc-q-dot"
+                                title="Total amount you may need in a medical emergency not covered by insurance.">?</span>
+                        </div>
+                        <input type="text" id="inp-em-med" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-em-med" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency auto repair -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-em-auto" class="calc-field-label">Emergency auto repair:*</label>
+                            <span class="calc-q-dot"
+                                title="Emergency auto repair costs not covered by insurance.">?</span>
+                        </div>
+                        <input type="text" id="inp-em-auto" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-em-auto" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency legal -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-em-legal" class="calc-field-label">Emergency legal:*</label>
+                            <span class="calc-q-dot"
+                                title="Emergency legal costs such as legal defenses for civil suits or criminal accusations.">?</span>
+                        </div>
+                        <input type="text" id="inp-em-legal" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-em-legal" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency property damage -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-em-prop" class="calc-field-label">Emergency property damage:*</label>
+                            <span class="calc-q-dot"
+                                title="Total amount you may need in an emergency involving damage to property such as your home.">?</span>
+                        </div>
+                        <input type="text" id="inp-em-prop" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-em-prop" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Emergency other -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-em-oth" class="calc-field-label">Emergency other:*</label>
+                            <span class="calc-q-dot"
+                                title="Any other amounts that may be required in an emergency not included in medical, legal, auto or property.">?</span>
+                        </div>
+                        <input type="text" id="inp-em-oth" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-em-oth" class="calc-range-slider" min="0" max="100000"
+                                step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subtotal: Emergency spending total -->
+                    <div class="calc-subtotal-row">
+                        Emergency spending total: <span id="subtotal-emergency-spending" style="margin-left: 8px;">$0.00</span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: ACCORDION: TAXES AND RETURN ON SAVINGS
+             ============================================================ -->
+            <section class="calc-collapsible-section collapsed" id="sec-taxes-return">
+                <div class="calc-section-header" onclick="toggleSec('sec-taxes-return')">
+                    <div style="display: flex; align-items: baseline; flex-wrap: wrap;">
+                        <h2 class="calc-section-title">TAXES AND RETURN ON SAVINGS</h2>
+                        <span class="calc-section-subtitle" id="tax-header-subtitle">1% INTEREST, 24% FEDERAL TAX, 8% STATE TAX</span>
+                    </div>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+
+                    <!-- Rate of return -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-ror" class="calc-field-label">Rate of return:*</label>
+                            <span class="calc-q-dot"
+                                title="This is the annually compounded rate of return you expect from your savings before taxes.">?</span>
+                        </div>
+                        <input type="text" id="inp-ror" class="calc-text-input" value="1%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ror" class="calc-range-slider" min="0" max="12" step="0.25"
+                                value="1">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-state-tax" class="calc-field-label">State tax rate:*</label>
+                            <span class="calc-q-dot"
+                                title="Your marginal state tax rate. The calculator assumes taxes are paid on interest earned.">?</span>
+                        </div>
+                        <input type="text" id="inp-state-tax" class="calc-text-input" value="8%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="50" step="1"
+                                value="8">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Federal tax rate -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-fed-tax" class="calc-field-label">Federal tax rate:*</label>
+                            <span class="calc-q-dot"
+                                title="Your marginal federal tax rate applied to interest earned.">?</span>
+                        </div>
+                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="24%">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="50" step="1"
+                                value="24">
+                            <div class="calc-tick-labels">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
                         </div>
                     </div>
 
@@ -308,193 +634,148 @@
             </section>
 
             <!-- ============================================================
-             SECTION 3: TAXES AND RETURN ON SAVINGS
+             SECTION 4: ACCORDION: RESULTS & BAR CHART
              ============================================================ -->
-            <section class="calc-section collapsed" id="sec-taxes-return">
-                <div class="calc-sec-header" onclick="toggleSec('sec-taxes-return')">
-                    <h2 class="calc-sec-title">TAXES AND RETURN ON SAVINGS:</h2>
-                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <section class="calc-collapsible-section" id="sec-chart-results">
+                <div class="calc-section-header" onclick="toggleSec('sec-chart-results')">
+                    <h2 class="calc-section-title" id="chart-section-title">YOU WILL REACH YOUR GOAL IN 6 YEARS AND 2 MONTHS.</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-em-rate" class="calc-field-label">Rate of return:*</label>
-                        </div>
-                        <input type="text" id="inp-em-rate" class="calc-text-input" value="4%">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-em-rate" class="calc-range-slider" min="0" max="15" step="0.5" value="4">
-                        </div>
+                    <!-- Visual SVG Bar Chart -->
+                    <div class="calc-chart-container" id="em-chart-container">
+                        <!-- Rendered dynamically by JS -->
                     </div>
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col">
-                            <label for="inp-em-fed-tax" class="calc-field-label">Marginal tax rate:*</label>
-                        </div>
-                        <input type="text" id="inp-em-fed-tax" class="calc-text-input" value="24%">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-em-fed-tax" class="calc-range-slider" min="0" max="37" step="1" value="24">
-                        </div>
-                    </div>
-
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col">
-                            <label for="inp-em-state-tax" class="calc-field-label">State tax rate:*</label>
-                        </div>
-                        <input type="text" id="inp-em-state-tax" class="calc-text-input" value="5%">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-em-state-tax" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-            <!-- Milestone Headline -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 18px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; font-weight: 600; margin-bottom: 4px;">ESTIMATED TIME TO FULL FUNDING</div>
-                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #ffffff; margin: 0; font-weight: 700;">
-                    YOU WILL REACH YOUR GOAL IN <span style="color: #dfa01e;">6 YEARS AND 2 MONTHS</span>
-                </h2>
-            </div>
-
-            <!-- Metric Cards -->
-            <div class="em-stat-grid">
-                <div class="em-stat-card">
-                    <div class="em-stat-val" id="card-goal">$18,000.00</div>
-                    <div class="em-stat-label">Total Emergency Goal</div>
-                </div>
-                <div class="em-stat-card">
-                    <div class="em-stat-val" id="card-funded-months">6 Months</div>
-                    <div class="em-stat-label">Coverage Horizon</div>
-                </div>
-                <div class="em-stat-card">
-                    <div class="em-stat-val" id="card-time-to-reach">6 Yrs 2 Mos</div>
-                    <div class="em-stat-label">Time to Reach Target</div>
-                </div>
-                <div class="em-stat-card">
-                    <div class="em-stat-val" id="card-interest-earned">$2,412.00</div>
-                    <div class="em-stat-label">After-Tax Interest Earned</div>
-                </div>
-            </div>
-
-            <!-- ============================================================
-             CHART SECTION
-             ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title">EMERGENCY FUND ACCUMULATION TRAJECTORY</h2>
-                    <span style="font-size: 11.5px; color: #dfa01e; font-weight: 600;">Yearly Progress</span>
-                </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-                    <div id="em-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- SVG Bars -->
-                    </div>
                 </div>
             </section>
 
             <!-- ============================================================
              DEFINITIONS SECTION
              ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
+            <div class="calc-definitions-wrapper" id="definitions-section">
+                <h3 class="calc-def-main-heading">DEFINITIONS</h3>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">CURRENT EMERGENCY FUNDS</h4>
-                    <p class="calc-def-desc">
-                        Total you currently have saved that should be included in this reserve.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">AMOUNT CURRENTLY SAVED</h4>
+                    <p class="calc-def-text">
+                        Total you currently have saved that should be included in this analysis.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MONTHLY CONTRIBUTION</h4>
-                    <p class="calc-def-desc">
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">MONTHLY CONTRIBUTION</h4>
+                    <p class="calc-def-text">
                         The amount you will contribute each month to your emergency savings.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MONTHLY LIVING EXPENSES</h4>
-                    <p class="calc-def-desc">
-                        Your total monthly living expenses. This amount should be your existing expenses, not your regular monthly income. Remember to include your mortgage or rent payments, food, clothing, auto, phone and other monthly expenses.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">MONTHLY LIVING EXPENSES</h4>
+                    <p class="calc-def-text">
+                        Your total monthly living expenses. This amount should be your total expenses, not your total monthly income. Remember to include your mortgage or rent payments, food, clothing, gas, phone and other monthly expenses. This amount does not need to include monthly savings or contributions to retirement accounts.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MONTHS OF UNEMPLOYMENT</h4>
-                    <p class="calc-def-desc">
-                        The number of months you would like to have funds to protect against unexpected loss of income. A common baseline is 3 to 6 months of living expenses.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">MONTHS OF UNEMPLOYMENT</h4>
+                    <p class="calc-def-text">
+                        The number of months you expect it will take to find a new employer if you become unemployed. The time it takes to find a new job can range anywhere from one month to more than a year. It is important to be realistic in your unemployment estimate. Covering living expenses if you become unexpectedly unemployed can be your largest emergency expense.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">EMERGENCY LEGAL</h4>
-                    <p class="calc-def-desc">
-                        Emergency legal costs and legal defenses to civil suits or criminal accusations. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">EMERGENCY MEDICAL</h4>
+                    <p class="calc-def-text">
+                        Total amount you may need in a medical emergency. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">EMERGENCY PROPERTY DAMAGE</h4>
-                    <p class="calc-def-desc">
-                        Total amount you may need in an emergency involving damages to property such as your home. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">EMERGENCY AUTO REPAIR</h4>
+                    <p class="calc-def-text">
+                        Emergency auto repair costs. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">EMERGENCY OTHER</h4>
-                    <p class="calc-def-desc">
-                        Any other amounts that may be required in an emergency not related to medical, legal, auto or property emergencies.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">EMERGENCY LEGAL</h4>
+                    <p class="calc-def-text">
+                        Emergency legal costs such as legal defenses for civil suits or criminal accusations. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE DEDUCTIBLE: HEALTH</h4>
-                    <p class="calc-def-desc">
-                        The amount you are required to pay for medical expenses before your insurance coverage begins. To see what all your insurance policy covers, look at your policy or check with your broker. Check if your insurance plan requires 100% of your expenses after your deductible, or if you still will have an out-of-pocket maximum limit, which may be significantly higher than your deductible alone.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">EMERGENCY PROPERTY DAMAGE</h4>
+                    <p class="calc-def-text">
+                        Total amount you may need in an emergency involving damage to property such as your home. Don't include amounts that will be covered by insurance. Also, insurance deductibles should not be included in this amount.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE DEDUCTIBLE: AUTO</h4>
-                    <p class="calc-def-desc">
-                        The amount you are responsible to pay on auto insurance claims before your insurance covers any expenses. Deductibles for auto insurance commonly range from $250 to $1,000.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">EMERGENCY OTHER</h4>
+                    <p class="calc-def-text">
+                        Any other amounts that may be required in an emergency not included in medical, legal, auto or property categories.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE DEDUCTIBLE: PROPERTY</h4>
-                    <p class="calc-def-desc">
-                        The amount you are responsible to pay on property claims, such as storm damage to your home, before your insurance covers any expenses. Deductibles for home or property insurance commonly range from $500 to $2,500.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">INSURANCE DEDUCTIBLE MEDICAL</h4>
+                    <p class="calc-def-text">
+                        The amount you are required to pay for medical expenses before your insurance coverage begins. Some medical insurance only covers a portion of your expenses after your deductible has been paid. If your insurance does not cover 100% of your expenses after you have paid your deductible, you may wish to enter your total maximum out of pocket costs here, which may be considerably higher than your deductible alone.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE DEDUCTIBLE: OTHER</h4>
-                    <p class="calc-def-desc">
-                        Any other insurance deductibles that may be expected in your emergency fund.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">INSURANCE DEDUCTIBLE AUTO</h4>
+                    <p class="calc-def-text">
+                        The amount you are responsible to pay on auto insurance claims before your insurance covers any expenses. Deductibles for auto insurance commonly range from $500 to $2500.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">RATE OF RETURN</h4>
-                    <p class="calc-def-desc">
-                        This is the annually compounded rate of return you expect from your savings before taxes. The actual rate of return is largely dependent on the type of investments you select. The Standard & Poor's 500 (S&P 500) for the 10 years ending December 31, 2025 had an annual compounded rate of return of 13.8%, including reinvestment of dividends. From 1970 to 2025, the average annual return was 10.7%. Money market accounts have historically paid much lower yields.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">INSURANCE DEDUCTIBLE PROPERTY</h4>
+                    <p class="calc-def-text">
+                        The amount you are responsible to pay on property claims, such as storm damage to your home, before your insurance covers any expenses. Deductibles for home or property insurance commonly range from $500 to $2500.
                     </p>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MARGINAL TAX RATE</h4>
-                    <p class="calc-def-desc">
-                        Your marginal federal tax rate applied to interest earned.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">INSURANCE DEDUCTIBLE OTHER</h4>
+                    <p class="calc-def-text">
+                        Any other insurance deductibles that may be required in your emergency fund.
+                    </p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">RATE OF RETURN</h4>
+                    <p class="calc-def-text">
+                        This is the annually compounded rate of return you expect from your savings before taxes. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                    </p>
+                    <p class="calc-def-text" style="margin-top: 10px;">
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                    </p>
+                    <p class="calc-def-text" style="margin-top: 10px;">
+                        Since emergency savings may need to be accessed at any time, most people should use a conservative interest rate similar to a saving account and not rely on more risky investments such as stock or bonds.
+                    </p>
+                </div>
+
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">FEDERAL TAX RATE</h4>
+                    <p class="calc-def-text">
+                        Your marginal federal tax rate. This calculator assumes that you pay federal taxes at this rate on any interest earned. This calculator also assumes that your taxes are taken out of your savings as they are earned, instead of at the end of the year. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
                     </p>
 
-                    <!-- Embedded Federal Income Tax Rates Table -->
+                    <!-- Filing Status Table for 2026 -->
                     <table class="tax-bracket-tbl">
+                        <caption>Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</caption>
                         <thead>
                             <tr>
                                 <th>Tax Rate</th>
-                                <th>Married Filing Jointly</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
                                 <th>Single</th>
                                 <th>Head of Household</th>
                                 <th>Married Filing Separately</th>
@@ -503,53 +784,74 @@
                         <tbody>
                             <tr>
                                 <td>10%</td>
-                                <td>$0 &ndash; $23,200</td>
-                                <td>$0 &ndash; $11,600</td>
-                                <td>$0 &ndash; $16,550</td>
-                                <td>$0 &ndash; $11,600</td>
+                                <td>$0 &ndash; $24,800</td>
+                                <td>$0 &ndash; $12,400</td>
+                                <td>$0 &ndash; $17,700</td>
+                                <td>$0 &ndash; $12,400</td>
                             </tr>
                             <tr>
                                 <td>12%</td>
-                                <td>$23,200 &ndash; $94,300</td>
-                                <td>$11,600 &ndash; $47,150</td>
-                                <td>$16,550 &ndash; $63,100</td>
-                                <td>$11,600 &ndash; $47,150</td>
+                                <td>$24,800 &ndash; $100,800</td>
+                                <td>$12,400 &ndash; $50,400</td>
+                                <td>$17,700 &ndash; $67,450</td>
+                                <td>$12,400 &ndash; $50,400</td>
                             </tr>
                             <tr>
                                 <td>22%</td>
-                                <td>$94,300 &ndash; $201,050</td>
-                                <td>$47,150 &ndash; $100,525</td>
-                                <td>$63,100 &ndash; $100,500</td>
-                                <td>$47,150 &ndash; $100,525</td>
+                                <td>$100,800 &ndash; $211,400</td>
+                                <td>$50,400 &ndash; $105,700</td>
+                                <td>$67,450 &ndash; $105,700</td>
+                                <td>$50,400 &ndash; $105,700</td>
                             </tr>
                             <tr>
                                 <td>24%</td>
-                                <td>$201,050 &ndash; $383,900</td>
-                                <td>$100,525 &ndash; $191,950</td>
-                                <td>$100,500 &ndash; $191,950</td>
-                                <td>$100,525 &ndash; $191,950</td>
+                                <td>$211,400 &ndash; $403,550</td>
+                                <td>$105,700 &ndash; $201,775</td>
+                                <td>$105,700 &ndash; $201,750</td>
+                                <td>$105,700 &ndash; $201,775</td>
                             </tr>
                             <tr>
                                 <td>32%</td>
-                                <td>Over $383,900</td>
-                                <td>Over $191,950</td>
-                                <td>Over $191,950</td>
-                                <td>Over $191,950</td>
+                                <td>$403,550 &ndash; $512,450</td>
+                                <td>$201,775 &ndash; $256,225</td>
+                                <td>$201,750 &ndash; $256,200</td>
+                                <td>$201,775 &ndash; $256,225</td>
+                            </tr>
+                            <tr>
+                                <td>35%</td>
+                                <td>$512,450 &ndash; $768,700</td>
+                                <td>$256,225 &ndash; $640,600</td>
+                                <td>$256,200 &ndash; $640,600</td>
+                                <td>$256,225 &ndash; $384,350</td>
+                            </tr>
+                            <tr>
+                                <td>37%</td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
                             </tr>
                         </tbody>
                     </table>
+                    <div class="tax-bracket-note">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates.<br>Source: Rev. Proc. 2025-32
+                    </div>
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">STATE TAX RATE</h4>
-                    <p class="calc-def-desc">
-                        Your marginal state tax rate. The assumptions for state taxes are the same as those for federal. This calculator assumes that you pay state taxes on the value of any interest earned. This calculation also assumes that your taxes are paid out of the savings as they are earned, instead of at the end of the year.
+                <div class="calc-def-block">
+                    <h4 class="calc-def-title">STATE TAX RATE</h4>
+                    <p class="calc-def-text">
+                        Your marginal state tax rate. The assumptions for state taxes are the same as those for federal. This calculator assumes that you pay state taxes on any interest earned. This calculator also assumes that your taxes are taken out of your savings as they are earned, instead of at the end of the year.
                     </p>
                 </div>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
-                </p>
+                <!-- Disclaimers -->
+                <div class="calc-disclaimers">
+                    <p>
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+
             </div>
 
         </article>
@@ -558,35 +860,34 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 850px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
+    <div id="report-modal" class="calc-modal-overlay">
+        <div class="calc-modal-dialog">
+            <div class="calc-modal-header">
                 <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Emergency Savings Accumulation Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
+                    <h2 class="calc-modal-title">Emergency Savings Analysis Report</h2>
+                    <p class="calc-modal-sub">The Seiler Group of Raymond James &bull; Safety Cushion &amp; Accumulation Projection</p>
                 </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
+                <div style="display: flex; gap: 12px; align-items: center;">
+                    <button type="button" onclick="window.print()" class="calc-btn" id="btn-calculate" style="padding: 6px 14px; font-size: 11px;">
+                        <i class="fas fa-print"></i> PRINT
+                    </button>
+                    <button type="button" onclick="closeReportModal()" class="calc-modal-close" aria-label="Close modal">&times;</button>
                 </div>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Schedule table -->
+            <div class="calc-modal-body" id="modal-report-content">
+                <!-- Injected via JS -->
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
+    <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
-
-        <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
                     aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
@@ -597,298 +898,531 @@
                         class="fas fa-envelope"></i></a>
             </div>
         </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
+        <div class="champ-divider"></div>
+        <div class="champ-quote-wrap">
+            <blockquote class="champ-quote">
+                &ldquo;We believe that true wealth management begins with an uncompromised standard of fiduciary integrity and customized financial guidance designed around your life.&rdquo;
+            </blockquote>
+            <cite class="champ-author">&mdash; The Seiler Group of Raymond James</cite>
         </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
     </section>
 
     <!-- ============================================================
-     FOOTER
+     SITE FOOTER (All 3 Office Locations)
      ============================================================ -->
     <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+        <div class="footer-container">
+            <div class="footer-locations">
+                <div class="location-col">
+                    <h4 class="location-title">NEWTOWN, PA</h4>
+                    <p class="location-address">
+                        5 Caufield Place, Suite 201<br>
+                        Newtown, PA 18940<br>
+                        <a href="tel:2158607823">T: 215.860.7823</a><br>
+                        <a href="tel:8554734537">TF: 855.473.4537</a><br>
+                        F: 215.860.7829
+                    </p>
+                    <a href="https://maps.google.com/?q=5+Caufield+Place+Suite+201+Newtown+PA+18940" target="_blank"
+                        rel="noopener noreferrer" class="location-map-link">Map &amp; Directions &rarr;</a>
+                </div>
+                <div class="location-col">
+                    <h4 class="location-title">FORT LAUDERDALE, FL</h4>
+                    <p class="location-address">
+                        201 East Las Olas Boulevard, Suite 1630<br>
+                        Fort Lauderdale, FL 33301<br>
+                        <a href="tel:9545672200">T: 954.567.2200</a><br>
+                        <a href="tel:8003271262">TF: 800.327.1262</a><br>
+                        F: 954.567.2201
+                    </p>
+                    <a href="https://maps.google.com/?q=201+East+Las+Olas+Boulevard+Suite+1630+Fort+Lauderdale+FL+33301"
+                        target="_blank" rel="noopener noreferrer" class="location-map-link">Map &amp; Directions &rarr;</a>
+                </div>
+                <div class="location-col">
+                    <h4 class="location-title">FORT MYERS, FL</h4>
+                    <p class="location-address">
+                        14541 Hope Center Loop, Suite 100<br>
+                        Fort Myers, FL 33912<br>
+                        <a href="tel:2394337770">T: 239.433.7770</a><br>
+                        <a href="tel:8004337770">TF: 800.433.7770</a><br>
+                        F: 239.433.7771
+                    </p>
+                    <a href="https://maps.google.com/?q=14541+Hope+Center+Loop+Suite+100+Fort+Myers+FL+33912"
+                        target="_blank" rel="noopener noreferrer" class="location-map-link">Map &amp; Directions &rarr;</a>
+                </div>
             </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            <div class="footer-legal">
+                <p>&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC. | <a
+                        href="https://www.raymondjames.com/legal-disclosures/privacy-security" target="_blank"
+                        rel="noopener noreferrer">Privacy Notice</a> | <a
+                        href="https://www.raymondjames.com/legal-disclosures" target="_blank"
+                        rel="noopener noreferrer">Legal Disclosures</a></p>
             </div>
         </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
     </footer>
 
     <!-- ============================================================
-     CALCULATOR JAVASCRIPT ENGINE
+     CALCULATOR ENGINE JAVASCRIPT
      ============================================================ -->
     <script>
-        function toggleMobileMenu(e) {
-            e.stopPropagation();
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            const toggle = document.getElementById('mobile-nav-toggle');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('open');
-            toggle.classList.toggle('open');
+        // Currency and Number Helpers
+        function parseCurrency(str) {
+            if (!str) return 0;
+            const clean = String(str).replace(/[^0-9.-]/g, '');
+            const val = parseFloat(clean);
+            return isNaN(val) ? 0 : val;
         }
 
+        function parsePercent(str) {
+            if (!str) return 0;
+            const clean = String(str).replace(/[^0-9.-]/g, '');
+            const val = parseFloat(clean);
+            return isNaN(val) ? 0 : val;
+        }
+
+        function formatCurrency(val) {
+            return '$' + Math.round(val).toLocaleString('en-US');
+        }
+
+        function formatCurrencyCents(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        // Section Accordion Toggle
         function toggleSec(secId) {
             const sec = document.getElementById(secId);
-            if (sec) sec.classList.toggle('collapsed');
+            if (sec) {
+                sec.classList.toggle('collapsed');
+            }
         }
 
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        // Smooth scroll to definitions
+        function scrollToDefinitions() {
+            const el = document.getElementById('definitions-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
         }
 
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+        // Social Share Dropdown
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) dd.classList.toggle('show');
+        }
+
+        function shareToSocial(platform, e) {
+            e.preventDefault();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check%20out%20this%20calculator:%20${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) dd.classList.remove('show');
+        }
+
+        document.addEventListener('click', function (e) {
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd && !dd.contains(e.target)) {
+                dd.classList.remove('show');
+            }
+        });
+
+        // Mobile Menu Drawer
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                const isActive = drawer.classList.contains('active');
+                if (isActive) {
+                    drawer.classList.remove('active');
+                    overlay.classList.remove('active');
+                } else {
+                    drawer.classList.add('active');
+                    overlay.classList.add('active');
+                }
+            }
+        }
+
+        // Synchronize Slider & Input
+        function bindSliderAndInput(inputId, rangeId, isCurrency = true, isPercent = false, maxVal = null) {
             const inp = document.getElementById(inputId);
             const range = document.getElementById(rangeId);
             if (!inp || !range) return;
 
             range.addEventListener('input', () => {
                 const val = parseFloat(range.value);
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
-                calculateEmergency();
+                if (isCurrency) {
+                    inp.value = formatCurrencyCents(val);
+                } else if (isPercent) {
+                    inp.value = val + '%';
+                } else {
+                    inp.value = val;
+                }
+                calculateEmergency(false);
             });
 
             inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
-                if (val < 0) val = 0;
+                let val = isCurrency ? parseCurrency(inp.value) : (isPercent ? parsePercent(inp.value) : parseFloat(inp.value));
+                if (isNaN(val) || val < 0) val = 0;
                 if (maxVal && val > maxVal) val = maxVal;
                 range.value = val;
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
-                else inp.value = val;
-                calculateEmergency();
+                if (isCurrency) {
+                    inp.value = formatCurrencyCents(val);
+                } else if (isPercent) {
+                    inp.value = val + '%';
+                } else {
+                    inp.value = val;
+                }
+                calculateEmergency(false);
             });
         }
 
-        bindSliderAndInput('inp-curr-fund', 'range-curr-fund', true, false, 50000);
-        bindSliderAndInput('inp-monthly-contrib', 'range-monthly-contrib', true, false, 2000);
-        bindSliderAndInput('inp-living-exp', 'range-living-exp', true, false, 15000);
-        bindSliderAndInput('inp-months-needed', 'range-months-needed', false, false, 12);
-        bindSliderAndInput('inp-deduct-car', 'range-deduct-car', true, false, 2500);
-        bindSliderAndInput('inp-deduct-home', 'range-deduct-home', true, false, 5000);
-        bindSliderAndInput('inp-em-rate', 'range-em-rate', false, true, 15);
-        bindSliderAndInput('inp-em-fed-tax', 'range-em-fed-tax', false, true, 37);
-        bindSliderAndInput('inp-em-state-tax', 'range-em-state-tax', false, true, 15);
+        // Bind all inputs
+        bindSliderAndInput('inp-amt-current', 'range-amt-current', true, false, 1000000);
+        bindSliderAndInput('inp-amt-save-month', 'range-amt-save-month', true, false, 100000);
+        bindSliderAndInput('inp-monthly-expenses', 'range-monthly-expenses', true, false, 100000);
+        bindSliderAndInput('inp-months-unemployment', 'range-months-unemployment', false, false, 100);
+        bindSliderAndInput('inp-deductible-med', 'range-deductible-med', true, false, 100000);
+        bindSliderAndInput('inp-deductible-auto', 'range-deductible-auto', true, false, 100000);
+        bindSliderAndInput('inp-deductible-prop', 'range-deductible-prop', true, false, 100000);
+        bindSliderAndInput('inp-deductible-oth', 'range-deductible-oth', true, false, 100000);
+        bindSliderAndInput('inp-em-med', 'range-em-med', true, false, 100000);
+        bindSliderAndInput('inp-em-auto', 'range-em-auto', true, false, 100000);
+        bindSliderAndInput('inp-em-legal', 'range-em-legal', true, false, 100000);
+        bindSliderAndInput('inp-em-prop', 'range-em-prop', true, false, 100000);
+        bindSliderAndInput('inp-em-oth', 'range-em-oth', true, false, 100000);
+        bindSliderAndInput('inp-ror', 'range-ror', false, true, 12);
+        bindSliderAndInput('inp-state-tax', 'range-state-tax', false, true, 50);
+        bindSliderAndInput('inp-fed-tax', 'range-fed-tax', false, true, 50);
 
-        let lastYearlyData = [];
+        // Core Calculation Engine
+        let lastEmergencyResults = null;
 
-        function calculateEmergency() {
-            const currFund = parseCurrency(document.getElementById('inp-curr-fund').value);
-            const monthlyContrib = parseCurrency(document.getElementById('inp-monthly-contrib').value);
-            const livingExp = parseCurrency(document.getElementById('inp-living-exp').value);
-            const monthsNeeded = parseInt(document.getElementById('inp-months-needed').value) || 6;
-            const deductCar = parseCurrency(document.getElementById('inp-deduct-car').value);
-            const deductHome = parseCurrency(document.getElementById('inp-deduct-home').value);
+        function calculateEmergency(isManualClick = false) {
+            const currentSaved = parseCurrency(document.getElementById('inp-amt-current').value);
+            const monthlySave = parseCurrency(document.getElementById('inp-amt-save-month').value);
+            const monthlyExpenses = parseCurrency(document.getElementById('inp-monthly-expenses').value);
+            const monthsUnemployment = parseInt(document.getElementById('inp-months-unemployment').value) || 1;
 
-            const rReturn = parsePercent(document.getElementById('inp-em-rate').value) / 100;
-            const fedTax = parsePercent(document.getElementById('inp-em-fed-tax').value) / 100;
-            const stateTax = parsePercent(document.getElementById('inp-em-state-tax').value) / 100;
-            const netReturn = rReturn * (1 - (fedTax + stateTax));
-            const monthlyRate = netReturn / 12;
+            const deductMed = parseCurrency(document.getElementById('inp-deductible-med').value);
+            const deductAuto = parseCurrency(document.getElementById('inp-deductible-auto').value);
+            const deductProp = parseCurrency(document.getElementById('inp-deductible-prop').value);
+            const deductOth = parseCurrency(document.getElementById('inp-deductible-oth').value);
 
-            const totalGoal = (livingExp * monthsNeeded) + deductCar + deductHome;
+            const emMed = parseCurrency(document.getElementById('inp-em-med').value);
+            const emAuto = parseCurrency(document.getElementById('inp-em-auto').value);
+            const emLegal = parseCurrency(document.getElementById('inp-em-legal').value);
+            const emProp = parseCurrency(document.getElementById('inp-em-prop').value);
+            const emOth = parseCurrency(document.getElementById('inp-em-oth').value);
 
-            document.getElementById('banner-goal-val').textContent = formatCurrency(totalGoal);
-            document.getElementById('badge-need-val').textContent = `Goal: ${formatCurrencyCents(totalGoal)}`;
-            document.getElementById('card-goal').textContent = formatCurrencyCents(totalGoal);
-            document.getElementById('card-funded-months').textContent = `${monthsNeeded} Months`;
+            const ror = parsePercent(document.getElementById('inp-ror').value) / 100;
+            const stateTax = parsePercent(document.getElementById('inp-state-tax').value) / 100;
+            const fedTax = parsePercent(document.getElementById('inp-fed-tax').value) / 100;
 
-            // Calculate months to reach target
-            let currentBal = currFund;
+            // Subtotals
+            const livingExpenseTotal = monthlyExpenses * monthsUnemployment;
+            const insuranceSavingsTotal = deductMed + deductAuto + deductProp + deductOth;
+            const emergencySpendingTotal = emMed + emAuto + emLegal + emProp + emOth;
+            const totalGoal = livingExpenseTotal + insuranceSavingsTotal + emergencySpendingTotal;
+
+            // Update Subtotal elements
+            document.getElementById('subtotal-living-expense').textContent = formatCurrencyCents(livingExpenseTotal);
+            document.getElementById('subtotal-insurance-savings').textContent = formatCurrencyCents(insuranceSavingsTotal);
+            document.getElementById('subtotal-emergency-spending').textContent = formatCurrencyCents(emergencySpendingTotal);
+
+            // Update Status Callout
+            document.getElementById('status-goal-text').textContent = formatCurrency(totalGoal);
+
+            // Update Tax Header Subtitle
+            const taxSubtitle = `${(ror * 100).toFixed(0)}% INTEREST, ${(fedTax * 100).toFixed(0)}% FEDERAL TAX, ${(stateTax * 100).toFixed(0)}% STATE TAX`;
+            document.getElementById('tax-header-subtitle').textContent = taxSubtitle;
+
+            // Effective After-Tax Compounding (Dinkytown model)
+            const combinedTax = fedTax + stateTax; // additive as in standard savings calculators
+            const afterTaxRor = Math.max(0, ror * (1 - combinedTax));
+            const monthlyRate = Math.pow(1 + afterTaxRor, 1 / 12) - 1;
+
+            // Accumulation simulation month by month (annuity due)
+            let bal = currentSaved;
             let totalMonths = 0;
+            let reachedMonth = null;
             let totalInterest = 0;
 
-            if (monthlyContrib > 0 && currentBal < totalGoal) {
-                while (currentBal < totalGoal && totalMonths < 600) {
-                    const intMonth = currentBal * monthlyRate;
-                    totalInterest += intMonth;
-                    currentBal += monthlyContrib + intMonth;
+            if (bal >= totalGoal && totalGoal > 0) {
+                reachedMonth = 0;
+            } else if (monthlySave > 0 && totalGoal > 0) {
+                while (totalMonths < 1200) { // cap at 100 years
+                    bal = (bal + monthlySave) * (1 + monthlyRate);
                     totalMonths++;
+                    if (bal >= totalGoal) {
+                        reachedMonth = totalMonths;
+                        break;
+                    }
                 }
             }
 
-            const yearsReach = Math.floor(totalMonths / 12);
-            const monthsReach = totalMonths % 12;
+            // Results Headline
+            let headlineText = '';
+            let yearsReach = 0;
+            let monthsReach = 0;
 
-            if (currentBal >= totalGoal && totalMonths === 0) {
-                document.getElementById('res-headline').innerHTML = `YOU HAVE ALREADY REACHED YOUR GOAL OF <span style="color: #22c55e;">${formatCurrency(totalGoal)}</span>!`;
-                document.getElementById('card-time-to-reach').textContent = 'Goal Met';
-            } else if (totalMonths >= 600 || monthlyContrib === 0) {
-                document.getElementById('res-headline').innerHTML = `INCREASE YOUR MONTHLY CONTRIBUTIONS TO REACH <span style="color: #dfa01e;">${formatCurrency(totalGoal)}</span>.`;
-                document.getElementById('card-time-to-reach').textContent = '> 50 Years';
+            if (totalGoal <= 0) {
+                headlineText = 'YOUR EMERGENCY SAVINGS GOAL IS CURRENTLY $0.';
+            } else if (currentSaved >= totalGoal) {
+                headlineText = `YOU HAVE ALREADY REACHED YOUR GOAL OF ${formatCurrency(totalGoal)}!`;
+            } else if (reachedMonth === null || monthlySave <= 0) {
+                headlineText = `INCREASE YOUR MONTHLY CONTRIBUTIONS TO REACH ${formatCurrency(totalGoal)}.`;
             } else {
-                document.getElementById('res-headline').innerHTML = `YOU WILL REACH YOUR GOAL IN <span style="color: #dfa01e;">${yearsReach} YEARS AND ${monthsReach} MONTHS</span>`;
-                document.getElementById('card-time-to-reach').textContent = `${yearsReach} Yrs ${monthsReach} Mos`;
+                yearsReach = Math.floor(reachedMonth / 12);
+                monthsReach = reachedMonth % 12;
+
+                let timeStr = '';
+                if (yearsReach > 0 && monthsReach > 0) {
+                    timeStr = `${yearsReach} YEAR${yearsReach > 1 ? 'S' : ''} AND ${monthsReach} MONTH${monthsReach > 1 ? 'S' : ''}`;
+                } else if (yearsReach > 0) {
+                    timeStr = `${yearsReach} YEAR${yearsReach > 1 ? 'S' : ''}`;
+                } else {
+                    timeStr = `${monthsReach} MONTH${monthsReach > 1 ? 'S' : ''}`;
+                }
+                headlineText = `YOU WILL REACH YOUR GOAL IN ${timeStr}.`;
             }
 
-            document.getElementById('card-interest-earned').textContent = formatCurrencyCents(totalInterest);
+            document.getElementById('chart-section-title').textContent = headlineText;
 
-            // Generate yearly simulation for chart
-            const chartYears = Math.min(10, Math.max(5, yearsReach + 1));
-            const yearlyData = [];
-            let simBal = currFund;
+            // Simulate annual progression for Bar Chart
+            let chartYears = 7;
+            if (reachedMonth !== null && reachedMonth > 0) {
+                chartYears = Math.min(30, Math.max(5, Math.ceil(reachedMonth / 12)));
+            }
+
+            const yearlyBars = [];
+            // Year 0
+            yearlyBars.push({
+                year: 0,
+                balance: currentSaved,
+                contributions: currentSaved,
+                interest: 0
+            });
+
+            let simBal = currentSaved;
+            let cumulativeContributions = currentSaved;
+            let cumulativeInterest = 0;
 
             for (let y = 1; y <= chartYears; y++) {
-                for (let m = 0; m < 12; m++) {
-                    simBal = (simBal + monthlyContrib) * (1 + monthlyRate);
+                let yearInterest = 0;
+                for (let m = 1; m <= 12; m++) {
+                    const startOfMonth = simBal + monthlySave;
+                    cumulativeContributions += monthlySave;
+                    const intMonth = startOfMonth * monthlyRate;
+                    yearInterest += intMonth;
+                    cumulativeInterest += intMonth;
+                    simBal = startOfMonth + intMonth;
                 }
-                yearlyData.push({
+                yearlyBars.push({
                     year: y,
-                    balance: simBal
+                    balance: simBal,
+                    contributions: cumulativeContributions,
+                    interest: cumulativeInterest
                 });
             }
 
-            lastYearlyData = yearlyData;
-            renderEmergencyChart(yearlyData, totalGoal);
+            lastEmergencyResults = {
+                currentSaved,
+                monthlySave,
+                livingExpenseTotal,
+                insuranceSavingsTotal,
+                emergencySpendingTotal,
+                totalGoal,
+                reachedMonth,
+                yearsReach,
+                monthsReach,
+                afterTaxRor,
+                yearlyBars
+            };
+
+            renderBarChart(yearlyBars, totalGoal);
         }
 
-        function renderEmergencyChart(data, targetGoal) {
+        // Render Dynamic SVG Bar Chart
+        function renderBarChart(bars, goal) {
             const container = document.getElementById('em-chart-container');
-            if (!container || data.length === 0) return;
+            if (!container || !bars || bars.length === 0) return;
 
-            const width = container.clientWidth || 700;
-            const height = 300;
+            const width = container.clientWidth || 760;
+            const height = 340;
             const padLeft = 70;
-            const padRight = 30;
-            const padTop = 35;
+            const padRight = 35;
+            const padTop = 30;
             const padBottom = 45;
+
             const chartW = width - padLeft - padRight;
             const chartH = height - padTop - padBottom;
 
-            const maxBal = Math.max(targetGoal, ...data.map(d => d.balance)) * 1.15;
-            const minBal = 0;
+            const maxVal = Math.max(goal, ...bars.map(b => b.balance));
+            // Round up maxVal to a clean increment (e.g. 2000s or 5000s)
+            let yMax = 18000;
+            if (maxVal > 18000 || maxVal < 10000) {
+                const order = Math.pow(10, Math.floor(Math.log10(maxVal)));
+                const step = (maxVal / order > 5) ? order : order / 2;
+                yMax = Math.ceil((maxVal * 1.1) / step) * step;
+            }
 
-            let gridSvg = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const yVal = minBal + ((maxBal - minBal) * (i / steps));
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
+            // Grid Lines and Y-Axis Labels
+            const ySteps = 9;
+            const stepVal = yMax / ySteps;
+            let gridHtml = '';
+
+            for (let i = 0; i <= ySteps; i++) {
+                const val = i * stepVal;
+                const yPos = padTop + chartH - (i / ySteps) * chartH;
+                gridHtml += `
+                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#94a3b8" stroke-width="0.75" opacity="0.3"/>
+                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#cbd5e1" font-size="11.5" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(val)}</text>
                 `;
             }
 
-            // Target Goal line
-            const yGoal = padTop + chartH - (targetGoal / maxBal) * chartH;
-            const goalLine = `
-                <line x1="${padLeft}" y1="${yGoal}" x2="${width - padRight}" y2="${yGoal}" stroke="#dfa01e" stroke-width="2" stroke-dasharray="5 4"/>
-                <text x="${width - padRight}" y="${yGoal - 6}" fill="#dfa01e" font-size="11" font-weight="700" text-anchor="end">Target: ${formatCurrency(targetGoal)}</text>
-            `;
+            // Target Goal Line (dashed gold)
+            let goalLineHtml = '';
+            if (goal > 0 && goal <= yMax) {
+                const goalY = padTop + chartH - (goal / yMax) * chartH;
+                goalLineHtml = `
+                    <line x1="${padLeft}" y1="${goalY}" x2="${width - padRight}" y2="${goalY}" stroke="#dfa01e" stroke-width="1.75" stroke-dasharray="6 4"/>
+                    <text x="${width - padRight}" y="${goalY - 6}" fill="#dfa01e" font-size="11" font-weight="700" text-anchor="end">Goal: ${formatCurrency(goal)}</text>
+                `;
+            }
 
-            const barWidth = Math.min(60, (chartW / data.length) * 0.65);
-            const gap = chartW / data.length;
+            // Render Vertical Blue Bars
+            const numBars = bars.length;
+            const slotWidth = chartW / numBars;
+            const barWidth = Math.min(52, slotWidth * 0.62);
 
-            let barsSvg = '';
-            data.forEach((d, idx) => {
-                const xPos = padLeft + (idx * gap) + (gap - barWidth) / 2;
-                const barH = (d.balance / maxBal) * chartH;
+            let barsHtml = '';
+            bars.forEach((d, idx) => {
+                const xCenter = padLeft + idx * slotWidth + slotWidth / 2;
+                const xPos = xCenter - barWidth / 2;
+                const barH = (d.balance / yMax) * chartH;
                 const yPos = padTop + chartH - barH;
 
-                barsSvg += `
-                    <rect class="em-bar-rect" x="${xPos}" y="${yPos}" width="${barWidth}" height="${barH}" fill="#2563eb" rx="3">
+                barsHtml += `
+                    <rect class="em-chart-bar" x="${xPos}" y="${yPos}" width="${barWidth}" height="${barH}" fill="#1139a0" stroke="#2563eb" stroke-width="1">
                         <title>Year ${d.year}: ${formatCurrencyCents(d.balance)}</title>
                     </rect>
-                    <text x="${xPos + barWidth / 2}" y="${yPos - 8}" fill="#ffffff" font-size="11" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">
-                        ${formatCurrency(d.balance)}
-                    </text>
-                    <text x="${xPos + barWidth / 2}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">
+                    <text x="${xCenter}" y="${height - padBottom + 20}" fill="#cbd5e1" font-size="12" font-family="'Open Sans', sans-serif" font-weight="600" text-anchor="middle">
                         ${d.year}
                     </text>
                 `;
             });
 
+            // Base axis line
+            const axisLine = `
+                <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#64748b" stroke-width="1.5"/>
+            `;
+
             container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    ${goalLine}
-                    ${barsSvg}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                    <text x="${width / 2}" y="${height + 5}" fill="#dfa01e" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">YEAR</text>
+                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible; display: block; margin: 0 auto; background: #ffffff; border-radius: 4px; padding: 10px 0;">
+                    ${gridHtml}
+                    ${goalLineHtml}
+                    ${barsHtml}
+                    ${axisLine}
                 </svg>
             `;
         }
 
+        // View Report Modal
         function openReportModal() {
-            calculateEmergency();
-            const modal = document.getElementById('report-modal');
+            calculateEmergency(false);
+            if (!lastEmergencyResults) return;
+
+            const res = lastEmergencyResults;
             const content = document.getElementById('modal-report-content');
+            const modal = document.getElementById('report-modal');
+
+            let timeSummary = '';
+            if (res.totalGoal <= 0) {
+                timeSummary = 'No emergency goal configured.';
+            } else if (res.currentSaved >= res.totalGoal) {
+                timeSummary = `You have already achieved your emergency fund goal of <strong>${formatCurrencyCents(res.totalGoal)}</strong>!`;
+            } else if (res.reachedMonth === null) {
+                timeSummary = `With your current monthly contribution, you may need to increase contributions to reach your goal of <strong>${formatCurrencyCents(res.totalGoal)}</strong>.`;
+            } else {
+                timeSummary = `At your current savings rate, you will achieve your <strong>${formatCurrencyCents(res.totalGoal)}</strong> goal in <strong>${res.yearsReach} years and ${res.monthsReach} months</strong>.`;
+            }
 
             let rows = '';
-            lastYearlyData.forEach(item => {
+            res.yearlyBars.forEach(item => {
                 rows += `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                        <td style="padding: 10px; text-align: left; color: #fff; font-weight: 600;">Year ${item.year}</td>
-                        <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(item.balance)}</td>
+                    <tr>
+                        <td>Year ${item.year}</td>
+                        <td>${formatCurrencyCents(item.contributions)}</td>
+                        <td>${formatCurrencyCents(item.interest)}</td>
+                        <td style="color: #dfa01e; font-weight: 700;">${formatCurrencyCents(item.balance)}</td>
                     </tr>
                 `;
             });
 
             content.innerHTML = `
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                <div class="calc-modal-summary-box">
+                    <h3>Emergency Savings Cushion Summary</h3>
+                    <p>${timeSummary}</p>
+                </div>
+
+                <h4 style="color: #dfa01e; font-family: 'Montserrat', sans-serif; font-size: 14px; text-transform: uppercase; margin: 20px 0 8px 0;">
+                    Breakdown of Emergency Fund Need
+                </h4>
+                <table class="calc-modal-table">
                     <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Timeline</th>
-                            <th style="padding: 12px 10px;">Emergency Fund Balance</th>
+                        <tr>
+                            <th>Category</th>
+                            <th>Calculated Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Living Expenses (${document.getElementById('inp-months-unemployment').value} Months)</td>
+                            <td>${formatCurrencyCents(res.livingExpenseTotal)}</td>
+                        </tr>
+                        <tr>
+                            <td>Insurance Deductibles Total</td>
+                            <td>${formatCurrencyCents(res.insuranceSavingsTotal)}</td>
+                        </tr>
+                        <tr>
+                            <td>Emergency Contingency Spending Total</td>
+                            <td>${formatCurrencyCents(res.emergencySpendingTotal)}</td>
+                        </tr>
+                        <tr style="background: rgba(223, 160, 30, 0.15); font-weight: 700;">
+                            <td style="color: #dfa01e;">Total Emergency Savings Target</td>
+                            <td style="color: #dfa01e;">${formatCurrencyCents(res.totalGoal)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="color: #dfa01e; font-family: 'Montserrat', sans-serif; font-size: 14px; text-transform: uppercase; margin: 28px 0 8px 0;">
+                    Year-by-Year Accumulation Schedule
+                </h4>
+                <table class="calc-modal-table">
+                    <thead>
+                        <tr>
+                            <th>Timeline</th>
+                            <th>Total Contributed</th>
+                            <th>Total Interest</th>
+                            <th>Ending Balance</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -901,22 +1435,29 @@
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('report-modal');
+            if (modal) modal.style.display = 'none';
         }
 
-        window.onclick = function(e) {
+        window.onclick = function (e) {
             const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
         };
 
+        // Window Resize listener to keep chart crisp
         window.addEventListener('resize', () => {
-            if (lastYearlyData.length > 0) calculateEmergency();
+            if (lastEmergencyResults) {
+                renderBarChart(lastEmergencyResults.yearlyBars, lastEmergencyResults.totalGoal);
+            }
         });
 
+        // Initialize on Load
         document.addEventListener('DOMContentLoaded', () => {
-            calculateEmergency();
+            calculateEmergency(false);
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

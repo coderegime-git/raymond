@@ -1,70 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprehensive Life Insurance Analysis | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your total family financial needs, current assets, debt payoff, education costs, and determine additional life insurance required.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Comprehensive Life Insurance Analysis | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="How much life insurance do you need? This comprehensive life insurance calculator includes detailed net worth analysis, budgeting and college savings to help you decide how much life insurance you might need. You can also adjust the inflation rate and your expected rate of return to see how these variables can impact your insurance needs.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .ins-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .ins-stat-card {
-            background: rgba(11, 23, 42, 0.85);
-            border: 1px solid rgba(223, 160, 30, 0.3);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-        }
-        .ins-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .ins-stat-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="comprehensive-life-insurance-analysis.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
             <span></span>
@@ -76,7 +134,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -108,418 +167,878 @@
     <main class="calc-white-wrapper">
         <article class="calc-white-container">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-14.jpg" alt="Comprehensive Life Insurance Analysis" style="width: 100%; height: 260px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Image Banner: Matching Screenshot 1 -->
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/comprehensive-life-insurance-hero.jpg" alt="Comprehensive Life Insurance Analysis | The Seiler Group of Raymond James" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Title & Meta Header matching Screenshot 1 -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">COMPREHENSIVE LIFE INSURANCE ANALYSIS</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Insurance &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=Insurance" class="calc-cat-link">Insurance</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    
+                    <!-- Social Share Button & Dropdown -->
+                    <div class="calc-share-wrapper" id="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown">
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('facebook', event)" title="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('twitter', event)" title="Share on X">
+                                <i class="fab fa-x-twitter"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('linkedin', event)" title="Share on LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('email', event)" title="Share via Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    How much life insurance do you need? This comprehensive life insurance calculator includes detailed cash flow breakdown, and based on what balance you break down how much life insurance you might need. You can also adjust the inflation rate and your expected rate of return to see how those variables can impact your insurance needs.
+                    How much life insurance do you need? This comprehensive life insurance calculator includes detailed net worth analysis, budgeting and college savings to help you decide how much life insurance you might need. You can also adjust the inflation rate and your expected rate of return to see how these variables can impact your insurance needs.
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Floating Action Box matching Screenshot 1 -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateInsurance()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateInsurance()">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-status-center">
+                        <div class="calc-action-status-line1" id="status-line1">
+                            Based on your inputs, additional life insurance required: <strong id="status-ins-val">$0.00</strong>
+                        </div>
                     </div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Detailed Report Schedule">
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <span class="calc-req-text">*indicates required</span>
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
 
-            <!-- Dynamic Estimated Need Banner -->
-            <div style="background: linear-gradient(135deg, #091424 0%, #11233e 100%); border: 1px solid #dfa01e; border-radius: 6px; padding: 18px 24px; text-align: center; margin-bottom: 25px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);">
-                <div style="font-size: 11.5px; text-transform: uppercase; letter-spacing: 1.5px; color: #94a3b8; font-weight: 600; margin-bottom: 4px;">CAPITAL NEEDS SUMMARY</div>
-                <h2 id="res-headline" style="font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #ffffff; margin: 0; font-weight: 700;">
-                    Based on your inputs, additional life insurance required: <span style="color: #dfa01e;">$0.00</span>
-                </h2>
-            </div>
-
-            <!-- Key Metric Badges -->
-            <div class="ins-stat-grid">
-                <div class="ins-stat-card">
-                    <div class="ins-stat-val" id="card-total-needs">$0.00</div>
-                    <div class="ins-stat-label">Total Family Financial Needs</div>
-                </div>
-                <div class="ins-stat-card">
-                    <div class="ins-stat-val" id="card-total-assets">$0.00</div>
-                    <div class="ins-stat-label">Total Available Assets</div>
-                </div>
-                <div class="ins-stat-card">
-                    <div class="ins-stat-val" id="card-existing-ins">$0.00</div>
-                    <div class="ins-stat-label">Existing Life Insurance</div>
-                </div>
-                <div class="ins-stat-card">
-                    <div class="ins-stat-val" id="card-net-gap" style="color: #4ade80;">$0.00</div>
-                    <div class="ins-stat-label">Net Coverage Status</div>
-                </div>
-            </div>
-
             <!-- ============================================================
-             SECTION 1: LIFE INSURANCE NEED INPUTS
+             SECTION 1: LIFE INSURANCE NEED INPUTS matching Screenshot 1 & 2
              ============================================================ -->
-            <section class="calc-section" id="sec-need-inputs">
-                <div class="calc-sec-header" onclick="toggleSec('sec-need-inputs')">
-                    <h2 class="calc-sec-title">LIFE INSURANCE NEED INPUTS:</h2>
-                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <div class="calc-collapsible-section" id="sec-need-inputs">
+                <div class="calc-section-header" onclick="toggleSec('sec-need-inputs')">
+                    <h2 class="calc-section-title">LIFE INSURANCE NEED INPUTS:</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
+                    <!-- Existing life insurance coverage:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-existing-ins" class="calc-field-label">Existing life insurance coverage:*</label>
-                            <span class="calc-q-dot" title="Current death benefit of your existing life policies.">?</span>
+                            <label for="inp-exist-ins" class="calc-field-label">Existing life insurance coverage:*</label>
+                            <span class="calc-q-dot" title="Total amount of life insurance coverage you currently have for yourself.">?</span>
                         </div>
-                        <input type="text" id="inp-existing-ins" class="calc-text-input" value="$0.00">
+                        <input type="text" id="inp-exist-ins" class="calc-text-input" value="$0.00">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-existing-ins" class="calc-range-slider" min="0" max="1000000" step="10000" value="0">
+                            <input type="range" id="range-exist-ins" class="calc-range-slider" min="0" max="10000000" step="50000" value="0">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$250,000</span>
-                                <span>$500,000</span>
-                                <span>$750,000</span>
-                                <span>$1,000,000</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                                <span>$10m</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Required estate preservation:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-prot-yrs" class="calc-field-label">Years insurance protection needed:*</label>
-                            <span class="calc-q-dot" title="Number of years family income replacement is required.">?</span>
+                            <label for="inp-estate-pres" class="calc-field-label">Required estate preservation:*</label>
+                            <span class="calc-q-dot" title="This is the amount that you wish to have remaining at your death.">?</span>
                         </div>
-                        <input type="text" id="inp-prot-yrs" class="calc-text-input" value="20">
+                        <input type="text" id="inp-estate-pres" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-prot-yrs" class="calc-range-slider" min="1" max="50" step="1" value="20">
+                            <input type="range" id="range-estate-pres" class="calc-range-slider" min="0" max="1000000" step="10000" value="0">
                             <div class="calc-tick-labels">
-                                <span>1</span>
-                                <span>12</span>
-                                <span>25</span>
-                                <span>37</span>
-                                <span>50</span>
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Expected inflation rate:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-ins-inflation" class="calc-field-label">Expected inflation rate:*</label>
-                            <span class="calc-q-dot" title="Anticipated long-term inflation rate.">?</span>
+                            <label for="inp-inflation" class="calc-field-label">Expected inflation rate:*</label>
+                            <span class="calc-q-dot" title="This is the rate that you expect your expenses and income to rise.">?</span>
                         </div>
-                        <input type="text" id="inp-ins-inflation" class="calc-text-input" value="3%">
+                        <input type="text" id="inp-inflation" class="calc-text-input" value="3%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-ins-inflation" class="calc-range-slider" min="0" max="10" step="0.5" value="3">
+                            <input type="range" id="range-inflation" class="calc-range-slider" min="0" max="20" step="0.5" value="3">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
-                                <span>3%</span>
-                                <span>5%</span>
-                                <span>8%</span>
-                                <span>10%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- After-tax return on investments:* -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-ins-return" class="calc-field-label">After-tax return on investments:*</label>
-                            <span class="calc-q-dot" title="Expected net annualized return on death benefit proceeds invested.">?</span>
+                            <label for="inp-return" class="calc-field-label">After-tax return on investments:*</label>
+                            <span class="calc-q-dot" title="The annual percentage rate you expect to earn on your savings.">?</span>
                         </div>
-                        <input type="text" id="inp-ins-return" class="calc-text-input" value="5%">
+                        <input type="text" id="inp-return" class="calc-text-input" value="0%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-ins-return" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
+                            <input type="range" id="range-return" class="calc-range-slider" min="0" max="12" step="0.25" value="0">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>4%</span>
                                 <span>8%</span>
-                                <span>11%</span>
-                                <span>15%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </section>
+            </div>
 
-            <!-- ACCORDION 2: VALUE OF INVESTMENTS -->
-            <section class="calc-section collapsed" id="sec-investments">
-                <div class="calc-sec-header" onclick="toggleSec('sec-investments')">
-                    <h2 class="calc-sec-title">VALUE OF INVESTMENTS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-investments" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <!-- ============================================================
+             SECTION 2: VALUE OF INVESTMENTS matching Screenshot 2
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-investments">
+                <div class="calc-section-header" onclick="toggleSec('sec-investments')">
+                    <h2 class="calc-section-title">VALUE OF INVESTMENTS:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-investments">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
+
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-inv-cash" class="calc-field-label">Cash and savings:</label></div>
-                        <input type="text" id="inp-inv-cash" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inv-cash" class="calc-range-slider" min="0" max="500000" step="5000" value="0"></div>
+                        <div class="calc-label-col"><label for="inp-inv-retire" class="calc-field-label">Retirement accounts:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-inv-retire" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-inv-retire" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
+
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-inv-stocks" class="calc-field-label">Stocks / Equities:</label></div>
+                        <div class="calc-label-col"><label for="inp-inv-stocks" class="calc-field-label">Stocks:*</label><span class="calc-q-dot">?</span></div>
                         <input type="text" id="inp-inv-stocks" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inv-stocks" class="calc-range-slider" min="0" max="500000" step="5000" value="0"></div>
+                        <div class="calc-slider-col"><input type="range" id="range-inv-stocks" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
+
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-inv-bonds" class="calc-field-label">Bonds &amp; Fixed Income:</label></div>
+                        <div class="calc-label-col"><label for="inp-inv-bonds" class="calc-field-label">Bonds:*</label><span class="calc-q-dot">?</span></div>
                         <input type="text" id="inp-inv-bonds" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inv-bonds" class="calc-range-slider" min="0" max="500000" step="5000" value="0"></div>
+                        <div class="calc-slider-col"><input type="range" id="range-inv-bonds" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-inv-mutual" class="calc-field-label">Mutual Funds &amp; ETFs:</label></div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-inv-mutual" class="calc-field-label">Mutual funds:*</label><span class="calc-q-dot">?</span></div>
                         <input type="text" id="inp-inv-mutual" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inv-mutual" class="calc-range-slider" min="0" max="500000" step="5000" value="0"></div>
+                        <div class="calc-slider-col"><input type="range" id="range-inv-mutual" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
-                </div>
-            </section>
 
-            <!-- ACCORDION 3: VALUE OF NON-INCOME ASSETS -->
-            <section class="calc-section collapsed" id="sec-non-income">
-                <div class="calc-sec-header" onclick="toggleSec('sec-non-income')">
-                    <h2 class="calc-sec-title">VALUE OF NON-INCOME ASSETS:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-non-income" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-asset-home" class="calc-field-label">Home Value:</label></div>
-                        <input type="text" id="inp-asset-home" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-asset-home" class="calc-range-slider" min="0" max="1000000" step="10000" value="0"></div>
+                        <div class="calc-label-col"><label for="inp-inv-checking" class="calc-field-label">Checking and savings:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-inv-checking" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-inv-checking" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-asset-re" class="calc-field-label">Other Real Estate:</label></div>
-                        <input type="text" id="inp-asset-re" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-asset-re" class="calc-range-slider" min="0" max="500000" step="5000" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-asset-auto" class="calc-field-label">Automobiles &amp; Personal Property:</label></div>
-                        <input type="text" id="inp-asset-auto" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-asset-auto" class="calc-range-slider" min="0" max="150000" step="2500" value="0"></div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- ACCORDION 4: CURRENT LIABILITIES -->
-            <section class="calc-section collapsed" id="sec-liabilities">
-                <div class="calc-sec-header" onclick="toggleSec('sec-liabilities')">
-                    <h2 class="calc-sec-title">CURRENT LIABILITIES:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-liabilities" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-debt-mort" class="calc-field-label">Home Mortgage:</label></div>
-                        <input type="text" id="inp-debt-mort" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-debt-mort" class="calc-range-slider" min="0" max="1000000" step="10000" value="0"></div>
+                        <div class="calc-label-col"><label for="inp-inv-gic" class="calc-field-label">Guaranteed Investment Certificates:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-inv-gic" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-inv-gic" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-debt-auto" class="calc-field-label">Auto &amp; Student Loans:</label></div>
-                        <input type="text" id="inp-debt-auto" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-debt-auto" class="calc-range-slider" min="0" max="150000" step="2500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-debt-cards" class="calc-field-label">Credit Cards &amp; Other Debts:</label></div>
-                        <input type="text" id="inp-debt-cards" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-debt-cards" class="calc-range-slider" min="0" max="100000" step="1000" value="0"></div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- ACCORDION 5: EXPENSES AT DEATH -->
-            <section class="calc-section collapsed" id="sec-death-exp">
-                <div class="calc-sec-header" onclick="toggleSec('sec-death-exp')">
-                    <h2 class="calc-sec-title">EXPENSES AT DEATH:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-death-exp" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$15,000.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-exp-funeral" class="calc-field-label">Funeral costs:</label></div>
-                        <input type="text" id="inp-exp-funeral" class="calc-text-input" value="$10,000.00">
-                        <div class="calc-slider-col"><input type="range" id="range-exp-funeral" class="calc-range-slider" min="0" max="50000" step="500" value="10000"></div>
+                        <div class="calc-label-col"><label for="inp-inv-other" class="calc-field-label">Other investment assets:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-inv-other" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-inv-other" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
                     </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-exp-probate" class="calc-field-label">Probate &amp; final medical expenses:</label></div>
-                        <input type="text" id="inp-exp-probate" class="calc-text-input" value="$5,000.00">
-                        <div class="calc-slider-col"><input type="range" id="range-exp-probate" class="calc-range-slider" min="0" max="50000" step="500" value="5000"></div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- ACCORDION 6: CHILDREN'S EDUCATION FUND -->
-            <section class="calc-section collapsed" id="sec-edu">
-                <div class="calc-sec-header" onclick="toggleSec('sec-edu')">
-                    <h2 class="calc-sec-title">CHILDREN'S EDUCATION FUND:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-edu" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
                 </div>
-                <div class="calc-sec-body">
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-edu-fund" class="calc-field-label">Total college funding desired:</label></div>
-                        <input type="text" id="inp-edu-fund" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-edu-fund" class="calc-range-slider" min="0" max="300000" step="5000" value="0"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ACCORDION 7: VALUE OF FUTURE INCOME -->
-            <section class="calc-section collapsed" id="sec-future-inc">
-                <div class="calc-sec-header" onclick="toggleSec('sec-future-inc')">
-                    <h2 class="calc-sec-title">VALUE OF FUTURE INCOME:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-future-inc" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-inc-spouse" class="calc-field-label">Surviving spouse annual income:</label></div>
-                        <input type="text" id="inp-inc-spouse" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inc-spouse" class="calc-range-slider" min="0" max="200000" step="2500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-inc-soc" class="calc-field-label">Annual Social Security / pension benefits:</label></div>
-                        <input type="text" id="inp-inc-soc" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-inc-soc" class="calc-range-slider" min="0" max="60000" step="1000" value="0"></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- ACCORDION 8: AMOUNT NEEDED FOR LIVING EXPENSES -->
-            <section class="calc-section collapsed" id="sec-living-exp">
-                <div class="calc-sec-header" onclick="toggleSec('sec-living-exp')">
-                    <h2 class="calc-sec-title">AMOUNT NEEDED FOR LIVING EXPENSES:</h2>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <span id="badge-living-exp" style="color: #dfa01e; font-weight: 700; font-size: 13.5px;">$0.00</span>
-                        <i class="fas fa-chevron-up calc-sec-chevron"></i>
-                    </div>
-                </div>
-                <div class="calc-sec-body">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-living-annual" class="calc-field-label">Current annual living expenses:</label></div>
-                        <input type="text" id="inp-living-annual" class="calc-text-input" value="$0.00">
-                        <div class="calc-slider-col"><input type="range" id="range-living-annual" class="calc-range-slider" min="0" max="250000" step="2500" value="0"></div>
-                    </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-living-pct" class="calc-field-label">Percentage needed by survivors:</label></div>
-                        <input type="text" id="inp-living-pct" class="calc-text-input" value="75%">
-                        <div class="calc-slider-col"><input type="range" id="range-living-pct" class="calc-range-slider" min="50" max="100" step="5" value="75"></div>
-                    </div>
-                </div>
-            </section>
+            </div>
 
             <!-- ============================================================
-             SECTION 3: CHART: EXPENSES VS ASSETS
+             SECTION 3: VALUE OF NON-INCOME ASSETS matching Screenshot 3
              ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title">YOUR FAMILY'S EXPENSES VS. AVAILABLE ASSETS AND LIFE INSURANCE</h2>
-                    <span style="font-size: 11.5px; color: #dfa01e; font-weight: 600;">Comparison Analysis</span>
-                </div>
-                <div class="calc-sec-body" style="padding: 24px;">
-
-                    <!-- Legend matching screenshot dots -->
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; font-size: 12px; color: #cbd5e1;">
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #2563eb;"></span> Existing Life Insurance</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #16a34a;"></span> Value of Investments</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #eab308;"></span> Non-income assets</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f97316;"></span> Future income PV</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #9333ea;"></span> Current liabilities</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #06b6d4;"></span> Education fund</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span> Expenses at death</div>
-                        <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span> Living expenses PV</div>
-                    </div>
-
-                    <div id="ins-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- Dynamic SVG Comparison Bar Chart -->
+            <div class="calc-collapsible-section" id="sec-non-income">
+                <div class="calc-section-header" onclick="toggleSec('sec-non-income')">
+                    <h2 class="calc-section-title">VALUE OF NON-INCOME ASSETS:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-non-income">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-            </section>
+                <div class="calc-section-body">
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-residence" class="calc-field-label">Residence:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-residence" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-residence" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-cottage" class="calc-field-label">Cottage:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-cottage" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-cottage" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-re" class="calc-field-label">Other real-estate:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-re" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-re" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-auto" class="calc-field-label">Automobile:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-auto" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-auto" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-oth-veh" class="calc-field-label">Other vehicles:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-oth-veh" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-oth-veh" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-jewel" class="calc-field-label">Jewelery:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-jewel" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-jewel" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ast-prop" class="calc-field-label">Other personal property:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-ast-prop" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-ast-prop" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                </div>
+            </div>
 
             <!-- ============================================================
-             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT)
+             SECTION 4: CURRENT LIABILITIES matching Screenshot 3 & 4
              ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
+            <div class="calc-collapsible-section" id="sec-liabilities">
+                <div class="calc-section-header" onclick="toggleSec('sec-liabilities')">
+                    <h2 class="calc-section-title">CURRENT LIABILITIES:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-liabilities">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-home-mort" class="calc-field-label">Home mortgage:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-home-mort" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-home-mort" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-oth-mort" class="calc-field-label">Other mortgages:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-oth-mort" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-oth-mort" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-auto" class="calc-field-label">Auto loans:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-auto" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-auto" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-student" class="calc-field-label">Student loans:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-student" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-student" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-cards" class="calc-field-label">Credit cards:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-cards" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-cards" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-loc" class="calc-field-label">Bank loans/Line of Credit:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-loc" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-loc" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-liab-other" class="calc-field-label">Other debts:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-liab-other" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-liab-other" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 5: EXPENSES AT DEATH matching Screenshot 4
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-death-exp">
+                <div class="calc-section-header" onclick="toggleSec('sec-death-exp')">
+                    <h2 class="calc-section-title">EXPENSES AT DEATH:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-death-exp">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-funeral" class="calc-field-label">Funeral costs:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-funeral" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-funeral" class="calc-range-slider" min="0" max="1000000" step="5000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$10k</span><span>$100k</span><span>$1m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-probate" class="calc-field-label">Probate costs:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-probate" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-probate" class="calc-range-slider" min="0" max="1000000" step="5000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$10k</span><span>$100k</span><span>$1m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-tax" class="calc-field-label">Income tax liabilities:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-tax" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-tax" class="calc-range-slider" min="0" max="10000000" step="25000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$100k</span><span>$1m</span><span>$10m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-medical" class="calc-field-label">Uninsured medical costs:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-medical" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-medical" class="calc-range-slider" min="0" max="1000000" step="5000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$10k</span><span>$100k</span><span>$1m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-charity" class="calc-field-label">Charitable bequests:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-charity" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-charity" class="calc-range-slider" min="0" max="1000000" step="5000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$10k</span><span>$100k</span><span>$1m</span></div></div>
+                    </div>
+
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-dth-other" class="calc-field-label">Other:*</label><span class="calc-q-dot">?</span></div>
+                        <input type="text" id="inp-dth-other" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-col"><input type="range" id="range-dth-other" class="calc-range-slider" min="0" max="1000000" step="5000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$10k</span><span>$100k</span><span>$1m</span></div></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 6: CHILDREN'S EDUCATION FUND matching Screenshot 4 & 5
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-edu">
+                <div class="calc-section-header" onclick="toggleSec('sec-edu')">
+                    <h2 class="calc-section-title">CHILDREN'S EDUCATION FUND:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-edu">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+
+                    <!-- Child One -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-subgroup-title">Child One</div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c1-age" class="calc-field-label">Age of child one:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c1-age" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-c1-age" class="calc-range-slider" min="0" max="25" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c1-start" class="calc-field-label">Age to start education:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c1-start" class="calc-text-input" value="18">
+                            <div class="calc-slider-col"><input type="range" id="range-c1-start" class="calc-range-slider" min="0" max="25" step="1" value="18"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c1-tuition" class="calc-field-label">Tuition:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c1-tuition" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c1-tuition" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c1-room" class="calc-field-label">Room and board:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c1-room" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c1-room" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Child Two -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-subgroup-title">Child Two</div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c2-age" class="calc-field-label">Age of child two:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c2-age" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-c2-age" class="calc-range-slider" min="0" max="25" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c2-start" class="calc-field-label">Age to start education:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c2-start" class="calc-text-input" value="18">
+                            <div class="calc-slider-col"><input type="range" id="range-c2-start" class="calc-range-slider" min="0" max="25" step="1" value="18"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c2-tuition" class="calc-field-label">Tuition:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c2-tuition" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c2-tuition" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c2-room" class="calc-field-label">Room and board:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c2-room" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c2-room" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Child Three -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-subgroup-title">Child Three</div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c3-age" class="calc-field-label">Age of child three:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c3-age" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-c3-age" class="calc-range-slider" min="0" max="25" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c3-start" class="calc-field-label">Age to start education:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c3-start" class="calc-text-input" value="18">
+                            <div class="calc-slider-col"><input type="range" id="range-c3-start" class="calc-range-slider" min="0" max="25" step="1" value="18"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c3-tuition" class="calc-field-label">Tuition:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c3-tuition" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c3-tuition" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c3-room" class="calc-field-label">Room and board:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c3-room" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c3-room" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Child Four -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-subgroup-title">Child Four</div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c4-age" class="calc-field-label">Age of child four:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c4-age" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-c4-age" class="calc-range-slider" min="0" max="25" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c4-start" class="calc-field-label">Age to start education:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c4-start" class="calc-text-input" value="18">
+                            <div class="calc-slider-col"><input type="range" id="range-c4-start" class="calc-range-slider" min="0" max="25" step="1" value="18"><div class="calc-tick-labels"><span>0</span><span>8</span><span>17</span><span>25</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c4-tuition" class="calc-field-label">Tuition:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c4-tuition" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c4-tuition" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-c4-room" class="calc-field-label">Room and board:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-c4-room" class="calc-text-input" value="$0.00">
+                            <div class="calc-slider-col"><input type="range" id="range-c4-room" class="calc-range-slider" min="0" max="100000" step="1000" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 7: VALUE OF FUTURE INCOME matching Screenshot 5 & 6
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-future-income">
+                <div class="calc-section-header" onclick="toggleSec('sec-future-income')">
+                    <h2 class="calc-section-title">VALUE OF FUTURE INCOME:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-future-income">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+
+                    <!-- Spousal income from work -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-spouse" class="calc-field-label">Spousal income from work:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-spouse" class="calc-text-input" value="$0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-spouse" class="calc-range-slider" min="0" max="10000" step="100" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-spouse-start" class="calc-field-label">Start year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-spouse-start" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-spouse-start" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-spouse-end" class="calc-field-label">End year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-spouse-end" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-spouse-end" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Surviving Spouse's pension income -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-surv-pen" class="calc-field-label">Surviving Spouse's pension income:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-surv-pen" class="calc-text-input" value="$0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-surv-pen" class="calc-range-slider" min="0" max="10000" step="100" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-surv-pen-start" class="calc-field-label">Start year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-surv-pen-start" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-surv-pen-start" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-surv-pen-end" class="calc-field-label">End year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-surv-pen-end" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-surv-pen-end" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Pension income -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-pension" class="calc-field-label">Pension income:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-pension" class="calc-text-input" value="$0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-pension" class="calc-range-slider" min="0" max="10000" step="100" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-pension-start" class="calc-field-label">Start year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-pension-start" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-pension-start" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-pension-end" class="calc-field-label">End year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-pension-end" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-pension-end" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Rental income -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-rental" class="calc-field-label">Rental income:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-rental" class="calc-text-input" value="$0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-rental" class="calc-range-slider" min="0" max="10000" step="100" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-rental-start" class="calc-field-label">Start year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-rental-start" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-rental-start" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-rental-end" class="calc-field-label">End year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-rental-end" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-rental-end" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Other monthly income -->
+                    <div class="calc-subgroup-card">
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-other" class="calc-field-label">Other monthly income:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-other" class="calc-text-input" value="$0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-other" class="calc-range-slider" min="0" max="10000" step="100" value="0"><div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-other-start" class="calc-field-label">Start year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-other-start" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-other-start" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                        <div class="calc-input-row">
+                            <div class="calc-label-col"><label for="inp-inc-other-end" class="calc-field-label">End year:*</label><span class="calc-q-dot">?</span></div>
+                            <input type="text" id="inp-inc-other-end" class="calc-text-input" value="0">
+                            <div class="calc-slider-col"><input type="range" id="range-inc-other-end" class="calc-range-slider" min="0" max="50" step="1" value="0"><div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 8: AMOUNT REQUIRED FOR LIVING EXPENSES matching Screenshot 6, 7 & 8
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-living-exp">
+                <div class="calc-section-header" onclick="toggleSec('sec-living-exp')">
+                    <h2 class="calc-section-title">AMOUNT REQUIRED FOR LIVING EXPENSES:</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-badge" id="badge-living-exp">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body" id="living-expenses-container">
+                    <!-- Populated dynamically / static by 20 items: Child care, Mortgage payments, Property taxes, Rent, Car lease payments, Auto insurance, Property insurance, Other insurance, Household utilities, Telephone/cellular, Cable, Internet, Home maintenance, Food, Auto gas and maintenance, Clothing, Travel and entertainment, Donations, Gifts expense, Other expenses -->
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 9: CHART: YOUR FAMILY'S EXPENSES VS. AVAILABLE ASSETS AND LIFE INSURANCE matching Screenshot 9
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-chart">
+                <div class="calc-section-header" onclick="toggleSec('sec-chart')">
+                    <h2 class="calc-section-title">YOUR FAMILY'S EXPENSES VS. AVAILABLE ASSETS AND LIFE INSURANCE</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-layout">
+                            <div class="calc-svg-chart-container" id="chart-container">
+                                <div class="calc-tooltip" id="chart-tooltip"></div>
+                                <svg class="calc-svg-chart" id="ins-svg" viewBox="0 0 520 340" preserveAspectRatio="none">
+                                    <!-- Dynamic SVG Stacked Bars generated by JS -->
+                                </svg>
+                            </div>
+
+                            <!-- Legend matching Screenshot 9 -->
+                            <div class="calc-chart-legend-col">
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-add-ins"></span>
+                                    <span>Additional life insurance <strong id="leg-add-ins">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-invest"></span>
+                                    <span>Value of investments <strong id="leg-invest">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-non-income"></span>
+                                    <span>Non-income producing assets <strong id="leg-non-income">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-liab"></span>
+                                    <span>Current liabilities <strong id="leg-liab">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-death-exp"></span>
+                                    <span>Projected expenses at death <strong id="leg-death-exp">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-edu"></span>
+                                    <span>Children's education fund <strong id="leg-edu">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-future-inc"></span>
+                                    <span>Monthly after-tax income <strong id="leg-future-inc">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-living-exp"></span>
+                                    <span>Living expenses <strong id="leg-living-exp">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-exist-ins"></span>
+                                    <span>Existing life insurance <strong id="leg-exist-ins">$0</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-estate-pres"></span>
+                                    <span>Estate preservation <strong id="leg-estate-pres">$0</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================
+             SECTION 10: DEFINITIONS matching Screenshot 9 & 10
+             ============================================================ -->
+            <section class="calc-def-wrap" id="sec-definitions">
+                <h3 class="calc-def-heading">DEFINITIONS</h3>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">EXISTING LIFE INSURANCE COVERAGE</h4>
-                    <p class="calc-def-desc">
-                        Total amount of life insurance contracts you currently have for yourself.
-                    </p>
+                    <p class="calc-def-desc">Total amount of life insurance coverage you currently have for yourself.</p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">YEARS OF INSURANCE COVERAGE NEEDED</h4>
-                    <p class="calc-def-desc">
-                        Number of years your spouse and family will require life insurance proceeds to provide for living expenses and liabilities.
-                    </p>
+                    <h4 class="calc-def-term">YEARS FOR INSURANCE INCOME TO LAST</h4>
+                    <p class="calc-def-desc">Number of years your spouse will need to use your insurance proceeds to provide for living expenses and income.</p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">EXPECTED INFLATION RATE</h4>
-                    <p class="calc-def-desc">
-                        This is the expected percentage your expenses and liabilities will rise each year. Your existing expenses and expected incomes are increased by this rate for each year you require income.
-                    </p>
+                    <p class="calc-def-desc">This is the rate that you expect your expenses and income to rise. Your total expenses and earned income are increased by this rate for each year you require income.</p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">AFTER-TAX RETURN ON INVESTMENTS</h4>
                     <p class="calc-def-desc">
-                        The annual percentage rate you expect to earn without your savings. The actual rate of return is largely dependent on the types of investments you select.
+                        The annual percentage rate you expect to earn on your savings. This includes any insurance proceeds and your educational savings. You may wish to use a more conservative rate of return if you will need to begin using your insurance proceeds immediately. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                    </p>
+                    <p class="calc-def-desc">
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge. This calculator compounds all growth annually. For the purposes of this calculator taxation is not factored into the results. If you pay taxes on the interest, dividends or capital gains you should enter your after-tax rate of return.
+                    </p>
+                    <p class="calc-def-desc">
+                        Insurance products may additionally include mortality, expense risk charges, cost of insurance, administrative, and surrender charges that will have a significant impact on the total rate of return for the investment.
                     </p>
                 </div>
 
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">CHILDREN AND EDUCATION FUND</h4>
-                    <p class="calc-def-desc">
-                        Current age of your children. This calculator is based on your children beginning their college education at age 18. The difference between their current age and 18 is the number of years you have to save.
-                    </p>
+                    <h4 class="calc-def-term">REQUIRED ESTATE PRESERVATION</h4>
+                    <p class="calc-def-desc">This is the amount that you wish to have remaining at your death. For example, you may wish to preserve part of your life savings as an inheritance for your children or to donate to charity.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">RETIREMENT ACCOUNTS</h4>
+                    <p class="calc-def-desc">The current total balance of your retirement accounts. This would include IRAs, 401(k)s, annuities and any other retirement savings you may have.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">BONDS</h4>
+                    <p class="calc-def-desc">If you own any Treasury, municipal, or commercial bonds enter the total here.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">STOCKS</h4>
+                    <p class="calc-def-desc">If you own any individual stocks, enter the total here. Again, do not include any stocks that are held in a registered retirement account.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">MUTUAL FUNDS</h4>
+                    <p class="calc-def-desc">If you own any mutual funds, enter the total here. Do not include any mutual funds that are in your registered retirement accounts, they were already included in the 'Registered retirement accounts' line.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">SAVINGS BONDS</h4>
+                    <p class="calc-def-desc">If you own any Savings Bonds enter the total here.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CHECKING AND SAVINGS</h4>
+                    <p class="calc-def-desc">The current total balance of your checking and savings accounts.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER INVESTMENT ASSETS</h4>
+                    <p class="calc-def-desc">If you have any other investment assets of value, you can enter the total here.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">HOME</h4>
+                    <p class="calc-def-desc">Current value of your home. This should be as close as possible to the actual market value of your home. If you have owned your home for a number of years, the current market value could be significantly higher than your original purchase price.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER REAL-ESTATE</h4>
+                    <p class="calc-def-desc">The value of any other real-estate you may own. Include second homes, undeveloped land, rental property or any commercial buildings you may have an interest in. As with your home, use the actual market value of this real-estate.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">AUTOMOBILES</h4>
+                    <p class="calc-def-desc">This is the total value of all automobiles that you own. Do not include any leased vehicles.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER VEHICLES</h4>
+                    <p class="calc-def-desc">If you own any other vehicles, such as RVs, campers or collectibles, enter them here.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">JEWELRY</h4>
+                    <p class="calc-def-desc">The value of any jewelry, gems or precious metals such as gold. If you have owned these items for a number of years they may have appreciated in price, remember to use the current market value.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER PERSONAL PROPERTY</h4>
+                    <p class="calc-def-desc">The value of other assets. This might include items such as furniture, home electronics, silverware, etc.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">HOME MORTGAGE</h4>
+                    <p class="calc-def-desc">This is the current principal balance remaining on your mortgage. This is the amount that you would have to pay to own your home free and clear.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER MORTGAGE</h4>
+                    <p class="calc-def-desc">This is the current principal balance for any other real-estate mortgages you may have. This includes mortgages on rental property, undeveloped land, commercial property or any other real-estate.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">AUTO LOANS</h4>
+                    <p class="calc-def-desc">Total amount you currently have outstanding on your auto loans.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">STUDENT LOANS</h4>
+                    <p class="calc-def-desc">Total amount, if any, that you currently owe in student loans. You should enter the total outstanding even if these loans are currently in deferment.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CREDIT CARD DEBT</h4>
+                    <p class="calc-def-desc">Your total credit card debt.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER LOANS</h4>
+                    <p class="calc-def-desc">Total amount, if any, of any other loans you may have.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">TAXES ON ASSETS</h4>
+                    <p class="calc-def-desc">Estate taxes are required to be paid upon your death.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">PROBATE COSTS</h4>
+                    <p class="calc-def-desc">Probate costs cover legal fees for disbursing the assets of the deceased. You may incur significant probate costs even if you have a will.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">FUNERAL COSTS</h4>
+                    <p class="calc-def-desc">All costs required to cover the cost of the funeral.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">OTHER EXPENSES</h4>
+                    <p class="calc-def-desc">Any other expenses you might have that would need to be paid if you or your spouse died.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">CURRENT AGE OF CHILDREN</h4>
+                    <p class="calc-def-desc">Current age of your children. This calculator is based on each child beginning their college education at age 18. The difference between their current age and 18 is the number of years you have to save.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ANNUAL TUITION AND BOOKS</h4>
+                    <p class="calc-def-desc">Current estimated cost of one year of tuition and books. This amount should be per child and be specific to the school they may be interested in attending. For the purposes of this calculator all expenses are assumed to be due at the end of the year.</p>
+                </div>
+
+                <div class="calc-def-item">
+                    <h4 class="calc-def-term">ROOM AND BOARD</h4>
+                    <p class="calc-def-desc">Current estimated cost of one year living expenses. Like tuition and books, this amount should be per child and specific to the school they may be interested in attending. For the purposes of this calculator all expenses are assumed to be due at the end of the year.</p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">SURVIVING SPOUSE'S INCOME</h4>
-                    <p class="calc-def-desc">
-                        Enter the net monthly income that your spouse will receive from each source. The start year is the year the income begins, and end year is when the income source will end.
-                    </p>
+                    <p class="calc-def-desc">Enter net monthly income that your spouse will receive from each source. The start year is the year the income begins, the end year is when the income source will end.</p>
                 </div>
 
                 <div class="calc-def-item">
                     <h4 class="calc-def-term">MONTHLY LIVING EXPENSES</h4>
-                    <p class="calc-def-desc">
-                        This is the total of all of your monthly expenses. This includes your expenses for housing, insurance, loan payments, utilities, and other miscellaneous items.
-                    </p>
+                    <p class="calc-def-desc">This is the total of all of your monthly expenses. This includes your expenses for housing, insurance, loan payments, utilities, and other miscellaneous items.</p>
                 </div>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+            </section>
+
+            <!-- Legal Disclaimers -->
+            <div class="calc-legal-box">
+                <p>
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                 </p>
             </div>
 
@@ -529,35 +1048,32 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 880px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Comprehensive Life Insurance Capital Needs Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
-                </div>
+    <div class="calc-modal-overlay" id="report-modal">
+        <div class="calc-modal-dialog">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Comprehensive Life Insurance Analysis — Detailed Summary</h3>
+                <button type="button" class="calc-modal-close" onclick="closeReportModal()">&times;</button>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Needs analysis rendered by JS -->
+            <div class="calc-modal-body" id="report-modal-body">
+                <!-- Dynamically generated report -->
+            </div>
+            <div class="calc-modal-footer">
+                <button type="button" class="modal-btn print-btn" onclick="window.print()"><i class="fas fa-print"></i> Print Report</button>
+                <button type="button" class="modal-btn close-btn" onclick="closeReportModal()">Close</button>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
+    <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
 
         <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
                     aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
@@ -586,16 +1102,16 @@
     </section>
 
     <!-- ============================================================
-     FOOTER
+     SITE FOOTER
      ============================================================ -->
     <footer class="site-footer">
-
         <div class="footer-addresses">
             <div class="addr-row">
                 <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
                         class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+                <p class="addr-phone">T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span
+                        class="slash">//</span> F: 215.860.7829 <span class="slash">//</span> <a
+                        href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
                 <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
@@ -637,358 +1153,613 @@
      CALCULATOR JAVASCRIPT ENGINE
      ============================================================ -->
     <script>
-        function toggleMobileMenu(e) {
-            e.stopPropagation();
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            const toggle = document.getElementById('mobile-nav-toggle');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('open');
-            toggle.classList.toggle('open');
+        // Formatting Helpers
+        function fmtCurr(num) {
+            return '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
+        }
+        function fmtCurrCents(num) {
+            return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtPct(num) {
+            return `${Number(num || 0).toFixed(num % 1 === 0 ? 0 : 2)}%`;
+        }
+        function cleanNum(val) {
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
         }
 
+        // 20 Monthly Expense Categories
+        const monthlyExpenseNames = [
+            "Child care", "Mortgage payments", "Property taxes", "Rent",
+            "Car lease payments", "Auto insurance", "Property insurance", "Other insurance",
+            "Household utilities", "Telephone/cellular", "Cable", "Internet",
+            "Home maintenance", "Food", "Auto gas and maintenance", "Clothing",
+            "Travel and entertainment", "Donations", "Gifts expense", "Other expenses"
+        ];
+
+        // Populate Living Expenses Container
+        function buildLivingExpensesUI() {
+            const container = document.getElementById('living-expenses-container');
+            if (!container) return;
+
+            let html = '';
+            monthlyExpenseNames.forEach((name, idx) => {
+                const i = idx + 1;
+                html += `
+                <div class="calc-subgroup-card">
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-exp-${i}" class="calc-field-label">${name}:*</label></div>
+                        <input type="text" id="inp-exp-${i}" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-exp-${i}" class="calc-range-slider" min="0" max="10000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-exp-${i}-start" class="calc-field-label">Start:*</label></div>
+                        <input type="text" id="inp-exp-${i}-start" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-exp-${i}-start" class="calc-range-slider" min="0" max="50" step="1" value="0">
+                            <div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div>
+                        </div>
+                    </div>
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-exp-${i}-dur" class="calc-field-label">Duration:*</label></div>
+                        <input type="text" id="inp-exp-${i}-dur" class="calc-text-input" value="0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-exp-${i}-dur" class="calc-range-slider" min="0" max="50" step="1" value="0">
+                            <div class="calc-tick-labels"><span>0</span><span>17</span><span>33</span><span>50</span></div>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            container.innerHTML = html;
+        }
+        buildLivingExpensesUI();
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
+            }
+        }
+
+        // Section Toggles
         function toggleSec(secId) {
             const sec = document.getElementById(secId);
             if (sec) sec.classList.toggle('collapsed');
         }
 
-        // Helpers
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        // Share Dropdown
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const dd = document.getElementById('calc-share-dropdown');
+            if (dd) dd.classList.toggle('active');
         }
 
-        // Sync inputs & sliders
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+        document.addEventListener('click', (e) => {
+            const shareWrap = document.getElementById('calc-share-wrapper');
+            const shareDd = document.getElementById('calc-share-dropdown');
+            if (shareWrap && !shareWrap.contains(e.target) && shareDd) {
+                shareDd.classList.remove('active');
+            }
+        });
+
+        function shareToSocial(platform, e) {
+            if (e) e.preventDefault();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+            if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            else if (platform === 'linkedin') shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`;
+            else if (platform === 'email') shareUrl = `mailto:?subject=${title}&body=${url}`;
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+            const dd = document.getElementById('calc-share-dropdown');
+            if (dd) dd.classList.remove('active');
+        }
+
+        // Two-Way Binding Helper
+        function bindInputAndSlider(inputId, sliderId, isCurrency, isPercent, maxVal) {
             const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
+            const slider = document.getElementById(sliderId);
+            if (!inp || !slider) return;
 
-            range.addEventListener('input', () => {
-                const val = parseFloat(range.value);
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
+            slider.addEventListener('input', () => {
+                const val = parseFloat(slider.value);
+                if (isCurrency) inp.value = fmtCurr(val);
+                else if (isPercent) inp.value = fmtPct(val);
                 else inp.value = val;
                 calculateInsurance();
             });
 
             inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
+                let val = cleanNum(inp.value);
                 if (val < 0) val = 0;
                 if (maxVal && val > maxVal) val = maxVal;
-                range.value = val;
-                if (isCurrency) inp.value = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                else if (isPct) inp.value = val + '%';
+                slider.value = val;
+                if (isCurrency) inp.value = fmtCurr(val);
+                else if (isPercent) inp.value = fmtPct(val);
                 else inp.value = val;
                 calculateInsurance();
             });
         }
 
-        // Top inputs
-        bindSliderAndInput('inp-existing-ins', 'range-existing-ins', true, false, 1000000);
-        bindSliderAndInput('inp-prot-yrs', 'range-prot-yrs', false, false, 50);
-        bindSliderAndInput('inp-ins-inflation', 'range-ins-inflation', false, true, 10);
-        bindSliderAndInput('inp-ins-return', 'range-ins-return', false, true, 15);
+        // Bind Base Inputs
+        bindInputAndSlider('inp-exist-ins', 'range-exist-ins', true, false, 10000000);
+        bindInputAndSlider('inp-estate-pres', 'range-estate-pres', true, false, 1000000);
+        bindInputAndSlider('inp-inflation', 'range-inflation', false, true, 20);
+        bindInputAndSlider('inp-return', 'range-return', false, true, 12);
 
-        // Investment inputs
-        bindSliderAndInput('inp-inv-cash', 'range-inv-cash', true, false, 500000);
-        bindSliderAndInput('inp-inv-stocks', 'range-inv-stocks', true, false, 500000);
-        bindSliderAndInput('inp-inv-bonds', 'range-inv-bonds', true, false, 500000);
-        bindSliderAndInput('inp-inv-mutual', 'range-inv-mutual', true, false, 500000);
+        // Bind Investments
+        ['retire', 'stocks', 'bonds', 'mutual', 'checking', 'gic', 'other'].forEach(id => {
+            bindInputAndSlider(`inp-inv-${id}`, `range-inv-${id}`, true, false, 10000000);
+        });
 
-        // Non-income assets
-        bindSliderAndInput('inp-asset-home', 'range-asset-home', true, false, 1000000);
-        bindSliderAndInput('inp-asset-re', 'range-asset-re', true, false, 500000);
-        bindSliderAndInput('inp-asset-auto', 'range-asset-auto', true, false, 150000);
+        // Bind Non-Income Assets
+        ['residence', 'cottage', 're', 'auto', 'oth-veh', 'jewel', 'prop'].forEach(id => {
+            bindInputAndSlider(`inp-ast-${id}`, `range-ast-${id}`, true, false, 10000000);
+        });
 
-        // Liabilities
-        bindSliderAndInput('inp-debt-mort', 'range-debt-mort', true, false, 1000000);
-        bindSliderAndInput('inp-debt-auto', 'range-debt-auto', true, false, 150000);
-        bindSliderAndInput('inp-debt-cards', 'range-debt-cards', true, false, 100000);
+        // Bind Liabilities
+        ['home-mort', 'oth-mort', 'auto', 'student', 'cards', 'loc', 'other'].forEach(id => {
+            bindInputAndSlider(`inp-liab-${id}`, `range-liab-${id}`, true, false, 10000000);
+        });
 
-        // Death Expenses
-        bindSliderAndInput('inp-exp-funeral', 'range-exp-funeral', true, false, 50000);
-        bindSliderAndInput('inp-exp-probate', 'range-exp-probate', true, false, 50000);
+        // Bind Death Expenses
+        ['funeral', 'probate', 'tax', 'medical', 'charity', 'other'].forEach(id => {
+            bindInputAndSlider(`inp-dth-${id}`, `range-dth-${id}`, true, false, 10000000);
+        });
 
-        // Education
-        bindSliderAndInput('inp-edu-fund', 'range-edu-fund', true, false, 300000);
+        // Bind Children
+        [1, 2, 3, 4].forEach(c => {
+            bindInputAndSlider(`inp-c${c}-age`, `range-c${c}-age`, false, false, 25);
+            bindInputAndSlider(`inp-c${c}-start`, `range-c${c}-start`, false, false, 25);
+            bindInputAndSlider(`inp-c${c}-tuition`, `range-c${c}-tuition`, true, false, 100000);
+            bindInputAndSlider(`inp-c${c}-room`, `range-c${c}-room`, true, false, 100000);
+        });
 
-        // Future Income
-        bindSliderAndInput('inp-inc-spouse', 'range-inc-spouse', true, false, 200000);
-        bindSliderAndInput('inp-inc-soc', 'range-inc-soc', true, false, 60000);
+        // Bind Future Incomes
+        ['spouse', 'surv-pen', 'pension', 'rental', 'other'].forEach(inc => {
+            bindInputAndSlider(`inp-inc-${inc}`, `range-inc-${inc}`, true, false, 10000);
+            bindInputAndSlider(`inp-inc-${inc}-start`, `range-inc-${inc}-start`, false, false, 50);
+            bindInputAndSlider(`inp-inc-${inc}-end`, `range-inc-${inc}-end`, false, false, 50);
+        });
 
-        // Living Expenses
-        bindSliderAndInput('inp-living-annual', 'range-living-annual', true, false, 250000);
-        bindSliderAndInput('inp-living-pct', 'range-living-pct', false, true, 100);
+        // Bind 20 Living Expenses
+        for (let i = 1; i <= 20; i++) {
+            bindInputAndSlider(`inp-exp-${i}`, `range-exp-${i}`, true, false, 10000);
+            bindInputAndSlider(`inp-exp-${i}-start`, `range-exp-${i}-start`, false, false, 50);
+            bindInputAndSlider(`inp-exp-${i}-dur`, `range-exp-${i}-dur`, false, false, 50);
+        }
 
-        let lastInsuranceState = {};
+        let latestCalcResults = null;
 
+        // Exact Raymond James & Dinkytown EnhancedLifeIns Math
         function calculateInsurance() {
-            const existingIns = parseCurrency(document.getElementById('inp-existing-ins').value);
-            const protYrs = parseInt(document.getElementById('inp-prot-yrs').value) || 20;
-            const inflation = parsePercent(document.getElementById('inp-ins-inflation').value) / 100;
-            const rReturn = parsePercent(document.getElementById('inp-ins-return').value) / 100;
+            const existIns = cleanNum(document.getElementById('inp-exist-ins').value);
+            const estatePres = cleanNum(document.getElementById('inp-estate-pres').value);
+            const inflRate = cleanNum(document.getElementById('inp-inflation').value) / 100;
+            const rorRate = cleanNum(document.getElementById('inp-return').value) / 100;
 
-            // Investments Total
-            const invCash = parseCurrency(document.getElementById('inp-inv-cash').value);
-            const invStocks = parseCurrency(document.getElementById('inp-inv-stocks').value);
-            const invBonds = parseCurrency(document.getElementById('inp-inv-bonds').value);
-            const invMutual = parseCurrency(document.getElementById('inp-inv-mutual').value);
-            const totalInvestments = invCash + invStocks + invBonds + invMutual;
-            document.getElementById('badge-investments').textContent = formatCurrencyCents(totalInvestments);
+            // 1. Value of Investments
+            let totalInvestments = 0;
+            ['retire', 'stocks', 'bonds', 'mutual', 'checking', 'gic', 'other'].forEach(id => {
+                totalInvestments += cleanNum(document.getElementById(`inp-inv-${id}`).value);
+            });
+            document.getElementById('badge-investments').textContent = fmtCurrCents(totalInvestments);
 
-            // Non-income assets Total
-            const assetHome = parseCurrency(document.getElementById('inp-asset-home').value);
-            const assetRE = parseCurrency(document.getElementById('inp-asset-re').value);
-            const assetAuto = parseCurrency(document.getElementById('inp-asset-auto').value);
-            const totalNonIncomeAssets = assetHome + assetRE + assetAuto;
-            document.getElementById('badge-non-income').textContent = formatCurrencyCents(totalNonIncomeAssets);
+            // 2. Non-Income Assets
+            let totalNonIncome = 0;
+            ['residence', 'cottage', 're', 'auto', 'oth-veh', 'jewel', 'prop'].forEach(id => {
+                totalNonIncome += cleanNum(document.getElementById(`inp-ast-${id}`).value);
+            });
+            document.getElementById('badge-non-income').textContent = fmtCurrCents(totalNonIncome);
 
-            // Liabilities Total
-            const debtMort = parseCurrency(document.getElementById('inp-debt-mort').value);
-            const debtAuto = parseCurrency(document.getElementById('inp-debt-auto').value);
-            const debtCards = parseCurrency(document.getElementById('inp-debt-cards').value);
-            const totalLiabilities = debtMort + debtAuto + debtCards;
-            document.getElementById('badge-liabilities').textContent = formatCurrencyCents(totalLiabilities);
+            const totalAssets = totalInvestments + totalNonIncome;
 
-            // Death Expenses Total
-            const expFuneral = parseCurrency(document.getElementById('inp-exp-funeral').value);
-            const expProbate = parseCurrency(document.getElementById('inp-exp-probate').value);
-            const totalDeathExp = expFuneral + expProbate;
-            document.getElementById('badge-death-exp').textContent = formatCurrencyCents(totalDeathExp);
+            // 3. Current Liabilities
+            let totalLiabilities = 0;
+            ['home-mort', 'oth-mort', 'auto', 'student', 'cards', 'loc', 'other'].forEach(id => {
+                totalLiabilities += cleanNum(document.getElementById(`inp-liab-${id}`).value);
+            });
+            document.getElementById('badge-liabilities').textContent = fmtCurrCents(totalLiabilities);
 
-            // Education Fund
-            const eduFund = parseCurrency(document.getElementById('inp-edu-fund').value);
-            document.getElementById('badge-edu').textContent = formatCurrencyCents(eduFund);
+            const assetsToCoverExpenses = totalAssets - totalLiabilities;
 
-            // Future Income PV
-            const incSpouse = parseCurrency(document.getElementById('inp-inc-spouse').value);
-            const incSoc = parseCurrency(document.getElementById('inp-inc-soc').value);
-            const totalAnnualIncome = incSpouse + incSoc;
-            // Real discount rate: (1 + r) / (1 + i) - 1
-            const realRate = (rReturn !== inflation) ? ((1 + rReturn) / (1 + inflation)) - 1 : 0.0001;
-            const pvFactor = (realRate > 0) ? (1 - Math.pow(1 + realRate, -protYrs)) / realRate : protYrs;
-            const pvFutureIncome = totalAnnualIncome * pvFactor;
-            document.getElementById('badge-future-inc').textContent = formatCurrencyCents(pvFutureIncome);
+            // 4. Expenses at Death
+            let totalDeathExp = 0;
+            ['funeral', 'probate', 'tax', 'medical', 'charity', 'other'].forEach(id => {
+                totalDeathExp += cleanNum(document.getElementById(`inp-dth-${id}`).value);
+            });
+            document.getElementById('badge-death-exp').textContent = fmtCurrCents(totalDeathExp);
 
-            // Living Expenses PV
-            const livingAnnual = parseCurrency(document.getElementById('inp-living-annual').value);
-            const livingPct = parsePercent(document.getElementById('inp-living-pct').value) / 100;
-            const livingAnnualNeeded = livingAnnual * livingPct;
-            const pvLivingExpenses = livingAnnualNeeded * pvFactor;
-            document.getElementById('badge-living-exp').textContent = formatCurrencyCents(pvLivingExpenses);
+            // 5. Children's Education Fund Present Value
+            let totalEduPV = 0;
+            let childrenDetails = [];
+            for (let c = 1; c <= 4; c++) {
+                const age = parseInt(document.getElementById(`inp-c${c}-age`).value) || 0;
+                const startAge = parseInt(document.getElementById(`inp-c${c}-start`).value) || 18;
+                const tuition = cleanNum(document.getElementById(`inp-c${c}-tuition`).value);
+                const room = cleanNum(document.getElementById(`inp-c${c}-room`).value);
+                const totalPerYr = tuition + room;
+                let childPV = 0;
 
-            // Total Needs vs Total Available
-            const totalFinancialNeeds = totalLiabilities + totalDeathExp + eduFund + pvLivingExpenses;
-            const totalAvailableAssets = totalInvestments + totalNonIncomeAssets + pvFutureIncome + existingIns;
+                if (totalPerYr > 0 && startAge >= age) {
+                    const yrsToStart = startAge - age;
+                    // 4 years of college expenses inflated & discounted
+                    for (let yr = 0; yr < 4; yr++) {
+                        const t = yrsToStart + yr;
+                        const inflatedCost = totalPerYr * Math.pow(1 + inflRate, t);
+                        const pv = inflatedCost / Math.pow(1 + rorRate, t);
+                        childPV += pv;
+                    }
+                }
+                totalEduPV += childPV;
+                childrenDetails.push({ child: c, age, startAge, tuition, room, totalPerYr, pv: childPV });
+            }
+            document.getElementById('badge-edu').textContent = fmtCurrCents(totalEduPV);
 
-            const netInsuranceNeeded = Math.max(0, totalFinancialNeeds - totalAvailableAssets);
+            // 6. Value of Future Incomes Present Value
+            let totalFutureIncomePV = 0;
+            let maxIncomeCoverageYrs = 0;
+            const incomeSources = ['spouse', 'surv-pen', 'pension', 'rental', 'other'].map(inc => {
+                const amt = cleanNum(document.getElementById(`inp-inc-${inc}`).value);
+                const startYr = parseInt(document.getElementById(`inp-inc-${inc}-start`).value) || 0;
+                const endYr = parseInt(document.getElementById(`inp-inc-${inc}-end`).value) || 0;
+                const duration = Math.max(0, endYr - startYr);
+                if (endYr > maxIncomeCoverageYrs) maxIncomeCoverageYrs = endYr;
+                return { name: inc, amt, startYr, endYr, duration };
+            });
 
-            lastInsuranceState = {
-                existingIns,
-                protYrs,
-                totalInvestments,
-                totalNonIncomeAssets,
-                pvFutureIncome,
-                totalLiabilities,
-                totalDeathExp,
-                eduFund,
-                pvLivingExpenses,
-                totalFinancialNeeds,
-                totalAvailableAssets,
-                netInsuranceNeeded
+            // Monthly compounding discount / inflation
+            const rMonth = rorRate / 12;
+            const infMonth = inflRate / 12;
+
+            incomeSources.forEach(inc => {
+                if (inc.amt > 0 && inc.endYr > inc.startYr) {
+                    const startMonth = inc.startYr * 12;
+                    const endMonth = inc.endYr * 12;
+                    for (let m = startMonth; m < endMonth; m++) {
+                        const inflatedVal = inc.amt * Math.pow(1 + infMonth, m);
+                        const pvVal = inflatedVal / Math.pow(1 + rMonth, m + 1);
+                        totalFutureIncomePV += pvVal;
+                    }
+                }
+            });
+            document.getElementById('badge-future-income').textContent = fmtCurrCents(totalFutureIncomePV);
+
+            // 7. Amount Required for Living Expenses Present Value
+            let totalLivingExpensesPV = 0;
+            let maxExpenseCoverageYrs = 0;
+            for (let i = 1; i <= 20; i++) {
+                const amt = cleanNum(document.getElementById(`inp-exp-${i}`).value);
+                const startYr = parseInt(document.getElementById(`inp-exp-${i}-start`).value) || 0;
+                const dur = parseInt(document.getElementById(`inp-exp-${i}-dur`).value) || 0;
+                if (startYr + dur > maxExpenseCoverageYrs) maxExpenseCoverageYrs = startYr + dur;
+
+                if (amt > 0 && dur > 0) {
+                    const startMonth = startYr * 12;
+                    const endMonth = (startYr + dur) * 12;
+                    for (let m = startMonth; m < endMonth; m++) {
+                        const inflatedVal = amt * Math.pow(1 + infMonth, m);
+                        const pvVal = inflatedVal / Math.pow(1 + rMonth, m + 1);
+                        totalLivingExpensesPV += pvVal;
+                    }
+                }
+            }
+            document.getElementById('badge-living-exp').textContent = fmtCurrCents(totalLivingExpensesPV);
+
+            // 8. Life Insurance Required Calculation
+            // Needs = Living Expenses PV + Expenses at Death + Children Education PV + Estate Preservation
+            // Resources = Assets to Cover Expenses + Future Income PV + Existing Insurance
+            const totalFamilyNeeds = totalLivingExpensesPV + totalDeathExp + totalEduPV + estatePres;
+            const totalResourcesExclIns = assetsToCoverExpenses + totalFutureIncomePV;
+
+            let shortfall = totalFamilyNeeds - totalResourcesExclIns;
+            if (shortfall < 0) shortfall = 0;
+
+            // Immediate shortfall check
+            let immediateNeed = totalDeathExp + totalEduPV + estatePres - assetsToCoverExpenses;
+            if (immediateNeed < 0) immediateNeed = 0;
+
+            let requiredGrossIns = Math.max(shortfall, immediateNeed);
+            let netAdditionalIns = Math.max(0, requiredGrossIns - existIns);
+
+            latestCalcResults = {
+                existIns, estatePres, inflRate, rorRate,
+                totalInvestments, totalNonIncome, totalAssets, totalLiabilities,
+                assetsToCoverExpenses, totalDeathExp, totalEduPV, totalFutureIncomePV,
+                totalLivingExpensesPV, totalFamilyNeeds, requiredGrossIns, netAdditionalIns
             };
 
-            // Update Header & Badges
-            document.getElementById('res-headline').innerHTML = `Based on your inputs, additional life insurance required: <span style="color: ${netInsuranceNeeded > 0 ? '#ef4444' : '#4ade80'};">${formatCurrencyCents(netInsuranceNeeded)}</span>`;
-            document.getElementById('card-total-needs').textContent = formatCurrencyCents(totalFinancialNeeds);
-            document.getElementById('card-total-assets').textContent = formatCurrencyCents(totalInvestments + pvFutureIncome);
-            document.getElementById('card-existing-ins').textContent = formatCurrencyCents(existingIns);
-            
-            const netGapEl = document.getElementById('card-net-gap');
-            if (netInsuranceNeeded > 0) {
-                netGapEl.textContent = `Gap: -${formatCurrencyCents(netInsuranceNeeded)}`;
-                netGapEl.style.color = '#ef4444';
-            } else {
-                netGapEl.textContent = `Surplus: +${formatCurrencyCents(totalAvailableAssets - totalFinancialNeeds)}`;
-                netGapEl.style.color = '#4ade80';
-            }
+            // Update UI Status Bar
+            document.getElementById('status-ins-val').textContent = fmtCurrCents(netAdditionalIns);
 
-            renderInsuranceChart(lastInsuranceState);
+            // Update Legend Values
+            document.getElementById('leg-add-ins').textContent = fmtCurr(netAdditionalIns);
+            document.getElementById('leg-invest').textContent = fmtCurr(totalInvestments);
+            document.getElementById('leg-non-income').textContent = fmtCurr(totalNonIncome);
+            document.getElementById('leg-liab').textContent = fmtCurr(totalLiabilities);
+            document.getElementById('leg-death-exp').textContent = fmtCurr(totalDeathExp);
+            document.getElementById('leg-edu').textContent = fmtCurr(totalEduPV);
+            document.getElementById('leg-future-inc').textContent = fmtCurr(totalFutureIncomePV);
+            document.getElementById('leg-living-exp').textContent = fmtCurr(totalLivingExpensesPV);
+            document.getElementById('leg-exist-ins').textContent = fmtCurr(existIns);
+            document.getElementById('leg-estate-pres').textContent = fmtCurr(estatePres);
+
+            renderStackedComparisonChart(latestCalcResults);
         }
 
-        function renderInsuranceChart(st) {
-            const container = document.getElementById('ins-chart-container');
-            if (!container) return;
+        // SVG Stacked Bar Chart matching Screenshot 9
+        function renderStackedComparisonChart(d) {
+            const svg = document.getElementById('ins-svg');
+            const tooltip = document.getElementById('chart-tooltip');
+            if (!svg || !d) return;
 
-            const width = container.clientWidth || 700;
-            const height = 300;
-            const padLeft = 70;
-            const padRight = 30;
-            const padTop = 30;
-            const padBottom = 45;
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
+            svg.innerHTML = '';
+            const w = 520;
+            const h = 340;
+            const padL = 70;
+            const padR = 25;
+            const padT = 30;
+            const padB = 55;
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
 
-            const maxVal = Math.max(st.totalAvailableAssets, st.totalFinancialNeeds, 100000) * 1.15;
+            // Column 1: Assets & Insurance components
+            // [Additional life ins, Value of investments, Non-income producing assets, Monthly after-tax income, Existing life insurance]
+            const col1Segments = [
+                { label: 'Additional life insurance', val: d.netAdditionalIns, color: '#0044ff' },
+                { label: 'Value of investments', val: d.totalInvestments, color: '#22c55e' },
+                { label: 'Non-income producing assets', val: d.totalNonIncome, color: '#00a2ff' },
+                { label: 'Monthly after-tax income', val: d.totalFutureIncomePV, color: '#a855f7' },
+                { label: 'Existing life insurance', val: d.existIns, color: '#e11d48' }
+            ];
 
-            let gridSvg = '';
+            // Column 2: Expenses components
+            // [Current liabilities, Projected expenses at death, Children's education fund, Living expenses, Estate preservation]
+            const col2Segments = [
+                { label: 'Current liabilities', val: d.totalLiabilities, color: '#eab308' },
+                { label: 'Projected expenses at death', val: d.totalDeathExp, color: '#ef4444' },
+                { label: "Children's education fund", val: d.totalEduPV, color: '#b45309' },
+                { label: 'Living expenses', val: d.totalLivingExpensesPV, color: '#14b8a6' },
+                { label: 'Estate preservation', val: d.estatePres, color: '#ec4899' }
+            ];
+
+            const col1Total = col1Segments.reduce((acc, s) => acc + s.val, 0);
+            const col2Total = col2Segments.reduce((acc, s) => acc + s.val, 0);
+            const maxValRaw = Math.max(col1Total, col2Total, 25);
+
+            // Compute Y-Axis Grid
+            let maxAxis = Math.ceil(maxValRaw / 25) * 25;
+            if (maxAxis === 0) maxAxis = 25;
             const steps = 5;
+            const stepVal = maxAxis / steps;
+
             for (let i = 0; i <= steps; i++) {
-                const yVal = (maxVal / steps) * i;
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
-                `;
+                const val = i * stepVal;
+                const yPos = padT + chartH - (i / steps) * chartH;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', padL);
+                line.setAttribute('x2', padL + chartW);
+                line.setAttribute('y1', yPos);
+                line.setAttribute('y2', yPos);
+                line.setAttribute('stroke', i === 0 ? 'rgba(223, 160, 30, 0.4)' : 'rgba(255, 255, 255, 0.08)');
+                line.setAttribute('stroke-width', i === 0 ? '1.5' : '1');
+                svg.appendChild(line);
+
+                const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                txt.setAttribute('x', padL - 10);
+                txt.setAttribute('y', yPos + 4);
+                txt.setAttribute('text-anchor', 'end');
+                txt.setAttribute('fill', '#94a3b8');
+                txt.setAttribute('font-size', '11px');
+                txt.setAttribute('font-family', 'Montserrat, sans-serif');
+                txt.textContent = fmtCurr(val);
+                svg.appendChild(txt);
             }
 
-            const colW = Math.min(65, (chartW / 2) * 0.45);
-            const groupGap = chartW / 2;
+            const barW = Math.min(110, chartW / 4);
+            const col1X = padL + (chartW * 0.28) - (barW / 2);
+            const col2X = padL + (chartW * 0.72) - (barW / 2);
 
-            const xLeft = padLeft + (groupGap * 0.25);
-            const xRight = padLeft + (groupGap * 1.15);
+            // Render Stacked Bar 1 (Assets & Insurance)
+            let currY1 = padT + chartH;
+            col1Segments.forEach(seg => {
+                if (seg.val > 0) {
+                    const segH = (seg.val / maxAxis) * chartH;
+                    currY1 -= segH;
 
-            // Stacked Bar Left: Available Assets & Insurance
-            const hIns = (st.existingIns / maxVal) * chartH;
-            const hInv = (st.totalInvestments / maxVal) * chartH;
-            const hInc = (st.pvFutureIncome / maxVal) * chartH;
-            const totalLeftH = hIns + hInv + hInc;
+                    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rect.setAttribute('x', col1X);
+                    rect.setAttribute('y', currY1);
+                    rect.setAttribute('width', barW);
+                    rect.setAttribute('height', segH);
+                    rect.setAttribute('fill', seg.color);
+                    rect.setAttribute('stroke', 'rgba(0,0,0,0.4)');
+                    rect.setAttribute('stroke-width', '1');
+                    rect.style.cursor = 'pointer';
 
-            // Stacked Bar Right: Financial Needs & Liabilities
-            const hLiab = (st.totalLiabilities / maxVal) * chartH;
-            const hDeath = (st.totalDeathExp / maxVal) * chartH;
-            const hEdu = (st.eduFund / maxVal) * chartH;
-            const hLiving = (st.pvLivingExpenses / maxVal) * chartH;
-            const totalRightH = hLiab + hDeath + hEdu + hLiving;
+                    rect.addEventListener('mouseenter', (e) => {
+                        tooltip.style.display = 'block';
+                        tooltip.innerHTML = `<strong>${seg.label}</strong>: ${fmtCurrCents(seg.val)}`;
+                    });
+                    rect.addEventListener('mousemove', (e) => {
+                        const bbox = svg.getBoundingClientRect();
+                        tooltip.style.left = (e.clientX - bbox.left + 15) + 'px';
+                        tooltip.style.top = (e.clientY - bbox.top - 20) + 'px';
+                    });
+                    rect.addEventListener('mouseleave', () => {
+                        tooltip.style.display = 'none';
+                    });
 
-            const bars = `
-                <!-- Left Stack: Assets & Existing Insurance -->
-                <rect x="${xLeft}" y="${padTop + chartH - (totalLeftH || 2)}" width="${colW}" height="${totalLeftH || 2}" fill="#2563eb" rx="3">
-                    <title>Available Assets & Insurance: ${formatCurrencyCents(st.existingIns + st.totalInvestments + st.pvFutureIncome)}</title>
-                </rect>
-                <text x="${xLeft + colW/2}" y="${padTop + chartH - (totalLeftH || 2) - 8}" fill="#60a5fa" font-size="12" font-weight="700" text-anchor="middle">
-                    ${formatCurrency(st.existingIns + st.totalInvestments + st.pvFutureIncome)}
-                </text>
+                    svg.appendChild(rect);
+                }
+            });
 
-                <!-- Right Stack: Needs & Expenses -->
-                <rect x="${xRight}" y="${padTop + chartH - (totalRightH || 2)}" width="${colW}" height="${totalRightH || 2}" fill="#ef4444" rx="3">
-                    <title>Family Financial Needs: ${formatCurrencyCents(st.totalFinancialNeeds)}</title>
-                </rect>
-                <text x="${xRight + colW/2}" y="${padTop + chartH - (totalRightH || 2) - 8}" fill="#f87171" font-size="12" font-weight="700" text-anchor="middle">
-                    ${formatCurrency(st.totalFinancialNeeds)}
-                </text>
-            `;
+            // Render Stacked Bar 2 (Expenses)
+            let currY2 = padT + chartH;
+            col2Segments.forEach(seg => {
+                if (seg.val > 0) {
+                    const segH = (seg.val / maxAxis) * chartH;
+                    currY2 -= segH;
 
-            container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    ${bars}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                    <text x="${xLeft + colW/2}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" text-anchor="middle">Assets &amp; Insurance</text>
-                    <text x="${xRight + colW/2}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" text-anchor="middle">Family Expenses &amp; Debt</text>
-                </svg>
-            `;
+                    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                    rect.setAttribute('x', col2X);
+                    rect.setAttribute('y', currY2);
+                    rect.setAttribute('width', barW);
+                    rect.setAttribute('height', segH);
+                    rect.setAttribute('fill', seg.color);
+                    rect.setAttribute('stroke', 'rgba(0,0,0,0.4)');
+                    rect.setAttribute('stroke-width', '1');
+                    rect.style.cursor = 'pointer';
+
+                    rect.addEventListener('mouseenter', (e) => {
+                        tooltip.style.display = 'block';
+                        tooltip.innerHTML = `<strong>${seg.label}</strong>: ${fmtCurrCents(seg.val)}`;
+                    });
+                    rect.addEventListener('mousemove', (e) => {
+                        const bbox = svg.getBoundingClientRect();
+                        tooltip.style.left = (e.clientX - bbox.left + 15) + 'px';
+                        tooltip.style.top = (e.clientY - bbox.top - 20) + 'px';
+                    });
+                    rect.addEventListener('mouseleave', () => {
+                        tooltip.style.display = 'none';
+                    });
+
+                    svg.appendChild(rect);
+                }
+            });
+
+            // X-Axis Labels matching Screenshot 9
+            const lbl1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            lbl1.setAttribute('x', col1X + (barW / 2));
+            lbl1.setAttribute('y', padT + chartH + 24);
+            lbl1.setAttribute('text-anchor', 'middle');
+            lbl1.setAttribute('fill', '#ffffff');
+            lbl1.setAttribute('font-size', '12px');
+            lbl1.setAttribute('font-weight', '700');
+            lbl1.setAttribute('font-family', 'Montserrat, sans-serif');
+            lbl1.textContent = 'Assets & Insurance';
+            svg.appendChild(lbl1);
+
+            const lbl2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            lbl2.setAttribute('x', col2X + (barW / 2));
+            lbl2.setAttribute('y', padT + chartH + 24);
+            lbl2.setAttribute('text-anchor', 'middle');
+            lbl2.setAttribute('fill', '#ffffff');
+            lbl2.setAttribute('font-size', '12px');
+            lbl2.setAttribute('font-weight', '700');
+            lbl2.setAttribute('font-family', 'Montserrat, sans-serif');
+            lbl2.textContent = 'Expenses';
+            svg.appendChild(lbl2);
         }
 
+        // Report Modal Controls
         function openReportModal() {
-            calculateInsurance();
+            if (!latestCalcResults) calculateInsurance();
+            const d = latestCalcResults;
             const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
-            const st = lastInsuranceState;
+            const body = document.getElementById('report-modal-body');
 
-            content.innerHTML = `
-                <div style="background: #091424; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px;">
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 13px; color: #cbd5e1;">
-                        <div><strong style="color: #94a3b8;">Total Family Needs:</strong><br><span style="color: #fff; font-weight: 700;">${formatCurrencyCents(st.totalFinancialNeeds)}</span></div>
-                        <div><strong style="color: #94a3b8;">Available Resources:</strong><br><span style="color: #60a5fa; font-weight: 700;">${formatCurrencyCents(st.totalAvailableAssets)}</span></div>
-                        <div><strong style="color: #94a3b8;">Additional Coverage:</strong><br><span style="color: ${st.netInsuranceNeeded > 0 ? '#ef4444' : '#4ade80'}; font-weight: 700;">${formatCurrencyCents(st.netInsuranceNeeded)}</span></div>
+            body.innerHTML = `
+                <div class="modal-summary-grid">
+                    <div class="modal-sum-item">
+                        <span class="modal-sum-label">Net Additional Life Insurance Needed</span>
+                        <span class="modal-sum-val highlight">${fmtCurrCents(d.netAdditionalIns)}</span>
+                    </div>
+                    <div class="modal-sum-item">
+                        <span class="modal-sum-label">Total Family Financial Needs</span>
+                        <span class="modal-sum-val">${fmtCurrCents(d.totalFamilyNeeds)}</span>
+                    </div>
+                    <div class="modal-sum-item">
+                        <span class="modal-sum-label">Existing Life Insurance Coverage</span>
+                        <span class="modal-sum-val">${fmtCurrCents(d.existIns)}</span>
+                    </div>
+                    <div class="modal-sum-item">
+                        <span class="modal-sum-label">Net Available Assets (Net Worth)</span>
+                        <span class="modal-sum-val">${fmtCurrCents(d.assetsToCoverExpenses)}</span>
                     </div>
                 </div>
 
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                <h4 style="color:#dfa01e; margin: 18px 0 10px 0; font-family:'Montserrat',sans-serif; text-transform:uppercase;">1. Financial Obligations &amp; Expenses Analysis</h4>
+                <table class="calc-report-table">
                     <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Category / Breakdown</th>
-                            <th style="padding: 12px 10px;">Subtotal Amount</th>
-                            <th style="padding: 12px 10px;">Impact</th>
+                        <tr>
+                            <th>Obligation Category</th>
+                            <th>Amount Required (Present Value)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Liabilities to Pay Off (Mortgage &amp; Debt)</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(st.totalLiabilities)}</td>
-                            <td style="padding: 10px; color: #ef4444;">Need</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Final Expenses at Death &amp; Probate</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(st.totalDeathExp)}</td>
-                            <td style="padding: 10px; color: #ef4444;">Need</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Children's Education Funding</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(st.eduFund)}</td>
-                            <td style="padding: 10px; color: #ef4444;">Need</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Present Value of Family Living Expenses (${st.protYrs} Years)</td>
-                            <td style="padding: 10px; color: #cbd5e1;">${formatCurrencyCents(st.pvLivingExpenses)}</td>
-                            <td style="padding: 10px; color: #ef4444;">Need</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Existing Liquid Investments</td>
-                            <td style="padding: 10px; color: #cbd5e1;">-${formatCurrencyCents(st.totalInvestments)}</td>
-                            <td style="padding: 10px; color: #4ade80;">Offset</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Present Value of Future Survivor Incomes</td>
-                            <td style="padding: 10px; color: #cbd5e1;">-${formatCurrencyCents(st.pvFutureIncome)}</td>
-                            <td style="padding: 10px; color: #4ade80;">Offset</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                            <td style="padding: 10px; text-align: left; color: #fff;">Current In-Force Life Insurance Coverage</td>
-                            <td style="padding: 10px; color: #cbd5e1;">-${formatCurrencyCents(st.existingIns)}</td>
-                            <td style="padding: 10px; color: #4ade80;">Offset</td>
-                        </tr>
-                        <tr style="background: rgba(223,160,30,0.1); font-weight: 700; text-align: right;">
-                            <td style="padding: 12px 10px; text-align: left; color: #dfa01e;">Additional Life Insurance Recommendation</td>
-                            <td style="padding: 12px 10px; color: ${st.netInsuranceNeeded > 0 ? '#ef4444' : '#4ade80'}; font-size: 15px;">
-                                ${formatCurrencyCents(st.netInsuranceNeeded)}
-                            </td>
-                            <td style="padding: 12px 10px; color: #dfa01e;">Recommendation</td>
+                        <tr><td>Current Family Liabilities &amp; Debts</td><td><strong>${fmtCurrCents(d.totalLiabilities)}</strong></td></tr>
+                        <tr><td>Expenses at Death (Funeral, Taxes, Probate)</td><td><strong>${fmtCurrCents(d.totalDeathExp)}</strong></td></tr>
+                        <tr><td>Children's College Education Fund Required</td><td><strong>${fmtCurrCents(d.totalEduPV)}</strong></td></tr>
+                        <tr><td>Living Expenses for Surviving Family</td><td><strong>${fmtCurrCents(d.totalLivingExpensesPV)}</strong></td></tr>
+                        <tr><td>Estate Preservation Goal</td><td><strong>${fmtCurrCents(d.estatePres)}</strong></td></tr>
+                        <tr style="background:rgba(223,160,30,0.1); font-weight:bold;">
+                            <td>Total Financial Capital Needs</td>
+                            <td style="color:#dfa01e;">${fmtCurrCents(d.totalFamilyNeeds)}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <h4 style="color:#dfa01e; margin: 18px 0 10px 0; font-family:'Montserrat',sans-serif; text-transform:uppercase;">2. Available Assets &amp; Future Incomes</h4>
+                <table class="calc-report-table">
+                    <thead>
+                        <tr>
+                            <th>Asset / Resource Category</th>
+                            <th>Current Value / Present Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Liquid &amp; Marketable Investments</td><td><strong>${fmtCurrCents(d.totalInvestments)}</strong></td></tr>
+                        <tr><td>Non-Income Producing Assets</td><td><strong>${fmtCurrCents(d.totalNonIncome)}</strong></td></tr>
+                        <tr><td>Future Income Streams (Spouse, Pension, Rental)</td><td><strong>${fmtCurrCents(d.totalFutureIncomePV)}</strong></td></tr>
+                        <tr><td>Existing Life Insurance Benefit</td><td><strong>${fmtCurrCents(d.existIns)}</strong></td></tr>
+                        <tr style="background:rgba(223,160,30,0.1); font-weight:bold;">
+                            <td>Total Available Resources</td>
+                            <td style="color:#22c55e;">${fmtCurrCents(d.assetsToCoverExpenses + d.totalFutureIncomePV + d.existIns)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="background:#080f1d; border-left:4px solid #dfa01e; padding:12px 16px; border-radius:4px; margin-top:16px;">
+                    <p style="margin:0; font-size:12.5px; line-height:1.6;">
+                        <strong>Recommendation Summary:</strong> Based on an inflation rate of <strong>${fmtPct(d.inflRate * 100)}</strong> and an after-tax return rate of <strong>${fmtPct(d.rorRate * 100)}</strong>, your family requires <strong>${fmtCurrCents(d.netAdditionalIns)}</strong> in new life insurance coverage to ensure full protection and complete financial legacy preservation.
+                    </p>
+                </div>
             `;
 
-            modal.style.display = 'block';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('report-modal');
+            if (modal) modal.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
-        window.addEventListener('resize', () => {
-            if (lastInsuranceState.totalFinancialNeeds !== undefined) renderInsuranceChart(lastInsuranceState);
-        });
-
+        // Initialize Calculator on page load
         document.addEventListener('DOMContentLoaded', () => {
             calculateInsurance();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

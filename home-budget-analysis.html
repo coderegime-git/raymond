@@ -1,245 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Budget Analysis | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Analyze your household income and monthly living expenses to calculate your cash flow surplus and optimize personal savings.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Home Budget Analysis | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Managing your monthly budget can be difficult and frustrating. One of the most important aspects of controlling your budget is to determine where your money is going. This calculator helps you do just that. By entering your income and monthly expenditures, you can see how much you have left to save and where your money is being spent.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        /* Home Budget Specific Enhancements */
-        .calc-accordion-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #0b172a;
-            padding: 13px 20px;
-            cursor: pointer;
-            border-bottom: 1px solid rgba(223, 160, 30, 0.3);
-            border-top: 1px solid rgba(223, 160, 30, 0.3);
-            transition: background 0.2s ease;
-            user-select: none;
-        }
-        .calc-accordion-header:hover {
-            background: #0f2038;
-        }
-        .calc-accordion-title {
-            font-size: 13.5px;
-            font-weight: 700;
-            color: #dfa01e;
-            letter-spacing: 0.8px;
-            margin: 0;
-            text-transform: uppercase;
-        }
-        .calc-accordion-total {
-            font-size: 13px;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-right: 12px;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .calc-accordion-icon {
-            color: #dfa01e;
-            font-size: 13px;
-            transition: transform 0.3s ease;
-        }
-        .calc-accordion-header.collapsed .calc-accordion-icon {
-            transform: rotate(-90deg);
-        }
-        .calc-accordion-content {
-            padding: 20px 22px;
-            background: #ffffff;
-            transition: max-height 0.3s ease-out;
-        }
-        .calc-accordion-content.collapsed {
-            display: none;
-        }
-
-        /* Select drop-down row */
-        .calc-select-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-        .calc-select-input {
-            width: 100%;
-            max-width: 260px;
-            padding: 8px 12px;
-            background: #0b172a;
-            color: #ffffff;
-            border: 1px solid rgba(223, 160, 30, 0.4);
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-        }
-
-        /* Key Metrics Grid */
-        .hb-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 14px;
-            margin: 20px 0;
-        }
-        .hb-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 14px 16px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .hb-stat-val {
-            font-size: 20px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .hb-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-
-        /* Chart Layout */
-        .chart-layout-box {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            padding: 15px 0;
-        }
-        .chart-legend-box {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-width: 280px;
-        }
-        .chart-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #1e293b;
-        }
-        .chart-legend-swatch {
-            width: 14px;
-            height: 14px;
-            border-radius: 3px;
-            display: inline-block;
-            flex-shrink: 0;
-        }
-
-        /* Income vs Expense Progress Bar */
-        .hb-bar-container {
-            margin: 20px 0;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            padding: 18px;
-        }
-        .hb-bar-track {
-            height: 24px;
-            background: #e2e8f0;
-            border-radius: 12px;
-            overflow: hidden;
-            display: flex;
-            margin: 10px 0;
-        }
-        .hb-bar-seg {
-            height: 100%;
-            transition: width 0.3s ease;
-        }
-
-        /* Report Modal */
-        .report-modal-bg {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 99999;
-            overflow-y: auto;
-            padding: 30px 15px;
-        }
-        .report-modal-box {
-            max-width: 820px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            border-top: 6px solid #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 26px;
-            cursor: pointer;
-            color: #64748b;
-            background: none;
-            border: none;
-        }
-        .report-modal-close:hover {
-            color: #0b172a;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="home-budget-analysis.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="investment-strategy-quarterly.html" class="nav-dropdown-item" id="nav-item-isq">
+                        INVESTMENT STRATEGY QUARTERLY
+                    </a>
+                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                        WORTHWHILE
+                    </a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="nav-link">CONTACT US</a>
+
+            <!-- Client Access Button -->
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="client-access-btn-nav" id="client-access-btn">
+                CLIENT ACCESS
+            </a>
+        </nav>
+
+        <!-- Mobile Navigation Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu"
+            onclick="toggleMobileMenu(event)">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </header>
 
-    <!-- Mobile Navigation Drawer Overlay -->
+    <!-- Mobile Drawer -->
     <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -249,18 +143,22 @@
             <a href="team.html" class="drawer-link">YOUR TEAM</a>
             <a href="resources.html" class="drawer-link active">RESOURCES</a>
             <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
         </nav>
     </div>
 
     <!-- ============================================================
      FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
      ============================================================ -->
-    <a href="estate-tax-planning.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Estate Tax Planning">
+    <a href="estate-tax-planning.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Estate Tax Planning">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="home-equity-line-of-credit-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Home Equity Line of Credit Calculator">
+    <a href="home-equity-line-of-credit-calculator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Home Equity Line of Credit Calculator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
@@ -268,181 +166,261 @@
     <!-- ============================================================
      MAIN CALCULATOR CONTENT
      ============================================================ -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-                <img src="assets/resources/home-budget-analysis-hero.jpg" alt="Home Budget Analysis" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/home-budget-hero.jpg" alt="Home Budget Analysis" class="calc-banner-img"
+                    onerror="this.src='https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=1200&q=80'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">HOME BUDGET ANALYSIS</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-page-title">HOME BUDGET ANALYSIS</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Personal Finance &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=personal-finance" class="calc-cat-link">Personal Finance</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <div class="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calcShareDropdown">
+                            <a href="javascript:void(0)" onclick="shareToSocial('facebook', event)"
+                                class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('twitter', event)"
+                                class="calc-share-item" title="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('linkedin', event)"
+                                class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('email', event)"
+                                class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Managing your monthly budget can be difficult and frustrating. One of the most important aspects of improving your budget is determining where your money is going. This calculator helps you figure that out. Enter your monthly expenses, and calculate your net income to find out how much you have left to save and where your money is going. In addition, you can click "Core Budget" to see your entry versus a core value for this category and a normal distribution.
+                    Managing your monthly budget can be difficult and frustrating. One of the most important aspects of
+                    controlling your budget is to determine where your money is going. This calculator helps you do just that.
+                    By entering your income and monthly expenditures, you can see how much you have left to save and
+                    where your money is being spent. In addition, you can click "View Report" to see your entry results in detail,
+                    which can help identify areas for improvement.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateHomeBudget()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            <!-- Sticky Floating Action Box -->
+            <div class="calc-action-card-sticky-wrapper">
+                <section class="calc-action-card">
+                    <div class="calc-btn-row">
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateHomeBudget(true)">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-right-icons">
+                        <button type="button" class="calc-icon-btn" onclick="scrollToDefinitions()" title="Definitions">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Budget Report">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <span class="calc-req-text">*indicates required</span>
+                    </div>
+                </section>
             </div>
 
             <!-- Subtitle Indicator -->
-            <div style="text-align: center; margin-bottom: 12px; font-size: 13px; font-weight: 700; color: #dfa01e;">
+            <div class="calc-subhead-indicator">
                 Home Budget Calculator
             </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="budget-result-banner" style="margin-bottom: 25px;">
-                Monthly expenses of <span class="highlight-val" id="banner-exp-amt">$0.00</span> leave you with <span class="highlight-val" id="banner-save-amt" style="color: #4ade80;">$0.00</span> available for savings.
-            </div>
-
-            <p style="font-size: 12px; color: #64748b; font-style: italic; margin-bottom: 15px;">* Indicates required</p>
 
             <!-- ============================================================
              SECTION 1: YOUR MONTHLY NET INCOME
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header" onclick="toggleAccordion('sec-income1')">
-                    <h2 class="calc-accordion-title">YOUR MONTHLY NET INCOME</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-income1">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-income1-icon"></i>
+            <section class="calc-collapsible-section" id="sec-your-income">
+                <div class="calc-section-header" onclick="toggleSec('sec-your-income')">
+                    <h2 class="calc-section-title">YOUR MONTHLY NET INCOME</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-your-income">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content" id="sec-income1">
+                <div class="calc-section-body">
 
-                    <!-- Gross salary -->
+                    <!-- Gross amount paid -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
-                            <label for="inp-gross1" class="calc-field-label">Gross salary & pay:*</label>
-                            <span class="calc-q-dot" title="Your pre-tax gross pay per pay period.">?</span>
+                            <label for="inp-your-gross" class="calc-field-label">Gross amount paid:*</label>
+                            <span class="calc-q-dot" title="Your total gross income from your paycheck.">?</span>
                         </div>
-                        <input type="text" id="inp-gross1" class="calc-text-input" value="$0">
+                        <input type="text" id="inp-your-gross" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-gross1" class="calc-range-slider" min="0" max="25000" step="250" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$6.25K</span><span>$12.5K</span><span>$18.75K</span><span>$25K</span></div>
+                            <input type="range" id="range-your-gross" class="calc-range-slider" min="0" max="25000" step="250" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Frequency -->
+                    <!-- Income paid frequency -->
                     <div class="calc-select-row">
-                        <label for="sel-freq1" class="calc-field-label" style="margin: 0;">How often are you paid?</label>
-                        <select id="sel-freq1" class="calc-select-input" onchange="calculateHomeBudget()">
-                            <option value="12">Monthly (12/yr)</option>
-                            <option value="26" selected>Bi-weekly (26/yr)</option>
-                            <option value="24">Semi-monthly (24/yr)</option>
-                            <option value="52">Weekly (52/yr)</option>
-                            <option value="1">Annually (1/yr)</option>
+                        <div class="calc-label-col">
+                            <label for="sel-your-freq" class="calc-field-label">Income paid:*</label>
+                            <span class="calc-q-dot" title="How frequently you receive this pay.">?</span>
+                        </div>
+                        <select id="sel-your-freq" class="calc-select-input" onchange="calculateHomeBudget()">
+                            <option value="12" selected>Monthly</option>
+                            <option value="24">Semi-Monthly</option>
+                            <option value="26">Bi-Weekly</option>
+                            <option value="52">Weekly</option>
+                            <option value="1">Annually</option>
                         </select>
                     </div>
 
-                    <!-- Federal Tax Withholding -->
+                    <!-- Federal tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-fed-tax1" class="calc-field-label">Federal tax withholding:*</label></div>
-                        <input type="text" id="inp-fed-tax1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-fed-tax" class="calc-field-label">Federal tax withholding:*</label>
+                            <span class="calc-q-dot" title="Total amount withheld for federal taxes. Enter this amount from your pay stub.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-fed-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fed-tax1" class="calc-range-slider" min="0" max="6000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$1.5K</span><span>$3.0K</span><span>$4.5K</span><span>$6K</span></div>
+                            <input type="range" id="range-your-fed-tax" class="calc-range-slider" min="0" max="6000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- State Tax Withholding -->
+                    <!-- State tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-state-tax1" class="calc-field-label">State tax withholding:*</label></div>
-                        <input type="text" id="inp-state-tax1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-state-tax" class="calc-field-label">State tax withholding:*</label>
+                            <span class="calc-q-dot" title="Total amount withheld for state taxes. Enter this amount from your pay stub.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-state-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-state-tax1" class="calc-range-slider" min="0" max="3000" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$750</span><span>$1.5K</span><span>$2.25K</span><span>$3K</span></div>
+                            <input type="range" id="range-your-state-tax" class="calc-range-slider" min="0" max="3000" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Local Tax Withholding -->
+                    <!-- Local tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-local-tax1" class="calc-field-label">Local tax withholding:*</label></div>
-                        <input type="text" id="inp-local-tax1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-local-tax" class="calc-field-label">Local tax withholding:*</label>
+                            <span class="calc-q-dot" title="Total amount withheld for local taxes. Enter this amount from your pay stub.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-local-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-local-tax1" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-your-local-tax" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Other Taxes & Withholding -->
+                    <!-- Other taxes and withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-other-tax1" class="calc-field-label">Other taxes & withholding:*</label></div>
-                        <input type="text" id="inp-other-tax1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-other-tax" class="calc-field-label">Other taxes and withholding:*</label>
+                            <span class="calc-q-dot" title="Total amount withheld for any other taxes or miscellaneous item.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-other-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-other-tax1" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-your-other-tax" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- FICA -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-fica1" class="calc-field-label">FICA:*</label></div>
-                        <input type="text" id="inp-fica1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-fica" class="calc-field-label">FICA:*</label>
+                            <span class="calc-q-dot" title="Total withheld for FICA (Federal Insurance Contributions Act).">?</span>
+                        </div>
+                        <input type="text" id="inp-your-fica" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fica1" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-your-fica" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Medicare -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-medicare1" class="calc-field-label">Medicare:*</label></div>
-                        <input type="text" id="inp-medicare1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-medicare" class="calc-field-label">Medicare:*</label>
+                            <span class="calc-q-dot" title="Total withheld for Medicare based on gross income.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-medicare" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-medicare1" class="calc-range-slider" min="0" max="600" step="10" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$150</span><span>$300</span><span>$450</span><span>$600</span></div>
+                            <input type="range" id="range-your-medicare" class="calc-range-slider" min="0" max="600" step="10" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Insurance and Benefits -->
+                    <!-- Insurance and benefits -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-benefits1" class="calc-field-label">Insurance and benefits:*</label></div>
-                        <input type="text" id="inp-benefits1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-benefits" class="calc-field-label">Insurance and benefits:*</label>
+                            <span class="calc-q-dot" title="Total amount withheld for insurance and benefits by your employer.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-benefits" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-benefits1" class="calc-range-slider" min="0" max="2000" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$1.0K</span><span>$1.5K</span><span>$2.0K</span></div>
+                            <input type="range" id="range-your-benefits" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Company Retirement / 401(k) -->
+                    <!-- Company retirement savings -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-retire1" class="calc-field-label">Company retirement / 401(k):*</label></div>
-                        <input type="text" id="inp-retire1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-retire" class="calc-field-label">Company retirement savings:*</label>
+                            <span class="calc-q-dot" title="Deposited into retirement savings plan such as 401(k) or 403(b).">?</span>
+                        </div>
+                        <input type="text" id="inp-your-retire" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-retire1" class="calc-range-slider" min="0" max="3000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$750</span><span>$1.5K</span><span>$2.25K</span><span>$3K</span></div>
+                            <input type="range" id="range-your-retire" class="calc-range-slider" min="0" max="3000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Other Income -->
+                    <!-- Other income -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-other-inc1" class="calc-field-label">Other income:*</label></div>
-                        <input type="text" id="inp-other-inc1" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-your-other-inc" class="calc-field-label">Other income:*</label>
+                            <span class="calc-q-dot" title="Any other income: bonuses, alimony, child support, business income.">?</span>
+                        </div>
+                        <input type="text" id="inp-your-other-inc" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-other-inc1" class="calc-range-slider" min="0" max="5000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$1.25K</span><span>$2.5K</span><span>$3.75K</span><span>$5K</span></div>
+                            <input type="range" id="range-your-other-inc" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- When is other income paid -->
+                    <!-- Other income paid frequency -->
                     <div class="calc-select-row" style="margin-bottom: 0;">
-                        <label for="sel-other-freq1" class="calc-field-label" style="margin: 0;">When is other income paid?</label>
-                        <select id="sel-other-freq1" class="calc-select-input" onchange="calculateHomeBudget()">
+                        <div class="calc-label-col">
+                            <label for="sel-your-other-freq" class="calc-field-label">Other income paid:*</label>
+                            <span class="calc-q-dot" title="How frequently this other income is received.">?</span>
+                        </div>
+                        <select id="sel-your-other-freq" class="calc-select-input" onchange="calculateHomeBudget()">
                             <option value="12" selected>Monthly</option>
+                            <option value="24">Semi-Monthly</option>
+                            <option value="26">Bi-Weekly</option>
+                            <option value="52">Weekly</option>
                             <option value="1">Annually</option>
-                            <option value="26">Bi-weekly</option>
                         </select>
                     </div>
 
@@ -452,509 +430,710 @@
             <!-- ============================================================
              SECTION 2: SPOUSE'S MONTHLY NET INCOME
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-income2')">
-                    <h2 class="calc-accordion-title">SPOUSE'S MONTHLY NET INCOME</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-income2">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-income2-icon"></i>
+            <section class="calc-collapsible-section" id="sec-spouse-income">
+                <div class="calc-section-header" onclick="toggleSec('sec-spouse-income')">
+                    <h2 class="calc-section-title">SPOUSE'S MONTHLY NET INCOME</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-spouse-income">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-income2">
+                <div class="calc-section-body">
 
-                    <!-- Gross salary -->
+                    <!-- Gross amount paid -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-gross2" class="calc-field-label">Gross salary & pay:*</label></div>
-                        <input type="text" id="inp-gross2" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-gross" class="calc-field-label">Gross amount paid:*</label>
+                            <span class="calc-q-dot" title="Spouse's total gross income from paycheck.">?</span>
+                        </div>
+                        <input type="text" id="inp-sp-gross" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-gross2" class="calc-range-slider" min="0" max="25000" step="250" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$6.25K</span><span>$12.5K</span><span>$18.75K</span><span>$25K</span></div>
+                            <input type="range" id="range-sp-gross" class="calc-range-slider" min="0" max="25000" step="250" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Frequency -->
+                    <!-- Spouse paid frequency -->
                     <div class="calc-select-row">
-                        <label for="sel-freq2" class="calc-field-label" style="margin: 0;">How often are they paid?</label>
-                        <select id="sel-freq2" class="calc-select-input" onchange="calculateHomeBudget()">
-                            <option value="12">Monthly (12/yr)</option>
-                            <option value="26" selected>Bi-weekly (26/yr)</option>
-                            <option value="24">Semi-monthly (24/yr)</option>
-                            <option value="52">Weekly (52/yr)</option>
-                            <option value="1">Annually (1/yr)</option>
+                        <div class="calc-label-col">
+                            <label for="sel-sp-freq" class="calc-field-label">Spouse paid:*</label>
+                            <span class="calc-q-dot" title="How frequently spouse is paid.">?</span>
+                        </div>
+                        <select id="sel-sp-freq" class="calc-select-input" onchange="calculateHomeBudget()">
+                            <option value="12" selected>Monthly</option>
+                            <option value="24">Semi-Monthly</option>
+                            <option value="26">Bi-Weekly</option>
+                            <option value="52">Weekly</option>
+                            <option value="1">Annually</option>
                         </select>
                     </div>
 
-                    <!-- Federal Tax Withholding -->
+                    <!-- Federal tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-fed-tax2" class="calc-field-label">Federal tax withholding:*</label></div>
-                        <input type="text" id="inp-fed-tax2" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-fed-tax" class="calc-field-label">Federal tax withholding:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-fed-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fed-tax2" class="calc-range-slider" min="0" max="6000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$1.5K</span><span>$3.0K</span><span>$4.5K</span><span>$6K</span></div>
+                            <input type="range" id="range-sp-fed-tax" class="calc-range-slider" min="0" max="6000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- State Tax Withholding -->
+                    <!-- State tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-state-tax2" class="calc-field-label">State tax withholding:*</label></div>
-                        <input type="text" id="inp-state-tax2" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-state-tax" class="calc-field-label">State tax withholding:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-state-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-state-tax2" class="calc-range-slider" min="0" max="3000" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$750</span><span>$1.5K</span><span>$2.25K</span><span>$3K</span></div>
+                            <input type="range" id="range-sp-state-tax" class="calc-range-slider" min="0" max="3000" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- FICA & Medicare combined -->
+                    <!-- Local tax withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-fica2" class="calc-field-label">FICA & Medicare:*</label></div>
-                        <input type="text" id="inp-fica2" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-local-tax" class="calc-field-label">Local tax withholding:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-local-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fica2" class="calc-range-slider" min="0" max="2000" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$1.0K</span><span>$1.5K</span><span>$2.0K</span></div>
+                            <input type="range" id="range-sp-local-tax" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Retirement & Benefits -->
+                    <!-- Other taxes and withholding -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-benefits2" class="calc-field-label">Benefits & 401(k):*</label></div>
-                        <input type="text" id="inp-benefits2" class="calc-text-input" value="$0">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-other-tax" class="calc-field-label">Other taxes and withholding:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-other-tax" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-benefits2" class="calc-range-slider" min="0" max="3000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$750</span><span>$1.5K</span><span>$2.25K</span><span>$3K</span></div>
+                            <input type="range" id="range-sp-other-tax" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Other Income -->
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-other-inc2" class="calc-field-label">Other spouse income:*</label></div>
-                        <input type="text" id="inp-other-inc2" class="calc-text-input" value="$0">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-other-inc2" class="calc-range-slider" min="0" max="5000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$1.25K</span><span>$2.5K</span><span>$3.75K</span><span>$5K</span></div>
+                    <!-- FICA -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-fica" class="calc-field-label">FICA:*</label>
                         </div>
+                        <input type="text" id="inp-sp-fica" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sp-fica" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Medicare -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-medicare" class="calc-field-label">Medicare:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-medicare" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sp-medicare" class="calc-range-slider" min="0" max="600" step="10" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance and benefits -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-benefits" class="calc-field-label">Insurance and benefits:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-benefits" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sp-benefits" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company retirement savings -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-retire" class="calc-field-label">Company retirement savings:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-retire" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sp-retire" class="calc-range-slider" min="0" max="3000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other income -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col">
+                            <label for="inp-sp-other-inc" class="calc-field-label">Other income:*</label>
+                        </div>
+                        <input type="text" id="inp-sp-other-inc" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sp-other-inc" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels">
+                                <span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other spouse income paid frequency -->
+                    <div class="calc-select-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col">
+                            <label for="sel-sp-other-freq" class="calc-field-label">Other spouse income paid:*</label>
+                        </div>
+                        <select id="sel-sp-other-freq" class="calc-select-input" onchange="calculateHomeBudget()">
+                            <option value="12" selected>Monthly</option>
+                            <option value="24">Semi-Monthly</option>
+                            <option value="26">Bi-Weekly</option>
+                            <option value="52">Weekly</option>
+                            <option value="1">Annually</option>
+                        </select>
                     </div>
 
                 </div>
             </section>
 
             <!-- ============================================================
-             SECTION 3: MORTGAGE AND RENT
+             SECTION 3: MORTGAGE AND DEBT
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-housing')">
-                    <h2 class="calc-accordion-title">MORTGAGE AND RENT</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-housing">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-housing-icon"></i>
+            <section class="calc-collapsible-section" id="sec-debt">
+                <div class="calc-section-header" onclick="toggleSec('sec-debt')">
+                    <h2 class="calc-section-title">MORTGAGE AND DEBT</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-debt">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-housing">
+                <div class="calc-section-body">
+
+                    <!-- House Payment -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-rent" class="calc-field-label">Mortgage / rent payment:</label></div>
-                        <input type="text" id="inp-rent" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-house" class="calc-field-label">House Payment:*</label></div>
+                        <input type="text" id="inp-house" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-rent" class="calc-range-slider" min="0" max="8000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$2K</span><span>$4K</span><span>$6K</span><span>$8K</span></div>
+                            <input type="range" id="range-house" class="calc-range-slider" min="0" max="10000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div>
                         </div>
                     </div>
+
+                    <!-- Auto Payment -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-prop-tax" class="calc-field-label">Property taxes (monthly):</label></div>
-                        <input type="text" id="inp-prop-tax" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-auto1" class="calc-field-label">Auto Payment:*</label></div>
+                        <input type="text" id="inp-auto1" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-prop-tax" class="calc-range-slider" min="0" max="2500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$625</span><span>$1.25K</span><span>$1.8K</span><span>$2.5K</span></div>
+                            <input type="range" id="range-auto1" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
+
+                    <!-- Auto Payment 2 -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-auto2" class="calc-field-label">Auto Payment 2:*</label></div>
+                        <input type="text" id="inp-auto2" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-auto2" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Credit Card Payments -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-cc-debt" class="calc-field-label">Credit Card Payments:*</label></div>
+                        <input type="text" id="inp-cc-debt" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cc-debt" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Other debt payments -->
                     <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-home-ins" class="calc-field-label">Homeowners / HOA dues:</label></div>
-                        <input type="text" id="inp-home-ins" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-other-debt" class="calc-field-label">Other debt payments:*</label></div>
+                        <input type="text" id="inp-other-debt" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-home-ins" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-other-debt" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
             <!-- ============================================================
              SECTION 4: UTILITIES
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-utilities')">
-                    <h2 class="calc-accordion-title">UTILITIES</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-utilities">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-utilities-icon"></i>
+            <section class="calc-collapsible-section" id="sec-utilities">
+                <div class="calc-section-header" onclick="toggleSec('sec-utilities')">
+                    <h2 class="calc-section-title">UTILITIES</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-utilities">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-utilities">
+                <div class="calc-section-body">
+
+                    <!-- Electric -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-electric" class="calc-field-label">Electric, gas & heat:</label></div>
+                        <div class="calc-label-col"><label for="inp-electric" class="calc-field-label">Electric:*</label></div>
                         <input type="text" id="inp-electric" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-electric" class="calc-range-slider" min="0" max="1000" step="20" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$250</span><span>$500</span><span>$750</span><span>$1.0K</span></div>
+                            <input type="range" id="range-electric" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- Gas -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-water" class="calc-field-label">Water, sewer & trash:</label></div>
-                        <input type="text" id="inp-water" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-gas" class="calc-field-label">Gas:*</label></div>
+                        <input type="text" id="inp-gas" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-water" class="calc-range-slider" min="0" max="500" step="10" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$125</span><span>$250</span><span>$375</span><span>$500</span></div>
+                            <input type="range" id="range-gas" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- Sewer and water -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-sewer" class="calc-field-label">Sewer and water:*</label></div>
+                        <input type="text" id="inp-sewer" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-sewer" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Cable -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-cable" class="calc-field-label">Cable:*</label></div>
+                        <input type="text" id="inp-cable" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-cable" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Telephone -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-phone" class="calc-field-label">Telephone:*</label></div>
+                        <input type="text" id="inp-phone" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-phone" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Internet -->
                     <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-telecom" class="calc-field-label">Phone, internet & cable:</label></div>
-                        <input type="text" id="inp-telecom" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-internet" class="calc-field-label">Internet:*</label></div>
+                        <input type="text" id="inp-internet" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-telecom" class="calc-range-slider" min="0" max="600" step="10" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$150</span><span>$300</span><span>$450</span><span>$600</span></div>
+                            <input type="range" id="range-internet" class="calc-range-slider" min="0" max="1000" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
             <!-- ============================================================
              SECTION 5: FOOD AND GENERAL EXPENSES
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-food')">
-                    <h2 class="calc-accordion-title">FOOD AND GENERAL EXPENSES</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-food">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-food-icon"></i>
+            <section class="calc-collapsible-section" id="sec-food">
+                <div class="calc-section-header" onclick="toggleSec('sec-food')">
+                    <h2 class="calc-section-title">FOOD AND GENERAL EXPENSES</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-food">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-food">
+                <div class="calc-section-body">
+
+                    <!-- Food -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-groceries" class="calc-field-label">Groceries & food:</label></div>
-                        <input type="text" id="inp-groceries" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-food" class="calc-field-label">Food:*</label></div>
+                        <input type="text" id="inp-food" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-groceries" class="calc-range-slider" min="0" max="2500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$625</span><span>$1.25K</span><span>$1.8K</span><span>$2.5K</span></div>
+                            <input type="range" id="range-food" class="calc-range-slider" min="0" max="3000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- Auto gas and maintenance -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-dining" class="calc-field-label">Dining out & restaurants:</label></div>
-                        <input type="text" id="inp-dining" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-auto-maint" class="calc-field-label">Auto gas and maintenance:*</label></div>
+                        <input type="text" id="inp-auto-maint" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-dining" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-auto-maint" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- General Merchandise -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-clothing" class="calc-field-label">Clothing & personal care:</label></div>
-                        <input type="text" id="inp-clothing" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-merch" class="calc-field-label">General Merchandise:*</label></div>
+                        <input type="text" id="inp-merch" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-clothing" class="calc-range-slider" min="0" max="1000" step="20" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$250</span><span>$500</span><span>$750</span><span>$1.0K</span></div>
+                            <input type="range" id="range-merch" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- Charitable donations -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-charity" class="calc-field-label">Charitable donations:*</label></div>
+                        <input type="text" id="inp-charity" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-charity" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Religious donations -->
                     <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-transport" class="calc-field-label">Gasoline & transportation:</label></div>
-                        <input type="text" id="inp-transport" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-religious" class="calc-field-label">Religious donations:*</label></div>
+                        <input type="text" id="inp-religious" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-transport" class="calc-range-slider" min="0" max="1000" step="20" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$250</span><span>$500</span><span>$750</span><span>$1.0K</span></div>
+                            <input type="range" id="range-religious" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
             <!-- ============================================================
              SECTION 6: INSURANCE
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 20px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-insurance')">
-                    <h2 class="calc-accordion-title">INSURANCE</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-insurance">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-insurance-icon"></i>
+            <section class="calc-collapsible-section" id="sec-insurance">
+                <div class="calc-section-header" onclick="toggleSec('sec-insurance')">
+                    <h2 class="calc-section-title">INSURANCE</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-insurance">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-insurance">
+                <div class="calc-section-body">
+
+                    <!-- Auto Insurance -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-auto-ins" class="calc-field-label">Auto insurance:</label></div>
-                        <input type="text" id="inp-auto-ins" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-ins-auto" class="calc-field-label">Auto Insurance:*</label></div>
+                        <input type="text" id="inp-ins-auto" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-auto-ins" class="calc-range-slider" min="0" max="800" step="15" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$200</span><span>$400</span><span>$600</span><span>$800</span></div>
+                            <input type="range" id="range-ins-auto" class="calc-range-slider" min="0" max="1500" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
                         </div>
                     </div>
+
+                    <!-- Life Insurance -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-life-ins-exp" class="calc-field-label">Life & disability insurance:</label></div>
-                        <input type="text" id="inp-life-ins-exp" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-ins-life" class="calc-field-label">Life:*</label></div>
+                        <input type="text" id="inp-ins-life" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-life-ins-exp" class="calc-range-slider" min="0" max="800" step="15" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$200</span><span>$400</span><span>$600</span><span>$800</span></div>
+                            <input type="range" id="range-ins-life" class="calc-range-slider" min="0" max="2500" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
+
+                    <!-- Health Insurance -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-ins-health" class="calc-field-label">Health:*</label></div>
+                        <input type="text" id="inp-ins-health" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-ins-health" class="calc-range-slider" min="0" max="3500" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Home Insurance -->
                     <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-health-ins" class="calc-field-label">Health & dental premiums:</label></div>
-                        <input type="text" id="inp-health-ins" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-ins-home" class="calc-field-label">Home:*</label></div>
+                        <input type="text" id="inp-ins-home" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-health-ins" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-ins-home" class="calc-range-slider" min="0" max="2500" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
+
                 </div>
             </section>
 
             <!-- ============================================================
              SECTION 7: MAINTENANCE, MEDICAL, CHILDCARE, ETC.
              ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 25px;">
-                <div class="calc-accordion-header collapsed" onclick="toggleAccordion('sec-maint')">
-                    <h2 class="calc-accordion-title">MAINTENANCE, MEDICAL, CHILDCARE, ETC.</h2>
-                    <div style="display: flex; align-items: center;">
-                        <span class="calc-accordion-total" id="tot-maint">$0.00</span>
-                        <i class="fas fa-chevron-up calc-accordion-icon" id="sec-maint-icon"></i>
+            <section class="calc-collapsible-section" id="sec-maintenance">
+                <div class="calc-section-header" onclick="toggleSec('sec-maintenance')">
+                    <h2 class="calc-section-title">MAINTENANCE, MEDICAL, CHILDCARE, ETC.</h2>
+                    <div class="calc-section-right">
+                        <span class="calc-section-total-badge" id="badge-maintenance">$0.00</span>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-accordion-content collapsed" id="sec-maint">
+                <div class="calc-section-body">
+
+                    <!-- Home maintenance -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-home-rep" class="calc-field-label">Home maintenance & repairs:</label></div>
-                        <input type="text" id="inp-home-rep" class="calc-text-input" value="$0">
+                        <div class="calc-label-col"><label for="inp-home-maint" class="calc-field-label">Home maintenance:*</label></div>
+                        <input type="text" id="inp-home-maint" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-home-rep" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-home-maint" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
+
+                    <!-- Medical -->
                     <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-childcare" class="calc-field-label">Childcare & education:</label></div>
-                        <input type="text" id="inp-childcare" class="calc-text-input" value="$0">
-                        <div class="calc-slider-col">
-                            <input type="range" id="range-childcare" class="calc-range-slider" min="0" max="3000" step="50" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$750</span><span>$1.5K</span><span>$2.25K</span><span>$3K</span></div>
-                        </div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-medical" class="calc-field-label">Medical & dental (out-of-pocket):</label></div>
+                        <div class="calc-label-col"><label for="inp-medical" class="calc-field-label">Medical:*</label></div>
                         <input type="text" id="inp-medical" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-medical" class="calc-range-slider" min="0" max="1500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$375</span><span>$750</span><span>$1.1K</span><span>$1.5K</span></div>
+                            <input type="range" id="range-medical" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
                         </div>
                     </div>
-                    <div class="calc-input-row" style="margin-bottom: 0;">
-                        <div class="calc-label-col"><label for="inp-debt-pay" class="calc-field-label">Credit cards & debt loans:</label></div>
-                        <input type="text" id="inp-debt-pay" class="calc-text-input" value="$0">
+
+                    <!-- Travel and Entertainment -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-travel" class="calc-field-label">Travel and Entertainment:*</label></div>
+                        <input type="text" id="inp-travel" class="calc-text-input" value="$0">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-debt-pay" class="calc-range-slider" min="0" max="2500" step="25" value="0">
-                            <div class="calc-tick-labels"><span>$0</span><span>$625</span><span>$1.25K</span><span>$1.8K</span><span>$2.5K</span></div>
+                            <input type="range" id="range-travel" class="calc-range-slider" min="0" max="3000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Gift Expense -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-gift" class="calc-field-label">Gift Expense:*</label></div>
+                        <input type="text" id="inp-gift" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-gift" class="calc-range-slider" min="0" max="2000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Bank Service Charge -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-bank-charge" class="calc-field-label">Bank Service Charge:*</label></div>
+                        <input type="text" id="inp-bank-charge" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-bank-charge" class="calc-range-slider" min="0" max="500" step="10" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Child care expense -->
+                    <div class="calc-input-row">
+                        <div class="calc-label-col"><label for="inp-childcare" class="calc-field-label">Child care expense:*</label></div>
+                        <input type="text" id="inp-childcare" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-childcare" class="calc-range-slider" min="0" max="3000" step="25" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Other monthly expenses -->
+                    <div class="calc-input-row" style="margin-bottom: 0;">
+                        <div class="calc-label-col"><label for="inp-other-exp" class="calc-field-label">Other monthly expenses:*</label></div>
+                        <input type="text" id="inp-other-exp" class="calc-text-input" value="$0">
+                        <div class="calc-slider-col">
+                            <input type="range" id="range-other-exp" class="calc-range-slider" min="0" max="5000" step="50" value="0">
+                            <div class="calc-tick-labels"><span>$0</span><span>$500</span><span>$2.5k</span><span>$5k</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 8: RESULTS & CHARTS
+             ============================================================ -->
+            <section class="calc-collapsible-section" id="sec-budget-results">
+                <div class="calc-section-header" onclick="toggleSec('sec-budget-results')">
+                    <h2 class="calc-section-title" id="results-header-title">MONTHLY EXPENSES OF $0.00 LEAVE YOU WITH $0.00 AVAILABLE FOR SAVINGS.</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
+                </div>
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <svg viewBox="0 0 320 320" id="svg-budget-pie">
+                            <!-- SVG Pie chart injected dynamically -->
+                        </svg>
+
+                        <!-- Legend Items -->
+                        <div class="calc-chart-legend" id="budget-legend">
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #001fbe;"></span>
+                                    <span id="legend-debt-text">$0 Mortgage and debt</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-debt-pct">(0%)</span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #22c55e;"></span>
+                                    <span id="legend-util-text">$0 Utilities</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-util-pct">(0%)</span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #0ea5e9;"></span>
+                                    <span id="legend-food-text">$0 Food and general expenses</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-food-pct">(0%)</span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #eab308;"></span>
+                                    <span id="legend-ins-text">$0 Insurance</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-ins-pct">(0%)</span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #8b5cf6;"></span>
+                                    <span id="legend-maint-text">$0 Maintenance, medical, childcare, etc.</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-maint-pct">(0%)</span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <div class="calc-legend-left">
+                                    <span class="calc-legend-dot" style="background: #ea580c;"></span>
+                                    <span id="legend-save-text">$0 Available for savings</span>
+                                </div>
+                                <span class="calc-legend-pct" id="legend-save-pct">(0%)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- ============================================================
-             CHART SECTION: EXPENSE DISTRIBUTION & SAVINGS POTENTIAL
-             ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 25px;">
-                <div class="calc-accordion-header" onclick="toggleAccordion('sec-chart-pie')">
-                    <h2 class="calc-accordion-title" id="chart-pie-heading">MONTHLY EXPENSES OF $0.00 LEAVE YOU WITH $0.00 AVAILABLE FOR SAVINGS.</h2>
-                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-chart-pie-icon"></i>
-                </div>
-                <div class="calc-accordion-content" id="sec-chart-pie">
-                    <div class="chart-layout-box">
-                        <div id="hb-pie-wrapper" style="width: 250px; height: 250px; position: relative;">
-                            <!-- Dynamic SVG Donut Chart -->
-                        </div>
-                        <div class="chart-legend-box" id="hb-pie-legend">
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #2563eb;"></span>
-                                <span>Available for Savings: <strong id="leg-savings">$0.00</strong></span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #16a34a;"></span>
-                                <span>Mortgage and Rent: <strong id="leg-housing">$0.00</strong></span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #06b6d4;"></span>
-                                <span>Utilities: <strong id="leg-utilities">$0.00</strong></span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #dfa01e;"></span>
-                                <span>Food & General Expenses: <strong id="leg-food">$0.00</strong></span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #8b5cf6;"></span>
-                                <span>Insurance: <strong id="leg-insurance">$0.00</strong></span>
-                            </div>
-                            <div class="chart-legend-item">
-                                <span class="chart-legend-swatch" style="background: #f43f5e;"></span>
-                                <span>Maintenance & Childcare: <strong id="leg-maint">$0.00</strong></span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Summary Stats Grid -->
-                    <div class="hb-stat-grid" style="margin-top: 25px;">
-                        <div class="hb-stat-card">
-                            <div class="hb-stat-val" id="card-tot-income" style="color: #60a5fa;">$0.00</div>
-                            <div class="hb-stat-label">Monthly Net Income</div>
-                        </div>
-                        <div class="hb-stat-card">
-                            <div class="hb-stat-val" id="card-tot-expenses" style="color: #f87171;">$0.00</div>
-                            <div class="hb-stat-label">Monthly Total Expenses</div>
-                        </div>
-                        <div class="hb-stat-card">
-                            <div class="hb-stat-val" id="card-tot-surplus" style="color: #4ade80;">$0.00</div>
-                            <div class="hb-stat-label">Available for Savings</div>
-                        </div>
-                        <div class="hb-stat-card">
-                            <div class="hb-stat-val" id="card-ann-savings" style="color: #dfa01e;">$0.00</div>
-                            <div class="hb-stat-label">Annualized Savings</div>
-                        </div>
+            <!-- Net Income & Deductions Summary Accordion -->
+            <section class="calc-collapsible-section collapsed" id="sec-net-income-summary">
+                <div class="calc-section-header" onclick="toggleSec('sec-net-income-summary')">
+                    <h2 class="calc-section-title" id="income-header-title">MONTHLY NET INCOME IS $0.00 AFTER TAKING $0.00 IN DEDUCTIONS.</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-            </section>
-
-            <!-- ============================================================
-             SECTION 8: MONTHLY NET INCOME AFTER TAXES AND DEDUCTIONS
-             ============================================================ -->
-            <section class="calc-section" style="margin-bottom: 35px;">
-                <div class="calc-accordion-header" onclick="toggleAccordion('sec-income-bar')">
-                    <h2 class="calc-accordion-title" id="income-bar-heading">MONTHLY NET INCOME OF $0.00 AFTER TAXES AND DEDUCTIONS.</h2>
-                    <i class="fas fa-chevron-up calc-accordion-icon" id="sec-income-bar-icon"></i>
-                </div>
-                <div class="calc-accordion-content" id="sec-income-bar">
-                    <div class="hb-bar-container">
-                        <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #1e293b;">
-                            <span>Expenses vs. Savings Ratio</span>
-                            <span id="ratio-label">0% Expenses / 0% Savings</span>
-                        </div>
-                        <div class="hb-bar-track">
-                            <div class="hb-bar-seg" id="seg-exp" style="width: 0%; background: #ef4444;" title="Expenses"></div>
-                            <div class="hb-bar-seg" id="seg-sav" style="width: 0%; background: #2563eb;" title="Savings"></div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 11.5px; color: #64748b;">
-                            <span>Total Expenses: <strong id="lbl-bar-exp" style="color: #ef4444;">$0.00</strong></span>
-                            <span>Surplus Savings: <strong id="lbl-bar-sav" style="color: #2563eb;">$0.00</strong></span>
-                        </div>
-                    </div>
+                <div class="calc-section-body">
+                    <table class="calc-modal-table" style="margin: 0; background: #0b172a; border-radius: 6px; overflow: hidden;">
+                        <thead>
+                            <tr>
+                                <th>Income Stream</th>
+                                <th>Gross Pay</th>
+                                <th>Total Deductions</th>
+                                <th>Net Monthly Income</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Your Income</strong></td>
+                                <td id="tbl-your-gross">$0.00</td>
+                                <td id="tbl-your-deduct">$0.00</td>
+                                <td id="tbl-your-net" style="font-weight: 700; color: #4ade80;">$0.00</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spouse's Income</strong></td>
+                                <td id="tbl-sp-gross">$0.00</td>
+                                <td id="tbl-sp-deduct">$0.00</td>
+                                <td id="tbl-sp-net" style="font-weight: 700; color: #4ade80;">$0.00</td>
+                            </tr>
+                            <tr style="background: #11233e; font-weight: 800;">
+                                <td>Total Household</td>
+                                <td id="tbl-tot-gross" style="color: #dfa01e;">$0.00</td>
+                                <td id="tbl-tot-deduct" style="color: #f87171;">$0.00</td>
+                                <td id="tbl-tot-net" style="color: #4ade80;">$0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
             <!-- ============================================================
              DEFINITIONS SECTION
              ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
+            <section class="calc-definitions-wrapper" id="definitions-section">
+                <h2 class="calc-def-title">DEFINITIONS</h2>
+                <div class="calc-def-list">
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">GROSS SALARY / PAY</h4>
-                    <p class="calc-def-desc">
-                        Your total gross pay received from your employment before any payroll deductions or taxes.
-                    </p>
+                    <div class="calc-def-item">
+                        <h3>GROSS AMOUNT PAID</h3>
+                        <p>Your total gross income from your paycheck.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>OTHER INCOME</h3>
+                        <p>Any other income that you receive including bonuses, alimony, child support or income from a business.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>FEDERAL TAX WITHHOLDING</h3>
+                        <p>Total amount withheld for federal taxes. Enter this amount from your pay stub.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>STATE TAX WITHHOLDING</h3>
+                        <p>Total amount withheld for state taxes. Enter this amount from your pay stub.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>LOCAL TAX WITHHOLDING</h3>
+                        <p>Total amount withheld for local taxes. Enter this amount from your pay stub.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>OTHER TAXES AND WITHHOLDING</h3>
+                        <p>Total amount withheld for any other taxes or miscellaneous item. Enter this amount from your pay stub.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>FICA</h3>
+                        <p>Total withheld for FICA (Federal Insurance Contributions Act) is based on the gross income on your paycheck.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>MEDICARE</h3>
+                        <p>Total withheld for Medicare based on the gross income on your paycheck.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>INSURANCE AND BENEFITS</h3>
+                        <p>Total amount withheld for insurance and benefits by your employer. Enter this amount from your pay stub.</p>
+                    </div>
+
+                    <div class="calc-def-item">
+                        <h3>COMPANY RETIREMENT SAVINGS PLAN</h3>
+                        <p>Total amount withheld from your paycheck that is deposited into a company retirement savings plan such as a 401(k) or 403(b).</p>
+                    </div>
+
                 </div>
 
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">OTHER INCOME</h4>
-                    <p class="calc-def-desc">
-                        Any other regular cash inflows received, including business dividends, alimony, child support, pensions, or rental profits.
-                    </p>
+                <!-- Legal Disclaimer -->
+                <div class="calc-legal-disclaimer">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                 </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">FEDERAL TAX WITHHOLDING</h4>
-                    <p class="calc-def-desc">
-                        Total amount withheld for federal income taxes. Enter this amount directly from your pay stub.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">STATE TAX WITHHOLDING</h4>
-                    <p class="calc-def-desc">
-                        Total amount withheld for state taxes. Enter this amount from your pay stub.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">LOCAL TAX WITHHOLDING</h4>
-                    <p class="calc-def-desc">
-                        Total amount withheld for city or county local taxes. Enter this amount from your pay stub.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">OTHER TAXES AND WITHHOLDING</h4>
-                    <p class="calc-def-desc">
-                        Total amount withheld for any other state disability or non-federal withholding taxes on your pay stub.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">FICA</h4>
-                    <p class="calc-def-desc">
-                        Total withholding for Federal Insurance Contributions Act (FICA / Social Security) from your salary.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MEDICARE</h4>
-                    <p class="calc-def-desc">
-                        Total withholding for Medicare based on the gross income reported on your pay stub.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE AND BENEFITS</h4>
-                    <p class="calc-def-desc">
-                        Total amount withheld for medical, dental, life, and vision benefits offered by your employer.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">COMPANY RETIREMENT / 401(K) PLAN</h4>
-                    <p class="calc-def-desc">
-                        Total amount deducted from your paycheck and contributed to a qualifying retirement plan such as a 401(k), 403(b), or 457.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MORTGAGE AND RENT</h4>
-                    <p class="calc-def-desc">
-                        Monthly housing costs including your primary mortgage principal and interest, rent, property taxes, homeowners insurance, and association dues.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">UTILITIES</h4>
-                    <p class="calc-def-desc">
-                        Monthly recurring domestic utility bills such as electricity, heating fuel, gas, water, municipal sewer, garbage pickup, mobile phones, cable TV, and broadband internet.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">FOOD AND GENERAL EXPENSES</h4>
-                    <p class="calc-def-desc">
-                        Day-to-day living costs including household groceries, restaurant dining, personal apparel, gasoline, vehicle transit, and discretionary entertainment.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">INSURANCE</h4>
-                    <p class="calc-def-desc">
-                        Out-of-pocket insurance policies not deducted through payroll, including personal automobile insurance, private term life policies, umbrella liability, and individual healthcare premiums.
-                    </p>
-                </div>
-
-                <div class="calc-def-item">
-                    <h4 class="calc-def-term">MAINTENANCE, MEDICAL, CHILDCARE, ETC.</h4>
-                    <p class="calc-def-desc">
-                        Recurring family obligations such as property repairs, automotive service, childcare, daycare tuition, medical co-pays, prescription medication, and minimum credit card debt obligations.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Bottom Disclaimer Note -->
-            <div style="margin-top: 35px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 11.5px; line-height: 1.6; color: #64748b;">
-                <p>
-                    The educational tool and calculations provided are hypothetical examples and estimates only. Results depend on your inputs and will vary depending on your personal financial circumstances, unexpected life events, and changing market conditions. The calculator does not guarantee future financial stability or savings outcomes. Consult a certified financial planner, CPA, or financial advisor before making significant budgeting, borrowing, or investment decisions.
-                </p>
-            </div>
+            </section>
 
         </article>
     </main>
@@ -962,28 +1141,32 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div class="report-modal-bg" id="report-modal">
-        <div class="report-modal-box">
-            <button class="report-modal-close" onclick="closeReportModal()">&times;</button>
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #dfa01e; padding-bottom: 15px; margin-bottom: 20px;">
-                <img src="assets/logo.svg" alt="The Seiler Group" style="height: 45px;">
-                <div style="text-align: right;">
-                    <h3 style="margin: 0; color: #0b172a; font-size: 18px; font-weight: 700;">HOME BUDGET ANALYSIS REPORT</h3>
-                    <div style="font-size: 12px; color: #64748b;">The Seiler Group of Raymond James</div>
-                </div>
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeReportModalOnOverlay(event)">
+        <div class="calc-modal-dialog">
+            <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()">&times;</button>
+            <h2 class="calc-modal-title">Home Budget Analysis Report</h2>
+            <div class="calc-modal-meta">Prepared by The Seiler Group of Raymond James &bull; Confidential Personal Financial Review</div>
+
+            <div id="modal-report-content">
+                <!-- Dynamically populated report content -->
             </div>
 
-            <div id="report-modal-content">
-                <!-- Dynamically injected report details -->
+            <div class="calc-modal-actions">
+                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()">
+                    <i class="fas fa-print"></i> PRINT REPORT
+                </button>
+                <button type="button" class="calc-btn" onclick="closeReportModal()">CLOSE</button>
             </div>
+        </div>
+    </div>
 
-            <div style="margin-top: 25px; text-align: right; display: flex; justify-content: flex-end; gap: 12px;">
-                <button type="button" class="calc-btn calc-btn-outline" onclick="window.print()" style="padding: 8px 18px; font-size: 13px;">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
-                <button type="button" class="calc-btn calc-btn-primary" onclick="closeReportModal()" style="padding: 8px 22px; font-size: 13px;">
-                    Close
-                </button>
+    <!-- ============================================================
+     CHAMPION STRIP
+     ============================================================ -->
+    <div class="champion-strip">
+        <div class="champion-inner">
+            <div class="champion-text">
+                WE ARE PROUD TO BE RECOGNIZED AS A TOP WEALTH MANAGEMENT TEAM
             </div>
         </div>
     </div>
@@ -991,120 +1174,109 @@
     <!-- ============================================================
      FOOTER
      ============================================================ -->
-        <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
-
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
     <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+        <div class="footer-locations">
+            <div class="footer-col">
+                <h4 class="footer-heading">NEWTOWN, PA</h4>
+                <p>5 Caufield Place, Suite 201<br>Newtown, PA 18940</p>
+                <p>Phone: 215.860.7823<br>Toll-Free: 855.473.4537</p>
             </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
+            <div class="footer-col">
+                <h4 class="footer-heading">FORT LAUDERDALE, FL</h4>
+                <p>201 East Las Olas Boulevard, Suite 1630<br>Fort Lauderdale, FL 33301</p>
+                <p>Phone: 954.627.5020</p>
             </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
+            <div class="footer-col">
+                <h4 class="footer-heading">FORT MYERS, FL</h4>
+                <p>14541 Hope Center Loop, Suite 100<br>Fort Myers, FL 33912</p>
+                <p>Phone: 239.561.2990</p>
             </div>
         </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Raymond James &amp; Associates, Inc., member New York Stock Exchange / SIPC.</p>
         </div>
-
     </footer>
 
     <!-- ============================================================
-     INTERACTIVE LOGIC & CALCULATION ENGINE
+     CALCULATOR LOGIC & INTERACTION SCRIPTS
      ============================================================ -->
     <script>
-        function fmtMoney(num) {
-            return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parseClean(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
+        // Currency formatting helper
+        function formatCurrency(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
         }
 
-        // Toggle Accordions
-        function toggleAccordion(id) {
-            const content = document.getElementById(id);
-            const icon = document.getElementById(id + '-icon');
-            if (content.classList.contains('collapsed')) {
-                content.classList.remove('collapsed');
-                if (icon) icon.parentElement.classList.remove('collapsed');
-            } else {
-                content.classList.add('collapsed');
-                if (icon) icon.parentElement.classList.add('collapsed');
+        function formatCurrencyDecimal(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function parseCurrency(str) {
+            if (!str) return 0;
+            const cleaned = String(str).replace(/[^0-9.-]/g, '');
+            const val = parseFloat(cleaned);
+            return isNaN(val) ? 0 : val;
+        }
+
+        // Toggle collapsible sections
+        function toggleSec(secId) {
+            const sec = document.getElementById(secId);
+            if (sec) {
+                sec.classList.toggle('collapsed');
             }
         }
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu(e) {
-            if (e) e.preventDefault();
+        // Share dropdown toggle
+        function toggleShareDropdown(event) {
+            event.stopPropagation();
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) {
+                dd.classList.toggle('active');
+            }
+        }
+
+        document.addEventListener('click', function (e) {
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd && dd.classList.contains('active')) {
+                if (!e.target.closest('.calc-share-wrapper')) {
+                    dd.classList.remove('active');
+                }
+            }
+        });
+
+        function shareToSocial(network, event) {
+            event.stopPropagation();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Home Budget Analysis | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (network) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check out this Home Budget Analysis calculator: ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                if (network === 'email') {
+                    window.location.href = shareUrl;
+                } else {
+                    window.open(shareUrl, '_blank', 'width=600,height=450');
+                }
+            }
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) dd.classList.remove('active');
+        }
+
+        function toggleMobileMenu(event) {
+            if (event) event.preventDefault();
             const drawer = document.getElementById('mobile-drawer');
             const overlay = document.getElementById('drawer-overlay');
             if (drawer && overlay) {
@@ -1113,352 +1285,455 @@
             }
         }
 
-        // Two-way synchronization between inputs and sliders
-        function setupSync(inputId, rangeId) {
-            const inp = document.getElementById(inputId);
-            const rng = document.getElementById(rangeId);
-            if (!inp || !rng) return;
-
-            rng.addEventListener('input', () => {
-                inp.value = '$' + Math.round(parseFloat(rng.value) || 0).toLocaleString('en-US');
-                calculateHomeBudget();
-            });
-
-            inp.addEventListener('change', () => {
-                let clean = parseClean(inp.value);
-                clean = Math.max(parseFloat(rng.min), Math.min(parseFloat(rng.max), clean));
-                rng.value = clean;
-                inp.value = '$' + Math.round(clean).toLocaleString('en-US');
-                calculateHomeBudget();
-            });
-        }
-
-        // Calculate Monthly Frequency Multiplier
-        function getMonthlyMultiplier(freq) {
-            switch(parseInt(freq)) {
-                case 52: return 52 / 12; // weekly
-                case 26: return 26 / 12; // bi-weekly
-                case 24: return 2;       // semi-monthly
-                case 12: return 1;       // monthly
-                case 1:  return 1 / 12;  // annually
-                default: return 1;
+        function scrollToDefinitions() {
+            const el = document.getElementById('definitions-section');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        let lastCalculation = null;
+        // Sync inputs and range sliders
+        const fieldBindings = [
+            // Your Income
+            { inputId: 'inp-your-gross', rangeId: 'range-your-gross' },
+            { inputId: 'inp-your-fed-tax', rangeId: 'range-your-fed-tax' },
+            { inputId: 'inp-your-state-tax', rangeId: 'range-your-state-tax' },
+            { inputId: 'inp-your-local-tax', rangeId: 'range-your-local-tax' },
+            { inputId: 'inp-your-other-tax', rangeId: 'range-your-other-tax' },
+            { inputId: 'inp-your-fica', rangeId: 'range-your-fica' },
+            { inputId: 'inp-your-medicare', rangeId: 'range-your-medicare' },
+            { inputId: 'inp-your-benefits', rangeId: 'range-your-benefits' },
+            { inputId: 'inp-your-retire', rangeId: 'range-your-retire' },
+            { inputId: 'inp-your-other-inc', rangeId: 'range-your-other-inc' },
 
-        function calculateHomeBudget() {
-            // Income 1
-            const gross1 = parseClean(document.getElementById('inp-gross1').value);
-            const freq1 = document.getElementById('sel-freq1').value;
-            const mult1 = getMonthlyMultiplier(freq1);
+            // Spouse Income
+            { inputId: 'inp-sp-gross', rangeId: 'range-sp-gross' },
+            { inputId: 'inp-sp-fed-tax', rangeId: 'range-sp-fed-tax' },
+            { inputId: 'inp-sp-state-tax', rangeId: 'range-sp-state-tax' },
+            { inputId: 'inp-sp-local-tax', rangeId: 'range-sp-local-tax' },
+            { inputId: 'inp-sp-other-tax', rangeId: 'range-sp-other-tax' },
+            { inputId: 'inp-sp-fica', rangeId: 'range-sp-fica' },
+            { inputId: 'inp-sp-medicare', rangeId: 'range-sp-medicare' },
+            { inputId: 'inp-sp-benefits', rangeId: 'range-sp-benefits' },
+            { inputId: 'inp-sp-retire', rangeId: 'range-sp-retire' },
+            { inputId: 'inp-sp-other-inc', rangeId: 'range-sp-other-inc' },
 
-            const fed1 = parseClean(document.getElementById('inp-fed-tax1').value);
-            const state1 = parseClean(document.getElementById('inp-state-tax1').value);
-            const local1 = parseClean(document.getElementById('inp-local-tax1').value);
-            const otherTax1 = parseClean(document.getElementById('inp-other-tax1').value);
-            const fica1 = parseClean(document.getElementById('inp-fica1').value);
-            const med1 = parseClean(document.getElementById('inp-medicare1').value);
-            const ben1 = parseClean(document.getElementById('inp-benefits1').value);
-            const ret1 = parseClean(document.getElementById('inp-retire1').value);
+            // Mortgage & Debt
+            { inputId: 'inp-house', rangeId: 'range-house' },
+            { inputId: 'inp-auto1', rangeId: 'range-auto1' },
+            { inputId: 'inp-auto2', rangeId: 'range-auto2' },
+            { inputId: 'inp-cc-debt', rangeId: 'range-cc-debt' },
+            { inputId: 'inp-other-debt', rangeId: 'range-other-debt' },
 
-            const otherInc1 = parseClean(document.getElementById('inp-other-inc1').value);
-            const otherMult1 = getMonthlyMultiplier(document.getElementById('sel-other-freq1').value);
+            // Utilities
+            { inputId: 'inp-electric', rangeId: 'range-electric' },
+            { inputId: 'inp-gas', rangeId: 'range-gas' },
+            { inputId: 'inp-sewer', rangeId: 'range-sewer' },
+            { inputId: 'inp-cable', rangeId: 'range-cable' },
+            { inputId: 'inp-phone', rangeId: 'range-phone' },
+            { inputId: 'inp-internet', rangeId: 'range-internet' },
 
-            const netSalaryPerPeriod1 = Math.max(0, gross1 - (fed1 + state1 + local1 + otherTax1 + fica1 + med1 + ben1 + ret1));
-            const monthlyNet1 = (netSalaryPerPeriod1 * mult1) + (otherInc1 * otherMult1);
+            // Food & General
+            { inputId: 'inp-food', rangeId: 'range-food' },
+            { inputId: 'inp-auto-maint', rangeId: 'range-auto-maint' },
+            { inputId: 'inp-merch', rangeId: 'range-merch' },
+            { inputId: 'inp-charity', rangeId: 'range-charity' },
+            { inputId: 'inp-religious', rangeId: 'range-religious' },
 
-            // Income 2 (Spouse)
-            const gross2 = parseClean(document.getElementById('inp-gross2').value);
-            const mult2 = getMonthlyMultiplier(document.getElementById('sel-freq2').value);
-            const fed2 = parseClean(document.getElementById('inp-fed-tax2').value);
-            const state2 = parseClean(document.getElementById('inp-state-tax2').value);
-            const fica2 = parseClean(document.getElementById('inp-fica2').value);
-            const ben2 = parseClean(document.getElementById('inp-benefits2').value);
-            const otherInc2 = parseClean(document.getElementById('inp-other-inc2').value);
+            // Insurance
+            { inputId: 'inp-ins-auto', rangeId: 'range-ins-auto' },
+            { inputId: 'inp-ins-life', rangeId: 'range-ins-life' },
+            { inputId: 'inp-ins-health', rangeId: 'range-ins-health' },
+            { inputId: 'inp-ins-home', rangeId: 'range-ins-home' },
 
-            const netSalaryPerPeriod2 = Math.max(0, gross2 - (fed2 + state2 + fica2 + ben2));
-            const monthlyNet2 = (netSalaryPerPeriod2 * mult2) + otherInc2;
+            // Maintenance & Misc
+            { inputId: 'inp-home-maint', rangeId: 'range-home-maint' },
+            { inputId: 'inp-medical', rangeId: 'range-medical' },
+            { inputId: 'inp-travel', rangeId: 'range-travel' },
+            { inputId: 'inp-gift', rangeId: 'range-gift' },
+            { inputId: 'inp-bank-charge', rangeId: 'range-bank-charge' },
+            { inputId: 'inp-childcare', rangeId: 'range-childcare' },
+            { inputId: 'inp-other-exp', rangeId: 'range-other-exp' }
+        ];
 
-            const totalMonthlyNetIncome = monthlyNet1 + monthlyNet2;
+        fieldBindings.forEach(binding => {
+            const inputEl = document.getElementById(binding.inputId);
+            const rangeEl = document.getElementById(binding.rangeId);
 
-            // Expenses: Housing
-            const rent = parseClean(document.getElementById('inp-rent').value);
-            const propTax = parseClean(document.getElementById('inp-prop-tax').value);
-            const homeIns = parseClean(document.getElementById('inp-home-ins').value);
-            const housingTotal = rent + propTax + homeIns;
+            if (inputEl && rangeEl) {
+                rangeEl.addEventListener('input', () => {
+                    const num = parseFloat(rangeEl.value) || 0;
+                    inputEl.value = formatCurrency(num);
+                    calculateHomeBudget();
+                });
 
-            // Expenses: Utilities
-            const electric = parseClean(document.getElementById('inp-electric').value);
-            const water = parseClean(document.getElementById('inp-water').value);
-            const telecom = parseClean(document.getElementById('inp-telecom').value);
-            const utilitiesTotal = electric + water + telecom;
+                inputEl.addEventListener('change', () => {
+                    let num = parseCurrency(inputEl.value);
+                    if (num < 0) num = 0;
+                    inputEl.value = formatCurrency(num);
+                    if (num <= parseFloat(rangeEl.max)) {
+                        rangeEl.value = num;
+                    }
+                    calculateHomeBudget();
+                });
 
-            // Expenses: Food & General
-            const groceries = parseClean(document.getElementById('inp-groceries').value);
-            const dining = parseClean(document.getElementById('inp-dining').value);
-            const clothing = parseClean(document.getElementById('inp-clothing').value);
-            const transport = parseClean(document.getElementById('inp-transport').value);
-            const foodTotal = groceries + dining + clothing + transport;
+                inputEl.addEventListener('focus', () => {
+                    let raw = parseCurrency(inputEl.value);
+                    inputEl.value = raw === 0 ? '' : raw;
+                });
 
-            // Expenses: Insurance
-            const autoIns = parseClean(document.getElementById('inp-auto-ins').value);
-            const lifeIns = parseClean(document.getElementById('inp-life-ins-exp').value);
-            const healthIns = parseClean(document.getElementById('inp-health-ins').value);
-            const insuranceTotal = autoIns + lifeIns + healthIns;
+                inputEl.addEventListener('blur', () => {
+                    let raw = parseCurrency(inputEl.value);
+                    inputEl.value = formatCurrency(raw);
+                });
+            }
+        });
 
-            // Expenses: Maintenance & Childcare
-            const homeRep = parseClean(document.getElementById('inp-home-rep').value);
-            const childcare = parseClean(document.getElementById('inp-childcare').value);
-            const medical = parseClean(document.getElementById('inp-medical').value);
-            const debtPay = parseClean(document.getElementById('inp-debt-pay').value);
-            const maintTotal = homeRep + childcare + medical + debtPay;
-
-            const totalExpenses = housingTotal + utilitiesTotal + foodTotal + insuranceTotal + maintTotal;
-            const availableSavings = Math.max(0, totalMonthlyNetIncome - totalExpenses);
-            const annualSavings = availableSavings * 12;
-
-            lastCalculation = {
-                monthlyNet1,
-                monthlyNet2,
-                totalMonthlyNetIncome,
-                housingTotal,
-                utilitiesTotal,
-                foodTotal,
-                insuranceTotal,
-                maintTotal,
-                totalExpenses,
-                availableSavings,
-                annualSavings
-            };
-
-            // Update UI Totals on Accordion Headers
-            document.getElementById('tot-income1').innerText = fmtMoney(monthlyNet1);
-            document.getElementById('tot-income2').innerText = fmtMoney(monthlyNet2);
-            document.getElementById('tot-housing').innerText = fmtMoney(housingTotal);
-            document.getElementById('tot-utilities').innerText = fmtMoney(utilitiesTotal);
-            document.getElementById('tot-food').innerText = fmtMoney(foodTotal);
-            document.getElementById('tot-insurance').innerText = fmtMoney(insuranceTotal);
-            document.getElementById('tot-maint').innerText = fmtMoney(maintTotal);
-
-            // Update Highlight Banners
-            document.getElementById('banner-exp-amt').innerText = fmtMoney(totalExpenses);
-            document.getElementById('banner-save-amt').innerText = fmtMoney(availableSavings);
-            document.getElementById('chart-pie-heading').innerText = `MONTHLY EXPENSES OF ${fmtMoney(totalExpenses)} LEAVE YOU WITH ${fmtMoney(availableSavings)} AVAILABLE FOR SAVINGS.`;
-            document.getElementById('income-bar-heading').innerText = `MONTHLY NET INCOME OF ${fmtMoney(totalMonthlyNetIncome)} AFTER TAXES AND DEDUCTIONS.`;
-
-            // Update Summary Cards
-            document.getElementById('card-tot-income').innerText = fmtMoney(totalMonthlyNetIncome);
-            document.getElementById('card-tot-expenses').innerText = fmtMoney(totalExpenses);
-            document.getElementById('card-tot-surplus').innerText = fmtMoney(availableSavings);
-            document.getElementById('card-ann-savings').innerText = fmtMoney(annualSavings);
-
-            // Update Legend Amounts
-            document.getElementById('leg-savings').innerText = fmtMoney(availableSavings);
-            document.getElementById('leg-housing').innerText = fmtMoney(housingTotal);
-            document.getElementById('leg-utilities').innerText = fmtMoney(utilitiesTotal);
-            document.getElementById('leg-food').innerText = fmtMoney(foodTotal);
-            document.getElementById('leg-insurance').innerText = fmtMoney(insuranceTotal);
-            document.getElementById('leg-maint').innerText = fmtMoney(maintTotal);
-
-            // Update Progress Bar
-            updateProgressBar(totalMonthlyNetIncome, totalExpenses, availableSavings);
-
-            // Render SVG Donut Chart
-            renderDonutChart(availableSavings, housingTotal, utilitiesTotal, foodTotal, insuranceTotal, maintTotal);
+        // Frequency multiplier to convert to monthly amount
+        function getFreqMultiplier(freqValue) {
+            const f = parseFloat(freqValue) || 12;
+            return f / 12;
         }
 
-        // SVG Donut Chart Renderer
-        function renderDonutChart(savings, housing, utils, food, ins, maint) {
-            const container = document.getElementById('hb-pie-wrapper');
-            const total = savings + housing + utils + food + ins + maint;
+        // Global results cache for modal
+        let lastBudgetResults = null;
+
+        // Core calculation logic
+        function calculateHomeBudget(shouldScroll = false) {
+            // Your Paycheck
+            const yourGrossPeriod = parseCurrency(document.getElementById('inp-your-gross').value);
+            const yourFreq = parseFloat(document.getElementById('sel-your-freq').value) || 12;
+            const yourFreqMult = yourFreq / 12;
+
+            const yourFedTax = parseCurrency(document.getElementById('inp-your-fed-tax').value);
+            const yourStateTax = parseCurrency(document.getElementById('inp-your-state-tax').value);
+            const yourLocalTax = parseCurrency(document.getElementById('inp-your-local-tax').value);
+            const yourOtherTax = parseCurrency(document.getElementById('inp-your-other-tax').value);
+            const yourFica = parseCurrency(document.getElementById('inp-your-fica').value);
+            const yourMedicare = parseCurrency(document.getElementById('inp-your-medicare').value);
+            const yourBenefits = parseCurrency(document.getElementById('inp-your-benefits').value);
+            const yourRetire = parseCurrency(document.getElementById('inp-your-retire').value);
+
+            const yourDeductionsPeriod = yourFedTax + yourStateTax + yourLocalTax + yourOtherTax +
+                yourFica + yourMedicare + yourBenefits + yourRetire;
+            const yourNetPeriod = Math.max(0, yourGrossPeriod - yourDeductionsPeriod);
+
+            const yourGrossMonthly = yourGrossPeriod * yourFreqMult;
+            const yourDeductionsMonthly = yourDeductionsPeriod * yourFreqMult;
+            const yourNetPayMonthly = yourNetPeriod * yourFreqMult;
+
+            const yourOtherIncPeriod = parseCurrency(document.getElementById('inp-your-other-inc').value);
+            const yourOtherFreq = parseFloat(document.getElementById('sel-your-other-freq').value) || 12;
+            const yourOtherMonthly = yourOtherIncPeriod * (yourOtherFreq / 12);
+
+            const yourTotalNetMonthly = yourNetPayMonthly + yourOtherMonthly;
+
+            // Spouse Paycheck
+            const spGrossPeriod = parseCurrency(document.getElementById('inp-sp-gross').value);
+            const spFreq = parseFloat(document.getElementById('sel-sp-freq').value) || 12;
+            const spFreqMult = spFreq / 12;
+
+            const spFedTax = parseCurrency(document.getElementById('inp-sp-fed-tax').value);
+            const spStateTax = parseCurrency(document.getElementById('inp-sp-state-tax').value);
+            const spLocalTax = parseCurrency(document.getElementById('inp-sp-local-tax').value);
+            const spOtherTax = parseCurrency(document.getElementById('inp-sp-other-tax').value);
+            const spFica = parseCurrency(document.getElementById('inp-sp-fica').value);
+            const spMedicare = parseCurrency(document.getElementById('inp-sp-medicare').value);
+            const spBenefits = parseCurrency(document.getElementById('inp-sp-benefits').value);
+            const spRetire = parseCurrency(document.getElementById('inp-sp-retire').value);
+
+            const spDeductionsPeriod = spFedTax + spStateTax + spLocalTax + spOtherTax +
+                spFica + spMedicare + spBenefits + spRetire;
+            const spNetPeriod = Math.max(0, spGrossPeriod - spDeductionsPeriod);
+
+            const spGrossMonthly = spGrossPeriod * spFreqMult;
+            const spDeductionsMonthly = spDeductionsPeriod * spFreqMult;
+            const spNetPayMonthly = spNetPeriod * spFreqMult;
+
+            const spOtherIncPeriod = parseCurrency(document.getElementById('inp-sp-other-inc').value);
+            const spOtherFreq = parseFloat(document.getElementById('sel-sp-other-freq').value) || 12;
+            const spOtherMonthly = spOtherIncPeriod * (spOtherFreq / 12);
+
+            const spTotalNetMonthly = spNetPayMonthly + spOtherMonthly;
+
+            // Total Household Income
+            const totalHouseholdGross = yourGrossMonthly + yourOtherMonthly + spGrossMonthly + spOtherMonthly;
+            const totalHouseholdDeductions = yourDeductionsMonthly + spDeductionsMonthly;
+            const totalHouseholdNetIncome = yourTotalNetMonthly + spTotalNetMonthly;
+
+            // Expense Categories
+            // 1. Mortgage & Debt
+            const debtHouse = parseCurrency(document.getElementById('inp-house').value);
+            const debtAuto1 = parseCurrency(document.getElementById('inp-auto1').value);
+            const debtAuto2 = parseCurrency(document.getElementById('inp-auto2').value);
+            const debtCC = parseCurrency(document.getElementById('inp-cc-debt').value);
+            const debtOther = parseCurrency(document.getElementById('inp-other-debt').value);
+            const totalDebt = debtHouse + debtAuto1 + debtAuto2 + debtCC + debtOther;
+
+            // 2. Utilities
+            const utilElec = parseCurrency(document.getElementById('inp-electric').value);
+            const utilGas = parseCurrency(document.getElementById('inp-gas').value);
+            const utilSewer = parseCurrency(document.getElementById('inp-sewer').value);
+            const utilCable = parseCurrency(document.getElementById('inp-cable').value);
+            const utilPhone = parseCurrency(document.getElementById('inp-phone').value);
+            const utilInternet = parseCurrency(document.getElementById('inp-internet').value);
+            const totalUtilities = utilElec + utilGas + utilSewer + utilCable + utilPhone + utilInternet;
+
+            // 3. Food & General Expenses
+            const foodGroceries = parseCurrency(document.getElementById('inp-food').value);
+            const foodAutoGas = parseCurrency(document.getElementById('inp-auto-maint').value);
+            const foodMerch = parseCurrency(document.getElementById('inp-merch').value);
+            const foodCharity = parseCurrency(document.getElementById('inp-charity').value);
+            const foodReligious = parseCurrency(document.getElementById('inp-religious').value);
+            const totalFood = foodGroceries + foodAutoGas + foodMerch + foodCharity + foodReligious;
+
+            // 4. Insurance
+            const insAuto = parseCurrency(document.getElementById('inp-ins-auto').value);
+            const insLife = parseCurrency(document.getElementById('inp-ins-life').value);
+            const insHealth = parseCurrency(document.getElementById('inp-ins-health').value);
+            const insHome = parseCurrency(document.getElementById('inp-ins-home').value);
+            const totalInsurance = insAuto + insLife + insHealth + insHome;
+
+            // 5. Maintenance, Medical, Childcare, etc.
+            const maintHome = parseCurrency(document.getElementById('inp-home-maint').value);
+            const maintMed = parseCurrency(document.getElementById('inp-medical').value);
+            const maintTravel = parseCurrency(document.getElementById('inp-travel').value);
+            const maintGift = parseCurrency(document.getElementById('inp-gift').value);
+            const maintBank = parseCurrency(document.getElementById('inp-bank-charge').value);
+            const maintChildcare = parseCurrency(document.getElementById('inp-childcare').value);
+            const maintOther = parseCurrency(document.getElementById('inp-other-exp').value);
+            const totalMaintenance = maintHome + maintMed + maintTravel + maintGift + maintBank + maintChildcare + maintOther;
+
+            // Total Monthly Living Expenses
+            const totalExpenses = totalDebt + totalUtilities + totalFood + totalInsurance + totalMaintenance;
+
+            // Available for Savings
+            const availableSavings = Math.max(0, totalHouseholdNetIncome - totalExpenses);
+            const deficit = Math.max(0, totalExpenses - totalHouseholdNetIncome);
+
+            // Update Header Badges
+            document.getElementById('badge-your-income').innerText = formatCurrencyDecimal(yourTotalNetMonthly);
+            document.getElementById('badge-spouse-income').innerText = formatCurrencyDecimal(spTotalNetMonthly);
+            document.getElementById('badge-debt').innerText = formatCurrencyDecimal(totalDebt);
+            document.getElementById('badge-utilities').innerText = formatCurrencyDecimal(totalUtilities);
+            document.getElementById('badge-food').innerText = formatCurrencyDecimal(totalFood);
+            document.getElementById('badge-insurance').innerText = formatCurrencyDecimal(totalInsurance);
+            document.getElementById('badge-maintenance').innerText = formatCurrencyDecimal(totalMaintenance);
+
+            // Update Result Accordion Headers
+            const resultsTitle = `MONTHLY EXPENSES OF ${formatCurrencyDecimal(totalExpenses)} LEAVE YOU WITH ${formatCurrencyDecimal(availableSavings)} AVAILABLE FOR SAVINGS.`;
+            document.getElementById('results-header-title').innerText = resultsTitle;
+
+            const incomeTitle = `MONTHLY NET INCOME IS ${formatCurrencyDecimal(totalHouseholdNetIncome)} AFTER TAKING ${formatCurrencyDecimal(totalHouseholdDeductions)} IN DEDUCTIONS.`;
+            document.getElementById('income-header-title').innerText = incomeTitle;
+
+            // Update Net Income Summary Table
+            document.getElementById('tbl-your-gross').innerText = formatCurrencyDecimal(yourGrossMonthly + yourOtherMonthly);
+            document.getElementById('tbl-your-deduct').innerText = formatCurrencyDecimal(yourDeductionsMonthly);
+            document.getElementById('tbl-your-net').innerText = formatCurrencyDecimal(yourTotalNetMonthly);
+
+            document.getElementById('tbl-sp-gross').innerText = formatCurrencyDecimal(spGrossMonthly + spOtherMonthly);
+            document.getElementById('tbl-sp-deduct').innerText = formatCurrencyDecimal(spDeductionsMonthly);
+            document.getElementById('tbl-sp-net').innerText = formatCurrencyDecimal(spTotalNetMonthly);
+
+            document.getElementById('tbl-tot-gross').innerText = formatCurrencyDecimal(totalHouseholdGross);
+            document.getElementById('tbl-tot-deduct').innerText = formatCurrencyDecimal(totalHouseholdDeductions);
+            document.getElementById('tbl-tot-net').innerText = formatCurrencyDecimal(totalHouseholdNetIncome);
+
+            // Update Pie Chart & Legend
+            updateBudgetChart(totalDebt, totalUtilities, totalFood, totalInsurance, totalMaintenance, availableSavings);
+
+            // Cache results for modal
+            lastBudgetResults = {
+                yourTotalNetMonthly,
+                spTotalNetMonthly,
+                totalHouseholdGross,
+                totalHouseholdDeductions,
+                totalHouseholdNetIncome,
+                totalDebt,
+                totalUtilities,
+                totalFood,
+                totalInsurance,
+                totalMaintenance,
+                totalExpenses,
+                availableSavings,
+                deficit
+            };
+
+            if (shouldScroll) {
+                const resultsEl = document.getElementById('sec-budget-results');
+                if (resultsEl) {
+                    resultsEl.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        }
+
+        // Render SVG Pie Chart
+        function updateBudgetChart(debt, util, food, ins, maint, savings) {
+            const svg = document.getElementById('svg-budget-pie');
+            if (!svg) return;
+
+            const total = debt + util + food + ins + maint + savings;
+
+            // Update legend labels
+            document.getElementById('legend-debt-text').innerText = `${formatCurrency(debt)} Mortgage and debt`;
+            document.getElementById('legend-util-text').innerText = `${formatCurrency(util)} Utilities`;
+            document.getElementById('legend-food-text').innerText = `${formatCurrency(food)} Food and general expenses`;
+            document.getElementById('legend-ins-text').innerText = `${formatCurrency(ins)} Insurance`;
+            document.getElementById('legend-maint-text').innerText = `${formatCurrency(maint)} Maintenance, medical, childcare, etc.`;
+            document.getElementById('legend-save-text').innerText = `${formatCurrency(savings)} Available for savings`;
 
             if (total <= 0) {
-                container.innerHTML = `
-                    <svg viewBox="0 0 200 200" style="width: 100%; height: 100%;">
-                        <circle cx="100" cy="100" r="80" fill="#2563eb" />
-                        <text x="100" y="105" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">100% Savings</text>
-                    </svg>
-                `;
+                // If 0, render solid blue circle matching screenshot
+                svg.innerHTML = `<circle cx="160" cy="160" r="140" fill="#001fbe" />`;
+                document.getElementById('legend-debt-pct').innerText = `(0%)`;
+                document.getElementById('legend-util-pct').innerText = `(0%)`;
+                document.getElementById('legend-food-pct').innerText = `(0%)`;
+                document.getElementById('legend-ins-pct').innerText = `(0%)`;
+                document.getElementById('legend-maint-pct').innerText = `(0%)`;
+                document.getElementById('legend-save-pct').innerText = `(0%)`;
                 return;
             }
 
             const slices = [
-                { val: savings, color: '#2563eb', label: 'Savings' },
-                { val: housing, color: '#16a34a', label: 'Housing' },
-                { val: utils, color: '#06b6d4', label: 'Utilities' },
-                { val: food, color: '#dfa01e', label: 'Food' },
-                { val: ins, color: '#8b5cf6', label: 'Insurance' },
-                { val: maint, color: '#f43f5e', label: 'Maintenance' }
-            ].filter(s => s.val > 0);
+                { name: 'Mortgage and debt', val: debt, color: '#001fbe', pctEl: 'legend-debt-pct' },
+                { name: 'Utilities', val: util, color: '#22c55e', pctEl: 'legend-util-pct' },
+                { name: 'Food and general expenses', val: food, color: '#0ea5e9', pctEl: 'legend-food-pct' },
+                { name: 'Insurance', val: ins, color: '#eab308', pctEl: 'legend-ins-pct' },
+                { name: 'Maintenance, medical, childcare, etc.', val: maint, color: '#8b5cf6', pctEl: 'legend-maint-pct' },
+                { name: 'Available for savings', val: savings, color: '#ea580c', pctEl: 'legend-save-pct' }
+            ];
 
-            let cumulativeAngle = 0;
-            const paths = slices.map(slice => {
-                const angle = (slice.val / total) * 360;
-                const startAngle = cumulativeAngle;
-                const endAngle = cumulativeAngle + angle;
-                cumulativeAngle = endAngle;
+            let cumulativeAngle = -Math.PI / 2; // Start at 12 o'clock
+            const cx = 160;
+            const cy = 160;
+            const r = 140;
 
-                const x1 = 100 + 80 * Math.cos((Math.PI / 180) * (startAngle - 90));
-                const y1 = 100 + 80 * Math.sin((Math.PI / 180) * (startAngle - 90));
-                const x2 = 100 + 80 * Math.cos((Math.PI / 180) * (endAngle - 90));
-                const y2 = 100 + 80 * Math.sin((Math.PI / 180) * (endAngle - 90));
-                const largeArc = angle > 180 ? 1 : 0;
+            let pathsHtml = '';
 
-                if (angle >= 359.9) {
-                    return `<circle cx="100" cy="100" r="80" fill="${slice.color}" />`;
+            slices.forEach(slice => {
+                const pct = slice.val / total;
+                const pctFormatted = Math.round(pct * 100);
+                document.getElementById(slice.pctEl).innerText = `(${pctFormatted}%)`;
+
+                if (slice.val <= 0) return;
+
+                const sliceAngle = pct * 2 * Math.PI;
+
+                if (sliceAngle >= 2 * Math.PI - 0.0001) {
+                    pathsHtml += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${slice.color}" />`;
+                    return;
                 }
 
-                return `<path d="M 100 100 L ${x1} ${y1} A 80 80 0 ${largeArc} 1 ${x2} ${y2} Z" fill="${slice.color}" />`;
-            }).join('');
+                const x1 = cx + r * Math.cos(cumulativeAngle);
+                const y1 = cy + r * Math.sin(cumulativeAngle);
 
-            container.innerHTML = `
-                <svg viewBox="0 0 200 200" style="width: 100%; height: 100%; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.15));">
-                    ${paths}
-                    <circle cx="100" cy="100" r="42" fill="#ffffff" />
-                </svg>
-            `;
+                cumulativeAngle += sliceAngle;
+
+                const x2 = cx + r * Math.cos(cumulativeAngle);
+                const y2 = cy + r * Math.sin(cumulativeAngle);
+
+                const largeArcFlag = sliceAngle > Math.PI ? 1 : 0;
+
+                const pathData = `M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArcFlag} 1 ${x2} ${y2} Z`;
+                pathsHtml += `<path d="${pathData}" fill="${slice.color}" stroke="#ffffff" stroke-width="1.5" />`;
+            });
+
+            svg.innerHTML = pathsHtml;
         }
 
-        // Progress Bar Update
-        function updateProgressBar(income, expenses, savings) {
-            const expPct = income > 0 ? Math.min(100, Math.round((expenses / income) * 100)) : 0;
-            const savPct = income > 0 ? Math.max(0, 100 - expPct) : 0;
-
-            document.getElementById('seg-exp').style.width = expPct + '%';
-            document.getElementById('seg-sav').style.width = savPct + '%';
-            document.getElementById('ratio-label').innerText = `${expPct}% Expenses / ${savPct}% Savings`;
-            document.getElementById('lbl-bar-exp').innerText = fmtMoney(expenses);
-            document.getElementById('lbl-bar-sav').innerText = fmtMoney(savings);
-        }
-
-        // Report Modal
+        // View Report Modal
         function openReportModal() {
-            if (!lastCalculation) calculateHomeBudget();
-            const c = lastCalculation;
-            const content = document.getElementById('report-modal-content');
+            if (!lastBudgetResults) {
+                calculateHomeBudget(false);
+            }
+
+            const res = lastBudgetResults;
+            const content = document.getElementById('modal-report-content');
+            if (!content) return;
+
+            const savingsRate = res.totalHouseholdNetIncome > 0
+                ? Math.round((res.availableSavings / res.totalHouseholdNetIncome) * 100)
+                : 0;
 
             content.innerHTML = `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
-                    <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border-left: 4px solid #2563eb;">
-                        <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #0b172a; text-transform: uppercase;">Income Breakdown</h4>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
-                            <span>Your Net Pay:</span><strong>${fmtMoney(c.monthlyNet1)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 6px;">
-                            <span>Spouse Net Pay:</span><strong>${fmtMoney(c.monthlyNet2)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-top: 10px; padding-top: 8px; border-top: 1px solid #cbd5e1; color: #1e3a8a;">
-                            <span>Total Net Income:</span><strong>${fmtMoney(c.totalMonthlyNetIncome)}</strong>
-                        </div>
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 18px; margin-bottom: 20px;">
+                    <div style="font-size: 15px; font-weight: 700; color: #0b172a; margin-bottom: 6px;">
+                        Monthly Cash Flow Summary
                     </div>
-
-                    <div style="background: #0b172a; color: #fff; padding: 15px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4);">
-                        <h4 style="margin: 0 0 10px 0; font-size: 13px; color: #dfa01e; text-transform: uppercase;">Living Expenses</h4>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;">
-                            <span>Mortgage / Rent:</span><strong>${fmtMoney(c.housingTotal)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;">
-                            <span>Utilities:</span><strong>${fmtMoney(c.utilitiesTotal)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;">
-                            <span>Food & General:</span><strong>${fmtMoney(c.foodTotal)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;">
-                            <span>Insurance:</span><strong>${fmtMoney(c.insuranceTotal)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px;">
-                            <span>Maintenance & Debt:</span><strong>${fmtMoney(c.maintTotal)}</strong>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 13px; margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2); color: #f87171;">
-                            <span>Total Expenses:</span><strong>${fmtMoney(c.totalExpenses)}</strong>
-                        </div>
+                    <div style="font-size: 13.5px; color: #334155;">
+                        Total Monthly Net Income: <strong>${formatCurrencyDecimal(res.totalHouseholdNetIncome)}</strong><br>
+                        Total Monthly Living Expenses: <strong>${formatCurrencyDecimal(res.totalExpenses)}</strong><br>
+                        Net Available for Savings: <strong style="color: #16a34a;">${formatCurrencyDecimal(res.availableSavings)}</strong> (${savingsRate}% savings rate)
                     </div>
                 </div>
 
-                <div style="background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; padding: 16px; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <h4 style="margin: 0; color: #065f46; font-size: 14px; text-transform: uppercase;">Monthly Net Savings Surplus</h4>
-                            <p style="margin: 4px 0 0 0; font-size: 12px; color: #047857;">Discretionary cash flow remaining each month to invest.</p>
-                        </div>
-                        <div style="font-size: 24px; font-weight: 800; color: #059669;">${fmtMoney(c.availableSavings)}</div>
-                    </div>
-                </div>
-
-                <h4 style="margin: 0 0 10px 0; font-size: 14px; color: #0b172a; text-transform: uppercase;">Actionable Wealth Strategies</h4>
-                <p style="font-size: 12.5px; line-height: 1.6; color: #475569; margin-bottom: 12px;">
-                    1. <strong>50/30/20 Benchmark:</strong> Strive to keep core living needs under 50% of your take-home pay, allocate 30% to lifestyle/discretionary items, and direct at least 20% into wealth-building savings.<br>
-                    2. <strong>Automate Savings:</strong> Set up an automatic sweep on payday moving your surplus ($${fmtMoney(c.availableSavings)}) into high-yield emergency reserves or tax-advantaged investment vehicles.<br>
-                    3. <strong>Debt Accelerated Payoff:</strong> If carrying high-interest consumer credit, route available monthly cash surplus to extinguish balances and eliminate unnecessary financing charges.
-                </p>
+                <h3 style="font-size: 15px; font-weight: 700; color: #0b172a; margin: 18px 0 8px 0; text-transform: uppercase;">
+                    Monthly Expenditures Breakdown
+                </h3>
+                <table class="calc-modal-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Monthly Amount</th>
+                            <th>Share of Budget</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mortgage and Debt</strong></td>
+                            <td>${formatCurrencyDecimal(res.totalDebt)}</td>
+                            <td>${res.totalExpenses > 0 ? Math.round((res.totalDebt / res.totalExpenses) * 100) : 0}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Utilities</strong></td>
+                            <td>${formatCurrencyDecimal(res.totalUtilities)}</td>
+                            <td>${res.totalExpenses > 0 ? Math.round((res.totalUtilities / res.totalExpenses) * 100) : 0}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Food and General Expenses</strong></td>
+                            <td>${formatCurrencyDecimal(res.totalFood)}</td>
+                            <td>${res.totalExpenses > 0 ? Math.round((res.totalFood / res.totalExpenses) * 100) : 0}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Insurance</strong></td>
+                            <td>${formatCurrencyDecimal(res.totalInsurance)}</td>
+                            <td>${res.totalExpenses > 0 ? Math.round((res.totalInsurance / res.totalExpenses) * 100) : 0}%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Maintenance, Medical, Childcare, etc.</strong></td>
+                            <td>${formatCurrencyDecimal(res.totalMaintenance)}</td>
+                            <td>${res.totalExpenses > 0 ? Math.round((res.totalMaintenance / res.totalExpenses) * 100) : 0}%</td>
+                        </tr>
+                        <tr style="background: #f1f5f9; font-weight: 700;">
+                            <td>Total Monthly Expenses</td>
+                            <td>${formatCurrencyDecimal(res.totalExpenses)}</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            const modal = document.getElementById('reportModal');
+            if (modal) modal.classList.add('active');
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('reportModal');
+            if (modal) modal.classList.remove('active');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
+        function closeReportModalOnOverlay(event) {
+            if (event.target.id === 'reportModal') {
+                closeReportModal();
+            }
+        }
 
-        // Initialize Sliders
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
-            // Income 1
-            setupSync('inp-gross1', 'range-gross1');
-            setupSync('inp-fed-tax1', 'range-fed-tax1');
-            setupSync('inp-state-tax1', 'range-state-tax1');
-            setupSync('inp-local-tax1', 'range-local-tax1');
-            setupSync('inp-other-tax1', 'range-other-tax1');
-            setupSync('inp-fica1', 'range-fica1');
-            setupSync('inp-medicare1', 'range-medicare1');
-            setupSync('inp-benefits1', 'range-benefits1');
-            setupSync('inp-retire1', 'range-retire1');
-            setupSync('inp-other-inc1', 'range-other-inc1');
-
-            // Income 2
-            setupSync('inp-gross2', 'range-gross2');
-            setupSync('inp-fed-tax2', 'range-fed-tax2');
-            setupSync('inp-state-tax2', 'range-state-tax2');
-            setupSync('inp-fica2', 'range-fica2');
-            setupSync('inp-benefits2', 'range-benefits2');
-            setupSync('inp-other-inc2', 'range-other-inc2');
-
-            // Housing
-            setupSync('inp-rent', 'range-rent');
-            setupSync('inp-prop-tax', 'range-prop-tax');
-            setupSync('inp-home-ins', 'range-home-ins');
-
-            // Utilities
-            setupSync('inp-electric', 'range-electric');
-            setupSync('inp-water', 'range-water');
-            setupSync('inp-telecom', 'range-telecom');
-
-            // Food
-            setupSync('inp-groceries', 'range-groceries');
-            setupSync('inp-dining', 'range-dining');
-            setupSync('inp-clothing', 'range-clothing');
-            setupSync('inp-transport', 'range-transport');
-
-            // Insurance
-            setupSync('inp-auto-ins', 'range-auto-ins');
-            setupSync('inp-life-ins-exp', 'range-life-ins-exp');
-            setupSync('inp-health-ins', 'range-health-ins');
-
-            // Maintenance & Debt
-            setupSync('inp-home-rep', 'range-home-rep');
-            setupSync('inp-childcare', 'range-childcare');
-            setupSync('inp-medical', 'range-medical');
-            setupSync('inp-debt-pay', 'range-debt-pay');
-
-            // Calculate Initial
-            calculateHomeBudget();
+            calculateHomeBudget(false);
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

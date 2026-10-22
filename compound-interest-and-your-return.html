@@ -1,75 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compound Interest and Your Return | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Compare how annual, quarterly, monthly, and daily compounding frequencies impact your investment returns over time.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Compound Interest and Your Return | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="How interest is calculated can greatly affect your savings. The more often interest is compounded, or added to your account, the more you earn. This calculator demonstrates how compounding can affect your savings, and how interest on your interest really adds up!">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .freq-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .freq-stat-card {
-            background: rgba(11, 23, 42, 0.85);
-            border: 1px solid rgba(223, 160, 30, 0.3);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-        }
-        .freq-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .freq-stat-label {
-            font-size: 11.5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .freq-apy-badge {
-            font-size: 11.5px;
-            color: #dfa01e;
-            margin-top: 4px;
-            font-weight: 600;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="compound-interest-and-your-return.css?v=1">
 </head>
-<body class="calc-page-body">
+
+<body class="calc-white-page">
 
     <!-- ============================================================
-     HEADER & BRAND NAVIGATION
+     HEADER
      ============================================================ -->
-    <header class="calc-header">
-        <div class="calc-header-inner">
-            <a href="index.html" class="calc-logo-wrap">
-                <img src="assets/logo.svg" alt="The Seiler Group | Raymond James" class="calc-header-logo">
+    <header class="site-header" id="main-header">
+
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
-            <nav class="calc-nav-desktop">
-                <a href="index.html" class="calc-nav-link">HOME</a>
-                <a href="athletes.html" class="calc-nav-link">ATHLETES</a>
-                <a href="business-titans.html" class="calc-nav-link">BUSINESS TITANS</a>
-                <a href="individuals.html" class="calc-nav-link">PRIVATE WEALTH</a>
-                <a href="team.html" class="calc-nav-link">YOUR TEAM</a>
-                <a href="resources.html" class="calc-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="calc-nav-link">CONTACT US</a>
-            </nav>
-            <a href="contact.html" class="calc-client-btn">CLIENT ACCESS</a>
         </div>
-        <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu" onclick="toggleMobileMenu(event)">
+
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="resources.html?media=Calculators" class="nav-dropdown-item" id="nav-item-media">
+                        CALCULATORS
+                    </a>
+                    <a href="resources.html" class="nav-dropdown-item active" id="nav-item-resources-all">
+                        RESOURCES &amp; PERSPECTIVES
+                    </a>
+                    <a href="introduce-us.html" class="nav-dropdown-item" id="nav-item-introduce-us">
+                        INTRODUCE US
+                    </a>
+                </div>
+            </div>
+
+            <!-- Client Access Button -->
+            <div class="nav-dropdown-wrapper client-access-wrapper dropdown-right-align" id="client-access-dropdown">
+                <a href="https://clientaccess.rjf.com" class="client-access-btn" target="_blank" rel="noopener noreferrer">
+                    <span>CLIENT ACCESS</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
             <span></span>
@@ -81,7 +134,8 @@
     <div class="mobile-drawer" id="mobile-drawer">
         <div class="drawer-header">
             <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
-            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
         </div>
         <nav class="drawer-nav">
             <a href="index.html" class="drawer-link">HOME</a>
@@ -113,237 +167,261 @@
     <main class="calc-white-wrapper">
         <article class="calc-white-container">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 260px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 12px 35px rgba(0,0,0,0.5);">
-                <img src="assets/resources/card-13.jpg" alt="Compound Interest Comparison" style="width: 100%; height: 260px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Image Banner: Matching Screenshot 1 -->
+            <div class="calc-hero-banner-wrapper">
+                <img src="assets/resources/compound-interest-hero.jpg" alt="Compound Interest and Your Return | The Seiler Group of Raymond James" class="calc-hero-banner-img">
             </div>
 
-            <!-- Title & Meta Header -->
+            <!-- Title & Meta Header matching Screenshot 1 -->
             <header class="calc-white-header">
                 <h1 class="calc-white-title">COMPOUND INTEREST AND YOUR RETURN</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=Savings%20%26%20Investments" class="calc-cat-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    
+                    <!-- Social Share Button & Dropdown -->
+                    <div class="calc-share-wrapper" id="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" id="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calc-share-dropdown">
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('facebook', event)" title="Share on Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('twitter', event)" title="Share on X">
+                                <i class="fab fa-x-twitter"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('linkedin', event)" title="Share on LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="javascript:void(0)" class="calc-share-item" onclick="shareToSocial('email', event)" title="Share via Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    How interest is calculated can greatly affect your savings. The more often interest is compounded, or added to your balance, the more you earn. This calculator demonstrates how compounding can affect your returns and how a small addition to your return is manageable.
+                    How interest is calculated can greatly affect your savings. The more often interest is compounded, or added to your account, the more you earn. This calculator demonstrates how compounding can affect your savings, and how interest on your interest really adds up!
                 </p>
             </header>
 
-            <!-- Sticky Floating Action Box -->
+            <!-- Sticky Floating Action Box matching Screenshot 1 -->
             <div class="calc-action-card-sticky-wrapper">
                 <section class="calc-action-card">
                     <div class="calc-btn-row">
-                        <button type="button" class="calc-btn-gold" id="btn-calculate" onclick="calculateCompounding()">CALCULATE</button>
-                        <button type="button" class="calc-btn-outline" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateCompounding()">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-status-center">
+                        <div class="calc-action-status-line1" id="status-line1">
+                            Daily compounding yields <strong>$11,051.69</strong> after 10 years.
+                        </div>
                     </div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
                         </button>
-                        <button type="button" class="calc-icon-btn" onclick="window.print()" title="Print Summary">
-                            <i class="fas fa-print"></i>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Detailed Report Schedule">
+                            <i class="fas fa-bars"></i>
                         </button>
-                        <span class="calc-req-text">*indicates required</span>
+                        <span class="calc-req-text">*indicates required.</span>
                     </div>
                 </section>
             </div>
 
             <!-- ============================================================
-             SECTION 1: YOUR INVESTMENT OPTIONS
+             SECTION 1: YOUR INVESTMENT OPTIONS matching Screenshot 1 & 2
              ============================================================ -->
-            <section class="calc-section" id="sec-options">
-                <div class="calc-sec-header" onclick="toggleSec('sec-options')">
-                    <h2 class="calc-sec-title">YOUR INVESTMENT OPTIONS:</h2>
-                    <i class="fas fa-chevron-up calc-sec-chevron"></i>
+            <div class="calc-collapsible-section" id="sec-options">
+                <div class="calc-section-header" onclick="toggleSec('sec-options')">
+                    <h2 class="calc-section-title">YOUR INVESTMENT OPTIONS:</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="calc-sec-body">
+                <div class="calc-section-body">
 
-                    <!-- Investment Amount -->
+                    <!-- Investment Amount:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-amount" class="calc-field-label">Investment Amount:*</label>
-                            <span class="calc-q-dot" title="Principal amount to invest.">?</span>
+                            <span class="calc-q-dot" title="The amount of your initial investment.">?</span>
                         </div>
                         <input type="text" id="inp-amount" class="calc-text-input" value="$10,000">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-amount" class="calc-range-slider" min="0" max="100000" step="500" value="10000">
+                            <input type="range" id="range-amount" class="calc-range-slider" min="0" max="1000000" step="500" value="10000">
                             <div class="calc-tick-labels">
                                 <span>$0</span>
-                                <span>$25,000</span>
-                                <span>$50,000</span>
-                                <span>$75,000</span>
-                                <span>$100,000</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Interest Rate -->
+                    <!-- Interest Rate:* -->
                     <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-rate" class="calc-field-label">Interest Rate:*</label>
-                            <span class="calc-q-dot" title="Annual nominal interest rate.">?</span>
+                            <span class="calc-q-dot" title="The annual interest rate for your investment. The actual rate of return is largely dependent on the types of investments you select.">?</span>
                         </div>
-                        <input type="text" id="inp-rate" class="calc-text-input" value="7%">
+                        <input type="text" id="inp-rate" class="calc-text-input" value="1%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="15" step="0.5" value="7">
+                            <input type="range" id="range-rate" class="calc-range-slider" min="0" max="12" step="0.25" value="1">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>4%</span>
-                                <span>7%</span>
-                                <span>11%</span>
-                                <span>15%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Years -->
-                    <div class="calc-input-row" style="margin-bottom: 0;">
+                    <!-- Years:* -->
+                    <div class="calc-input-row">
                         <div class="calc-label-col">
                             <label for="inp-years" class="calc-field-label">Years:*</label>
-                            <span class="calc-q-dot" title="Number of years for investment horizon.">?</span>
+                            <span class="calc-q-dot" title="Number of years for this investment.">?</span>
                         </div>
                         <input type="text" id="inp-years" class="calc-text-input" value="10">
                         <div class="calc-slider-col">
                             <input type="range" id="range-years" class="calc-range-slider" min="1" max="50" step="1" value="10">
                             <div class="calc-tick-labels">
                                 <span>1</span>
-                                <span>12</span>
-                                <span>25</span>
-                                <span>37</span>
+                                <span>17</span>
+                                <span>34</span>
                                 <span>50</span>
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </section>
+            </div>
 
-            <!-- 4 Frequency Stat Cards -->
-            <div class="freq-stat-grid">
-                <div class="freq-stat-card">
-                    <div class="freq-stat-val" style="color: #2563eb;" id="card-ann">$19,671.51</div>
-                    <div class="freq-stat-label">Annually Compounded</div>
-                    <div class="freq-apy-badge" id="card-ann-apy">APY: 7.00%</div>
+            <!-- ============================================================
+             SECTION 2: TOTAL RETURN AFTER 10 YEARS (CHART) matching Screenshot 2 & 3
+             ============================================================ -->
+            <div class="calc-collapsible-section" id="sec-chart">
+                <div class="calc-section-header" onclick="toggleSec('sec-chart')">
+                    <h2 class="calc-section-title" id="chart-section-title">TOTAL RETURN AFTER 10 YEARS</h2>
+                    <div class="calc-section-right">
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
+                    </div>
                 </div>
-                <div class="freq-stat-card">
-                    <div class="freq-stat-val" style="color: #16a34a;" id="card-qtr">$20,015.97</div>
-                    <div class="freq-stat-label">Quarterly Compounded</div>
-                    <div class="freq-apy-badge" id="card-qtr-apy">APY: 7.19%</div>
-                </div>
-                <div class="freq-stat-card">
-                    <div class="freq-stat-val" style="color: #06b6d4;" id="card-mon">$20,096.61</div>
-                    <div class="freq-stat-label">Monthly Compounded</div>
-                    <div class="freq-apy-badge" id="card-mon-apy">APY: 7.23%</div>
-                </div>
-                <div class="freq-stat-card">
-                    <div class="freq-stat-val" style="color: #dfa01e;" id="card-day">$20,136.18</div>
-                    <div class="freq-stat-label">Daily Compounded</div>
-                    <div class="freq-apy-badge" id="card-day-apy">APY: 7.25%</div>
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <div class="calc-chart-layout">
+                            <div class="calc-svg-chart-container" id="chart-container">
+                                <div class="calc-tooltip" id="chart-tooltip"></div>
+                                <svg class="calc-svg-chart" id="compound-svg" viewBox="0 0 600 320" preserveAspectRatio="none">
+                                    <!-- Dynamic SVG bars generated by JS -->
+                                </svg>
+                            </div>
+
+                            <!-- Legend matching Screenshot 2 & 3 -->
+                            <div class="calc-chart-legend-col">
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-yearly"></span>
+                                    <span>Yearly Total <strong id="leg-yearly">$11,046.22</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-quarterly"></span>
+                                    <span>Quarterly Total <strong id="leg-quarterly">$11,050.33</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-monthly"></span>
+                                    <span>Monthly Total <strong id="leg-monthly">$11,051.25</strong></span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-dot dot-daily"></span>
+                                    <span>Daily Total <strong id="leg-daily">$11,051.69</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- ============================================================
-             SECTION 2: TOTAL RETURN AFTER YEARS CHART
+             SECTION 3: DEFINITIONS matching Screenshot 3, 4 & 5
              ============================================================ -->
-            <section class="calc-section" id="sec-chart">
-                <div class="calc-sec-header">
-                    <h2 class="calc-sec-title" id="chart-headline">TOTAL RETURN AFTER 10 YEARS</h2>
-                    <span style="font-size: 11.5px; color: #dfa01e; font-weight: 600;">Side-by-Side Comparison</span>
-                </div>
-                <div class="calc-sec-body" style="padding: 24px;">
+            <section class="calc-def-wrap" id="sec-definitions">
+                <h3 class="calc-def-heading">DEFINITIONS</h3>
 
-                    <!-- Legend -->
-                    <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-bottom: 20px; font-size: 12.5px; font-weight: 600;">
-                        <span style="display: flex; align-items: center; gap: 6px; color: #60a5fa;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #2563eb; display: inline-block;"></span> Annually: <span id="leg-ann" style="color: #fff; margin-left: 4px;">$19,671.51</span>
-                        </span>
-                        <span style="display: flex; align-items: center; gap: 6px; color: #4ade80;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #16a34a; display: inline-block;"></span> Quarterly: <span id="leg-qtr" style="color: #fff; margin-left: 4px;">$20,015.97</span>
-                        </span>
-                        <span style="display: flex; align-items: center; gap: 6px; color: #22d3ee;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #06b6d4; display: inline-block;"></span> Monthly: <span id="leg-mon" style="color: #fff; margin-left: 4px;">$20,096.61</span>
-                        </span>
-                        <span style="display: flex; align-items: center; gap: 6px; color: #dfa01e;">
-                            <span style="width: 12px; height: 12px; border-radius: 50%; background: #dfa01e; display: inline-block;"></span> Daily: <span id="leg-day" style="color: #fff; margin-left: 4px;">$20,136.18</span>
-                        </span>
-                    </div>
-
-                    <div id="freq-chart-container" style="width: 100%; height: 320px; position: relative;">
-                        <!-- Dynamic SVG Comparison Chart -->
-                    </div>
-                </div>
-            </section>
-
-            <!-- ============================================================
-             DEFINITIONS SECTION (EXACT TEXT FROM SCREENSHOT)
-             ============================================================ -->
-            <div class="calc-def-wrap">
-                <h3 class="calc-def-head">DEFINITIONS</h3>
-
+                <!-- Investment Amount -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">INVESTMENT AMOUNT</h4>
+                    <div class="calc-def-term">INVESTMENT AMOUNT</div>
                     <p class="calc-def-desc">
                         The amount of your initial investment.
                     </p>
                 </div>
 
+                <!-- Interest Rate -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">INTEREST RATE</h4>
+                    <div class="calc-def-term">INTEREST RATE</div>
                     <p class="calc-def-desc">
-                        The rate of interest rate for your investment. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500 (S&amp;P 500) for the 10 years ended December 31st, 2023, had an annual compounded rate of return of 11.4%, including reinvestment of dividends. From January 1, 1970 to December 31st 2023, the average annual compound rate of return for the S&amp;P 500, including reinvestment of dividends, was approximately 11.1 percent (with a standard deviation of 17.5%). The highest 10-year period return was 19.5% (June 1989 through June 1999). The lowest 10-year period return was -1.4% (March 1999 to March 2009). Savings accounts at financial institutions are not currently expected to return this level of annual return.
+                        The annual interest rate for your investment. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
                     </p>
-                    <p class="calc-def-desc" style="margin-top: 8px;">
-                        It is important to remember that these examples are hypothetical and that future rates of return cannot be predicted with certainty, and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. Also consider the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return quoted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                    <p class="calc-def-desc" style="margin-top: 10px;">
+                        It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
                     </p>
                 </div>
 
+                <!-- Years -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">YEARS</h4>
+                    <div class="calc-def-term">YEARS</div>
                     <p class="calc-def-desc">
-                        Number of years for the investment.
+                        Number of years for this investment.
                     </p>
                 </div>
 
+                <!-- Compound Interest -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">COMPOUND FREQUENCY</h4>
+                    <div class="calc-def-term">COMPOUND INTEREST</div>
                     <p class="calc-def-desc">
-                        Interest on an investment's earnings, plus previous interest. The more frequently this occurs, the sooner your accumulated interest will generate additional interest. You should check with your financial institution to find out how often interest is being compounded on your particular investment.
+                        Interest on an investment's interest, plus previous interest. The more frequently this occurs, the sooner your accumulated interest will generate additional interest. You should check with your financial institution to find out how often interest is being compounded on your particular investment.
                     </p>
                 </div>
 
+                <!-- Yearly APY -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">YEARLY APY</h4>
+                    <div class="calc-def-term">YEARLY APY</div>
                     <p class="calc-def-desc">
                         Annual percentage yield received if your investment is compounded yearly.
                     </p>
                 </div>
 
+                <!-- Quarterly APY -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">QUARTERLY APY</h4>
+                    <div class="calc-def-term">QUARTERLY APY</div>
                     <p class="calc-def-desc">
                         Annual percentage yield received if your investment is compounded quarterly.
                     </p>
                 </div>
 
+                <!-- Monthly APY -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">MONTHLY APY</h4>
+                    <div class="calc-def-term">MONTHLY APY</div>
                     <p class="calc-def-desc">
                         Annual percentage yield received if your investment is compounded monthly.
                     </p>
                 </div>
 
+                <!-- Daily APY -->
                 <div class="calc-def-item">
-                    <h4 class="calc-def-term">DAILY APY</h4>
+                    <div class="calc-def-term">DAILY APY</div>
                     <p class="calc-def-desc">
                         Annual percentage yield received if your investment is compounded daily.
                     </p>
                 </div>
 
-                <p class="calc-footnote-p" style="margin-top: 30px; font-size: 11px; line-height: 1.6; color: #64748b;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
+            </section>
+
+            <!-- Legal Disclaimer matching Screenshot 5 -->
+            <div class="calc-disclaimer-wrap">
+                <p class="calc-disclaimer-p">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
                 </p>
             </div>
 
@@ -353,35 +431,32 @@
     <!-- ============================================================
      VIEW REPORT MODAL
      ============================================================ -->
-    <div id="report-modal" class="calc-modal" style="display: none; position: fixed; inset: 0; background: rgba(5,11,20,0.88); z-index: 9999; overflow-y: auto; padding: 30px 15px;">
-        <div style="background: #0d1b31; max-width: 880px; margin: 40px auto; border-radius: 8px; border: 1px solid #dfa01e; box-shadow: 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;">
-            <div style="background: #091424; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(223,160,30,0.3);">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #ffffff; margin: 0;">Compounding Frequency Comparison Report</h2>
-                    <p style="font-size: 12px; color: #dfa01e; margin: 4px 0 0 0;">Prepared by The Seiler Group &bull; Raymond James</p>
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <button type="button" onclick="window.print()" class="calc-btn-gold" style="padding: 7px 16px; font-size: 12px;"><i class="fas fa-print"></i> Print</button>
-                    <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 24px; color: #94a3b8; cursor: pointer;">&times;</button>
-                </div>
+    <div class="calc-modal-overlay" id="report-modal">
+        <div class="calc-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="modal-title">Compound Interest and Your Return — Comparative Schedule</h3>
+                <button type="button" class="calc-modal-close" onclick="closeReportModal()" aria-label="Close modal">&times;</button>
             </div>
-            <div style="padding: 24px; max-height: 520px; overflow-y: auto;" id="modal-report-content">
-                <!-- Comparison table rendered by JS -->
+            <div class="calc-modal-body" id="modal-report-content">
+                <!-- Dynamically generated comparison report -->
+            </div>
+            <div class="calc-modal-footer">
+                <button type="button" class="calc-btn" style="background: transparent; color: #dfa01e;" onclick="window.print()"><i class="fas fa-print"></i> PRINT REPORT</button>
+                <button type="button" class="calc-btn" id="btn-modal-close" onclick="closeReportModal()">CLOSE</button>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
+    <!-- ============================================================
      CHAMPION STRIP
      ============================================================ -->
     <section class="champion-strip">
 
         <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
                 <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
                     aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
@@ -461,252 +536,410 @@
      CALCULATOR JAVASCRIPT ENGINE
      ============================================================ -->
     <script>
-        function toggleMobileMenu(e) {
-            e.stopPropagation();
-            const drawer = document.getElementById('mobile-drawer');
-            const overlay = document.getElementById('drawer-overlay');
-            const toggle = document.getElementById('mobile-nav-toggle');
-            drawer.classList.toggle('open');
-            overlay.classList.toggle('open');
-            toggle.classList.toggle('open');
+        // Formatting Helpers
+        function fmtCurr(num) {
+            return '$' + Math.round(Number(num || 0)).toLocaleString('en-US');
+        }
+        function fmtCurrCents(num) {
+            return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+        function fmtPct(num) {
+            return `${Number(num || 0).toFixed(num % 1 === 0 ? 0 : 2)}%`;
+        }
+        function cleanNum(val) {
+            return parseFloat(String(val || 0).replace(/[^0-9.-]/g, '')) || 0;
         }
 
+        // Toggle Mobile Menu
+        function toggleMobileMenu(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const toggle = document.getElementById('mobile-toggle');
+            if (!drawer) return;
+            const isOpen = drawer.classList.contains('active');
+            if (isOpen) {
+                drawer.classList.remove('active');
+                if (overlay) overlay.classList.remove('active');
+                if (toggle) toggle.classList.remove('open');
+                document.body.classList.remove('menu-open');
+            } else {
+                drawer.classList.add('active');
+                if (overlay) overlay.classList.add('active');
+                if (toggle) toggle.classList.add('open');
+                document.body.classList.add('menu-open');
+            }
+        }
+
+        // Section Toggles
         function toggleSec(secId) {
             const sec = document.getElementById(secId);
             if (sec) sec.classList.toggle('collapsed');
         }
 
-        // Helpers
-        function parseCurrency(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
-        }
-        function formatCurrency(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-        function formatCurrencyCents(num) {
-            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-        function parsePercent(str) {
-            return parseFloat(String(str).replace(/[^0-9.-]+/g, '')) || 0;
+        // Share Dropdown
+        function toggleShareDropdown(e) {
+            if (e) { e.preventDefault(); e.stopPropagation(); }
+            const dd = document.getElementById('calc-share-dropdown');
+            if (dd) dd.classList.toggle('active');
         }
 
-        // Sync inputs & sliders
-        function bindSliderAndInput(inputId, rangeId, isCurrency, isPct, maxVal) {
+        document.addEventListener('click', (e) => {
+            const shareWrap = document.getElementById('calc-share-wrapper');
+            const shareDd = document.getElementById('calc-share-dropdown');
+            if (shareWrap && !shareWrap.contains(e.target) && shareDd) {
+                shareDd.classList.remove('active');
+            }
+        });
+
+        function shareToSocial(platform, e) {
+            if (e) e.preventDefault();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+            if (platform === 'facebook') shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            else if (platform === 'twitter') shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+            else if (platform === 'linkedin') shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`;
+            else if (platform === 'email') shareUrl = `mailto:?subject=${title}&body=${url}`;
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+            const dd = document.getElementById('calc-share-dropdown');
+            if (dd) dd.classList.remove('active');
+        }
+
+        // Bind Two-Way Sliders & Inputs
+        function bindInputAndSlider(inputId, sliderId, isCurrency, isPercent, maxVal) {
             const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
+            const slider = document.getElementById(sliderId);
+            if (!inp || !slider) return;
 
-            range.addEventListener('input', () => {
-                const val = parseFloat(range.value);
-                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
-                else if (isPct) inp.value = val + '%';
+            slider.addEventListener('input', () => {
+                const val = parseFloat(slider.value);
+                if (isCurrency) inp.value = fmtCurr(val);
+                else if (isPercent) inp.value = fmtPct(val);
                 else inp.value = val;
                 calculateCompounding();
             });
 
             inp.addEventListener('change', () => {
-                let val = isCurrency ? parseCurrency(inp.value) : parsePercent(inp.value);
+                let val = cleanNum(inp.value);
                 if (val < 0) val = 0;
                 if (maxVal && val > maxVal) val = maxVal;
-                range.value = val;
-                if (isCurrency) inp.value = '$' + Math.round(val).toLocaleString('en-US');
-                else if (isPct) inp.value = val + '%';
+                slider.value = val;
+                if (isCurrency) inp.value = fmtCurr(val);
+                else if (isPercent) inp.value = fmtPct(val);
                 else inp.value = val;
                 calculateCompounding();
             });
         }
 
-        bindSliderAndInput('inp-amount', 'range-amount', true, false, 100000);
-        bindSliderAndInput('inp-rate', 'range-rate', false, true, 15);
-        bindSliderAndInput('inp-years', 'range-years', false, false, 50);
+        bindInputAndSlider('inp-amount', 'range-amount', true, false, 1000000);
+        bindInputAndSlider('inp-rate', 'range-rate', false, true, 12);
+        bindInputAndSlider('inp-years', 'range-years', false, false, 50);
 
-        let lastResults = {};
+        let latestCalcResults = null;
 
+        // Exact Raymond James Compounding Math
         function calculateCompounding() {
-            const P = parseCurrency(document.getElementById('inp-amount').value);
-            const r = parsePercent(document.getElementById('inp-rate').value) / 100;
-            const t = parseInt(document.getElementById('inp-years').value) || 1;
+            const P = cleanNum(document.getElementById('inp-amount').value);
+            const r = cleanNum(document.getElementById('inp-rate').value) / 100;
+            const years = Math.max(1, parseInt(document.getElementById('inp-years').value) || 1);
 
-            // Frequencies: 1 (annual), 4 (quarterly), 12 (monthly), 365 (daily)
-            const fvAnn = P * Math.pow(1 + r, t);
-            const fvQtr = P * Math.pow(1 + (r / 4), 4 * t);
-            const fvMon = P * Math.pow(1 + (r / 12), 12 * t);
-            const fvDay = P * Math.pow(1 + (r / 365), 365 * t);
+            // Update Chart Section Header
+            const chartTitle = document.getElementById('chart-section-title');
+            if (chartTitle) chartTitle.textContent = `TOTAL RETURN AFTER ${years} ${years === 1 ? 'YEAR' : 'YEARS'}`;
 
-            // APYs: (1 + r/n)^n - 1
-            const apyAnn = r;
-            const apyQtr = Math.pow(1 + (r / 4), 4) - 1;
-            const apyMon = Math.pow(1 + (r / 12), 12) - 1;
-            const apyDay = Math.pow(1 + (r / 365), 365) - 1;
+            // Compounding calculations:
+            // Yearly (n=1)
+            const balYearly = P * Math.pow(1 + r / 1, 1 * years);
+            const apyYearly = (Math.pow(1 + r / 1, 1) - 1) * 100;
 
-            lastResults = { P, r, t, fvAnn, fvQtr, fvMon, fvDay, apyAnn, apyQtr, apyMon, apyDay };
+            // Quarterly (n=4)
+            const balQuarterly = P * Math.pow(1 + r / 4, 4 * years);
+            const apyQuarterly = (Math.pow(1 + r / 4, 4) - 1) * 100;
 
-            // Update Headline & Cards
-            document.getElementById('chart-headline').textContent = `TOTAL RETURN AFTER ${t} YEARS`;
+            // Monthly (n=12)
+            const balMonthly = P * Math.pow(1 + r / 12, 12 * years);
+            const apyMonthly = (Math.pow(1 + r / 12, 12) - 1) * 100;
 
-            document.getElementById('card-ann').textContent = formatCurrencyCents(fvAnn);
-            document.getElementById('card-ann-apy').textContent = `APY: ${(apyAnn * 100).toFixed(2)}%`;
+            // Daily (n=365)
+            const balDaily = P * Math.pow(1 + r / 365, 365 * years);
+            const apyDaily = (Math.pow(1 + r / 365, 365) - 1) * 100;
 
-            document.getElementById('card-qtr').textContent = formatCurrencyCents(fvQtr);
-            document.getElementById('card-qtr-apy').textContent = `APY: ${(apyQtr * 100).toFixed(2)}%`;
-
-            document.getElementById('card-mon').textContent = formatCurrencyCents(fvMon);
-            document.getElementById('card-mon-apy').textContent = `APY: ${(apyMon * 100).toFixed(2)}%`;
-
-            document.getElementById('card-day').textContent = formatCurrencyCents(fvDay);
-            document.getElementById('card-day-apy').textContent = `APY: ${(apyDay * 100).toFixed(2)}%`;
-
-            // Update Legend labels
-            document.getElementById('leg-ann').textContent = formatCurrencyCents(fvAnn);
-            document.getElementById('leg-qtr').textContent = formatCurrencyCents(fvQtr);
-            document.getElementById('leg-mon').textContent = formatCurrencyCents(fvMon);
-            document.getElementById('leg-day').textContent = formatCurrencyCents(fvDay);
-
-            renderCompoundingChart(lastResults);
-        }
-
-        function renderCompoundingChart(res) {
-            const container = document.getElementById('freq-chart-container');
-            if (!container) return;
-
-            const width = container.clientWidth || 700;
-            const height = 300;
-            const padLeft = 70;
-            const padRight = 30;
-            const padTop = 35;
-            const padBottom = 45;
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            const maxVal = Math.max(res.fvAnn, res.fvQtr, res.fvMon, res.fvDay, 20000) * 1.1;
-            const minVal = 0;
-
-            let gridSvg = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const yVal = minVal + ((maxVal - minVal) * (i / steps));
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridSvg += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="rgba(255,255,255,0.08)" stroke-dasharray="3 3"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${formatCurrency(yVal)}</text>
-                `;
+            // Year-by-year progression for report
+            const yearlyProgression = [];
+            for (let y = 1; y <= years; y++) {
+                yearlyProgression.push({
+                    year: y,
+                    yearly: P * Math.pow(1 + r / 1, 1 * y),
+                    quarterly: P * Math.pow(1 + r / 4, 4 * y),
+                    monthly: P * Math.pow(1 + r / 12, 12 * y),
+                    daily: P * Math.pow(1 + r / 365, 365 * y)
+                });
             }
 
-            const items = [
-                { label: 'Annually', val: res.fvAnn, color: '#2563eb' },
-                { label: 'Quarterly', val: res.fvQtr, color: '#16a34a' },
-                { label: 'Monthly', val: res.fvMon, color: '#06b6d4' },
-                { label: 'Daily', val: res.fvDay, color: '#dfa01e' }
-            ];
+            latestCalcResults = {
+                P, r, years,
+                balYearly, apyYearly,
+                balQuarterly, apyQuarterly,
+                balMonthly, apyMonthly,
+                balDaily, apyDaily,
+                progression: yearlyProgression
+            };
 
-            const barW = Math.min(80, (chartW / 4) * 0.75);
-            const gap = chartW / 4;
+            // Update Status Center Line
+            document.getElementById('status-line1').innerHTML = 
+                `Daily compounding yields <strong>${fmtCurrCents(balDaily)}</strong> after ${years} years.`;
 
-            let barsSvg = '';
-            items.forEach((it, idx) => {
-                const xPos = padLeft + (idx * gap) + (gap - barW) / 2;
-                const barH = (it.val / maxVal) * chartH;
-                const yPos = padTop + chartH - barH;
+            // Update Legend Values
+            document.getElementById('leg-yearly').textContent = fmtCurrCents(balYearly);
+            document.getElementById('leg-quarterly').textContent = fmtCurrCents(balQuarterly);
+            document.getElementById('leg-monthly').textContent = fmtCurrCents(balMonthly);
+            document.getElementById('leg-daily').textContent = fmtCurrCents(balDaily);
 
-                barsSvg += `
-                    <rect x="${xPos}" y="${yPos}" width="${barW}" height="${barH}" fill="${it.color}" rx="3">
-                        <title>${it.label}: ${formatCurrencyCents(it.val)}</title>
-                    </rect>
-                    <text x="${xPos + barW/2}" y="${yPos - 8}" fill="#ffffff" font-size="11.5" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">
-                        ${formatCurrency(it.val)}
-                    </text>
-                    <text x="${xPos + barW/2}" y="${height - 15}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">
-                        ${it.label}
-                    </text>
-                `;
-            });
-
-            container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}" style="overflow: visible;">
-                    ${gridSvg}
-                    ${barsSvg}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#dfa01e" stroke-width="1.5"/>
-                </svg>
-            `;
+            renderComparisonChart(latestCalcResults);
         }
 
-        function openReportModal() {
-            calculateCompounding();
-            const modal = document.getElementById('report-modal');
-            const content = document.getElementById('modal-report-content');
-            const res = lastResults;
+        // SVG Bar Chart matching Screenshot 2 & 3
+        function renderComparisonChart(data) {
+            const svg = document.getElementById('compound-svg');
+            const tooltip = document.getElementById('chart-tooltip');
+            if (!svg || !data) return;
+
+            svg.innerHTML = '';
+            const w = 600;
+            const h = 320;
+            const padL = 75;
+            const padR = 25;
+            const padT = 25;
+            const padB = 40;
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
 
             const items = [
-                { name: 'Annually', apy: res.apyAnn, fv: res.fvAnn },
-                { name: 'Quarterly', apy: res.apyQtr, fv: res.fvQtr },
-                { name: 'Monthly', apy: res.apyMon, fv: res.fvMon },
-                { name: 'Daily', apy: res.apyDay, fv: res.fvDay }
+                { label: 'Yearly', val: data.balYearly, color: '#0044ff' },
+                { label: 'Quarterly', val: data.balQuarterly, color: '#4caf50' },
+                { label: 'Monthly', val: data.balMonthly, color: '#00a2ff' },
+                { label: 'Daily', val: data.balDaily, color: '#ffeb3b' }
             ];
 
-            let rows = '';
-            items.forEach(it => {
-                const interestEarned = it.fv - res.P;
-                const extraVsAnnual = it.fv - res.fvAnn;
-                rows += `
-                    <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); text-align: right;">
-                        <td style="padding: 12px 10px; text-align: left; color: #fff; font-weight: 700;">${it.name}</td>
-                        <td style="padding: 12px 10px; color: #dfa01e;">${(it.apy * 100).toFixed(2)}%</td>
-                        <td style="padding: 12px 10px; color: #cbd5e1;">${formatCurrencyCents(res.P)}</td>
-                        <td style="padding: 12px 10px; color: #38bdf8;">${formatCurrencyCents(interestEarned)}</td>
-                        <td style="padding: 12px 10px; color: #ffffff; font-weight: 700;">${formatCurrencyCents(it.fv)}</td>
-                        <td style="padding: 12px 10px; color: ${extraVsAnnual > 0 ? '#4ade80' : '#94a3b8'};">
-                            ${extraVsAnnual > 0 ? '+' + formatCurrencyCents(extraVsAnnual) : '$0.00'}
-                        </td>
+            const maxValRaw = Math.max(...items.map(d => d.val));
+            const minValRaw = Math.min(...items.map(d => d.val));
+
+            // Set clean baseline below principal or min return
+            let minAxis = Math.floor((data.P * 0.8) / 500) * 500;
+            if (minValRaw < minAxis) minAxis = Math.floor(minValRaw / 500) * 500;
+            if (minAxis < 0) minAxis = 0;
+
+            let maxAxis = Math.ceil(maxValRaw / 500) * 500;
+            if (maxAxis <= minAxis) maxAxis = minAxis + 1000;
+            if ((maxValRaw - minAxis) / (maxAxis - minAxis) > 0.9) maxAxis += 500;
+
+            const numSteps = 7;
+            const stepVal = (maxAxis - minAxis) / numSteps;
+
+            // Draw Y-Axis Horizontal Grid Lines and Labels
+            for (let i = 0; i <= numSteps; i++) {
+                const val = minAxis + (i * stepVal);
+                const yPos = padT + chartH - (i / numSteps) * chartH;
+
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', padL);
+                line.setAttribute('x2', padL + chartW);
+                line.setAttribute('y1', yPos);
+                line.setAttribute('y2', yPos);
+                line.setAttribute('stroke', i === 0 ? 'rgba(223, 160, 30, 0.4)' : 'rgba(255, 255, 255, 0.08)');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', padL - 10);
+                text.setAttribute('y', yPos + 4);
+                text.setAttribute('text-anchor', 'end');
+                text.setAttribute('font-family', 'Open Sans, sans-serif');
+                text.setAttribute('font-size', '11.5');
+                text.setAttribute('font-weight', '600');
+                text.setAttribute('fill', '#94a3b8');
+                text.textContent = fmtCurr(val);
+                svg.appendChild(text);
+            }
+
+            // Draw Bars (flush adjacent or tight spacing matching Screenshot 2/3)
+            const n = items.length;
+            const slotW = chartW / n;
+            const barW = slotW - 2;
+
+            items.forEach((item, idx) => {
+                const xPos = padL + (idx * slotW) + 1;
+                const barH = ((item.val - minAxis) / (maxAxis - minAxis)) * chartH;
+                const yPos = padT + chartH - barH;
+
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('x', xPos);
+                rect.setAttribute('y', yPos);
+                rect.setAttribute('width', barW);
+                rect.setAttribute('height', Math.max(2, barH));
+                rect.setAttribute('fill', item.color);
+                rect.setAttribute('stroke', 'rgba(0,0,0,0.3)');
+                rect.setAttribute('stroke-width', '1');
+                rect.setAttribute('cursor', 'pointer');
+
+                function showTip() {
+                    const rectBounds = svg.getBoundingClientRect();
+                    const xRel = ((xPos + barW / 2) / w) * rectBounds.width;
+                    const yRel = (yPos / h) * rectBounds.height;
+                    tooltip.innerHTML = `${item.label} Compounding: <strong style="color: #dfa01e;">${fmtCurrCents(item.val)}</strong>`;
+                    tooltip.style.left = `${xRel}px`;
+                    tooltip.style.top = `${yRel}px`;
+                    tooltip.style.display = 'block';
+                }
+
+                function hideTip() {
+                    tooltip.style.display = 'none';
+                }
+
+                rect.addEventListener('mouseenter', showTip);
+                rect.addEventListener('mouseleave', hideTip);
+                svg.appendChild(rect);
+
+                // Label on X-axis
+                const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                xLabel.setAttribute('x', xPos + barW / 2);
+                xLabel.setAttribute('y', padT + chartH + 20);
+                xLabel.setAttribute('text-anchor', 'middle');
+                xLabel.setAttribute('font-family', 'Montserrat, sans-serif');
+                xLabel.setAttribute('font-size', '11.5');
+                xLabel.setAttribute('font-weight', '700');
+                xLabel.setAttribute('fill', '#cbd5e1');
+                xLabel.textContent = item.label;
+                svg.appendChild(xLabel);
+            });
+        }
+
+        // Report Modal Logic
+        const reportModal = document.getElementById('report-modal');
+        function openReportModal() {
+            calculateCompounding();
+            const content = document.getElementById('modal-report-content');
+            if (!content || !latestCalcResults) return;
+
+            const res = latestCalcResults;
+            const diffQuarterly = res.balQuarterly - res.balYearly;
+            const diffMonthly = res.balMonthly - res.balYearly;
+            const diffDaily = res.balDaily - res.balYearly;
+
+            let progRows = '';
+            res.progression.forEach(item => {
+                progRows += `
+                    <tr>
+                        <td>Year ${item.year}</td>
+                        <td style="color: #60a5fa;">${fmtCurrCents(item.yearly)}</td>
+                        <td style="color: #4ade80;">${fmtCurrCents(item.quarterly)}</td>
+                        <td style="color: #38bdf8;">${fmtCurrCents(item.monthly)}</td>
+                        <td style="color: #facc15; font-weight: 700;">${fmtCurrCents(item.daily)}</td>
                     </tr>
                 `;
             });
 
             content.innerHTML = `
-                <div style="background: #091424; padding: 16px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.3); margin-bottom: 20px;">
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 13px; color: #cbd5e1;">
-                        <div><strong style="color: #94a3b8;">Initial Principal:</strong><br><span style="color: #fff; font-weight: 700;">${formatCurrencyCents(res.P)}</span></div>
-                        <div><strong style="color: #94a3b8;">Nominal Rate:</strong><br><span style="color: #dfa01e; font-weight: 700;">${(res.r * 100).toFixed(1)}%</span></div>
-                        <div><strong style="color: #94a3b8;">Horizon:</strong><br><span style="color: #38bdf8; font-weight: 700;">${res.t} Years</span></div>
+                <div style="background: #11233e; border: 1px solid rgba(223,160,30,0.3); border-radius: 6px; padding: 18px; margin-bottom: 22px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; font-size: 13px;">
+                        <div><span style="color: #94a3b8;">Initial Investment:</span><br><strong style="color: #ffffff; font-size: 15px;">${fmtCurrCents(res.P)}</strong></div>
+                        <div><span style="color: #94a3b8;">Interest Rate:</span><br><strong style="color: #dfa01e; font-size: 15px;">${fmtPct(res.r * 100)}</strong></div>
+                        <div><span style="color: #94a3b8;">Horizon:</span><br><strong style="color: #ffffff; font-size: 15px;">${res.years} Years</strong></div>
+                        <div><span style="color: #94a3b8;">Daily Extra Gain vs Yearly:</span><br><strong style="color: #38bdf8; font-size: 15px;">+${fmtCurrCents(diffDaily)}</strong></div>
                     </div>
                 </div>
 
-                <table style="width: 100%; border-collapse: collapse; font-size: 13px; font-family: 'Open Sans', sans-serif;">
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #dfa01e; margin: 0 0 10px 0; text-transform: uppercase;">
+                    Compounding Frequency Comparison Summary
+                </h4>
+                <table class="calc-table" style="margin-bottom: 26px;">
                     <thead>
-                        <tr style="background: rgba(11,23,42,0.9); border-bottom: 2px solid #dfa01e; text-align: right; color: #dfa01e;">
-                            <th style="padding: 12px 10px; text-align: left;">Compounding Frequency</th>
-                            <th style="padding: 12px 10px;">Effective APY</th>
-                            <th style="padding: 12px 10px;">Initial Deposit</th>
-                            <th style="padding: 12px 10px;">Interest Earned</th>
-                            <th style="padding: 12px 10px;">Ending Balance</th>
-                            <th style="padding: 12px 10px;">Extra vs Annual</th>
+                        <tr>
+                            <th>Compounding Frequency</th>
+                            <th>Effective APY</th>
+                            <th>Total Interest</th>
+                            <th>Final Balance</th>
+                            <th>Difference vs. Annual</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${rows}
+                        <tr>
+                            <td><strong>Yearly Compounding</strong></td>
+                            <td>${res.apyYearly.toFixed(3)}%</td>
+                            <td>${fmtCurrCents(res.balYearly - res.P)}</td>
+                            <td><strong>${fmtCurrCents(res.balYearly)}</strong></td>
+                            <td style="color: #94a3b8;">Baseline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quarterly Compounding</strong></td>
+                            <td>${res.apyQuarterly.toFixed(3)}%</td>
+                            <td>${fmtCurrCents(res.balQuarterly - res.P)}</td>
+                            <td><strong>${fmtCurrCents(res.balQuarterly)}</strong></td>
+                            <td style="color: #4ade80;">+${fmtCurrCents(diffQuarterly)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monthly Compounding</strong></td>
+                            <td>${res.apyMonthly.toFixed(3)}%</td>
+                            <td>${fmtCurrCents(res.balMonthly - res.P)}</td>
+                            <td><strong>${fmtCurrCents(res.balMonthly)}</strong></td>
+                            <td style="color: #38bdf8;">+${fmtCurrCents(diffMonthly)}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Daily Compounding</strong></td>
+                            <td>${res.apyDaily.toFixed(3)}%</td>
+                            <td>${fmtCurrCents(res.balDaily - res.P)}</td>
+                            <td><strong style="color: #dfa01e;">${fmtCurrCents(res.balDaily)}</strong></td>
+                            <td style="color: #dfa01e; font-weight: 700;">+${fmtCurrCents(diffDaily)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4 style="font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; color: #dfa01e; margin: 0 0 10px 0; text-transform: uppercase;">
+                    Annual Wealth Accumulation Schedule
+                </h4>
+                <table class="calc-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>Yearly Total</th>
+                            <th>Quarterly Total</th>
+                            <th>Monthly Total</th>
+                            <th>Daily Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${progRows}
                     </tbody>
                 </table>
             `;
 
-            modal.style.display = 'block';
+            reportModal.classList.add('active');
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            if (reportModal) reportModal.classList.remove('active');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
-        window.addEventListener('resize', () => {
-            if (lastResults.P !== undefined) renderCompoundingChart(lastResults);
+        reportModal.addEventListener('click', (e) => {
+            if (e.target === reportModal) closeReportModal();
         });
 
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
             calculateCompounding();
+        });
+
+        // Sticky Header scroll
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (header) {
+                if (window.scrollY > 40) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
         });
     </script>
     <script src="email-handler.js"></script>
 </body>
+
 </html>

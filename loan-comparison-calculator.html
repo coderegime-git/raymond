@@ -1,796 +1,1577 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Comparison Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Side-by-side comparison of loan offers. Compare monthly payments, APR, total interest, closing costs, and balloon payments across multiple loans.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Loan Comparison Calculator | The Seiler Group of Raymond James</title>
+    <meta name="description"
+        content="Determining which loan provides you with the best value involves more than simply comparing monthly payments. Use this calculator to sort through the monthly payments, fees and other costs associated with getting a new loan. By comparing these important variables side by side, this calculator can help you pick the loan that works best for you. Click on the 'View Report' button to see the results in detail.">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .loan-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .loan-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .loan-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .loan-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .subtotal-badge {
-            font-size: 13px;
-            font-weight: 700;
-            color: #dfa01e;
-            margin-left: auto;
-            padding-right: 15px;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 880px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .comp-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12.5px;
-            margin-top: 15px;
-        }
-        .comp-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 9px 12px;
-            text-align: right;
-            border: 1px solid #1e293b;
-        }
-        .comp-table th:first-child {
-            text-align: left;
-        }
-        .comp-table td {
-            padding: 8px 12px;
-            border: 1px solid #e2e8f0;
-            text-align: right;
-            color: #334155;
-        }
-        .comp-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-        }
-        .comp-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Prata&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css?v=176">
+    <link rel="stylesheet" href="loan-comparison-calculator.css?v=1">
 </head>
-<body>
 
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
+<body class="calc-white-page">
+
+    <!-- ============================================================
+     HEADER
+     ============================================================ -->
+    <header class="site-header" id="main-header">
+        <!-- Left Navigation -->
+        <nav class="nav-left">
+            <a href="index.html" class="nav-link">HOME</a>
+
+            <!-- Dropdown for ATHLETES -->
+            <div class="nav-dropdown-wrapper" id="athletes-dropdown">
+                <a href="athletes.html" class="nav-link nav-dropdown-trigger" id="athletes-trigger">
+                    <span>ATHLETES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="athletes-menu" role="menu" aria-label="Athletes Submenu">
+                    <a href="empowering-pro-athletes.html" class="nav-dropdown-item" id="nav-item-empowering">
+                        EMPOWERING PRO ATHLETES
+                    </a>
+                    <a href="our-difference.html" class="nav-dropdown-item" id="nav-item-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
             </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
+
+            <!-- Dropdown for BUSINESS TITANS -->
+            <div class="nav-dropdown-wrapper" id="titans-dropdown">
+                <a href="business-titans.html" class="nav-link nav-dropdown-trigger" id="titans-trigger">
+                    <span>BUSINESS TITANS</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="titans-menu" role="menu" aria-label="Business Titans Submenu">
+                    <a href="counseling-visionaries.html" class="nav-dropdown-item" id="nav-item-titans-counselling">
+                        COUNSELING VISIONARIES
+                    </a>
+                    <a href="titans-our-difference.html" class="nav-dropdown-item" id="nav-item-titans-difference">
+                        OUR DIFFERENCE
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dropdown for PRIVATE WEALTH -->
+            <div class="nav-dropdown-wrapper" id="individuals-dropdown">
+                <a href="individuals.html" class="nav-link nav-dropdown-trigger" id="individuals-trigger">
+                    <span>PRIVATE WEALTH</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="individuals-menu" role="menu" aria-label="Individuals Submenu">
+                    <a href="private-wealth.html" class="nav-dropdown-item" id="nav-item-private-wealth">
+                        PRIVATE WEALTH
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Logo -->
+        <div class="header-logo">
+            <a href="index.html" class="logo-anchor">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="header-logo-img">
             </a>
         </div>
-    </nav>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="life-insurance-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Life Insurance Calculator">
+        <!-- Right Navigation -->
+        <nav class="nav-right">
+            <a href="team.html" class="nav-link">YOUR TEAM</a>
+
+            <!-- Dropdown for RESOURCES (Active) -->
+            <div class="nav-dropdown-wrapper active" id="resources-dropdown">
+                <a href="resources.html" class="nav-link nav-dropdown-trigger active" id="resources-trigger">
+                    <span>RESOURCES</span>
+                    <i class="fas fa-chevron-down nav-caret"></i>
+                </a>
+                <div class="nav-dropdown-menu" id="resources-menu" role="menu" aria-label="Resources Submenu">
+                    <a href="press-releases.html" class="nav-dropdown-item" id="nav-item-press-releases">
+                        PRESS RELEASES
+                    </a>
+                    <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf"
+                        target="_blank" rel="noopener noreferrer" class="nav-dropdown-item" id="nav-item-isq">
+                        INVESTOR STRATEGY QUARTERLY
+                    </a>
+                    <a href="worthwhile.html" class="nav-dropdown-item" id="nav-item-worthwhile">
+                        WORTHWHILE
+                    </a>
+                </div>
+            </div>
+
+            <a href="contact.html" class="nav-link">CONTACT US</a>
+
+            <!-- Client Access Button -->
+            <div class="client-access-wrapper">
+                <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                    class="client-access-btn" id="client-access-btn">
+                    CLIENT ACCESS
+                </a>
+            </div>
+        </nav>
+
+        <!-- Mobile Hamburger Toggle -->
+        <button class="mobile-hamburger" id="mobile-hamburger" onclick="toggleMobileMenu(event)"
+            aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="life-insurance-calculator.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Life Insurance Calculator">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="long-term-care-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Long-Term Care Calculator">
+    <a href="mortgage-adjustable-vs-fixed-rates-comparison.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Mortgage: Adjustable vs. Fixed Rates Comparison">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Loan Comparison Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/loan-comparison-hero.jpg" alt="Loan Comparison Calculator"
+                    class="calc-banner-img"
+                    onerror="this.src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">LOAN COMPARISON CALCULATOR</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-page-title">LOAN COMPARISON CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Loans &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
-                        <i class="fas fa-share-nodes"></i> Share
-                    </button>
+                    <a href="resources.html?category=loans" class="calc-cat-link">Loans</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?media=Calculators" class="calc-cat-link">Calculator</a>
+                    <div class="calc-share-wrapper">
+                        <button type="button" class="calc-share-btn" onclick="toggleShareDropdown(event)">
+                            <i class="fas fa-share-nodes"></i> Share
+                        </button>
+                        <div class="calc-share-dropdown" id="calcShareDropdown">
+                            <a href="javascript:void(0)" onclick="shareToSocial('facebook', event)"
+                                class="calc-share-item" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('twitter', event)"
+                                class="calc-share-item" title="Share on X"><i class="fab fa-x-twitter"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('linkedin', event)"
+                                class="calc-share-item" title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="javascript:void(0)" onclick="shareToSocial('email', event)"
+                                class="calc-share-item" title="Share via Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
                 </div>
                 <p class="calc-intro-p">
-                    Determining which loan provides you with the best value involves more than simply comparing monthly payments. Use this calculator to sort through the monthly payments, fees and other loan costs associated with getting a new loan. By comparing these important variables side-by-side, you can easily see each loan and compare results. Click on the 'View Report' button to see the results in detail.
+                    Determining which loan provides you with the best value involves more than simply comparing monthly
+                    payments. Use this calculator to sort through the monthly payments, fees and other costs associated
+                    with getting a new loan. By comparing these important variables side by side, this calculator can help
+                    you pick the loan that works best for you. Click on the "View Report" button to see the results in
+                    detail.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateLoans()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
+            <!-- Sticky Action Card -->
+            <div class="calc-action-card-sticky-wrapper">
+                <section class="calc-action-card">
+                    <div class="calc-btn-row">
+                        <button type="button" class="calc-btn" id="btn-calculate" onclick="calculateLoans(true)">CALCULATE</button>
+                        <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
+                    </div>
+                    <div class="calc-action-right-icons">
+                        <button type="button" class="calc-icon-btn" onclick="scrollToDefinitions()" title="Definitions">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Comparison Report">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </section>
             </div>
 
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="loan-result-banner" style="margin-bottom: 25px;">
-                <span class="highlight-val" id="banner-rec-text" style="color: #4ade80;">LOAN 1 HAS THE LOWEST APR AT 6.78%</span>
+            <!-- Sub-Headline -->
+            <div class="calc-sub-headline-box">
+                <h2 class="calc-sub-title">Loan Comparison Calculator</h2>
+                <span class="calc-req-notice">*indicates required.</span>
             </div>
 
-            <!-- Summary Cards -->
-            <div class="loan-stat-grid">
-                <div class="loan-stat-card">
-                    <div class="loan-stat-val" id="stat-loan1-pmt">$516.60</div>
-                    <div class="loan-stat-label">Loan 1 Monthly Payment</div>
-                </div>
-                <div class="loan-stat-card">
-                    <div class="loan-stat-val" id="stat-loan2-pmt" style="color: #60a5fa;">$489.15</div>
-                    <div class="loan-stat-label">Loan 2 Monthly Payment</div>
-                </div>
-                <div class="loan-stat-card">
-                    <div class="loan-stat-val" id="stat-loan3-pmt" style="color: #4ade80;">$283.89</div>
-                    <div class="loan-stat-label">Loan 3 Monthly Payment</div>
-                </div>
-            </div>
-
-            <!-- ACCORDION: LOAN 1 -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>LOAN 1</span>
-                    <span class="subtotal-badge" id="badge-loan1">Monthly payment: $516.60</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- ============================================================
+             ACCORDION 1: LOAN 1:
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-loan1">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-loan1')">
+                    <div class="calc-accordion-header-left">
+                        <h3 class="calc-accordion-title">LOAN 1:</h3>
+                    </div>
+                    <div class="calc-accordion-header-right">
+                        <span class="calc-accordion-badge" id="badge-loan1">Monthly payment $730.93</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </div>
                 </div>
                 <div class="calc-accordion-content">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l1-amount" class="calc-label">Loan amount*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l1-amount" class="calc-input" value="$25,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l1-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
-                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                    <!-- Loan amount:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-amount1">Loan amount:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-amount')" title="Help: Loan Amount">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-amount1" class="calc-input" value="$100,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amount1" class="calc-slider" min="0" max="1000000" step="1000" value="100000">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l1-rate" class="calc-label">Interest rate*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l1-rate" class="calc-input" value="6.50%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l1-rate" class="calc-slider" value="6.5" min="0" max="18" step="0.125">
-                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
+
+                    <!-- Interest rate:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-rate1">Interest rate:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('interest-rate')" title="Help: Interest Rate">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-rate1" class="calc-input" value="6.25%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-rate1" class="calc-slider" min="0" max="10" step="0.125" value="6.25">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l1-term" class="calc-label">Term (years)*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="l1-term" class="calc-input" value="5" min="1" max="30"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l1-term" class="calc-slider" value="5" min="1" max="30" step="1">
-                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
+
+                    <!-- Loan term:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-term1">Loan term:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-term')" title="Help: Loan Term">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-term1" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-term1" class="calc-slider" min="1" max="40" step="1" value="20">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l1-orig-pct" class="calc-label">Origination fee</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l1-orig-pct" class="calc-input" value="1.00%" onchange="calculateLoans()"></div>
+
+                    <!-- Loan amortization:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-amort1">Loan amortization:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('amortization')" title="Help: Amortization">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-amort1" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amort1" class="calc-slider" min="1" max="40" step="1" value="20">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l1-closing" class="calc-label">Closing costs</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l1-closing" class="calc-input" value="$400.00" onchange="calculateLoans()"></div>
+
+                    <!-- Origination fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-orig1">Origination fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('origination-fee')" title="Help: Origination Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
                         </div>
+                        <input type="text" id="inp-orig1" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-orig1" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commitment fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-commit1">Commitment fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('commitment-fee')" title="Help: Commitment Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-commit1" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-commit1" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other fees:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-otherfees1">Other fees:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-fees')" title="Help: Other Fees">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-otherfees1" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-otherfees1" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other costs:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-othercosts1">Other costs:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-costs')" title="Help: Other Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-othercosts1" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-othercosts1" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Closing costs: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Closing costs:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('closing-costs')" title="Help: Closing Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-closing1">$0.00</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Balloon payment: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Balloon payment:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('balloon-payment')" title="Help: Balloon Payment">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-balloon1">n/a</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Apr: -->
+                    <div class="calc-accordion-bottom-row">
+                        <button type="button" class="calc-help-btn" onclick="showHelp('apr')" title="Help: APR">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <span class="calc-apr-label">Apr:</span>
+                        <span class="calc-apr-val" id="val-apr1">6.25%</span>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- ACCORDION: LOAN 2 -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>LOAN 2</span>
-                    <span class="subtotal-badge" id="badge-loan2">Monthly payment: $489.15</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- ============================================================
+             ACCORDION 2: LOAN 2:
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-loan2">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-loan2')">
+                    <div class="calc-accordion-header-left">
+                        <h3 class="calc-accordion-title">LOAN 2:</h3>
+                    </div>
+                    <div class="calc-accordion-header-right">
+                        <span class="calc-accordion-badge" id="badge-loan2">Monthly payment $659.67</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </div>
                 </div>
                 <div class="calc-accordion-content">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l2-amount" class="calc-label">Loan amount*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l2-amount" class="calc-input" value="$25,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l2-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
-                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                    <!-- Loan amount:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-amount2">Loan amount:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-amount')" title="Help: Loan Amount">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-amount2" class="calc-input" value="$100,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amount2" class="calc-slider" min="0" max="1000000" step="1000" value="100000">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l2-rate" class="calc-label">Interest rate*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l2-rate" class="calc-input" value="6.25%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l2-rate" class="calc-slider" value="6.25" min="0" max="18" step="0.125">
-                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
+
+                    <!-- Interest rate:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-rate2">Interest rate:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('interest-rate')" title="Help: Interest Rate">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-rate2" class="calc-input" value="6.25%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-rate2" class="calc-slider" min="0" max="10" step="0.125" value="6.25">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l2-term" class="calc-label">Term (years)*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="l2-term" class="calc-input" value="5" min="1" max="30"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l2-term" class="calc-slider" value="5" min="1" max="30" step="1">
-                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
+
+                    <!-- Loan term:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-term2">Loan term:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-term')" title="Help: Loan Term">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-term2" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-term2" class="calc-slider" min="1" max="40" step="1" value="25">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l2-orig-pct" class="calc-label">Origination fee</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l2-orig-pct" class="calc-input" value="1.50%" onchange="calculateLoans()"></div>
+
+                    <!-- Loan amortization:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-amort2">Loan amortization:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('amortization')" title="Help: Amortization">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-amort2" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amort2" class="calc-slider" min="1" max="40" step="1" value="25">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l2-closing" class="calc-label">Closing costs</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l2-closing" class="calc-input" value="$650.00" onchange="calculateLoans()"></div>
+
+                    <!-- Origination fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-orig2">Origination fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('origination-fee')" title="Help: Origination Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
                         </div>
+                        <input type="text" id="inp-orig2" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-orig2" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commitment fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-commit2">Commitment fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('commitment-fee')" title="Help: Commitment Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-commit2" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-commit2" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other fees:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-otherfees2">Other fees:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-fees')" title="Help: Other Fees">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-otherfees2" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-otherfees2" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other costs:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-othercosts2">Other costs:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-costs')" title="Help: Other Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-othercosts2" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-othercosts2" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Closing costs: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Closing costs:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('closing-costs')" title="Help: Closing Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-closing2">$0.00</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Balloon payment: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Balloon payment:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('balloon-payment')" title="Help: Balloon Payment">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-balloon2">n/a</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Apr: -->
+                    <div class="calc-accordion-bottom-row">
+                        <button type="button" class="calc-help-btn" onclick="showHelp('apr')" title="Help: APR">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <span class="calc-apr-label">Apr:</span>
+                        <span class="calc-apr-val" id="val-apr2">6.25%</span>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- ACCORDION: LOAN 3 -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>LOAN 3</span>
-                    <span class="subtotal-badge" id="badge-loan3">Monthly payment: $283.89</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- ============================================================
+             ACCORDION 3: LOAN 3:
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-loan3">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-loan3')">
+                    <div class="calc-accordion-header-left">
+                        <h3 class="calc-accordion-title">LOAN 3:</h3>
+                    </div>
+                    <div class="calc-accordion-header-right">
+                        <span class="calc-accordion-badge" id="badge-loan3">Monthly payment $277.78</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </div>
                 </div>
                 <div class="calc-accordion-content">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l3-amount" class="calc-label">Loan amount*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l3-amount" class="calc-input" value="$25,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l3-amount" class="calc-slider" value="25000" min="1000" max="100000" step="1000">
-                                <div class="calc-slider-scale"><span>$1,000</span><span>$50,000</span><span>$100,000</span></div>
+                    <!-- Loan amount:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-amount3">Loan amount:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-amount')" title="Help: Loan Amount">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-amount3" class="calc-input" value="$100,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amount3" class="calc-slider" min="0" max="1000000" step="1000" value="100000">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l3-rate" class="calc-label">Interest rate*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l3-rate" class="calc-input" value="6.75%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l3-rate" class="calc-slider" value="6.75" min="0" max="18" step="0.125">
-                                <div class="calc-slider-scale"><span>0%</span><span>9%</span><span>18%</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l3-term" class="calc-label">Term (years)*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="l3-term" class="calc-input" value="10" min="1" max="30"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-l3-term" class="calc-slider" value="10" min="1" max="30" step="1">
-                                <div class="calc-slider-scale"><span>1 yr</span><span>15 yrs</span><span>30 yrs</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l3-orig-pct" class="calc-label">Origination fee</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l3-orig-pct" class="calc-input" value="1.00%" onchange="calculateLoans()"></div>
-                        </div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="l3-closing" class="calc-label">Closing costs</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="l3-closing" class="calc-input" value="$400.00" onchange="calculateLoans()"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Chart Section: Monthly Payments Comparison -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>MONTHLY PAYMENTS</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Payment Comparison</span>
-                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1e3a8a; display: inline-block; border-radius: 2px;"></span> Loan 1</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #166534; display: inline-block; border-radius: 2px;"></span> Loan 2</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #0284c7; display: inline-block; border-radius: 2px;"></span> Loan 3</span>
+                    <!-- Interest rate:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-rate3">Interest rate:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('interest-rate')" title="Help: Interest Rate">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-rate3" class="calc-input" value="0%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-rate3" class="calc-slider" min="0" max="10" step="0.125" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
                             </div>
                         </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="loan-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                    </div>
+
+                    <!-- Loan term:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-term3">Loan term:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-term')" title="Help: Loan Term">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-term3" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-term3" class="calc-slider" min="1" max="40" step="1" value="30">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loan amortization:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="sel-amort3">Loan amortization:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('amortization')" title="Help: Amortization">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <select id="sel-amort3" class="calc-select">
+                            <!-- Populated 1 to 40 years -->
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-amort3" class="calc-slider" min="1" max="40" step="1" value="30">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Origination fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-orig3">Origination fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('origination-fee')" title="Help: Origination Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-orig3" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-orig3" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Commitment fee:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-commit3">Commitment fee:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('commitment-fee')" title="Help: Commitment Fee">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-commit3" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-commit3" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other fees:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-otherfees3">Other fees:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-fees')" title="Help: Other Fees">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-otherfees3" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-otherfees3" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other costs:* -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label" for="inp-othercosts3">Other costs:<span class="calc-req">*</span></label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('other-costs')" title="Help: Other Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <input type="text" id="inp-othercosts3" class="calc-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="sld-othercosts3" class="calc-slider" min="0" max="10000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$5k</span>
+                                <span>$10k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Closing costs: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Closing costs:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('closing-costs')" title="Help: Closing Costs">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-closing3">$0.00</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Balloon payment: (Computed) -->
+                    <div class="calc-form-row computed-row">
+                        <div class="calc-label-wrap">
+                            <label class="calc-label">Balloon payment:</label>
+                            <button type="button" class="calc-help-btn" onclick="showHelp('balloon-payment')" title="Help: Balloon Payment">
+                                <i class="fas fa-question-circle"></i>
+                            </button>
+                        </div>
+                        <div class="calc-computed-val" id="val-balloon3">n/a</div>
+                        <div></div>
+                    </div>
+
+                    <!-- Apr: -->
+                    <div class="calc-accordion-bottom-row">
+                        <button type="button" class="calc-help-btn" onclick="showHelp('apr')" title="Help: APR">
+                            <i class="fas fa-question-circle"></i>
+                        </button>
+                        <span class="calc-apr-label">Apr:</span>
+                        <span class="calc-apr-val" id="val-apr3">0%</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION: MONTHLY PAYMENTS (CHART)
+             ============================================================ -->
+            <section class="calc-chart-box" id="acc-chart">
+                <div class="calc-chart-header" onclick="toggleAccordion('acc-chart')">
+                    <h3 class="calc-chart-title">MONTHLY PAYMENTS</h3>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                </div>
+                <div class="calc-chart-content calc-accordion-content">
+                    <div class="calc-chart-svg-container">
+                        <svg id="loanChartSvg" width="760" height="340" viewBox="0 0 760 340"
+                            style="width: 100%; max-width: 760px; height: auto; display: block; margin: 0 auto; background: #eef2f6; border-radius: 4px;">
+                            <!-- SVG generated dynamically -->
+                        </svg>
+                    </div>
+
+                    <!-- Loan Comparison Summary Cards -->
+                    <div class="calc-summary-grid">
+                        <div class="calc-summary-card loan1">
+                            <div class="calc-summary-title">Loan 1 (20 Years)</div>
+                            <div class="calc-summary-pmt" id="sum-pmt1">$730.93</div>
+                            <div class="calc-summary-sub" id="sum-sub1">APR: 6.25% &bull; Interest: $75,423.20</div>
+                        </div>
+                        <div class="calc-summary-card loan2">
+                            <div class="calc-summary-title">Loan 2 (25 Years)</div>
+                            <div class="calc-summary-pmt" id="sum-pmt2" style="color: #55aa44;">$659.67</div>
+                            <div class="calc-summary-sub" id="sum-sub2">APR: 6.25% &bull; Interest: $97,901.00</div>
+                        </div>
+                        <div class="calc-summary-card loan3">
+                            <div class="calc-summary-title">Loan 3 (30 Years)</div>
+                            <div class="calc-summary-pmt" id="sum-pmt3" style="color: #0088ff;">$277.78</div>
+                            <div class="calc-summary-sub" id="sum-sub3">APR: 0% &bull; Interest: $0.00</div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+            <!-- ============================================================
+             DEFINITIONS SECTION
+             ============================================================ -->
+            <section class="calc-definitions-section" id="definitions">
+                <h3 class="calc-definitions-header">DEFINITIONS</h3>
 
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">LOAN AMOUNT</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        The total dollar amount for this loan.
+                <div class="calc-def-item" id="def-loan-amount">
+                    <h4 class="calc-def-term">LOAN AMOUNT</h4>
+                    <p class="calc-def-desc">The total dollar amount for this loan.</p>
+                </div>
+
+                <div class="calc-def-item" id="def-interest-rate">
+                    <h4 class="calc-def-term">INTEREST RATE</h4>
+                    <p class="calc-def-desc">The interest rate on this loan.</p>
+                </div>
+
+                <div class="calc-def-item" id="def-loan-term">
+                    <h4 class="calc-def-term">LOAN TERM</h4>
+                    <p class="calc-def-desc">
+                        The number of years over which you will repay this loan. The most common terms are 15 years and 30
+                        years. If this loan has a 'balloon' payment, the loan term will be shorter than the number of years
+                        to amortize the loan. For example, a loan with a 5-year term amortized over 30 years will have the
+                        same monthly payment as a 30-year loan with the same interest rate. The difference is the 30-year
+                        loan will have equal payments for 30 years. The 5-year loan will have equal payments for 5 years
+                        and then a very large, or balloon, payment for the remaining balance.
                     </p>
                 </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">INTEREST RATE</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        The stated interest rate for this loan.
+
+                <div class="calc-def-item" id="def-amortization">
+                    <h4 class="calc-def-term">AMORTIZATION</h4>
+                    <p class="calc-def-desc">
+                        The number of years used in calculating the monthly payment. Loans that are amortized over a longer
+                        period than their loan term have a balloon payment. See 'Loan term' for more information.
                     </p>
                 </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">TERM (YEARS)</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        The number of years over which you will pay off the loan. The most common terms are 1-5 years and 30 years. If the loan has a balloon payment, the term can be shorter than the amortization period.
+
+                <div class="calc-def-item" id="def-origination-fee">
+                    <h4 class="calc-def-term">ORIGINATION FEE</h4>
+                    <p class="calc-def-desc">
+                        The dollar amount charged as a loan origination fee, which is included in the annual percentage
+                        rate (APR) calculation. For many loans a 1% origination fee is common. For example, a 1% fee on a
+                        $120,000 loan would cost $1,200.
                     </p>
                 </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">AMORTIZATION</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        The number of years used in calculating the monthly payment.
+
+                <div class="calc-def-item" id="def-commitment-fee">
+                    <h4 class="calc-def-term">COMMITMENT FEE</h4>
+                    <p class="calc-def-desc">An upfront fee included in the APR calculation.</p>
+                </div>
+
+                <div class="calc-def-item" id="def-other-fees">
+                    <h4 class="calc-def-term">OTHER FEES</h4>
+                    <p class="calc-def-desc">
+                        Fees included in the APR calculation. These fees can vary by lender but, at a minimum, usually
+                        includes prepaid interest.
                     </p>
                 </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ORIGINATION FEE</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        The dollar amount charged as a loan origination fee and is included in the annual percentage rate (APR) calculation.
+
+                <div class="calc-def-item" id="def-other-costs">
+                    <h4 class="calc-def-term">OTHER COSTS</h4>
+                    <p class="calc-def-desc">Any other costs that should be included in the APR calculation.</p>
+                </div>
+
+                <div class="calc-def-item" id="def-closing-costs">
+                    <h4 class="calc-def-term">CLOSING COSTS</h4>
+                    <p class="calc-def-desc">Total of all closing costs for this loan.</p>
+                </div>
+
+                <div class="calc-def-item" id="def-balloon-payment">
+                    <h4 class="calc-def-term">BALLOON PAYMENT</h4>
+                    <p class="calc-def-desc">
+                        This is the total final payment for all loans that are amortized over a period of time longer than
+                        the loan term. The balloon payment is total interest and principal balance due at the end of the
+                        loan term. (If the loan term is the same as the amortization, this amount is always zero.)
                     </p>
                 </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">CLOSING COSTS</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        Total of all closing costs for this loan.
-                    </p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL PERCENTAGE RATE (APR)</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">
-                        A combined calculation of fees, interest and amortization used to compare different loan offers on an equal basis.
+
+                <div class="calc-def-item" id="def-apr">
+                    <h4 class="calc-def-term">ANNUAL PERCENTAGE RATE (APR)</h4>
+                    <p class="calc-def-desc">
+                        A standard calculation used by lenders. It is designed to help borrowers compare different loan
+                        options. For example, a loan with a lower stated interest rate may be a bad value if its fees are
+                        too high. Likewise, a loan with a higher stated rate and very low fees could be an exceptional
+                        value. APR calculations incorporate these fees into a single rate. You can then compare loans with
+                        different fees, rates or terms.
                     </p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
-
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
+            <!-- Legal Disclaimer -->
+            <p class="calc-disclaimer-p">
+                Information and interactive calculators are made available to you as self-help tools for your independent
+                use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or
+                accuracy in regards to your individual circumstances. All examples are hypothetical and are for
+                illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding
+                all personal finance issues.
             </p>
-        </div>
-
-    </footer>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">LOAN COMPARISON DETAILED REPORT</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal" id="reportModal" onclick="closeModalOnOverlay(event)">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Loan Comparison Detailed Report</h3>
+                <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()">&times;</button>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body" id="reportModalBody">
+                <!-- Dynamically Generated Report Content -->
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     SCRIPTS & CALCULATION ENGINE
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
-            }
+        // Populate term and amortization dropdowns (1 to 40 years)
+        function populateSelectOptions() {
+            const selects = ['sel-term1', 'sel-amort1', 'sel-term2', 'sel-amort2', 'sel-term3', 'sel-amort3'];
+            selects.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                el.innerHTML = '';
+                for (let yr = 1; yr <= 40; yr++) {
+                    const opt = document.createElement('option');
+                    opt.value = yr;
+                    opt.textContent = `${yr} year${yr > 1 ? 's' : ''}`;
+                    el.appendChild(opt);
+                }
+            });
+
+            // Set initial defaults matching screenshot
+            document.getElementById('sel-term1').value = 20;
+            document.getElementById('sel-amort1').value = 20;
+            document.getElementById('sel-term2').value = 25;
+            document.getElementById('sel-amort2').value = 25;
+            document.getElementById('sel-term3').value = 30;
+            document.getElementById('sel-amort3').value = 30;
         }
 
-        function parseNum(val) {
+        // Parsers & Formatters
+        function parseMoney(val) {
+            if (typeof val === 'number') return val;
             if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+            return parseFloat(String(val).replace(/[^0-9.-]+/g, '')) || 0;
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        function parsePct(val) {
+            if (typeof val === 'number') return val;
+            if (!val) return 0;
+            return parseFloat(String(val).replace(/[^0-9.-]+/g, '')) || 0;
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function fmtMoney(num, decimals = 2) {
+            if (isNaN(num)) return '$0.00';
+            return '$' + Number(num).toLocaleString('en-US', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
         }
 
-        function setupSync(inputId, sliderId, isPct, isCur) {
+        function fmtRoundMoney(num) {
+            if (isNaN(num)) return '$0';
+            return '$' + Math.round(Number(num)).toLocaleString('en-US');
+        }
+
+        function fmtPct(num) {
+            if (isNaN(num)) return '0%';
+            // If whole number, format without unnecessary decimal
+            const rounded = Math.round(num * 1000) / 1000;
+            return rounded % 1 === 0 ? `${rounded}%` : `${rounded.toFixed(2)}%`;
+        }
+
+        // Two-way bindings for sliders and inputs
+        function bindMoneySync(inputId, sliderId) {
             const inp = document.getElementById(inputId);
             const sld = document.getElementById(sliderId);
+            if (!inp || !sld) return;
 
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculateLoans();
+            inp.addEventListener('input', () => {
+                const val = parseMoney(inp.value);
+                if (!isNaN(val)) sld.value = val;
+                calculateLoans(false);
             });
-
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculateLoans();
+            inp.addEventListener('blur', () => {
+                const val = parseMoney(inp.value);
+                inp.value = fmtMoney(val, 0);
+                sld.value = val;
+                calculateLoans(false);
+            });
+            sld.addEventListener('input', () => {
+                const val = parseFloat(sld.value);
+                inp.value = fmtMoney(val, 0);
+                calculateLoans(false);
             });
         }
 
-        let loanResults = [];
+        function bindPctSync(inputId, sliderId) {
+            const inp = document.getElementById(inputId);
+            const sld = document.getElementById(sliderId);
+            if (!inp || !sld) return;
 
-        function calcLoanData(amount, ratePct, termYears, origPct, closing) {
-            const r = (ratePct / 100) / 12;
-            const n = termYears * 12;
-            let monthly = 0;
-            if (r > 0) {
-                monthly = (amount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            inp.addEventListener('input', () => {
+                const val = parsePct(inp.value);
+                if (!isNaN(val)) sld.value = val;
+                calculateLoans(false);
+            });
+            inp.addEventListener('blur', () => {
+                const val = parsePct(inp.value);
+                inp.value = `${val}%`;
+                sld.value = val;
+                calculateLoans(false);
+            });
+            sld.addEventListener('input', () => {
+                const val = parseFloat(sld.value);
+                inp.value = `${val}%`;
+                calculateLoans(false);
+            });
+        }
+
+        function bindSelectSync(selectId, sliderId) {
+            const sel = document.getElementById(selectId);
+            const sld = document.getElementById(sliderId);
+            if (!sel || !sld) return;
+
+            sel.addEventListener('change', () => {
+                sld.value = sel.value;
+                calculateLoans(false);
+            });
+            sld.addEventListener('input', () => {
+                sel.value = sld.value;
+                calculateLoans(false);
+            });
+        }
+
+        // Core Mathematical Solver
+        function calcSingleLoan(num) {
+            const amount = Math.max(0, parseMoney(document.getElementById(`inp-amount${num}`).value));
+            const rate = Math.max(0, parsePct(document.getElementById(`inp-rate${num}`).value));
+            const termYrs = Math.max(1, parseInt(document.getElementById(`sel-term${num}`).value) || 1);
+            const amortYrs = Math.max(1, parseInt(document.getElementById(`sel-amort${num}`).value) || 1);
+
+            const orig = Math.max(0, parseMoney(document.getElementById(`inp-orig${num}`).value));
+            const commit = Math.max(0, parseMoney(document.getElementById(`inp-commit${num}`).value));
+            const otherFees = Math.max(0, parseMoney(document.getElementById(`inp-otherfees${num}`).value));
+            const otherCosts = Math.max(0, parseMoney(document.getElementById(`inp-othercosts${num}`).value));
+
+            const closingCosts = orig + commit + otherFees + otherCosts;
+
+            const nAmort = amortYrs * 12;
+            const nTerm = termYrs * 12;
+            const rMonth = (rate / 100) / 12;
+
+            let monthlyPayment = 0;
+            if (rMonth > 0) {
+                const factor = Math.pow(1 + rMonth, nAmort);
+                monthlyPayment = amount * (rMonth * factor) / (factor - 1);
             } else {
-                monthly = amount / n;
+                monthlyPayment = amount / nAmort;
             }
-            const totalPmt = monthly * n;
-            const totalInterest = totalPmt - amount;
-            const origFee = amount * (origPct / 100);
-            const totalFees = origFee + closing;
-            const apr = ratePct + ((totalFees / amount) / termYears) * 100;
+
+            // Balloon calculation
+            let balloon = 0;
+            let hasBalloon = false;
+            if (termYrs < amortYrs) {
+                hasBalloon = true;
+                if (rMonth > 0) {
+                    const factorTerm = Math.pow(1 + rMonth, nTerm);
+                    balloon = amount * factorTerm - monthlyPayment * (factorTerm - 1) / rMonth;
+                } else {
+                    balloon = amount - (monthlyPayment * nTerm);
+                }
+                balloon = Math.max(0, balloon);
+            }
+
+            // APR Solver (Internal Rate of Return with Upfront Fees Deducted from Net Proceeds)
+            let apr = rate;
+            const netProceeds = amount - closingCosts;
+            if (netProceeds > 0 && closingCosts > 0) {
+                // Newton-Raphson to solve for monthly APR rate r_apr
+                let rGuess = rMonth > 0 ? rMonth : 0.005;
+                for (let iter = 0; iter < 40; iter++) {
+                    let pv = 0;
+                    let pvDerivative = 0;
+                    for (let m = 1; m <= nTerm; m++) {
+                        const df = Math.pow(1 + rGuess, -m);
+                        pv += monthlyPayment * df;
+                        pvDerivative -= m * monthlyPayment * Math.pow(1 + rGuess, -m - 1);
+                    }
+                    if (hasBalloon && balloon > 0) {
+                        const dfB = Math.pow(1 + rGuess, -nTerm);
+                        pv += balloon * dfB;
+                        pvDerivative -= nTerm * balloon * Math.pow(1 + rGuess, -nTerm - 1);
+                    }
+
+                    const diff = pv - netProceeds;
+                    if (Math.abs(diff) < 0.0001) break;
+                    if (Math.abs(pvDerivative) < 1e-12) break;
+                    rGuess = rGuess - diff / pvDerivative;
+                    if (rGuess < 0) rGuess = 0.00001;
+                }
+                apr = rGuess * 12 * 100;
+            }
+
+            const totalPayments = (monthlyPayment * nTerm) + (hasBalloon ? balloon : 0);
+            const totalInterest = Math.max(0, totalPayments - amount);
 
             return {
-                amount, ratePct, termYears, monthly, totalPmt, totalInterest, totalFees, apr
+                num,
+                amount,
+                rate,
+                termYrs,
+                amortYrs,
+                closingCosts,
+                monthlyPayment,
+                balloon,
+                hasBalloon,
+                apr,
+                totalPayments,
+                totalInterest
             };
         }
 
-        function calculateLoans() {
-            const l1 = calcLoanData(
-                parseNum(document.getElementById('l1-amount').value) || 25000,
-                parseNum(document.getElementById('l1-rate').value) || 6.5,
-                parseNum(document.getElementById('l1-term').value) || 5,
-                parseNum(document.getElementById('l1-orig-pct').value) || 1,
-                parseNum(document.getElementById('l1-closing').value) || 400
-            );
+        let calculatedLoans = [];
 
-            const l2 = calcLoanData(
-                parseNum(document.getElementById('l2-amount').value) || 25000,
-                parseNum(document.getElementById('l2-rate').value) || 6.25,
-                parseNum(document.getElementById('l2-term').value) || 5,
-                parseNum(document.getElementById('l2-orig-pct').value) || 1.5,
-                parseNum(document.getElementById('l2-closing').value) || 650
-            );
+        function calculateLoans(scroll = false) {
+            calculatedLoans = [
+                calcSingleLoan(1),
+                calcSingleLoan(2),
+                calcSingleLoan(3)
+            ];
 
-            const l3 = calcLoanData(
-                parseNum(document.getElementById('l3-amount').value) || 25000,
-                parseNum(document.getElementById('l3-rate').value) || 6.75,
-                parseNum(document.getElementById('l3-term').value) || 10,
-                parseNum(document.getElementById('l3-orig-pct').value) || 1,
-                parseNum(document.getElementById('l3-closing').value) || 400
-            );
+            // Update UI elements for Loan 1, 2, 3
+            calculatedLoans.forEach(loan => {
+                const num = loan.num;
+                // Accordion header badge
+                document.getElementById(`badge-loan${num}`).textContent = `Monthly payment ${fmtMoney(loan.monthlyPayment, 2)}`;
+                // Closing costs
+                document.getElementById(`val-closing${num}`).textContent = fmtMoney(loan.closingCosts, 2);
+                // Balloon payment
+                document.getElementById(`val-balloon${num}`).textContent = loan.hasBalloon ? fmtMoney(loan.balloon, 2) : 'n/a';
+                // APR
+                document.getElementById(`val-apr${num}`).textContent = fmtPct(loan.apr);
 
-            loanResults = [l1, l2, l3];
+                // Summary card
+                document.getElementById(`sum-pmt${num}`).textContent = fmtMoney(loan.monthlyPayment, 2);
+                document.getElementById(`sum-sub${num}`).innerHTML = `APR: ${fmtPct(loan.apr)} &bull; Interest: ${fmtMoney(loan.totalInterest, 2)}`;
+            });
 
-            document.getElementById('badge-loan1').textContent = `Monthly payment: ${fmtMoneyCents(l1.monthly)}`;
-            document.getElementById('badge-loan2').textContent = `Monthly payment: ${fmtMoneyCents(l2.monthly)}`;
-            document.getElementById('badge-loan3').textContent = `Monthly payment: ${fmtMoneyCents(l3.monthly)}`;
+            // Draw SVG Chart
+            drawMonthlyPaymentsChart(calculatedLoans);
 
-            document.getElementById('stat-loan1-pmt').textContent = fmtMoneyCents(l1.monthly);
-            document.getElementById('stat-loan2-pmt').textContent = fmtMoneyCents(l2.monthly);
-            document.getElementById('stat-loan3-pmt').textContent = fmtMoneyCents(l3.monthly);
-
-            // Find lowest APR
-            let lowestAprIdx = 0;
-            if (l2.apr < loanResults[lowestAprIdx].apr) lowestAprIdx = 1;
-            if (l3.apr < loanResults[lowestAprIdx].apr) lowestAprIdx = 2;
-
-            document.getElementById('banner-rec-text').textContent = 
-                `LOAN ${lowestAprIdx + 1} HAS THE LOWEST APR AT ${loanResults[lowestAprIdx].apr.toFixed(2)}%`;
-
-            renderLoanChart(loanResults);
+            if (scroll) {
+                const chartBox = document.getElementById('acc-chart');
+                if (chartBox) {
+                    chartBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            }
         }
 
-        function renderLoanChart(loans) {
-            const svg = document.getElementById('loan-chart-svg');
+        // SVG Bar Chart Generator (Pixel-Accurate Match to Screenshot 5)
+        function drawMonthlyPaymentsChart(loans) {
+            const svg = document.getElementById('loanChartSvg');
             if (!svg) return;
 
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
+            const width = 760;
+            const height = 340;
+            const padLeft = 85;
+            const padRight = 50;
+            const padTop = 35;
+            const padBottom = 45;
 
             const chartW = width - padLeft - padRight;
             const chartH = height - padTop - padBottom;
 
-            let maxVal = Math.max(...loans.map(l => l.monthly)) * 1.25;
-            if (maxVal === 0) maxVal = 1000;
+            // Determine maximum Y-value (multiple of $100, min $800 to match screenshot)
+            let maxPmt = 0;
+            loans.forEach(l => { if (l.monthlyPayment > maxPmt) maxPmt = l.monthlyPayment; });
+            let yMax = Math.max(800, Math.ceil(maxPmt / 100) * 100);
 
-            let svgHtml = '';
-            const gridCount = 4;
-            for (let i = 0; i <= gridCount; i++) {
-                const yVal = (maxVal / gridCount) * i;
-                const yPos = padTop + chartH - (i / gridCount) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            let svgContent = '';
+
+            // Background & Outer border
+            svgContent += `<rect x="0" y="0" width="${width}" height="${height}" fill="#f1f5f9" rx="6" />`;
+            svgContent += `<rect x="${padLeft}" y="${padTop}" width="${chartW}" height="${chartH}" fill="#ffffff" stroke="#94a3b8" stroke-width="1" />`;
+
+            // Horizontal grid lines and Y-axis labels
+            const gridSteps = 8;
+            for (let i = 0; i <= gridSteps; i++) {
+                const val = (yMax / gridSteps) * i;
+                const y = padTop + chartH - (i / gridSteps) * chartH;
+
+                svgContent += `<line x1="${padLeft}" y1="${y}" x2="${padLeft + chartW}" y2="${y}" stroke="#cbd5e1" stroke-width="1" />`;
+                svgContent += `<text x="${padLeft - 12}" y="${y + 4}" fill="#0f172a" font-size="12" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="end">${fmtRoundMoney(val)}</text>`;
             }
 
-            const colors = ['#1d4ed8', '#15803d', '#0284c7'];
-            const barW = 75;
-            const slotW = chartW / 3;
+            // Colors matching Raymond James / DinkyTown:
+            // Loan 1: Dark Blue (#0022cc)
+            // Loan 2: Green (#55aa44)
+            // Loan 3: Light Blue (#0088ff)
+            const colors = ['#0022cc', '#55aa44', '#0088ff'];
+            const barWidth = 90;
+            const colSpacing = chartW / 3;
 
-            loans.forEach((l, idx) => {
-                const cx = padLeft + idx * slotW + slotW / 2;
-                const bH = (l.monthly / maxVal) * chartH;
-                const bY = padTop + chartH - bH;
+            loans.forEach((loan, idx) => {
+                const cx = padLeft + (idx + 0.5) * colSpacing;
+                const barH = (loan.monthlyPayment / yMax) * chartH;
+                const barY = padTop + chartH - barH;
+                const barX = cx - (barWidth / 2);
+                const color = colors[idx];
 
-                svgHtml += `
-                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${colors[idx]}" rx="3">
-                        <title>Loan ${idx + 1}: ${fmtMoneyCents(l.monthly)}</title>
-                    </rect>
-                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(l.monthly)}</text>
-                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="12" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">Loan ${idx + 1}</text>
+                // Bar
+                svgContent += `
+                    <g class="chart-bar-group">
+                        <rect x="${barX}" y="${barY}" width="${barWidth}" height="${barH}" fill="${color}" stroke="#1e293b" stroke-width="1" rx="1">
+                            <title>Loan ${loan.num}: ${fmtMoney(loan.monthlyPayment, 2)}</title>
+                        </rect>
+                        <!-- Value label above bar -->
+                        <text x="${cx}" y="${barY - 8}" fill="#0f172a" font-size="13" font-family="'Montserrat', sans-serif" font-weight="800" text-anchor="middle">
+                            ${fmtRoundMoney(loan.monthlyPayment)}
+                        </text>
+                        <!-- X-axis label below chart -->
+                        <text x="${cx}" y="${padTop + chartH + 24}" fill="#0f172a" font-size="13" font-family="'Montserrat', sans-serif" font-weight="700" text-anchor="middle">
+                            Loan ${loan.num}
+                        </text>
+                    </g>
                 `;
             });
 
-            svg.innerHTML = svgHtml;
+            svg.innerHTML = svgContent;
         }
 
+        // View Report Modal Generator
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!loanResults.length) calculateLoans();
+            if (!calculatedLoans.length) calculateLoans();
 
-            body.innerHTML = `
-                <table class="comp-table">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Loan 1</th>
-                            <th>Loan 2</th>
-                            <th>Loan 3</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Loan Amount</td>
-                            <td>${fmtMoney(loanResults[0].amount)}</td>
-                            <td>${fmtMoney(loanResults[1].amount)}</td>
-                            <td>${fmtMoney(loanResults[2].amount)}</td>
-                        </tr>
-                        <tr>
-                            <td>Interest Rate</td>
-                            <td>${loanResults[0].ratePct.toFixed(2)}%</td>
-                            <td>${loanResults[1].ratePct.toFixed(2)}%</td>
-                            <td>${loanResults[2].ratePct.toFixed(2)}%</td>
-                        </tr>
-                        <tr>
-                            <td>Term</td>
-                            <td>${loanResults[0].termYears} Years</td>
-                            <td>${loanResults[1].termYears} Years</td>
-                            <td>${loanResults[2].termYears} Years</td>
-                        </tr>
-                        <tr>
-                            <td>Monthly Payment</td>
-                            <td style="font-weight: 700; color: #1d4ed8;">${fmtMoneyCents(loanResults[0].monthly)}</td>
-                            <td style="font-weight: 700; color: #15803d;">${fmtMoneyCents(loanResults[1].monthly)}</td>
-                            <td style="font-weight: 700; color: #0284c7;">${fmtMoneyCents(loanResults[2].monthly)}</td>
-                        </tr>
-                        <tr>
-                            <td>Upfront Fees</td>
-                            <td>${fmtMoney(loanResults[0].totalFees)}</td>
-                            <td>${fmtMoney(loanResults[1].totalFees)}</td>
-                            <td>${fmtMoney(loanResults[2].totalFees)}</td>
-                        </tr>
-                        <tr>
-                            <td>Total Interest Paid</td>
-                            <td>${fmtMoney(loanResults[0].totalInterest)}</td>
-                            <td>${fmtMoney(loanResults[1].totalInterest)}</td>
-                            <td>${fmtMoney(loanResults[2].totalInterest)}</td>
-                        </tr>
-                        <tr>
-                            <td>Total Cost of Loan</td>
-                            <td>${fmtMoney(loanResults[0].totalPmt + loanResults[0].totalFees)}</td>
-                            <td>${fmtMoney(loanResults[1].totalPmt + loanResults[1].totalFees)}</td>
-                            <td>${fmtMoney(loanResults[2].totalPmt + loanResults[2].totalFees)}</td>
-                        </tr>
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Estimated APR</td>
-                            <td style="color: #dfa01e;">${loanResults[0].apr.toFixed(2)}%</td>
-                            <td style="color: #dfa01e;">${loanResults[1].apr.toFixed(2)}%</td>
-                            <td style="color: #dfa01e;">${loanResults[2].apr.toFixed(2)}%</td>
-                        </tr>
-                    </tbody>
-                </table>
+            const body = document.getElementById('reportModalBody');
+            if (!body) return;
+
+            let tableHtml = `
+                <div style="margin-bottom: 20px;">
+                    <h4 style="font-family: 'Montserrat', sans-serif; font-size: 15px; color: var(--gold); text-transform: uppercase; margin: 0 0 8px;">
+                        Side-by-Side Loan Evaluation
+                    </h4>
+                    <p style="font-size: 13px; color: #cbd5e1; margin: 0; line-height: 1.6;">
+                        This report compares the monthly payments, annual percentage rates (APR), closing costs, balloon obligations, and lifetime interest charges across all 3 evaluated financing options.
+                    </p>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="calc-report-table">
+                        <thead>
+                            <tr>
+                                <th>Comparison Factor</th>
+                                <th style="color: #60a5fa;">Loan 1</th>
+                                <th style="color: #4ade80;">Loan 2</th>
+                                <th style="color: #38bdf8;">Loan 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Loan Amount</td>
+                                <td>${fmtMoney(calculatedLoans[0].amount, 0)}</td>
+                                <td>${fmtMoney(calculatedLoans[1].amount, 0)}</td>
+                                <td>${fmtMoney(calculatedLoans[2].amount, 0)}</td>
+                            </tr>
+                            <tr>
+                                <td>Interest Rate</td>
+                                <td>${fmtPct(calculatedLoans[0].rate)}</td>
+                                <td>${fmtPct(calculatedLoans[1].rate)}</td>
+                                <td>${fmtPct(calculatedLoans[2].rate)}</td>
+                            </tr>
+                            <tr>
+                                <td>Loan Term</td>
+                                <td>${calculatedLoans[0].termYrs} years</td>
+                                <td>${calculatedLoans[1].termYrs} years</td>
+                                <td>${calculatedLoans[2].termYrs} years</td>
+                            </tr>
+                            <tr>
+                                <td>Amortization Period</td>
+                                <td>${calculatedLoans[0].amortYrs} years</td>
+                                <td>${calculatedLoans[1].amortYrs} years</td>
+                                <td>${calculatedLoans[2].amortYrs} years</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>Monthly Payment</td>
+                                <td>${fmtMoney(calculatedLoans[0].monthlyPayment, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[1].monthlyPayment, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[2].monthlyPayment, 2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Closing Costs</td>
+                                <td>${fmtMoney(calculatedLoans[0].closingCosts, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[1].closingCosts, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[2].closingCosts, 2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Balloon Payment Due</td>
+                                <td>${calculatedLoans[0].hasBalloon ? fmtMoney(calculatedLoans[0].balloon, 2) : 'None'}</td>
+                                <td>${calculatedLoans[1].hasBalloon ? fmtMoney(calculatedLoans[1].balloon, 2) : 'None'}</td>
+                                <td>${calculatedLoans[2].hasBalloon ? fmtMoney(calculatedLoans[2].balloon, 2) : 'None'}</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td>Annual Percentage Rate (APR)</td>
+                                <td>${fmtPct(calculatedLoans[0].apr)}</td>
+                                <td>${fmtPct(calculatedLoans[1].apr)}</td>
+                                <td>${fmtPct(calculatedLoans[2].apr)}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Lifetime Payments</td>
+                                <td>${fmtMoney(calculatedLoans[0].totalPayments, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[1].totalPayments, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[2].totalPayments, 2)}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Interest Paid</td>
+                                <td>${fmtMoney(calculatedLoans[0].totalInterest, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[1].totalInterest, 2)}</td>
+                                <td>${fmtMoney(calculatedLoans[2].totalInterest, 2)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 24px; text-align: right;">
+                    <button type="button" class="calc-btn" onclick="window.print()" style="background: var(--gold); color: #080a0f;">
+                        <i class="fas fa-print" style="margin-right: 6px;"></i> Print Report
+                    </button>
+                </div>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            body.innerHTML = tableHtml;
+            document.getElementById('reportModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            document.getElementById('reportModal').style.display = 'none';
+            document.body.style.overflow = '';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
+        function closeModalOnOverlay(e) {
+            if (e.target.id === 'reportModal') {
+                closeReportModal();
+            }
+        }
 
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                closeReportModal();
+                closeShareDropdown();
+            }
+        });
+
+        // Accordion Controls
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
+        }
+
+        // Definitions & Tooltip Navigation
+        function scrollToDefinitions() {
+            const defs = document.getElementById('definitions');
+            if (defs) {
+                defs.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showHelp(termId) {
+            const target = document.getElementById(`def-${termId}`);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                target.style.transition = 'background-color 0.4s ease';
+                target.style.backgroundColor = 'rgba(223, 160, 30, 0.2)';
+                setTimeout(() => {
+                    target.style.backgroundColor = '';
+                }, 1500);
+            } else {
+                scrollToDefinitions();
+            }
+        }
+
+        // Share Dropdown
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) dd.classList.toggle('show');
+        }
+
+        function closeShareDropdown() {
+            const dd = document.getElementById('calcShareDropdown');
+            if (dd) dd.classList.remove('show');
+        }
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('.calc-share-wrapper')) {
+                closeShareDropdown();
+            }
+        });
+
+        function shareToSocial(platform, e) {
+            e.preventDefault();
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${url}`;
+                    break;
+            }
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+            closeShareDropdown();
+        }
+
+        // Mobile Menu Drawer Toggle
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('open');
+            }
+        }
+
+        // Initialize Everything on Load
         document.addEventListener('DOMContentLoaded', () => {
-            setupSync('l1-amount', 'range-l1-amount', false, true);
-            setupSync('l1-rate', 'range-l1-rate', true, false);
-            setupSync('l1-term', 'range-l1-term', false, false);
+            populateSelectOptions();
 
-            setupSync('l2-amount', 'range-l2-amount', false, true);
-            setupSync('l2-rate', 'range-l2-rate', true, false);
-            setupSync('l2-term', 'range-l2-term', false, false);
+            // Bind all input controls for Loan 1, 2, 3
+            [1, 2, 3].forEach(num => {
+                bindMoneySync(`inp-amount${num}`, `sld-amount${num}`);
+                bindPctSync(`inp-rate${num}`, `sld-rate${num}`);
+                bindSelectSync(`sel-term${num}`, `sld-term${num}`);
+                bindSelectSync(`sel-amort${num}`, `sld-amort${num}`);
 
-            setupSync('l3-amount', 'range-l3-amount', false, true);
-            setupSync('l3-rate', 'range-l3-rate', true, false);
-            setupSync('l3-term', 'range-l3-term', false, false);
+                bindMoneySync(`inp-orig${num}`, `sld-orig${num}`);
+                bindMoneySync(`inp-commit${num}`, `sld-commit${num}`);
+                bindMoneySync(`inp-otherfees${num}`, `sld-otherfees${num}`);
+                bindMoneySync(`inp-othercosts${num}`, `sld-othercosts${num}`);
+            });
 
-            calculateLoans();
+            // Initial calculation run
+            calculateLoans(false);
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>
