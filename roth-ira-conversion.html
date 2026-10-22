@@ -1,849 +1,969 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roth IRA Conversion | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate whether converting your Traditional IRA into a Roth IRA will generate higher after-tax retirement income based on your current and future tax rates.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="In 1997, the Roth IRA was introduced. This new IRA allowed for contributions to be made on an after-tax basis and all gains (or growth) to be distributed completely tax-free. Since then, people with incomes under $100,000 have had the option to convert all or a portion of their existing traditional IRAs to Roth IRAs. Beginning in 2008, participants with funds in eligible employer-sponsored plans could also roll those funds directly over to a Roth IRA in a qualified rollover if their income did not exceed the $100,000 threshold. Starting in 2010, all IRA owners and participants in eligible employer-sponsored plans, regardless of income level, are eligible to convert their traditional IRA and pre-tax funds in an employer-sponsored plan [401(a)/(k), 403(b) and governmental 457(b)] to a Roth IRA. Is this a good option for you? A conversion has both advantages and disadvantages that should be carefully considered before you make a decision. This calculator compares two alternatives with equal out-of-pocket costs to estimate the change in total net worth, at retirement, if you convert your traditional IRA into a Roth IRA." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/roth-transfer" />
+    <meta property="og:title" content="Roth IRA Conversion | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/roth-transfer-hero.jpg" />
+    <title>Roth IRA Conversion | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .ric-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .ric-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .ric-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .ric-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .ric-tax-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 12px;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .ric-tax-table th, .ric-tax-table td {
-            padding: 8px 10px;
-            border: 1px solid #cbd5e1;
-            text-align: center;
-        }
-        .ric-tax-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 700;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .ric-tax-table tr:nth-child(even) td {
-            background-color: #f8fafc;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 780px;
-            border-top: 5px solid #dfa01e;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            position: relative;
-            color: #1e293b;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .report-modal-close:hover {
-            color: #0b172a;
-        }
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13px;
-        }
-        .report-table th, .report-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .report-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-        .report-table tr:hover td {
-            background-color: #f8fafc;
-        }
-        .report-table td:last-child {
-            text-align: right;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- TOP HEADER BAR -->
-    <header class="top-nav-container">
-        <div class="top-nav-inner">
-            <div class="brand-left">
-                <a href="index.html" class="brand-logo-link">
-                    <span class="brand-title">THE SEILER GROUP</span>
-                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
-                </a>
-            </div>
-            <div class="header-contact">
-                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
-                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
-            </div>
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="roth-ira-conversion.css?v=2">
+</head>
+
+<body>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
         </div>
     </header>
 
-    <!-- SECONDARY NAVIGATION -->
-    <nav class="sub-nav">
-        <div class="sub-nav-inner">
-            <a href="index.html">HOME</a>
-            <a href="corporate-executive-services.html">ABOUT US</a>
-            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
-            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
-            <a href="resources.html" class="active">RESOURCES</a>
-            <a href="contact-us.html">CONTACT US</a>
-        </div>
-    </nav>
-
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="roth-ira-savings.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Roth IRA Savings">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="roth-ira-savings.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Roth IRA Savings">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="roth-ira-vs-traditional-ira.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Roth IRA vs. Traditional IRA">
+    <a href="roth-ira-vs-traditional-ira.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Roth IRA vs. Traditional IRA">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Roth IRA Conversion" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/roth-transfer-hero.jpg"
+                    alt="A Perfectly Timed and Planned Exit - Roth IRA Conversion" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-45.jpg'">
             </div>
 
-            <!-- Page Titles -->
-            <h1 class="calc-page-title">ROTH IRA CONVERSION</h1>
-            <div class="calc-category-path">Retirement &amp; Longevity &gt; Calculator</div>
-
-            <div class="calc-share-container">
-                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
-            </div>
-
-            <p class="calc-intro-paragraph">
-                In 1997, the Taxpayer Relief Act created the Roth IRA, allowing tax-free growth and distributions. However, many people were initially excluded due to income limitations. Now, any traditional IRA owner can convert all or part of their savings to a Roth IRA regardless of income. Use this calculator to see whether converting your traditional IRA to a Roth IRA will increase your retirement wealth after taxes.
-            </p>
-
-            <!-- Action Buttons -->
-            <div class="calc-actions-row">
-                <button type="button" class="calc-btn-primary" onclick="calculateConversion()">CALCULATE</button>
-                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Highlight Banner -->
-            <div class="calc-dynamic-banner" id="conversion-banner">
-                <span id="banner-text">Your Roth conversion could generate $33,850.00 in extra retirement savings</span>
-                <span class="banner-badge"><i class="fas fa-random"></i> Conversion Analysis</span>
-            </div>
-
-            <!-- Summary Stat Cards -->
-            <div class="ric-stat-grid">
-                <div class="ric-stat-card">
-                    <div class="ric-stat-val" id="stat-roth-value" style="color: #60a5fa;">$212,393</div>
-                    <div class="ric-stat-label">Roth IRA at Retirement</div>
+            <!-- Title & Meta Header -->
+            <header class="calc-header-section">
+                <h1 class="calc-title">ROTH IRA CONVERSION</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?category=retirement" class="calc-category-link">Retirement &amp; Longevity</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
                 </div>
-                <div class="ric-stat-card">
-                    <div class="ric-stat-val" id="stat-trad-value" style="color: #4ade80;">$178,543</div>
-                    <div class="ric-stat-label">Traditional IRA + Savings (Net)</div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <div class="ric-stat-card">
-                    <div class="ric-stat-val" id="stat-net-advantage" style="color: #dfa01e;">+$33,850</div>
-                    <div class="ric-stat-label" id="lbl-advantage-title">Conversion Advantage</div>
+
+                <p class="calc-intro-text">
+                    In 1997, the Roth IRA was introduced. This new IRA allowed for contributions to be made on an after-tax basis and all gains (or growth) to be distributed completely tax-free. Since then, people with incomes under $100,000 have had the option to convert all or a portion of their existing traditional IRAs to Roth IRAs. Beginning in 2008, participants with funds in eligible employer-sponsored plans could also roll those funds directly over to a Roth IRA in a qualified rollover if their income did not exceed the $100,000 threshold. Starting in 2010, all IRA owners and participants in eligible employer-sponsored plans, regardless of income level, are eligible to convert their traditional IRA and pre-tax funds in an employer-sponsored plan [401(a)/(k), 403(b) and governmental 457(b)] to a Roth IRA. Is this a good option for you? A conversion has both advantages and disadvantages that should be carefully considered before you make a decision. This calculator compares two alternatives with equal out-of-pocket costs to estimate the change in total net worth, at retirement, if you convert your traditional IRA into a Roth IRA.
+                </p>
+            </header>
+
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateConversion()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="ric-stat-card">
-                    <div class="ric-stat-val" id="stat-conversion-tax" style="color: #ef4444;">$12,000</div>
-                    <div class="ric-stat-label">Estimated Upfront Tax Due</div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- CALCULATOR FORM -->
-            <div class="calc-two-col-layout">
-                
-                <!-- Left Column: Inputs -->
-                <div class="calc-inputs-column">
-                    
-                    <div class="calc-section-group">
-                        <div class="calc-group-title">ROTH IRA CONVERSION INPUTS</div>
+            <!-- Dynamic Announcement Subhead -->
+            <div class="calc-action-subhead-banner" id="announcement-banner">
+                Your IRA could increase <span class="val" id="banner-increase-val">$888.47</span> with a Roth Conversion.
+            </div>
 
-                        <!-- Amount to convert -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-convert-amt">Amount to convert*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-convert-amt" class="calc-text-input" value="$50,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-convert-amt" class="calc-range-slider" min="5000" max="500000" step="5000" value="50000">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$5k</span>
-                                        <span>$250k</span>
-                                        <span>$500k</span>
-                                    </div>
-                                </div>
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- ============================================================
+             SECTION 1: ROTH IRA CONVERSION INPUTS (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-conv-inputs">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-conv-inputs')">
+                    <h3 class="calc-accordion-title">
+                        <span>ROTH IRA CONVERSION INPUTS:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Amount to convert -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('amount-to-convert')" title="Help on Amount to Convert">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-amt">Amount to convert:*</label>
+                        </div>
+                        <input type="text" id="inp-amt" class="calc-text-input" value="$10,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-amt" class="calc-slider" min="0" max="300" step="1" value="100">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- How are conversion taxes paid? -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label">How are conversion taxes paid?*</label>
-                            <div class="calc-input-control" style="display: flex; flex-direction: column; gap: 8px;">
-                                <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; cursor: pointer;">
-                                    <input type="radio" name="tax_source" id="tax-outside" value="outside" checked onchange="calculateConversion()">
-                                    Pay taxes from outside non-retirement funds (Recommended)
-                                </label>
-                                <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; cursor: pointer;">
-                                    <input type="radio" name="tax_source" id="tax-converted" value="converted" onchange="calculateConversion()">
-                                    Withhold taxes directly from converted funds
-                                </label>
+                    <!-- Non-deductible contributions -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('non-deductible')" title="Help on Non-deductible Contributions">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-non-ded">Non-deductible contributions:*</label>
+                        </div>
+                        <input type="text" id="inp-non-ded" class="calc-text-input" value="$0">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-non-ded" class="calc-slider" min="0" max="300" step="1" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Current age -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-curr-age">Current age*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-curr-age" class="calc-text-input" value="45" min="20" max="75" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-curr-age" class="calc-range-slider" min="20" max="75" step="1" value="45">
-                                    <div class="calc-slider-range-labels">
-                                        <span>20</span>
-                                        <span>47</span>
-                                        <span>75</span>
-                                    </div>
-                                </div>
+                    <!-- Current age -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-age')" title="Help on Current Age">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-cur-age">Current age:*</label>
+                        </div>
+                        <input type="text" id="inp-cur-age" class="calc-text-input" value="45">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-age" class="calc-slider" min="1" max="72" step="1" value="45">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>25</span>
+                                <span>48</span>
+                                <span>72</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Age at retirement -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-ret-age">Age at retirement*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-ret-age" class="calc-text-input" value="65" min="50" max="80" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-ret-age" class="calc-range-slider" min="50" max="80" step="1" value="65">
-                                    <div class="calc-slider-range-labels">
-                                        <span>50</span>
-                                        <span>65</span>
-                                        <span>80</span>
-                                    </div>
-                                </div>
+                    <!-- Age at retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('age-retirement')" title="Help on Age at Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-retire-age">Age at retirement:*</label>
+                        </div>
+                        <input type="text" id="inp-retire-age" class="calc-text-input" value="65">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-age" class="calc-slider" min="13" max="115" step="1" value="65">
+                            <div class="calc-slider-ticks">
+                                <span>13</span>
+                                <span>47</span>
+                                <span>81</span>
+                                <span>115</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Rate of return -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-return">Expected rate of return*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-return" class="calc-text-input" value="7.50%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-return" class="calc-range-slider" min="1.0" max="15.0" step="0.25" value="7.5">
-                                    <div class="calc-slider-range-labels">
-                                        <span>1.0%</span>
-                                        <span>8.0%</span>
-                                        <span>15.0%</span>
-                                    </div>
-                                </div>
+                    <!-- Rate of return -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('rate-return')" title="Help on Rate of Return">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-ror">Rate of return:*</label>
+                        </div>
+                        <input type="text" id="inp-ror" class="calc-text-input" value="7%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror" class="calc-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Current tax bracket -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-curr-tax">Current tax bracket*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-curr-tax" class="calc-text-input" value="24.0%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-curr-tax" class="calc-range-slider" min="10" max="37" step="1" value="24">
-                                    <div class="calc-slider-range-labels">
-                                        <span>10%</span>
-                                        <span>24%</span>
-                                        <span>37%</span>
-                                    </div>
-                                </div>
+                    <!-- Current tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-tax-rate')" title="Help on Current Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-cur-tax">Current tax rate:*</label>
+                        </div>
+                        <input type="text" id="inp-cur-tax" class="calc-text-input" value="24%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-tax" class="calc-slider" min="0" max="50" step="1" value="24">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Retirement tax bracket -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-ret-tax">Retirement tax bracket*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-ret-tax" class="calc-text-input" value="22.0%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-ret-tax" class="calc-range-slider" min="10" max="37" step="1" value="22">
-                                    <div class="calc-slider-range-labels">
-                                        <span>10%</span>
-                                        <span>22%</span>
-                                        <span>37%</span>
-                                    </div>
-                                </div>
+                    <!-- Tax rate at retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('tax-rate-retirement')" title="Help on Tax Rate at Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-ret-tax">Tax rate at retirement:*</label>
+                        </div>
+                        <input type="text" id="inp-ret-tax" class="calc-text-input" value="22%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ret-tax" class="calc-slider" min="0" max="50" step="1" value="22">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
                             </div>
                         </div>
+                    </div>
 
-                        <!-- Investment tax bracket -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-inv-tax">Investment tax bracket (Capital Gains)</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-inv-tax" class="calc-text-input" value="15.0%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-inv-tax" class="calc-range-slider" min="0" max="20" step="1" value="15">
-                                    <div class="calc-slider-range-labels">
-                                        <span>0%</span>
-                                        <span>15%</span>
-                                        <span>20%</span>
-                                    </div>
-                                </div>
+                    <!-- Investment tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('investment-tax-rate')" title="Help on Investment Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-inv-tax">Investment tax rate:*</label>
+                        </div>
+                        <input type="text" id="inp-inv-tax" class="calc-text-input" value="15%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-inv-tax" class="calc-slider" min="0" max="50" step="1" value="15">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
+            </section>
 
-                <!-- Right Column: Interactive Charts -->
-                <div class="calc-charts-column">
+            <!-- ============================================================
+             SECTION 2: ROTH CONVERSION RESULTS AT RETIREMENT (SCREENSHOT 2 & 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-results">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-results')">
+                    <h3 class="calc-accordion-title">
+                        <span>ROTH CONVERSION RESULTS AT RETIREMENT</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
                     <div class="calc-chart-box">
-                        <div class="calc-chart-title">ROTH CONVERSION RESULTS AT RETIREMENT</div>
-                        <div id="conversion-svg-container" style="width: 100%; height: 350px;">
-                            <!-- Dynamic SVG Chart rendered via JS -->
+
+                        <!-- 3-Bar Chart Grid -->
+                        <div class="calc-bars-grid-wrap" id="chartGridWrap">
+                            <!-- Y-axis grid lines $0 to $45,000 -->
+                            <div class="calc-grid-y-line" style="bottom: 0%;"><span class="calc-grid-y-label">$0</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 11.11%;"><span class="calc-grid-y-label">$5,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 22.22%;"><span class="calc-grid-y-label">$10,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 33.33%;"><span class="calc-grid-y-label">$15,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 44.44%;"><span class="calc-grid-y-label">$20,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 55.56%;"><span class="calc-grid-y-label">$25,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 66.67%;"><span class="calc-grid-y-label">$30,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 77.78%;"><span class="calc-grid-y-label">$35,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 88.89%;"><span class="calc-grid-y-label">$40,000</span></div>
+                            <div class="calc-grid-y-line" style="bottom: 100%;"><span class="calc-grid-y-label">$45,000</span></div>
+
+                            <!-- Bars Container -->
+                            <div class="calc-bars-flex">
+                                <!-- Bar 1: Roth IRA -->
+                                <div class="calc-bar-column">
+                                    <span class="calc-bar-val-label" id="lbl-bar-roth">$38,697</span>
+                                    <div class="calc-single-bar bar-roth" id="bar-roth" style="height: 85.99%;"></div>
+                                </div>
+                                <!-- Bar 2: Traditional IRA -->
+                                <div class="calc-bar-column">
+                                    <span class="calc-bar-val-label" id="lbl-bar-trad">$30,184</span>
+                                    <div class="calc-single-bar bar-trad" id="bar-trad" style="height: 67.07%;"></div>
+                                </div>
+                                <!-- Bar 3: Traditional IRA + Tax Payment -->
+                                <div class="calc-bar-column">
+                                    <span class="calc-bar-val-label" id="lbl-bar-trad-tax">$37,808</span>
+                                    <div class="calc-single-bar bar-trad-tax" id="bar-trad-tax" style="height: 84.02%;"></div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Legend -->
-                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 2px;"></span>
-                                <span>Roth IRA (100% Tax-Free)</span>
+                        <!-- Legend Matching Screenshot 3 -->
+                        <div class="calc-legend-list">
+                            <div class="calc-legend-row">
+                                <span class="calc-legend-circle roth"></span>
+                                <span>After tax Roth IRA <span id="leg-val-roth" style="font-weight: 800; color: #0022cc;">$38,696.84</span></span>
                             </div>
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span style="width: 12px; height: 12px; background: #15803d; border-radius: 2px;"></span>
-                                <span>Traditional IRA (After-Tax)</span>
+                            <div class="calc-legend-row">
+                                <span class="calc-legend-circle trad"></span>
+                                <span>After tax Traditional IRA <span id="leg-val-trad" style="font-weight: 800; color: #2e7d32;">$30,183.54</span></span>
+                            </div>
+                            <div class="calc-legend-row">
+                                <span class="calc-legend-circle trad-tax"></span>
+                                <span>Traditional IRA + <span id="leg-val-tax-paid">$2,400.00</span> tax payment <span id="leg-val-trad-tax" style="font-weight: 800; color: #0077dd;">$37,808.37</span></span>
                             </div>
                         </div>
+
                     </div>
                 </div>
+            </section>
 
-            </div>
+            <!-- ============================================================
+             SECTION 3: DEFINITIONS & STATUTORY CONTENT (SCREENSHOTS 3, 4, 5)
+             ============================================================ -->
+            <section class="calc-definitions-section" id="definitionsSection">
+                <h2 class="calc-def-main-heading">DEFINITIONS</h2>
 
-            <!-- DEFINITIONS SECTION -->
-            <section class="calc-definitions-wrapper">
-                <h3 class="calc-defs-title">DEFINITIONS</h3>
+                <h3 class="calc-def-sub-heading">CALCULATION NOTES</h3>
+                <p class="calc-def-p">
+                    Please note the following important information regarding any Roth conversion.
+                </p>
+                <ul class="calc-def-bullets">
+                    <li>You must pay ordinary income tax on the amount converted (specifically, on pre-tax contributions and investment gains).</li>
+                    <li>If you pay the taxes using money from the traditional IRA, you will lose the potential benefits of tax-free growth on that amount.</li>
+                    <li>If you are under age 59½, you may be subject to a 10% federal tax penalty if you withdraw money from your traditional IRA to pay the tax on the conversion. You may also have to pay state tax penalties.</li>
+                    <li>For an investor in a lower tax bracket, traditional IRA contributions may be tax-deductible while Roth IRA contributions are not.</li>
+                    <li>After conversion, in order to take any distributions that include earnings that are tax-free, the Roth IRA must be opened for 5 tax years. Eligible tax-free distributions include those taken for death or disability, after age 59½, or for a first-time home purchase.</li>
+                </ul>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">EVALUATION NOTE</div>
-                    <div class="calc-def-desc">When converting a traditional IRA to a Roth IRA, you pay ordinary income tax on the amount converted in the tax year of the conversion. In exchange, all future earnings compound completely tax-free and qualified withdrawals are 100% tax-free.</div>
-                </div>
+                <h3 class="calc-def-sub-heading">AMOUNT TO CONVERT</h3>
+                <p class="calc-def-p">
+                    Amount to convert from a traditional IRA account to a Roth IRA. The tool assumes that you are paying any taxes owed with funds that you have available outside of the account you are converting. If you are under 59½, the IRS treats any money not directly rolled over to the Roth IRA as an early withdrawal – even if that money is used to pay the tax bill caused by the conversion and, except in the case of a rollover from a governmental 457(b) plan, the funds will be subject to a federal tax penalty unless an exception applies.
+                </p>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">AMOUNT TO CONVERT</div>
-                    <div class="calc-def-desc">The pre-tax balance in your Traditional IRA or qualified plan that you intend to convert to a Roth IRA.</div>
-                </div>
+                <h3 class="calc-def-sub-heading">NON-DEDUCTIBLE CONTRIBUTIONS</h3>
+                <p class="calc-def-p">
+                    The amounts, if any, contributed to your traditional IRAs or employer-sponsored accounts made with after-tax contributions. It is important to note that you may not 'cherry pick' funds that are either after-tax or pre-tax to convert. If you are not converting all of your IRAs or the entire amount in your employer-sponsored plan, you must convert a prorated amount of the pre-tax (deductible) and after-tax (nondeductible) balance. All of your IRAs are added together and treated as one for this purpose.
+                </p>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">TAXES PAID FROM OUTSIDE FUNDS</div>
-                    <div class="calc-def-desc">Paying conversion taxes using non-retirement taxable cash maximizes the amount compounding tax-free in the Roth IRA. If taxes are withheld directly from the converted amount, individuals under age 59½ may trigger a 10% IRS early withdrawal penalty on the withheld tax portion.</div>
-                </div>
+                <h3 class="calc-def-sub-heading">CURRENT AGE</h3>
+                <p class="calc-def-p">
+                    This current age of the account owner must be less than 72 for this calculator. Although it is possible to convert an IRA at any age, this calculator does not take Required Minimum Distributions (RMD) into account, which begin at age 75 (or 70 1/2 if you were born before 7/1/1949, 72 if you were born 7/1/1949 to 12/31/1951, 73 if you were born 1/1/1951 to 1/1/1960) and is not designed for individuals that are currently required to begin making these distributions.
+                </p>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">CURRENT TAX RATE</div>
-                    <div class="calc-def-desc">Your marginal tax rate today. Because a Roth conversion adds to your taxable income, large conversions may push part of your income into a higher tax bracket.</div>
-                </div>
+                <h3 class="calc-def-sub-heading">AGE AT RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Desired age at retirement.
+                </p>
 
-                <!-- 2024 Federal Tax Bracket Reference Table -->
-                <div style="margin: 20px 0; overflow-x: auto;">
-                    <div style="font-weight: 700; color: #0b172a; font-size: 13px; margin-bottom: 8px;">
-                        Filing Status and Federal Income Tax Rates for 2024
-                    </div>
-                    <table class="ric-tax-table">
+                <h3 class="calc-def-sub-heading">RATE OF RETURN</h3>
+                <p class="calc-def-p">
+                    The annual rate of return for your IRA. This calculator assumes that your return is compounded annually. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT TAX RATE</h3>
+                <p class="calc-def-p">
+                    Current marginal income tax rate that will apply to conversion amount. Please note that the marginal tax rate for your conversion may be higher than your current marginal tax rate if the conversion moves your AGI into a higher income tax bracket. It is also possible, especially on very large conversions, that part of your conversion be subject to more than one tax rate. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                </p>
+
+                <!-- 2026 IRS Tax Brackets Table -->
+                <div class="calc-tax-table-wrap">
+                    <div class="calc-tax-table-title">Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</div>
+                    <table class="calc-tax-table">
                         <thead>
                             <tr>
                                 <th>Tax Rate</th>
-                                <th>Married Filing Jointly</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
                                 <th>Single</th>
                                 <th>Head of Household</th>
                                 <th>Married Filing Separately</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>10%</td><td>$0 – $23,200</td><td>$0 – $11,600</td><td>$0 – $16,550</td><td>$0 – $11,600</td></tr>
-                            <tr><td>12%</td><td>$23,200 – $94,300</td><td>$11,600 – $47,150</td><td>$16,550 – $63,100</td><td>$11,600 – $47,150</td></tr>
-                            <tr><td>22%</td><td>$94,300 – $201,050</td><td>$47,150 – $100,525</td><td>$63,100 – $100,500</td><td>$47,150 – $100,525</td></tr>
-                            <tr><td>24%</td><td>$201,050 – $383,900</td><td>$100,525 – $191,950</td><td>$100,500 – $191,950</td><td>$100,525 – $191,950</td></tr>
-                            <tr><td>32%</td><td>$383,900 – $487,450</td><td>$191,950 – $243,725</td><td>$191,950 – $243,700</td><td>$191,950 – $243,725</td></tr>
-                            <tr><td>35%</td><td>$487,450 – $731,200</td><td>$243,725 – $609,350</td><td>$243,700 – $609,350</td><td>$243,725 – $365,600</td></tr>
-                            <tr><td>37%</td><td>Over $731,200</td><td>Over $609,350</td><td>Over $609,350</td><td>Over $365,600</td></tr>
+                            <tr>
+                                <td style="font-weight: 700;">10%</td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">12%</td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">22%</td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">24%</td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">32%</td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">35%</td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">37%</td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
                         </tbody>
                     </table>
+                    <div class="calc-tax-table-footnote">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates.<br>Source: Rev. Proc. 2025-32
+                    </div>
                 </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">RETIREMENT TAX RATE</div>
-                    <div class="calc-def-desc">The marginal tax rate you anticipate paying during retirement when taking distributions. Converting is typically favorable if you expect your future tax rate to be equal to or higher than your current rate.</div>
-                </div>
+                <h3 class="calc-def-sub-heading">TAX RATE AT RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Expected marginal income tax rate at retirement.
+                </p>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">INVESTMENT TAX RATE</div>
-                    <div class="calc-def-desc">The long-term capital gains tax rate applied to outside taxable investment growth.</div>
+                <h3 class="calc-def-sub-heading">INVESTMENT TAX RATE</h3>
+                <p class="calc-def-p">
+                    Expected marginal tax rate (base this on expected capital gains rate) for investments. This calculator assumes that you invest the amount that you would have had to pay in taxes in a taxable investment account. The investment tax rate is used for calculating the annual return on these taxable investments. For many, this will be the same as their income tax rate. If you expect your non-IRA investments to be primarily from long-term capital gains or dividends, enter your expected capital gains rate here.
+                </p>
+
+                <!-- Regulatory & FINRA Disclaimer -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
                 </div>
             </section>
-
-            <!-- LEGAL DISCLAIMER -->
-            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
-            </div>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Roth IRA Conversion Analysis Report</h2>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
-                </div>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeModalOnBackdrop(event, 'reportModal')">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Roth IRA Conversion Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('reportModal')">&times;</button>
             </div>
-
-            <div id="report-modal-body">
-                <!-- Populated dynamically via JS -->
+            <div class="calc-modal-body">
+                <p style="margin-bottom: 14px; color: var(--gold);">
+                    Comprehensive analysis of Roth Conversion versus keeping your Traditional IRA:
+                </p>
+                <table class="calc-modal-table">
+                    <tbody id="modalReportBody">
+                        <!-- Injected dynamically -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
-     CHAMPION STRIP
+    <!-- ============================================================
+     HELP / CONTEXT MODAL
      ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+    <div class="calc-modal-overlay" id="helpModal" onclick="closeModalOnBackdrop(event, 'helpModal')">
+        <div class="calc-modal-box" style="max-width: 520px;">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="helpModalTitle">Help Information</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('helpModal')">&times;</button>
+            </div>
+            <div class="calc-modal-body" id="helpModalBody">
+                <!-- Injected dynamically -->
             </div>
         </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
+    </div>
 
     <!-- ============================================================
-     FOOTER
+     CALCULATOR JAVASCRIPT LOGIC
      ============================================================ -->
-    <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
-    </footer>
-
-    <!-- INTERACTIVE ENGINE SCRIPT -->
     <script>
-        function parseClean(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // Formatting utilities
+        function formatCurrency(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        function formatCurrencyRound(val) {
+            return '$' + Math.round(Number(val)).toLocaleString('en-US');
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function parseCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function fmtPct(num) {
-            return Number(num).toFixed(1) + '%';
+        function parsePercent(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
+        let lastReportData = null;
 
-            range.addEventListener('input', () => {
-                let v = parseFloat(range.value);
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(v);
-                } else if (isPct) {
-                    inp.value = fmtPct(v);
-                } else {
-                    inp.value = v;
-                }
-                calculateConversion();
-            });
-
-            inp.addEventListener('change', () => {
-                let val = parseClean(inp.value);
-                if (val < parseFloat(range.min)) val = parseFloat(range.min);
-                if (val > parseFloat(range.max)) val = parseFloat(range.max);
-                range.value = val;
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(val);
-                } else if (isPct) {
-                    inp.value = fmtPct(val);
-                } else {
-                    inp.value = val;
-                }
-                calculateConversion();
-            });
+        // Piecewise interpolation for logarithmic $0 to $1M sliders
+        // Ticks: 0, 10k, 100k, 1m (pos: 0..300)
+        function millionSliderToVal(pos) {
+            if (pos <= 100) return (pos / 100) * 10000;
+            if (pos <= 200) return 10000 + ((pos - 100) / 100) * 90000;
+            return 100000 + ((pos - 200) / 100) * 900000;
         }
 
-        let convData = {};
+        function millionValToSlider(val) {
+            if (val <= 10000) return (val / 10000) * 100;
+            if (val <= 100000) return 100 + ((val - 10000) / 90000) * 100;
+            return 200 + ((val - 100000) / 900000) * 100;
+        }
 
+        // Main Calculation
         function calculateConversion() {
-            const convertAmt = parseClean(document.getElementById('inp-convert-amt').value) || 50000;
-            const payFromOutside = document.getElementById('tax-outside').checked;
-            const currAge = parseClean(document.getElementById('inp-curr-age').value) || 45;
-            let retAge = parseClean(document.getElementById('inp-ret-age').value) || 65;
-            if (retAge <= currAge) retAge = currAge + 1;
+            const amt = parseCurrency(document.getElementById('inp-amt').value);
+            const nonDed = parseCurrency(document.getElementById('inp-non-ded').value);
+            const curAge = parseInt(document.getElementById('inp-cur-age').value, 10) || 45;
+            const retireAge = parseInt(document.getElementById('inp-retire-age').value, 10) || 65;
+            const ror = parsePercent(document.getElementById('inp-ror').value) / 100;
+            const curTax = parsePercent(document.getElementById('inp-cur-tax').value) / 100;
+            const retTax = parsePercent(document.getElementById('inp-ret-tax').value) / 100;
+            const invTax = parsePercent(document.getElementById('inp-inv-tax').value) / 100;
 
-            const rateReturn = (parseClean(document.getElementById('inp-return').value) || 7.5) / 100;
-            const currTax = (parseClean(document.getElementById('inp-curr-tax').value) || 24.0) / 100;
-            const retTax = (parseClean(document.getElementById('inp-ret-tax').value) || 22.0) / 100;
-            const invTax = (parseClean(document.getElementById('inp-inv-tax').value) || 15.0) / 100;
+            const n = Math.max(1, retireAge - curAge);
 
-            const yrs = retAge - currAge;
-            const growthFactor = Math.pow(1 + rateReturn, yrs);
+            // Conversion Tax:
+            // Deductible portion is taxed today at curTax
+            const taxableConversion = Math.max(0, amt - nonDed);
+            const conversionTax = taxableConversion * curTax;
 
-            // Upfront Conversion Tax Due
-            const taxDue = convertAmt * currTax;
+            // 1. After Tax Roth IRA at Retirement:
+            // Entire amount grows tax-free at ror
+            const rothAtRet = amt * Math.pow(1 + ror, n);
 
-            let rothInitial = convertAmt;
-            if (!payFromOutside) {
-                // If paid from conversion, net amount deposited into Roth
-                // If age < 59.5, 10% penalty on withheld tax
-                const penaltyRate = currAge < 59.5 ? 0.10 : 0.00;
-                rothInitial = Math.max(0, convertAmt - (taxDue * (1 + penaltyRate)));
-            }
+            // 2. Traditional IRA (After-Tax at Retirement):
+            // Entire amount grows at ror, taxes paid at retTax on taxable portion
+            const tradGross = amt * Math.pow(1 + ror, n);
+            const tradTax = Math.max(0, tradGross - nonDed) * retTax;
+            const tradAfterTax = tradGross - tradTax;
 
-            // 1. Roth Final Value (Compounded tax-free)
-            const rothFinal = rothInitial * growthFactor;
+            // 3. Alternative: Traditional IRA + Tax Payment Invested in Taxable Account
+            // If not converted, invest the conversion tax into a taxable account earning ror*(1 - invTax)
+            const rTaxable = ror * (1 - invTax);
+            const sideAccount = conversionTax * Math.pow(1 + rTaxable, n);
+            const tradPlusSide = tradAfterTax + sideAccount;
 
-            // 2. Traditional IRA Final Value:
-            // The $convertAmt grows inside Trad IRA to:
-            const tradGrossFinal = convertAmt * growthFactor;
-            // When distributed at retTax:
-            const tradNetFinal = tradGrossFinal * (1 - retTax);
+            // Net Difference / Benefit
+            const netAdvantage = rothAtRet - tradPlusSide;
 
-            // Plus: If payFromOutside was true, under the "Do Not Convert" scenario, that $taxDue cash
-            // remained in the outside taxable account compounding at (rateReturn * (1 - invTax * 0.35))
-            let taxableGrowthNet = 0;
-            if (payFromOutside) {
-                const netReturn = rateReturn * (1 - invTax * 0.35);
-                const sideFinalGross = taxDue * Math.pow(1 + netReturn, yrs);
-                const sideGains = Math.max(0, sideFinalGross - taxDue);
-                taxableGrowthNet = taxDue + sideGains * (1 - invTax);
-            }
-
-            const tradTotalNet = tradNetFinal + taxableGrowthNet;
-            const netAdvantage = rothFinal - tradTotalNet;
-
-            convData = {
-                convertAmt, payFromOutside, currAge, retAge, yrs, rateReturn, currTax, retTax, invTax,
-                taxDue, rothInitial, rothFinal, tradGrossFinal, tradNetFinal, taxableGrowthNet,
-                tradTotalNet, netAdvantage
-            };
-
-            // Update UI
-            document.getElementById('stat-roth-value').innerText = fmtMoney(rothFinal);
-            document.getElementById('stat-trad-value').innerText = fmtMoney(tradTotalNet);
-            document.getElementById('stat-conversion-tax').innerText = fmtMoney(taxDue);
-
-            const bannerText = document.getElementById('banner-text');
-            const statAdv = document.getElementById('stat-net-advantage');
-            const lblAdv = document.getElementById('lbl-advantage-title');
-
+            // Update Announcement Subhead
+            const bannerVal = document.getElementById('banner-increase-val');
+            const bannerText = document.getElementById('announcement-banner');
             if (netAdvantage >= 0) {
-                bannerText.innerText = `Your Roth conversion could generate ${fmtMoneyCents(netAdvantage)} in extra retirement savings`;
-                statAdv.innerText = `+${fmtMoney(netAdvantage)}`;
-                statAdv.style.color = '#dfa01e';
-                lblAdv.innerText = 'Conversion Advantage';
+                bannerText.innerHTML = `Your IRA could increase <span class="val" id="banner-increase-val">${formatCurrency(netAdvantage)}</span> with a Roth Conversion.`;
             } else {
-                bannerText.innerText = `Keeping Traditional IRA provides ${fmtMoneyCents(Math.abs(netAdvantage))} more wealth`;
-                statAdv.innerText = `+${fmtMoney(Math.abs(netAdvantage))}`;
-                statAdv.style.color = '#15803d';
-                lblAdv.innerText = 'Traditional Advantage';
+                bannerText.innerHTML = `Keeping your Traditional IRA could be ahead by <span class="val" id="banner-increase-val">${formatCurrency(Math.abs(netAdvantage))}</span> compared to conversion.`;
             }
 
-            renderConversionChart(rothFinal, tradTotalNet);
+            // Update Legend Values
+            document.getElementById('leg-val-roth').textContent = formatCurrency(rothAtRet);
+            document.getElementById('leg-val-trad').textContent = formatCurrency(tradAfterTax);
+            document.getElementById('leg-val-tax-paid').textContent = formatCurrency(conversionTax);
+            document.getElementById('leg-val-trad-tax').textContent = formatCurrency(tradPlusSide);
+
+            // Update Bar Value Labels
+            document.getElementById('lbl-bar-roth').textContent = formatCurrencyRound(rothAtRet);
+            document.getElementById('lbl-bar-trad').textContent = formatCurrencyRound(tradAfterTax);
+            document.getElementById('lbl-bar-trad-tax').textContent = formatCurrencyRound(tradPlusSide);
+
+            // Scale Bar Heights ($0 to $45,000 scale, or dynamic if larger)
+            const maxY = Math.max(45000, Math.ceil(Math.max(rothAtRet, tradPlusSide) / 5000) * 5000);
+            
+            document.getElementById('bar-roth').style.height = `${((rothAtRet / maxY) * 100).toFixed(2)}%`;
+            document.getElementById('bar-trad').style.height = `${((tradAfterTax / maxY) * 100).toFixed(2)}%`;
+            document.getElementById('bar-trad-tax').style.height = `${((tradPlusSide / maxY) * 100).toFixed(2)}%`;
+
+            lastReportData = {
+                amt,
+                nonDed,
+                curAge,
+                retireAge,
+                n,
+                ror,
+                curTax,
+                retTax,
+                invTax,
+                conversionTax,
+                rothAtRet,
+                tradGross,
+                tradTax,
+                tradAfterTax,
+                sideAccount,
+                tradPlusSide,
+                netAdvantage
+            };
         }
 
-        function renderConversionChart(rothVal, tradVal) {
-            const container = document.getElementById('conversion-svg-container');
-            const maxVal = Math.max(rothVal, tradVal, 50000) * 1.15;
-            const w = 480;
-            const h = 330;
-            const padL = 70;
-            const padR = 30;
-            const padT = 30;
-            const padB = 60;
-            const chartW = w - padL - padR;
-            const chartH = h - padT - padB;
-
-            const hRoth = (rothVal / maxVal) * chartH;
-            const hTrad = (tradVal / maxVal) * chartH;
-
-            const yRoth = padT + chartH - hRoth;
-            const yTrad = padT + chartH - hTrad;
-
-            const barW = 85;
-            const xRoth = padL + (chartW / 3) - (barW / 2);
-            const xTrad = padL + (2 * chartW / 3) - (barW / 2);
-
-            let gridLines = '';
-            for (let i = 0; i <= 4; i++) {
-                const val = (maxVal / 4) * i;
-                const y = padT + chartH - (i * chartH / 4);
-                gridLines += `
-                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
-                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val / 1000)}k</text>
-                `;
-            }
-
-            const svgHtml = `
-                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
-                    ${gridLines}
-
-                    <!-- Roth Bar -->
-                    <rect x="${xRoth}" y="${yRoth}" width="${barW}" height="${hRoth}" fill="#2563eb" rx="4" />
-                    <text x="${xRoth + barW / 2}" y="${Math.max(padT + 15, yRoth - 8)}" fill="#1e3a8a" font-size="12" font-weight="700" text-anchor="middle">
-                        ${fmtMoney(rothVal)}
-                    </text>
-                    <text x="${xRoth + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Roth IRA
-                    </text>
-
-                    <!-- Traditional Bar -->
-                    <rect x="${xTrad}" y="${yTrad}" width="${barW}" height="${hTrad}" fill="#15803d" rx="4" />
-                    <text x="${xTrad + barW / 2}" y="${Math.max(padT + 15, yTrad - 8)}" fill="#14532d" font-size="12" font-weight="700" text-anchor="middle">
-                        ${fmtMoney(tradVal)}
-                    </text>
-                    <text x="${xTrad + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Traditional IRA
-                    </text>
-
-                    <!-- Axis -->
-                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
-                </svg>
-            `;
-
-            container.innerHTML = svgHtml;
-        }
-
+        // View Report Modal
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!convData.rothFinal) calculateConversion();
+            if (!lastReportData) calculateConversion();
+            const d = lastReportData;
+            const tbody = document.getElementById('modalReportBody');
 
-            const d = convData;
-            const rothWins = d.netAdvantage >= 0;
-
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Conversion Recommendation</div>
-                    <div style="font-size: 22px; font-weight: 700; color: #ffffff; margin-top: 4px;">
-                        ${rothWins ? 'Roth Conversion Recommended' : 'Retain Traditional IRA'}
-                    </div>
-                    <div style="font-size: 13px; color: #4ade80; font-weight: 600; margin-top: 4px;">
-                        Net Financial Gain: ${fmtMoneyCents(Math.abs(d.netAdvantage))}
-                    </div>
-                </div>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Conversion Inputs &amp; Taxes</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Amount to Convert</td><td style="font-weight: 700;">${fmtMoneyCents(d.convertAmt)}</td></tr>
-                        <tr><td>Tax Payment Method</td><td>${d.payFromOutside ? 'Paid from non-retirement taxable funds' : 'Withheld from converted amount'}</td></tr>
-                        <tr><td>Upfront Conversion Tax Due</td><td style="color: #ef4444;">${fmtMoneyCents(d.taxDue)}</td></tr>
-                        <tr><td>Time Horizon to Retirement</td><td>${d.yrs} Years (${d.currAge} to ${d.retAge})</td></tr>
-                        <tr><td>Expected Rate of Return</td><td>${fmtPct(d.rateReturn * 100)}</td></tr>
-                        <tr><td>Current Marginal Tax Bracket</td><td>${fmtPct(d.currTax * 100)}</td></tr>
-                        <tr><td>Retirement Marginal Tax Bracket</td><td>${fmtPct(d.retTax * 100)}</td></tr>
-                    </tbody>
-                </table>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Projected Value at Age ${d.retAge}</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr style="background: #eff6ff; font-weight: 700;">
-                            <td style="color: #1e40af;">Roth IRA (100% Tax-Free Net Value)</td>
-                            <td style="color: #1d4ed8; font-size: 15px;">${fmtMoneyCents(d.rothFinal)}</td>
-                        </tr>
-                        <tr><td>Traditional IRA Gross Compounded Balance</td><td>${fmtMoneyCents(d.tradGrossFinal)}</td></tr>
-                        <tr><td>Less: Future Taxes Paid at Retirement (${fmtPct(d.retTax * 100)})</td><td style="color: #ef4444;">- ${fmtMoneyCents(d.tradGrossFinal * d.retTax)}</td></tr>
-                        <tr><td>Traditional IRA Net Distribution Value</td><td>${fmtMoneyCents(d.tradNetFinal)}</td></tr>
-                        ${d.payFromOutside ? `
-                        <tr><td>Compounded Outside Taxable Account Net Value</td><td style="color: #16a34a;">+ ${fmtMoneyCents(d.taxableGrowthNet)}</td></tr>` : ''}
-                        <tr style="background: #f0fdf4; font-weight: 700;">
-                            <td style="color: #166534;">Total Alternative Net Wealth</td>
-                            <td style="color: #15803d; font-size: 15px;">${fmtMoneyCents(d.tradTotalNet)}</td>
-                        </tr>
-                        <tr style="background: #fffbeb; font-weight: 800;">
-                            <td style="color: #b45309;">Net Advantage of Conversion</td>
-                            <td style="color: ${rothWins ? '#2563eb' : '#15803d'}; font-size: 16px;">
-                                ${fmtMoneyCents(Math.abs(d.netAdvantage))} (${rothWins ? 'Roth Advantage' : 'Traditional Advantage'})
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            tbody.innerHTML = `
+                <tr>
+                    <td>Amount to Convert</td>
+                    <td style="font-weight: 700; color: #ffffff;">${formatCurrency(d.amt)}</td>
+                </tr>
+                <tr>
+                    <td>Non-Deductible Contributions</td>
+                    <td>${formatCurrency(d.nonDed)}</td>
+                </tr>
+                <tr>
+                    <td>Current Age / Retirement Age</td>
+                    <td>${d.curAge} / ${d.retireAge} (${d.n} years until retirement)</td>
+                </tr>
+                <tr>
+                    <td>Estimated Tax Owed on Conversion Today (${Math.round(d.curTax * 100)}%)</td>
+                    <td style="color: #ef4444; font-weight: 700;">${formatCurrency(d.conversionTax)}</td>
+                </tr>
+                <tr>
+                    <td>Expected Annual Investment Return</td>
+                    <td>${(d.ror * 100).toFixed(1)}%</td>
+                </tr>
+                <tr>
+                    <td>Expected Retirement Marginal Tax Rate</td>
+                    <td>${Math.round(d.retTax * 100)}%</td>
+                </tr>
+                <tr>
+                    <td>Tax Rate on Outside Investment Growth</td>
+                    <td>${Math.round(d.invTax * 100)}%</td>
+                </tr>
+                <tr style="border-top: 1px solid #334155;">
+                    <td style="font-weight: 700; color: #60a5fa;">After-Tax Roth IRA at Retirement</td>
+                    <td style="font-weight: 800; color: #60a5fa; font-size: 15px;">${formatCurrency(d.rothAtRet)}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700; color: #4ade80;">After-Tax Traditional IRA at Retirement</td>
+                    <td style="font-weight: 800; color: #4ade80; font-size: 15px;">${formatCurrency(d.tradAfterTax)}</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: 700; color: #38bdf8;">Traditional IRA + Invested Tax Savings</td>
+                    <td style="font-weight: 800; color: #38bdf8; font-size: 15px;">${formatCurrency(d.tradPlusSide)}</td>
+                </tr>
+                <tr style="background: rgba(223, 160, 30, 0.1); border-top: 2px solid var(--gold);">
+                    <td style="font-weight: 800; color: var(--gold);">Net Difference from Conversion</td>
+                    <td style="font-weight: 800; color: var(--gold); font-size: 16px;">${d.netAdvantage >= 0 ? '+' : ''}${formatCurrency(d.netAdvantage)}</td>
+                </tr>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            document.getElementById('reportModal').classList.add('show');
         }
 
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        function closeModalOnBackdrop(e, id) {
+            if (e.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Help Modal Content
+        const helpData = {
+            'amount-to-convert': {
+                title: 'Amount to Convert',
+                text: 'The total dollar amount you wish to convert from a traditional IRA or eligible employer retirement account into a Roth IRA.'
+            },
+            'non-deductible': {
+                title: 'Non-Deductible Contributions',
+                text: 'The basis amount of after-tax non-deductible contributions already made to your traditional IRA. This portion is not subject to income tax upon conversion.'
+            },
+            'current-age': {
+                title: 'Current Age',
+                text: 'Your current age. Must be under 72 for this calculator since Required Minimum Distributions are not modeled.'
+            },
+            'age-retirement': {
+                title: 'Age at Retirement',
+                text: 'The age at which you plan to begin withdrawing retirement funds.'
+            },
+            'rate-return': {
+                title: 'Rate of Return',
+                text: 'The expected annual investment rate of return, compounded annually over the investment horizon.'
+            },
+            'current-tax-rate': {
+                title: 'Current Tax Rate',
+                text: 'Your current marginal income tax rate that will apply to the taxable conversion amount today.'
+            },
+            'tax-rate-retirement': {
+                title: 'Tax Rate at Retirement',
+                text: 'Your expected marginal income tax rate during retirement when traditional IRA distributions would be taxed.'
+            },
+            'investment-tax-rate': {
+                title: 'Investment Tax Rate',
+                text: 'The capital gains or income tax rate applied to earnings on taxable non-IRA investments.'
+            }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-convert-amt', 'range-convert-amt', false, true);
-            setupSync('inp-curr-age', 'range-curr-age', false, false);
-            setupSync('inp-ret-age', 'range-ret-age', false, false);
-            setupSync('inp-return', 'range-return', true, false);
-            setupSync('inp-curr-tax', 'range-curr-tax', true, false);
-            setupSync('inp-ret-tax', 'range-ret-tax', true, false);
-            setupSync('inp-inv-tax', 'range-inv-tax', true, false);
+        function showHelp(key) {
+            const h = helpData[key];
+            if (!h) return;
+            document.getElementById('helpModalTitle').textContent = h.title;
+            document.getElementById('helpModalBody').innerHTML = `<p style="line-height: 1.6; color: #cbd5e1;">${h.text}</p>`;
+            document.getElementById('helpModal').classList.add('show');
+        }
 
+        function scrollToDefinitions() {
+            document.getElementById('definitionsSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('collapsed');
+        }
+
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('shareDropdown').classList.toggle('show');
+        }
+
+        window.addEventListener('click', function(e) {
+            const dd = document.getElementById('shareDropdown');
+            if (dd && dd.classList.contains('show') && !e.target.closest('.calc-share-wrap')) {
+                dd.classList.remove('show');
+            }
+        });
+
+        function shareToSocial(network) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Roth IRA Conversion | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (network) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+        }
+
+        // Setup Sliders and Inputs
+        function bindInputs() {
+            // 1. Amount to Convert ($0 to $1M)
+            const inpAmt = document.getElementById('inp-amt');
+            const rangeAmt = document.getElementById('range-amt');
+            rangeAmt.addEventListener('input', () => {
+                const val = millionSliderToVal(parseFloat(rangeAmt.value));
+                inpAmt.value = (val === 0) ? '$0' : formatCurrencyRound(val);
+                calculateConversion();
+            });
+            inpAmt.addEventListener('change', () => {
+                const val = parseCurrency(inpAmt.value);
+                rangeAmt.value = millionValToSlider(val);
+                inpAmt.value = (val === 0) ? '$0' : formatCurrencyRound(val);
+                calculateConversion();
+            });
+
+            // 2. Non-deductible ($0 to $1M)
+            const inpNonDed = document.getElementById('inp-non-ded');
+            const rangeNonDed = document.getElementById('range-non-ded');
+            rangeNonDed.addEventListener('input', () => {
+                const val = millionSliderToVal(parseFloat(rangeNonDed.value));
+                inpNonDed.value = (val === 0) ? '$0' : formatCurrencyRound(val);
+                calculateConversion();
+            });
+            inpNonDed.addEventListener('change', () => {
+                const val = parseCurrency(inpNonDed.value);
+                rangeNonDed.value = millionValToSlider(val);
+                inpNonDed.value = (val === 0) ? '$0' : formatCurrencyRound(val);
+                calculateConversion();
+            });
+
+            // 3. Current Age (1 to 72)
+            const inpCurAge = document.getElementById('inp-cur-age');
+            const rangeCurAge = document.getElementById('range-cur-age');
+            rangeCurAge.addEventListener('input', () => {
+                inpCurAge.value = rangeCurAge.value;
+                calculateConversion();
+            });
+            inpCurAge.addEventListener('change', () => {
+                let val = parseInt(inpCurAge.value, 10) || 1;
+                val = Math.max(1, Math.min(72, val));
+                inpCurAge.value = val;
+                rangeCurAge.value = val;
+                calculateConversion();
+            });
+
+            // 4. Age at Retirement (13 to 115)
+            const inpRetireAge = document.getElementById('inp-retire-age');
+            const rangeRetireAge = document.getElementById('range-retire-age');
+            rangeRetireAge.addEventListener('input', () => {
+                inpRetireAge.value = rangeRetireAge.value;
+                calculateConversion();
+            });
+            inpRetireAge.addEventListener('change', () => {
+                let val = parseInt(inpRetireAge.value, 10) || 13;
+                val = Math.max(13, Math.min(115, val));
+                inpRetireAge.value = val;
+                rangeRetireAge.value = val;
+                calculateConversion();
+            });
+
+            // 5. Rate of Return (0% to 12%)
+            const inpRor = document.getElementById('inp-ror');
+            const rangeRor = document.getElementById('range-ror');
+            rangeRor.addEventListener('input', () => {
+                inpRor.value = rangeRor.value + '%';
+                calculateConversion();
+            });
+            inpRor.addEventListener('change', () => {
+                let val = parsePercent(inpRor.value);
+                val = Math.max(0, Math.min(12, val));
+                inpRor.value = val + '%';
+                rangeRor.value = val;
+                calculateConversion();
+            });
+
+            // 6. Current Tax Rate (0% to 50%)
+            const inpCurTax = document.getElementById('inp-cur-tax');
+            const rangeCurTax = document.getElementById('range-cur-tax');
+            rangeCurTax.addEventListener('input', () => {
+                inpCurTax.value = rangeCurTax.value + '%';
+                calculateConversion();
+            });
+            inpCurTax.addEventListener('change', () => {
+                let val = parsePercent(inpCurTax.value);
+                val = Math.max(0, Math.min(50, val));
+                inpCurTax.value = val + '%';
+                rangeCurTax.value = val;
+                calculateConversion();
+            });
+
+            // 7. Tax Rate at Retirement (0% to 50%)
+            const inpRetTax = document.getElementById('inp-ret-tax');
+            const rangeRetTax = document.getElementById('range-ret-tax');
+            rangeRetTax.addEventListener('input', () => {
+                inpRetTax.value = rangeRetTax.value + '%';
+                calculateConversion();
+            });
+            inpRetTax.addEventListener('change', () => {
+                let val = parsePercent(inpRetTax.value);
+                val = Math.max(0, Math.min(50, val));
+                inpRetTax.value = val + '%';
+                rangeRetTax.value = val;
+                calculateConversion();
+            });
+
+            // 8. Investment Tax Rate (0% to 50%)
+            const inpInvTax = document.getElementById('inp-inv-tax');
+            const rangeInvTax = document.getElementById('range-inv-tax');
+            rangeInvTax.addEventListener('input', () => {
+                inpInvTax.value = rangeInvTax.value + '%';
+                calculateConversion();
+            });
+            inpInvTax.addEventListener('change', () => {
+                let val = parsePercent(inpInvTax.value);
+                val = Math.max(0, Math.min(50, val));
+                inpInvTax.value = val + '%';
+                rangeInvTax.value = val;
+                calculateConversion();
+            });
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            bindInputs();
             calculateConversion();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

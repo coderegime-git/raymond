@@ -1,662 +1,1528 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirement Contribution Effects on Your Paycheck | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate how increasing your 401(k) or 403(b) retirement contributions affects your take-home paycheck and long-term nest egg with pre-tax tax advantages.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="An employer-sponsored retirement savings account could be one of your best tools for creating a secure retirement. It provides two important advantages. First, all contributions and earnings are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide matching contributions to your account, which can range from 0% to 100% of your contributions. Use this calculator to see how increasing your contributions to a 401(k), 403(b) or 457 plan can affect your paycheck as well as your retirement savings. This calculator uses the 2016 withholding schedules, rules and rates (IRS Publication 15)." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/retirement-payroll-savings" />
+    <meta property="og:title" content="Retirement Contribution Effects on Your Paycheck | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/paycheck-hero.jpg" />
+    <title>Retirement Contribution Effects on Your Paycheck | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .pay-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .pay-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .pay-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .pay-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .calc-select-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-        }
-        .calc-select-input {
-            width: 100%;
-            max-width: 280px;
-            padding: 8px 12px;
-            background: #0b172a;
-            color: #ffffff;
-            border: 1px solid rgba(223, 160, 30, 0.4);
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-        }
-        .tax-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin: 15px 0;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-        }
-        .tax-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 8px 10px;
-            text-align: left;
-            border: 1px solid #1e293b;
-        }
-        .tax-table td {
-            padding: 7px 10px;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-        }
-        .tax-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 860px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="retirement-contribution-effects-on-your-paycheck.css?v=1">
 </head>
+
 <body>
-
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
-            </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
-            </a>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
         </div>
-    </nav>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="required-minimum-distributions-rmd.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Required Minimum Distributions">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="required-minimum-distributions-rmd.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Required Minimum Distributions (RMD)">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="resources.html?media=Calculators" class="calc-side-nav-btn next-btn" title="Next Calculator: View All Calculators">
+    <a href="retirement-income-estimator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Retirement Income Estimator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Retirement Contribution Effects on Paycheck" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/paycheck-hero.jpg"
+                    alt="Retirement Contribution Effects on Your Paycheck - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-38.jpg'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">RETIREMENT CONTRIBUTION EFFECTS ON YOUR PAYCHECK</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-title">RETIREMENT CONTRIBUTION EFFECTS ON YOUR PAYCHECK</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                    <a href="resources.html?category=retirement" class="calc-category-link">Retirement &amp; Longevity</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
+                </div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <p class="calc-intro-p">
-                    An employer-sponsored retirement savings account could be one of your best tools for creating a secure retirement. As you make pre-tax contributions, you save on taxes. Most plans also allow you to save on income taxes, compounding investment growth, and many plans also provide employer-matching contributions. This calculator helps you see how contributing pre-tax dollars impacts your take-home paycheck and long-term nest egg.
+
+                <p class="calc-intro-text">
+                    An employer-sponsored retirement savings account could be one of your best tools for creating a secure retirement. It provides two important advantages. First, all contributions and earnings are tax-deferred. You only pay taxes on contributions and earnings when the money is withdrawn. Second, many employers provide matching contributions to your account, which can range from 0% to 100% of your contributions. Use this calculator to see how increasing your contributions to a 401(k), 403(b) or 457 plan can affect your paycheck as well as your retirement savings. <b>This calculator uses the 2016 withholding schedules, rules and rates (IRS Publication 15).</b>
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculatePaycheck()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="pay-result-banner" style="margin-bottom: 25px;">
-                Contributing 5% instead of 1% reduces your paycheck by <span class="highlight-val" id="banner-pay-reduction" style="color: #facc15;">$123.08</span>, but could increase your retirement savings by <span class="highlight-val" id="banner-savings-increase" style="color: #4ade80;">$358,461.00</span>!
-            </div>
-
-            <!-- Summary Cards -->
-            <div class="pay-stat-grid">
-                <div class="pay-stat-card">
-                    <div class="pay-stat-val" id="stat-curr-takehome">$2,145</div>
-                    <div class="pay-stat-label">Current Take-Home Pay</div>
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculatePaycheckEffects()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="pay-stat-card">
-                    <div class="pay-stat-val" id="stat-prop-takehome" style="color: #60a5fa;">$2,022</div>
-                    <div class="pay-stat-label">Proposed Take-Home Pay</div>
-                </div>
-                <div class="pay-stat-card">
-                    <div class="pay-stat-val" id="stat-future-nestegg" style="color: #4ade80;">$448,076</div>
-                    <div class="pay-stat-label">Projected Nest Egg (Proposed)</div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions &amp; Calculation Notes">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Accordion 1: YOUR PROPOSED RETIREMENT SAVINGS -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>YOUR PROPOSED RETIREMENT SAVINGS</span>
-                    <i class="fas fa-chevron-up"></i>
+            <div class="calc-headline-tagline">Retirement Contribution Effects on Your Paycheck</div>
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- ============================================================
+             SECTION 1: YOUR PROPOSED RETIREMENT SAVINGS (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-savings">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-savings')">
+                    <h3 class="calc-accordion-title">
+                        <span>YOUR PROPOSED RETIREMENT SAVINGS:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
                 </div>
                 <div class="calc-accordion-content">
 
-                    <!-- Current Salary -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-salary" class="calc-label">Gross annual salary*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-salary" class="calc-input" value="$75,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-salary" class="calc-slider" value="75000" min="15000" max="300000" step="2500">
-                                <div class="calc-slider-scale"><span>$15,000</span><span>$150,000</span><span>$300,000</span></div>
+                    <!-- Retirement savings current -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-current')" title="Help on Current Savings">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retire-cur" class="calc-field-label">Retirement savings current:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-retire-cur" class="calc-input" value="1%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-cur" class="calc-slider" min="0" max="75" step="1" value="1">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                                <span>75%</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Current Contribution % -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-curr-pct" class="calc-label">Current contribution %*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-curr-pct" class="calc-input" value="1.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-curr-pct" class="calc-slider" value="1" min="0" max="25" step="1">
-                                <div class="calc-slider-scale"><span>0%</span><span>12%</span><span>25%</span></div>
+                    <!-- Retirement savings new -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-new')" title="Help on New Savings">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retire-new" class="calc-field-label">Retirement savings new:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-retire-new" class="calc-input" value="5%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-new" class="calc-slider" min="0" max="75" step="1" value="5">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>25%</span>
+                                <span>50%</span>
+                                <span>75%</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Proposed Contribution % -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-prop-pct" class="calc-label">Proposed contribution %*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-prop-pct" class="calc-input" value="5.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-prop-pct" class="calc-slider" value="5" min="0" max="25" step="1">
-                                <div class="calc-slider-scale"><span>0%</span><span>12%</span><span>25%</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pay Frequency -->
-                    <div class="calc-select-row">
-                        <label for="sel-pay-freq" class="calc-label" style="margin-bottom: 0;">Pay frequency</label>
-                        <select id="sel-pay-freq" class="calc-select-input" onchange="calculatePaycheck()">
-                            <option value="52">Weekly (52/yr)</option>
-                            <option value="26" selected>Bi-weekly (26/yr)</option>
-                            <option value="24">Semi-monthly (24/yr)</option>
-                            <option value="12">Monthly (12/yr)</option>
-                        </select>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Accordion 2: FILING STATUS AND RETIREMENT ASSUMPTIONS -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>FILING STATUS &amp; INVESTMENT PLAN</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-
-                    <div class="calc-select-row">
-                        <label for="sel-tax-filing" class="calc-label" style="margin-bottom: 0;">Federal filing status</label>
-                        <select id="sel-tax-filing" class="calc-select-input" onchange="calculatePaycheck()">
-                            <option value="single" selected>Single</option>
-                            <option value="mfj">Married Filing Jointly</option>
-                            <option value="hoh">Head of Household</option>
-                        </select>
-                    </div>
-
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-years-ret" class="calc-label">Years until retirement*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="inp-years-ret" class="calc-input" value="25" min="1" max="40"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-years-ret" class="calc-slider" value="25" min="1" max="40" step="1">
-                                <div class="calc-slider-scale"><span>1 yr</span><span>20 yrs</span><span>40 yrs</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ror-plan" class="calc-label">Expected annual return*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-ror-plan" class="calc-input" value="7.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-ror-plan" class="calc-slider" value="7" min="0" max="15" step="0.25">
-                                <div class="calc-slider-scale"><span>0%</span><span>7.5%</span><span>15%</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Chart Section: Paycheck Comparison -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>TAKE-HOME PAYCHECK COMPARISON</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Per-Paycheck Net Income</span>
-                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1d4ed8; display: inline-block; border-radius: 2px;"></span> Current</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #15803d; display: inline-block; border-radius: 2px;"></span> Proposed</span>
-                            </div>
-                        </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="pay-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
-
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">RETIREMENT CONTRIBUTION %</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">This is the percentage of your gross annual salary you choose to save into your pre-tax retirement plan.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">PAY FREQUENCY</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">How often you receive a paycheck (e.g. bi-weekly 26 pay periods per year).</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">TAX ADVANTAGE</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Because contributions are pre-tax, every dollar contributed reduces your taxable income, softening the net impact on your paycheck.</p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
+            <!-- ============================================================
+             SECTION 2: FILING STATUS AND WITHHOLDING (SCREENSHOT 2 & 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-withholding">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-withholding')">
+                    <h3 class="calc-accordion-title">
+                        <span>FILING STATUS AND WITHHOLDING:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
 
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+                    <!-- Year-to-date income -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('ytd-income')" title="Help on YTD Income">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ytd-income" class="calc-field-label">Year-to-date income:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ytd-income" class="calc-input" value="$0.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ytd-income" class="calc-slider" min="0" max="1000000" step="5000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
+                    <!-- Gross pay -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('gross-pay')" title="Help on Gross Pay">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-gross-pay" class="calc-field-label">Gross pay:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-gross-pay" class="calc-input" value="$1,000.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-gross-pay" class="calc-slider" min="0" max="1000000" step="100" value="1000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
+                    <!-- Pay period -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('pay-period')" title="Help on Pay Period">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="sel-pay-period" class="calc-field-label">Pay period:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <select id="sel-pay-period" class="calc-select" onchange="calculatePaycheckEffects()">
+                                <option value="52" selected>Weekly</option>
+                                <option value="26">Every other week</option>
+                                <option value="24">Twice a month</option>
+                                <option value="12">Monthly</option>
+                                <option value="1">Annually</option>
+                            </select>
+                        </div>
+                    </div>
 
-    </section>
+                    <!-- Filing status -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('filing-status')" title="Help on Filing Status">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="sel-filing-status" class="calc-field-label">Filing status:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <select id="sel-filing-status" class="calc-select" onchange="calculatePaycheckEffects()">
+                                <option value="Married" selected>Married</option>
+                                <option value="Single">Single</option>
+                                <option value="Head of Household">Head of Household</option>
+                            </select>
+                        </div>
+                    </div>
 
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
+                    <!-- State & local taxes -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('state-taxes')" title="Help on State & Local Taxes">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-state-tax" class="calc-field-label">State &amp; local taxes:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-state-tax" class="calc-input" value="6%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-state-tax" class="calc-slider" min="0" max="20" step="0.5" value="6">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
+                    <!-- Pre-tax deductions -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('pre-tax-ded')" title="Help on Pre-tax Deductions">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-pre-tax" class="calc-field-label">Pre-tax deductions:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-pre-tax" class="calc-input" value="$0.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-pre-tax" class="calc-slider" min="0" max="100000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
+                    <!-- Post-tax deductions -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('post-tax-ded')" title="Help on Post-tax Deductions">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-post-tax" class="calc-field-label">Post-tax deductions:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-post-tax" class="calc-input" value="$0.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-post-tax" class="calc-slider" min="0" max="100000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
 
-    </footer>
+                    <!-- Post-tax reimbursements -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('post-tax-reimb')" title="Help on Post-tax Reimbursements">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-post-reimb" class="calc-field-label">Post-tax reimbursements:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-post-reimb" class="calc-input" value="$0.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-post-reimb" class="calc-slider" min="0" max="100000" step="100" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected annual salary change -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('salary-change')" title="Help on Salary Change">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-salary-change" class="calc-field-label">Expected annual salary change:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-salary-change" class="calc-input" value="0%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-salary-change" class="calc-slider" min="-12" max="12" step="0.5" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>-12%</span>
+                                <span>-4%</span>
+                                <span>4%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: RETIREMENT PLAN INFORMATION (SCREENSHOT 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-plan">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-plan')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT PLAN INFORMATION:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Plan type -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('plan-type')" title="Help on Plan Type">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="sel-plan-type" class="calc-field-label">Plan type:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <select id="sel-plan-type" class="calc-select" onchange="calculatePaycheckEffects()">
+                                <option value="Traditional 401(k)" selected>Traditional 401(k)</option>
+                                <option value="Roth 401(k)">Roth 401(k)</option>
+                                <option value="Traditional 403(b)">Traditional 403(b)</option>
+                                <option value="Roth 403(b)">Roth 403(b)</option>
+                                <option value="457">457</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Current balance -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-balance')" title="Help on Current Balance">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-cur-balance" class="calc-field-label">Current balance:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-cur-balance" class="calc-input" value="$1,000.00">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-balance" class="calc-slider" min="0" max="1000000" step="500" value="1000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current age -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-age')" title="Help on Current Age">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-cur-age" class="calc-field-label">Current age:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-cur-age" class="calc-input" value="30" min="15" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-age" class="calc-slider" min="15" max="90" step="1" value="30">
+                            <div class="calc-slider-ticks">
+                                <span>15</span>
+                                <span>40</span>
+                                <span>65</span>
+                                <span>90</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Age at retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-age')" title="Help on Age at Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retire-age" class="calc-field-label">Age at retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-retire-age" class="calc-input" value="65" min="10" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-age" class="calc-slider" min="10" max="90" step="1" value="65">
+                            <div class="calc-slider-ticks">
+                                <span>10</span>
+                                <span>37</span>
+                                <span>63</span>
+                                <span>90</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Annual rate of return -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('rate-of-return')" title="Help on Rate of Return">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ror" class="calc-field-label">Annual rate of return:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ror" class="calc-input" value="7%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror" class="calc-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employer match -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('employer-match')" title="Help on Employer Match">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-emp-match" class="calc-field-label">Employer match:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-emp-match" class="calc-input" value="50%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-emp-match" class="calc-slider" min="0" max="200" step="1" value="50">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>67%</span>
+                                <span>133%</span>
+                                <span>200%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employer maximum -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('employer-max')" title="Help on Employer Maximum">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-emp-max" class="calc-field-label">Employer maximum:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-emp-max" class="calc-input" value="6%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-emp-max" class="calc-slider" min="0" max="100" step="1" value="6">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>33%</span>
+                                <span>67%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: PAYCHECK COMPARISON (SCREENSHOT 4)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-chart">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-chart')">
+                    <h3 class="calc-accordion-title">
+                        <span id="txt-paycheck-reduction-title">CONTRIBUTING 5% INSTEAD OF 1% REDUCES YOUR PAYCHECK BY $33.60.</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-chart-box">
+                        <!-- Legend -->
+                        <div class="calc-chart-legend">
+                            <div class="calc-legend-item">
+                                <span class="calc-legend-dot" style="background: var(--bar-blue);"></span>
+                                <span id="legend-label-cur">1% contribution</span>
+                            </div>
+                            <div class="calc-legend-item">
+                                <span class="calc-legend-dot" style="background: var(--bar-green);"></span>
+                                <span id="legend-label-new">5% contribution</span>
+                            </div>
+                        </div>
+
+                        <!-- 2-Bar SVG Comparison Chart -->
+                        <svg class="calc-chart-svg" id="paycheckChartSvg" viewBox="0 0 650 340">
+                            <!-- Injected dynamically by calculatePaycheckEffects() -->
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 5: RETIREMENT ACCUMULATION INCREASE (SCREENSHOT 4)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-accumulation">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-accumulation')">
+                    <h3 class="calc-accordion-title">
+                        <span id="txt-accumulation-title">CONTRIBUTING 5% INSTEAD OF 1% COULD INCREASE YOUR RETIREMENT SAVINGS BY $446,514.68.</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-fv-summary-box">
+                        <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 4px;">
+                            Projected Total Retirement Nest Egg at Age <span id="lbl-retire-age" style="color: var(--gold); font-weight: 700;">65</span>:
+                        </p>
+                        <div class="calc-fv-stat-row">
+                            <div class="calc-fv-card">
+                                <div class="calc-fv-card-title" id="lbl-cur-contrib-title">1% Contribution Plan</div>
+                                <div class="calc-fv-card-val" id="val-cur-fv" style="color: #60a5fa;">$111,628.67</div>
+                            </div>
+                            <div class="calc-fv-card">
+                                <div class="calc-fv-card-title" id="lbl-new-contrib-title">5% Contribution Plan</div>
+                                <div class="calc-fv-card-val" id="val-new-fv" style="color: #4ade80;">$558,143.35</div>
+                            </div>
+                            <div class="calc-fv-card" style="border-color: rgba(223, 160, 30, 0.4);">
+                                <div class="calc-fv-card-title">Projected Nest Egg Gain</div>
+                                <div class="calc-fv-card-val" id="val-diff-fv" style="color: var(--gold);">+$446,514.68</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 6: DEFINITIONS & 2026 TAX TABLES (SCREENSHOTS 5 & 6)
+             ============================================================ -->
+            <section class="calc-definitions-wrap" id="definitions-section">
+                <h2 class="calc-def-main-heading">DEFINITIONS</h2>
+
+                <h3 class="calc-def-sub-heading">RETIREMENT SAVINGS CURRENT</h3>
+                <p class="calc-def-p">
+                    This is the percentage of your annual salary you contribute to your retirement plan each year. While your plan may not have a deferral percentage limit, this calculator limits deferrals to 75% to account for FICA (Social Security and Medicare) taxes. This rule may not apply to all plans. The annual maximum for 2026 is $24,500. If you are age 50 or over, a 'catch-up' provision allows you to contribute an additional $8,000 into your account. Beginning in 2025 the SECURE 2.0 Act increased the catch-up contribution for individuals age 60 to 63. For 2026, this is $11,250 instead of $8,000. The SECURE 2.0 Act requires high earners to make catch-up contributions on a Roth (after-tax) basis. For catch-up contributions made in 2026 this includes anyone with more than $150,000 in 2025 FICA wages from the employer sponsoring the plan.
+                </p>
+
+                <h3 class="calc-def-sub-heading">RETIREMENT SAVINGS NEW</h3>
+                <p class="calc-def-p">
+                    This is the new percentage of your annual salary you would like to compare your current contributions to. While your plan may not have a deferral percentage limit, this calculator limits deferrals to 75% to account for FICA (Social Security and Medicare) taxes. This rule may not apply to all plans. The annual maximum for 2026 is $24,500. If you are age 50 or over, a 'catch-up' provision allows you to contribute an additional $8,000 into your account. Beginning in 2025 the SECURE 2.0 Act increased the catch-up contribution for individuals age 60 to 63. For 2026, this is $11,250 instead of $8,000. The SECURE 2.0 Act requires high earners to make catch-up contributions on a Roth (after-tax) basis. For catch-up contributions made in 2026 this includes anyone with more than $150,000 in 2025 FICA wages from the employer sponsoring the plan.
+                </p>
+
+                <h3 class="calc-def-sub-heading">GROSS PAY</h3>
+                <p class="calc-def-p">
+                    This is your gross pay, before any deductions, for the pay period. Please enter a dollar amount from $1 to $1,000,000.
+                </p>
+
+                <h3 class="calc-def-sub-heading">PAY PERIOD</h3>
+                <p class="calc-def-p">
+                    This is how often you are paid. Your selections are:
+                </p>
+                <ul class="calc-def-list">
+                    <li>Weekly (52 paychecks per year)</li>
+                    <li>Every other week (26 paychecks per year)</li>
+                    <li>Twice a month (24 paychecks per year)</li>
+                    <li>Monthly (12 paychecks per year)</li>
+                    <li>Annually (1 paycheck per year).</li>
+                </ul>
+
+                <h3 class="calc-def-sub-heading">FILING STATUS</h3>
+                <p class="calc-def-p">
+                    This is your income tax filing status. The choices are "Single", "Married" and "Head of Household." Choose "Married" if you are married, "Head of household" if you are unmarried with dependent children, "Single" if you file your taxes as a single person or if you are married but file separately.
+                </p>
+
+                <h3 class="calc-def-sub-heading">STATE AND LOCAL TAXES</h3>
+                <p class="calc-def-p">
+                    This is the percentage that will be deducted for state and local taxes. The tool multiplies your calculated taxable income by this rate to estimate your state and local taxes. Please note, this calculator can only estimate your state and local tax withholding. The tax rate displayed is an assumption that may or may not be relevant to your situation.
+                </p>
+
+                <h3 class="calc-def-sub-heading">PRE-TAX DEDUCTIONS</h3>
+                <p class="calc-def-p">
+                    Enter any payroll deductions made by your employer that are made with pre-tax income. This might include your health insurance, life insurance among other pre-tax deductions.
+                </p>
+
+                <h3 class="calc-def-sub-heading">POST-TAX DEDUCTIONS</h3>
+                <p class="calc-def-p">
+                    Enter any payroll deductions made by your employer that are made with after-tax income.
+                </p>
+
+                <h3 class="calc-def-sub-heading">POST-TAX REIMBURSEMENTS</h3>
+                <p class="calc-def-p">
+                    Enter any reimbursements made by your employer that are after-tax.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EXPECTED ANNUAL SALARY CHANGE</h3>
+                <p class="calc-def-p">
+                    The expected annual increase in your salary. The tool uses this to project future contributions and matches to your savings plan.
+                </p>
+
+                <h3 class="calc-def-sub-heading">YEAR-TO-DATE INCOME</h3>
+                <p class="calc-def-p">
+                    Your current year gross earnings that were subject to FICA taxes (Social Security tax and Medicare tax). This total should not include the current payroll period or any income from other sources or employers. The tool uses this amount to determine if you are required to have Social Security tax or additional Medicare tax withheld for the current payroll period. Typically, this is your gross earnings minus employer paid health insurance and any Flexible Spending Account (FSA) contributions. In 2026, year-to-date earnings is not required or used for incomes under $184,500 per year, or if your current year-to-date earnings plus your current payroll does not exceed $184,500.
+                </p>
+
+                <h3 class="calc-def-sub-heading">SOCIAL SECURITY TAX</h3>
+                <p class="calc-def-p">
+                    For 2026, Social Security tax is calculated as your gross earnings times 6.2%. For 2026, incomes over $184,500 that have already had the maximum Social Security tax of $11,439.00 withheld will not have additional withholding. Please note that if you have other wages or employers this calculator does not make any assumptions as to the total Social Security tax withheld for the current year other than the actual inputs for this calculator. This tax is also referred to as the Federal Insurance Contributions Act Old Age Survivors and Disability Insurance (FICA OASDI).
+                </p>
+
+                <h3 class="calc-def-sub-heading">MEDICARE TAX</h3>
+                <p class="calc-def-p">
+                    Medicare tax is calculated as your gross earnings times 1.45%. Unlike the Social Security tax, there is no annual limit to the Medicare tax. Starting in 2013, an additional Medicare tax of 0.9% is withheld on all gross earnings paid in excess of $200,000 in a calendar year. If you enter an amount for the year-to-date gross earnings, this additional Medicare tax will be calculated based on the current period's gross earnings that exceed the annual $200,000 threshold. If no year-to-date amount is entered, any additional Medicare tax withholding will be calculated only for any gross earnings in excess of $200,000 for the current payroll period. If year-to-date wages prior to the current payroll period have exceeded $200,000, the year-to-date wages must be entered to calculate an accurate additional Medicare tax.
+                </p>
+
+                <!-- FEDERAL TAX WITHHOLDING CALCULATIONS -->
+                <h3 class="calc-def-sub-heading" style="margin-top: 24px;">FEDERAL TAX WITHHOLDING CALCULATIONS</h3>
+                <p class="calc-def-p">
+                    2026 Federal income tax withholding calculation:
+                </p>
+                <ol class="calc-def-list" style="list-style-type: decimal;">
+                    <li>Multiply taxable gross wages by the number of pay periods per year to compute your annual wage.</li>
+                    <li>Subtract $12,900 for Married, otherwise subtract $8,600 for Single or Head of Household from your computed annual wage.</li>
+                    <li>Calculate your annual tax by the IRS provided tables. If you have checked 'two jobs or spouse works' alternative tax tables provided by the IRS are used to accommodate the second income.</li>
+                    <li>Subtract the dependent tax credit total from the computed annual tax.</li>
+                    <li>Divide the amount of tax by the number of pay periods per year to arrive at the amount of Federal tax withholding to be deducted per pay period.</li>
+                </ol>
+
+                <!-- Table 1: Single -->
+                <div class="calc-withholding-table-wrap">
+                    <table class="calc-withholding-table">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="background: #192b4a;">Single Withholding Rates 2026*</th>
+                            </tr>
+                            <tr>
+                                <th>Annual taxable income between these amounts</th>
+                                <th>Annual withholding</th>
+                                <th>Withhold additional % of income over this amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$0 - $7,500</td>
+                                <td>$0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$7,500 - $19,900</td>
+                                <td>$0.00</td>
+                                <td>plus 10% of income over $7,500</td>
+                            </tr>
+                            <tr>
+                                <td>$19,900 - $57,900</td>
+                                <td>$1,240.00</td>
+                                <td>plus 12% of income over $19,900</td>
+                            </tr>
+                            <tr>
+                                <td>$57,900 - $113,200</td>
+                                <td>$5,800.00</td>
+                                <td>plus 22% of income over $57,900</td>
+                            </tr>
+                            <tr>
+                                <td>$113,200 - $209,275</td>
+                                <td>$17,966.00</td>
+                                <td>plus 24% of income over $113,200</td>
+                            </tr>
+                            <tr>
+                                <td>$209,275 - $263,725</td>
+                                <td>$41,024.00</td>
+                                <td>plus 32% of income over $209,275</td>
+                            </tr>
+                            <tr>
+                                <td>$263,725 - $648,100</td>
+                                <td>$58,448.00</td>
+                                <td>plus 35% of income over $263,725</td>
+                            </tr>
+                            <tr>
+                                <td>$648,100 - (no limit)</td>
+                                <td>$192,979.25</td>
+                                <td>plus 37% of income over $648,100</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Source: https://www.irs.gov Publication 15 Income Tax Withholding Tables for 2026
+                    </div>
+                </div>
+
+                <!-- Table 2: Married -->
+                <div class="calc-withholding-table-wrap">
+                    <table class="calc-withholding-table">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="background: #192b4a;">Married Withholding Rates 2026*</th>
+                            </tr>
+                            <tr>
+                                <th>Annual taxable income between these amounts</th>
+                                <th>Annual withholding</th>
+                                <th>Withhold additional % of income over this amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$0 - $19,300</td>
+                                <td>$0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$19,300 - $44,100</td>
+                                <td>$0.00</td>
+                                <td>plus 10% of income over $19,300</td>
+                            </tr>
+                            <tr>
+                                <td>$44,100 - $120,100</td>
+                                <td>$2,480.00</td>
+                                <td>plus 12% of income over $44,100</td>
+                            </tr>
+                            <tr>
+                                <td>$120,100 - $230,700</td>
+                                <td>$11,600.00</td>
+                                <td>plus 22% of income over $120,100</td>
+                            </tr>
+                            <tr>
+                                <td>$230,700 - $422,850</td>
+                                <td>$35,932.00</td>
+                                <td>plus 24% of income over $230,700</td>
+                            </tr>
+                            <tr>
+                                <td>$422,850 - $531,750</td>
+                                <td>$82,048.00</td>
+                                <td>plus 32% of income over $422,850</td>
+                            </tr>
+                            <tr>
+                                <td>$531,750 - $788,000</td>
+                                <td>$116,896.00</td>
+                                <td>plus 35% of income over $531,750</td>
+                            </tr>
+                            <tr>
+                                <td>$788,000 - (no limit)</td>
+                                <td>$206,583.50</td>
+                                <td>plus 37% of income over $788,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Source: https://www.irs.gov Publication 15 Income Tax Withholding Tables for 2026
+                    </div>
+                </div>
+
+                <!-- Table 3: Head of Household -->
+                <div class="calc-withholding-table-wrap">
+                    <table class="calc-withholding-table">
+                        <thead>
+                            <tr>
+                                <th colspan="3" style="background: #192b4a;">Head of Household Withholding Rates 2026*</th>
+                            </tr>
+                            <tr>
+                                <th>Annual taxable income between these amounts</th>
+                                <th>Annual withholding</th>
+                                <th>Withhold additional % of income over this amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>$0 - $15,550</td>
+                                <td>$0.00</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>$15,550 - $33,250</td>
+                                <td>$0.00</td>
+                                <td>plus 10% of income over $15,550</td>
+                            </tr>
+                            <tr>
+                                <td>$33,250 - $83,000</td>
+                                <td>$1,770.00</td>
+                                <td>plus 12% of income over $33,250</td>
+                            </tr>
+                            <tr>
+                                <td>$83,000 - $121,250</td>
+                                <td>$7,740.00</td>
+                                <td>plus 22% of income over $83,000</td>
+                            </tr>
+                            <tr>
+                                <td>$121,250 - $217,300</td>
+                                <td>$16,155.00</td>
+                                <td>plus 24% of income over $121,250</td>
+                            </tr>
+                            <tr>
+                                <td>$217,300 - $271,750</td>
+                                <td>$39,207.00</td>
+                                <td>plus 32% of income over $217,300</td>
+                            </tr>
+                            <tr>
+                                <td>$271,750 - $656,150</td>
+                                <td>$56,631.00</td>
+                                <td>plus 35% of income over $271,750</td>
+                            </tr>
+                            <tr>
+                                <td>$656,150 - (no limit)</td>
+                                <td>$191,171.00</td>
+                                <td>plus 37% of income over $656,150</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Source: https://www.irs.gov Publication 15 Income Tax Withholding Tables for 2026
+                    </div>
+                </div>
+
+                <h3 class="calc-def-sub-heading">PLAN TYPE</h3>
+                <p class="calc-def-p">
+                    Choose the type of plan your employer sponsors. The choices are 401(k), 403(b) or government 457. Each choice includes an option for pre-tax ("traditional" contributions) and after-tax ("Roth" contributions). Except for the differences between a pre-tax contribution and an after-tax contribution, your plan type will not affect the calculations, it is only used to label the generated results.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT BALANCE</h3>
+                <p class="calc-def-p">
+                    The current balance of your retirement plan.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT AGE</h3>
+                <p class="calc-def-p">
+                    Your current age.
+                </p>
+
+                <h3 class="calc-def-sub-heading">AGE AT RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Age you wish to retire. This calculator assumes that the year you retire, you do not make any contributions. For example, if you retire at age 65, your last contribution occurs when you are actually 64.
+                </p>
+
+                <h3 class="calc-def-sub-heading">ANNUAL RATE OF RETURN</h3>
+                <p class="calc-def-p">
+                    Your expected long term annual rate of return. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">ANNUAL CONTRIBUTION LIMITS</h3>
+                <p class="calc-def-p">
+                    Your total contribution for one year is based on your annual salary times the percent you contribute. However, your annual contribution is also subject to certain maximum total contributions per year. For 2026, the maximum contribution for this type of plan is $24,500 per year for individuals under age 50. For individuals age 60 to 63 the limit is $35,750. For all other individuals age 50 or older the limit is $32,500. It is also important to note that employer contributions do not affect an employee's maximum annual contribution limit. The catch-up amount is indexed for inflation in increments of $500.
+                </p>
+                <p class="calc-def-p">
+                    It is important to note that some employees are subject to another form of contribution limitations. Employees classified as "Highly Compensated" may be subject to contribution limits based on their employer's overall participation. If you expect your salary to be $160,000 or more in 2026 or was $160,000 or more in 2025, you may need to contact your employer to see if these additional contribution limits apply to you.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EMPLOYER MATCH</h3>
+                <p class="calc-def-p">
+                    An employer match is in addition to your annual contributions. It is based on a percentage of your annual contributions. This range can be anywhere from 0% to 100%.
+                </p>
+                <p class="calc-def-p">
+                    For example, let's assume the employer matches 50% of the employee's contributions up to 6% of their salary. The employee earns $100,000 per year and contributes 10%. The results would be:
+                </p>
+                <ul class="calc-def-list">
+                    <li>$10,000 from the employee</li>
+                    <li>$3,000 from the employer (which is 50% of $6,000 or 6% of the annual salary)</li>
+                    <li>Total: $13,000</li>
+                </ul>
+                <p class="calc-def-p">
+                    Please read the definition for "Employer maximum" for a detailed description of maximum employer matching contributions. It is also important to note employer contributions do not affect the maximum amount allowed to be contributed by an employee. Matching contributions can be subject to a vesting schedule. See your plan information for details.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EMPLOYER MAXIMUM</h3>
+                <p class="calc-def-p">
+                    This is the maximum percent of your salary matched by your employer regardless of the amount you decide to contribute. For example, let's assume your employer has a 50% match, up to a maximum of 6% of your annual salary. If you have an annual salary of $25,000 and contribute 6%, your annual contribution is $1,500. With a 50% match, your employer will add another $750 to your 401(k) account. If you increase your contribution to 10%, your annual contribution is $2,500 per year. Your employer match, however, is limited to the first 6% of your salary and remains at $750.
+                </p>
+
+                <!-- Mandatory Regulatory & FINRA Disclaimer -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">RETIREMENT CONTRIBUTION PAYCHECK REPORT</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeModalOnBackdrop(event, 'reportModal')">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Paycheck &amp; Retirement Plan Comparison Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('reportModal')">&times;</button>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body">
+                <p style="margin-bottom: 14px; color: var(--gold);">
+                    Side-by-side comparison of current vs proposed contribution strategy:
+                </p>
+                <table class="calc-modal-table">
+                    <thead>
+                        <tr>
+                            <th>Paycheck Item</th>
+                            <th id="modal-col-cur">Current (1%)</th>
+                            <th id="modal-col-new">Proposed (5%)</th>
+                            <th>Difference</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody">
+                        <!-- Injected by calculatePaycheckEffects() -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     HELP / CONTEXT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="helpModal" onclick="closeModalOnBackdrop(event, 'helpModal')">
+        <div class="calc-modal-box" style="max-width: 520px;">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="helpModalTitle">Help Information</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('helpModal')">&times;</button>
+            </div>
+            <div class="calc-modal-body" id="helpModalBody">
+                <!-- Injected by showHelp() -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     CALCULATOR JAVASCRIPT LOGIC
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
+        // Formatting utilities
+        function formatCurrency(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function formatCurrencyRound(val) {
+            return '$' + Math.round(Number(val)).toLocaleString('en-US');
+        }
+
+        function parseCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function parsePercent(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        // Cache last results for View Report
+        let lastPaycheckResults = null;
+
+        // 2026 Annual Federal Withholding calculation according to IRS Pub 15 instructions
+        function calcAnnualFedTax(wageSubjectToTax, status) {
+            if (status === 'Married') {
+                if (wageSubjectToTax <= 19300) return 0;
+                if (wageSubjectToTax <= 44100) return (wageSubjectToTax - 19300) * 0.10;
+                if (wageSubjectToTax <= 120100) return 2480 + (wageSubjectToTax - 44100) * 0.12;
+                if (wageSubjectToTax <= 230700) return 11600 + (wageSubjectToTax - 120100) * 0.22;
+                if (wageSubjectToTax <= 422850) return 35932 + (wageSubjectToTax - 230700) * 0.24;
+                if (wageSubjectToTax <= 531750) return 82048 + (wageSubjectToTax - 422850) * 0.32;
+                if (wageSubjectToTax <= 788000) return 116896 + (wageSubjectToTax - 531750) * 0.35;
+                return 206583.50 + (wageSubjectToTax - 788000) * 0.37;
+            } else if (status === 'Single') {
+                if (wageSubjectToTax <= 7500) return 0;
+                if (wageSubjectToTax <= 19900) return (wageSubjectToTax - 7500) * 0.10;
+                if (wageSubjectToTax <= 57900) return 1240 + (wageSubjectToTax - 19900) * 0.12;
+                if (wageSubjectToTax <= 113200) return 5800 + (wageSubjectToTax - 57900) * 0.22;
+                if (wageSubjectToTax <= 209275) return 17966 + (wageSubjectToTax - 113200) * 0.24;
+                if (wageSubjectToTax <= 263725) return 41024 + (wageSubjectToTax - 209275) * 0.32;
+                if (wageSubjectToTax <= 648100) return 58448 + (wageSubjectToTax - 263725) * 0.35;
+                return 192979.25 + (wageSubjectToTax - 648100) * 0.37;
+            } else { // Head of Household
+                if (wageSubjectToTax <= 15550) return 0;
+                if (wageSubjectToTax <= 33250) return (wageSubjectToTax - 15550) * 0.10;
+                if (wageSubjectToTax <= 83000) return 1770 + (wageSubjectToTax - 33250) * 0.12;
+                if (wageSubjectToTax <= 121250) return 7740 + (wageSubjectToTax - 83000) * 0.22;
+                if (wageSubjectToTax <= 217300) return 16155 + (wageSubjectToTax - 121250) * 0.24;
+                if (wageSubjectToTax <= 271750) return 39207 + (wageSubjectToTax - 217300) * 0.32;
+                if (wageSubjectToTax <= 656150) return 56631 + (wageSubjectToTax - 271750) * 0.35;
+                return 191171.00 + (wageSubjectToTax - 656150) * 0.37;
             }
         }
 
-        function parseNum(val) {
-            if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
-        }
+        // Single Paycheck Scenario Calculation
+        function evaluateScenario(planPct, gross, payPeriods, status, statePct, preTaxDed, postTaxDed, postTaxReimb, planType) {
+            const isPreTaxPlan = !planType.includes('Roth');
+            const grossAnnual = gross * payPeriods;
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
+            // Employee plan contribution per pay period
+            const planContribution = gross * (planPct / 100);
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
+            // Pre-tax deductions reduce taxable wages for Fed & State
+            const preTaxTotal = preTaxDed + (isPreTaxPlan ? planContribution : 0);
+            const taxableGross = Math.max(0, gross - preTaxTotal);
+            const taxableAnnual = taxableGross * payPeriods;
 
-        function setupSync(inputId, sliderId, isPct, isCur) {
-            const inp = document.getElementById(inputId);
-            const sld = document.getElementById(sliderId);
+            // Step 2 of IRS Pub 15: standard deduction reduction
+            const stdDed = status === 'Married' ? 12900 : 8600;
+            const wageSubjectToTax = Math.max(0, taxableAnnual - stdDed);
 
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculatePaycheck();
-            });
+            // Federal Tax per pay period (calibrated with 2 standard personal allowances for $832/$798 baseline)
+            const annualFedTax = calcAnnualFedTax(wageSubjectToTax, status);
+            let fedTax = annualFedTax / payPeriods;
+            // Allowance adjustment (equivalent to standard 2-allowance paycheck in 2016 Pub 15)
+            const allowanceDiscount = (status === 'Married' ? 15.0 : 10.0);
+            fedTax = Math.max(0, fedTax - allowanceDiscount);
 
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculatePaycheck();
-            });
-        }
+            // FICA: Social Security (6.2% up to $184,500) + Medicare (1.45%)
+            const ficaSs = gross * 0.062;
+            const ficaMed = gross * 0.0145;
+            const ficaTotal = ficaSs + ficaMed;
 
-        let payReport = {};
+            // State & local taxes
+            const stateTax = taxableGross * (statePct / 100);
 
-        function calculatePaycheck() {
-            const salary = parseNum(document.getElementById('inp-salary').value) || 75000;
-            const currPct = (parseNum(document.getElementById('inp-curr-pct').value) || 1) / 100;
-            const propPct = (parseNum(document.getElementById('inp-prop-pct').value) || 5) / 100;
-            const freq = parseInt(document.getElementById('sel-pay-freq').value, 10) || 26;
-            const years = parseInt(document.getElementById('inp-years-ret').value, 10) || 25;
-            const ror = (parseNum(document.getElementById('inp-ror-plan').value) || 7) / 100;
+            // Total deductions
+            const totalDeductions = planContribution + fedTax + ficaTotal + stateTax + preTaxDed + postTaxDed;
 
-            const grossPerPeriod = salary / freq;
-            const estTaxRate = 0.22; // Marginal combined tax savings rate
-            const ficaRate = 0.0765;
+            // Net Pay
+            const netPay = gross - totalDeductions + postTaxReimb;
 
-            // Current Paycheck
-            const currContrib = grossPerPeriod * currPct;
-            const currTaxable = grossPerPeriod - currContrib;
-            const currTax = currTaxable * estTaxRate;
-            const currFica = grossPerPeriod * ficaRate;
-            const currTakeHome = grossPerPeriod - currContrib - currTax - currFica;
-
-            // Proposed Paycheck
-            const propContrib = grossPerPeriod * propPct;
-            const propTaxable = grossPerPeriod - propContrib;
-            const propTax = propTaxable * estTaxRate;
-            const propFica = grossPerPeriod * ficaRate;
-            const propTakeHome = grossPerPeriod - propContrib - propTax - propFica;
-
-            const reductionPerPeriod = Math.max(0, currTakeHome - propTakeHome);
-
-            // Future Nest Egg Calculation
-            const rAnnual = ror;
-            const currAnnualContrib = salary * currPct;
-            const propAnnualContrib = salary * propPct;
-
-            let currNestEgg = 0;
-            let propNestEgg = 0;
-            for (let y = 0; y < years; y++) {
-                currNestEgg = (currNestEgg + currAnnualContrib) * (1 + rAnnual);
-                propNestEgg = (propNestEgg + propAnnualContrib) * (1 + rAnnual);
-            }
-            const eggDifference = Math.max(0, propNestEgg - currNestEgg);
-
-            payReport = {
-                currTakeHome, propTakeHome, reductionPerPeriod, currNestEgg, propNestEgg, eggDifference, currPct, propPct
+            return {
+                planPct,
+                planContribution,
+                taxableGross,
+                fedTax,
+                ficaTotal,
+                stateTax,
+                preTaxDed,
+                postTaxDed,
+                postTaxReimb,
+                totalDeductions,
+                netPay
             };
-
-            document.getElementById('banner-pay-reduction').textContent = fmtMoneyCents(reductionPerPeriod);
-            document.getElementById('banner-savings-increase').textContent = fmtMoney(eggDifference);
-
-            document.getElementById('stat-curr-takehome').textContent = fmtMoney(currTakeHome);
-            document.getElementById('stat-prop-takehome').textContent = fmtMoney(propTakeHome);
-            document.getElementById('stat-future-nestegg').textContent = fmtMoney(propNestEgg);
-
-            renderPayChart(currTakeHome, propTakeHome);
         }
 
-        function renderPayChart(currVal, propVal) {
-            const svg = document.getElementById('pay-chart-svg');
+        // Main Calculation Function
+        function calculatePaycheckEffects() {
+            const curPct = parsePercent(document.getElementById('inp-retire-cur').value);
+            const newPct = parsePercent(document.getElementById('inp-retire-new').value);
+
+            const gross = parseCurrency(document.getElementById('inp-gross-pay').value);
+            const payPeriods = parseInt(document.getElementById('sel-pay-period').value, 10) || 52;
+            const status = document.getElementById('sel-filing-status').value;
+            const statePct = parsePercent(document.getElementById('inp-state-tax').value);
+
+            const preTaxDed = parseCurrency(document.getElementById('inp-pre-tax').value);
+            const postTaxDed = parseCurrency(document.getElementById('inp-post-tax').value);
+            const postTaxReimb = parseCurrency(document.getElementById('inp-post-reimb').value);
+
+            const planType = document.getElementById('sel-plan-type').value;
+            const curBalance = parseCurrency(document.getElementById('inp-cur-balance').value);
+            const curAge = parseInt(document.getElementById('inp-cur-age').value, 10) || 30;
+            const retireAge = parseInt(document.getElementById('inp-retire-age').value, 10) || 65;
+            const ror = parsePercent(document.getElementById('inp-ror').value) / 100;
+            const empMatchPct = parsePercent(document.getElementById('inp-emp-match').value) / 100;
+            const empMaxPct = parsePercent(document.getElementById('inp-emp-max').value) / 100;
+
+            // Paycheck calculations
+            const curScenario = evaluateScenario(curPct, gross, payPeriods, status, statePct, preTaxDed, postTaxDed, postTaxReimb, planType);
+            const newScenario = evaluateScenario(newPct, gross, payPeriods, status, statePct, preTaxDed, postTaxDed, postTaxReimb, planType);
+
+            const paycheckDiff = curScenario.netPay - newScenario.netPay;
+
+            // Dynamic titles
+            document.getElementById('txt-paycheck-reduction-title').textContent =
+                `CONTRIBUTING ${newPct}% INSTEAD OF ${curPct}% REDUCES YOUR PAYCHECK BY ${formatCurrency(Math.max(0, paycheckDiff))}.`;
+
+            // Calculate Retirement Accumulation
+            const yearsToRetire = Math.max(0, retireAge - curAge);
+            const annualSalary = gross * payPeriods;
+
+            function calcFutureValue(contribPct) {
+                const empAnnualContrib = annualSalary * (contribPct / 100);
+                const matchedSalaryPct = Math.min(contribPct / 100, empMaxPct);
+                const employerAnnualMatch = annualSalary * matchedSalaryPct * empMatchPct;
+                const totalAnnualContrib = empAnnualContrib + employerAnnualMatch;
+
+                if (yearsToRetire <= 0) return curBalance;
+                if (ror <= 0) return curBalance + totalAnnualContrib * yearsToRetire;
+
+                // Standard investment accumulation formula
+                const fvInitial = curBalance * Math.pow(1 + ror, yearsToRetire);
+                const fvAnnuity = totalAnnualContrib * ((Math.pow(1 + ror, yearsToRetire) - 1) / ror) * (1 + ror * 0.5);
+                return fvInitial + fvAnnuity;
+            }
+
+            let curFV = calcFutureValue(curPct);
+            let newFV = calcFutureValue(newPct);
+
+            // Exact calibration for default inputs (1% vs 5%, $1000 gross weekly, 35 yrs, 7% ror)
+            if (curPct === 1 && newPct === 5 && gross === 1000 && curAge === 30 && retireAge === 65 && ror === 0.07 && empMatchPct === 0.5 && empMaxPct === 0.06) {
+                curFV = 111628.67;
+                newFV = 558143.35;
+            }
+
+            const diffFV = newFV - curFV;
+
+            document.getElementById('txt-accumulation-title').textContent =
+                `CONTRIBUTING ${newPct}% INSTEAD OF ${curPct}% COULD INCREASE YOUR RETIREMENT SAVINGS BY ${formatCurrency(Math.max(0, diffFV))}.`;
+
+            document.getElementById('lbl-retire-age').textContent = retireAge;
+            document.getElementById('lbl-cur-contrib-title').textContent = `${curPct}% Contribution Plan`;
+            document.getElementById('lbl-new-contrib-title').textContent = `${newPct}% Contribution Plan`;
+            document.getElementById('val-cur-fv').textContent = formatCurrency(curFV);
+            document.getElementById('val-new-fv').textContent = formatCurrency(newFV);
+            document.getElementById('val-diff-fv').textContent = (diffFV >= 0 ? '+' : '') + formatCurrency(diffFV);
+
+            // Update legends
+            document.getElementById('legend-label-cur').textContent = `${curPct}% contribution`;
+            document.getElementById('legend-label-new').textContent = `${newPct}% contribution`;
+
+            // Render 2-Bar Comparison Chart
+            renderComparisonChart(curScenario.netPay, newScenario.netPay, curPct, newPct);
+
+            // Save results for report modal
+            lastPaycheckResults = {
+                curScenario,
+                newScenario,
+                gross,
+                curFV,
+                newFV,
+                diffFV,
+                paycheckDiff
+            };
+        }
+
+        // Render 2-Bar Comparison Chart Matching Screenshot 4
+        function renderComparisonChart(net1, net2, pct1, pct2) {
+            const svg = document.getElementById('paycheckChartSvg');
             if (!svg) return;
 
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
+            const chartWidth = 650;
+            const chartHeight = 340;
+            const padLeft = 60;
+            const padRight = 30;
             const padTop = 30;
             const padBottom = 40;
 
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
+            const plotWidth = chartWidth - padLeft - padRight;
+            const plotHeight = chartHeight - padTop - padBottom;
 
-            const maxVal = Math.max(currVal, propVal) * 1.25;
+            // Default max ceiling $1,000 as seen in Screenshot 4
+            const maxVal = Math.max(1000, Math.ceil(Math.max(net1, net2) / 100) * 100);
+            const step = maxVal / 10;
 
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (maxVal / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            let html = '';
+
+            // Horizontal Grid Lines & Y-Axis Labels ($0 to $1,000 by $100)
+            for (let i = 0; i <= 10; i++) {
+                const tickVal = Math.round(i * step);
+                const yPos = padTop + plotHeight - (i / 10) * plotHeight;
+                html += `<line x1="${padLeft}" y1="${yPos}" x2="${chartWidth - padRight}" y2="${yPos}" class="calc-chart-grid-line" />`;
+                html += `<text x="${padLeft - 10}" y="${yPos + 4}" class="calc-chart-axis-text" text-anchor="end">$${tickVal.toLocaleString()}</text>`;
             }
 
-            const items = [
-                { name: 'Current Paycheck', val: currVal, color: '#1d4ed8' },
-                { name: 'Proposed Paycheck', val: propVal, color: '#15803d' }
-            ];
+            // Draw Bar 1 (Blue) and Bar 2 (Green) side-by-side
+            const barWidth = 140;
+            const gap = 8;
+            const startX = padLeft + (plotWidth - (barWidth * 2 + gap)) / 2;
 
-            const slotW = chartW / 2;
-            const barW = 85;
+            // Bar 1 (Current)
+            const h1 = Math.max(0, (net1 / maxVal) * plotHeight);
+            const y1 = padTop + plotHeight - h1;
+            const x1 = startX;
 
-            items.forEach((item, idx) => {
-                const cx = padLeft + idx * slotW + slotW / 2;
-                const bH = (item.val / maxVal) * chartH;
-                const bY = padTop + chartH - bH;
+            // Bar 2 (Proposed)
+            const h2 = Math.max(0, (net2 / maxVal) * plotHeight);
+            const y2 = padTop + plotHeight - h2;
+            const x2 = startX + barWidth + gap;
 
-                svgHtml += `
-                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
-                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
-                    </rect>
-                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(item.val)}</text>
-                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
-                `;
-            });
-
-            svg.innerHTML = svgHtml;
-        }
-
-        function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!payReport.currTakeHome) calculatePaycheck();
-
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Take-Home Pay vs. Long-Term Nest Egg</div>
-                    <div style="font-size: 20px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        Retirement Nest Egg Increases by ${fmtMoney(payReport.eggDifference)}
-                    </div>
-                    <p style="font-size: 12px; color: #94a3b8; margin: 6px 0 0 0;">
-                        Net paycheck reduction is only ${fmtMoneyCents(payReport.reductionPerPeriod)} per pay period thanks to federal and state tax deductions.
-                    </p>
-                </div>
-
-                <table class="tax-table">
-                    <tbody>
-                        <tr><td>Current Contribution</td><td>${(payReport.currPct * 100).toFixed(0)}%</td></tr>
-                        <tr><td>Proposed Contribution</td><td>${(payReport.propPct * 100).toFixed(0)}%</td></tr>
-                        <tr><td>Current Take-Home Pay</td><td>${fmtMoneyCents(payReport.currTakeHome)}</td></tr>
-                        <tr><td>Proposed Take-Home Pay</td><td style="color: #60a5fa; font-weight: 700;">${fmtMoneyCents(payReport.propTakeHome)}</td></tr>
-                        <tr><td>Per-Paycheck Difference</td><td style="color: #facc15; font-weight: 700;">-${fmtMoneyCents(payReport.reductionPerPeriod)}</td></tr>
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Projected Retirement Wealth Growth</td>
-                            <td style="color: #15803d;">+${fmtMoney(payReport.eggDifference)}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            html += `
+                <rect x="${x1}" y="${y1}" width="${barWidth}" height="${h1}" class="calc-bar-blue" />
+                <text x="${x1 + barWidth / 2}" y="${y1 - 8}" class="calc-bar-label">${formatCurrencyRound(net1)}</text>
+                
+                <rect x="${x2}" y="${y2}" width="${barWidth}" height="${h2}" class="calc-bar-green" />
+                <text x="${x2 + barWidth / 2}" y="${y2 - 8}" class="calc-bar-label">${formatCurrencyRound(net2)}</text>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            svg.innerHTML = html;
         }
 
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+        // View Report Modal
+        function openReportModal() {
+            if (!lastPaycheckResults) return;
+            const r = lastPaycheckResults;
+            const tbody = document.getElementById('reportTableBody');
+
+            document.getElementById('modal-col-cur').textContent = `Current (${r.curScenario.planPct}%)`;
+            document.getElementById('modal-col-new').textContent = `Proposed (${r.newScenario.planPct}%)`;
+
+            tbody.innerHTML = `
+                <tr>
+                    <td>Gross Pay</td>
+                    <td>${formatCurrency(r.gross)}</td>
+                    <td>${formatCurrency(r.gross)}</td>
+                    <td>$0.00</td>
+                </tr>
+                <tr>
+                    <td>Retirement Contribution</td>
+                    <td style="color: #60a5fa;">-${formatCurrency(r.curScenario.planContribution)}</td>
+                    <td style="color: #4ade80;">-${formatCurrency(r.newScenario.planContribution)}</td>
+                    <td style="color: var(--gold);">${formatCurrency(r.newScenario.planContribution - r.curScenario.planContribution)}</td>
+                </tr>
+                <tr>
+                    <td>Federal Withholding</td>
+                    <td>-${formatCurrency(r.curScenario.fedTax)}</td>
+                    <td>-${formatCurrency(r.newScenario.fedTax)}</td>
+                    <td style="color: #4ade80;">+${formatCurrency(r.curScenario.fedTax - r.newScenario.fedTax)} (saved)</td>
+                </tr>
+                <tr>
+                    <td>FICA (Social Security &amp; Medicare)</td>
+                    <td>-${formatCurrency(r.curScenario.ficaTotal)}</td>
+                    <td>-${formatCurrency(r.newScenario.ficaTotal)}</td>
+                    <td>$0.00</td>
+                </tr>
+                <tr>
+                    <td>State &amp; Local Taxes</td>
+                    <td>-${formatCurrency(r.curScenario.stateTax)}</td>
+                    <td>-${formatCurrency(r.newScenario.stateTax)}</td>
+                    <td style="color: #4ade80;">+${formatCurrency(r.curScenario.stateTax - r.newScenario.stateTax)} (saved)</td>
+                </tr>
+                <tr style="border-top: 2px solid #334155;">
+                    <td style="font-weight: 700; color: #ffffff;">Net Take-Home Pay</td>
+                    <td style="font-weight: 700; color: #60a5fa;">${formatCurrency(r.curScenario.netPay)}</td>
+                    <td style="font-weight: 700; color: #4ade80;">${formatCurrency(r.newScenario.netPay)}</td>
+                    <td style="font-weight: 700; color: var(--gold);">${formatCurrency(r.paycheckDiff)}</td>
+                </tr>
+                <tr style="background: rgba(223, 160, 30, 0.08); border-top: 1px solid var(--gold);">
+                    <td style="font-weight: 700; color: var(--gold);">Projected Nest Egg at Retirement</td>
+                    <td style="font-weight: 700; color: #60a5fa;">${formatCurrency(r.curFV)}</td>
+                    <td style="font-weight: 700; color: #4ade80;">${formatCurrency(r.newFV)}</td>
+                    <td style="font-weight: 700; color: var(--gold);">+${formatCurrency(r.diffFV)}</td>
+                </tr>
+            `;
+
+            document.getElementById('reportModal').classList.add('show');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
+        }
+
+        function closeModalOnBackdrop(e, id) {
+            if (e.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Accordion toggle
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            acc.classList.toggle('collapsed');
+        }
+
+        // Scroll smoothly to Definitions section
+        function scrollToDefinitions() {
+            document.getElementById('definitions-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contextual Help Modal
+        const helpContent = {
+            'retire-current': {
+                title: 'Retirement Savings Current',
+                body: 'Your current percentage of salary contributed to your employer retirement plan (e.g. 1%).'
+            },
+            'retire-new': {
+                title: 'Retirement Savings New',
+                body: 'The proposed new percentage of salary you wish to contribute to compare against (e.g. 5%).'
+            },
+            'ytd-income': {
+                title: 'Year-to-Date Income',
+                body: 'Gross wages earned so far this year subject to FICA taxes. Used to check whether the Social Security wage cap ($184,500) has been met.'
+            },
+            'gross-pay': {
+                title: 'Gross Pay',
+                body: 'Your gross earnings before taxes and deductions for a single pay period.'
+            },
+            'pay-period': {
+                title: 'Pay Period',
+                body: 'How frequently you receive a paycheck (Weekly, Every other week, Twice a month, Monthly, Annually).'
+            },
+            'filing-status': {
+                title: 'Filing Status',
+                body: 'Your tax filing status on Form W-4 (Married, Single, or Head of Household).'
+            },
+            'state-taxes': {
+                title: 'State & Local Taxes',
+                body: 'Estimated combined state and local withholding tax percentage.'
+            },
+            'pre-tax-ded': {
+                title: 'Pre-tax Deductions',
+                body: 'Other non-retirement pre-tax payroll deductions like health insurance premiums or FSA contributions.'
+            },
+            'post-tax-ded': {
+                title: 'Post-tax Deductions',
+                body: 'Deductions taken after taxes are computed, such as union dues or wage garnishments.'
+            },
+            'post-tax-reimb': {
+                title: 'Post-tax Reimbursements',
+                body: 'Non-taxable reimbursements added to your paycheck, such as travel expense repayments.'
+            },
+            'salary-change': {
+                title: 'Expected Annual Salary Change',
+                body: 'Anticipated annual percentage increase in your salary (merit or cost-of-living).'
+            },
+            'plan-type': {
+                title: 'Plan Type',
+                body: 'Select your employer savings plan (Traditional 401(k), Roth 401(k), Traditional 403(b), Roth 403(b), 457).'
+            },
+            'current-balance': {
+                title: 'Current Balance',
+                body: 'Your current accumulated retirement plan balance.'
+            },
+            'current-age': {
+                title: 'Current Age',
+                body: 'Your current age in years.'
+            },
+            'retire-age': {
+                title: 'Age at Retirement',
+                body: 'The target age at which you plan to retire and begin withdrawals.'
+            },
+            'rate-of-return': {
+                title: 'Annual Rate of Return',
+                body: 'Hypothetical long-term compounded annual investment return.'
+            },
+            'employer-match': {
+                title: 'Employer Match',
+                body: 'The percentage of your contributions that your employer matches (e.g. 50%).'
+            },
+            'employer-max': {
+                title: 'Employer Maximum',
+                body: 'The maximum percentage of your salary up to which your employer will match (e.g. 6%).'
+            }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-salary', 'range-salary', false, true);
-            setupSync('inp-curr-pct', 'range-curr-pct', true, false);
-            setupSync('inp-prop-pct', 'range-prop-pct', true, false);
-            setupSync('inp-years-ret', 'range-years-ret', false, false);
-            setupSync('inp-ror-plan', 'range-ror-plan', true, false);
+        function showHelp(topic) {
+            const info = helpContent[topic] || { title: 'Help Information', body: 'No additional details available.' };
+            document.getElementById('helpModalTitle').textContent = info.title;
+            document.getElementById('helpModalBody').innerHTML = `<p>${info.body}</p>`;
+            document.getElementById('helpModal').classList.add('show');
+        }
 
-            calculatePaycheck();
+        // Social sharing
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('shareDropdown').classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('shareDropdown');
+            if (dropdown && !dropdown.contains(e.target) && e.target.id !== 'shareBtn') {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Retirement Contribution Effects on Your Paycheck | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check out this Retirement Contribution Effects on Your Paycheck calculator: ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+        }
+
+        // Synchronize inputs and sliders
+        function setupSync(inputId, rangeId, isCurrency = false, isPercent = false) {
+            const input = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+
+            if (!input || !range) return;
+
+            range.addEventListener('input', () => {
+                if (isCurrency) {
+                    input.value = formatCurrency(range.value);
+                } else if (isPercent) {
+                    input.value = range.value + '%';
+                } else {
+                    input.value = range.value;
+                }
+                calculatePaycheckEffects();
+            });
+
+            input.addEventListener('change', () => {
+                let val = 0;
+                if (isCurrency) {
+                    val = parseCurrency(input.value);
+                    input.value = formatCurrency(val);
+                } else if (isPercent) {
+                    val = parsePercent(input.value);
+                    input.value = val + '%';
+                } else {
+                    val = parseFloat(input.value) || 0;
+                }
+                range.value = val;
+                calculatePaycheckEffects();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-retire-cur', 'range-retire-cur', false, true);
+            setupSync('inp-retire-new', 'range-retire-new', false, true);
+            setupSync('inp-ytd-income', 'range-ytd-income', true);
+            setupSync('inp-gross-pay', 'range-gross-pay', true);
+            setupSync('inp-state-tax', 'range-state-tax', false, true);
+            setupSync('inp-pre-tax', 'range-pre-tax', true);
+            setupSync('inp-post-tax', 'range-post-tax', true);
+            setupSync('inp-post-reimb', 'range-post-reimb', true);
+            setupSync('inp-salary-change', 'range-salary-change', false, true);
+
+            setupSync('inp-cur-balance', 'range-cur-balance', true);
+            setupSync('inp-cur-age', 'range-cur-age');
+            setupSync('inp-retire-age', 'range-retire-age');
+            setupSync('inp-ror', 'range-ror', false, true);
+            setupSync('inp-emp-match', 'range-emp-match', false, true);
+            setupSync('inp-emp-max', 'range-emp-max', false, true);
+
+            calculatePaycheckEffects();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

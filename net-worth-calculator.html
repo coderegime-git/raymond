@@ -1,609 +1,1484 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Net Worth Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your current net worth by tabulating all personal assets against total liabilities. Project your net worth trajectory over the next 10 years.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Your net worth is the value of all of your assets minus the total of all of your liabilities. Put another way, it is what you own minus what you owe. If you owe more than you own, you have a negative net worth. If you own more than you owe you have a positive net worth. This calculator helps you determine your net worth and estimates how it could grow (or shrink) over the next 10 years." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/net-worth" />
+    <meta property="og:title" content="Net Worth Calculator | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/net-worth-hero.jpg" />
+    <title>Net Worth Calculator | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .nw-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .nw-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .nw-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .nw-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .subtotal-badge {
-            font-size: 13px;
-            font-weight: 700;
-            color: #dfa01e;
-            margin-left: auto;
-            padding-right: 15px;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 860px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .nw-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-        .nw-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 8px 10px;
-            text-align: right;
-            border: 1px solid #1e293b;
-        }
-        .nw-table th:first-child {
-            text-align: left;
-        }
-        .nw-table td {
-            padding: 7px 10px;
-            border: 1px solid #e2e8f0;
-            text-align: right;
-            color: #334155;
-        }
-        .nw-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-        }
-        .nw-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="net-worth-calculator.css?v=1">
 </head>
+
 <body>
-
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
-            </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
-            </a>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                class="rj-header-social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                rel="noopener noreferrer" class="rj-header-social-link" title="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" class="rj-header-social-link" title="Email"><i
+                    class="fas fa-envelope"></i></a>
         </div>
-    </nav>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="mortgage-payoff-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Mortgage Payoff Calculator">
+        <nav class="rj-nav-bar">
+            <a href="index.html" class="rj-logo-link">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="rj-logo-svg"
+                    onerror="this.src='https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Images/Group-Logos/the-seiler-group-logo-light.svg'">
+            </a>
+
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-item">Home</a>
+                <a href="athletes.html" class="rj-nav-item">Athletes <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="business-titans.html" class="rj-nav-item">Business Titans <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="individuals.html" class="rj-nav-item">Individuals <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="team.html" class="rj-nav-item">Your Team <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="resources.html" class="rj-nav-item active">Resources <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="contact.html" class="rj-nav-item">Contact Us <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                    class="rj-nav-item client-access-btn">Client Access <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-hamburger" id="mobile-hamburger" onclick="toggleMobileMenu(event)"
+                aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="mortgage-payoff-calculator.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Mortgage Payoff Calculator">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="personal-economic-recovery.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Personal Economic Recovery">
+    <a href="personal-economic-recovery.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Personal Economic Recovery">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Net Worth Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/net-worth-hero.jpg"
+                    alt="Why Women Are a Game Changer for Economic Growth - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-35.jpg'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">NET WORTH CALCULATOR</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-title">NET WORTH CALCULATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Personal Finance &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                    <a href="resources.html?category=personal-finance" class="calc-category-link">Personal Finance</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
+                </div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <p class="calc-intro-p">
-                    Your net worth is the value of all of your assets minus the total of all of your liabilities. Put another way, it is what you have minus what you owe. If this result is positive, then you have a surplus net worth. If you determine that you owe more than you have, then you have a negative net worth. This calculator helps you determine your net worth and estimates how it could grow or diminish over the next 10 years.
+
+                <p class="calc-intro-text">
+                    Your net worth is the value of all of your assets minus the total of all of your liabilities. Put another way, it is what you own minus what you owe. If you owe more than you own, you have a negative net worth. If you own more than you owe you have a positive net worth. This calculator helps you determine your net worth and estimates how it could grow (or shrink) over the next 10 years.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateNW()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="nw-result-banner" style="margin-bottom: 25px;">
-                Your current net worth is <span class="highlight-val" id="banner-nw-val" style="color: #4ade80;">$325,000.00</span>
-            </div>
-
-            <!-- Summary Cards -->
-            <div class="nw-stat-grid">
-                <div class="nw-stat-card">
-                    <div class="nw-stat-val" id="stat-net-worth">$325,000</div>
-                    <div class="nw-stat-label">Total Net Worth</div>
+            <!-- Top Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateNetWorth()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="nw-stat-card">
-                    <div class="nw-stat-val" id="stat-total-assets" style="color: #60a5fa;">$525,000</div>
-                    <div class="nw-stat-label">Total Assets</div>
-                </div>
-                <div class="nw-stat-card">
-                    <div class="nw-stat-val" id="stat-total-liabilities" style="color: #f87171;">$200,000</div>
-                    <div class="nw-stat-label">Total Liabilities</div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="openDefinitions()" title="View Definitions & Explanations">
+                        <i class="fas fa-table-list"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Accordion: Growth Rates -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>ANNUAL GROWTH RATES</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-asset-growth" class="calc-label">Annual asset growth*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-asset-growth" class="calc-input" value="7.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-asset-growth" class="calc-slider" value="7" min="0" max="15" step="0.25">
-                                <div class="calc-slider-scale"><span>0%</span><span>7.5%</span><span>15%</span></div>
-                            </div>
-                        </div>
+            <!-- Headline Summary Output (Screenshot 1) -->
+            <div class="calc-headline-summary" id="result-headline">
+                Your current net worth is $0.00
+            </div>
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- Top Growth Rates Box (Screenshot 1) -->
+            <section class="calc-top-rates-box">
+                <!-- Annual asset growth -->
+                <div class="calc-form-row">
+                    <div class="calc-label-wrap">
+                        <button type="button" class="calc-inline-help" onclick="showHelp('annual-asset-growth')" title="Help on Annual Asset Growth">
+                            <i class="fas fa-circle-question"></i>
+                        </button>
+                        <label for="inp-asset-growth" class="calc-field-label">Annual asset growth:<span class="calc-required-star">*</span></label>
                     </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-liab-growth" class="calc-label">Annual liability growth*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-liab-growth" class="calc-input" value="0.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-liab-growth" class="calc-slider" value="0" min="0" max="10" step="0.25">
-                                <div class="calc-slider-scale"><span>0%</span><span>5%</span><span>10%</span></div>
-                            </div>
+                    <div class="calc-input-wrap">
+                        <input type="text" id="inp-asset-growth" class="calc-input" value="7%">
+                    </div>
+                    <div class="calc-slider-wrap">
+                        <input type="range" id="range-asset-growth" class="calc-slider" min="-20" max="100" step="1" value="7">
+                        <div class="calc-slider-ticks">
+                            <span>-20%</span>
+                            <span>20%</span>
+                            <span>60%</span>
+                            <span>100%</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Accordion 1: YOUR ASSETS -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>YOUR ASSETS</span>
-                    <span class="subtotal-badge" id="badge-assets">$525,000.00</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-home" class="calc-label">Home</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-home" class="calc-input" value="$350,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-re" class="calc-label">Other real estate</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-re" class="calc-input" value="$0.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-auto" class="calc-label">Automobiles</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-auto" class="calc-input" value="$25,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-ret" class="calc-label">Retirement accounts</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-ret" class="calc-input" value="$100,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-stocks" class="calc-label">Stocks / Mutual funds</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-stocks" class="calc-input" value="$35,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="a-cash" class="calc-label">Checking, savings &amp; cash</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="a-cash" class="calc-input" value="$15,000.00" onchange="calculateNW()"></div></div></div>
-                </div>
-            </div>
-
-            <!-- Accordion 2: YOUR LIABILITIES -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>YOUR LIABILITIES</span>
-                    <span class="subtotal-badge" id="badge-liab">$200,000.00</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-mort" class="calc-label">Home mortgage principal</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-mort" class="calc-input" value="$185,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-auto" class="calc-label">Auto loans</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-auto" class="calc-input" value="$10,000.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-student" class="calc-label">Student loans</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-student" class="calc-input" value="$0.00" onchange="calculateNW()"></div></div></div>
-                    <div class="calc-input-row"><div class="calc-label-col"><label for="l-cards" class="calc-label">Credit card &amp; other debt</label></div><div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="l-cards" class="calc-input" value="$5,000.00" onchange="calculateNW()"></div></div></div>
-                </div>
-            </div>
-
-            <!-- Chart Section: Projected Net Worth by Year -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>PROJECTED NET WORTH BY YEAR FOR 10 YEARS</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">10-Year Net Worth Trend</span>
-                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #10b981; display: inline-block; border-radius: 2px;"></span> Net Worth</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #3b82f6; display: inline-block; border-radius: 2px;"></span> Assets</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #ef4444; display: inline-block; border-radius: 2px;"></span> Liabilities</span>
-                            </div>
-                        </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="nw-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                <!-- Annual liability growth -->
+                <div class="calc-form-row">
+                    <div class="calc-label-wrap">
+                        <button type="button" class="calc-inline-help" onclick="showHelp('annual-liability-growth')" title="Help on Annual Liability Growth">
+                            <i class="fas fa-circle-question"></i>
+                        </button>
+                        <label for="inp-liability-growth" class="calc-field-label">Annual liability growth:<span class="calc-required-star">*</span></label>
+                    </div>
+                    <div class="calc-input-wrap">
+                        <input type="text" id="inp-liability-growth" class="calc-input" value="0%">
+                    </div>
+                    <div class="calc-slider-wrap">
+                        <input type="range" id="range-liability-growth" class="calc-slider" min="-20" max="100" step="1" value="0">
+                        <div class="calc-slider-ticks">
+                            <span>-20%</span>
+                            <span>20%</span>
+                            <span>60%</span>
+                            <span>100%</span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
-
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL ASSET GROWTH</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Average annual growth you expect your assets to experience.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL LIABILITY GROWTH</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Average annual growth you expect your debts to experience (or reduction if negative).</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">HOME</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Current estimated market value of your primary residence.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">RETIREMENT ACCOUNTS</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total current balance of your 401(k), IRA, pension, and other qualified retirement assets.</p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
+            <!-- ============================================================
+             SECTION 1: YOUR ASSETS (SCREENSHOTS 1 & 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-assets">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-assets')">
+                    <h3 class="calc-accordion-title">
+                        <span>YOUR ASSETS:</span>
+                        <span class="calc-accordion-badge" id="assets-total-badge">$0.00</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
 
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+                    <!-- Real Estate -->
+                    <div class="calc-subgroup-title">Real Estate:</div>
 
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
+                    <!-- Home -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('home')" title="Help on Home">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-home" class="calc-field-label">Home:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-home" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-home" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
+                    <!-- Other real estate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('other-real-estate')" title="Help on Other Real Estate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-other-re" class="calc-field-label">Other real estate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-other-re" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-other-re" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-    </section>
+                    <!-- Personal Property -->
+                    <div class="calc-subgroup-title">Personal Property:</div>
 
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
+                    <!-- Automobiles -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('automobiles')" title="Help on Automobiles">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-automobiles" class="calc-field-label">Automobiles:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-automobiles" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-automobiles" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
+                    <!-- Other vehicles -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('other-vehicles')" title="Help on Other Vehicles">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-other-vehicles" class="calc-field-label">Other vehicles:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-other-vehicles" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-other-vehicles" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
+                    <!-- Jewelry -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('jewelry')" title="Help on Jewelry">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-jewelry" class="calc-field-label">Jewelry:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-jewelry" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-jewelry" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
 
-    </footer>
+                    <!-- Household items -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('household-items')" title="Help on Household Items">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-household-items" class="calc-field-label">Household items:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-household-items" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-household-items" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Investments -->
+                    <div class="calc-subgroup-title">Investments:</div>
+
+                    <!-- Retirement accounts -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retirement-accounts')" title="Help on Retirement Accounts">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retirement" class="calc-field-label">Retirement accounts:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-retirement" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retirement" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bonds -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('bonds')" title="Help on Bonds">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-bonds" class="calc-field-label">Bonds:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-bonds" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-bonds" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stocks -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('stocks')" title="Help on Stocks">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-stocks" class="calc-field-label">Stocks:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-stocks" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-stocks" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mutual funds -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('mutual-funds')" title="Help on Mutual Funds">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-mutual-funds" class="calc-field-label">Mutual funds:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-mutual-funds" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-mutual-funds" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cash value of life insurance -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('cash-value-of-life-insurance')" title="Help on Cash Value of Life Insurance">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-life-ins" class="calc-field-label">Cash value of life insurance:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-life-ins" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-life-ins" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Savings bonds -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('savings-bonds')" title="Help on Savings Bonds">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-savings-bonds" class="calc-field-label">Savings bonds:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-savings-bonds" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-savings-bonds" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cash -->
+                    <div class="calc-subgroup-title">Cash:</div>
+
+                    <!-- Checking and savings -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('checking-and-savings')" title="Help on Checking and Savings">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-checking-savings" class="calc-field-label">Checking and savings:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-checking-savings" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-checking-savings" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cash -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('cash')" title="Help on Cash">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-cash" class="calc-field-label">Cash:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-cash" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cash" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('other')" title="Help on Other Assets">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-other-asset" class="calc-field-label">Other:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-other-asset" class="calc-input asset-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-other-asset" class="calc-slider asset-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 2: YOUR LIABILITIES (SCREENSHOTS 2 & 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-liabilities">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-liabilities')">
+                    <h3 class="calc-accordion-title">
+                        <span>YOUR LIABILITIES:</span>
+                        <span class="calc-accordion-badge" id="liabilities-total-badge">$0.00</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Mortgage Principal -->
+                    <div class="calc-subgroup-title">Mortgage Principal:</div>
+
+                    <!-- Home mortgage -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('home-mortgage-principal')" title="Help on Home Mortgage Principal">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-home-mortgage" class="calc-field-label">Home mortgage:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-home-mortgage" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-home-mortgage" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other mortgage -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('other-mortgage-principal')" title="Help on Other Mortgage Principal">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-other-mortgage" class="calc-field-label">Other mortgage:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-other-mortgage" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-other-mortgage" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loans and Debt -->
+                    <div class="calc-subgroup-title">Loans and Debt:</div>
+
+                    <!-- Auto loans -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('auto-loans')" title="Help on Auto Loans">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-auto-loans" class="calc-field-label">Auto loans:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-auto-loans" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-auto-loans" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student loans -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('student-loans')" title="Help on Student Loans">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-student-loans" class="calc-field-label">Student loans:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-student-loans" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-student-loans" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Credit card debt -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('credit-card-debt')" title="Help on Credit Card Debt">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-credit-debt" class="calc-field-label">Credit card debt:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-credit-debt" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-credit-debt" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Other loans -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('other-loans')" title="Help on Other Loans">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-other-loans" class="calc-field-label">Other loans:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-other-loans" class="calc-input liab-field" value="$0">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-other-loans" class="calc-slider liab-slider" min="0" max="1000000" step="1000" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: PROJECTED NET WORTH BY YEAR (SCREENSHOT 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-chart">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-chart')">
+                    <h3 class="calc-accordion-title">
+                        <span>PROJECTED NET WORTH BY YEAR FOR 10 YEARS.</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <div class="calc-chart-box">
+                        <svg id="net-worth-chart-svg" class="calc-chart-svg" viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background rect for chart plotting area -->
+                            <rect x="70" y="20" width="650" height="270" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1"/>
+
+                            <!-- Gridlines & Y-Axis Labels (Dynamically rendered or default $0 to $100) -->
+                            <g id="chart-grid-group"></g>
+
+                            <!-- X-Axis Years 1 through 10 -->
+                            <g font-family="'Open Sans', sans-serif" font-size="11.5" font-weight="600" fill="#334155" text-anchor="middle">
+                                <text x="102.5" y="312">1</text>
+                                <text x="167.5" y="312">2</text>
+                                <text x="232.5" y="312">3</text>
+                                <text x="297.5" y="312">4</text>
+                                <text x="362.5" y="312">5</text>
+                                <text x="427.5" y="312">6</text>
+                                <text x="492.5" y="312">7</text>
+                                <text x="557.5" y="312">8</text>
+                                <text x="622.5" y="312">9</text>
+                                <text x="687.5" y="312">10</text>
+                            </g>
+
+                            <!-- Projected Net Worth Line & Points -->
+                            <path id="chart-networth-path" d="" fill="none" stroke="#0022cc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="chart-networth-dots"></g>
+                        </svg>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: DEFINITIONS (SCREENSHOTS 4, 5, 6)
+             ============================================================ -->
+            <section class="calc-definitions-section" id="section-definitions">
+                <h3 class="calc-def-main-title">DEFINITIONS</h3>
+
+                <!-- Annual Asset Growth -->
+                <div class="calc-def-block" id="def-annual-asset-growth">
+                    <h4 class="calc-term-title">ANNUAL ASSET GROWTH</h4>
+                    <p class="calc-term-desc">
+                        Average annual rate you expect your assets to increase (or decrease if negative) in value.
+                    </p>
+                </div>
+
+                <!-- Annual Liability Growth -->
+                <div class="calc-def-block" id="def-annual-liability-growth">
+                    <h4 class="calc-term-title">ANNUAL LIABILITY GROWTH</h4>
+                    <p class="calc-term-desc">
+                        Average annual rate you expect your liabilities to increase (or decrease if negative) in value.
+                    </p>
+                </div>
+
+                <!-- Home -->
+                <div class="calc-def-block" id="def-home">
+                    <h4 class="calc-term-title">HOME</h4>
+                    <p class="calc-term-desc">
+                        Current value of your home. This should be as close as possible to the actual market value of your home. If you have owned your home for a number of years, the current market value could be significantly higher than your original purchase price.
+                    </p>
+                </div>
+
+                <!-- Other Real Estate -->
+                <div class="calc-def-block" id="def-other-real-estate">
+                    <h4 class="calc-term-title">OTHER REAL ESTATE</h4>
+                    <p class="calc-term-desc">
+                        The value of any other real estate you may own. Include second homes, undeveloped land, rental property or any commercial buildings you may have an interest in. As with your home, use the actual market value of this real estate.
+                    </p>
+                </div>
+
+                <!-- Automobiles -->
+                <div class="calc-def-block" id="def-automobiles">
+                    <h4 class="calc-term-title">AUTOMOBILES</h4>
+                    <p class="calc-term-desc">
+                        This is the total value of all automobiles that you own. Do not include any leased vehicles.
+                    </p>
+                </div>
+
+                <!-- Other Vehicles -->
+                <div class="calc-def-block" id="def-other-vehicles">
+                    <h4 class="calc-term-title">OTHER VEHICLES</h4>
+                    <p class="calc-term-desc">
+                        If you own any other vehicles, such as RVs, campers or collectibles, enter them here.
+                    </p>
+                </div>
+
+                <!-- Jewelry -->
+                <div class="calc-def-block" id="def-jewelry">
+                    <h4 class="calc-term-title">JEWELRY</h4>
+                    <p class="calc-term-desc">
+                        The value of any jewelry, gems or precious metals such as gold. If you have owned these items for a number of years they may have appreciated in price, so remember to use the current market value.
+                    </p>
+                </div>
+
+                <!-- Household Items -->
+                <div class="calc-def-block" id="def-household-items">
+                    <h4 class="calc-term-title">HOUSEHOLD ITEMS</h4>
+                    <p class="calc-term-desc">
+                        The value of your household goods and items. This would include items such as furniture, home electronics, silverware, etc.
+                    </p>
+                </div>
+
+                <!-- Retirement Accounts -->
+                <div class="calc-def-block" id="def-retirement-accounts">
+                    <h4 class="calc-term-title">RETIREMENT ACCOUNTS</h4>
+                    <p class="calc-term-desc">
+                        The current total balance of your retirement accounts. This should include IRAs, 401(k) savings, SEP IRAs, variable annuities and any other retirement savings you may have.
+                    </p>
+                </div>
+
+                <!-- Bonds -->
+                <div class="calc-def-block" id="def-bonds">
+                    <h4 class="calc-term-title">BONDS</h4>
+                    <p class="calc-term-desc">
+                        If you own any Treasury, municipal or commercial bonds, that are not part of your retirement accounts, enter the total here.
+                    </p>
+                </div>
+
+                <!-- Stocks -->
+                <div class="calc-def-block" id="def-stocks">
+                    <h4 class="calc-term-title">STOCKS</h4>
+                    <p class="calc-term-desc">
+                        If you own any individual stocks, that are not part of your retirement accounts, enter the total here.
+                    </p>
+                </div>
+
+                <!-- Mutual Funds -->
+                <div class="calc-def-block" id="def-mutual-funds">
+                    <h4 class="calc-term-title">MUTUAL FUNDS</h4>
+                    <p class="calc-term-desc">
+                        If you own any mutual funds, that are not part of your retirement accounts, enter the total here.
+                    </p>
+                </div>
+
+                <!-- Cash Value of Life Insurance -->
+                <div class="calc-def-block" id="def-cash-value-of-life-insurance">
+                    <h4 class="calc-term-title">CASH VALUE OF LIFE INSURANCE</h4>
+                    <p class="calc-term-desc">
+                        Some life insurance has a cash value. This is true for whole life and universal life policies. Term life policies, on the other hand, have no cash value. If you have life insurance with a cash value, enter the total here. Remember, this should be the cash value of the policy, not the amount paid out if you were to collect on the policy.
+                    </p>
+                </div>
+
+                <!-- Savings Bonds -->
+                <div class="calc-def-block" id="def-savings-bonds">
+                    <h4 class="calc-term-title">SAVINGS BONDS</h4>
+                    <p class="calc-term-desc">
+                        If you own any savings bonds enter the total here.
+                    </p>
+                </div>
+
+                <!-- Checking and Savings -->
+                <div class="calc-def-block" id="def-checking-and-savings">
+                    <h4 class="calc-term-title">CHECKING AND SAVINGS</h4>
+                    <p class="calc-term-desc">
+                        The current total balance of your checking and savings accounts.
+                    </p>
+                </div>
+
+                <!-- Cash -->
+                <div class="calc-def-block" id="def-cash">
+                    <h4 class="calc-term-title">CASH</h4>
+                    <p class="calc-term-desc">
+                        If you have any other cash, enter the total here.
+                    </p>
+                </div>
+
+                <!-- Other Assets -->
+                <div class="calc-def-block" id="def-other">
+                    <h4 class="calc-term-title">OTHER</h4>
+                    <p class="calc-term-desc">
+                        If you have any other assets of value, you can enter the total here.
+                    </p>
+                </div>
+
+                <!-- Home Mortgage Principal -->
+                <div class="calc-def-block" id="def-home-mortgage-principal">
+                    <h4 class="calc-term-title">HOME MORTGAGE PRINCIPAL</h4>
+                    <p class="calc-term-desc">
+                        This is the current principal balance remaining on your mortgage. This is the amount that you would have to pay to own your home free and clear.
+                    </p>
+                </div>
+
+                <!-- Other Mortgage Principal -->
+                <div class="calc-def-block" id="def-other-mortgage-principal">
+                    <h4 class="calc-term-title">OTHER MORTGAGE PRINCIPAL</h4>
+                    <p class="calc-term-desc">
+                        This is the current principal balance for any other real estate mortgages you may have. This includes mortgages on rental property, undeveloped land, commercial property or any other real estate.
+                    </p>
+                </div>
+
+                <!-- Auto Loans -->
+                <div class="calc-def-block" id="def-auto-loans">
+                    <h4 class="calc-term-title">AUTO LOANS</h4>
+                    <p class="calc-term-desc">
+                        Total amount you currently have outstanding on your auto loans.
+                    </p>
+                </div>
+
+                <!-- Student Loans -->
+                <div class="calc-def-block" id="def-student-loans">
+                    <h4 class="calc-term-title">STUDENT LOANS</h4>
+                    <p class="calc-term-desc">
+                        Total amount, if any, that you currently owe in college or student loans. You should enter the total outstanding even if these loans are currently in deferment.
+                    </p>
+                </div>
+
+                <!-- Credit Card Debt -->
+                <div class="calc-def-block" id="def-credit-card-debt">
+                    <h4 class="calc-term-title">CREDIT CARD DEBT</h4>
+                    <p class="calc-term-desc">
+                        Your total credit card debt.
+                    </p>
+                </div>
+
+                <!-- Other Loans -->
+                <div class="calc-def-block" id="def-other-loans">
+                    <h4 class="calc-term-title">OTHER LOANS</h4>
+                    <p class="calc-term-desc">
+                        Total amount, if any, of any other loans you may have.
+                    </p>
+                </div>
+
+                <!-- Exact Legal Disclaimer Box -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">NET WORTH 10-YEAR PROJECTION</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-backdrop" id="reportModal" onclick="if(event.target===this) closeReportModal()">
+        <div class="calc-modal-card">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Personal Net Worth &amp; 10-Year Growth Report</h3>
+                <div class="calc-modal-header-actions">
+                    <button type="button" class="calc-modal-print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()">&times;</button>
+                </div>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body" id="reportModalBody">
+                <!-- Dynamically populated report details -->
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     CALCULATOR MATHEMATICAL JAVASCRIPT ENGINE
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu(e) {
+            if (e) e.stopPropagation();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('open');
             }
         }
 
-        function parseNum(val) {
-            if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // --- Social Share Toggle & Actions ---
+        function toggleShareDropdown(e) {
+            if (e) e.stopPropagation();
+            const dd = document.getElementById('shareDropdown');
+            if (dd) dd.classList.toggle('open');
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('shareDropdown');
+            const btn = document.getElementById('shareBtn');
+            if (dd && dd.classList.contains('open') && (!btn || !btn.contains(e.target))) {
+                dd.classList.remove('open');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Net Worth Calculator | The Seiler Group Raymond James");
+            let shareUrl = "";
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${url}`;
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
-        function fmtMoneyCents(num) {
+        // --- Accordion Toggle ---
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
+        }
+
+        // --- Definitions Scroll Helper ---
+        function openDefinitions() {
+            const defSec = document.getElementById('section-definitions');
+            if (defSec) {
+                defSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showHelp(termId) {
+            const targetId = 'def-' + termId;
+            const elem = document.getElementById(targetId);
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                elem.style.transition = 'background-color 0.4s ease';
+                elem.style.backgroundColor = 'rgba(223, 160, 30, 0.15)';
+                setTimeout(() => {
+                    elem.style.backgroundColor = 'transparent';
+                }, 1500);
+            }
+        }
+
+        // --- Number Formatting Utilities ---
+        function formatCurrency(num) {
             return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function setupSync(inputId, sliderId, isPct, isCur) {
-            const inp = document.getElementById(inputId);
-            const sld = document.getElementById(sliderId);
+        function formatCurrencyShort(num) {
+            if (Math.abs(num) >= 1000000) {
+                return '$' + (num / 1000000).toFixed(1) + 'M';
+            }
+            if (Math.abs(num) >= 1000) {
+                return '$' + (num / 1000).toFixed(0) + 'k';
+            }
+            return '$' + Number(num).toFixed(0);
+        }
 
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculateNW();
+        function cleanNumber(str) {
+            if (typeof str === 'number') return str;
+            if (!str) return 0;
+            return parseFloat(str.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // --- Field Mappings ---
+        const assetFields = [
+            { id: 'home', inp: 'inp-home', range: 'range-home' },
+            { id: 'other-re', inp: 'inp-other-re', range: 'range-other-re' },
+            { id: 'automobiles', inp: 'inp-automobiles', range: 'range-automobiles' },
+            { id: 'other-vehicles', inp: 'inp-other-vehicles', range: 'range-other-vehicles' },
+            { id: 'jewelry', inp: 'inp-jewelry', range: 'range-jewelry' },
+            { id: 'household-items', inp: 'inp-household-items', range: 'range-household-items' },
+            { id: 'retirement', inp: 'inp-retirement', range: 'range-retirement' },
+            { id: 'bonds', inp: 'inp-bonds', range: 'range-bonds' },
+            { id: 'stocks', inp: 'inp-stocks', range: 'range-stocks' },
+            { id: 'mutual-funds', inp: 'inp-mutual-funds', range: 'range-mutual-funds' },
+            { id: 'life-ins', inp: 'inp-life-ins', range: 'range-life-ins' },
+            { id: 'savings-bonds', inp: 'inp-savings-bonds', range: 'range-savings-bonds' },
+            { id: 'checking-savings', inp: 'inp-checking-savings', range: 'range-checking-savings' },
+            { id: 'cash', inp: 'inp-cash', range: 'range-cash' },
+            { id: 'other-asset', inp: 'inp-other-asset', range: 'range-other-asset' }
+        ];
+
+        const liabFields = [
+            { id: 'home-mortgage', inp: 'inp-home-mortgage', range: 'range-home-mortgage' },
+            { id: 'other-mortgage', inp: 'inp-other-mortgage', range: 'range-other-mortgage' },
+            { id: 'auto-loans', inp: 'inp-auto-loans', range: 'range-auto-loans' },
+            { id: 'student-loans', inp: 'inp-student-loans', range: 'range-student-loans' },
+            { id: 'credit-debt', inp: 'inp-credit-debt', range: 'range-credit-debt' },
+            { id: 'other-loans', inp: 'inp-other-loans', range: 'range-other-loans' }
+        ];
+
+        const assetGrowthInput = document.getElementById('inp-asset-growth');
+        const assetGrowthSlider = document.getElementById('range-asset-growth');
+        const liabGrowthInput = document.getElementById('inp-liability-growth');
+        const liabGrowthSlider = document.getElementById('range-liability-growth');
+
+        function setupSync() {
+            // Asset growth rate sync
+            assetGrowthSlider.addEventListener('input', () => {
+                assetGrowthInput.value = assetGrowthSlider.value + '%';
+                calculateNetWorth();
+            });
+            assetGrowthInput.addEventListener('change', () => {
+                let val = cleanNumber(assetGrowthInput.value);
+                if (val < -100) val = -100;
+                if (val > 500) val = 500;
+                assetGrowthInput.value = val + '%';
+                assetGrowthSlider.value = Math.min(Math.max(val, -20), 100);
+                calculateNetWorth();
             });
 
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculateNW();
+            // Liability growth rate sync
+            liabGrowthSlider.addEventListener('input', () => {
+                liabGrowthInput.value = liabGrowthSlider.value + '%';
+                calculateNetWorth();
+            });
+            liabGrowthInput.addEventListener('change', () => {
+                let val = cleanNumber(liabGrowthInput.value);
+                if (val < -100) val = -100;
+                if (val > 500) val = 500;
+                liabGrowthInput.value = val + '%';
+                liabGrowthSlider.value = Math.min(Math.max(val, -20), 100);
+                calculateNetWorth();
+            });
+
+            // Asset fields sync
+            assetFields.forEach(item => {
+                const inp = document.getElementById(item.inp);
+                const rng = document.getElementById(item.range);
+                if (!inp || !rng) return;
+
+                rng.addEventListener('input', () => {
+                    inp.value = '$' + Number(rng.value).toLocaleString('en-US');
+                    calculateNetWorth();
+                });
+                inp.addEventListener('change', () => {
+                    let val = cleanNumber(inp.value);
+                    if (val < 0) val = 0;
+                    inp.value = '$' + Number(val).toLocaleString('en-US');
+                    rng.value = Math.min(val, 1000000);
+                    calculateNetWorth();
+                });
+            });
+
+            // Liability fields sync
+            liabFields.forEach(item => {
+                const inp = document.getElementById(item.inp);
+                const rng = document.getElementById(item.range);
+                if (!inp || !rng) return;
+
+                rng.addEventListener('input', () => {
+                    inp.value = '$' + Number(rng.value).toLocaleString('en-US');
+                    calculateNetWorth();
+                });
+                inp.addEventListener('change', () => {
+                    let val = cleanNumber(inp.value);
+                    if (val < 0) val = 0;
+                    inp.value = '$' + Number(val).toLocaleString('en-US');
+                    rng.value = Math.min(val, 1000000);
+                    calculateNetWorth();
+                });
             });
         }
 
-        let nwProjection = [];
+        // --- Exact Financial Calculations (DinkyTown NetWorth.js) ---
+        let lastReportData = {};
 
-        function calculateNW() {
-            const aGrowth = (parseNum(document.getElementById('inp-asset-growth').value) || 7) / 100;
-            const lGrowth = (parseNum(document.getElementById('inp-liab-growth').value) || 0) / 100;
+        function calculateNetWorth() {
+            // Sum all assets
+            let totalAssets0 = 0;
+            const assetBreakdown = [];
+            assetFields.forEach(item => {
+                const inp = document.getElementById(item.inp);
+                const val = cleanNumber(inp ? inp.value : 0);
+                totalAssets0 += val;
+                assetBreakdown.push({
+                    name: inp ? inp.closest('.calc-form-row').querySelector('.calc-field-label').textContent.replace('*', '').trim() : item.id,
+                    value: val
+                });
+            });
 
-            const totalAssets = 
-                parseNum(document.getElementById('a-home').value) +
-                parseNum(document.getElementById('a-re').value) +
-                parseNum(document.getElementById('a-auto').value) +
-                parseNum(document.getElementById('a-ret').value) +
-                parseNum(document.getElementById('a-stocks').value) +
-                parseNum(document.getElementById('a-cash').value);
+            // Sum all liabilities
+            let totalLiab0 = 0;
+            const liabBreakdown = [];
+            liabFields.forEach(item => {
+                const inp = document.getElementById(item.inp);
+                const val = cleanNumber(inp ? inp.value : 0);
+                totalLiab0 += val;
+                liabBreakdown.push({
+                    name: inp ? inp.closest('.calc-form-row').querySelector('.calc-field-label').textContent.replace('*', '').trim() : item.id,
+                    value: val
+                });
+            });
 
-            const totalLiabilities = 
-                parseNum(document.getElementById('l-mort').value) +
-                parseNum(document.getElementById('l-auto').value) +
-                parseNum(document.getElementById('l-student').value) +
-                parseNum(document.getElementById('l-cards').value);
+            const currentNetWorth = totalAssets0 - totalLiab0;
 
-            const currentNW = totalAssets - totalLiabilities;
+            // Growth rates
+            const assetGrowthRate = cleanNumber(assetGrowthInput.value) / 100;
+            const liabGrowthRate = cleanNumber(liabGrowthInput.value) / 100;
 
-            document.getElementById('badge-assets').textContent = fmtMoneyCents(totalAssets);
-            document.getElementById('badge-liab').textContent = fmtMoneyCents(totalLiabilities);
-            document.getElementById('banner-nw-val').textContent = fmtMoneyCents(currentNW);
+            // 10-Year Projections
+            const projections = [];
+            let curAssets = totalAssets0;
+            let curLiab = totalLiab0;
 
-            document.getElementById('stat-net-worth').textContent = fmtMoney(currentNW);
-            document.getElementById('stat-total-assets').textContent = fmtMoney(totalAssets);
-            document.getElementById('stat-total-liabilities').textContent = fmtMoney(totalLiabilities);
-
-            nwProjection = [];
-            for (let y = 0; y <= 10; y++) {
-                const aY = totalAssets * Math.pow(1 + aGrowth, y);
-                const lY = totalLiabilities * Math.pow(1 + lGrowth, y);
-                nwProjection.push({
-                    year: y,
-                    assets: aY,
-                    liab: lY,
-                    netWorth: aY - lY
+            for (let yr = 1; yr <= 10; yr++) {
+                curAssets = curAssets * (1 + assetGrowthRate);
+                curLiab = curLiab * (1 + liabGrowthRate);
+                const netW = curAssets - curLiab;
+                projections.push({
+                    year: yr,
+                    assets: Math.round(curAssets * 100) / 100,
+                    liabilities: Math.round(curLiab * 100) / 100,
+                    netWorth: Math.round(netW * 100) / 100
                 });
             }
 
-            renderNwChart(nwProjection);
+            lastReportData = {
+                currentNetWorth,
+                totalAssets0,
+                totalLiab0,
+                assetGrowthRate: assetGrowthRate * 100,
+                liabGrowthRate: liabGrowthRate * 100,
+                projections,
+                assetBreakdown,
+                liabBreakdown
+            };
+
+            // Update Headline & Subtotal Badges
+            document.getElementById('result-headline').innerText = `Your current net worth is ${formatCurrency(currentNetWorth)}`;
+            document.getElementById('assets-total-badge').innerText = formatCurrency(totalAssets0);
+            document.getElementById('liabilities-total-badge').innerText = formatCurrency(totalLiab0);
+
+            // Render SVG Line Chart
+            renderChart(projections, currentNetWorth);
         }
 
-        function renderNwChart(data) {
-            const svg = document.getElementById('nw-chart-svg');
-            if (!svg || !data.length) return;
+        // --- Render SVG Chart (Screenshot 3 Matching) ---
+        function renderChart(projections, currentNetWorth) {
+            const chartGridGroup = document.getElementById('chart-grid-group');
+            const pathElem = document.getElementById('chart-networth-path');
+            const dotsGroup = document.getElementById('chart-networth-dots');
 
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
+            const originX = 70;
+            const chartW = 650;
+            const topY = 20;
+            const chartH = 270;
+            const bottomY = topY + chartH; // 290
 
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
+            // Determine min and max for Y-axis
+            const values = projections.map(p => p.netWorth);
+            values.push(currentNetWorth);
 
-            let maxVal = Math.max(...data.map(d => Math.max(d.assets, d.netWorth))) * 1.25;
-            if (maxVal === 0) maxVal = 500000;
+            let maxVal = Math.max(...values);
+            let minVal = Math.min(...values);
 
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (maxVal / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            // Default screenshot state: when all values are 0, Y-axis shows $0 to $100 ($0, $10, $20, ..., $100)
+            let isDefaultZero = (maxVal === 0 && minVal === 0);
+            if (isDefaultZero) {
+                minVal = 0;
+                maxVal = 100;
+            } else {
+                if (minVal > 0) minVal = 0;
+                if (maxVal < 0) maxVal = 0;
+                // Add 10% breathing room to max
+                const range = maxVal - minVal;
+                maxVal += (range * 0.1 || 1000);
             }
 
-            let ptsA = '';
-            let ptsL = '';
-            let ptsNW = '';
+            // Create 10 horizontal grid steps (11 lines from 0 to 10)
+            const numSteps = 10;
+            const stepVal = (maxVal - minVal) / numSteps;
 
-            data.forEach((d, idx) => {
-                const cx = padLeft + (idx / 10) * chartW;
-                const cyA = padTop + chartH - (Math.max(0, d.assets) / maxVal) * chartH;
-                const cyL = padTop + chartH - (Math.max(0, d.liab) / maxVal) * chartH;
-                const cyNW = padTop + chartH - (Math.max(0, d.netWorth) / maxVal) * chartH;
+            let gridHtml = '';
+            for (let i = 0; i <= numSteps; i++) {
+                const y = bottomY - (i / numSteps) * chartH;
+                const val = minVal + i * stepVal;
+                let labelText = '';
+                if (isDefaultZero) {
+                    labelText = '$' + Math.round(val);
+                } else {
+                    labelText = formatCurrencyShort(val);
+                }
 
-                ptsA += `${cx},${cyA} `;
-                ptsL += `${cx},${cyL} `;
-                ptsNW += `${cx},${cyNW} `;
+                gridHtml += `
+                    <line x1="${originX}" y1="${y}" x2="${originX + chartW}" y2="${y}" stroke="#cbd5e1" stroke-width="1"/>
+                    <text x="${originX - 8}" y="${y + 4}" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">${labelText}</text>
+                `;
+            }
+            chartGridGroup.innerHTML = gridHtml;
 
-                svgHtml += `<circle cx="${cx}" cy="${cyNW}" r="3" fill="#10b981"><title>Year ${d.year} Net Worth: ${fmtMoney(d.netWorth)}</title></circle>`;
-                svgHtml += `<text x="${cx}" y="${padTop + chartH + 18}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="middle">Yr ${d.year}</text>`;
-            });
+            // Plot 10 points for Year 1 to Year 10
+            // x coordinates: 10 columns across chartW (650).
+            // col width = 65. Year 1 = originX + 32.5 = 102.5. Year t = 102.5 + (t-1)*65.
+            let pathD = '';
+            let dotsHtml = '';
 
-            svgHtml += `<polyline points="${ptsA.trim()}" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="4,4" />`;
-            svgHtml += `<polyline points="${ptsL.trim()}" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" />`;
-            svgHtml += `<polyline points="${ptsNW.trim()}" fill="none" stroke="#10b981" stroke-width="2.5" />`;
+            projections.forEach((p, idx) => {
+                const x = originX + 32.5 + idx * 65;
+                let yRatio = 0;
+                if (maxVal !== minVal) {
+                    yRatio = (p.netWorth - minVal) / (maxVal - minVal);
+                }
+                const y = bottomY - yRatio * chartH;
 
-            svg.innerHTML = svgHtml;
-        }
+                if (idx === 0) {
+                    pathD += `M ${x.toFixed(1)},${y.toFixed(1)}`;
+                } else {
+                    pathD += ` L ${x.toFixed(1)},${y.toFixed(1)}`;
+                }
 
-        function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!nwProjection.length) calculateNW();
-
-            let rows = '';
-            nwProjection.forEach(d => {
-                rows += `
-                    <tr>
-                        <td>Year ${d.year}</td>
-                        <td>${fmtMoney(d.assets)}</td>
-                        <td style="color: #ef4444;">${fmtMoney(d.liab)}</td>
-                        <td style="color: #10b981; font-weight: 700;">${fmtMoney(d.netWorth)}</td>
-                    </tr>
+                dotsHtml += `
+                    <circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5" fill="#0022cc" stroke="#ffffff" stroke-width="1.5">
+                        <title>Year ${p.year}: Net Worth ${formatCurrency(p.netWorth)}</title>
+                    </circle>
                 `;
             });
 
+            pathElem.setAttribute('d', pathD);
+            dotsGroup.innerHTML = dotsHtml;
+        }
+
+        // --- View Report Modal Functions ---
+        function openReportModal() {
+            const modal = document.getElementById('reportModal');
+            const body = document.getElementById('reportModalBody');
+            if (!modal || !body) return;
+
+            const d = lastReportData;
+            const year10 = d.projections[9] || { assets: 0, liabilities: 0, netWorth: 0 };
+
             body.innerHTML = `
-                <table class="nw-table">
-                    <thead>
-                        <tr>
-                            <th>Projection Year</th>
-                            <th>Total Assets</th>
-                            <th>Total Liabilities</th>
-                            <th>Net Worth</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${rows}
-                    </tbody>
-                </table>
+                <div class="report-summary-grid">
+                    <div class="report-summary-card">
+                        <div class="report-summary-val">${formatCurrency(d.totalAssets0)}</div>
+                        <div class="report-summary-label">Current Assets</div>
+                    </div>
+                    <div class="report-summary-card">
+                        <div class="report-summary-val" style="color: #ef4444;">${formatCurrency(d.totalLiab0)}</div>
+                        <div class="report-summary-label">Current Liabilities</div>
+                    </div>
+                    <div class="report-summary-card">
+                        <div class="report-summary-val" style="color: ${d.currentNetWorth >= 0 ? 'var(--gold)' : '#ef4444'};">${formatCurrency(d.currentNetWorth)}</div>
+                        <div class="report-summary-label">Current Net Worth</div>
+                    </div>
+                    <div class="report-summary-card">
+                        <div class="report-summary-val" style="color: #38bdf8;">${formatCurrency(year10.netWorth)}</div>
+                        <div class="report-summary-label">10-Year Projected Net Worth</div>
+                    </div>
+                </div>
+
+                <h4 style="color: var(--gold); font-size: 15px; margin-bottom: 12px; text-transform: uppercase;">10-Year Net Worth Projection Schedule</h4>
+                <div class="calc-table-wrap">
+                    <table class="calc-report-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>Projected Assets (${d.assetGrowthRate}%)</th>
+                                <th>Projected Liabilities (${d.liabGrowthRate}%)</th>
+                                <th>Projected Net Worth</th>
+                                <th>Annual Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Current (0)</strong></td>
+                                <td>${formatCurrency(d.totalAssets0)}</td>
+                                <td>${formatCurrency(d.totalLiab0)}</td>
+                                <td><strong>${formatCurrency(d.currentNetWorth)}</strong></td>
+                                <td>-</td>
+                            </tr>
+                            ${d.projections.map((p, idx) => {
+                                const prevNW = idx === 0 ? d.currentNetWorth : d.projections[idx - 1].netWorth;
+                                const diff = p.netWorth - prevNW;
+                                const diffColor = diff >= 0 ? '#4ade80' : '#ef4444';
+                                const sign = diff >= 0 ? '+' : '';
+                                return `
+                                    <tr>
+                                        <td><strong>Year ${p.year}</strong></td>
+                                        <td>${formatCurrency(p.assets)}</td>
+                                        <td>${formatCurrency(p.liabilities)}</td>
+                                        <td><strong>${formatCurrency(p.netWorth)}</strong></td>
+                                        <td style="color: ${diffColor};">${sign}${formatCurrency(diff)}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px;">
+                    <div>
+                        <h5 style="color: var(--gold); font-size: 13.5px; margin-bottom: 10px; text-transform: uppercase;">Asset Details</h5>
+                        <div class="calc-table-wrap">
+                            <table class="calc-report-table" style="font-size: 12px;">
+                                <tbody>
+                                    ${d.assetBreakdown.map(a => `
+                                        <tr>
+                                            <td>${a.name}</td>
+                                            <td>${formatCurrency(a.value)}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h5 style="color: var(--gold); font-size: 13.5px; margin-bottom: 10px; text-transform: uppercase;">Liability Details</h5>
+                        <div class="calc-table-wrap">
+                            <table class="calc-report-table" style="font-size: 12px;">
+                                <tbody>
+                                    ${d.liabBreakdown.map(l => `
+                                        <tr>
+                                            <td>${l.name}</td>
+                                            <td>${formatCurrency(l.value)}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 18px; font-size: 11px; color: #94a3b8; line-height: 1.6;">
+                    * Projections assume compounded annual growth as specified and are purely hypothetical for personal financial planning purposes. Taxes, inflation, and market volatility may affect actual results.
+                </div>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            modal.classList.add('open');
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('reportModal');
+            if (modal) modal.classList.remove('open');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
+        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-asset-growth', 'range-asset-growth', true, false);
-            setupSync('inp-liab-growth', 'range-liab-growth', true, false);
-
-            calculateNW();
+            setupSync();
+            calculateNetWorth();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

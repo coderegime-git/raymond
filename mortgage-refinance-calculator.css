@@ -1,0 +1,970 @@
+/* ==========================================================================
+   MORTGAGE REFINANCE CALCULATOR (CARD 50)
+   Signature Midnight Navy & Luxury Gold Corporate Aesthetic
+   The Seiler Group of Raymond James
+   ========================================================================== */
+
+:root {
+    --navy-darkest: #050c18;
+    --navy-dark: #0b172a;
+    --navy-card: #0d1b31;
+    --navy-card-border: rgba(223, 160, 30, 0.28);
+    --navy-card-hover: rgba(223, 160, 30, 0.45);
+    --gold: #dfa01e;
+    --gold-light: #f0b538;
+    --gold-dim: #c58c19;
+    --gold-tint: rgba(223, 160, 30, 0.12);
+    --text-white: #ffffff;
+    --text-muted: #94a3b8;
+    --text-slate: #cbd5e1;
+    --border-subtle: #1e293b;
+    --alert-red: #ef4444;
+    --alert-bg: rgba(239, 68, 68, 0.15);
+    --success-green: #22c55e;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--navy-darkest);
+    color: var(--text-white);
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   TOP HEADER & CORPORATE NAV (SEILER GROUP)
+   ========================================================================== */
+.rj-header {
+    background: var(--navy-dark);
+    border-bottom: 1px solid rgba(223, 160, 30, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.rj-header-social-bar {
+    background: #060e1d;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rj-header-social-bar a {
+    color: #94a3b8;
+    font-size: 13px;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+
+.rj-header-social-bar a:hover {
+    color: var(--gold);
+}
+
+.rj-header-main-bar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rj-brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+}
+
+.rj-brand-logo {
+    height: 48px;
+    width: auto;
+    display: block;
+}
+
+.rj-brand-text {
+    border-left: 1px solid rgba(223, 160, 30, 0.4);
+    padding-left: 14px;
+}
+
+.rj-brand-title {
+    color: #ffffff;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.rj-brand-sub {
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.rj-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.rj-header-link {
+    color: #cbd5e1;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rj-header-link:hover {
+    color: var(--gold);
+}
+
+.rj-header-btn-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dim) 100%);
+    color: #000000;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rj-header-btn-gold:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(223, 160, 30, 0.4);
+}
+
+/* ==========================================================================
+   FLOATING SIDE NAVIGATION BUTTONS
+   ========================================================================== */
+.calc-side-nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    background: rgba(11, 23, 42, 0.95);
+    border: 1px solid rgba(223, 160, 30, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(8px);
+}
+
+.calc-side-nav-btn.prev-btn {
+    left: 12px;
+}
+
+.calc-side-nav-btn.next-btn {
+    right: 12px;
+}
+
+.calc-side-nav-btn:hover {
+    border-color: var(--gold);
+    background: #0d1b31;
+    box-shadow: 0 10px 30px rgba(223, 160, 30, 0.25);
+    transform: translateY(-50%) scale(1.04);
+}
+
+.calc-side-nav-square {
+    width: 32px;
+    height: 48px;
+    background: var(--gold);
+    color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 3px;
+    font-weight: 700;
+}
+
+.calc-side-nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.25;
+    color: #ffffff;
+}
+
+.prev-btn .calc-side-nav-label {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.next-btn .calc-side-nav-label {
+    margin-right: 10px;
+    text-align: right;
+}
+
+/* ==========================================================================
+   MAIN CALCULATOR CONTAINER & CARD
+   ========================================================================== */
+.calc-main-wrapper {
+    max-width: 980px;
+    margin: 30px auto 60px auto;
+    padding: 0 20px;
+}
+
+.calc-banner-wrap {
+    width: 100%;
+    max-height: 340px;
+    overflow: hidden;
+    border-radius: 6px;
+    margin-bottom: 26px;
+    border: 1px solid var(--navy-card-border);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    background: #000;
+}
+
+.calc-banner-img {
+    width: 100%;
+    height: 340px;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+}
+
+.calc-header-section {
+    margin-bottom: 20px;
+}
+
+.calc-title {
+    font-family: 'Montserrat', 'Playfair Display', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.calc-meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.calc-category-link,
+.calc-type-link {
+    color: var(--gold);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.calc-category-link:hover,
+.calc-type-link:hover {
+    color: var(--gold-light);
+    text-decoration: underline;
+}
+
+.calc-meta-divider {
+    color: #475569;
+}
+
+/* Share Dropdown */
+.calc-share-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.calc-share-btn {
+    background: transparent;
+    border: none;
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    transition: color 0.2s;
+}
+
+.calc-share-btn:hover {
+    color: var(--gold-light);
+}
+
+.calc-share-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--gold);
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    display: none;
+    flex-direction: column;
+    width: 38px;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.calc-share-social-item {
+    width: 38px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.calc-share-social-item:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.calc-intro-text {
+    color: var(--text-slate);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   ACTION BAR & BUTTONS
+   ========================================================================== */
+.calc-action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.calc-action-btns-left {
+    display: flex;
+    gap: 12px;
+}
+
+.calc-action-btn-gold {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 8px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calc-action-btn-gold:hover {
+    background: var(--gold);
+    color: #000000;
+    border-color: var(--gold);
+}
+
+.calc-action-btn-outline {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 8px 22px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calc-action-btn-outline:hover {
+    background: #0b172a;
+    color: #ffffff;
+    border-color: #0b172a;
+}
+
+.calc-action-btns-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-help-icon-btn {
+    background: #0b172a;
+    border: 1px solid rgba(223, 160, 30, 0.4);
+    color: var(--gold);
+    width: 38px;
+    height: 38px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 3px;
+}
+
+.calc-help-icon-btn:hover {
+    background: var(--gold);
+    color: #000000;
+}
+
+/* Validation Error Message */
+.calc-error-banner {
+    color: #ef4444;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0;
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.calc-error-banner.show {
+    display: block;
+}
+
+.calc-required-hint {
+    text-align: right;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 14px;
+}
+
+/* ==========================================================================
+   ACCORDIONS
+   ========================================================================== */
+.calc-accordion {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-card-border);
+    border-radius: 6px;
+    margin-bottom: 18px;
+    overflow: visible;
+    transition: border-color 0.2s ease;
+}
+
+.calc-accordion:hover {
+    border-color: var(--navy-card-hover);
+}
+
+.calc-accordion-header {
+    padding: 16px 20px;
+    cursor: pointer;
+    background: rgba(11, 23, 42, 0.7);
+    border-bottom: 1px solid rgba(223, 160, 30, 0.15);
+    user-select: none;
+    transition: background 0.2s;
+}
+
+.calc-accordion-header:hover {
+    background: rgba(11, 23, 42, 0.95);
+}
+
+.calc-accordion-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calc-accordion-title-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.calc-accordion-title-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.calc-accordion-payment-subhead {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold);
+    margin-right: 14px;
+    letter-spacing: 0.3px;
+}
+
+.calc-accordion-icon {
+    color: var(--gold);
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.calc-accordion.collapsed .calc-accordion-icon {
+    transform: rotate(180deg);
+}
+
+.calc-accordion-content {
+    padding: 22px 24px;
+    display: block;
+}
+
+.calc-accordion.collapsed .calc-accordion-content {
+    display: none;
+}
+
+/* Form Rows */
+.calc-form-row {
+    display: grid;
+    grid-template-columns: 240px 140px 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.calc-label-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-inline-help {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 13px;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0;
+}
+
+.calc-inline-help:hover {
+    color: var(--gold);
+}
+
+.calc-field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.calc-text-input {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0b172a;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.calc-text-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(223, 160, 30, 0.25);
+}
+
+.calc-text-input.input-error {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+}
+
+.calc-select-input {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0b172a;
+    width: 100%;
+    outline: none;
+    cursor: pointer;
+}
+
+.calc-readonly-val {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(223, 160, 30, 0.3);
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold);
+    width: 100%;
+}
+
+/* Tooltip popup for validation */
+.calc-input-tooltip {
+    position: absolute;
+    top: -46px;
+    left: 240px;
+    background: #ffffff;
+    color: #1e293b;
+    border: 1px solid #94a3b8;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    z-index: 50;
+    white-space: nowrap;
+    display: none;
+}
+
+.calc-input-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #ffffff;
+}
+
+.calc-input-tooltip.show {
+    display: block;
+    animation: fadeIn 0.25s ease;
+}
+
+/* Range Slider Styling */
+.calc-slider-wrap {
+    position: relative;
+    width: 100%;
+    padding: 0 4px;
+}
+
+.calc-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #94a3b8;
+    outline: none;
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 8px 0;
+}
+
+.calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0022cc;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transition: transform 0.15s ease;
+}
+
+.calc-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.calc-slider-ticks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+    user-select: none;
+}
+
+/* ==========================================================================
+   RESULTS / OUTPUT SECTIONS
+   ========================================================================== */
+.calc-result-accordion {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-card-border);
+    border-radius: 6px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+.calc-result-header {
+    padding: 16px 20px;
+    background: rgba(11, 23, 42, 0.9);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(223, 160, 30, 0.15);
+}
+
+.calc-result-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.calc-result-content {
+    padding: 24px;
+}
+
+.calc-result-accordion.collapsed .calc-result-content {
+    display: none;
+}
+
+.calc-result-accordion.collapsed .calc-accordion-icon {
+    transform: rotate(180deg);
+}
+
+/* Chart Canvas Container */
+.calc-chart-box {
+    background: #f1f5f9;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    border: 1px solid #cbd5e1;
+}
+
+.calc-chart-canvas {
+    width: 100%;
+    height: 240px;
+    display: block;
+}
+
+/* Summary Grid Cards */
+.calc-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.calc-summary-card {
+    background: rgba(11, 23, 42, 0.85);
+    border: 1px solid rgba(223, 160, 30, 0.35);
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+}
+
+.calc-summary-card-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+}
+
+.calc-summary-card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+/* Comparison Breakdown Table */
+.calc-table-wrap {
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.calc-breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.calc-breakdown-table th,
+.calc-breakdown-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #1e293b;
+    text-align: left;
+}
+
+.calc-breakdown-table th {
+    background: #060e1d;
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.calc-breakdown-table td:nth-child(2),
+.calc-breakdown-table td:nth-child(3),
+.calc-breakdown-table td:nth-child(4),
+.calc-breakdown-table th:nth-child(2),
+.calc-breakdown-table th:nth-child(3),
+.calc-breakdown-table th:nth-child(4) {
+    text-align: right;
+}
+
+.calc-breakdown-table tr:hover td {
+    background: rgba(223, 160, 30, 0.05);
+}
+
+.calc-breakdown-table tr.highlight-row td {
+    background: rgba(223, 160, 30, 0.12);
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* ==========================================================================
+   DEFINITIONS & REGULATORY DISCLAIMER
+   ========================================================================== */
+.calc-definitions-section {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(223, 160, 30, 0.25);
+}
+
+.calc-definitions-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+}
+
+.calc-def-item {
+    margin-bottom: 20px;
+}
+
+.calc-def-term {
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.calc-def-desc {
+    font-size: 13px;
+    color: var(--text-slate);
+    line-height: 1.6;
+}
+
+.calc-disclaimer-wrap {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.calc-disclaimer-text {
+    font-size: 11px;
+    color: #94a3b8;
+    line-height: 1.7;
+}
+
+/* ==========================================================================
+   MODAL WINDOWS (REPORT & HELP)
+   ========================================================================== */
+.calc-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(5, 12, 24, 0.88);
+    backdrop-filter: blur(5px);
+}
+
+.calc-modal-content {
+    background: #0d1b31;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    max-width: 820px;
+    margin: 40px auto;
+    padding: 32px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+    position: relative;
+    color: #ffffff;
+}
+
+.calc-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    font-size: 26px;
+    color: #94a3b8;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.calc-modal-close:hover {
+    color: var(--gold);
+}
+
+.calc-modal-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 18px;
+}
+
+/* Responsive queries */
+@media (max-width: 860px) {
+    .calc-form-row {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .calc-input-tooltip {
+        left: 0;
+        top: -40px;
+    }
+
+    .calc-side-nav-btn {
+        display: none;
+    }
+
+    .rj-header-main-bar {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .calc-action-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

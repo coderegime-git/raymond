@@ -1,903 +1,952 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How Much Do You Need to Retire? | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate what size your retirement nest egg should be to fund your desired lifestyle throughout your retirement years.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Do you know how much it takes to create a secure retirement? Use this calculator to help determine what size your retirement nest egg should be." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/retirement-nest-egg" />
+    <meta property="og:title" content="How much do you need to retire? | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/nest-egg-hero.jpg" />
+    <title>How much do you need to retire? | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .calc-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .calc-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .calc-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .calc-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 780px;
-            border-top: 5px solid #dfa01e;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            position: relative;
-            color: #1e293b;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .report-modal-close:hover {
-            color: #0b172a;
-        }
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13px;
-        }
-        .report-table th, .report-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .report-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-        .report-table tr:hover td {
-            background-color: #f8fafc;
-        }
-        .report-table td:last-child {
-            text-align: right;
-            font-weight: 600;
-        }
-        .calc-toggle-header {
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .calc-toggle-header:hover {
-            color: #dfa01e;
-        }
-    </style>
-</head>
-<body>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- TOP HEADER BAR -->
-    <header class="top-nav-container">
-        <div class="top-nav-inner">
-            <div class="brand-left">
-                <a href="index.html" class="brand-logo-link">
-                    <span class="brand-title">THE SEILER GROUP</span>
-                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
-                </a>
-            </div>
-            <div class="header-contact">
-                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
-                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
-            </div>
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="how-much-do-you-need-to-retire.css?v=1">
+</head>
+
+<body>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
         </div>
     </header>
 
-    <!-- SECONDARY NAVIGATION -->
-    <nav class="sub-nav">
-        <div class="sub-nav-inner">
-            <a href="index.html">HOME</a>
-            <a href="corporate-executive-services.html">ABOUT US</a>
-            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
-            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
-            <a href="resources.html" class="active">RESOURCES</a>
-            <a href="contact-us.html">CONTACT US</a>
-        </div>
-    </nav>
-
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="retirement-income-estimator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Retirement Income Estimator">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="retirement-income-estimator.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Retirement Income Estimator">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="retirement-plan-withdrawal.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Retirement Plan Withdrawal">
+    <a href="retirement-plan-withdrawal.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Retirement Plan Withdrawal">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="How Much Do You Need to Retire?" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/nest-egg-hero.jpg"
+                    alt="How much do you need to retire? - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-40.jpg'">
             </div>
 
-            <!-- Page Titles -->
-            <h1 class="calc-page-title">HOW MUCH DO YOU NEED TO RETIRE?</h1>
-            <div class="calc-category-path">Retirement &amp; Longevity &gt; Calculator</div>
-
-            <div class="calc-share-container">
-                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
-            </div>
-
-            <p class="calc-intro-paragraph">
-                Do you know how much it takes to create a secure retirement? Use this calculator to help determine what size your retirement nest egg should be.
-            </p>
-
-            <!-- Action Buttons -->
-            <div class="calc-actions-row">
-                <button type="button" class="calc-btn-primary" onclick="calculateNestEgg()">CALCULATE</button>
-                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Highlight Banner -->
-            <div class="calc-dynamic-banner" id="nestegg-banner">
-                <span id="banner-text">You will need a retirement nest egg of $1,425,000.00</span>
-                <span class="banner-badge"><i class="fas fa-shield-alt"></i> Nest Egg Goal</span>
-            </div>
-
-            <!-- Summary Stat Cards -->
-            <div class="calc-stat-grid">
-                <div class="calc-stat-card">
-                    <div class="calc-stat-val" id="stat-nestegg-needed">$1,425,000</div>
-                    <div class="calc-stat-label">Total Nest Egg Needed</div>
+            <!-- Title & Meta Header -->
+            <header class="calc-header-section">
+                <h1 class="calc-title">HOW MUCH DO YOU NEED TO RETIRE?</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?category=retirement" class="calc-category-link">Retirement &amp; Longevity</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
                 </div>
-                <div class="calc-stat-card">
-                    <div class="calc-stat-val" id="stat-projected-savings" style="color: #60a5fa;">$654,120</div>
-                    <div class="calc-stat-label">Projected Savings At Retirement</div>
-                </div>
-                <div class="calc-stat-card">
-                    <div class="calc-stat-val" id="stat-shortfall" style="color: #ef4444;">$770,880</div>
-                    <div class="calc-stat-label" id="stat-gap-label">Estimated Shortfall</div>
-                </div>
-                <div class="calc-stat-card">
-                    <div class="calc-stat-val" id="stat-ann-savings-needed" style="color: #4ade80;">$14,210 / yr</div>
-                    <div class="calc-stat-label">Additional Savings Target</div>
-                </div>
-            </div>
 
-            <!-- CALCULATOR FORM -->
-            <div class="calc-two-col-layout">
-                
-                <!-- Left Column: Inputs -->
-                <div class="calc-inputs-column">
-                    
-                    <!-- SECTION 1: RETIREMENT PLAN INPUTS -->
-                    <div class="calc-section-group">
-                        <div class="calc-group-title">RETIREMENT PLAN INPUTS</div>
-
-                        <!-- Current age -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-curr-age">Current age*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-curr-age" class="calc-text-input" value="35" min="20" max="70" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-curr-age" class="calc-range-slider" min="20" max="70" step="1" value="35">
-                                    <div class="calc-slider-range-labels">
-                                        <span>20</span>
-                                        <span>45</span>
-                                        <span>70</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Age at retirement -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-ret-age">Age at retirement*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-ret-age" class="calc-text-input" value="65" min="50" max="80" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-ret-age" class="calc-range-slider" min="50" max="80" step="1" value="65">
-                                    <div class="calc-slider-range-labels">
-                                        <span>50</span>
-                                        <span>65</span>
-                                        <span>80</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Annual household income -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-hh-income">Annual household income*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-hh-income" class="calc-text-input" value="$85,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-hh-income" class="calc-range-slider" min="20000" max="300000" step="2500" value="85000">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$20k</span>
-                                        <span>$160k</span>
-                                        <span>$300k</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Current retirement savings -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-curr-savings">Current retirement savings*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-curr-savings" class="calc-text-input" value="$45,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-curr-savings" class="calc-range-slider" min="0" max="1000000" step="5000" value="45000">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$0</span>
-                                        <span>$500k</span>
-                                        <span>$1M</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Expected total return -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-exp-return">Expected total return*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-exp-return" class="calc-text-input" value="7.50%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-exp-return" class="calc-range-slider" min="1.0" max="15.0" step="0.25" value="7.50">
-                                    <div class="calc-slider-range-labels">
-                                        <span>1.0%</span>
-                                        <span>8.0%</span>
-                                        <span>15.0%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pre-retirement income replacement % -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-replacement-pct">
-                                Pre-retirement income needed in retirement*
-                            </label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-replacement-pct" class="calc-text-input" value="75%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-replacement-pct" class="calc-range-slider" min="50" max="100" step="1" value="75">
-                                    <div class="calc-slider-range-labels">
-                                        <span>50%</span>
-                                        <span>75%</span>
-                                        <span>100%</span>
-                                    </div>
-                                </div>
-                                <div style="font-size: 11px; color: #64748b; margin-top: 4px; font-style: italic;">
-                                    Enter an amount between 50% and 100%
-                                </div>
-                            </div>
-                        </div>
-
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
                     </div>
+                </div>
 
-                    <!-- SECTION 2: INVESTMENT RETURN, INFLATION AND SOCIAL SECURITY -->
-                    <div class="calc-section-group" style="margin-top: 25px;">
-                        <div class="calc-group-title calc-toggle-header" onclick="toggleSec2()">
-                            <span>INVESTMENT RETURN, INFLATION AND SOCIAL SECURITY</span>
-                            <i id="sec2-chevron" class="fas fa-chevron-up" style="color: #dfa01e; font-size: 14px;"></i>
+                <p class="calc-intro-text">
+                    Do you know how much it takes to create a secure retirement? Use this calculator to help determine what size your retirement nest egg should be.
+                </p>
+            </header>
+
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateNestEgg()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
+                </div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Validation Alert Banner -->
+            <div class="calc-alert-banner" id="alert-banner">
+                Pre-retirement income desired in retirement can't be less than 40%
+            </div>
+
+            <!-- Dynamic Headline Result -->
+            <div class="calc-headline-summary-wrap">
+                <div class="calc-headline-main" id="res-headline">
+                    YOU NEED TO SAVE <span class="highlight-gold" id="res-needed-savings">$0.00</span> PER MONTH TO MEET YOUR RETIREMENT NEEDS.
+                </div>
+            </div>
+
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- ============================================================
+             SECTION 1: RETIREMENT PLAN INPUTS (SCREENSHOT 1 & 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-inputs">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-inputs')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT PLAN INPUTS:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Current age -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-age')" title="Help on Current Age">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-cur-age" class="calc-field-label">Current age:<span class="calc-required-star">*</span></label>
                         </div>
-
-                        <div id="sec2-content">
-                            <!-- Rate of return during retirement -->
-                            <div class="calc-input-row">
-                                <label class="calc-input-label" for="inp-ret-return">Rate of return during retirement</label>
-                                <div class="calc-input-control">
-                                    <input type="text" id="inp-ret-return" class="calc-text-input" value="5.50%">
-                                    <div class="calc-slider-wrapper">
-                                        <input type="range" id="range-ret-return" class="calc-range-slider" min="1.0" max="12.0" step="0.25" value="5.50">
-                                        <div class="calc-slider-range-labels">
-                                            <span>1.0%</span>
-                                            <span>6.5%</span>
-                                            <span>12.0%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Expected inflation rate -->
-                            <div class="calc-input-row">
-                                <label class="calc-input-label" for="inp-inflation">Expected inflation rate</label>
-                                <div class="calc-input-control">
-                                    <input type="text" id="inp-inflation" class="calc-text-input" value="3.00%">
-                                    <div class="calc-slider-wrapper">
-                                        <input type="range" id="range-inflation" class="calc-range-slider" min="0.5" max="8.0" step="0.25" value="3.00">
-                                        <div class="calc-slider-range-labels">
-                                            <span>0.5%</span>
-                                            <span>4.0%</span>
-                                            <span>8.0%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Years in retirement -->
-                            <div class="calc-input-row">
-                                <label class="calc-input-label" for="inp-yrs-ret">Years in retirement</label>
-                                <div class="calc-input-control">
-                                    <input type="number" id="inp-yrs-ret" class="calc-text-input" value="25" min="10" max="45" step="1">
-                                    <div class="calc-slider-wrapper">
-                                        <input type="range" id="range-yrs-ret" class="calc-range-slider" min="10" max="45" step="1" value="25">
-                                        <div class="calc-slider-range-labels">
-                                            <span>10</span>
-                                            <span>25</span>
-                                            <span>45</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Social Security Checkboxes -->
-                            <div class="calc-input-row">
-                                <label class="calc-input-label">Social Security benefits</label>
-                                <div class="calc-input-control" style="display: flex; flex-direction: column; gap: 8px;">
-                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; cursor: pointer;">
-                                        <input type="checkbox" id="chk-ss" checked onchange="calculateNestEgg()">
-                                        Include Social Security benefits
-                                    </label>
-                                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #334155; cursor: pointer;">
-                                        <input type="checkbox" id="chk-spouse-ss" checked onchange="calculateNestEgg()">
-                                        Include spouse's Social Security benefit
-                                    </label>
-                                </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-cur-age" class="calc-input" value="45" min="15" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-age" class="calc-slider" min="15" max="90" step="1" value="45">
+                            <div class="calc-slider-ticks">
+                                <span>15</span>
+                                <span>39</span>
+                                <span>65</span>
+                                <span>90</span>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <!-- Right Column: Interactive Charts -->
-                <div class="calc-charts-column">
-                    <div class="calc-chart-box">
-                        <div class="calc-chart-title">PROJECTED SAVINGS VS. NEST EGG NEED</div>
-                        <div id="nestegg-svg-container" style="width: 100%; height: 350px;">
-                            <!-- Dynamic SVG Chart rendered via JS -->
+                    <!-- Age at retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-age')" title="Help on Age at Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retire-age" class="calc-field-label">Age at retirement:<span class="calc-required-star">*</span></label>
                         </div>
-
-                        <div style="margin-top: 15px; font-size: 12px; color: #64748b; text-align: center; line-height: 1.6;">
-                            Comparison of your projected accumulated retirement savings against your estimated required nest egg at age <span id="lbl-ret-age" style="font-weight: 700; color: #0b172a;">65</span>.
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-retire-age" class="calc-input" value="67" min="10" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-age" class="calc-slider" min="10" max="90" step="1" value="67">
+                            <div class="calc-slider-ticks">
+                                <span>10</span>
+                                <span>37</span>
+                                <span>63</span>
+                                <span>90</span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                    <!-- Annual household income -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('household-income')" title="Help on Annual Household Income">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-income" class="calc-field-label">Annual household income:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-income" class="calc-input" value="$50,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-income" class="calc-slider" min="0" max="10000000" step="2500" value="50000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                                <span>$10m</span>
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- DEFINITIONS SECTION -->
-            <section class="calc-definitions-wrapper">
-                <h3 class="calc-defs-title">DEFINITIONS</h3>
+                    <!-- Current retirement savings -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-savings')" title="Help on Current Retirement Savings">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-savings" class="calc-field-label">Current retirement savings:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-savings" class="calc-input" value="$250,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-savings" class="calc-slider" min="0" max="10000000" step="5000" value="250000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                                <span>$10m</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">CURRENT AGE</div>
-                    <div class="calc-def-desc">Your current age.</div>
-                </div>
+                    <!-- Expected income increase -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('income-increase')" title="Help on Expected Income Increase">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-income-inc" class="calc-field-label">Expected income increase:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-income-inc" class="calc-input" value="2%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-income-inc" class="calc-slider" min="0" max="20" step="0.5" value="2">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">AGE AT RETIREMENT</div>
-                    <div class="calc-def-desc">Age at which you plan to retire. This calculator assumes that this year you will, for the first time, not make any contributions to your retirement savings. For example, if you retire at age 65, your last contribution would happen in the end of your 64th year.</div>
-                </div>
+                    <!-- Pre-retirement income desired in retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('desired-income')" title="Help on Desired Retirement Income">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-desired-pct" class="calc-field-label">Pre-retirement income desired in retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-desired-pct" class="calc-input" value="80%">
+                            <div class="calc-input-tooltip" id="tooltip-desired-pct">Enter an amount between 40% and 160%</div>
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-desired-pct" class="calc-slider" min="40" max="160" step="1" value="80">
+                            <div class="calc-slider-ticks">
+                                <span>40%</span>
+                                <span>80%</span>
+                                <span>120%</span>
+                                <span>160%</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">ANNUAL HOUSEHOLD INCOME</div>
-                    <div class="calc-def-desc">Total annual earned pre-tax gross income for your entire household.</div>
-                </div>
+                    <!-- Years of retirement income -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('years-income')" title="Help on Years of Retirement Income">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-years-income" class="calc-field-label">Years of retirement income:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-years-income" class="calc-input" value="35" min="1" max="100">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-years-income" class="calc-slider" min="1" max="100" step="1" value="35">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>34</span>
+                                <span>67</span>
+                                <span>100</span>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">CURRENT RETIREMENT SAVINGS</div>
-                    <div class="calc-def-desc">Total amount that you currently have saved toward your retirement. Include all sources of retirement savings, such as 401(k)s, IRAs, and annuities.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">RATE OF RETURN BEFORE RETIREMENT</div>
-                    <div class="calc-def-desc">The annual rate of return you expect from your investments until you reach retirement. This should reflect the aggregate return of all of your retirement savings accounts (401(k), traditional IRA, Roth IRA, taxable investments). Historical returns for the S&amp;P 500 have averaged approximately 10%–11% before inflation since 1926.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">RATE OF RETURN DURING RETIREMENT</div>
-                    <div class="calc-def-desc">The annual nominal rate of return you expect from your investments during retirement. Most retirees shift to a more conservative portfolio with greater bond exposure to reduce volatility and safeguard capital during distribution.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">EXPECTED INFLATION RATE</div>
-                    <div class="calc-def-desc">The annual rate of inflation you anticipate over your planning horizon. Long-term average historical inflation in the United States has ranged between 2.5% and 3.5% annually.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">YEARS IN RETIREMENT</div>
-                    <div class="calc-def-desc">The number of years you anticipate drawing income from your retirement assets. Planning for longevity (often 25 to 35 years) ensures your assets outlast your lifetime.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">PRE-RETIREMENT INCOME NEEDED IN RETIREMENT</div>
-                    <div class="calc-def-desc">The percentage of your current pre-retirement household income you will require annually in retirement. Most financial planners recommend targeting between 70% and 85% of pre-retirement earnings to maintain your standard of living.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">INCLUDE SOCIAL SECURITY BENEFITS</div>
-                    <div class="calc-def-desc">Check this box to include estimated Social Security retirement income in your calculation. Social Security is indexed to inflation and replaces a percentage of pre-retirement earnings based on average lifetime earnings.</div>
                 </div>
             </section>
 
-            <!-- LEGAL DISCLAIMER -->
-            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
-            </div>
+            <!-- ============================================================
+             SECTION 2: INVESTMENT RETURNS, INFLATION AND SOCIAL SECURITY (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion collapsed" id="acc-returns">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-returns')">
+                    <h3 class="calc-accordion-title">
+                        <div>
+                            <span>INVESTMENT RETURNS, INFLATION AND SOCIAL SECURITY:</span>
+                            <div class="calc-accordion-subhead" id="txt-returns-subhead">
+                                7% PRE-RETIREMENT, 4% IN RETIREMENT, 3% INFLATION, INCLUDE SOCIAL SECURITY? YES
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Rate of return before retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('ror-before')" title="Help on Return Before Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ror-before" class="calc-field-label">Rate of return before retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ror-before" class="calc-input" value="7%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror-before" class="calc-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rate of return during retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('ror-during')" title="Help on Return During Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ror-during" class="calc-field-label">Rate of return during retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ror-during" class="calc-input" value="4%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror-during" class="calc-slider" min="0" max="12" step="0.25" value="4">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Expected rate of inflation -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('inflation-rate')" title="Help on Inflation Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-inflation" class="calc-field-label">Expected rate of inflation:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-inflation" class="calc-input" value="3%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-inflation" class="calc-slider" min="0" max="12" step="0.25" value="3">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Married -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('married')" title="Help on Marital Status">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="chk-married" class="calc-field-label">Married:</label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <label class="calc-checkbox-wrap">
+                                <input type="checkbox" id="chk-married" class="calc-checkbox" onchange="calculateNestEgg()">
+                                <span class="calc-checkbox-label">Check here if married</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Include Social Security -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('social-security')" title="Help on Social Security">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="chk-ss" class="calc-field-label">Include Social Security:</label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <label class="calc-checkbox-wrap">
+                                <input type="checkbox" id="chk-ss" class="calc-checkbox" checked onchange="calculateNestEgg()">
+                                <span class="calc-checkbox-label">Check here to include Social Security</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: RETIREMENT NEST EGG ANALYSIS
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-analysis">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-analysis')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT NEST EGG ANALYSIS</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-stat-grid">
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Target Nest Egg Needed</div>
+                            <div class="calc-stat-card-val" id="val-target-nestegg">$786,412</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Projected Nest Egg with Savings</div>
+                            <div class="calc-stat-card-val" id="val-projected-nestegg" style="color: #60a5fa;">$1,107,511</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Additional Monthly Savings Needed</div>
+                            <div class="calc-stat-card-val" id="val-monthly-needed" style="color: #4ade80;">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: DEFINITIONS (SCREENSHOTS 3, 4 & 5)
+             ============================================================ -->
+            <section class="calc-definitions-wrap" id="definitions-section">
+                <h2 class="calc-def-main-heading">DEFINITIONS</h2>
+
+                <h3 class="calc-def-sub-heading">CURRENT AGE</h3>
+                <p class="calc-def-p">
+                    Your current age.
+                </p>
+
+                <h3 class="calc-def-sub-heading">AGE AT RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Age at which you plan to retire. This calculator assumes that the year you retire, you do not make any contributions to your retirement savings. For example, if you retire at age 65, your last contribution occurs when you are actually age 64. This calculator also assumes that you make your entire contribution at the end of each year.
+                </p>
+
+                <h3 class="calc-def-sub-heading">HOUSEHOLD INCOME</h3>
+                <p class="calc-def-p">
+                    Your total household income. If you are married, this should include your spouse's income.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT RETIREMENT SAVINGS</h3>
+                <p class="calc-def-p">
+                    Total amount that you currently have saved toward your retirement. Include all sources of retirement savings such as 401(k)s, IRAs and Annuities.
+                </p>
+
+                <h3 class="calc-def-sub-heading">RATE OF RETURN BEFORE RETIREMENT</h3>
+                <p class="calc-def-p">
+                    This is the annual rate of return you expect from your retirement savings and investments. This should also be an after-tax rate of return if the majority of your retirement savings is not in a tax-deferred account such as a 403(b), 401(k), 457(b), annuity or IRA. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">RATE OF RETURN DURING RETIREMENT</h3>
+                <p class="calc-def-p">
+                    This is the annual rate of return you expect from your investments during retirement. This should also be an after-tax rate of return if the majority of your retirement savings is not in a tax-deferred account such as a 403(b), 401(k), 457(b), annuity or IRA. This rate is often lower than the return earned before retirement due to more conservative investment choices to help insure a steady flow of income. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EXPECTED INCOME INCREASE</h3>
+                <p class="calc-def-p">
+                    Annual percent increase you expect in your household income.
+                </p>
+
+                <h3 class="calc-def-sub-heading">YEARS OF RETIREMENT INCOME</h3>
+                <p class="calc-def-p">
+                    Total number of years you expect to use your retirement income.
+                </p>
+
+                <h3 class="calc-def-sub-heading">PRE-RETIREMENT INCOME DESIRED IN RETIREMENT</h3>
+                <p class="calc-def-p">
+                    The percentage of your pre-retirement household income you think you will need in retirement. This amount is based on the household income earned during the year immediately before your retirement. You can change this amount to be as low as 40% and as high as 160%. The percentage should reflect an after-tax amount if the majority of your retirement savings is not in a tax-deferred savings account such as a 401(k), IRA or other tax-deferred account.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EXPECTED RATE OF INFLATION</h3>
+                <p class="calc-def-p">
+                    This is what you expect for the average long-term inflation rate. A common measure of inflation in the U.S. is the Consumer Price Index (CPI). From 1925 through 2025 the CPI has a long-term average of 3.0% annually. Over the last 40 years the highest CPI recorded was 13.5% in 1980. For the 12 months ending November 30<sup>th</sup> 2025 the CPI for All Urban Consumers (CPI-U) was 2.7% as reported by the U.S. Bureau of Labor Statistics.
+                </p>
+
+                <h3 class="calc-def-sub-heading">MARRIED CHECKBOX</h3>
+                <p class="calc-def-p">
+                    Check this box if you are married. Married couples have a higher maximum Social Security benefit than single wage earners.
+                </p>
+
+                <h3 class="calc-def-sub-heading">INCLUDE SOCIAL SECURITY CHECKBOX</h3>
+                <p class="calc-def-p">
+                    Check this box if you wish to include Social Security benefits in your retirement planning. Social Security is based on a sliding scale depending on your income, how long you work and at what age you retire. Social Security benefits automatically increase each year based on increases in the Consumer Price Index. Including a spouse increases your Social Security benefits by 1.5 times your individual estimated benefit. Please note that this calculator assumes that only one spouse works. Benefits could be different if your spouse worked and earned a benefit higher than one half of your benefit. If you are a married couple, and both spouses work, you may need to run the calculation twice - once for each spouse and their respective income. This calculator provides only an estimate of your benefits.
+                </p>
+                <p class="calc-def-p">
+                    The calculations use the 2026 FICA income limit of $184,500 with an annual maximum Social Security benefit of $49,824 ($4,152 per month) for a single person and 1.5 times this amount for a married couple. To receive the maximum benefit would require earning the maximum FICA income for nearly your entire career. You would also need to begin receiving benefits at your full retirement age of 66 or 67 (depending on your birthdate). This calculator rounds the age you can receive full Social Security benefits to the next highest full year. If your birthdate is in 1955 through 1959 your actual full retirement age for Social Security is 66 plus two months for each year after 1954. Your actual benefit may be lower or higher depending on your work history and the complete compensation rules used by Social Security.
+                </p>
+
+                <!-- Mandatory Regulatory & FINRA Disclaimer -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Retirement Nest Egg Analysis Report</h2>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
-                </div>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeModalOnBackdrop(event, 'reportModal')">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Retirement Nest Egg Calculation Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('reportModal')">&times;</button>
             </div>
-
-            <div id="report-modal-body">
-                <!-- Populated dynamically via JS -->
+            <div class="calc-modal-body">
+                <p style="margin-bottom: 14px; color: var(--gold);">
+                    Comprehensive analysis of your retirement readiness:
+                </p>
+                <table class="calc-modal-table">
+                    <tbody id="modalReportBody">
+                        <!-- Injected dynamically -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
-     CHAMPION STRIP
+    <!-- ============================================================
+     HELP / CONTEXT MODAL
      ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+    <div class="calc-modal-overlay" id="helpModal" onclick="closeModalOnBackdrop(event, 'helpModal')">
+        <div class="calc-modal-box" style="max-width: 520px;">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="helpModalTitle">Help Information</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('helpModal')">&times;</button>
+            </div>
+            <div class="calc-modal-body" id="helpModalBody">
+                <!-- Injected by showHelp() -->
             </div>
         </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
+    </div>
 
     <!-- ============================================================
-     FOOTER
+     CALCULATOR JAVASCRIPT LOGIC
      ============================================================ -->
-    <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
-    </footer>
-
-    <!-- INTERACTIVE ENGINE SCRIPT -->
     <script>
-        function parseClean(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // Formatting utilities
+        function formatCurrency(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        function formatCurrencyRound(val) {
+            return '$' + Math.round(Number(val)).toLocaleString('en-US');
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function parseCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function fmtPct(num) {
-            return Number(num).toFixed(2) + '%';
+        function parsePercent(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
+        // Cache last report results
+        let lastReportData = null;
 
-            range.addEventListener('input', () => {
-                let v = parseFloat(range.value);
-                if (isCurrency) {
-                    inp.value = fmtMoney(v);
-                } else if (isPct) {
-                    inp.value = fmtPct(v);
-                } else {
-                    inp.value = v;
-                }
-                calculateNestEgg();
-            });
+        // Estimate Social Security annual benefit based on 2026 rules
+        function estimateSocialSecurity(income, isMarried) {
+            // 2026 maximum single benefit is $49,824; replacement formula roughly 40% of income up to bend points
+            const wageCap = 184500;
+            const cappedIncome = Math.min(income, wageCap);
+            let singleBenefit = 0;
 
-            inp.addEventListener('change', () => {
-                let val = parseClean(inp.value);
-                if (val < parseFloat(range.min)) val = parseFloat(range.min);
-                if (val > parseFloat(range.max)) val = parseFloat(range.max);
-                range.value = val;
-                if (isCurrency) {
-                    inp.value = fmtMoney(val);
-                } else if (isPct) {
-                    inp.value = fmtPct(val);
-                } else {
-                    inp.value = val;
-                }
-                calculateNestEgg();
-            });
-        }
-
-        function toggleSec2() {
-            const content = document.getElementById('sec2-content');
-            const chev = document.getElementById('sec2-chevron');
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                chev.className = 'fas fa-chevron-up';
+            if (cappedIncome <= 15000) {
+                singleBenefit = cappedIncome * 0.90;
+            } else if (cappedIncome <= 60000) {
+                singleBenefit = 15000 * 0.90 + (cappedIncome - 15000) * 0.32;
             } else {
-                content.style.display = 'none';
-                chev.className = 'fas fa-chevron-down';
+                singleBenefit = 15000 * 0.90 + 45000 * 0.32 + (cappedIncome - 60000) * 0.15;
             }
+            singleBenefit = Math.min(singleBenefit, 49824);
+
+            return isMarried ? singleBenefit * 1.5 : singleBenefit;
         }
 
-        let nestEggData = {};
-
+        // Main Calculation Function
         function calculateNestEgg() {
-            const currAge = parseClean(document.getElementById('inp-curr-age').value) || 35;
-            let retAge = parseClean(document.getElementById('inp-ret-age').value) || 65;
-            if (retAge <= currAge) retAge = currAge + 1;
+            const curAge = parseInt(document.getElementById('inp-cur-age').value, 10) || 45;
+            const retireAge = parseInt(document.getElementById('inp-retire-age').value, 10) || 67;
+            const income = parseCurrency(document.getElementById('inp-income').value);
+            const curSavings = parseCurrency(document.getElementById('inp-savings').value);
+            const incomeIncRate = parsePercent(document.getElementById('inp-income-inc').value) / 100;
+            const desiredPct = parsePercent(document.getElementById('inp-desired-pct').value);
+            const yearsRetire = parseInt(document.getElementById('inp-years-income').value, 10) || 35;
 
-            const hhIncome = parseClean(document.getElementById('inp-hh-income').value) || 85000;
-            const currSavings = parseClean(document.getElementById('inp-curr-savings').value) || 45000;
-            const expReturn = (parseClean(document.getElementById('inp-exp-return').value) || 7.5) / 100;
-            let replacePct = (parseClean(document.getElementById('inp-replacement-pct').value) || 75) / 100;
+            const rorBefore = parsePercent(document.getElementById('inp-ror-before').value) / 100;
+            const rorDuring = parsePercent(document.getElementById('inp-ror-during').value) / 100;
+            const inflationRate = parsePercent(document.getElementById('inp-inflation').value) / 100;
+            const isMarried = document.getElementById('chk-married').checked;
+            const incSocialSecurity = document.getElementById('chk-ss').checked;
 
-            const retReturn = (parseClean(document.getElementById('inp-ret-return').value) || 5.5) / 100;
-            const inflation = (parseClean(document.getElementById('inp-inflation').value) || 3.0) / 100;
-            const yrsRet = parseClean(document.getElementById('inp-yrs-ret').value) || 25;
+            // Update subhead text for accordion 2
+            document.getElementById('txt-returns-subhead').textContent = 
+                `${Math.round(rorBefore*100)}% PRE-RETIREMENT, ${Math.round(rorDuring*100)}% IN RETIREMENT, ${Math.round(inflationRate*100)}% INFLATION, INCLUDE SOCIAL SECURITY? ${incSocialSecurity ? 'YES' : 'NO'}`;
 
-            const incSS = document.getElementById('chk-ss').checked;
-            const incSpouseSS = document.getElementById('chk-spouse-ss').checked;
+            // Validation check: desired income must be between 40% and 160%
+            const alertBanner = document.getElementById('alert-banner');
+            const desiredInp = document.getElementById('inp-desired-pct');
+            const tooltip = document.getElementById('tooltip-desired-pct');
 
-            const yrsToRet = retAge - currAge;
-            document.getElementById('lbl-ret-age').innerText = retAge;
+            if (desiredPct < 40 || desiredPct > 160) {
+                alertBanner.classList.add('show');
+                desiredInp.classList.add('input-error');
+                tooltip.classList.add('show');
+            } else {
+                alertBanner.classList.remove('show');
+                desiredInp.classList.remove('input-error');
+                tooltip.classList.remove('show');
+            }
 
-            // 1. Calculate Pre-Retirement Annual Income Needed
-            const annualIncomeNeededToday = hhIncome * replacePct;
-            // Inflate to retirement age
-            const annualIncomeNeededAtRet = annualIncomeNeededToday * Math.pow(1 + inflation, yrsToRet);
+            const yearsToRetire = Math.max(0, retireAge - curAge);
 
-            // 2. Social Security Benefit (Estimated today ~32% of income capped, adjusted to retirement)
-            let annualSSAtRet = 0;
-            if (incSS) {
-                let primarySS = Math.min(hhIncome * 0.32, 45000);
-                annualSSAtRet += primarySS * Math.pow(1 + inflation, yrsToRet);
-                if (incSpouseSS) {
-                    annualSSAtRet += (primarySS * 0.5) * Math.pow(1 + inflation, yrsToRet);
+            // Final pre-retirement income with annual increases
+            const finalSalary = income * Math.pow(1 + incomeIncRate, yearsToRetire);
+            const annualNeed = finalSalary * (Math.max(40, Math.min(160, desiredPct)) / 100);
+
+            // Estimated Social Security benefit at retirement adjusted for inflation
+            const ssBenefitToday = incSocialSecurity ? estimateSocialSecurity(income, isMarried) : 0;
+            const ssBenefitAtRetire = ssBenefitToday * Math.pow(1 + inflationRate, yearsToRetire);
+
+            // Net annual income needed from personal savings
+            const netAnnualNeedFromSavings = Math.max(0, annualNeed - ssBenefitAtRetire);
+
+            // Capital needed at retirement to fund netAnnualNeed for yearsRetire with real return during retirement
+            const realReturnDuring = (1 + rorDuring) / (1 + inflationRate) - 1;
+            let annuityFactor = 0;
+            if (realReturnDuring !== 0) {
+                annuityFactor = (1 - Math.pow(1 + realReturnDuring, -yearsRetire)) / realReturnDuring;
+            } else {
+                annuityFactor = yearsRetire;
+            }
+
+            const targetNestEgg = netAnnualNeedFromSavings * annuityFactor;
+
+            // Projected balance of current savings at retirement
+            const projectedSavings = curSavings * Math.pow(1 + rorBefore, yearsToRetire);
+
+            // Shortfall or surplus
+            const shortfall = Math.max(0, targetNestEgg - projectedSavings);
+
+            // Additional monthly savings needed
+            let monthlyNeeded = 0;
+            if (shortfall > 0 && yearsToRetire > 0) {
+                const rMonthly = rorBefore / 12;
+                const totalMonths = yearsToRetire * 12;
+                if (rMonthly > 0) {
+                    monthlyNeeded = shortfall * (rMonthly / (Math.pow(1 + rMonthly, totalMonths) - 1));
+                } else {
+                    monthlyNeeded = shortfall / totalMonths;
                 }
             }
 
-            // 3. Net Annual Gap to be funded from savings
-            const netAnnualGap = Math.max(0, annualIncomeNeededAtRet - annualSSAtRet);
+            // Headline Display
+            document.getElementById('res-needed-savings').textContent = formatCurrency(monthlyNeeded);
 
-            // 4. Real rate of return in retirement
-            const realRetRate = (1 + retReturn) / (1 + inflation) - 1;
+            // Results Card Display
+            document.getElementById('val-target-nestegg').textContent = formatCurrencyRound(targetNestEgg);
+            document.getElementById('val-projected-nestegg').textContent = formatCurrencyRound(projectedSavings);
+            document.getElementById('val-monthly-needed').textContent = formatCurrency(monthlyNeeded);
 
-            // 5. Present Value of Annuity needed at retirement
-            let nestEggNeeded = 0;
-            if (realRetRate > 0.0001) {
-                nestEggNeeded = netAnnualGap * ((1 - Math.pow(1 + realRetRate, -yrsRet)) / realRetRate);
-            } else {
-                nestEggNeeded = netAnnualGap * yrsRet;
-            }
-
-            // 6. Projected Savings at Retirement:
-            // Assume continuing savings rate of 10% of household income growing with inflation
-            const annualContrib = hhIncome * 0.10;
-            let projectedSavings = currSavings * Math.pow(1 + expReturn, yrsToRet);
-            if (expReturn > 0.0001) {
-                projectedSavings += annualContrib * ((Math.pow(1 + expReturn, yrsToRet) - 1) / expReturn);
-            } else {
-                projectedSavings += annualContrib * yrsToRet;
-            }
-
-            // Gap / Shortfall
-            const gap = nestEggNeeded - projectedSavings;
-            let addlAnnualNeeded = 0;
-            if (gap > 0 && yrsToRet > 0) {
-                addlAnnualNeeded = gap * (expReturn / (Math.pow(1 + expReturn, yrsToRet) - 1));
-            }
-
-            nestEggData = {
-                currAge, retAge, yrsToRet, hhIncome, currSavings, expReturn,
-                replacePct, retReturn, inflation, yrsRet,
-                annualIncomeNeededToday, annualIncomeNeededAtRet, annualSSAtRet,
-                netAnnualGap, nestEggNeeded, projectedSavings, gap, addlAnnualNeeded
+            lastReportData = {
+                curAge,
+                retireAge,
+                yearsToRetire,
+                yearsRetire,
+                income,
+                finalSalary,
+                annualNeed,
+                ssBenefitAtRetire,
+                netAnnualNeedFromSavings,
+                targetNestEgg,
+                projectedSavings,
+                shortfall,
+                monthlyNeeded
             };
-
-            // Update UI elements
-            document.getElementById('banner-text').innerText = `You will need a retirement nest egg of ${fmtMoney(nestEggNeeded)}`;
-            document.getElementById('stat-nestegg-needed').innerText = fmtMoney(nestEggNeeded);
-            document.getElementById('stat-projected-savings').innerText = fmtMoney(projectedSavings);
-
-            const statShortfall = document.getElementById('stat-shortfall');
-            const statGapLabel = document.getElementById('stat-gap-label');
-            const statAddlSavings = document.getElementById('stat-ann-savings-needed');
-
-            if (gap > 0) {
-                statShortfall.innerText = fmtMoney(gap);
-                statShortfall.style.color = '#ef4444';
-                statGapLabel.innerText = 'Estimated Shortfall';
-                statAddlSavings.innerText = fmtMoney(addlAnnualNeeded) + ' / yr';
-                statAddlSavings.style.color = '#f59e0b';
-            } else {
-                statShortfall.innerText = fmtMoney(Math.abs(gap));
-                statShortfall.style.color = '#22c55e';
-                statGapLabel.innerText = 'Estimated Surplus';
-                statAddlSavings.innerText = '$0 / yr (On Track)';
-                statAddlSavings.style.color = '#22c55e';
-            }
-
-            renderChart(projectedSavings, nestEggNeeded);
         }
 
-        function renderChart(projected, needed) {
-            const container = document.getElementById('nestegg-svg-container');
-            const maxVal = Math.max(projected, needed, 100000) * 1.15;
-            const w = 480;
-            const h = 330;
-            const padL = 70;
-            const padR = 30;
-            const padT = 30;
-            const padB = 60;
-            const chartW = w - padL - padR;
-            const chartH = h - padT - padB;
-
-            const hProj = (projected / maxVal) * chartH;
-            const hNeed = (needed / maxVal) * chartH;
-
-            const yProj = padT + chartH - hProj;
-            const yNeed = padT + chartH - hNeed;
-
-            const barW = 85;
-            const x1 = padL + (chartW / 3) - (barW / 2);
-            const x2 = padL + (2 * chartW / 3) - (barW / 2);
-
-            let gridLines = '';
-            for (let i = 0; i <= 4; i++) {
-                const val = (maxVal / 4) * i;
-                const y = padT + chartH - (i * chartH / 4);
-                gridLines += `
-                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
-                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${(val / 1000).toFixed(0)}k</text>
-                `;
-            }
-
-            const svgHtml = `
-                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
-                    ${gridLines}
-
-                    <!-- Projected Savings Bar -->
-                    <rect x="${x1}" y="${yProj}" width="${barW}" height="${hProj}" fill="#2563eb" rx="4" />
-                    <text x="${x1 + barW / 2}" y="${Math.max(padT + 15, yProj - 8)}" fill="#1e3a8a" font-size="11" font-weight="700" text-anchor="middle">
-                        ${fmtMoney(projected)}
-                    </text>
-                    <text x="${x1 + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Projected Savings
-                    </text>
-
-                    <!-- Nest Egg Needed Bar -->
-                    <rect x="${x2}" y="${yNeed}" width="${barW}" height="${hNeed}" fill="#dfa01e" rx="4" />
-                    <text x="${x2 + barW / 2}" y="${Math.max(padT + 15, yNeed - 8)}" fill="#b45309" font-size="11" font-weight="700" text-anchor="middle">
-                        ${fmtMoney(needed)}
-                    </text>
-                    <text x="${x2 + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Nest Egg Needed
-                    </text>
-
-                    <!-- Axis -->
-                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
-                </svg>
-            `;
-
-            container.innerHTML = svgHtml;
-        }
-
+        // View Report Modal
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!nestEggData.nestEggNeeded) calculateNestEgg();
+            if (!lastReportData) return;
+            const d = lastReportData;
+            const tbody = document.getElementById('modalReportBody');
 
-            const d = nestEggData;
-            const statusColor = d.gap > 0 ? '#ef4444' : '#22c55e';
-            const statusText = d.gap > 0 ? 'Savings Gap / Shortfall' : 'On Track / Surplus';
-
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Retirement Goal Assessment</div>
-                    <div style="font-size: 22px; font-weight: 700; color: #ffffff; margin-top: 4px;">
-                        Nest Egg Required: <span style="color: #dfa01e;">${fmtMoney(d.nestEggNeeded)}</span>
-                    </div>
-                    <div style="font-size: 13px; color: ${statusColor}; font-weight: 600; margin-top: 6px;">
-                        ${statusText}: ${fmtMoney(Math.abs(d.gap))}
-                    </div>
-                </div>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Planning Horizons &amp; Earnings</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Current Age / Retirement Age</td><td>${d.currAge} / ${d.retAge} (${d.yrsToRet} yrs until retirement)</td></tr>
-                        <tr><td>Current Annual Household Income</td><td>${fmtMoney(d.hhIncome)}</td></tr>
-                        <tr><td>Current Retirement Savings</td><td>${fmtMoney(d.currSavings)}</td></tr>
-                        <tr><td>Expected Investment Return (Pre-Retirement)</td><td>${fmtPct(d.expReturn * 100)}</td></tr>
-                        <tr><td>Expected Investment Return (In-Retirement)</td><td>${fmtPct(d.retReturn * 100)}</td></tr>
-                        <tr><td>Expected Inflation Rate</td><td>${fmtPct(d.inflation * 100)}</td></tr>
-                        <tr><td>Income Replacement Percentage</td><td>${fmtPct(d.replacePct * 100)}</td></tr>
-                    </tbody>
-                </table>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Retirement Income &amp; Capital Projections</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Annual Retirement Income Target (at Age ${d.retAge})</td><td>${fmtMoney(d.annualIncomeNeededAtRet)} / yr</td></tr>
-                        <tr><td>Projected Annual Social Security Benefit</td><td>${fmtMoney(d.annualSSAtRet)} / yr</td></tr>
-                        <tr><td>Net Annual Income Required from Savings</td><td style="color: #2563eb; font-weight: 700;">${fmtMoney(d.netAnnualGap)} / yr</td></tr>
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Total Nest Egg Required at Retirement</td>
-                            <td style="color: #dfa01e; font-size: 15px;">${fmtMoney(d.nestEggNeeded)}</td>
-                        </tr>
-                        <tr><td>Projected Accumulated Savings</td><td style="color: #1e3a8a;">${fmtMoney(d.projectedSavings)}</td></tr>
-                        <tr style="font-weight: 700;">
-                            <td>${d.gap > 0 ? 'Projected Shortfall' : 'Projected Surplus'}</td>
-                            <td style="color: ${statusColor};">${fmtMoney(Math.abs(d.gap))}</td>
-                        </tr>
-                        ${d.gap > 0 ? `
-                        <tr style="background: #fef2f2; font-weight: 700;">
-                            <td>Recommended Additional Annual Savings</td>
-                            <td style="color: #dc2626;">${fmtMoney(d.addlAnnualNeeded)} / yr</td>
-                        </tr>` : ''}
-                    </tbody>
-                </table>
+            tbody.innerHTML = `
+                <tr>
+                    <td>Current Age / Retirement Age</td>
+                    <td style="font-weight: 700; color: #ffffff;">${d.curAge} / ${d.retireAge} (${d.yearsToRetire} years to retire)</td>
+                </tr>
+                <tr>
+                    <td>Retirement Duration</td>
+                    <td style="font-weight: 700; color: #ffffff;">${d.yearsRetire} years</td>
+                </tr>
+                <tr>
+                    <td>Current Annual Income</td>
+                    <td>${formatCurrency(d.income)}</td>
+                </tr>
+                <tr>
+                    <td>Projected Final Salary at Retirement</td>
+                    <td>${formatCurrency(d.finalSalary)}</td>
+                </tr>
+                <tr>
+                    <td>Annual Retirement Income Desired</td>
+                    <td style="color: var(--gold); font-weight: 700;">${formatCurrency(d.annualNeed)}</td>
+                </tr>
+                <tr>
+                    <td>Estimated Annual Social Security Benefit</td>
+                    <td style="color: #60a5fa;">${formatCurrency(d.ssBenefitAtRetire)}</td>
+                </tr>
+                <tr>
+                    <td>Annual Income Needed from Savings</td>
+                    <td style="color: var(--gold);">${formatCurrency(d.netAnnualNeedFromSavings)}</td>
+                </tr>
+                <tr style="border-top: 2px solid #334155;">
+                    <td style="font-weight: 700; color: #ffffff;">Target Retirement Nest Egg</td>
+                    <td style="font-weight: 700; color: var(--gold); font-size: 15px;">${formatCurrency(d.targetNestEgg)}</td>
+                </tr>
+                <tr>
+                    <td>Projected Nest Egg with Existing Savings</td>
+                    <td style="font-weight: 700; color: #60a5fa; font-size: 15px;">${formatCurrency(d.projectedSavings)}</td>
+                </tr>
+                <tr style="background: rgba(223, 160, 30, 0.08); border-top: 1px solid var(--gold);">
+                    <td style="font-weight: 700; color: var(--gold);">Additional Monthly Savings Required</td>
+                    <td style="font-weight: 800; color: #4ade80; font-size: 16px;">${formatCurrency(d.monthlyNeeded)}</td>
+                </tr>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            document.getElementById('reportModal').classList.add('show');
         }
 
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        function closeModalOnBackdrop(e, id) {
+            if (e.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Accordion toggle
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            acc.classList.toggle('collapsed');
+        }
+
+        // Scroll smoothly to Definitions section
+        function scrollToDefinitions() {
+            document.getElementById('definitions-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contextual Help Modal
+        const helpContent = {
+            'current-age': {
+                title: 'Current Age',
+                body: 'Your current age in years.'
+            },
+            'retire-age': {
+                title: 'Age at Retirement',
+                body: 'The age at which you plan to retire and stop working.'
+            },
+            'household-income': {
+                title: 'Annual Household Income',
+                body: 'Total current gross annual earnings of your household.'
+            },
+            'current-savings': {
+                title: 'Current Retirement Savings',
+                body: 'Total current balances across all your 401(k), IRA, annuity, and personal investment accounts designated for retirement.'
+            },
+            'income-increase': {
+                title: 'Expected Income Increase',
+                body: 'The expected annual wage growth or promotion rate until retirement.'
+            },
+            'desired-income': {
+                title: 'Pre-Retirement Income Desired',
+                body: 'Percentage of your final working salary you aim to replace each year during retirement (typically between 70% and 85%). Must be between 40% and 160%.'
+            },
+            'years-income': {
+                title: 'Years of Retirement Income',
+                body: 'Number of years your nest egg needs to provide retirement income.'
+            },
+            'ror-before': {
+                title: 'Rate of Return Before Retirement',
+                body: 'Expected annual investment return on your savings before retirement.'
+            },
+            'ror-during': {
+                title: 'Rate of Return During Retirement',
+                body: 'Expected annual investment return on your savings during retirement.'
+            },
+            'inflation-rate': {
+                title: 'Expected Rate of Inflation',
+                body: 'Expected long-term annual inflation rate.'
+            },
+            'married': {
+                title: 'Married Status',
+                body: 'Check if you are married to include spousal Social Security adjustments (1.5x).'
+            },
+            'social-security': {
+                title: 'Include Social Security',
+                body: 'Check to include estimated Social Security benefits in your income streams.'
+            }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-curr-age', 'range-curr-age', false, false);
-            setupSync('inp-ret-age', 'range-ret-age', false, false);
-            setupSync('inp-hh-income', 'range-hh-income', false, true);
-            setupSync('inp-curr-savings', 'range-curr-savings', false, true);
-            setupSync('inp-exp-return', 'range-exp-return', true, false);
-            setupSync('inp-replacement-pct', 'range-replacement-pct', false, false);
+        function showHelp(topic) {
+            const info = helpContent[topic] || { title: 'Help Information', body: 'No additional details available.' };
+            document.getElementById('helpModalTitle').textContent = info.title;
+            document.getElementById('helpModalBody').innerHTML = `<p>${info.body}</p>`;
+            document.getElementById('helpModal').classList.add('show');
+        }
 
-            setupSync('inp-ret-return', 'range-ret-return', true, false);
-            setupSync('inp-inflation', 'range-inflation', true, false);
-            setupSync('inp-yrs-ret', 'range-yrs-ret', false, false);
+        // Social sharing
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('shareDropdown').classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('shareDropdown');
+            if (dropdown && !dropdown.contains(e.target) && e.target.id !== 'shareBtn') {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("How much do you need to retire? | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check out this How Much Do You Need to Retire calculator: ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+        }
+
+        // Synchronize inputs and sliders
+        function setupSync(inputId, rangeId, isCurrency = false, isPercent = false) {
+            const input = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+
+            if (!input || !range) return;
+
+            range.addEventListener('input', () => {
+                if (isCurrency) {
+                    input.value = formatCurrencyRound(range.value);
+                } else if (isPercent) {
+                    input.value = range.value + '%';
+                } else {
+                    input.value = range.value;
+                }
+                calculateNestEgg();
+            });
+
+            input.addEventListener('change', () => {
+                let val = 0;
+                if (isCurrency) {
+                    val = parseCurrency(input.value);
+                    input.value = formatCurrencyRound(val);
+                } else if (isPercent) {
+                    val = parsePercent(input.value);
+                    input.value = val + '%';
+                } else {
+                    val = parseFloat(input.value) || 0;
+                }
+                range.value = val;
+                calculateNestEgg();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-cur-age', 'range-cur-age');
+            setupSync('inp-retire-age', 'range-retire-age');
+            setupSync('inp-income', 'range-income', true);
+            setupSync('inp-savings', 'range-savings', true);
+            setupSync('inp-income-inc', 'range-income-inc', false, true);
+            setupSync('inp-desired-pct', 'range-desired-pct', false, true);
+            setupSync('inp-years-income', 'range-years-income');
+
+            setupSync('inp-ror-before', 'range-ror-before', false, true);
+            setupSync('inp-ror-during', 'range-ror-during', false, true);
+            setupSync('inp-inflation', 'range-inflation', false, true);
 
             calculateNestEgg();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

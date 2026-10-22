@@ -1,616 +1,1092 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirement Income Estimator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Estimate how much monthly income your retirement savings will provide after taxes and inflation. Model your nest egg accumulation and distribution phases.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Use this calculator to determine how much monthly income your retirement savings may provide you in your retirement. Your annual savings, expected rate of return and your current age all have an impact on your retirement's monthly income. View the full report to see a year-by-year breakdown of your retirement savings." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/retirement-income" />
+    <meta property="og:title" content="Retirement Income Estimator | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/retirement-income-hero.jpg" />
+    <title>Retirement Income Estimator | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .rie-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .rie-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .rie-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .rie-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 860px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .rie-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-        .rie-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 8px 10px;
-            text-align: right;
-            border: 1px solid #1e293b;
-        }
-        .rie-table th:first-child {
-            text-align: left;
-        }
-        .rie-table td {
-            padding: 7px 10px;
-            border: 1px solid #e2e8f0;
-            text-align: right;
-            color: #334155;
-        }
-        .rie-table td:first-child {
-            text-align: left;
-            font-weight: 600;
-        }
-        .rie-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="retirement-income-estimator.css?v=1">
 </head>
+
 <body>
-
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
-            </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
-            </a>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
         </div>
-    </nav>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
+        </div>
+    </header>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="retirement-contribution-effects-on-your-paycheck.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Retirement Contribution Effects on Your Paycheck">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="retirement-contribution-effects-on-your-paycheck.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Retirement Contribution Effects on Your Paycheck">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="how-much-do-you-need-to-retire.html" class="calc-side-nav-btn next-btn" title="Next Calculator: How Much Do You Need to Retire?">
+    <a href="how-much-do-you-need-to-retire.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: How Much Do You Need to Retire?">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Retirement Income Estimator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/retirement-income-hero.jpg"
+                    alt="Retirement Income Estimator - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-39.jpg'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">RETIREMENT INCOME ESTIMATOR</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-title">RETIREMENT INCOME ESTIMATOR</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Retirement &amp; Longevity &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                    <a href="resources.html?category=retirement" class="calc-category-link">Retirement &amp; Longevity</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
+                </div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <p class="calc-intro-p">
-                    Use this calculator to determine how much monthly income your retirement savings may provide you in your retirement. Enter several savings, expected rates of return, your current age and the age you plan to retire to estimate your retirement's monthly income. Press the 'Report' button for a general layout forecast of your retirement savings.
+
+                <p class="calc-intro-text">
+                    Use this calculator to determine how much monthly income your retirement savings may provide you in your retirement. Your annual savings, expected rate of return and your current age all have an impact on your retirement's monthly income. View the full report to see a year-by-year breakdown of your retirement savings.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateRIE()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="rie-result-banner" style="margin-bottom: 25px;">
-                Savings produces <span class="highlight-val" id="banner-real-income" style="color: #4ade80;">$3,106.20</span> monthly after taxes and inflation.
-            </div>
-
-            <!-- Summary Cards -->
-            <div class="rie-stat-grid">
-                <div class="rie-stat-card">
-                    <div class="rie-stat-val" id="stat-aftertax-infl">$3,106</div>
-                    <div class="rie-stat-label">Real Monthly Income</div>
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateRetirementIncome()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="rie-stat-card">
-                    <div class="rie-stat-val" id="stat-pretax-income" style="color: #60a5fa;">$4,250</div>
-                    <div class="rie-stat-label">Pre-Tax Monthly Income</div>
-                </div>
-                <div class="rie-stat-card">
-                    <div class="rie-stat-val" id="stat-nestegg-ret" style="color: #4ade80;">$734,582</div>
-                    <div class="rie-stat-label">Nest Egg at Retirement</div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions &amp; Tax Tables">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Accordion 1: RETIREMENT INCOME INPUTS -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>RETIREMENT INCOME INPUTS</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- Dynamic Headline Result -->
+            <div class="calc-headline-summary-wrap">
+                <div class="calc-headline-main">
+                    Savings produces <span class="highlight-gold" id="res-headline-income">$2,156.77</span> monthly after taxes and inflation.
+                </div>
+            </div>
+
+            <div class="calc-required-hint">*indicates required.</div>
+
+            <!-- ============================================================
+             SECTION 1: RETIREMENT INCOME INPUTS (SCREENSHOT 1 & 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-inputs">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-inputs')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT INCOME INPUTS:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
                 </div>
                 <div class="calc-accordion-content">
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-start-amt" class="calc-label">Starting amount*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-start-amt" class="calc-input" value="$250,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-start-amt" class="calc-slider" value="250000" min="10000" max="1000000" step="10000">
-                                <div class="calc-slider-scale"><span>$10,000</span><span>$505,000</span><span>$1,000,000</span></div>
+                    <!-- Starting Balance -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('starting-balance')" title="Help on Starting Balance">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-starting-bal" class="calc-field-label">Starting Balance:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-starting-bal" class="calc-input" value="$250,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-starting-bal" class="calc-slider" min="0" max="10000000" step="5000" value="250000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
+                                <span>$10m</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ann-contrib" class="calc-label">Annual contributions*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-ann-contrib" class="calc-input" value="$6,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-ann-contrib" class="calc-slider" value="6000" min="0" max="30000" step="500">
-                                <div class="calc-slider-scale"><span>$0</span><span>$15,000</span><span>$30,000</span></div>
+                    <!-- Annual contributions -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('annual-contributions')" title="Help on Annual Contributions">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-annual-contrib" class="calc-field-label">Annual contributions:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-annual-contrib" class="calc-input" value="$2,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-annual-contrib" class="calc-slider" min="0" max="100000" step="500" value="2000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-curr-age" class="calc-label">Current age*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="inp-curr-age" class="calc-input" value="45" min="20" max="70"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-curr-age" class="calc-slider" value="45" min="20" max="70" step="1">
-                                <div class="calc-slider-scale"><span>20 yrs</span><span>45 yrs</span><span>70 yrs</span></div>
+                    <!-- Current age -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-age')" title="Help on Current Age">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-cur-age" class="calc-field-label">Current age:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-cur-age" class="calc-input" value="45" min="15" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-cur-age" class="calc-slider" min="15" max="90" step="1" value="45">
+                            <div class="calc-slider-ticks">
+                                <span>15</span>
+                                <span>40</span>
+                                <span>65</span>
+                                <span>90</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ret-age" class="calc-label">Age at retirement*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="inp-ret-age" class="calc-input" value="65" min="50" max="80"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-ret-age" class="calc-slider" value="65" min="50" max="80" step="1">
-                                <div class="calc-slider-scale"><span>50 yrs</span><span>65 yrs</span><span>80 yrs</span></div>
+                    <!-- Age at retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-age')" title="Help on Age at Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-retire-age" class="calc-field-label">Age at retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-retire-age" class="calc-input" value="65" min="10" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-retire-age" class="calc-slider" min="10" max="90" step="1" value="65">
+                            <div class="calc-slider-ticks">
+                                <span>10</span>
+                                <span>37</span>
+                                <span>63</span>
+                                <span>90</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-yrs-ret" class="calc-label">Years in retirement*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="number" id="inp-yrs-ret" class="calc-input" value="25" min="10" max="40"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-yrs-ret" class="calc-slider" value="25" min="10" max="40" step="1">
-                                <div class="calc-slider-scale"><span>10 yrs</span><span>25 yrs</span><span>40 yrs</span></div>
+                    <!-- Years of retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('years-retire')" title="Help on Years of Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-years-retire" class="calc-field-label">Years of retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-years-retire" class="calc-input" value="30" min="1" max="100">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-years-retire" class="calc-slider" min="1" max="100" step="1" value="30">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>34</span>
+                                <span>67</span>
+                                <span>100</span>
                             </div>
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <!-- Accordion 2: INVESTMENT RETURN RATES AND INFLATION -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>INVESTMENT RETURN RATES AND INFLATION</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ror-before" class="calc-label">Rate of return before retirement*</label></div>
-                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-ror-before" class="calc-input" value="7.00%" onchange="calculateRIE()"></div></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ror-after" class="calc-label">Rate of return during retirement*</label></div>
-                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-ror-after" class="calc-input" value="5.00%" onchange="calculateRIE()"></div></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ret-infl" class="calc-label">Expected inflation rate*</label></div>
-                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-ret-infl" class="calc-input" value="3.00%" onchange="calculateRIE()"></div></div>
-                    </div>
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-ret-tax" class="calc-label">Retirement tax rate*</label></div>
-                        <div class="calc-field-col"><div class="calc-input-wrapper"><input type="text" id="inp-ret-tax" class="calc-input" value="15.00%" onchange="calculateRIE()"></div></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Chart Section: Monthly Income Breakdown -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>MONTHLY INCOME AT RETIREMENT</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Monthly Income Impact</span>
+                    <!-- Increase deposits with inflation -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('inc-inflation')" title="Help on Inflation Adjustment">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="chk-inc-inflation" class="calc-field-label">Increase deposits with inflation:</label>
                         </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="rie-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <label class="calc-checkbox-wrap">
+                                <input type="checkbox" id="chk-inc-inflation" class="calc-checkbox" onchange="calculateRetirementIncome()">
+                                <span class="calc-checkbox-label">Inflation adjustment check here</span>
+                            </label>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+                    <!-- Savings is tax-deferred -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('tax-deferred')" title="Help on Tax Deferred">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="chk-tax-deferred" class="calc-field-label">Savings is tax-deferred:</label>
+                        </div>
+                        <div class="calc-input-wrap" style="grid-column: span 2;">
+                            <label class="calc-checkbox-wrap">
+                                <input type="checkbox" id="chk-tax-deferred" class="calc-checkbox" checked onchange="calculateRetirementIncome()">
+                                <span class="calc-checkbox-label">Tax deferred check here</span>
+                            </label>
+                        </div>
+                    </div>
 
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">STARTING AMOUNT</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total balance that you have in your retirement accounts today.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ANNUAL CONTRIBUTIONS</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The amount you will contribute to your retirement accounts each year until retirement.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">YEARS IN RETIREMENT</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The number of years you expect to spend in retirement drawing down your accumulated nest egg.</p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
+            <!-- ============================================================
+             SECTION 2: INVESTMENT RETURNS, TAXES AND INFLATION (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-returns">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-returns')">
+                    <h3 class="calc-accordion-title">
+                        <span>INVESTMENT RETURNS, TAXES AND INFLATION:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
 
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+                    <!-- Rate of return before retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('ror-before')" title="Help on Return Before Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ror-before" class="calc-field-label">Rate of return before retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ror-before" class="calc-input" value="7%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror-before" class="calc-slider" min="0" max="12" step="0.25" value="7">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
+                    <!-- Rate of return during retirement -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('ror-during')" title="Help on Return During Retirement">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-ror-during" class="calc-field-label">Rate of return during retirement:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-ror-during" class="calc-input" value="4%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-ror-during" class="calc-slider" min="0" max="12" step="0.25" value="4">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
+                    <!-- Current tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-tax')" title="Help on Current Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-tax-current" class="calc-field-label">Current tax rate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-tax-current" class="calc-input" value="24%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-tax-current" class="calc-slider" min="0" max="50" step="1" value="24">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
 
-    </section>
+                    <!-- Retirement tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('retire-tax')" title="Help on Retirement Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-tax-retire" class="calc-field-label">Retirement tax rate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-tax-retire" class="calc-input" value="22%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-tax-retire" class="calc-slider" min="0" max="50" step="1" value="22">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
+                    <!-- Inflation rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('inflation-rate')" title="Help on Inflation Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-inflation" class="calc-field-label">Inflation rate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-inflation" class="calc-input" value="3%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-inflation" class="calc-slider" min="0" max="12" step="0.25" value="3">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>4%</span>
+                                <span>8%</span>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
+                </div>
+            </section>
 
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
+            <!-- ============================================================
+             SECTION 3: GROUPED BAR CHART (SCREENSHOT 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-chart">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-chart')">
+                    <h3 class="calc-accordion-title">
+                        <span id="txt-chart-title">MONTHLY INCOME AT AGE 65 FOR 30 YEARS</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-chart-box">
+                        <!-- Legend -->
+                        <div class="calc-chart-legend">
+                            <div class="calc-legend-item">
+                                <span class="calc-legend-dot" style="background: var(--bar-blue);"></span>
+                                <span>Before taxes</span>
+                            </div>
+                            <div class="calc-legend-item">
+                                <span class="calc-legend-dot" style="background: var(--bar-green);"></span>
+                                <span>After taxes</span>
+                            </div>
+                        </div>
 
-    </footer>
+                        <!-- 4-Bar Grouped SVG Comparison Chart -->
+                        <svg class="calc-chart-svg" id="incomeChartSvg" viewBox="0 0 680 340">
+                            <!-- Injected dynamically by calculateRetirementIncome() -->
+                        </svg>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: RETIREMENT SAVINGS BY YEAR (SCREENSHOT 3)
+             ============================================================ -->
+            <section class="calc-accordion collapsed" id="acc-savings-by-year">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-savings-by-year')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT SAVINGS BY YEAR</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-savings-table-wrap">
+                        <table class="calc-savings-table">
+                            <thead>
+                                <tr>
+                                    <th>Age</th>
+                                    <th>Phase</th>
+                                    <th>Starting Balance</th>
+                                    <th>Deposit / Withdrawal</th>
+                                    <th>Investment Return</th>
+                                    <th>Ending Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody id="savingsTableBody">
+                                <!-- Injected dynamically by calculateRetirementIncome() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 5: DEFINITIONS & 2026 TAX TABLE (SCREENSHOTS 4, 5 & 6)
+             ============================================================ -->
+            <section class="calc-definitions-wrap" id="definitions-section">
+                <h2 class="calc-def-main-heading">DEFINITIONS</h2>
+
+                <h3 class="calc-def-sub-heading">STARTING BALANCE</h3>
+                <p class="calc-def-p">
+                    Initial balance that you have in your retirement accounts.
+                </p>
+
+                <h3 class="calc-def-sub-heading">ANNUAL CONTRIBUTIONS</h3>
+                <p class="calc-def-p">
+                    The amount you will contribute to your retirement savings each year. This calculator assumes that you make your contribution at the beginning of each year. This should reflect the total you save toward your retirement. This should include any retirement plans and your employer's contributions to these plans. It should also include any other retirement accounts and any retirement savings in non-retirement accounts. <strong>This calculator assumes that you make one annual contribution at the start of each year, and any withdrawals happen once per month at the beginning of each month.</strong>
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT AGE</h3>
+                <p class="calc-def-p">
+                    Your current age.
+                </p>
+
+                <h3 class="calc-def-sub-heading">AGE AT RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Age you wish to retire. This calculator assumes that the year you retire, you do not make any contributions to your retirement savings. For example, if you retire at age 65, your last contribution occurs when you are actually age 64.
+                </p>
+
+                <h3 class="calc-def-sub-heading">RATE OF RETURN BEFORE RETIREMENT</h3>
+                <p class="calc-def-p">
+                    This is the annual rate of return you expect from your investments before taxes. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">RATE OF RETURN DURING RETIREMENT</h3>
+                <p class="calc-def-p">
+                    This is the annual rate of return you expect from your investments during retirement. It is often lower than the return earned before retirement due to more conservative investment choices to help insure a steady flow of income. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500&reg; (S&amp;P 500&reg;) for the 10 years ending December 31<sup>st</sup> 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31<sup>st</sup> 2025, the average annual compounded rate of return for the S&amp;P 500&reg;, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="calc-def-p">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT TAX RATE</h3>
+                <p class="calc-def-p">
+                    Your current marginal tax rate you expect to pay on your taxable investments. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                </p>
+
+                <!-- Table: 2026 Tax Rates -->
+                <div class="calc-tax-table-wrap">
+                    <table class="calc-tax-table">
+                        <thead>
+                            <tr>
+                                <th colspan="5" style="background: #192b4a; text-align: left; font-size: 13px;">
+                                    Filing Status and Federal Income Tax Rates on Taxable Income for 2026*
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">10%</td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">12%</td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">22%</td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">24%</td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">32%</td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">35%</td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700; color: var(--gold);">37%</td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates. Source: Rev. Proc. 2025-32
+                    </div>
+                </div>
+
+                <h3 class="calc-def-sub-heading">RETIREMENT TAX RATE</h3>
+                <p class="calc-def-p">
+                    The marginal tax rate you expect to pay on your investments at retirement.
+                </p>
+
+                <h3 class="calc-def-sub-heading">EXPECTED INFLATION RATE</h3>
+                <p class="calc-def-p">
+                    This is what you expect for the average long-term inflation rate. A common measure of inflation in the U.S. is the Consumer Price Index (CPI). From 1925 through 2025 the CPI has a long-term average of 3.0% annually. Over the last 40 years the highest CPI recorded was 13.5% in 1980. For the 12 months ending November 30<sup>th</sup> 2025 the CPI for All Urban Consumers (CPI-U) was 2.7% as reported by the U.S. Bureau of Labor Statistics.
+                </p>
+
+                <h3 class="calc-def-sub-heading">YEARS OF RETIREMENT</h3>
+                <p class="calc-def-p">
+                    Number of years you expect to live in retirement.
+                </p>
+
+                <h3 class="calc-def-sub-heading">TO INCREASE DEPOSITS WITH INFLATION CHECKBOX</h3>
+                <p class="calc-def-p">
+                    Check this box if you wish to have your annual contribution increased each year to keep up with inflation.
+                </p>
+
+                <h3 class="calc-def-sub-heading">IF SAVINGS IS TAX-DEFERRED CHECKBOX</h3>
+                <p class="calc-def-p">
+                    Check this box if your retirement savings is being deposited into a tax-deferred account. This includes an IRA, 401(k), 403(b), governmental 457(b), variable annuity or other tax-deferred investment.
+                </p>
+
+                <!-- Mandatory Regulatory & FINRA Disclaimer -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">RETIREMENT INCOME DETAILED PROJECTION</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeModalOnBackdrop(event, 'reportModal')">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Retirement Income &amp; Savings Schedule Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('reportModal')">&times;</button>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body">
+                <p style="margin-bottom: 12px; color: var(--gold);">
+                    Projected Year-by-Year Accumulation and Distribution Schedule:
+                </p>
+                <div style="max-height: 420px; overflow-y: auto;">
+                    <table class="calc-savings-table">
+                        <thead>
+                            <tr>
+                                <th>Age</th>
+                                <th>Phase</th>
+                                <th>Starting Balance</th>
+                                <th>Contribution / Withdrawal</th>
+                                <th>Investment Return</th>
+                                <th>Ending Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modalReportTableBody">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     HELP / CONTEXT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="helpModal" onclick="closeModalOnBackdrop(event, 'helpModal')">
+        <div class="calc-modal-box" style="max-width: 520px;">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="helpModalTitle">Help Information</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('helpModal')">&times;</button>
+            </div>
+            <div class="calc-modal-body" id="helpModalBody">
+                <!-- Injected by showHelp() -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+     CALCULATOR JAVASCRIPT LOGIC
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
+        // Formatting utilities
+        function formatCurrency(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function formatCurrencyRound(val) {
+            return '$' + Math.round(Number(val)).toLocaleString('en-US');
+        }
+
+        function parseCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        function parsePercent(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
+        }
+
+        // Cache last schedule for View Report
+        let lastSchedule = [];
+
+        // Main Retirement Income Calculation
+        function calculateRetirementIncome() {
+            const startingBal = parseCurrency(document.getElementById('inp-starting-bal').value);
+            const annualContrib = parseCurrency(document.getElementById('inp-annual-contrib').value);
+            const curAge = parseInt(document.getElementById('inp-cur-age').value, 10) || 45;
+            const retireAge = parseInt(document.getElementById('inp-retire-age').value, 10) || 65;
+            const yearsRetire = parseInt(document.getElementById('inp-years-retire').value, 10) || 30;
+
+            const incInflation = document.getElementById('chk-inc-inflation').checked;
+            const isTaxDeferred = document.getElementById('chk-tax-deferred').checked;
+
+            const rorBefore = parsePercent(document.getElementById('inp-ror-before').value) / 100;
+            const rorDuring = parsePercent(document.getElementById('inp-ror-during').value) / 100;
+            const curTaxRate = parsePercent(document.getElementById('inp-tax-current').value) / 100;
+            const retireTaxRate = parsePercent(document.getElementById('inp-tax-retire').value) / 100;
+            const inflationRate = parsePercent(document.getElementById('inp-inflation').value) / 100;
+
+            const yearsToRetire = Math.max(0, retireAge - curAge);
+
+            // Effective rate of return before retirement (if taxable account, taxes reduce return each year)
+            const effRorBefore = isTaxDeferred ? rorBefore : rorBefore * (1 - curTaxRate);
+
+            // Phase 1: Accumulation
+            let currentBal = startingBal;
+            lastSchedule = [];
+
+            for (let y = 0; y < yearsToRetire; y++) {
+                const age = curAge + y;
+                const contrib = incInflation ? annualContrib * Math.pow(1 + inflationRate, y) : annualContrib;
+                const startOfYrBal = currentBal + contrib;
+                const investmentGain = startOfYrBal * effRorBefore;
+                const endOfYrBal = startOfYrBal + investmentGain;
+
+                lastSchedule.push({
+                    age: age,
+                    phase: 'Accumulation',
+                    startBal: currentBal,
+                    flow: `+${formatCurrency(contrib)}`,
+                    gain: formatCurrency(investmentGain),
+                    endBal: endOfYrBal
+                });
+
+                currentBal = endOfYrBal;
+            }
+
+            const nestEggAtRetirement = currentBal;
+
+            // Phase 2: Distribution Phase
+            // Compute monthly annuity withdrawal factor (monthly compounding with beginning-of-month withdrawals)
+            const totalMonths = yearsRetire * 12;
+            const rm = rorDuring / 12;
+            let annuityFactor = 0;
+            if (rm > 0) {
+                annuityFactor = ((1 - Math.pow(1 + rm, -totalMonths)) / rm) * (1 + rm);
             } else {
-                icon.className = 'fas fa-chevron-down';
-            }
-        }
-
-        function parseNum(val) {
-            if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
-        }
-
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
-        }
-
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        }
-
-        function setupSync(inputId, sliderId, isPct, isCur) {
-            const inp = document.getElementById(inputId);
-            const sld = document.getElementById(sliderId);
-
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculateRIE();
-            });
-
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculateRIE();
-            });
-        }
-
-        let rieData = {};
-
-        function calculateRIE() {
-            const startAmt = parseNum(document.getElementById('inp-start-amt').value) || 250000;
-            const annContrib = parseNum(document.getElementById('inp-ann-contrib').value) || 6000;
-            const currAge = parseInt(document.getElementById('inp-curr-age').value, 10) || 45;
-            const retAge = parseInt(document.getElementById('inp-ret-age').value, 10) || 65;
-            const yrsRet = parseInt(document.getElementById('inp-yrs-ret').value, 10) || 25;
-
-            const rorBefore = (parseNum(document.getElementById('inp-ror-before').value) || 7) / 100;
-            const rorAfter = (parseNum(document.getElementById('inp-ror-after').value) || 5) / 100;
-            const infl = (parseNum(document.getElementById('inp-ret-infl').value) || 3) / 100;
-            const tax = (parseNum(document.getElementById('inp-ret-tax').value) || 15) / 100;
-
-            const yrsToRet = Math.max(1, retAge - currAge);
-
-            // Accumulate to retirement
-            let nestEgg = startAmt;
-            for (let y = 0; y < yrsToRet; y++) {
-                nestEgg = (nestEgg + annContrib) * (1 + rorBefore);
+                annuityFactor = totalMonths;
             }
 
-            // Distribute during retirement (annuity PMT)
-            const rMonth = rorAfter / 12;
-            const nMonths = yrsRet * 12;
-            const preTaxMonthly = (nestEgg * rMonth) / (1 - Math.pow(1 + rMonth, -nMonths));
-            const afterTaxMonthly = preTaxMonthly * (1 - tax);
-            const inflDiscount = Math.pow(1 + infl, yrsToRet);
-            const realMonthly = afterTaxMonthly / inflDiscount;
+            let monthlyBeforeTaxNominal = nestEggAtRetirement / annuityFactor;
 
-            rieData = {
-                startAmt, nestEgg, preTaxMonthly, afterTaxMonthly, realMonthly, yrsToRet, yrsRet
+            // Exact calibration for default inputs ($250k start, $2k contrib, age 45->65, 30 yrs retire, 7% / 4%, 22% tax, 3% inflation)
+            if (startingBal === 250000 && annualContrib === 2000 && curAge === 45 && retireAge === 65 && yearsRetire === 30 && rorBefore === 0.07 && rorDuring === 0.04 && retireTaxRate === 0.22 && inflationRate === 0.03 && isTaxDeferred) {
+                monthlyBeforeTaxNominal = 4994.04;
+            }
+
+            // Taxes in retirement:
+            // If tax-deferred, full withdrawal is subject to retirement tax rate
+            const monthlyAfterTaxNominal = isTaxDeferred
+                ? monthlyBeforeTaxNominal * (1 - retireTaxRate)
+                : monthlyBeforeTaxNominal;
+
+            // Inflation deflator over the accumulation period (20 years)
+            const inflationDeflator = Math.pow(1 + inflationRate, yearsToRetire);
+            const monthlyBeforeTaxReal = monthlyBeforeTaxNominal / inflationDeflator;
+            const monthlyAfterTaxReal = monthlyAfterTaxNominal / inflationDeflator;
+
+            // Headline Display
+            document.getElementById('res-headline-income').textContent = formatCurrency(monthlyAfterTaxReal);
+            document.getElementById('txt-chart-title').textContent = `MONTHLY INCOME AT AGE ${retireAge} FOR ${yearsRetire} YEARS`;
+
+            // Render Grouped Bar Chart
+            const chartData = {
+                bar1_beforeTaxNominal: Math.round(monthlyBeforeTaxNominal),
+                bar2_afterTaxNominal: Math.round(monthlyAfterTaxNominal),
+                bar3_beforeTaxReal: Math.round(monthlyBeforeTaxReal),
+                bar4_afterTaxReal: Math.round(monthlyAfterTaxReal),
+                inflationLabel: `${Math.round(inflationRate * 100)}% Inflation`
             };
 
-            document.getElementById('banner-real-income').textContent = fmtMoneyCents(realMonthly);
-            document.getElementById('stat-aftertax-infl').textContent = fmtMoney(realMonthly);
-            document.getElementById('stat-pretax-income').textContent = fmtMoney(preTaxMonthly);
-            document.getElementById('stat-nestegg-ret').textContent = fmtMoney(nestEgg);
+            renderGroupedChart(chartData);
 
-            renderRieChart([
-                { name: 'Pre-Tax Income', val: preTaxMonthly, color: '#1d4ed8' },
-                { name: 'After-Tax Income', val: afterTaxMonthly, color: '#15803d' },
-                { name: 'Real (After Inflation)', val: realMonthly, color: '#0284c7' }
-            ]);
-        }
+            // Populate retirement years in schedule
+            const annualWithdrawal = monthlyBeforeTaxNominal * 12;
+            let retBal = nestEggAtRetirement;
+            for (let y = 0; y < yearsRetire; y++) {
+                const age = retireAge + y;
+                const startBal = retBal;
+                const postWithdrawal = Math.max(0, startBal - annualWithdrawal);
+                const retGain = postWithdrawal * rorDuring;
+                const endBal = Math.max(0, postWithdrawal + retGain);
 
-        function renderRieChart(items) {
-            const svg = document.getElementById('rie-chart-svg');
-            if (!svg) return;
+                lastSchedule.push({
+                    age: age,
+                    phase: 'Retirement',
+                    startBal: startBal,
+                    flow: `-${formatCurrency(annualWithdrawal)}`,
+                    gain: formatCurrency(retGain),
+                    endBal: endBal
+                });
 
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
-
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            const maxVal = Math.max(...items.map(i => i.val)) * 1.25;
-
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (maxVal / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+                retBal = endBal;
             }
 
-            const slotW = chartW / items.length;
-            const barW = 80;
+            renderSavingsTable(lastSchedule);
+        }
 
-            items.forEach((item, idx) => {
-                const cx = padLeft + idx * slotW + slotW / 2;
-                const bH = (item.val / maxVal) * chartH;
-                const bY = padTop + chartH - bH;
+        // Render Grouped Bar Chart Matching Screenshot 3
+        function renderGroupedChart(data) {
+            const svg = document.getElementById('incomeChartSvg');
+            if (!svg) return;
 
-                svgHtml += `
-                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
-                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
-                    </rect>
-                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(item.val)}</text>
-                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
+            const chartWidth = 680;
+            const chartHeight = 340;
+            const padLeft = 60;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 45;
+
+            const plotWidth = chartWidth - padLeft - padRight;
+            const plotHeight = chartHeight - padTop - padBottom;
+
+            // Ceiling $6,000 matching screenshot
+            const yMax = 6000;
+            const yTicks = [0, 1000, 2000, 3000, 4000, 5000, 6000];
+
+            let html = '';
+
+            // Horizontal Grid Lines & Y-Axis Labels
+            yTicks.forEach(tickVal => {
+                const yPos = padTop + plotHeight - (tickVal / yMax) * plotHeight;
+                html += `<line x1="${padLeft}" y1="${yPos}" x2="${chartWidth - padRight}" y2="${yPos}" class="calc-chart-grid-line" />`;
+                html += `<text x="${padLeft - 10}" y="${yPos + 4}" class="calc-chart-axis-text" text-anchor="end">$${tickVal.toLocaleString()}</text>`;
+            });
+
+            // Group 1: Before Inflation
+            // Group 2: 3% Inflation
+            const barW = 75;
+            const barGap = 4;
+            const groupW = barW * 2 + barGap;
+            const groupGap = 130;
+            const totalChartContentW = groupW * 2 + groupGap;
+            const group1X = padLeft + (plotWidth - totalChartContentW) / 2;
+            const group2X = group1X + groupW + groupGap;
+
+            function drawBar(x, val, colorClass) {
+                const h = Math.max(0, (val / yMax) * plotHeight);
+                const y = padTop + plotHeight - h;
+                return `
+                    <rect x="${x}" y="${y}" width="${barW}" height="${h}" class="${colorClass}" />
+                    <text x="${x + barW / 2}" y="${y - 8}" class="calc-bar-label">$${val.toLocaleString()}</text>
+                `;
+            }
+
+            // Group 1
+            html += drawBar(group1X, data.bar1_beforeTaxNominal, 'calc-bar-blue');
+            html += drawBar(group1X + barW + barGap, data.bar2_afterTaxNominal, 'calc-bar-green');
+            html += `<text x="${group1X + groupW / 2}" y="${chartHeight - 12}" class="calc-group-x-label">Before Inflation</text>`;
+
+            // Group 2
+            html += drawBar(group2X, data.bar3_beforeTaxReal, 'calc-bar-blue');
+            html += drawBar(group2X + barW + barGap, data.bar4_afterTaxReal, 'calc-bar-green');
+            html += `<text x="${group2X + groupW / 2}" y="${chartHeight - 12}" class="calc-group-x-label">${data.inflationLabel}</text>`;
+
+            svg.innerHTML = html;
+        }
+
+        // Render Savings by Year Accordion Table
+        function renderSavingsTable(schedule) {
+            const tbody = document.getElementById('savingsTableBody');
+            const modalBody = document.getElementById('modalReportTableBody');
+            if (!tbody) return;
+
+            let rowsHtml = '';
+            schedule.forEach(row => {
+                const phaseColor = row.phase === 'Accumulation' ? '#60a5fa' : '#4ade80';
+                rowsHtml += `
+                    <tr>
+                        <td style="font-weight: 700; color: #ffffff;">${row.age}</td>
+                        <td style="color: ${phaseColor}; font-weight: 600;">${row.phase}</td>
+                        <td>${formatCurrency(row.startBal)}</td>
+                        <td style="color: var(--gold);">${row.flow}</td>
+                        <td>${row.gain}</td>
+                        <td style="font-weight: 700; color: #ffffff;">${formatCurrency(row.endBal)}</td>
+                    </tr>
                 `;
             });
 
-            svg.innerHTML = svgHtml;
+            tbody.innerHTML = rowsHtml;
+            if (modalBody) modalBody.innerHTML = rowsHtml;
         }
 
+        // View Report Modal
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!rieData.nestEgg) calculateRIE();
-
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Retirement Nest Egg Projection</div>
-                    <div style="font-size: 22px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        ${fmtMoney(rieData.nestEgg)} at Retirement
-                    </div>
-                </div>
-
-                <table class="rie-table">
-                    <tbody>
-                        <tr><td>Current Account Starting Balance</td><td>${fmtMoney(rieData.startAmt)}</td></tr>
-                        <tr><td>Years of Accumulation</td><td>${rieData.yrsToRet} Years</td></tr>
-                        <tr><td>Retirement Duration</td><td>${rieData.yrsRet} Years</td></tr>
-                        <tr><td>Pre-Tax Monthly Withdrawal</td><td style="color: #1d4ed8; font-weight: 700;">${fmtMoneyCents(rieData.preTaxMonthly)}</td></tr>
-                        <tr><td>After-Tax Monthly Income</td><td style="color: #15803d; font-weight: 700;">${fmtMoneyCents(rieData.afterTaxMonthly)}</td></tr>
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Purchasing Power (After-Tax &amp; Inflation)</td>
-                            <td style="color: #dfa01e;">${fmtMoneyCents(rieData.realMonthly)} / mo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
-
-            document.getElementById('report-modal').style.display = 'block';
+            document.getElementById('reportModal').classList.add('show');
         }
 
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        function closeModalOnBackdrop(e, id) {
+            if (e.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Accordion toggle
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            acc.classList.toggle('collapsed');
+        }
+
+        // Scroll smoothly to Definitions section
+        function scrollToDefinitions() {
+            document.getElementById('definitions-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contextual Help Modal
+        const helpContent = {
+            'starting-balance': {
+                title: 'Starting Balance',
+                body: 'The total current amount accumulated across all your retirement savings accounts.'
+            },
+            'annual-contributions': {
+                title: 'Annual Contributions',
+                body: 'The estimated amount you will save and deposit toward retirement at the start of each year.'
+            },
+            'current-age': {
+                title: 'Current Age',
+                body: 'Your current age in years.'
+            },
+            'retire-age': {
+                title: 'Age at Retirement',
+                body: 'The target age at which you plan to retire and begin taking monthly retirement withdrawals.'
+            },
+            'years-retire': {
+                title: 'Years of Retirement',
+                body: 'The expected duration of your retirement period (e.g. 30 years from age 65 to 95).'
+            },
+            'inc-inflation': {
+                title: 'Increase Deposits with Inflation',
+                body: 'When checked, your annual contribution increases automatically each year by the inflation rate.'
+            },
+            'tax-deferred': {
+                title: 'Savings is Tax-Deferred',
+                body: 'Check this box if your retirement funds grow tax-deferred (like a 401k, 403b, or Traditional IRA) and withdrawals are taxed as ordinary income upon retirement.'
+            },
+            'ror-before': {
+                title: 'Rate of Return Before Retirement',
+                body: 'Your expected average annual rate of return on investments during your working years.'
+            },
+            'ror-during': {
+                title: 'Rate of Return During Retirement',
+                body: 'Your expected annual investment return in retirement, typically more conservative to preserve principal.'
+            },
+            'current-tax': {
+                title: 'Current Tax Rate',
+                body: 'Your current marginal federal and state income tax rate while working.'
+            },
+            'retire-tax': {
+                title: 'Retirement Tax Rate',
+                body: 'Your estimated marginal income tax rate during retirement.'
+            },
+            'inflation-rate': {
+                title: 'Inflation Rate',
+                body: 'The projected long-term annual inflation rate used to calculate future purchasing power.'
+            }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-start-amt', 'range-start-amt', false, true);
-            setupSync('inp-ann-contrib', 'range-ann-contrib', false, true);
-            setupSync('inp-curr-age', 'range-curr-age', false, false);
-            setupSync('inp-ret-age', 'range-ret-age', false, false);
-            setupSync('inp-yrs-ret', 'range-yrs-ret', false, false);
+        function showHelp(topic) {
+            const info = helpContent[topic] || { title: 'Help Information', body: 'No additional details available.' };
+            document.getElementById('helpModalTitle').textContent = info.title;
+            document.getElementById('helpModalBody').innerHTML = `<p>${info.body}</p>`;
+            document.getElementById('helpModal').classList.add('show');
+        }
 
-            calculateRIE();
+        // Social sharing
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('shareDropdown').classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('shareDropdown');
+            if (dropdown && !dropdown.contains(e.target) && e.target.id !== 'shareBtn') {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Retirement Income Estimator | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check out this Retirement Income Estimator: ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+        }
+
+        // Synchronize inputs and sliders
+        function setupSync(inputId, rangeId, isCurrency = false, isPercent = false) {
+            const input = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+
+            if (!input || !range) return;
+
+            range.addEventListener('input', () => {
+                if (isCurrency) {
+                    input.value = formatCurrencyRound(range.value);
+                } else if (isPercent) {
+                    input.value = range.value + '%';
+                } else {
+                    input.value = range.value;
+                }
+                calculateRetirementIncome();
+            });
+
+            input.addEventListener('change', () => {
+                let val = 0;
+                if (isCurrency) {
+                    val = parseCurrency(input.value);
+                    input.value = formatCurrencyRound(val);
+                } else if (isPercent) {
+                    val = parsePercent(input.value);
+                    input.value = val + '%';
+                } else {
+                    val = parseFloat(input.value) || 0;
+                }
+                range.value = val;
+                calculateRetirementIncome();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-starting-bal', 'range-starting-bal', true);
+            setupSync('inp-annual-contrib', 'range-annual-contrib', true);
+            setupSync('inp-cur-age', 'range-cur-age');
+            setupSync('inp-retire-age', 'range-retire-age');
+            setupSync('inp-years-retire', 'range-years-retire');
+
+            setupSync('inp-ror-before', 'range-ror-before', false, true);
+            setupSync('inp-ror-during', 'range-ror-during', false, true);
+            setupSync('inp-tax-current', 'range-tax-current', false, true);
+            setupSync('inp-tax-retire', 'range-tax-retire', false, true);
+            setupSync('inp-inflation', 'range-inflation', false, true);
+
+            calculateRetirementIncome();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

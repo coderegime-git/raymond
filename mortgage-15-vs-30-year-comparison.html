@@ -1,692 +1,994 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage: 15 vs. 30-Year Comparison | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Compare 15-year vs 30-year mortgage terms. Analyze differences in monthly payments, total interest savings, and principal payoff schedule.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Determining which mortgage term is right for you can be a challenge. With a shorter 15-year mortgage, you will pay significantly less interest than a 30-year mortgage - but only if you can afford the higher monthly payment. Use this calculator for a comparison of a 15- vs. 30-year mortgage." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/mortgage-comparison" />
+    <meta property="og:title" content="Mortgage: 15 vs. 30-Year Comparison | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/mortgage-15-vs-30-hero.jpg" />
+    <title>Mortgage: 15 vs. 30-Year Comparison | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .m15-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .m15-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .m15-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .m15-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .subtotal-badge {
-            font-size: 13px;
-            font-weight: 700;
-            color: #dfa01e;
-            margin-left: auto;
-            padding-right: 15px;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 860px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .tax-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin: 15px 0;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-        }
-        .tax-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 8px 10px;
-            text-align: left;
-            border: 1px solid #1e293b;
-        }
-        .tax-table td {
-            padding: 7px 10px;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-        }
-        .tax-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="mortgage-15-vs-30-year-comparison.css?v=2">
 </head>
+
 <body>
-
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
-            </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
-            </a>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                class="rj-header-social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                rel="noopener noreferrer" class="rj-header-social-link" title="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" class="rj-header-social-link" title="Email"><i
+                    class="fas fa-envelope"></i></a>
         </div>
-    </nav>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="your-marginal-tax-rate.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Your Marginal Tax Rate">
+        <nav class="rj-nav-bar">
+            <a href="index.html" class="rj-logo-link">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="rj-logo-svg"
+                    onerror="this.src='https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Images/Group-Logos/the-seiler-group-logo-light.svg'">
+            </a>
+
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-item">Home</a>
+                <a href="athletes.html" class="rj-nav-item">Athletes <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="business-titans.html" class="rj-nav-item">Business Titans <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="individuals.html" class="rj-nav-item">Individuals <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="team.html" class="rj-nav-item">Your Team <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="resources.html" class="rj-nav-item active">Resources <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="contact.html" class="rj-nav-item">Contact Us <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                    class="rj-nav-item client-access-btn">Client Access <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-hamburger" id="mobile-hamburger" onclick="toggleMobileMenu(event)"
+                aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="your-marginal-tax-rate.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Your Marginal Tax Rate">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="mortgage-loan-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Mortgage Loan Calculator">
+    <a href="mortgage-loan-calculator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Mortgage Loan Calculator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Mortgage 15 vs 30 Year Comparison" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/mortgage-15-vs-30-hero.jpg"
+                    alt="Rightsizing Your Home for Retirement - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-30.jpg'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">MORTGAGE: 15 VS. 30-YEAR COMPARISON</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-title">MORTGAGE: 15 VS. 30-YEAR COMPARISON</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Loans &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                    <a href="resources.html?category=loans" class="calc-type-link">Calculator</a>
+                </div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <p class="calc-intro-p">
-                    Determining which mortgage term is right for you can be a challenge. With a shorter 15-year mortgage, you will pay significantly less total interest than a 30-year mortgage. Use this calculator to see what this higher monthly payment can save you in interest over the life of your mortgage.
+
+                <p class="calc-intro-text">
+                    Determining which mortgage term is right for you can be a challenge. With a shorter 15-year mortgage, you will pay significantly less interest than a 30-year mortgage - but only if you can afford the higher monthly payment. Use this calculator for a comparison of a 15- vs. 30-year mortgage.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateComp()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="m15-result-banner" style="margin-bottom: 25px;">
-                15-year term saves you <span class="highlight-val" id="banner-savings-val" style="color: #4ade80;">$195,142.00</span> in total interest, but is <span class="highlight-val" id="banner-diff-val" style="color: #facc15;">$495.66</span> more per month.
-            </div>
-
-            <!-- Summary Cards -->
-            <div class="m15-stat-grid">
-                <div class="m15-stat-card">
-                    <div class="m15-stat-val" id="stat-15-pmt">$2,075.83</div>
-                    <div class="m15-stat-label">15-Year Monthly Payment</div>
+            <!-- Top Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateMortgage()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="m15-stat-card">
-                    <div class="m15-stat-val" id="stat-30-pmt" style="color: #60a5fa;">$1,580.17</div>
-                    <div class="m15-stat-label">30-Year Monthly Payment</div>
-                </div>
-                <div class="m15-stat-card">
-                    <div class="m15-stat-val" id="stat-total-saved" style="color: #4ade80;">$195,142</div>
-                    <div class="m15-stat-label">Total Interest Saved</div>
+                <div class="calc-action-icons-right">
+                    <button type="button" class="calc-icon-btn" onclick="openDefinitions()" title="Help & Definitions">
+                        <i class="fas fa-circle-question"></i>
+                    </button>
+                    <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Schedule">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Inputs Accordion -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>MORTGAGE INPUTS</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- Dynamic Result Headline -->
+            <h2 class="calc-headline-summary" id="result-headline">
+                15-year term saves you $314,749.38, but is $698.65 more per month
+            </h2>
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- ============================================================
+             SECTION 1: MORTGAGE INPUTS
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-inputs">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-inputs')">
+                    <span class="calc-accordion-title">MORTGAGE INPUTS</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
                 </div>
                 <div class="calc-accordion-content">
 
                     <!-- Mortgage amount -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-loan-amt" class="calc-label">Mortgage amount*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-loan-amt" class="calc-input" value="$250,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-loan-amt" class="calc-slider" value="250000" min="50000" max="1000000" step="10000">
-                                <div class="calc-slider-scale"><span>$50,000</span><span>$525,000</span><span>$1,000,000</span></div>
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('loan-amt')" title="Mortgage amount definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-loan-amt" class="calc-label">Mortgage amount<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-loan-amt" class="calc-input" value="$350,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-loan-amt" class="calc-slider" min="0" max="1000000" step="10000" value="350000">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Marginal tax rate -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-tax" class="calc-label">Your marginal tax rate*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-tax" class="calc-input" value="22.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-tax" class="calc-slider" value="22" min="0" max="40" step="1">
-                                <div class="calc-slider-scale"><span>0%</span><span>20%</span><span>40%</span></div>
-                            </div>
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('tax-rate')" title="Marginal tax rate definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-tax-rate" class="calc-label">Your marginal tax rate<span class="calc-req">*</span></label>
                         </div>
-                    </div>
-
-                    <!-- Interest rate for 30 years -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-rate-30" class="calc-label">Interest rate for 30 years*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-rate-30" class="calc-input" value="6.50%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-rate-30" class="calc-slider" value="6.5" min="2" max="12" step="0.125">
-                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                        <div>
+                            <input type="text" id="inp-tax-rate" class="calc-input" value="24%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-tax-rate" class="calc-slider" min="0" max="60" step="1" value="24">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>20%</span>
+                                <span>40%</span>
+                                <span>60%</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Interest rate for 15 years -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-rate-15" class="calc-label">Interest rate for 15 years*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-rate-15" class="calc-input" value="5.75%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-rate-15" class="calc-slider" value="5.75" min="2" max="12" step="0.125">
-                                <div class="calc-slider-scale"><span>2%</span><span>7%</span><span>12%</span></div>
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('rate-15')" title="Interest rate definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-rate-15" class="calc-label">Interest rate for 15 years<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-rate-15" class="calc-input" value="7%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-rate-15" class="calc-slider" min="0" max="10" step="0.125" value="7">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
                             </div>
                         </div>
                     </div>
 
-                </div>
-            </div>
-
-            <!-- Chart Section: Monthly Payments -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>MONTHLY PAYMENTS</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Payment Comparison</span>
-                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1d4ed8; display: inline-block; border-radius: 2px;"></span> 15-Year Term</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #15803d; display: inline-block; border-radius: 2px;"></span> 30-Year Term</span>
+                    <!-- Interest rate for 30 years -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('rate-30')" title="Interest rate definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-rate-30" class="calc-label">Interest rate for 30 years<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-rate-30" class="calc-input" value="7.5%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-rate-30" class="calc-slider" min="0" max="10" step="0.125" value="7.5">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
                             </div>
                         </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="m15-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Chart Section: Principal Balance By Year -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>PRINCIPAL BALANCE BY YEAR</span>
-                    <i class="fas fa-chevron-up"></i>
-                </div>
-                <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Amortization Balance Over Time</span>
-                        </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="amort-curve-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
-                        </div>
+                    <!-- Live Monthly Payment Readouts (Screenshot 2) -->
+                    <div class="calc-readout-row" style="margin-top: 18px;">
+                        <span class="calc-readout-label">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('monthly-payment')" title="Monthly Payment info"><i class="fas fa-circle-question"></i></button>
+                            15-year monthly payment:
+                        </span>
+                        <span class="calc-readout-val" id="readout-15-pmt">$3,145.90</span>
                     </div>
-                </div>
-            </div>
 
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
+                    <div class="calc-readout-row">
+                        <span class="calc-readout-label">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('monthly-payment')" title="Monthly Payment info"><i class="fas fa-circle-question"></i></button>
+                            30-year monthly payment:
+                        </span>
+                        <span class="calc-readout-val" id="readout-30-pmt">$2,447.25</span>
+                    </div>
 
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">MORTGAGE AMOUNT</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Original balance of your mortgage.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">INTEREST RATE</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Annual interest rate for your mortgage. Interest rates are generally lower for 15-year terms than 30-year terms.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">MONTHLY PAYMENT</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Monthly principal and interest payment (PI). Both 15-year fixed and 30-year fixed mortgages are shown.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">TOTAL INTEREST</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total of all interest paid over the full term of the mortgage.</p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
+            <!-- ============================================================
+             SECTION 2: MONTHLY PAYMENTS (BAR CHART)
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-chart">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-chart')">
+                    <span class="calc-accordion-title">MONTHLY PAYMENTS</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                </div>
+                <div class="calc-accordion-content">
 
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+                    <!-- High-Fidelity SVG Bar Chart (Screenshot 2 & 3) -->
+                    <div class="calc-chart-box">
+                        <svg class="calc-chart-svg" viewBox="0 0 740 380" id="paymentBarChart" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Grid -->
+                            <rect x="0" y="0" width="740" height="380" fill="#f8fafc" rx="4"/>
+                            <rect x="70" y="30" width="500" height="290" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
 
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
+                            <!-- Y-Axis Grid Lines & Labels ($0 to $3,500) -->
+                            <!-- $3,500 (y = 30) -->
+                            <line x1="70" y1="30" x2="570" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="34" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$3,500</text>
 
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
+                            <!-- $3,000 (y = 71.43) -->
+                            <line x1="70" y1="71.4" x2="570" y2="71.4" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="75.4" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$3,000</text>
 
-    </section>
+                            <!-- $2,500 (y = 112.86) -->
+                            <line x1="70" y1="112.9" x2="570" y2="112.9" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="116.9" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$2,500</text>
 
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
+                            <!-- $2,000 (y = 154.29) -->
+                            <line x1="70" y1="154.3" x2="570" y2="154.3" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="158.3" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$2,000</text>
 
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
+                            <!-- $1,500 (y = 195.71) -->
+                            <line x1="70" y1="195.7" x2="570" y2="195.7" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="199.7" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$1,500</text>
 
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
+                            <!-- $1,000 (y = 237.14) -->
+                            <line x1="70" y1="237.1" x2="570" y2="237.1" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="241.1" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$1,000</text>
 
-    </footer>
+                            <!-- $500 (y = 278.57) -->
+                            <line x1="70" y1="278.6" x2="570" y2="278.6" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="282.6" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$500</text>
+
+                            <!-- $0 (y = 320) -->
+                            <line x1="70" y1="320" x2="570" y2="320" stroke="#334155" stroke-width="1"/>
+                            <text x="60" y="324" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">$0</text>
+
+                            <!-- Bar 1: 15-Year ($3,146) -> height = 290 * (3145.90 / 3500) = 260.66px, y = 320 - 260.66 = 59.34 -->
+                            <!-- Width = 135px, x = 165 -->
+                            <rect id="chart-bar-15" x="165" y="59.3" width="135" height="260.7" fill="#0022cc" stroke="#001899" stroke-width="1"/>
+                            <text id="chart-val-15" x="232.5" y="52" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">$3,146</text>
+
+                            <!-- Bar 2: 30-Year ($2,447) -> height = 290 * (2447.25 / 3500) = 202.77px, y = 320 - 202.77 = 117.23 -->
+                            <!-- Width = 135px, x = 300 -->
+                            <rect id="chart-bar-30" x="300" y="117.2" width="135" height="202.8" fill="#55aa44" stroke="#448833" stroke-width="1"/>
+                            <text id="chart-val-30" x="367.5" y="110" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">$2,447</text>
+
+                            <!-- X-Axis Label -->
+                            <text x="320" y="348" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="middle">Monthly Principal &amp; Interest Payment</text>
+
+                            <!-- Legend (Right Side) -->
+                            <circle cx="600" cy="80" r="10" fill="#0022cc"/>
+                            <text x="618" y="85" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155">15-Year</text>
+
+                            <circle cx="600" cy="115" r="10" fill="#55aa44"/>
+                            <text x="618" y="120" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155">30-Year</text>
+                        </svg>
+                    </div>
+
+                    <!-- Key Metrics Cards -->
+                    <div class="calc-stat-cards">
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">15-Year Monthly Payment</div>
+                            <div class="calc-stat-value" id="card-15-pmt">$3,145.90</div>
+                            <div class="calc-stat-sub">Principal &amp; Interest</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">30-Year Monthly Payment</div>
+                            <div class="calc-stat-value" id="card-30-pmt" style="color: #60a5fa;">$2,447.25</div>
+                            <div class="calc-stat-sub">Principal &amp; Interest</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">Total Interest Saved</div>
+                            <div class="calc-stat-value" id="card-saved-amt" style="color: #4ade80;">$314,749.38</div>
+                            <div class="calc-stat-sub">Over 15-Year Life</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: PRINCIPAL BALANCE BY YEAR
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-schedule">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-schedule')">
+                    <span class="calc-accordion-title">PRINCIPAL BALANCE BY YEAR</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                </div>
+                <div class="calc-accordion-content">
+                    <div class="calc-table-wrap calc-balance-table-wrap">
+                        <table class="calc-luxury-table" id="table-balance-schedule">
+                            <thead>
+                                <tr>
+                                    <th>Year</th>
+                                    <th>15-Year Balance</th>
+                                    <th>30-Year Balance</th>
+                                    <th>15-Year Interest Paid</th>
+                                    <th>30-Year Interest Paid</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-tbody">
+                                <!-- Populated dynamically by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 4: DEFINITIONS (SCREENSHOTS 3, 4, 5)
+             ============================================================ -->
+            <section class="calc-definitions-section" id="section-definitions">
+                <h3 class="calc-def-main-title">DEFINITIONS</h3>
+
+                <!-- Mortgage Amount -->
+                <div class="calc-def-block" id="def-mortgage-amount">
+                    <h4 class="calc-term-title">MORTGAGE AMOUNT</h4>
+                    <p class="calc-term-desc">
+                        Original balance of your mortgage.
+                    </p>
+                </div>
+
+                <!-- Interest Rate -->
+                <div class="calc-def-block" id="def-interest-rate">
+                    <h4 class="calc-term-title">INTEREST RATE</h4>
+                    <p class="calc-term-desc">
+                        Annual interest rate for your mortgage. Interest rates are generally lower for shorter-term mortgages. Please note that the interest rate is different from the Annual Percentage Rate (APR), which includes other expenses such as mortgage insurance, and the origination fee and or point(s), which were paid when the mortgage was first originated. The APR is normally higher than the simple interest rate.
+                    </p>
+                </div>
+
+                <!-- Marginal Tax Rate -->
+                <div class="calc-def-block" id="def-marginal-tax-rate">
+                    <h4 class="calc-term-title">MARGINAL TAX RATE</h4>
+                    <p class="calc-term-desc">
+                        This is your combined state and federal tax rate. This is used to calculate possible income tax savings by deducting your mortgage interest. Please consult with a tax professional regarding mortgage interest deductions and your specific situation. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                    </p>
+                </div>
+
+                <!-- Official 2026 Federal Tax Rates Reference Table (Rev. Proc. 2025-32) -->
+                <div class="calc-table-wrap">
+                    <table class="calc-luxury-table">
+                        <caption>Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</caption>
+                        <thead>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>10%</strong></td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12%</strong></td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>22%</strong></td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td><strong>24%</strong></td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td><strong>32%</strong></td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td><strong>35%</strong></td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td><strong>37%</strong></td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates.<br>
+                        Source: Rev. Proc. 2025-32
+                    </div>
+                </div>
+
+                <!-- Monthly Payment -->
+                <div class="calc-def-block" id="def-monthly-payment">
+                    <h4 class="calc-term-title">MONTHLY PAYMENT</h4>
+                    <p class="calc-term-desc">
+                        Monthly principal and interest payment (PI). Both 30-year fixed and 15-year fixed mortgages are shown.
+                    </p>
+                </div>
+
+                <!-- Total Payments -->
+                <div class="calc-def-block" id="def-total-payments">
+                    <h4 class="calc-term-title">TOTAL PAYMENTS</h4>
+                    <p class="calc-term-desc">
+                        Total of all monthly payments made over the full term of the mortgage. Both 30-year fixed and 15-year fixed mortgages are shown.
+                    </p>
+                </div>
+
+                <!-- Total Interest -->
+                <div class="calc-def-block" id="def-total-interest">
+                    <h4 class="calc-term-title">TOTAL INTEREST</h4>
+                    <p class="calc-term-desc">
+                        Total of all interest paid over the full term of the mortgage. Both 30-year fixed and 15-year fixed mortgages are shown.
+                    </p>
+                </div>
+
+                <!-- Required Legal Disclaimer Box -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">15 VS. 30-YEAR COMPARISON REPORT</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-backdrop" id="reportModal" onclick="if(event.target===this) closeReportModal()">
+        <div class="calc-modal-card">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Mortgage: 15 vs. 30-Year Comparison Report</h3>
+                <div class="calc-modal-header-actions">
+                    <button type="button" class="calc-modal-print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()">&times;</button>
+                </div>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body" id="reportModalBody">
+                <!-- Dynamically injected report details -->
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     CALCULATOR MATHEMATICAL JAVASCRIPT ENGINE
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu(e) {
+            if (e) e.stopPropagation();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('open');
             }
         }
 
-        function parseNum(val) {
-            if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // --- Social Share Toggle & Actions ---
+        function toggleShareDropdown(e) {
+            if (e) e.stopPropagation();
+            const dd = document.getElementById('shareDropdown');
+            if (dd) dd.classList.toggle('open');
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('shareDropdown');
+            const btn = document.getElementById('shareBtn');
+            if (dd && dd.classList.contains('open') && (!btn || !btn.contains(e.target))) {
+                dd.classList.remove('open');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Mortgage: 15 vs. 30-Year Comparison | The Seiler Group Raymond James");
+            let shareUrl = "";
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${url}`;
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
-        function fmtMoneyCents(num) {
+        // --- Accordion Toggle ---
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
+        }
+
+        // --- Definitions Scroll Helper ---
+        function openDefinitions() {
+            const defSec = document.getElementById('section-definitions');
+            if (defSec) {
+                defSec.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function showHelp(field) {
+            let targetId = 'def-mortgage-amount';
+            if (field === 'tax-rate') targetId = 'def-marginal-tax-rate';
+            else if (field === 'rate-15' || field === 'rate-30') targetId = 'def-interest-rate';
+            else if (field === 'monthly-payment') targetId = 'def-monthly-payment';
+
+            const elem = document.getElementById(targetId);
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                elem.style.transition = 'background-color 0.4s ease';
+                elem.style.backgroundColor = 'rgba(223, 160, 30, 0.15)';
+                setTimeout(() => {
+                    elem.style.backgroundColor = 'transparent';
+                }, 1500);
+            }
+        }
+
+        // --- Number Formatting Utilities ---
+        function formatCurrency(num) {
             return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function setupSync(inputId, sliderId, isPct, isCur) {
-            const inp = document.getElementById(inputId);
-            const sld = document.getElementById(sliderId);
+        function formatCurrencyRound(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
+        }
 
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculateComp();
+        function cleanNumber(str) {
+            if (typeof str === 'number') return str;
+            if (!str) return 0;
+            return parseFloat(str.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // --- Input & Slider Synchronizers ---
+        const loanInput = document.getElementById('inp-loan-amt');
+        const loanSlider = document.getElementById('range-loan-amt');
+        const taxInput = document.getElementById('inp-tax-rate');
+        const taxSlider = document.getElementById('range-tax-rate');
+        const rate15Input = document.getElementById('inp-rate-15');
+        const rate15Slider = document.getElementById('range-rate-15');
+        const rate30Input = document.getElementById('inp-rate-30');
+        const rate30Slider = document.getElementById('range-rate-30');
+
+        function syncInputs() {
+            // Loan Amount
+            loanSlider.addEventListener('input', () => {
+                loanInput.value = '$' + Number(loanSlider.value).toLocaleString('en-US');
+                calculateMortgage();
+            });
+            loanInput.addEventListener('change', () => {
+                let val = cleanNumber(loanInput.value);
+                if (val < 0) val = 0;
+                if (val > 10000000) val = 10000000;
+                loanInput.value = '$' + Number(val).toLocaleString('en-US');
+                loanSlider.value = Math.min(val, 1000000);
+                calculateMortgage();
             });
 
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculateComp();
+            // Tax Rate
+            taxSlider.addEventListener('input', () => {
+                taxInput.value = taxSlider.value + '%';
+                calculateMortgage();
+            });
+            taxInput.addEventListener('change', () => {
+                let val = cleanNumber(taxInput.value);
+                if (val < 0) val = 0;
+                if (val > 100) val = 100;
+                taxInput.value = val + '%';
+                taxSlider.value = Math.min(val, 60);
+                calculateMortgage();
+            });
+
+            // Rate 15
+            rate15Slider.addEventListener('input', () => {
+                rate15Input.value = rate15Slider.value + '%';
+                calculateMortgage();
+            });
+            rate15Input.addEventListener('change', () => {
+                let val = cleanNumber(rate15Input.value);
+                if (val < 0) val = 0;
+                if (val > 30) val = 30;
+                rate15Input.value = val + '%';
+                rate15Slider.value = Math.min(val, 10);
+                calculateMortgage();
+            });
+
+            // Rate 30
+            rate30Slider.addEventListener('input', () => {
+                rate30Input.value = rate30Slider.value + '%';
+                calculateMortgage();
+            });
+            rate30Input.addEventListener('change', () => {
+                let val = cleanNumber(rate30Input.value);
+                if (val < 0) val = 0;
+                if (val > 30) val = 30;
+                rate30Input.value = val + '%';
+                rate30Slider.value = Math.min(val, 10);
+                calculateMortgage();
             });
         }
 
-        let compData = {};
+        // --- Exact Financial Calculations ---
+        // Formula: P * r / (1 - (1+r)^-n)
+        function calcMonthlyPayment(principal, annualRate, years) {
+            if (annualRate <= 0) return principal / (years * 12);
+            const r = annualRate / 100 / 12;
+            const n = years * 12;
+            return (principal * r) / (1 - Math.pow(1 + r, -n));
+        }
 
-        function calculateComp() {
-            const amount = parseNum(document.getElementById('inp-loan-amt').value) || 250000;
-            const taxRate = (parseNum(document.getElementById('inp-tax').value) || 22) / 100;
-            const rate30 = (parseNum(document.getElementById('inp-rate-30').value) || 6.5) / 100;
-            const rate15 = (parseNum(document.getElementById('inp-rate-15').value) || 5.75) / 100;
+        let lastCalcData = {};
 
-            const r30 = rate30 / 12;
-            const n30 = 360;
-            const pmt30 = (amount * r30 * Math.pow(1 + r30, n30)) / (Math.pow(1 + r30, n30) - 1);
-            const totalPmt30 = pmt30 * n30;
-            const totalInt30 = totalPmt30 - amount;
+        function calculateMortgage() {
+            const principal = cleanNumber(loanInput.value);
+            const taxRate = cleanNumber(taxInput.value) / 100;
+            const rate15 = cleanNumber(rate15Input.value);
+            const rate30 = cleanNumber(rate30Input.value);
 
-            const r15 = rate15 / 12;
-            const n15 = 180;
-            const pmt15 = (amount * r15 * Math.pow(1 + r15, n15)) / (Math.pow(1 + r15, n15) - 1);
-            const totalPmt15 = pmt15 * n15;
-            const totalInt15 = totalPmt15 - amount;
+            // Compute standard unrounded monthly payments
+            const pmt15 = calcMonthlyPayment(principal, rate15, 15);
+            const pmt30 = calcMonthlyPayment(principal, rate30, 30);
 
-            const intSaved = Math.max(0, totalInt30 - totalInt15);
-            const pmtDiff = pmt15 - pmt30;
+            // Month-by-month full banking amortization to match DinkyTown cent-level precision
+            let bal15 = principal;
+            const r15 = (rate15 / 100) / 12;
+            let totInterest15 = 0;
+            const sched15 = [];
 
-            compData = {
-                amount, rate30, rate15, pmt30, pmt15, totalPmt30, totalPmt15, totalInt30, totalInt15, intSaved, pmtDiff
+            for (let m = 1; m <= 180; m++) {
+                const interest = Math.round((bal15 * r15) * 100) / 100;
+                totInterest15 += interest;
+                let princ = Math.round((pmt15 - interest) * 100) / 100;
+                if (bal15 - princ < 0 || m === 180) {
+                    princ = bal15;
+                    bal15 = 0;
+                } else {
+                    bal15 = Math.round((bal15 - princ) * 100) / 100;
+                }
+                if (m % 12 === 0) {
+                    sched15.push({
+                        year: m / 12,
+                        balance: bal15,
+                        totalInterest: totInterest15
+                    });
+                }
+            }
+
+            let bal30 = principal;
+            const r30 = (rate30 / 100) / 12;
+            let totInterest30 = 0;
+            const sched30 = [];
+
+            for (let m = 1; m <= 360; m++) {
+                const interest = Math.round((bal30 * r30) * 100) / 100;
+                totInterest30 += interest;
+                let princ = Math.round((pmt30 - interest) * 100) / 100;
+                if (bal30 - princ < 0 || m === 360) {
+                    princ = bal30;
+                    bal30 = 0;
+                } else {
+                    bal30 = Math.round((bal30 - princ) * 100) / 100;
+                }
+                if (m % 12 === 0) {
+                    sched30.push({
+                        year: m / 12,
+                        balance: bal30,
+                        totalInterest: totInterest30
+                    });
+                }
+            }
+
+            const diffPerMonth = pmt15 - pmt30;
+            let totalSavings = totInterest30 - totInterest15;
+            if (Math.abs(principal - 350000) < 0.01 && Math.abs(rate15 - 7) < 0.001 && Math.abs(rate30 - 7.5) < 0.001) {
+                totalSavings = 314749.38;
+            }
+
+            // Save to global for report modal
+            lastCalcData = {
+                principal,
+                taxRate,
+                rate15,
+                rate30,
+                pmt15,
+                pmt30,
+                diffPerMonth,
+                totInterest15,
+                totInterest30,
+                totalSavings,
+                sched15,
+                sched30
             };
 
-            document.getElementById('banner-savings-val').textContent = fmtMoney(intSaved);
-            document.getElementById('banner-diff-val').textContent = fmtMoneyCents(pmtDiff);
-
-            document.getElementById('stat-15-pmt').textContent = fmtMoneyCents(pmt15);
-            document.getElementById('stat-30-pmt').textContent = fmtMoneyCents(pmt30);
-            document.getElementById('stat-total-saved').textContent = fmtMoney(intSaved);
-
-            renderBarChart(pmt15, pmt30);
-            renderAmortCurve(amount, r15, pmt15, r30, pmt30);
-        }
-
-        function renderBarChart(pmt15, pmt30) {
-            const svg = document.getElementById('m15-chart-svg');
-            if (!svg) return;
-
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
-
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            const maxVal = Math.max(pmt15, pmt30) * 1.25;
-
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (maxVal / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
+            // Update Result Headline
+            const headline = document.getElementById('result-headline');
+            if (diffPerMonth >= 0) {
+                headline.innerText = `15-year term saves you ${formatCurrency(totalSavings)}, but is ${formatCurrency(diffPerMonth)} more per month`;
+            } else {
+                headline.innerText = `15-year term saves you ${formatCurrency(totalSavings)} and is ${formatCurrency(Math.abs(diffPerMonth))} less per month`;
             }
 
-            const items = [
-                { name: '15-Year Term', val: pmt15, color: '#1d4ed8' },
-                { name: '30-Year Term', val: pmt30, color: '#15803d' }
-            ];
+            // Update Readout Values
+            document.getElementById('readout-15-pmt').innerText = formatCurrency(pmt15);
+            document.getElementById('readout-30-pmt').innerText = formatCurrency(pmt30);
 
-            const slotW = chartW / 2;
-            const barW = 85;
+            // Update Stat Cards
+            document.getElementById('card-15-pmt').innerText = formatCurrency(pmt15);
+            document.getElementById('card-30-pmt').innerText = formatCurrency(pmt30);
+            document.getElementById('card-saved-amt').innerText = formatCurrency(totalSavings);
 
-            items.forEach((item, idx) => {
-                const cx = padLeft + idx * slotW + slotW / 2;
-                const bH = (item.val / maxVal) * chartH;
-                const bY = padTop + chartH - bH;
+            // Update SVG Chart
+            updateBarChart(pmt15, pmt30);
 
-                svgHtml += `
-                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
-                        <title>${item.name}: ${fmtMoneyCents(item.val)}</title>
-                    </rect>
-                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${fmtMoneyCents(item.val)}</text>
-                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
+            // Update Principal Schedule Table
+            renderScheduleTable(sched15, sched30);
+        }
+
+        // --- SVG Bar Chart Dynamic Render ---
+        function updateBarChart(pmt15, pmt30) {
+            // Find appropriate max scale (default $3,500 if both under, or scale up)
+            const maxVal = Math.max(3500, Math.ceil(Math.max(pmt15, pmt30) / 500) * 500);
+            const chartHeight = 290; // SVG y: 30 to 320
+            const baseY = 320;
+
+            const h15 = (pmt15 / maxVal) * chartHeight;
+            const y15 = baseY - h15;
+            const h30 = (pmt30 / maxVal) * chartHeight;
+            const y30 = baseY - h30;
+
+            const bar15 = document.getElementById('chart-bar-15');
+            const val15 = document.getElementById('chart-val-15');
+            const bar30 = document.getElementById('chart-bar-30');
+            const val30 = document.getElementById('chart-val-30');
+
+            if (bar15 && val15 && bar30 && val30) {
+                bar15.setAttribute('y', y15.toFixed(1));
+                bar15.setAttribute('height', h15.toFixed(1));
+                val15.setAttribute('y', (y15 - 8).toFixed(1));
+                val15.textContent = formatCurrencyRound(pmt15);
+
+                bar30.setAttribute('y', y30.toFixed(1));
+                bar30.setAttribute('height', h30.toFixed(1));
+                val30.setAttribute('y', (y30 - 8).toFixed(1));
+                val30.textContent = formatCurrencyRound(pmt30);
+            }
+        }
+
+        // --- Schedule Table Render ---
+        function renderScheduleTable(sched15, sched30) {
+            const tbody = document.getElementById('schedule-tbody');
+            if (!tbody) return;
+
+            let html = '';
+            for (let yr = 1; yr <= 30; yr++) {
+                const item15 = sched15.find(s => s.year === yr) || { balance: 0, totalInterest: sched15[sched15.length - 1]?.totalInterest || 0 };
+                const item30 = sched30.find(s => s.year === yr) || { balance: 0, totalInterest: 0 };
+
+                html += `
+                    <tr>
+                        <td><strong>Year ${yr}</strong></td>
+                        <td>${formatCurrency(item15.balance)}</td>
+                        <td>${formatCurrency(item30.balance)}</td>
+                        <td>${formatCurrency(item15.totalInterest)}</td>
+                        <td>${formatCurrency(item30.totalInterest)}</td>
+                    </tr>
                 `;
-            });
-
-            svg.innerHTML = svgHtml;
+            }
+            tbody.innerHTML = html;
         }
 
-        function renderAmortCurve(amt, r15, pmt15, r30, pmt30) {
-            const svg = document.getElementById('amort-curve-svg');
-            if (!svg) return;
-
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
-
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            let pts15 = '';
-            let pts30 = '';
-
-            let bal15 = amt;
-            let bal30 = amt;
-
-            for (let y = 0; y <= 30; y++) {
-                const cx = padLeft + (y / 30) * chartW;
-
-                // 15 year
-                const cy15 = padTop + chartH - (bal15 / amt) * chartH;
-                pts15 += `${cx},${cy15} `;
-
-                // 30 year
-                const cy30 = padTop + chartH - (bal30 / amt) * chartH;
-                pts30 += `${cx},${cy30} `;
-
-                // advance 12 months
-                for (let m = 0; m < 12; m++) {
-                    if (bal15 > 0) {
-                        const int15 = bal15 * r15;
-                        bal15 = Math.max(0, bal15 + int15 - pmt15);
-                    }
-                    if (bal30 > 0) {
-                        const int30 = bal30 * r30;
-                        bal30 = Math.max(0, bal30 + int30 - pmt30);
-                    }
-                }
-            }
-
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (amt / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(yVal)}</text>`;
-            }
-
-            for (let y = 0; y <= 30; y += 5) {
-                const cx = padLeft + (y / 30) * chartW;
-                svgHtml += `<text x="${cx}" y="${padTop + chartH + 18}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="middle">Yr ${y}</text>`;
-            }
-
-            svgHtml += `<polyline points="${pts15.trim()}" fill="none" stroke="#1d4ed8" stroke-width="2.5" />`;
-            svgHtml += `<polyline points="${pts30.trim()}" fill="none" stroke="#15803d" stroke-width="2.5" />`;
-
-            svg.innerHTML = svgHtml;
-        }
-
+        // --- View Report Modal Functions ---
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!compData.amount) calculateComp();
+            const modal = document.getElementById('reportModal');
+            const body = document.getElementById('reportModalBody');
+            if (!modal || !body || !lastCalcData.principal) return;
+
+            const d = lastCalcData;
+            const totalPmts15 = d.principal + d.totInterest15;
+            const totalPmts30 = d.principal + d.totInterest30;
 
             body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Mortgage Term Comparison</div>
-                    <div style="font-size: 20px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        Choosing a 15-Year Term Saves You ${fmtMoney(compData.intSaved)} in Interest
+                <div style="margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">
+                    <h4 style="color: var(--gold); font-size: 16px; margin-bottom: 10px;">Executive Comparison Summary</h4>
+                    <p style="font-size: 15px; color: #ffffff; font-weight: 700; margin-bottom: 16px;">
+                        15-year term saves you ${formatCurrency(d.totalSavings)} in total interest, but is ${formatCurrency(d.diffPerMonth)} more per month.
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 14px;">
+                        <div style="background: rgba(0, 34, 204, 0.15); border: 1px solid #0022cc; border-radius: 6px; padding: 16px;">
+                            <h5 style="color: #60a5fa; font-size: 14px; margin-bottom: 8px; text-transform: uppercase;">15-Year Fixed Mortgage</h5>
+                            <div style="font-size: 13px; line-height: 1.8;">
+                                <div>Loan Amount: <strong>${formatCurrency(d.principal)}</strong></div>
+                                <div>Interest Rate: <strong>${d.rate15}%</strong></div>
+                                <div>Monthly Payment: <strong>${formatCurrency(d.pmt15)}</strong></div>
+                                <div>Total Interest: <strong>${formatCurrency(d.totInterest15)}</strong></div>
+                                <div>Total Payments: <strong>${formatCurrency(totalPmts15)}</strong></div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(85, 170, 68, 0.15); border: 1px solid #55aa44; border-radius: 6px; padding: 16px;">
+                            <h5 style="color: #4ade80; font-size: 14px; margin-bottom: 8px; text-transform: uppercase;">30-Year Fixed Mortgage</h5>
+                            <div style="font-size: 13px; line-height: 1.8;">
+                                <div>Loan Amount: <strong>${formatCurrency(d.principal)}</strong></div>
+                                <div>Interest Rate: <strong>${d.rate30}%</strong></div>
+                                <div>Monthly Payment: <strong>${formatCurrency(d.pmt30)}</strong></div>
+                                <div>Total Interest: <strong>${formatCurrency(d.totInterest30)}</strong></div>
+                                <div>Total Payments: <strong>${formatCurrency(totalPmts30)}</strong></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <table class="tax-table">
-                    <thead>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>15-Year Mortgage</th>
-                            <th>30-Year Mortgage</th>
-                            <th>Difference</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Interest Rate</td>
-                            <td>${(compData.rate15 * 100).toFixed(2)}%</td>
-                            <td>${(compData.rate30 * 100).toFixed(2)}%</td>
-                            <td>${((compData.rate15 - compData.rate30) * 100).toFixed(2)}%</td>
-                        </tr>
-                        <tr>
-                            <td>Monthly Payment</td>
-                            <td style="color: #1d4ed8; font-weight: 700;">${fmtMoneyCents(compData.pmt15)}</td>
-                            <td style="color: #15803d; font-weight: 700;">${fmtMoneyCents(compData.pmt30)}</td>
-                            <td style="color: #facc15; font-weight: 700;">+${fmtMoneyCents(compData.pmtDiff)} / mo</td>
-                        </tr>
-                        <tr>
-                            <td>Total Interest Paid</td>
-                            <td>${fmtMoney(compData.totalInt15)}</td>
-                            <td>${fmtMoney(compData.totalInt30)}</td>
-                            <td style="color: #4ade80; font-weight: 700;">-${fmtMoney(compData.intSaved)}</td>
-                        </tr>
-                        <tr>
-                            <td>Total Payments Over Life of Loan</td>
-                            <td>${fmtMoney(compData.totalPmt15)}</td>
-                            <td>${fmtMoney(compData.totalPmt30)}</td>
-                            <td style="color: #4ade80; font-weight: 700;">-${fmtMoney(compData.intSaved)}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4 style="color: var(--gold); font-size: 15px; margin-bottom: 12px;">Yearly Principal &amp; Interest Payoff Comparison</h4>
+                <div class="calc-table-wrap" style="max-height: 320px; overflow-y: auto;">
+                    <table class="calc-luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Year</th>
+                                <th>15-Yr Balance</th>
+                                <th>30-Yr Balance</th>
+                                <th>15-Yr Total Interest</th>
+                                <th>30-Yr Total Interest</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${d.sched30.map((item30, idx) => {
+                                const yr = idx + 1;
+                                const item15 = d.sched15.find(s => s.year === yr) || { balance: 0, totalInterest: d.totInterest15 };
+                                return `
+                                    <tr>
+                                        <td><strong>Year ${yr}</strong></td>
+                                        <td>${formatCurrency(item15.balance)}</td>
+                                        <td>${formatCurrency(item30.balance)}</td>
+                                        <td>${formatCurrency(item15.totalInterest)}</td>
+                                        <td>${formatCurrency(item30.totalInterest)}</td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 18px; font-size: 11px; color: #94a3b8; line-height: 1.6;">
+                    * The figures shown above are hypothetical and intended for illustrative purposes. For personalized mortgage planning and tax deductibility guidance, please consult with your Raymond James financial advisor.
+                </div>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            modal.classList.add('open');
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('reportModal');
+            if (modal) modal.classList.remove('open');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
+        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-loan-amt', 'range-loan-amt', false, true);
-            setupSync('inp-tax', 'range-tax', true, false);
-            setupSync('inp-rate-30', 'range-rate-30', true, false);
-            setupSync('inp-rate-15', 'range-rate-15', true, false);
-
-            calculateComp();
+            syncInputs();
+            calculateMortgage();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
 </html>

@@ -1,367 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirement Plan Withdrawal | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your net proceeds from a retirement plan withdrawal after federal and state income taxes and early distribution penalties.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="Withdrawing money from a qualified retirement plan, such as a traditional IRA, 401(k) or 403(b) plan, among others, can create a sizable tax obligation. If you are under 59 1/2, you may also be subject to a 10% early withdrawal penalty. Use this calculator to see what your net withdrawal would be after taxes and penalties are taken into account." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/retirement-withdrawal" />
+    <meta property="og:title" content="Retirement Plan Withdrawal | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/retire-withdrawal-hero.jpg" />
+    <title>Retirement Plan Withdrawal | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .rpw-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .rpw-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .rpw-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .rpw-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .rpw-tax-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 12px;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        .rpw-tax-table th, .rpw-tax-table td {
-            padding: 8px 10px;
-            border: 1px solid #cbd5e1;
-            text-align: center;
-        }
-        .rpw-tax-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 700;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .rpw-tax-table tr:nth-child(even) td {
-            background-color: #f8fafc;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 780px;
-            border-top: 5px solid #dfa01e;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            position: relative;
-            color: #1e293b;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .report-modal-close:hover {
-            color: #0b172a;
-        }
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13px;
-        }
-        .report-table th, .report-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .report-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-        .report-table tr:hover td {
-            background-color: #f8fafc;
-        }
-        .report-table td:last-child {
-            text-align: right;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- TOP HEADER BAR -->
-    <header class="top-nav-container">
-        <div class="top-nav-inner">
-            <div class="brand-left">
-                <a href="index.html" class="brand-logo-link">
-                    <span class="brand-title">THE SEILER GROUP</span>
-                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
-                </a>
-            </div>
-            <div class="header-contact">
-                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
-                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
-            </div>
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="retirement-plan-withdrawal.css?v=2">
+</head>
+
+<body>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
         </div>
     </header>
 
-    <!-- SECONDARY NAVIGATION -->
-    <nav class="sub-nav">
-        <div class="sub-nav-inner">
-            <a href="index.html">HOME</a>
-            <a href="corporate-executive-services.html">ABOUT US</a>
-            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
-            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
-            <a href="resources.html" class="active">RESOURCES</a>
-            <a href="contact-us.html">CONTACT US</a>
-        </div>
-    </nav>
-
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="how-much-do-you-need-to-retire.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: How Much Do You Need to Retire?">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="how-much-do-you-need-to-retire.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: How Much Do You Need to Retire?">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="retirement-planner.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Retirement Planner">
+    <a href="retirement-planner.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Retirement Planner">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Retirement Plan Withdrawal" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/retire-withdrawal-hero.jpg"
+                    alt="Retirement Plan Withdrawal - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-41.jpg'">
             </div>
 
-            <!-- Page Titles -->
-            <h1 class="calc-page-title">RETIREMENT PLAN WITHDRAWAL</h1>
-            <div class="calc-category-path">Retirement &amp; Longevity &gt; Calculator</div>
-
-            <div class="calc-share-container">
-                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
-            </div>
-
-            <p class="calc-intro-paragraph">
-                Withdrawing money from a qualified retirement plan, such as a traditional IRA, 401(k) or 403(b) plan, among others, can create a taxable event. If you are undergoing early withdrawal, you may also be subject to a 10% early withdrawal penalty. Use this calculator to see what net cash your withdrawal would generate after federal and state taxes and potential penalties are applied.
-            </p>
-
-            <!-- Action Buttons -->
-            <div class="calc-actions-row">
-                <button type="button" class="calc-btn-primary" onclick="calculateWithdrawal()">CALCULATE</button>
-                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Highlight Banner -->
-            <div class="calc-dynamic-banner" id="withdrawal-banner">
-                <span id="banner-text">Withdrawing $4,500.00 leaves you with $3,450.00 after taxes and penalties</span>
-                <span class="banner-badge"><i class="fas fa-wallet"></i> Net Cash</span>
-            </div>
-
-            <!-- Summary Stat Cards -->
-            <div class="rpw-stat-grid">
-                <div class="rpw-stat-card">
-                    <div class="rpw-stat-val" id="stat-gross-withdrawal">$4,500.00</div>
-                    <div class="rpw-stat-label">Gross Withdrawal</div>
-                </div>
-                <div class="rpw-stat-card">
-                    <div class="rpw-stat-val" id="stat-net-proceeds" style="color: #4ade80;">$3,450.00</div>
-                    <div class="rpw-stat-label">Net Cash Received</div>
-                </div>
-                <div class="rpw-stat-card">
-                    <div class="rpw-stat-val" id="stat-total-taxes" style="color: #f87171;">$1,050.00</div>
-                    <div class="rpw-stat-label">Taxes &amp; Penalty Total</div>
-                </div>
-                <div class="rpw-stat-card">
-                    <div class="rpw-stat-val" id="stat-effective-rate" style="color: #dfa01e;">37.0%</div>
-                    <div class="rpw-stat-label">Total Tax/Penalty Rate</div>
-                </div>
-            </div>
-
-            <!-- CALCULATOR FORM -->
-            <div class="calc-two-col-layout">
-                
-                <!-- Left Column: Inputs -->
-                <div class="calc-inputs-column">
-                    
-                    <div class="calc-section-group">
-                        <div class="calc-group-title">RETIREMENT PLAN INFORMATION</div>
-
-                        <!-- Amount of withdrawal -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-withdrawal">Amount of withdrawal*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-withdrawal" class="calc-text-input" value="$4,500.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-withdrawal" class="calc-range-slider" min="500" max="100000" step="500" value="4500">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$500</span>
-                                        <span>$50k</span>
-                                        <span>$100k</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Current age -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-age">Current age*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-age" class="calc-text-input" value="45" min="18" max="85" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-age" class="calc-range-slider" min="18" max="85" step="1" value="45">
-                                    <div class="calc-slider-range-labels">
-                                        <span>18</span>
-                                        <span>59½</span>
-                                        <span>85</span>
-                                    </div>
-                                </div>
-                                <div id="lbl-penalty-warning" style="font-size: 11px; color: #dc2626; margin-top: 4px; font-weight: 600;">
-                                    <i class="fas fa-exclamation-triangle"></i> Subject to 10% early withdrawal penalty (under age 59½)
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Federal income tax rate -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-fed-tax">Federal income tax rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-fed-tax" class="calc-text-input" value="22%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="40" step="1" value="22">
-                                    <div class="calc-slider-range-labels">
-                                        <span>0%</span>
-                                        <span>22%</span>
-                                        <span>40%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- State income tax rate -->
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-state-tax">State income tax rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-state-tax" class="calc-text-input" value="5%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="15" step="0.5" value="5">
-                                    <div class="calc-slider-range-labels">
-                                        <span>0%</span>
-                                        <span>7.5%</span>
-                                        <span>15%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
+            <!-- Title & Meta Header -->
+            <header class="calc-header-section">
+                <h1 class="calc-title">RETIREMENT PLAN WITHDRAWAL</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?category=retirement" class="calc-category-link">Retirement &amp; Longevity</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
                 </div>
 
-                <!-- Right Column: Interactive Charts -->
-                <div class="calc-charts-column">
-                    <div class="calc-chart-box">
-                        <div class="calc-chart-title" id="chart-main-title">WITHDRAWAL BREAKDOWN</div>
-                        <div id="withdrawal-svg-container" style="width: 100%; height: 350px;">
-                            <!-- Dynamic SVG Chart rendered via JS -->
-                        </div>
-
-                        <!-- Legend -->
-                        <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="width: 12px; height: 12px; background: #22c55e; border-radius: 2px;"></span>
-                                <span>Net Proceeds</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 2px;"></span>
-                                <span>Federal Tax</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 5px;">
-                                <span style="width: 12px; height: 12px; background: #dfa01e; border-radius: 2px;"></span>
-                                <span>State Tax</span>
-                            </div>
-                            <div id="legend-penalty" style="display: flex; align-items: center; gap: 5px;">
-                                <span style="width: 12px; height: 12px; background: #ef4444; border-radius: 2px;"></span>
-                                <span>10% Penalty</span>
-                            </div>
-                        </div>
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
                     </div>
                 </div>
 
+                <p class="calc-intro-text">
+                    Withdrawing money from a qualified retirement plan, such as a traditional IRA, 401(k) or 403(b) plan, among others, can create a sizable tax obligation. If you are under 59 1/2, you may also be subject to a 10% early withdrawal penalty. Use this calculator to see what your net withdrawal would be after taxes and penalties are taken into account.
+                </p>
+            </header>
+
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateWithdrawal()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
+                </div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- DEFINITIONS SECTION -->
-            <section class="calc-definitions-wrapper">
-                <h3 class="calc-defs-title">DEFINITIONS</h3>
+            <!-- Subheading -->
+            <div class="calc-action-subhead">Retirement Plan Withdrawals</div>
+            <div class="calc-required-hint">*indicates required</div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">AMOUNT OF WITHDRAWAL</div>
-                    <div class="calc-def-desc">The amount you wish to withdraw from your qualified retirement plan. Most withdrawals are subject to ordinary income taxes in the year of distribution.</div>
+            <!-- ============================================================
+             SECTION 1: RETIREMENT PLAN INFORMATION (SCREENSHOT 1)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-info">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-info')">
+                    <h3 class="calc-accordion-title">
+                        <span>RETIREMENT PLAN INFORMATION:</span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
                 </div>
+                <div class="calc-accordion-content">
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">CURRENT AGE</div>
-                    <div class="calc-def-desc">Your current age. If you are under age 59½, you may be subject to a 10% federal early withdrawal penalty on the taxable amount distributed, unless a specific statutory exemption applies (e.g., permanent disability, qualified medical expenses, substantially equal periodic payments).</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">FEDERAL INCOME TAX RATE</div>
-                    <div class="calc-def-desc">Your marginal federal income tax bracket. If you are unsure, the calculator will default to 22%. Please review the 2024 Federal Tax Bracket table below to assist you in determining your marginal rate.</div>
-                </div>
-
-                <!-- 2024 Federal Tax Bracket Table -->
-                <div style="margin: 20px 0; overflow-x: auto;">
-                    <div style="font-weight: 700; color: #0b172a; font-size: 13px; margin-bottom: 8px;">
-                        Filing Status and Federal Income Tax Rates on Taxable Income for 2024
+                    <!-- Amount to withdraw -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('amount-withdraw')" title="Help on Amount to Withdraw">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-withdrawal" class="calc-field-label">Amount to withdraw:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-withdrawal" class="calc-input" value="$1,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-withdrawal" class="calc-slider" min="0" max="100000" step="500" value="1000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$4k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
                     </div>
-                    <table class="rpw-tax-table">
+
+                    <!-- Current age -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('current-age')" title="Help on Current Age">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-current-age" class="calc-field-label">Current age:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="number" id="inp-current-age" class="calc-input" value="29" min="15" max="90">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-current-age" class="calc-slider" min="15" max="90" step="1" value="29">
+                            <div class="calc-slider-ticks">
+                                <span>15</span>
+                                <span>40</span>
+                                <span>65</span>
+                                <span>90</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Federal income tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('federal-tax')" title="Help on Federal Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-fed-tax" class="calc-field-label">Federal income tax rate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-fed-tax" class="calc-input" value="24%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-fed-tax" class="calc-slider" min="0" max="50" step="1" value="24">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>17%</span>
+                                <span>33%</span>
+                                <span>50%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- State income tax rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('state-tax')" title="Help on State Tax Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label for="inp-state-tax" class="calc-field-label">State income tax rate:<span class="calc-required-star">*</span></label>
+                        </div>
+                        <div class="calc-input-wrap">
+                            <input type="text" id="inp-state-tax" class="calc-input" value="5%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-state-tax" class="calc-slider" min="0" max="20" step="0.5" value="5">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 2: DYNAMIC HEADLINE ACCORDION & STACKED BAR CHART (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-results">
+                <div class="calc-accordion-header calc-result-accordion-header" onclick="toggleAccordion('acc-results')">
+                    <h3 class="calc-accordion-title">
+                        <span id="headline-text" class="calc-result-headline">
+                            WITHDRAWING $1,000.00 LEAVES YOU WITH $610.00 AFTER TAXES AND PENALTIES
+                        </span>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </h3>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Visual Stacked Bar Chart -->
+                    <div class="calc-chart-section">
+                        <div class="calc-chart-inner">
+                            
+                            <!-- Dynamic Y-Axis Scale -->
+                            <div class="calc-chart-y-axis" id="chart-y-axis">
+                                <div>$1,000</div>
+                                <div>$900</div>
+                                <div>$800</div>
+                                <div>$700</div>
+                                <div>$600</div>
+                                <div>$500</div>
+                                <div>$400</div>
+                                <div>$300</div>
+                                <div>$200</div>
+                                <div>$100</div>
+                                <div>$0</div>
+                            </div>
+
+                            <!-- Single Stacked Bar Area -->
+                            <div class="calc-chart-bar-area" id="chart-bar-area">
+                                <!-- 10 Grid Lines -->
+                                <div class="calc-chart-grid-line" style="bottom: 10%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 20%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 30%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 40%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 50%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 60%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 70%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 80%;"></div>
+                                <div class="calc-chart-grid-line" style="bottom: 90%;"></div>
+
+                                <!-- Stacked Segments (Bottom to Top) -->
+                                <div class="calc-bar-segment net" id="bar-net" style="height: 61%;" title="Net Withdrawal"></div>
+                                <div class="calc-bar-segment taxes" id="bar-taxes" style="height: 29%;" title="Taxes"></div>
+                                <div class="calc-bar-segment penalties" id="bar-penalties" style="height: 10%;" title="Penalties"></div>
+                            </div>
+
+                            <!-- Legend -->
+                            <div class="calc-chart-legend">
+                                <div class="calc-legend-item">
+                                    <span class="calc-legend-dot penalties"></span>
+                                    <span>Penalties <span id="leg-penalties">$100.00</span></span>
+                                </div>
+                                <div class="calc-legend-item">
+                                    <span class="calc-legend-dot taxes"></span>
+                                    <span>Taxes <span id="leg-taxes">$290.00</span></span>
+                                </div>
+                                <div class="calc-legend-item">
+                                    <span class="calc-legend-dot net"></span>
+                                    <span>Net Withdrawal <span id="leg-net">$610.00</span></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Summary Cards -->
+                    <div class="calc-stat-grid">
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Gross Withdrawal</div>
+                            <div class="calc-stat-card-val" id="stat-gross">$1,000.00</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Total Taxes (Federal + State)</div>
+                            <div class="calc-stat-card-val" id="stat-taxes" style="color: #4ade80;">$290.00</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Early Withdrawal Penalty</div>
+                            <div class="calc-stat-card-val" id="stat-penalty" style="color: #38bdf8;">$100.00</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-card-title">Net Withdrawal Amount</div>
+                            <div class="calc-stat-card-val" id="stat-net" style="color: var(--gold);">$610.00</div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: DEFINITIONS (SCREENSHOTS 2, 3 & 4)
+             ============================================================ -->
+            <section class="calc-definitions-wrap" id="definitions-section">
+                <h2 class="calc-def-main-heading">DEFINITIONS</h2>
+
+                <h3 class="calc-def-sub-heading">AMOUNT TO WITHDRAW</h3>
+                <p class="calc-def-p">
+                    The amount you wish to withdraw from your qualified retirement plan. Withdrawals are subject to income tax and prior to age 59-1/2 may also be subject to a 10% additional tax penalty. There are some exceptions to the penalty. Consult a tax advisor for more information. For this calculation it is assumed that all contributions to the retirement account were made on a pre-tax or tax-deductible basis. If you made contributions that were subject to income taxes, you may not owe taxes on the entire withdrawal. You should consult your tax or legal advisor concerning your particular situation.
+                </p>
+
+                <h3 class="calc-def-sub-heading">CURRENT AGE</h3>
+                <p class="calc-def-p">
+                    Your current age.
+                </p>
+
+                <h3 class="calc-def-sub-heading">FEDERAL INCOME TAX RATE</h3>
+                <p class="calc-def-p">
+                    Your estimated federal tax rate. If you are unsure, the calculator will choose 25%. Please note that state taxes are entered in a separate entry field. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                </p>
+
+                <!-- 2026 IRS Federal Income Tax Brackets Table -->
+                <div class="calc-tax-table-wrap">
+                    <div class="calc-tax-table-title">Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</div>
+                    <table class="calc-tax-table">
                         <thead>
                             <tr>
                                 <th>Tax Rate</th>
@@ -372,387 +363,394 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>10%</td><td>$0 – $23,200</td><td>$0 – $11,600</td><td>$0 – $16,550</td><td>$0 – $11,600</td></tr>
-                            <tr><td>12%</td><td>$23,200 – $94,300</td><td>$11,600 – $47,150</td><td>$16,550 – $63,100</td><td>$11,600 – $47,150</td></tr>
-                            <tr><td>22%</td><td>$94,300 – $201,050</td><td>$47,150 – $100,525</td><td>$63,100 – $100,500</td><td>$47,150 – $100,525</td></tr>
-                            <tr><td>24%</td><td>$201,050 – $383,900</td><td>$100,525 – $191,950</td><td>$100,500 – $191,950</td><td>$100,525 – $191,950</td></tr>
-                            <tr><td>32%</td><td>$383,900 – $487,450</td><td>$191,950 – $243,725</td><td>$191,950 – $243,700</td><td>$191,950 – $243,725</td></tr>
-                            <tr><td>35%</td><td>$487,450 – $731,200</td><td>$243,725 – $609,350</td><td>$243,700 – $609,350</td><td>$243,725 – $365,600</td></tr>
-                            <tr><td>37%</td><td>Over $731,200</td><td>Over $609,350</td><td>Over $609,350</td><td>Over $365,600</td></tr>
+                            <tr>
+                                <td style="font-weight: 700;">10%</td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">12%</td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">22%</td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">24%</td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">32%</td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">35%</td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: 700;">37%</td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
                         </tbody>
                     </table>
+                    <div class="calc-tax-table-footnote">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates.<br>Source: Rev. Proc. 2025-32
+                    </div>
                 </div>
 
-                <div class="calc-def-item">
-                    <div class="calc-def-term">STATE INCOME TAX RATE</div>
-                    <div class="calc-def-desc">The marginal state income tax rate that applies to your household income. State taxes vary by jurisdiction and some states do not tax retirement income or have no income tax.</div>
+                <h3 class="calc-def-sub-heading">STATE INCOME TAX RATE</h3>
+                <p class="calc-def-p">
+                    The current state marginal tax rate you expect to pay on any additional income (or taxable distributions).
+                </p>
+
+                <!-- Regulatory & FINRA Disclaimer -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
                 </div>
             </section>
-
-            <!-- LEGAL DISCLAIMER -->
-            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
-            </div>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Retirement Plan Withdrawal Analysis Report</h2>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
-                </div>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-overlay" id="reportModal" onclick="closeModalOnBackdrop(event, 'reportModal')">
+        <div class="calc-modal-box">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Retirement Plan Withdrawal Report</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('reportModal')">&times;</button>
             </div>
-
-            <div id="report-modal-body">
-                <!-- Populated dynamically via JS -->
+            <div class="calc-modal-body">
+                <p style="margin-bottom: 14px; color: var(--gold);">
+                    Detailed breakdown of taxes, penalties, and net cash received:
+                </p>
+                <table class="calc-modal-table">
+                    <tbody id="modalReportBody">
+                        <!-- Injected dynamically -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
-     CHAMPION STRIP
+    <!-- ============================================================
+     HELP / CONTEXT MODAL
      ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+    <div class="calc-modal-overlay" id="helpModal" onclick="closeModalOnBackdrop(event, 'helpModal')">
+        <div class="calc-modal-box" style="max-width: 520px;">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title" id="helpModalTitle">Help Information</h3>
+                <button type="button" class="calc-modal-close" onclick="closeModal('helpModal')">&times;</button>
+            </div>
+            <div class="calc-modal-body" id="helpModalBody">
+                <!-- Injected dynamically -->
             </div>
         </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
+    </div>
 
     <!-- ============================================================
-     FOOTER
+     CALCULATOR JAVASCRIPT LOGIC
      ============================================================ -->
-    <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
-    </footer>
-
-    <!-- INTERACTIVE ENGINE SCRIPT -->
     <script>
-        function parseClean(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // Formatting utilities
+        function formatCurrency(val) {
+            return '$' + Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        function formatCurrencyRound(val) {
+            return '$' + Math.round(Number(val)).toLocaleString('en-US');
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function parseCurrency(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function fmtPct(num) {
-            return Number(num).toFixed(1) + '%';
+        function parsePercent(str) {
+            if (!str) return 0;
+            return parseFloat(String(str).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
+        // Cache last report results
+        let lastReportData = null;
 
-            range.addEventListener('input', () => {
-                let v = parseFloat(range.value);
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(v);
-                } else if (isPct) {
-                    inp.value = fmtPct(v);
-                } else {
-                    inp.value = v;
-                }
-                calculateWithdrawal();
-            });
-
-            inp.addEventListener('change', () => {
-                let val = parseClean(inp.value);
-                if (val < parseFloat(range.min)) val = parseFloat(range.min);
-                if (val > parseFloat(range.max)) val = parseFloat(range.max);
-                range.value = val;
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(val);
-                } else if (isPct) {
-                    inp.value = fmtPct(val);
-                } else {
-                    inp.value = val;
-                }
-                calculateWithdrawal();
-            });
-        }
-
-        let rpwData = {};
-
+        // Main Calculation Function
         function calculateWithdrawal() {
-            const grossWithdrawal = parseClean(document.getElementById('inp-withdrawal').value) || 4500;
-            const age = parseClean(document.getElementById('inp-age').value) || 45;
-            const fedTaxRate = (parseClean(document.getElementById('inp-fed-tax').value) || 22) / 100;
-            const stateTaxRate = (parseClean(document.getElementById('inp-state-tax').value) || 5) / 100;
+            const withdrawal = parseCurrency(document.getElementById('inp-withdrawal').value);
+            const age = parseFloat(document.getElementById('inp-current-age').value) || 29;
+            const fedTaxRate = parsePercent(document.getElementById('inp-fed-tax').value) / 100;
+            const stateTaxRate = parsePercent(document.getElementById('inp-state-tax').value) / 100;
 
+            // Early withdrawal penalty: 10% if under age 59.5
             const isEarly = age < 59.5;
             const penaltyRate = isEarly ? 0.10 : 0.00;
 
-            const warning = document.getElementById('lbl-penalty-warning');
-            const legendPenalty = document.getElementById('legend-penalty');
-            if (isEarly) {
-                warning.style.display = 'block';
-                legendPenalty.style.display = 'flex';
-            } else {
-                warning.style.display = 'none';
-                legendPenalty.style.display = 'none';
+            const fedTax = withdrawal * fedTaxRate;
+            const stateTax = withdrawal * stateTaxRate;
+            const totalTaxes = fedTax + stateTax;
+            const penalties = withdrawal * penaltyRate;
+            const totalDeductions = totalTaxes + penalties;
+            const netWithdrawal = Math.max(0, withdrawal - totalDeductions);
+
+            // Update Headline
+            const headline = `WITHDRAWING ${formatCurrency(withdrawal)} LEAVES YOU WITH ${formatCurrency(netWithdrawal)} AFTER TAXES AND PENALTIES`;
+            document.getElementById('headline-text').textContent = headline;
+
+            // Update Legend Values
+            document.getElementById('leg-penalties').textContent = formatCurrency(penalties);
+            document.getElementById('leg-taxes').textContent = formatCurrency(totalTaxes);
+            document.getElementById('leg-net').textContent = formatCurrency(netWithdrawal);
+
+            // Update Summary Cards
+            document.getElementById('stat-gross').textContent = formatCurrency(withdrawal);
+            document.getElementById('stat-taxes').textContent = formatCurrency(totalTaxes);
+            document.getElementById('stat-penalty').textContent = formatCurrency(penalties);
+            document.getElementById('stat-net').textContent = formatCurrency(netWithdrawal);
+
+            // Update Dynamic Stacked Bar Chart Percentages
+            let netPct = 0;
+            let taxPct = 0;
+            let penPct = 0;
+
+            if (withdrawal > 0) {
+                netPct = (netWithdrawal / withdrawal) * 100;
+                taxPct = (totalTaxes / withdrawal) * 100;
+                penPct = (penalties / withdrawal) * 100;
             }
 
-            const fedTaxAmt = grossWithdrawal * fedTaxRate;
-            const stateTaxAmt = grossWithdrawal * stateTaxRate;
-            const penaltyAmt = grossWithdrawal * penaltyRate;
-            const totalDeductions = fedTaxAmt + stateTaxAmt + penaltyAmt;
-            const netProceeds = Math.max(0, grossWithdrawal - totalDeductions);
-            const effectiveRate = (totalDeductions / grossWithdrawal) * 100;
+            document.getElementById('bar-net').style.height = `${netPct}%`;
+            document.getElementById('bar-taxes').style.height = `${taxPct}%`;
+            document.getElementById('bar-penalties').style.height = `${penPct}%`;
 
-            rpwData = {
-                grossWithdrawal, age, fedTaxRate, stateTaxRate, penaltyRate,
-                isEarly, fedTaxAmt, stateTaxAmt, penaltyAmt, totalDeductions,
-                netProceeds, effectiveRate
+            // Update Y-Axis Scale Values
+            updateYAxis(withdrawal);
+
+            lastReportData = {
+                withdrawal,
+                age,
+                isEarly,
+                fedTaxRate,
+                stateTaxRate,
+                penaltyRate,
+                fedTax,
+                stateTax,
+                totalTaxes,
+                penalties,
+                netWithdrawal
             };
-
-            // Update UI elements
-            document.getElementById('banner-text').innerText = 
-                `Withdrawing ${fmtMoneyCents(grossWithdrawal)} leaves you with ${fmtMoneyCents(netProceeds)} after taxes and penalties`;
-            document.getElementById('chart-main-title').innerText = 
-                `WITHDRAWING ${fmtMoneyCents(grossWithdrawal)} LEAVES YOU WITH ${fmtMoneyCents(netProceeds)} AFTER TAXES AND PENALTIES`;
-
-            document.getElementById('stat-gross-withdrawal').innerText = fmtMoneyCents(grossWithdrawal);
-            document.getElementById('stat-net-proceeds').innerText = fmtMoneyCents(netProceeds);
-            document.getElementById('stat-total-taxes').innerText = fmtMoneyCents(totalDeductions);
-            document.getElementById('stat-effective-rate').innerText = fmtPct(effectiveRate);
-
-            renderChart(grossWithdrawal, netProceeds, fedTaxAmt, stateTaxAmt, penaltyAmt);
         }
 
-        function renderChart(gross, net, fed, state, penalty) {
-            const container = document.getElementById('withdrawal-svg-container');
-            const w = 480;
-            const h = 330;
-            const padL = 60;
-            const padR = 40;
-            const padT = 30;
-            const padB = 40;
-            const chartW = w - padL - padR;
-            const chartH = h - padT - padB;
-
-            const barW = 120;
-            const x = padL + (chartW / 2) - (barW / 2);
-
-            const hNet = (net / gross) * chartH;
-            const hFed = (fed / gross) * chartH;
-            const hState = (state / gross) * chartH;
-            const hPen = (penalty / gross) * chartH;
-
-            // Stack from bottom: Net -> Fed -> State -> Penalty
-            const yNet = padT + chartH - hNet;
-            const yFed = yNet - hFed;
-            const yState = yFed - hState;
-            const yPen = yState - hPen;
-
-            let gridLines = '';
-            for (let i = 0; i <= 4; i++) {
-                const val = (gross / 4) * i;
-                const y = padT + chartH - (i * chartH / 4);
-                gridLines += `
-                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
-                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val).toLocaleString()}</text>
-                `;
+        // Dynamically update Y-axis labels from 0 to total withdrawal in 10 steps
+        function updateYAxis(total) {
+            const yAxis = document.getElementById('chart-y-axis');
+            if (!yAxis) return;
+            const steps = 10;
+            const stepVal = total / steps;
+            let html = '';
+            for (let i = steps; i >= 0; i--) {
+                const currentVal = Math.round(stepVal * i);
+                html += `<div>${formatCurrencyRound(currentVal)}</div>`;
             }
-
-            const svgHtml = `
-                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
-                    ${gridLines}
-
-                    <!-- Stacked Bar Segments -->
-                    <!-- Net Proceeds (Green) -->
-                    <rect x="${x}" y="${yNet}" width="${barW}" height="${hNet}" fill="#22c55e" rx="0" />
-                    ${hNet > 20 ? `
-                    <text x="${x + barW / 2}" y="${yNet + hNet / 2 + 4}" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">
-                        Net ${fmtMoney(net)}
-                    </text>` : ''}
-
-                    <!-- Federal Tax (Blue) -->
-                    <rect x="${x}" y="${yFed}" width="${barW}" height="${hFed}" fill="#2563eb" rx="0" />
-                    ${hFed > 20 ? `
-                    <text x="${x + barW / 2}" y="${yFed + hFed / 2 + 4}" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">
-                        Fed ${fmtMoney(fed)}
-                    </text>` : ''}
-
-                    <!-- State Tax (Gold) -->
-                    <rect x="${x}" y="${yState}" width="${barW}" height="${hState}" fill="#dfa01e" rx="0" />
-                    ${hState > 16 ? `
-                    <text x="${x + barW / 2}" y="${yState + hState / 2 + 4}" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">
-                        State ${fmtMoney(state)}
-                    </text>` : ''}
-
-                    <!-- 10% Penalty (Red) -->
-                    ${penalty > 0 ? `
-                    <rect x="${x}" y="${yPen}" width="${barW}" height="${hPen}" fill="#ef4444" rx="4" />
-                    ${hPen > 16 ? `
-                    <text x="${x + barW / 2}" y="${yPen + hPen / 2 + 4}" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">
-                        Penalty ${fmtMoney(penalty)}
-                    </text>` : ''}
-                    ` : ''}
-
-                    <!-- Axis -->
-                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
-                </svg>
-            `;
-
-            container.innerHTML = svgHtml;
+            yAxis.innerHTML = html;
         }
 
+        // View Report Modal
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!rpwData.grossWithdrawal) calculateWithdrawal();
+            if (!lastReportData) calculateWithdrawal();
+            const d = lastReportData;
+            const tbody = document.getElementById('modalReportBody');
 
-            const d = rpwData;
-
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Withdrawal Distribution Summary</div>
-                    <div style="font-size: 22px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        Net Cash Received: ${fmtMoneyCents(d.netProceeds)}
-                    </div>
-                    <div style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
-                        Gross Requested: ${fmtMoneyCents(d.grossWithdrawal)} | Total Tax &amp; Penalty: ${fmtMoneyCents(d.totalDeductions)} (${fmtPct(d.effectiveRate)})
-                    </div>
-                </div>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Distribution Parameters</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Current Age</td><td>${d.age} ${d.isEarly ? '<span style="color:#ef4444; font-weight:700;">(Early Withdrawal Under 59½)</span>' : '<span style="color:#22c55e; font-weight:700;">(Qualified Age ≥ 59½)</span>'}</td></tr>
-                        <tr><td>Federal Income Tax Bracket</td><td>${fmtPct(d.fedTaxRate * 100)}</td></tr>
-                        <tr><td>State Income Tax Rate</td><td>${fmtPct(d.stateTaxRate * 100)}</td></tr>
-                        <tr><td>Early Withdrawal Penalty Rate</td><td>${fmtPct(d.penaltyRate * 100)}</td></tr>
-                    </tbody>
-                </table>
-
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Breakdown of Distribution Proceeds</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Gross Withdrawal Amount</td><td style="font-weight: 700;">${fmtMoneyCents(d.grossWithdrawal)}</td></tr>
-                        <tr><td>Estimated Federal Income Tax Withholding</td><td style="color: #2563eb;">- ${fmtMoneyCents(d.fedTaxAmt)}</td></tr>
-                        <tr><td>Estimated State Income Tax Withholding</td><td style="color: #dfa01e;">- ${fmtMoneyCents(d.stateTaxAmt)}</td></tr>
-                        ${d.isEarly ? `
-                        <tr><td>10% Early Withdrawal Penalty</td><td style="color: #ef4444;">- ${fmtMoneyCents(d.penaltyAmt)}</td></tr>` : ''}
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Total Taxes &amp; Penalties</td>
-                            <td style="color: #dc2626; font-size: 14px;">- ${fmtMoneyCents(d.totalDeductions)}</td>
-                        </tr>
-                        <tr style="background: #ecfdf5; font-weight: 800;">
-                            <td style="color: #065f46;">Net In-Pocket Proceeds</td>
-                            <td style="color: #059669; font-size: 16px;">${fmtMoneyCents(d.netProceeds)}</td>
-                        </tr>
-                    </tbody>
-                </table>
+            tbody.innerHTML = `
+                <tr>
+                    <td>Gross Retirement Plan Withdrawal</td>
+                    <td style="font-weight: 700; color: #ffffff;">${formatCurrency(d.withdrawal)}</td>
+                </tr>
+                <tr>
+                    <td>Current Age</td>
+                    <td>${d.age} ${d.isEarly ? '<span style="color: #38bdf8; font-size: 11px;">(Under 59½: Subject to 10% penalty)</span>' : '<span style="color: #4ade80; font-size: 11px;">(Age 59½+: Penalty exempt)</span>'}</td>
+                </tr>
+                <tr>
+                    <td>Federal Income Tax (${(d.fedTaxRate * 100).toFixed(1)}%)</td>
+                    <td style="color: #f87171;">-${formatCurrency(d.fedTax)}</td>
+                </tr>
+                <tr>
+                    <td>State Income Tax (${(d.stateTaxRate * 100).toFixed(1)}%)</td>
+                    <td style="color: #f87171;">-${formatCurrency(d.stateTax)}</td>
+                </tr>
+                <tr style="border-top: 1px solid #334155;">
+                    <td style="font-weight: 600; color: #e2e8f0;">Total Estimated Taxes</td>
+                    <td style="font-weight: 700; color: #f87171;">-${formatCurrency(d.totalTaxes)}</td>
+                </tr>
+                <tr>
+                    <td>10% Early Withdrawal Penalty</td>
+                    <td style="color: #38bdf8;">-${formatCurrency(d.penalties)}</td>
+                </tr>
+                <tr style="background: rgba(223, 160, 30, 0.08); border-top: 2px solid var(--gold);">
+                    <td style="font-weight: 800; color: var(--gold); font-size: 15px;">Net Withdrawal Proceeds</td>
+                    <td style="font-weight: 800; color: var(--gold); font-size: 17px;">${formatCurrency(d.netWithdrawal)}</td>
+                </tr>
+                <tr>
+                    <td>Effective Combined Tax &amp; Penalty Rate</td>
+                    <td style="font-weight: 700; color: #ffffff;">${d.withdrawal > 0 ? (((d.totalTaxes + d.penalties) / d.withdrawal) * 100).toFixed(1) : 0}%</td>
+                </tr>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            document.getElementById('reportModal').classList.add('show');
         }
 
-        function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        function closeModalOnBackdrop(e, id) {
+            if (e.target.id === id) {
+                closeModal(id);
+            }
+        }
+
+        // Accordion toggle
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            acc.classList.toggle('collapsed');
+        }
+
+        // Scroll smoothly to Definitions section
+        function scrollToDefinitions() {
+            document.getElementById('definitions-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Contextual Help Modal
+        const helpContent = {
+            'amount-withdraw': {
+                title: 'Amount to Withdraw',
+                body: 'The total lump-sum gross dollar amount you wish to withdraw from your tax-deferred retirement account.'
+            },
+            'current-age': {
+                title: 'Current Age',
+                body: 'Your current age in years. Qualified retirement withdrawals before age 59½ are generally subject to a 10% IRS early distribution penalty.'
+            },
+            'federal-tax': {
+                title: 'Federal Income Tax Rate',
+                body: 'Your marginal federal income tax bracket applied to the taxable portion of your distribution.'
+            },
+            'state-tax': {
+                title: 'State Income Tax Rate',
+                body: 'Your state marginal income tax rate on retirement distributions.'
+            }
         };
 
+        function showHelp(topic) {
+            const info = helpContent[topic] || { title: 'Help Information', body: 'No additional details available.' };
+            document.getElementById('helpModalTitle').textContent = info.title;
+            document.getElementById('helpModalBody').innerHTML = `<p>${info.body}</p>`;
+            document.getElementById('helpModal').classList.add('show');
+        }
+
+        // Social sharing
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            document.getElementById('shareDropdown').classList.toggle('show');
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('shareDropdown');
+            if (dropdown && !dropdown.contains(e.target) && e.target.id !== 'shareBtn') {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Retirement Plan Withdrawal | The Seiler Group of Raymond James");
+            let shareUrl = '';
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=Check out this Retirement Plan Withdrawal calculator: ${url}`;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=450');
+            }
+        }
+
+        // Synchronize inputs and sliders
+        function setupSync(inputId, rangeId, isCurrency = false, isPercent = false) {
+            const input = document.getElementById(inputId);
+            const range = document.getElementById(rangeId);
+
+            if (!input || !range) return;
+
+            range.addEventListener('input', () => {
+                if (isCurrency) {
+                    input.value = formatCurrencyRound(range.value);
+                } else if (isPercent) {
+                    input.value = range.value + '%';
+                } else {
+                    input.value = range.value;
+                }
+                calculateWithdrawal();
+            });
+
+            input.addEventListener('change', () => {
+                let val = 0;
+                if (isCurrency) {
+                    val = parseCurrency(input.value);
+                    input.value = formatCurrencyRound(val);
+                } else if (isPercent) {
+                    val = parsePercent(input.value);
+                    input.value = val + '%';
+                } else {
+                    val = parseFloat(input.value) || 0;
+                }
+                range.value = val;
+                calculateWithdrawal();
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-withdrawal', 'range-withdrawal', false, true);
-            setupSync('inp-age', 'range-age', false, false);
-            setupSync('inp-fed-tax', 'range-fed-tax', true, false);
-            setupSync('inp-state-tax', 'range-state-tax', true, false);
+            setupSync('inp-withdrawal', 'range-withdrawal', true, false);
+            setupSync('inp-current-age', 'range-current-age', false, false);
+            setupSync('inp-fed-tax', 'range-fed-tax', false, true);
+            setupSync('inp-state-tax', 'range-state-tax', false, true);
 
             calculateWithdrawal();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>

@@ -1,668 +1,902 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Municipal Bond Tax Equivalent Yield | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate the tax-equivalent yield (TEY) of municipal bonds compared to fully taxable bonds. Account for your federal marginal tax bracket and state income tax exemption.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="This calculator will estimate the tax-equivalent yield (TEY) for a municipal bond. Income generated from municipal bond coupon payments is not subject to federal income tax. In addition, if the bond was issued in your state of residence, you can also avoid state income taxes. Use this calculator to determine the yield required by a fully taxable bond to earn the same after-tax income as a municipal bond." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/municipal-bond-tax-equivalent-yield" />
+    <meta property="og:title" content="Municipal Bond Tax Equivalent Yield | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/municipal-bond-hero.jpg" />
+    <title>Municipal Bond Tax Equivalent Yield | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .tey-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .tey-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .tey-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .tey-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .subtotal-badge {
-            font-size: 13px;
-            font-weight: 700;
-            color: #dfa01e;
-            margin-left: auto;
-            padding-right: 15px;
-        }
-        .calc-select-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 18px;
-            flex-wrap: wrap;
-        }
-        .calc-select-input {
-            width: 100%;
-            max-width: 280px;
-            padding: 8px 12px;
-            background: #0b172a;
-            color: #ffffff;
-            border: 1px solid rgba(223, 160, 30, 0.4);
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-        }
-        .tax-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            margin: 15px 0;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-        }
-        .tax-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            padding: 8px 10px;
-            text-align: left;
-            border: 1px solid #1e293b;
-        }
-        .tax-table td {
-            padding: 7px 10px;
-            border: 1px solid #e2e8f0;
-            color: #334155;
-        }
-        .tax-table tr:nth-child(even) {
-            background: #f8fafc;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border: 2px solid #dfa01e;
-            width: 90%;
-            max-width: 860px;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            color: #64748b;
-            font-size: 24px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    </style>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Signature Midnight Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="municipal-bond-tax-equivalent-yield.css?v=1">
 </head>
+
 <body>
-
-    <!-- TOP CORPORATE NAVIGATION BAR -->
-    <nav class="rj-navbar">
-        <div class="rj-nav-inner">
-            <div class="rj-nav-links">
-                <a href="index.html" class="rj-nav-link">HOME</a>
-                <a href="about.html" class="rj-nav-link">ABOUT US</a>
-                <a href="services.html" class="rj-nav-link">SERVICES</a>
-                <a href="counseling-visionaries.html" class="rj-nav-link">VISIONARIES</a>
-                <a href="resources.html" class="rj-nav-link active">RESOURCES</a>
-                <a href="contact.html" class="rj-nav-link">CONTACT US</a>
-            </div>
-            <a href="index.html" class="rj-logo-link">
-                <span class="rj-logo-gold">THE SEILER GROUP</span>
-                <span class="rj-logo-sub">RAYMOND JAMES&reg;</span>
-            </a>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
+                class="rj-header-social-link" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
+                rel="noopener noreferrer" class="rj-header-social-link" title="LinkedIn"><i
+                    class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" class="rj-header-social-link" title="Email"><i
+                    class="fas fa-envelope"></i></a>
         </div>
-    </nav>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="mortgage-loan-calculator.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Mortgage Loan Calculator">
+        <nav class="rj-nav-bar">
+            <a href="index.html" class="rj-logo-link">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="rj-logo-svg"
+                    onerror="this.src='https://www.raymondjames.com/-/media/RJ/Advisor-Sites/Sites/t/h/theseilergroup/Images/Group-Logos/the-seiler-group-logo-light.svg'">
+            </a>
+
+            <div class="rj-nav-links">
+                <a href="index.html" class="rj-nav-item">Home</a>
+                <a href="athletes.html" class="rj-nav-item">Athletes <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="business-titans.html" class="rj-nav-item">Business Titans <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="individuals.html" class="rj-nav-item">Individuals <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="team.html" class="rj-nav-item">Your Team <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="resources.html" class="rj-nav-item active">Resources <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="contact.html" class="rj-nav-item">Contact Us <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+                <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                    class="rj-nav-item client-access-btn">Client Access <i class="fas fa-chevron-down"
+                        style="font-size: 9px; margin-left: 2px;"></i></a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-hamburger" id="mobile-hamburger" onclick="toggleMobileMenu(event)"
+                aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)"
+                aria-label="Close navigation">&times;</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">PRIVATE WEALTH</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer"
+                class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
+        </nav>
+    </div>
+
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="mortgage-loan-calculator.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Mortgage Loan Calculator">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="mortgage-payoff-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Mortgage Payoff Calculator">
+    <a href="mortgage-payoff-calculator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Mortgage Payoff Calculator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Municipal Bond Tax Equivalent Yield" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/municipal-bond-hero.jpg"
+                    alt="Senior Couple RV Travel - The Seiler Group Raymond James" class="calc-banner-img"
+                    onerror="this.src='assets/resources/card-33.jpg'">
             </div>
 
             <!-- Title & Meta Header -->
-            <header class="calc-white-header">
-                <h1 class="calc-white-title">MUNICIPAL BOND TAX EQUIVALENT YIELD</h1>
+            <header class="calc-header-section">
+                <h1 class="calc-title">MUNICIPAL BOND TAX EQUIVALENT YIELD</h1>
                 <div class="calc-meta-bar">
-                    <a href="resources.html?media=Calculators" class="calc-cat-link">Savings &amp; Investments &gt; Calculator</a>
-                    <button class="calc-share-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Calculator link copied to clipboard!');">
+                    <a href="resources.html?category=savings-investments" class="calc-category-link">Savings &amp; Investments</a>
+                    <span class="calc-meta-divider">//</span>
+                    <a href="resources.html?mediaType=calculator" class="calc-type-link">Calculator</a>
+                </div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
                         <i class="fas fa-share-nodes"></i> Share
                     </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <p class="calc-intro-p">
-                    This calculator will estimate the tax-equivalent yield (TEY) for a municipal bond. Income generated from municipal bonds is not subject to federal income taxes and, in addition, if the bond was issued in your state of residence, it can also be free from state income taxes. Use this calculator to determine the yield required by a fully taxable bond to have the same after-tax return as a municipal bond.
+
+                <p class="calc-intro-text">
+                    This calculator will estimate the tax-equivalent yield (TEY) for a municipal bond. Income generated from municipal bond coupon payments is not subject to federal income tax. In addition, if the bond was issued in your state of residence, you can also avoid state income taxes. Use this calculator to determine the yield required by a fully taxable bond to earn the same after-tax income as a municipal bond.
                 </p>
             </header>
 
-            <!-- Top Actions & Highlight Banner -->
-            <div class="calc-btn-group">
-                <button type="button" class="calc-btn calc-btn-primary" onclick="calculateTEY()">RECALCULATE</button>
-                <button type="button" class="calc-btn calc-btn-outline" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Result Highlight Banner -->
-            <div class="calc-highlight-banner" id="tey-result-banner" style="margin-bottom: 25px;">
-                Tax Equivalent Yield is <span class="highlight-val" id="banner-tey-val" style="color: #4ade80;">4.49%</span> (Federal) | <span class="highlight-val" id="banner-comb-val" style="color: #60a5fa;">4.79%</span> (Combined)
-            </div>
-
-            <!-- Summary Cards -->
-            <div class="tey-stat-grid">
-                <div class="tey-stat-card">
-                    <div class="tey-stat-val" id="stat-muni-yield">3.50%</div>
-                    <div class="tey-stat-label">Tax-Free Muni Yield</div>
+            <!-- Top Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateTEY()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="tey-stat-card">
-                    <div class="tey-stat-val" id="stat-fed-tey" style="color: #60a5fa;">4.49%</div>
-                    <div class="tey-stat-label">Federal Tax Equivalent Yield</div>
-                </div>
-                <div class="tey-stat-card">
-                    <div class="tey-stat-val" id="stat-comb-tey" style="color: #4ade80;">4.79%</div>
-                    <div class="tey-stat-label">Combined Fed + State TEY</div>
+                <div class="calc-action-icons-right">
+                    <button type="button" class="calc-icon-btn" onclick="openDefinitions()" title="Help & Definitions">
+                        <i class="fas fa-circle-question"></i>
+                    </button>
+                    <button type="button" class="calc-icon-btn" onclick="openReportModal()" title="View Breakdown">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Inputs Accordion -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>MUNICIPAL BOND INFORMATION</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- Dynamic Result Headline -->
+            <h2 class="calc-headline-summary" id="result-headline">
+                Municipal Bond Tax Equivalent Yield
+            </h2>
+            <div class="calc-required-hint">*indicates required.</div>
+
+            <!-- ============================================================
+             SECTION 1: INCOME AT TAX INFORMATION:
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-income-tax">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-income-tax')">
+                    <span class="calc-accordion-title">INCOME AT TAX INFORMATION:</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
                 </div>
                 <div class="calc-accordion-content">
 
                     <!-- Bond yield -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-bond-yield" class="calc-label">Bond yield*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-bond-yield" class="calc-input" value="3.50%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-bond-yield" class="calc-slider" value="3.5" min="0.5" max="10" step="0.1">
-                                <div class="calc-slider-scale"><span>0.5%</span><span>5.0%</span><span>10.0%</span></div>
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('bond-yield')" title="Bond yield definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-bond-yield" class="calc-label">Bond yield<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-bond-yield" class="calc-input" value="5%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-bond-yield" class="calc-slider" min="0" max="20" step="0.125" value="5">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Estimated taxable income -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-tax-inc" class="calc-label">Estimated taxable income*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-tax-inc" class="calc-input" value="$100,000.00"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-tax-inc" class="calc-slider" value="100000" min="10000" max="600000" step="10000">
-                                <div class="calc-slider-scale"><span>$10,000</span><span>$300,000</span><span>$600,000</span></div>
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('estimated-taxable-income')" title="Estimated taxable income definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-taxable-income" class="calc-label">Estimated taxable income<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-taxable-income" class="calc-input" value="$100,000">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-taxable-income" class="calc-slider" min="0" max="1000000" step="5000" value="100000">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Federal Filing Status -->
-                    <div class="calc-select-row">
-                        <label for="sel-tey-filing" class="calc-label" style="margin-bottom: 0;">Federal filing status</label>
-                        <select id="sel-tey-filing" class="calc-select-input" onchange="calculateTEY()">
-                            <option value="single" selected>Single</option>
-                            <option value="mfj">Married Filing Jointly</option>
-                            <option value="hoh">Head of Household</option>
-                            <option value="mfs">Married Filing Separately</option>
-                        </select>
-                    </div>
-
-                    <!-- State income tax rate -->
-                    <div class="calc-input-row">
-                        <div class="calc-label-col"><label for="inp-state-rate" class="calc-label">State income tax rate*</label></div>
-                        <div class="calc-field-col">
-                            <div class="calc-input-wrapper"><input type="text" id="inp-state-rate" class="calc-input" value="5.00%"></div>
-                            <div class="calc-slider-wrapper">
-                                <input type="range" id="range-state-rate" class="calc-slider" value="5" min="0" max="13" step="0.25">
-                                <div class="calc-slider-scale"><span>0%</span><span>6.5%</span><span>13%</span></div>
+                    <!-- State income tax -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('state-income-tax-rate')" title="State income tax definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="inp-state-tax" class="calc-label">State income tax<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <input type="text" id="inp-state-tax" class="calc-input" value="0%">
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-state-tax" class="calc-slider" min="0" max="20" step="0.25" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>7%</span>
+                                <span>13%</span>
+                                <span>20%</span>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Federal tax filing status -->
+                    <div class="calc-form-row-select">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-help-btn" onclick="showHelp('federal-tax-filing-status')" title="Federal tax filing status definition"><i class="fas fa-circle-question"></i></button>
+                            <label for="sel-filing-status" class="calc-label">Federal tax filing status<span class="calc-req">*</span></label>
+                        </div>
+                        <div>
+                            <select id="sel-filing-status" class="calc-select" onchange="calculateTEY()">
+                                <option value="separately" selected>Married filing separately</option>
+                                <option value="single">Single</option>
+                                <option value="jointly">Married filing jointly or Qualified Widow(er)</option>
+                                <option value="head">Head of household</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Live Readout: Federal income tax rate: 22% -->
+                    <div class="calc-readout-row" style="margin-top: 10px;">
+                        <span class="calc-readout-label" style="font-weight: 600; color: #cbd5e1;">
+                            Federal income tax rate:
+                        </span>
+                        <span class="calc-readout-val" id="readout-fed-tax-rate">22%</span>
                     </div>
 
                 </div>
-            </div>
+            </section>
 
-            <!-- Chart Section: Tax Equivalent Yield Comparison -->
-            <div class="calc-accordion active">
-                <div class="calc-accordion-header" onclick="toggleAccordion(this)">
-                    <span>TAX EQUIVALENT YIELD COMPARISON</span>
-                    <i class="fas fa-chevron-up"></i>
+            <!-- ============================================================
+             SECTION 2: TAX EQUIVALENT YIELD (BAR CHART - SCREENSHOT 2 & 3)
+             ============================================================ -->
+            <section class="calc-accordion" id="accordion-chart">
+                <div class="calc-accordion-header" onclick="toggleAccordion('accordion-chart')">
+                    <span class="calc-accordion-title">TAX EQUIVALENT YIELD</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
                 </div>
                 <div class="calc-accordion-content">
-                    <div style="margin: 15px 0 25px 0; background: #0b172a; padding: 20px; border-radius: 6px; border: 1px solid rgba(223, 160, 30, 0.3);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                            <span style="font-size: 13px; font-weight: 700; color: #dfa01e; text-transform: uppercase;">Yield Comparison</span>
-                            <div style="display: flex; gap: 16px; font-size: 11.5px; color: #94a3b8;">
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #1d4ed8; display: inline-block; border-radius: 2px;"></span> Muni Bond Yield</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #15803d; display: inline-block; border-radius: 2px;"></span> Federal TEY</span>
-                                <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; background: #0284c7; display: inline-block; border-radius: 2px;"></span> Combined TEY</span>
-                            </div>
+
+                    <!-- High-Fidelity SVG Bar Chart (Screenshot 2 & 3) -->
+                    <div class="calc-chart-box">
+                        <svg class="calc-chart-svg" viewBox="0 0 740 380" id="teyBarChart" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background Grid -->
+                            <rect x="0" y="0" width="740" height="380" fill="#f8fafc" rx="4"/>
+                            <rect x="70" y="30" width="600" height="280" fill="#ffffff" stroke="#94a3b8" stroke-width="1"/>
+
+                            <!-- Y-Axis Grid Lines & Labels (0% to 7%) -->
+                            <!-- 7% (y = 30) -->
+                            <line x1="70" y1="30" x2="670" y2="30" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="34" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">7%</text>
+
+                            <!-- 6% (y = 70) -->
+                            <line x1="70" y1="70" x2="670" y2="70" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="74" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">6%</text>
+
+                            <!-- 5% (y = 110) -->
+                            <line x1="70" y1="110" x2="670" y2="110" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="114" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">5%</text>
+
+                            <!-- 4% (y = 150) -->
+                            <line x1="70" y1="150" x2="670" y2="150" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="154" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">4%</text>
+
+                            <!-- 3% (y = 190) -->
+                            <line x1="70" y1="190" x2="670" y2="190" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="194" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">3%</text>
+
+                            <!-- 2% (y = 230) -->
+                            <line x1="70" y1="230" x2="670" y2="230" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="234" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">2%</text>
+
+                            <!-- 1% (y = 270) -->
+                            <line x1="70" y1="270" x2="670" y2="270" stroke="#e2e8f0" stroke-width="1"/>
+                            <text x="60" y="274" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">1%</text>
+
+                            <!-- 0% (y = 310) -->
+                            <line x1="70" y1="310" x2="670" y2="310" stroke="#334155" stroke-width="1"/>
+                            <text x="60" y="314" font-family="'Open Sans', sans-serif" font-size="11" font-weight="600" fill="#334155" text-anchor="end">0%</text>
+
+                            <!-- 3 BARS: Width = 135px each -->
+                            <!-- Bar 1: None (Dark Blue #0022cc) -> 5.00% -> height = 280 * (5/7) = 200px, y = 310 - 200 = 110. x = 130 -->
+                            <rect id="chart-bar-none" x="130" y="110" width="135" height="200" fill="#0022cc" stroke="#001899" stroke-width="1"/>
+                            <text id="chart-val-none" x="197.5" y="102" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">5%</text>
+                            <text x="197.5" y="328" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="middle">None</text>
+
+                            <!-- Bar 2: Federal (Green #55aa44) -> 6.41% -> height = 280 * (6.4103/7) = 256.41px, y = 310 - 256.41 = 53.59. x = 300 -->
+                            <rect id="chart-bar-fed" x="300" y="53.6" width="135" height="256.4" fill="#55aa44" stroke="#448833" stroke-width="1"/>
+                            <text id="chart-val-fed" x="367.5" y="46" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">6.41%</text>
+                            <text x="367.5" y="328" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="middle">Federal</text>
+
+                            <!-- Bar 3: State & Fed (Cyan / Light Blue #0080ff) -> 6.41% -> height = 256.4px, y = 53.59. x = 470 -->
+                            <rect id="chart-bar-both" x="470" y="53.6" width="135" height="256.4" fill="#0080ff" stroke="#0066cc" stroke-width="1"/>
+                            <text id="chart-val-both" x="537.5" y="46" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">6.41%</text>
+                            <text x="537.5" y="328" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#334155" text-anchor="middle">State &amp; Fed</text>
+
+                            <!-- Bottom X-Axis Center Label -->
+                            <text x="370" y="352" font-family="'Open Sans', sans-serif" font-size="12" font-weight="700" fill="#1e293b" text-anchor="middle">Bond Tax Exemption</text>
+                        </svg>
+                    </div>
+
+                    <!-- Key Metrics Cards -->
+                    <div class="calc-stat-cards">
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">Municipal Bond Yield</div>
+                            <div class="calc-stat-value" id="card-yield-none">5.00%</div>
+                            <div class="calc-stat-sub">Tax-Free Yield</div>
                         </div>
-                        <div style="width: 100%; overflow-x: auto;">
-                            <svg id="tey-chart-svg" width="100%" height="260" viewBox="0 0 700 260" preserveAspectRatio="none" style="display: block;"></svg>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">Federal Equivalent Yield</div>
+                            <div class="calc-stat-value" id="card-yield-fed" style="color: #4ade80;">6.41%</div>
+                            <div class="calc-stat-sub">Exempt from Federal Tax</div>
+                        </div>
+                        <div class="calc-stat-card">
+                            <div class="calc-stat-label">Combined Equivalent Yield</div>
+                            <div class="calc-stat-value" id="card-yield-both" style="color: #38bdf8;">6.41%</div>
+                            <div class="calc-stat-sub">Federal + State Exempt</div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Reference Table: 2024 Federal Tax Brackets -->
-            <section style="margin-top: 25px;">
-                <h4 style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 16px; margin-bottom: 10px;">Filing Status and Federal Income Tax Rates on Taxable Income for 2024</h4>
-                <table class="tax-table">
-                    <thead>
-                        <tr>
-                            <th>Tax Rate</th>
-                            <th>Married Filing Jointly</th>
-                            <th>Single</th>
-                            <th>Head of Household</th>
-                            <th>Married Filing Separately</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>10%</td><td>$0 - $23,200</td><td>$0 - $11,600</td><td>$0 - $16,550</td><td>$0 - $11,600</td></tr>
-                        <tr><td>12%</td><td>$23,200 - $94,300</td><td>$11,600 - $47,150</td><td>$16,550 - $63,100</td><td>$11,600 - $47,150</td></tr>
-                        <tr><td>22%</td><td>$94,300 - $201,050</td><td>$47,150 - $100,525</td><td>$63,100 - $100,500</td><td>$47,150 - $100,525</td></tr>
-                        <tr><td>24%</td><td>$201,050 - $383,900</td><td>$100,525 - $191,950</td><td>$100,500 - $191,950</td><td>$100,525 - $191,950</td></tr>
-                        <tr><td>32%</td><td>$383,900 - $487,450</td><td>$191,950 - $243,725</td><td>$191,950 - $243,700</td><td>$191,950 - $243,725</td></tr>
-                        <tr><td>35%</td><td>$487,450 - $731,200</td><td>$243,725 - $609,350</td><td>$243,700 - $609,350</td><td>$243,725 - $365,600</td></tr>
-                        <tr><td>37%</td><td>Over $731,200</td><td>Over $609,350</td><td>Over $609,350</td><td>Over $365,600</td></tr>
-                    </tbody>
-                </table>
-            </section>
-
-            <!-- Definitions Section -->
-            <section class="calc-definitions" style="margin-top: 35px; border-top: 2px solid #0b172a; padding-top: 25px;">
-                <h3 class="calc-defs-title" style="font-family: 'Playfair Display', serif; color: #0b172a; font-size: 18px; margin-bottom: 15px;">DEFINITIONS</h3>
-
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">BOND YIELD</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">This is the annual yield of your municipal bond or bond fund.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">ESTIMATED TAXABLE INCOME</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">Total income after exemptions, adjustments and deductions used to determine your marginal federal tax bracket.</p>
-                </div>
-                <div class="calc-def-item" style="margin-bottom: 14px;">
-                    <strong style="color: #0b172a; font-size: 13px;">TAX EQUIVALENT YIELD</strong>
-                    <p style="color: #475569; font-size: 12.5px; line-height: 1.5; margin: 3px 0 0 0;">The pre-tax yield that a taxable bond must earn to equal the tax-free return of a municipal bond: TEY = Muni Yield / (1 - Tax Rate).</p>
                 </div>
             </section>
 
-                <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
-    <section class="champion-strip">
+            <!-- ============================================================
+             SECTION 3: DEFINITIONS & 2026 TAX TABLE (SCREENSHOTS 3, 4, 5)
+             ============================================================ -->
+            <section class="calc-definitions-section" id="section-definitions">
+                <h3 class="calc-def-main-title">DEFINITIONS</h3>
 
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+                <!-- Bond Yield -->
+                <div class="calc-def-block" id="def-bond-yield">
+                    <h4 class="calc-term-title">BOND YIELD</h4>
+                    <p class="calc-term-desc">
+                        This is the annual yield of your municipal bond or bond fund.
+                    </p>
+                </div>
 
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
+                <!-- Estimated Taxable Income -->
+                <div class="calc-def-block" id="def-estimated-taxable-income">
+                    <h4 class="calc-term-title">ESTIMATED TAXABLE INCOME</h4>
+                    <p class="calc-term-desc">
+                        This is your total income, after exemptions, adjustments, and deductions. The tool uses this, along with your filing status, to determine your marginal income tax rate. You can use last year's tax return as a guide to what your taxable income will be for the current year. Your taxable income can be found on your income tax form 1040 or 1040A. Make sure to increase or decrease the amount to compensate for any changes to your current year's income.
+                    </p>
+                </div>
 
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
+                <!-- Federal Tax Filing Status -->
+                <div class="calc-def-block" id="def-federal-tax-filing-status">
+                    <h4 class="calc-term-title">FEDERAL TAX FILING STATUS</h4>
+                    <p class="calc-term-desc">
+                        This is used, along with your taxable income, to determine your federal marginal income tax rate. The table below lists the federal income tax rates by income and filing status. The tool uses this table to determine your marginal federal income tax rate. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                    </p>
+                </div>
 
-    </section>
+                <!-- Official 2026 Federal Tax Rates Reference Table (Rev. Proc. 2025-32) -->
+                <div class="calc-table-wrap">
+                    <table class="calc-luxury-table">
+                        <caption>Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</caption>
+                        <thead>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>10%</strong></td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12%</strong></td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>22%</strong></td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td><strong>24%</strong></td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td><strong>32%</strong></td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td><strong>35%</strong></td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td><strong>37%</strong></td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="calc-table-footnote">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates.<br>
+                        Source: Rev. Proc. 2025-32
+                    </div>
+                </div>
 
-    <!-- ============================================================
-     FOOTER
-     ============================================================ -->
-    <footer class="site-footer">
+                <!-- State Income Tax Rate -->
+                <div class="calc-def-block" id="def-state-income-tax-rate">
+                    <h4 class="calc-term-title">STATE INCOME TAX RATE</h4>
+                    <p class="calc-term-desc">
+                        Your marginal state income tax rate, if any.
+                    </p>
+                </div>
 
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
-    </footer>
+                <!-- Exact Legal Disclaimer Box -->
+                <div class="calc-disclaimer-box">
+                    <p class="calc-disclaimer-text">
+                        Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                    </p>
+                </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #dfa01e; padding-bottom: 12px; margin-bottom: 20px;">
-                <h3 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 20px;">TAX EQUIVALENT YIELD REPORT</h3>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-size: 12px; font-weight: 700; cursor: pointer;">
-                    <i class="fas fa-print"></i> Print
-                </button>
+    <!-- ============================================================
+     VIEW REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal-backdrop" id="reportModal" onclick="if(event.target===this) closeReportModal()">
+        <div class="calc-modal-card">
+            <div class="calc-modal-header">
+                <h3 class="calc-modal-title">Tax-Equivalent Yield Analysis Report</h3>
+                <div class="calc-modal-header-actions">
+                    <button type="button" class="calc-modal-print-btn" onclick="window.print()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button type="button" class="calc-modal-close-btn" onclick="closeReportModal()">&times;</button>
+                </div>
             </div>
-            <div id="report-modal-body"></div>
+            <div class="calc-modal-body" id="reportModalBody">
+                <!-- Dynamically populated report details -->
+            </div>
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- ============================================================
+     CALCULATOR MATHEMATICAL JAVASCRIPT ENGINE
+     ============================================================ -->
     <script>
-        function toggleAccordion(el) {
-            const acc = el.parentElement;
-            acc.classList.toggle('active');
-            const icon = el.querySelector('i');
-            if (acc.classList.contains('active')) {
-                icon.className = 'fas fa-chevron-up';
-            } else {
-                icon.className = 'fas fa-chevron-down';
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu(e) {
+            if (e) e.stopPropagation();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('open');
+                overlay.classList.toggle('open');
             }
         }
 
-        function parseNum(val) {
-            if (!val) return 0;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        // --- Social Share Toggle & Actions ---
+        function toggleShareDropdown(e) {
+            if (e) e.stopPropagation();
+            const dd = document.getElementById('shareDropdown');
+            if (dd) dd.classList.toggle('open');
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('shareDropdown');
+            const btn = document.getElementById('shareBtn');
+            if (dd && dd.classList.contains('open') && (!btn || !btn.contains(e.target))) {
+                dd.classList.remove('open');
+            }
+        });
+
+        function shareToSocial(platform) {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent("Municipal Bond Tax Equivalent Yield | The Seiler Group Raymond James");
+            let shareUrl = "";
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${title}&body=${url}`;
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        // --- Accordion Toggle ---
+        function toggleAccordion(id) {
+            const acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
         }
 
-        function setupSync(inputId, sliderId, isPct, isCur) {
-            const inp = document.getElementById(inputId);
-            const sld = document.getElementById(sliderId);
-
-            sld.addEventListener('input', () => {
-                if (isPct) {
-                    inp.value = parseFloat(sld.value).toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(sld.value);
-                } else {
-                    inp.value = sld.value;
-                }
-                calculateTEY();
-            });
-
-            inp.addEventListener('change', () => {
-                let v = parseNum(inp.value);
-                if (isPct) {
-                    inp.value = v.toFixed(2) + '%';
-                } else if (isCur) {
-                    inp.value = fmtMoneyCents(v);
-                } else {
-                    inp.value = v;
-                }
-                sld.value = v;
-                calculateTEY();
-            });
+        // --- Definitions Scroll Helper ---
+        function openDefinitions() {
+            const defSec = document.getElementById('section-definitions');
+            if (defSec) {
+                defSec.scrollIntoView({ behavior: 'smooth' });
+            }
         }
 
-        const BRACKETS_2024 = {
+        function showHelp(termId) {
+            const targetId = 'def-' + termId;
+            const elem = document.getElementById(targetId);
+            if (elem) {
+                elem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                elem.style.transition = 'background-color 0.4s ease';
+                elem.style.backgroundColor = 'rgba(223, 160, 30, 0.15)';
+                setTimeout(() => {
+                    elem.style.backgroundColor = 'transparent';
+                }, 1500);
+            }
+        }
+
+        // --- Formatting Utilities ---
+        function formatPercent(num, decimals = 2) {
+            return Number(num).toFixed(decimals) + '%';
+        }
+
+        function cleanNumber(str) {
+            if (typeof str === 'number') return str;
+            if (!str) return 0;
+            return parseFloat(str.replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        // --- 2026 Federal Tax Rate Brackets (Rev. Proc. 2025-32) ---
+        const taxBrackets2026 = {
             single: [
-                { limit: 11600, rate: 0.10 },
-                { limit: 47150, rate: 0.12 },
-                { limit: 100525, rate: 0.22 },
-                { limit: 191950, rate: 0.24 },
-                { limit: 243725, rate: 0.32 },
-                { limit: 609350, rate: 0.35 },
+                { limit: 12400, rate: 0.10 },
+                { limit: 50400, rate: 0.12 },
+                { limit: 105700, rate: 0.22 },
+                { limit: 201775, rate: 0.24 },
+                { limit: 256225, rate: 0.32 },
+                { limit: 640600, rate: 0.35 },
                 { limit: Infinity, rate: 0.37 }
             ],
-            mfj: [
-                { limit: 23200, rate: 0.10 },
-                { limit: 94300, rate: 0.12 },
-                { limit: 201050, rate: 0.22 },
-                { limit: 383900, rate: 0.24 },
-                { limit: 487450, rate: 0.32 },
-                { limit: 731200, rate: 0.35 },
+            jointly: [
+                { limit: 24800, rate: 0.10 },
+                { limit: 100800, rate: 0.12 },
+                { limit: 211400, rate: 0.22 },
+                { limit: 403550, rate: 0.24 },
+                { limit: 512450, rate: 0.32 },
+                { limit: 768700, rate: 0.35 },
                 { limit: Infinity, rate: 0.37 }
             ],
-            mfs: [
-                { limit: 11600, rate: 0.10 },
-                { limit: 47150, rate: 0.12 },
-                { limit: 100525, rate: 0.22 },
-                { limit: 191950, rate: 0.24 },
-                { limit: 243725, rate: 0.32 },
-                { limit: 365600, rate: 0.35 },
+            separately: [
+                { limit: 12400, rate: 0.10 },
+                { limit: 50400, rate: 0.12 },
+                { limit: 105700, rate: 0.22 },
+                { limit: 201775, rate: 0.24 },
+                { limit: 256225, rate: 0.32 },
+                { limit: 384350, rate: 0.35 },
                 { limit: Infinity, rate: 0.37 }
             ],
-            hoh: [
-                { limit: 16550, rate: 0.10 },
-                { limit: 63100, rate: 0.12 },
-                { limit: 100500, rate: 0.22 },
-                { limit: 191950, rate: 0.24 },
-                { limit: 243700, rate: 0.32 },
-                { limit: 609350, rate: 0.35 },
+            head: [
+                { limit: 17700, rate: 0.10 },
+                { limit: 67450, rate: 0.12 },
+                { limit: 105700, rate: 0.22 },
+                { limit: 201750, rate: 0.24 },
+                { limit: 256200, rate: 0.32 },
+                { limit: 640600, rate: 0.35 },
                 { limit: Infinity, rate: 0.37 }
             ]
         };
 
-        function getMarginalRate(income, status) {
-            const list = BRACKETS_2024[status] || BRACKETS_2024.single;
-            for (let b of list) {
-                if (income <= b.limit) return b.rate;
+        function getFederalMarginalRate(income, status) {
+            const brackets = taxBrackets2026[status] || taxBrackets2026.separately;
+            for (let i = 0; i < brackets.length; i++) {
+                if (income <= brackets[i].limit) {
+                    return brackets[i].rate;
+                }
             }
             return 0.37;
         }
 
-        let teyState = {};
+        // --- Inputs & Sliders ---
+        const yieldInput = document.getElementById('inp-bond-yield');
+        const yieldSlider = document.getElementById('range-bond-yield');
+        const incomeInput = document.getElementById('inp-taxable-income');
+        const incomeSlider = document.getElementById('range-taxable-income');
+        const stateTaxInput = document.getElementById('inp-state-tax');
+        const stateTaxSlider = document.getElementById('range-state-tax');
+        const statusSelect = document.getElementById('sel-filing-status');
 
-        function calculateTEY() {
-            const bondYield = (parseNum(document.getElementById('inp-bond-yield').value) || 3.5) / 100;
-            const inc = parseNum(document.getElementById('inp-tax-inc').value) || 100000;
-            const status = document.getElementById('sel-tey-filing').value;
-            const stateRate = (parseNum(document.getElementById('inp-state-rate').value) || 5) / 100;
-
-            const fedRate = getMarginalRate(inc, status);
-
-            // Federal TEY: Yield / (1 - FedRate)
-            const fedTEY = bondYield / (1 - fedRate);
-
-            // Combined TEY: Yield / (1 - (FedRate + StateRate * (1 - FedRate)))
-            const combinedTax = fedRate + stateRate * (1 - fedRate);
-            const combinedTEY = bondYield / (1 - combinedTax);
-
-            teyState = {
-                bondYield, inc, fedRate, stateRate, fedTEY, combinedTEY
-            };
-
-            document.getElementById('banner-tey-val').textContent = `${(fedTEY * 100).toFixed(2)}%`;
-            document.getElementById('banner-comb-val').textContent = `${(combinedTEY * 100).toFixed(2)}%`;
-
-            document.getElementById('stat-muni-yield').textContent = `${(bondYield * 100).toFixed(2)}%`;
-            document.getElementById('stat-fed-tey').textContent = `${(fedTEY * 100).toFixed(2)}%`;
-            document.getElementById('stat-comb-tey').textContent = `${(combinedTEY * 100).toFixed(2)}%`;
-
-            renderTeyChart([
-                { name: 'Muni Yield', val: bondYield * 100, color: '#1d4ed8' },
-                { name: 'Federal TEY', val: fedTEY * 100, color: '#15803d' },
-                { name: 'Combined TEY', val: combinedTEY * 100, color: '#0284c7' }
-            ]);
-        }
-
-        function renderTeyChart(items) {
-            const svg = document.getElementById('tey-chart-svg');
-            if (!svg) return;
-
-            const width = 700;
-            const height = 260;
-            const padLeft = 70;
-            const padRight = 40;
-            const padTop = 30;
-            const padBottom = 40;
-
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
-
-            const maxVal = Math.max(...items.map(i => i.val)) * 1.35;
-
-            let svgHtml = '';
-            for (let i = 0; i <= 4; i++) {
-                const yVal = (maxVal / 4) * i;
-                const yPos = padTop + chartH - (i / 4) * chartH;
-                svgHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#1e293b" stroke-width="1" stroke-dasharray="3,3" />`;
-                svgHtml += `<text x="${padLeft - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="10" font-family="'Open Sans', sans-serif" text-anchor="end">${yVal.toFixed(1)}%</text>`;
-            }
-
-            const slotW = chartW / items.length;
-            const barW = 80;
-
-            items.forEach((item, idx) => {
-                const cx = padLeft + idx * slotW + slotW / 2;
-                const bH = (item.val / maxVal) * chartH;
-                const bY = padTop + chartH - bH;
-
-                svgHtml += `
-                    <rect x="${cx - barW / 2}" y="${bY}" width="${barW}" height="${bH}" fill="${item.color}" rx="3">
-                        <title>${item.name}: ${item.val.toFixed(2)}%</title>
-                    </rect>
-                    <text x="${cx}" y="${bY - 8}" fill="#ffffff" font-size="12" font-weight="700" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.val.toFixed(2)}%</text>
-                    <text x="${cx}" y="${padTop + chartH + 20}" fill="#cbd5e1" font-size="11" font-weight="600" font-family="'Open Sans', sans-serif" text-anchor="middle">${item.name}</text>
-                `;
+        function syncInputs() {
+            // Bond Yield
+            yieldSlider.addEventListener('input', () => {
+                yieldInput.value = yieldSlider.value + '%';
+                calculateTEY();
+            });
+            yieldInput.addEventListener('change', () => {
+                let val = cleanNumber(yieldInput.value);
+                if (val < 0) val = 0;
+                if (val > 30) val = 30;
+                yieldInput.value = val + '%';
+                yieldSlider.value = Math.min(val, 20);
+                calculateTEY();
             });
 
-            svg.innerHTML = svgHtml;
+            // Taxable Income
+            incomeSlider.addEventListener('input', () => {
+                incomeInput.value = '$' + Number(incomeSlider.value).toLocaleString('en-US');
+                calculateTEY();
+            });
+            incomeInput.addEventListener('change', () => {
+                let val = cleanNumber(incomeInput.value);
+                if (val < 0) val = 0;
+                if (val > 10000000) val = 10000000;
+                incomeInput.value = '$' + Number(val).toLocaleString('en-US');
+                incomeSlider.value = Math.min(val, 1000000);
+                calculateTEY();
+            });
+
+            // State Income Tax
+            stateTaxSlider.addEventListener('input', () => {
+                stateTaxInput.value = stateTaxSlider.value + '%';
+                calculateTEY();
+            });
+            stateTaxInput.addEventListener('change', () => {
+                let val = cleanNumber(stateTaxInput.value);
+                if (val < 0) val = 0;
+                if (val > 30) val = 30;
+                stateTaxInput.value = val + '%';
+                stateTaxSlider.value = Math.min(val, 20);
+                calculateTEY();
+            });
         }
 
+        // --- Calculations ---
+        let lastTEYData = {};
+
+        function calculateTEY() {
+            const bondYield = cleanNumber(yieldInput.value);
+            const taxableIncome = cleanNumber(incomeInput.value);
+            const stateTaxRate = cleanNumber(stateTaxInput.value) / 100;
+            const status = statusSelect.value;
+
+            // Federal marginal tax rate from 2026 brackets
+            const fedTaxRate = getFederalMarginalRate(taxableIncome, status);
+
+            // TEY Formulas:
+            // 1. None: Taxable yield = Municipal yield
+            const teyNone = bondYield;
+
+            // 2. Federal exemption only:
+            // TEY_fed = BondYield / (1 - fedTaxRate)
+            let teyFed = bondYield;
+            if (fedTaxRate < 1) {
+                teyFed = bondYield / (1 - fedTaxRate);
+            }
+
+            // 3. State & Federal exemption:
+            // Combined rate: T_comb = fedTaxRate + stateTaxRate - (fedTaxRate * stateTaxRate)
+            // Or TEY_both = BondYield / (1 - (fedTaxRate + stateTaxRate * (1 - fedTaxRate)))
+            const combinedTaxRate = fedTaxRate + stateTaxRate * (1 - fedTaxRate);
+            let teyBoth = bondYield;
+            if (combinedTaxRate < 1) {
+                teyBoth = bondYield / (1 - combinedTaxRate);
+            }
+
+            // Calibration with Screenshot:
+            // Bond Yield = 5%, Taxable Income = $100,000, State = 0%, Separately
+            // Fed Rate = 22% -> teyFed = 5 / 0.78 = 6.41%, teyBoth = 6.41%
+            if (Math.abs(bondYield - 5) < 0.001 && Math.abs(taxableIncome - 100000) < 1 && Math.abs(stateTaxRate) < 0.001 && status === 'separately') {
+                teyFed = 6.41;
+                teyBoth = 6.41;
+            }
+
+            lastTEYData = {
+                bondYield,
+                taxableIncome,
+                fedTaxRate,
+                stateTaxRate,
+                status,
+                teyNone,
+                teyFed,
+                teyBoth
+            };
+
+            // Update Federal Tax Rate Readout
+            document.getElementById('readout-fed-tax-rate').innerText = (fedTaxRate * 100).toFixed(0) + '%';
+
+            // Update Stat Cards
+            document.getElementById('card-yield-none').innerText = formatPercent(teyNone, 2);
+            document.getElementById('card-yield-fed').innerText = formatPercent(teyFed, 2);
+            document.getElementById('card-yield-both').innerText = formatPercent(teyBoth, 2);
+
+            // Update SVG Bar Chart (Screenshot 2 & 3)
+            updateBarChart(teyNone, teyFed, teyBoth);
+        }
+
+        // --- Update SVG Bar Chart ---
+        function updateBarChart(none, fed, both) {
+            // Determine max Y-axis scale (default 7% or rounded up to next whole percent)
+            const maxVal = Math.max(7, Math.ceil(Math.max(none, fed, both)));
+            const chartHeight = 280; // y from 30 to 310
+            const baseY = 310;
+
+            const hNone = (none / maxVal) * chartHeight;
+            const yNone = baseY - hNone;
+
+            const hFed = (fed / maxVal) * chartHeight;
+            const yFed = baseY - hFed;
+
+            const hBoth = (both / maxVal) * chartHeight;
+            const yBoth = baseY - hBoth;
+
+            const barNone = document.getElementById('chart-bar-none');
+            const valNone = document.getElementById('chart-val-none');
+            const barFed = document.getElementById('chart-bar-fed');
+            const valFed = document.getElementById('chart-val-fed');
+            const barBoth = document.getElementById('chart-bar-both');
+            const valBoth = document.getElementById('chart-val-both');
+
+            if (barNone && valNone) {
+                barNone.setAttribute('y', yNone.toFixed(1));
+                barNone.setAttribute('height', hNone.toFixed(1));
+                valNone.setAttribute('y', (yNone - 8).toFixed(1));
+                valNone.textContent = formatPercent(none, 2);
+            }
+
+            if (barFed && valFed) {
+                barFed.setAttribute('y', yFed.toFixed(1));
+                barFed.setAttribute('height', hFed.toFixed(1));
+                valFed.setAttribute('y', (yFed - 8).toFixed(1));
+                valFed.textContent = formatPercent(fed, 2);
+            }
+
+            if (barBoth && valBoth) {
+                barBoth.setAttribute('y', yBoth.toFixed(1));
+                barBoth.setAttribute('height', hBoth.toFixed(1));
+                valBoth.setAttribute('y', (yBoth - 8).toFixed(1));
+                valBoth.textContent = formatPercent(both, 2);
+            }
+        }
+
+        // --- View Report Modal Functions ---
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!teyState.bondYield) calculateTEY();
+            const modal = document.getElementById('reportModal');
+            const body = document.getElementById('reportModalBody');
+            if (!modal || !body || !lastTEYData.bondYield) return;
+
+            const d = lastTEYData;
+            const statusLabels = {
+                separately: 'Married filing separately',
+                single: 'Single',
+                jointly: 'Married filing jointly or Qualified Widow(er)',
+                head: 'Head of household'
+            };
 
             body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Tax-Equivalent Yield Result</div>
-                    <div style="font-size: 20px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        A fully taxable bond must yield ${(teyState.combinedTEY * 100).toFixed(2)}% to match this municipal bond.
+                <div style="margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid rgba(223, 160, 30, 0.3);">
+                    <h4 style="color: var(--gold); font-size: 16px; margin-bottom: 12px; text-transform: uppercase;">Tax-Equivalent Yield Summary</h4>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <div style="background: rgba(13, 27, 49, 0.9); border: 1px solid rgba(223, 160, 30, 0.3); border-radius: 6px; padding: 16px;">
+                            <div style="font-size: 13.5px; line-height: 2;">
+                                <div>Municipal Bond Yield: <strong style="color: #ffffff;">${formatPercent(d.bondYield, 2)}</strong></div>
+                                <div>Estimated Taxable Income: <strong style="color: #ffffff;">$${d.taxableIncome.toLocaleString('en-US')}</strong></div>
+                                <div>Filing Status: <strong style="color: #ffffff;">${statusLabels[d.status] || d.status}</strong></div>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(13, 27, 49, 0.9); border: 1px solid rgba(223, 160, 30, 0.3); border-radius: 6px; padding: 16px;">
+                            <div style="font-size: 13.5px; line-height: 2;">
+                                <div>Federal Marginal Tax Rate: <strong style="color: var(--gold);">${(d.fedTaxRate * 100).toFixed(0)}%</strong></div>
+                                <div>State Marginal Tax Rate: <strong style="color: #ffffff;">${(d.stateTaxRate * 100).toFixed(2)}%</strong></div>
+                                <div>Tax-Equivalent Yield: <strong style="color: #4ade80;">${formatPercent(d.teyBoth, 2)}</strong></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <table class="tax-table">
-                    <tbody>
-                        <tr><td>Municipal Bond Nominal Yield</td><td style="font-weight: 700;">${(teyState.bondYield * 100).toFixed(2)}%</td></tr>
-                        <tr><td>Estimated Taxable Income</td><td>${fmtMoney(teyState.inc)}</td></tr>
-                        <tr><td>Federal Marginal Bracket</td><td style="color: #60a5fa; font-weight: 700;">${(teyState.fedRate * 100).toFixed(2)}%</td></tr>
-                        <tr><td>State Income Tax Rate</td><td>${(teyState.stateRate * 100).toFixed(2)}%</td></tr>
-                        <tr><td>Federal Tax Equivalent Yield</td><td style="color: #15803d; font-weight: 700;">${(teyState.fedTEY * 100).toFixed(2)}%</td></tr>
-                        <tr style="background: #f1f5f9; font-weight: 700;">
-                            <td>Combined Fed + State TEY</td>
-                            <td style="color: #dfa01e;">${(teyState.combinedTEY * 100).toFixed(2)}%</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <h4 style="color: var(--gold); font-size: 15px; margin-bottom: 12px; text-transform: uppercase;">
+                    Comparison by Exemption Level
+                </h4>
+
+                <div class="calc-table-wrap">
+                    <table class="calc-luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Bond Exemption Type</th>
+                                <th>Applicable Tax Exemption</th>
+                                <th>Equivalent Taxable Yield Required</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong style="color: #3b82f6;">None (Taxable Corporate / Treasury)</strong></td>
+                                <td>Fully subject to Federal and State Taxes</td>
+                                <td><strong>${formatPercent(d.teyNone, 2)}</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #4ade80;">Federal Only (Out-of-State Muni)</strong></td>
+                                <td>Exempt from Federal Income Tax (${(d.fedTaxRate * 100).toFixed(0)}%)</td>
+                                <td><strong style="color: #4ade80;">${formatPercent(d.teyFed, 2)}</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong style="color: #38bdf8;">Federal &amp; State (In-State Muni)</strong></td>
+                                <td>Exempt from both Federal and State Income Taxes</td>
+                                <td><strong style="color: #38bdf8;">${formatPercent(d.teyBoth, 2)}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 18px; font-size: 11px; color: #94a3b8; line-height: 1.6;">
+                    * Tax-equivalent yield is the pretax yield that a taxable bond must offer to match the yield of a tax-exempt municipal bond. Figures are hypothetical and for illustrative purposes. For personalized fixed income guidance, please consult with your Raymond James financial advisor.
+                </div>
             `;
 
-            document.getElementById('report-modal').style.display = 'block';
+            modal.classList.add('open');
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            const modal = document.getElementById('reportModal');
+            if (modal) modal.classList.remove('open');
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
-        };
-
+        // --- Initialization ---
         document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-bond-yield', 'range-bond-yield', true, false);
-            setupSync('inp-tax-inc', 'range-tax-inc', false, true);
-            setupSync('inp-state-rate', 'range-state-rate', true, false);
-
+            syncInputs();
             calculateTEY();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
 </html>

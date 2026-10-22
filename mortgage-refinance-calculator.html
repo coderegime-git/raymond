@@ -1,800 +1,1338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Refinance Calculator | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate your monthly savings and break-even point from refinancing your mortgage with current vs. new interest rates and closing costs.">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description"
+        content="How long will it take to break even on a mortgage refinance? Use the mortgage refinance calculator to sort through a multitude of factors including your current interest rate, the new potential rate, closing costs and how long you plan to stay in your home." />
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/should-i-refinance" />
+    <meta property="og:title" content="Mortgage Refinance Calculator | The Seiler Group of Raymond James" />
+    <meta property="og:image" content="assets/resources/card-50.jpg" />
+    <title>Mortgage Refinance Calculator | The Seiler Group of Raymond James</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+
+    <!-- Google Fonts & Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .refi-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .refi-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .refi-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .refi-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .calc-toggle-header {
-            cursor: pointer;
-            user-select: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .calc-toggle-header:hover {
-            color: #dfa01e;
-        }
-        .report-modal {
-            display: none;
-            position: fixed;
-            z-index: 99999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(11, 23, 42, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .report-modal-content {
-            background-color: #ffffff;
-            margin: 40px auto;
-            padding: 30px;
-            border-radius: 8px;
-            max-width: 780px;
-            border-top: 5px solid #dfa01e;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-            position: relative;
-            color: #1e293b;
-            font-family: 'Open Sans', sans-serif;
-        }
-        .report-modal-close {
-            position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #64748b;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .report-modal-close:hover {
-            color: #0b172a;
-        }
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 13px;
-        }
-        .report-table th, .report-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .report-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-        .report-table tr:hover td {
-            background-color: #f8fafc;
-        }
-        .report-table td:last-child {
-            text-align: right;
-            font-weight: 600;
-        }
-    </style>
-</head>
-<body>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!-- TOP HEADER BAR -->
-    <header class="top-nav-container">
-        <div class="top-nav-inner">
-            <div class="brand-left">
-                <a href="index.html" class="brand-logo-link">
-                    <span class="brand-title">THE SEILER GROUP</span>
-                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
-                </a>
-            </div>
-            <div class="header-contact">
-                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
-                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
-            </div>
+    <!-- Signature Corporate Navy & Gold Stylesheet -->
+    <link rel="stylesheet" href="mortgage-refinance-calculator.css?v=1">
+</head>
+
+<body>
+    <!-- ============================================================
+     TOP CORPORATE NAVIGATION HEADER (THE SEILER GROUP)
+     ============================================================ -->
+    <header class="rj-header">
+        <div class="rj-header-social-bar">
+            <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:theseilergroup@raymondjames.com" title="Email Us"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="rj-header-main-bar">
+            <a href="index.html" class="rj-brand-wrap">
+                <img src="assets/the-seiler-group-logo-light.svg" alt="The Seiler Group of Raymond James" class="rj-brand-logo" onerror="this.src='assets/logo.png'">
+                <div class="rj-brand-text">
+                    <div class="rj-brand-title">THE SEILER GROUP</div>
+                    <div class="rj-brand-sub">RAYMOND JAMES</div>
+                </div>
+            </a>
+            <nav class="rj-header-actions">
+                <a href="index.html" class="rj-header-link">Home</a>
+                <a href="resources.html" class="rj-header-link" style="color: var(--gold);">Resources</a>
+                <a href="contact-us.html" class="rj-header-link">Contact Us</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="rj-header-btn-gold">Client Access</a>
+            </nav>
         </div>
     </header>
 
-    <!-- SECONDARY NAVIGATION -->
-    <nav class="sub-nav">
-        <div class="sub-nav-inner">
-            <a href="index.html">HOME</a>
-            <a href="corporate-executive-services.html">ABOUT US</a>
-            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
-            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
-            <a href="resources.html" class="active">RESOURCES</a>
-            <a href="contact-us.html">CONTACT US</a>
-        </div>
-    </nav>
-
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
-    <a href="should-my-spouse-work.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Should My Spouse Work?">
+    <!-- ============================================================
+     FLOATING SIDE CALCULATOR NAVIGATION BUTTONS
+     ============================================================ -->
+    <a href="should-my-spouse-work.html" class="calc-side-nav-btn prev-btn"
+        title="Previous Calculator: Should My Spouse Work?">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
     </a>
 
-    <a href="social-security-benefits-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Social Security Benefits Calculator">
+    <a href="social-security-benefits-calculator.html" class="calc-side-nav-btn next-btn"
+        title="Next Calculator: Social Security Benefits Calculator">
         <span class="calc-side-nav-label">Next<br>Calculator</span>
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- ============================================================
+     MAIN CALCULATOR CONTENT
+     ============================================================ -->
+    <main class="calc-main-wrapper" id="main-content">
+        <article>
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/estate-tax-planning-hero.jpg" alt="Mortgage Refinance Calculator" style="width: 100%; height: 240px; object-fit: cover; object-position: center 25%; display: block;">
+            <!-- Hero Banner -->
+            <div class="calc-banner-wrap">
+                <img src="assets/resources/card-50.jpg"
+                    alt="Gifting in a Volatile Market - Mortgage Refinance Calculator" class="calc-banner-img"
+                    onerror="this.src='assets/resources/Gifting-in-a-Volatile-Market.jpg'">
             </div>
 
-            <!-- Page Titles -->
-            <h1 class="calc-page-title">MORTGAGE REFINANCE CALCULATOR</h1>
-            <div class="calc-category-path">Loans &gt; Calculator</div>
-
-            <div class="calc-share-container">
-                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
-            </div>
-
-            <p class="calc-intro-paragraph">
-                How long will it take to break even on a mortgage refinance? Use this mortgage refinance calculator to sort through a multitude of options including your current interest rate, the new potential rate, refinancing costs and the time you plan to stay in your home.
-            </p>
-
-            <!-- Action Buttons -->
-            <div class="calc-actions-row">
-                <button type="button" class="calc-btn-primary" onclick="calculateRefi()">CALCULATE</button>
-                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Highlight Banner -->
-            <div class="calc-dynamic-banner" id="refi-banner">
-                <span id="banner-text">Refinancing saves you $248.50 per month, breaking even in 18 months</span>
-                <span class="banner-badge"><i class="fas fa-home"></i> Refinance Analysis</span>
-            </div>
-
-            <!-- Summary Stat Cards -->
-            <div class="refi-stat-grid">
-                <div class="refi-stat-card">
-                    <div class="refi-stat-val" id="stat-monthly-savings" style="color: #4ade80;">$248.50 / mo</div>
-                    <div class="refi-stat-label">Monthly Payment Savings</div>
+            <!-- Title & Meta Header -->
+            <header class="calc-header-section">
+                <h1 class="calc-title">MORTGAGE REFINANCE CALCULATOR</h1>
+                <div class="calc-meta-bar">
+                    <a href="resources.html?category=loans" class="calc-category-link">Calculator</a>
                 </div>
-                <div class="refi-stat-card">
-                    <div class="refi-stat-val" id="stat-breakeven" style="color: #60a5fa;">18 Months</div>
-                    <div class="refi-stat-label">Break-Even Horizon</div>
+
+                <!-- Share Button & Dropdown -->
+                <div class="calc-share-wrap">
+                    <button type="button" class="calc-share-btn" id="shareBtn" onclick="toggleShareDropdown(event)">
+                        <i class="fas fa-share-nodes"></i> Share
+                    </button>
+                    <div class="calc-share-dropdown" id="shareDropdown">
+                        <a href="javascript:void(0)" onclick="shareToSocial('facebook')" class="calc-share-social-item"
+                            title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('twitter')" class="calc-share-social-item"
+                            title="Share on X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('linkedin')" class="calc-share-social-item"
+                            title="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="javascript:void(0)" onclick="shareToSocial('email')" class="calc-share-social-item"
+                            title="Share via Email"><i class="fas fa-envelope"></i></a>
+                    </div>
                 </div>
-                <div class="refi-stat-card">
-                    <div class="refi-stat-val" id="stat-closing-costs" style="color: #ef4444;">$4,500.00</div>
-                    <div class="refi-stat-label">Estimated Closing Costs</div>
+
+                <p class="calc-intro-text">
+                    How long will it take to break even on a mortgage refinance? Use the mortgage refinance calculator to sort through a multitude of factors including your current interest rate, the new potential rate, closing costs and how long you plan to stay in your home. The mortgage refinance calculator helps sort through the confusion and determine if refinancing your mortgage is a sound financial decision.
+                </p>
+            </header>
+
+            <!-- Action Bar -->
+            <div class="calc-action-bar">
+                <div class="calc-action-btns-left">
+                    <button type="button" class="calc-action-btn-gold" id="btn-calc" onclick="calculateRefinance()">CALCULATE</button>
+                    <button type="button" class="calc-action-btn-outline" id="btn-report" onclick="openReportModal()">VIEW REPORT</button>
                 </div>
-                <div class="refi-stat-card">
-                    <div class="refi-stat-val" id="stat-5yr-savings" style="color: #dfa01e;">$10,410.00</div>
-                    <div class="refi-stat-label">5-Year Net Savings</div>
+                <div class="calc-action-btns-right">
+                    <button type="button" class="calc-help-icon-btn" onclick="scrollToDefinitions()" title="View Definitions &amp; Help">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-circle-question" style="font-size: 13px;"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- CALCULATOR FORM -->
-            <div class="calc-two-col-layout">
-                
-                <!-- Left Column: Inputs -->
-                <div class="calc-inputs-column">
-                    
-                    <!-- SECTION 1: ABOUT YOUR HOME -->
-                    <div class="calc-section-group">
-                        <div class="calc-group-title">ABOUT YOUR HOME</div>
+            <!-- Error Banner (Screenshot 1) -->
+            <div class="calc-error-banner" id="error-banner">Number of payments made can't be less than 1</div>
 
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-home-val">Appraised value*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-home-val" class="calc-text-input" value="$350,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-home-val" class="calc-range-slider" min="50000" max="1500000" step="10000" value="350000">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$50k</span>
-                                        <span>$750k</span>
-                                        <span>$1.5M</span>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="calc-required-hint">*indicates required</div>
+
+            <!-- ============================================================
+             SECTION 1: ABOUT YOUR HOME (SCREENSHOT 1)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-about-home">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-about-home')">
+                    <div class="calc-accordion-title-row">
+                        <div class="calc-accordion-title-left">
+                            <span class="calc-accordion-title-text">ABOUT YOUR HOME:</span>
                         </div>
+                        <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                    </div>
+                </div>
+                <div class="calc-accordion-content">
 
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-taxes">Annual property taxes*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-taxes" class="calc-text-input" value="$3,500.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-taxes" class="calc-range-slider" min="0" max="20000" step="250" value="3500">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$0</span>
-                                        <span>$10k</span>
-                                        <span>$20k</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Appraised value -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('appraised-value')" title="Help on Appraised Value">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-appraised-val">Appraised value:*</label>
                         </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-insurance">Annual hazard insurance*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-insurance" class="calc-text-input" value="$1,200.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-insurance" class="calc-range-slider" min="0" max="10000" step="100" value="1200">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$0</span>
-                                        <span>$5k</span>
-                                        <span>$10k</span>
-                                    </div>
-                                </div>
+                        <input type="text" id="inp-appraised-val" class="calc-text-input" value="$300,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-appraised-val" class="calc-slider" min="0" max="300" step="1" value="133">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SECTION 2: ORIGINAL MORTGAGE -->
-                    <div class="calc-section-group" style="margin-top: 25px;">
-                        <div class="calc-group-title">ORIGINAL MORTGAGE</div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-orig-amt">Original loan amount*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-orig-amt" class="calc-text-input" value="$280,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-orig-amt" class="calc-range-slider" min="50000" max="1000000" step="10000" value="280000">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$50k</span>
-                                        <span>$500k</span>
-                                        <span>$1M</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Annual property taxes -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('property-taxes')" title="Help on Annual Property Taxes">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-taxes">Annual property taxes:*</label>
                         </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-orig-rate">Original interest rate*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-orig-rate" class="calc-text-input" value="6.75%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-orig-rate" class="calc-range-slider" min="2.0" max="12.0" step="0.125" value="6.75">
-                                    <div class="calc-slider-range-labels">
-                                        <span>2%</span>
-                                        <span>7%</span>
-                                        <span>12%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-orig-term">Original term in years*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-orig-term" class="calc-text-input" value="30" min="10" max="30" step="5">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-orig-term" class="calc-range-slider" min="10" max="30" step="5" value="30">
-                                    <div class="calc-slider-range-labels">
-                                        <span>10</span>
-                                        <span>20</span>
-                                        <span>30</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-pmts-made">Number of payments made*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-pmts-made" class="calc-text-input" value="36" min="1" max="360" step="1">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-pmts-made" class="calc-range-slider" min="1" max="360" step="1" value="36">
-                                    <div class="calc-slider-range-labels">
-                                        <span>1</span>
-                                        <span>180</span>
-                                        <span>360</span>
-                                    </div>
-                                </div>
+                        <input type="text" id="inp-taxes" class="calc-text-input" value="$3,600.00">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-taxes" class="calc-slider" min="0" max="300" step="1" value="126">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SECTION 3: NEW REFINANCE MORTGAGE -->
-                    <div class="calc-section-group" style="margin-top: 25px;">
-                        <div class="calc-group-title">NEW REFINANCE MORTGAGE</div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-new-rate">New interest rate*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-new-rate" class="calc-text-input" value="5.75%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-new-rate" class="calc-range-slider" min="2.0" max="12.0" step="0.125" value="5.75">
-                                    <div class="calc-slider-range-labels">
-                                        <span>2%</span>
-                                        <span>7%</span>
-                                        <span>12%</span>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- Annual home insurance -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('home-insurance')" title="Help on Annual Home Insurance">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-insurance">Annual home insurance:*</label>
                         </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-new-term">New term in years*</label>
-                            <div class="calc-input-control">
-                                <input type="number" id="inp-new-term" class="calc-text-input" value="30" min="10" max="30" step="5">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-new-term" class="calc-range-slider" min="10" max="30" step="5" value="30">
-                                    <div class="calc-slider-range-labels">
-                                        <span>10</span>
-                                        <span>20</span>
-                                        <span>30</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-closing-costs">Closing costs*</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-closing-costs" class="calc-text-input" value="$4,500.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-closing-costs" class="calc-range-slider" min="0" max="20000" step="250" value="4500">
-                                    <div class="calc-slider-range-labels">
-                                        <span>$0</span>
-                                        <span>$10k</span>
-                                        <span>$20k</span>
-                                    </div>
-                                </div>
+                        <input type="text" id="inp-insurance" class="calc-text-input" value="$1,200.00">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-insurance" class="calc-slider" min="0" max="300" step="1" value="103">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
                             </div>
                         </div>
                     </div>
 
-                </div>
-
-                <!-- Right Column: Interactive Charts -->
-                <div class="calc-charts-column">
-                    <div class="calc-chart-box">
-                        <div class="calc-chart-title">MONTHLY PAYMENT COMPARISON</div>
-                        <div id="refi-svg-container" style="width: 100%; height: 350px;">
-                            <!-- Dynamic SVG Chart rendered via JS -->
-                        </div>
-
-                        <!-- Legend -->
-                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 11px; flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span style="width: 12px; height: 12px; background: #2563eb; border-radius: 2px;"></span>
-                                <span>Current Monthly Payment</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span style="width: 12px; height: 12px; background: #16a34a; border-radius: 2px;"></span>
-                                <span>New Refinanced Payment</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- DEFINITIONS SECTION -->
-            <section class="calc-definitions-wrapper">
-                <h3 class="calc-defs-title">DEFINITIONS</h3>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">APPRAISED HOME VALUE &amp; TAXES</div>
-                    <div class="calc-def-desc">Current fair market valuation of your property along with annual county property taxes and hazard homeowners insurance.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">ORIGINAL LOAN &amp; PAYMENTS MADE</div>
-                    <div class="calc-def-desc">The initial principal borrowed and the total count of monthly mortgage payments fulfilled to date. This determines the outstanding mortgage balance remaining to be refinanced.</div>
-                </div>
-
-                <div class="calc-def-item">
-                    <div class="calc-def-term">CLOSING COSTS &amp; BREAK-EVEN POINT</div>
-                    <div class="calc-def-desc">Closing costs include lender origination fees, appraisal, title insurance, and escrow fees. The break-even horizon is the number of months of lower monthly payments needed to completely recover the upfront refinance closing costs.</div>
                 </div>
             </section>
 
-            <!-- LEGAL DISCLAIMER -->
-            <div style="font-size: 11px; color: #94a3b8; line-height: 1.6; margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment, tax, or legal advice. We cannot and do not guarantee their applicability or accuracy in regard to your individual circumstances. All examples are hypothetical and are for illustrative purposes only. We encourage you to seek personalized advice from qualified Raymond James professionals regarding your personal finance and retirement issues.</p>
+            <!-- ============================================================
+             SECTION 2: ORIGINAL MORTGAGE (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-orig-mortgage">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-orig-mortgage')">
+                    <div class="calc-accordion-title-row">
+                        <div class="calc-accordion-title-left">
+                            <span class="calc-accordion-title-text">ORIGINAL MORTGAGE:</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span class="calc-accordion-payment-subhead">Monthly payment <span id="hdr-orig-payment">$1,922.28</span></span>
+                            <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- Original mortgage -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('orig-loan-amt')" title="Help on Original Mortgage Amount">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-orig-mortgage">Original mortgage:*</label>
+                        </div>
+                        <input type="text" id="inp-orig-mortgage" class="calc-text-input" value="$250,000">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-orig-mortgage" class="calc-slider" min="0" max="300" step="1" value="117">
+                            <div class="calc-slider-ticks">
+                                <span>$0k</span>
+                                <span>$200k</span>
+                                <span>$500k</span>
+                                <span>$1m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Original interest rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('orig-interest-rate')" title="Help on Original Interest Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-orig-rate">Original interest rate:*</label>
+                        </div>
+                        <input type="text" id="inp-orig-rate" class="calc-text-input" value="8.5%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-orig-rate" class="calc-slider" min="0" max="100" step="1" value="85">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Original term in years -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('orig-term-years')" title="Help on Original Term in Years">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="select-orig-term">Original term in years:*</label>
+                        </div>
+                        <select id="select-orig-term" class="calc-select-input" onchange="syncTermSelectToRange('orig')">
+                            <option value="10">10 years</option>
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="25">25 years</option>
+                            <option value="30" selected>30 years</option>
+                            <option value="40">40 years</option>
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-orig-term" class="calc-slider" min="1" max="40" step="1" value="30" oninput="syncTermRangeToSelect('orig')">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Original monthly PMI -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('monthly-pmi')" title="Help on Original Monthly PMI">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-orig-pmi">Original monthly PMI:*</label>
+                        </div>
+                        <input type="text" id="inp-orig-pmi" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-orig-pmi" class="calc-slider" min="0" max="300" step="1" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$500</span>
+                                <span>$2.5k</span>
+                                <span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Number of payments made (With Screenshot 2 error tooltip) -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('payments-made')" title="Help on Number of Payments Made">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-payments-made">Number of payments made:*</label>
+                        </div>
+                        <div style="position: relative; width: 100%;">
+                            <input type="text" id="inp-payments-made" class="calc-text-input" value="60">
+                            <div class="calc-input-tooltip" id="payments-made-tooltip">Enter an amount between 1 and 360</div>
+                        </div>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-payments-made" class="calc-slider" min="1" max="360" step="1" value="60">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>121</span>
+                                <span>240</span>
+                                <span>360</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             SECTION 3: NEW MORTGAGE (SCREENSHOT 2)
+             ============================================================ -->
+            <section class="calc-accordion" id="acc-new-mortgage">
+                <div class="calc-accordion-header" onclick="toggleAccordion('acc-new-mortgage')">
+                    <div class="calc-accordion-title-row">
+                        <div class="calc-accordion-title-left">
+                            <span class="calc-accordion-title-text">NEW MORTGAGE:</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <span class="calc-accordion-payment-subhead">Monthly payment <span id="hdr-new-payment">$1,518.52</span></span>
+                            <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-accordion-content">
+
+                    <!-- New mortgage balance (auto-computed from remaining balance of original mortgage) -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('new-mortgage-balance')" title="Help on New Mortgage Balance">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-new-balance">New mortgage balance:</label>
+                        </div>
+                        <div class="calc-readonly-val" id="inp-new-balance">$240,248.87</div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-style: italic;">
+                            Automatically equal to current remaining balance on original mortgage
+                        </div>
+                    </div>
+
+                    <!-- New interest rate -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('new-interest-rate')" title="Help on New Interest Rate">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-new-rate">New interest rate:*</label>
+                        </div>
+                        <input type="text" id="inp-new-rate" class="calc-text-input" value="6.5%">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-new-rate" class="calc-slider" min="0" max="100" step="1" value="65">
+                            <div class="calc-slider-ticks">
+                                <span>0%</span>
+                                <span>3%</span>
+                                <span>6%</span>
+                                <span>10%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New term in years -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('new-term-years')" title="Help on New Term in Years">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="select-new-term">New term in years:*</label>
+                        </div>
+                        <select id="select-new-term" class="calc-select-input" onchange="syncTermSelectToRange('new')">
+                            <option value="10">10 years</option>
+                            <option value="15">15 years</option>
+                            <option value="20">20 years</option>
+                            <option value="25">25 years</option>
+                            <option value="30" selected>30 years</option>
+                            <option value="40">40 years</option>
+                        </select>
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-new-term" class="calc-slider" min="1" max="40" step="1" value="30" oninput="syncTermRangeToSelect('new')">
+                            <div class="calc-slider-ticks">
+                                <span>1</span>
+                                <span>10</span>
+                                <span>19</span>
+                                <span>40</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Closing costs -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('closing-costs')" title="Help on Closing Costs">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-closing-costs">Closing costs:*</label>
+                        </div>
+                        <input type="text" id="inp-closing-costs" class="calc-text-input" value="$3,000.00">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-closing-costs" class="calc-slider" min="0" max="300" step="1" value="120">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$1k</span>
+                                <span>$10k</span>
+                                <span>$100k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New monthly PMI -->
+                    <div class="calc-form-row">
+                        <div class="calc-label-wrap">
+                            <button type="button" class="calc-inline-help" onclick="showHelp('monthly-pmi')" title="Help on New Monthly PMI">
+                                <i class="fas fa-circle-question"></i>
+                            </button>
+                            <label class="calc-field-label" for="inp-new-pmi">New monthly PMI:*</label>
+                        </div>
+                        <input type="text" id="inp-new-pmi" class="calc-text-input" value="$0.00">
+                        <div class="calc-slider-wrap">
+                            <input type="range" id="range-new-pmi" class="calc-slider" min="0" max="300" step="1" value="0">
+                            <div class="calc-slider-ticks">
+                                <span>$0</span>
+                                <span>$500</span>
+                                <span>$2.5k</span>
+                                <span>$5k</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ============================================================
+             RESULTS SECTION 1: INTEREST COMPARISON BANNER & GRAPH (SCREENSHOT 2, 3)
+             ============================================================ -->
+            <section class="calc-result-accordion" id="acc-res-interest">
+                <div class="calc-result-header" onclick="toggleResultAccordion('acc-res-interest')">
+                    <span class="calc-result-title" id="hdr-interest-savings">YOU COULD SAVE $83,755.20 IN INTEREST.</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                </div>
+                <div class="calc-result-content">
+                    <div class="calc-chart-box">
+                        <canvas id="refiChart" class="calc-chart-canvas" width="800" height="260"></canvas>
+                    </div>
+
+                    <div class="calc-summary-grid">
+                        <div class="calc-summary-card">
+                            <div class="calc-summary-card-val" id="card-monthly-savings">$403.76</div>
+                            <div class="calc-summary-card-label">Monthly Payment Savings</div>
+                        </div>
+                        <div class="calc-summary-card">
+                            <div class="calc-summary-card-val" id="card-breakeven-time">7.4 Months</div>
+                            <div class="calc-summary-card-label">Break-Even Period</div>
+                        </div>
+                        <div class="calc-summary-card">
+                            <div class="calc-summary-card-val" id="card-lifetime-interest">$83,755.20</div>
+                            <div class="calc-summary-card-label">Lifetime Interest Savings</div>
+                        </div>
+                        <div class="calc-summary-card">
+                            <div class="calc-summary-card-val" id="card-ltv">80.08%</div>
+                            <div class="calc-summary-card-label">New Loan-To-Value (LTV)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             RESULTS SECTION 2: PAYMENT COMPARISON BANNER & TABLE (SCREENSHOT 3)
+             ============================================================ -->
+            <section class="calc-result-accordion" id="acc-res-payment">
+                <div class="calc-result-header" onclick="toggleResultAccordion('acc-res-payment')">
+                    <span class="calc-result-title" id="hdr-monthly-savings">YOUR PAYMENT WILL DECREASE BY $403.76 PER MONTH</span>
+                    <i class="fas fa-chevron-up calc-accordion-icon"></i>
+                </div>
+                <div class="calc-result-content">
+                    <div class="calc-table-wrap">
+                        <table class="calc-breakdown-table">
+                            <thead>
+                                <tr>
+                                    <th>Payment Component</th>
+                                    <th>Current Mortgage</th>
+                                    <th>Refinanced Mortgage</th>
+                                    <th>Monthly Difference</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Principal &amp; Interest</td>
+                                    <td id="tbl-orig-pi">$1,922.28</td>
+                                    <td id="tbl-new-pi">$1,518.52</td>
+                                    <td id="tbl-diff-pi" style="color: #4ade80;">-$403.76</td>
+                                </tr>
+                                <tr>
+                                    <td>Property Taxes (Monthly)</td>
+                                    <td id="tbl-orig-taxes">$300.00</td>
+                                    <td id="tbl-new-taxes">$300.00</td>
+                                    <td id="tbl-diff-taxes">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Homeowners Insurance (Monthly)</td>
+                                    <td id="tbl-orig-ins">$100.00</td>
+                                    <td id="tbl-new-ins">$100.00</td>
+                                    <td id="tbl-diff-ins">$0.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Private Mortgage Insurance (PMI)</td>
+                                    <td id="tbl-orig-pmi">$0.00</td>
+                                    <td id="tbl-new-pmi">$0.00</td>
+                                    <td id="tbl-diff-pmi">$0.00</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td>TOTAL MONTHLY PAYMENT</td>
+                                    <td id="tbl-orig-total">$2,322.28</td>
+                                    <td id="tbl-new-total">$1,918.52</td>
+                                    <td id="tbl-diff-total" style="color: #dfa01e;">-$403.76</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             DEFINITIONS SECTION (SCREENSHOT 3, 4, 5)
+             ============================================================ -->
+            <section class="calc-definitions-section" id="definitions">
+                <h2 class="calc-definitions-title">DEFINITIONS</h2>
+
+                <div class="calc-def-item" id="def-appraised-value">
+                    <div class="calc-def-term">APPRAISED HOME VALUE</div>
+                    <div class="calc-def-desc">Current market value of your home.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-property-taxes">
+                    <div class="calc-def-term">ANNUAL PROPERTY TAXES</div>
+                    <div class="calc-def-desc">Your annual property taxes.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-home-insurance">
+                    <div class="calc-def-term">ANNUAL HOME INSURANCE</div>
+                    <div class="calc-def-desc">Your annual homeowner's insurance premium.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-orig-loan-amt">
+                    <div class="calc-def-term">ORIGINAL LOAN AMOUNT</div>
+                    <div class="calc-def-desc">Total amount of your original mortgage.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-orig-interest-rate">
+                    <div class="calc-def-term">ORIGINAL INTEREST RATE</div>
+                    <div class="calc-def-desc">Interest rate of your original mortgage. Please note that the interest rate is different from the Annual Percentage Rate (APR), which includes other expenses such as mortgage insurance, and the origination fee and or point(s), which were paid when the mortgage was first originated. The APR is normally higher than the simple interest rate.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-orig-term-years">
+                    <div class="calc-def-term">ORIGINAL TERM IN YEARS</div>
+                    <div class="calc-def-desc">Total number of years of your original mortgage.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-monthly-pmi">
+                    <div class="calc-def-term">MONTHLY PMI</div>
+                    <div class="calc-def-desc">Monthly cost of Private Mortgage Insurance (PMI). For loans secured with less than 20% down, PMI is estimated at 0.5% of your loan balance each year but can be higher or lower depending on the loan and your credit score.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-payments-made">
+                    <div class="calc-def-term">NUMBER OF PAYMENTS MADE</div>
+                    <div class="calc-def-desc">The total number of payments you have made on your original mortgage.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-new-interest-rate">
+                    <div class="calc-def-term">NEW INTEREST RATE</div>
+                    <div class="calc-def-desc">Interest rate of your new mortgage. Please note that the interest rate is different from the Annual Percentage Rate (APR), which includes other expenses such as mortgage insurance, and the origination fee and or point(s), which were paid when the mortgage was first originated. The APR is normally higher than the simple interest rate.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-new-term-years">
+                    <div class="calc-def-term">NEW TERM</div>
+                    <div class="calc-def-desc">Total number of years of your new mortgage.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-new-mortgage-balance">
+                    <div class="calc-def-term">NEW MORTGAGE BALANCE</div>
+                    <div class="calc-def-desc">Total amount for your new refinanced mortgage. This amount is equal to your current balance on your original mortgage. Closing costs and prepayment penalties are assumed to be payable at the time of closing. Closing costs are not added to your new mortgage balance.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-closing-costs">
+                    <div class="calc-def-term">CLOSING COSTS</div>
+                    <div class="calc-def-desc">Total fees and other costs associated with the new mortgage, paid at the time of closing. This calculator assumes that all closing costs are paid separately and are not rolled into the new mortgage amount.</div>
+                </div>
+
+                <div class="calc-def-item" id="def-ltv">
+                    <div class="calc-def-term">NEW LOAN-TO-VALUE</div>
+                    <div class="calc-def-desc">Total loan amount divided by the appraised value of your home.</div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+             REGULATORY DISCLAIMER (SCREENSHOT 5)
+             ============================================================ -->
+            <div class="calc-disclaimer-wrap">
+                <p class="calc-disclaimer-text">
+                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+                </p>
             </div>
 
         </article>
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="report-modal">
-        <div class="report-modal-content">
-            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
-            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 20px;">
-                <div>
-                    <h2 style="font-family: 'Playfair Display', serif; color: #0b172a; margin: 0; font-size: 22px;">Mortgage Refinance Evaluation Report</h2>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 4px;">Prepared by The Seiler Group of Raymond James</div>
-                </div>
-                <button onclick="window.print()" style="background: #0b172a; color: #dfa01e; border: 1px solid #dfa01e; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; font-size: 12px;">
-                    <i class="fas fa-print"></i> Print Report
-                </button>
-            </div>
-
-            <div id="report-modal-body">
-                <!-- Populated dynamically via JS -->
+    <!-- ============================================================
+     REPORT MODAL
+     ============================================================ -->
+    <div class="calc-modal" id="reportModal">
+        <div class="calc-modal-content">
+            <button type="button" class="calc-modal-close" onclick="closeReportModal()">&times;</button>
+            <h2 class="calc-modal-title">Mortgage Refinance Evaluation Report</h2>
+            <div id="report-modal-body"></div>
+            <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px;">
+                <button type="button" class="calc-action-btn-gold" onclick="window.print()"><i class="fas fa-print"></i> PRINT REPORT</button>
+                <button type="button" class="calc-action-btn-outline" onclick="closeReportModal()">CLOSE</button>
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
-     CHAMPION STRIP
+    <!-- ============================================================
+     HELP MODAL
      ============================================================ -->
-    <section class="champion-strip">
-
-        <!-- Brand / Social -->
-        <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
-            <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
-            </div>
+    <div class="calc-modal" id="helpModal">
+        <div class="calc-modal-content" style="max-width: 580px;">
+            <button type="button" class="calc-modal-close" onclick="closeHelpModal()">&times;</button>
+            <h3 class="calc-modal-title" id="helpModalTitle" style="font-size: 18px;">Field Help</h3>
+            <p id="helpModalText" style="font-size: 14px; line-height: 1.7; color: var(--text-slate); margin-top: 12px;"></p>
         </div>
-
-        <!-- Center Quote -->
-        <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
-        </div>
-
-        <!-- CTA -->
-        <div class="champ-cta">
-            <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
-        </div>
-
-    </section>
+    </div>
 
     <!-- ============================================================
-     FOOTER
+     CALCULATOR JAVASCRIPT ENGINE
      ============================================================ -->
-    <footer class="site-footer">
-
-        <div class="footer-addresses">
-            <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
-                <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
-            </div>
-            <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
-                <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
-            </div>
-        </div>
-
-        <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
-        </div>
-
-    </footer>
-
-    <!-- INTERACTIVE ENGINE SCRIPT -->
     <script>
-        function parseClean(val) {
-            if (typeof val === 'number') return val;
-            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
+        /* ============================================================
+           PIECEWISE RANGE SLIDER TRANSFORMS
+           ============================================================ */
+        // Appraised Value & Original Mortgage: $0 to $1M with ticks [$0, $200k, $500k, $1m]
+        function posToDollar1M(pos) {
+            pos = Math.max(0, Math.min(300, pos));
+            if (pos <= 100) {
+                return (pos / 100) * 200000;
+            } else if (pos <= 200) {
+                return 200000 + ((pos - 100) / 100) * 300000;
+            } else {
+                return 500000 + ((pos - 200) / 100) * 500000;
+            }
+        }
+        function dollar1MToPos(val) {
+            val = Math.max(0, Math.min(1000000, val));
+            if (val <= 200000) {
+                return (val / 200000) * 100;
+            } else if (val <= 500000) {
+                return 100 + ((val - 200000) / 300000) * 100;
+            } else {
+                return 200 + ((val - 500000) / 500000) * 100;
+            }
         }
 
-        function fmtMoney(num) {
-            return '$' + Math.round(num).toLocaleString('en-US');
+        // Taxes, Insurance, Closing Costs: $0 to $100k with ticks [$0, $1k, $10k, $100k]
+        function posToDollar100k(pos) {
+            pos = Math.max(0, Math.min(300, pos));
+            if (pos <= 100) {
+                return (pos / 100) * 1000;
+            } else if (pos <= 200) {
+                return 1000 + ((pos - 100) / 100) * 9000;
+            } else {
+                return 10000 + ((pos - 200) / 100) * 90000;
+            }
+        }
+        function dollar100kToPos(val) {
+            val = Math.max(0, Math.min(100000, val));
+            if (val <= 1000) {
+                return (val / 1000) * 100;
+            } else if (val <= 10000) {
+                return 100 + ((val - 1000) / 9000) * 100;
+            } else {
+                return 200 + ((val - 10000) / 90000) * 100;
+            }
         }
 
-        function fmtMoneyCents(num) {
-            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        // Monthly PMI: $0 to $5k with ticks [$0, $500, $2.5k, $5k]
+        function posToDollar5k(pos) {
+            pos = Math.max(0, Math.min(300, pos));
+            if (pos <= 100) {
+                return (pos / 100) * 500;
+            } else if (pos <= 200) {
+                return 500 + ((pos - 100) / 100) * 2000;
+            } else {
+                return 2500 + ((pos - 200) / 100) * 2500;
+            }
+        }
+        function dollar5kToPos(val) {
+            val = Math.max(0, Math.min(5000, val));
+            if (val <= 500) {
+                return (val / 500) * 100;
+            } else if (val <= 2500) {
+                return 100 + ((val - 500) / 2000) * 100;
+            } else {
+                return 200 + ((val - 2500) / 2500) * 100;
+            }
         }
 
-        function fmtPct(num) {
-            return Number(num).toFixed(3).replace(/\.?0+$/, '') + '%';
+        // Parse & Format Utilities
+        function parseCurrency(str) {
+            if (!str) return 0;
+            var num = parseFloat(String(str).replace(/[^0-9.-]/g, ''));
+            return isNaN(num) ? 0 : num;
         }
 
-        function setupSync(inputId, rangeId, isPct = false, isCurrency = false) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
+        function formatCurrency(num, decimals) {
+            decimals = (typeof decimals === 'number') ? decimals : 0;
+            var parts = Number(num).toFixed(decimals).split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return '$' + parts.join('.');
+        }
+
+        function parsePercent(str) {
+            if (!str) return 0;
+            var num = parseFloat(String(str).replace(/[^0-9.-]/g, ''));
+            return isNaN(num) ? 0 : num;
+        }
+
+        function formatPercent(num) {
+            return Number(num).toFixed(2).replace(/\.00$/, '') + '%';
+        }
+
+        /* ============================================================
+           INPUT / SLIDER TWO-WAY SYNCHRONIZATION
+           ============================================================ */
+        function bindCurrencySlider(inpId, rangeId, toValFn, toPosFn, decimals) {
+            var inp = document.getElementById(inpId);
+            var range = document.getElementById(rangeId);
             if (!inp || !range) return;
 
-            range.addEventListener('input', () => {
-                let v = parseFloat(range.value);
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(v);
-                } else if (isPct) {
-                    inp.value = fmtPct(v);
-                } else {
-                    inp.value = v;
-                }
-                calculateRefi();
+            range.addEventListener('input', function() {
+                var val = toValFn(parseFloat(range.value));
+                inp.value = formatCurrency(val, decimals);
+                inp.classList.remove('input-error');
+                calculateRefinance();
             });
 
-            inp.addEventListener('change', () => {
-                let val = parseClean(inp.value);
-                if (val < parseFloat(range.min)) val = parseFloat(range.min);
-                if (val > parseFloat(range.max)) val = parseFloat(range.max);
-                range.value = val;
-                if (isCurrency) {
-                    inp.value = fmtMoneyCents(val);
-                } else if (isPct) {
-                    inp.value = fmtPct(val);
-                } else {
-                    inp.value = val;
-                }
-                calculateRefi();
+            inp.addEventListener('change', function() {
+                var val = parseCurrency(inp.value);
+                inp.value = formatCurrency(val, decimals);
+                range.value = toPosFn(val);
+                calculateRefinance();
             });
         }
 
-        let refiData = {};
+        function bindRateSlider(inpId, rangeId) {
+            var inp = document.getElementById(inpId);
+            var range = document.getElementById(rangeId);
+            if (!inp || !range) return;
 
-        function pmt(rate, nper, pv) {
-            if (rate === 0) return pv / nper;
-            return (pv * rate * Math.pow(1 + rate, nper)) / (Math.pow(1 + rate, nper) - 1);
+            range.addEventListener('input', function() {
+                var rate = parseFloat(range.value) / 10;
+                inp.value = rate.toFixed(2).replace(/\.00$/, '') + '%';
+                inp.classList.remove('input-error');
+                calculateRefinance();
+            });
+
+            inp.addEventListener('change', function() {
+                var rate = parsePercent(inp.value);
+                rate = Math.max(0, Math.min(10, rate));
+                inp.value = rate.toFixed(2).replace(/\.00$/, '') + '%';
+                range.value = Math.round(rate * 10);
+                calculateRefinance();
+            });
         }
 
-        function calculateRefi() {
-            const origAmt = parseClean(document.getElementById('inp-orig-amt').value) || 280000;
-            const origRate = (parseClean(document.getElementById('inp-orig-rate').value) || 6.75) / 100;
-            const origTermYrs = parseClean(document.getElementById('inp-orig-term').value) || 30;
-            const pmtsMade = parseClean(document.getElementById('inp-pmts-made').value) || 36;
+        function bindPaymentsMadeSlider() {
+            var inp = document.getElementById('inp-payments-made');
+            var range = document.getElementById('range-payments-made');
+            if (!inp || !range) return;
 
-            const newRate = (parseClean(document.getElementById('inp-new-rate').value) || 5.75) / 100;
-            const newTermYrs = parseClean(document.getElementById('inp-new-term').value) || 30;
-            const closingCosts = parseClean(document.getElementById('inp-closing-costs').value) || 4500;
+            range.addEventListener('input', function() {
+                inp.value = range.value;
+                validateAndCalculate();
+            });
 
-            const origNper = origTermYrs * 12;
-            const origR = origRate / 12;
-            const origPI = pmt(origR, origNper, origAmt);
+            inp.addEventListener('input', function() {
+                validateAndCalculate();
+            });
 
-            // Compute remaining balance after pmtsMade
-            let bal = origAmt;
-            for (let i = 0; i < pmtsMade; i++) {
-                const interest = bal * origR;
-                const principal = origPI - interest;
-                bal = Math.max(0, bal - principal);
+            inp.addEventListener('change', function() {
+                validateAndCalculate();
+            });
+        }
+
+        function syncTermSelectToRange(type) {
+            var select = document.getElementById('select-' + type + '-term');
+            var range = document.getElementById('range-' + type + '-term');
+            if (select && range) {
+                range.value = select.value;
+                calculateRefinance();
             }
-            const currentBal = bal;
+        }
 
-            // New loan refinances currentBal
-            const newNper = newTermYrs * 12;
-            const newR = newRate / 12;
-            const newPI = pmt(newR, newNper, currentBal);
+        function syncTermRangeToSelect(type) {
+            var select = document.getElementById('select-' + type + '-term');
+            var range = document.getElementById('range-' + type + '-term');
+            if (select && range) {
+                var val = parseInt(range.value, 10);
+                var found = false;
+                for (var i = 0; i < select.options.length; i++) {
+                    if (parseInt(select.options[i].value, 10) === val) {
+                        select.selectedIndex = i;
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    var opt = document.createElement('option');
+                    opt.value = val;
+                    opt.textContent = val + ' years';
+                    select.appendChild(opt);
+                    select.value = val;
+                }
+                calculateRefinance();
+            }
+        }
 
-            const monthlySavings = origPI - newPI;
-            const breakEvenMonths = monthlySavings > 0 ? Math.ceil(closingCosts / monthlySavings) : null;
-            const fiveYearNet = (monthlySavings * 60) - closingCosts;
+        /* ============================================================
+           VALIDATION & CALCULATION CONTROLLER
+           ============================================================ */
+        function validateAndCalculate() {
+            var inp = document.getElementById('inp-payments-made');
+            var range = document.getElementById('range-payments-made');
+            var errorBanner = document.getElementById('error-banner');
+            var tooltip = document.getElementById('payments-made-tooltip');
 
-            refiData = {
-                origAmt, origRate, origTermYrs, pmtsMade, currentBal,
-                origPI, newRate, newTermYrs, newPI, closingCosts,
-                monthlySavings, breakEvenMonths, fiveYearNet
+            var val = parseInt(inp.value, 10);
+            var origTermYears = parseInt(document.getElementById('select-orig-term').value, 10) || 30;
+            var maxPayments = origTermYears * 12;
+
+            if (isNaN(val) || val < 1) {
+                errorBanner.classList.add('show');
+                inp.classList.add('input-error');
+                tooltip.classList.add('show');
+                return false;
+            } else {
+                errorBanner.classList.remove('show');
+                inp.classList.remove('input-error');
+                tooltip.classList.remove('show');
+                if (range) range.value = Math.min(val, 360);
+                calculateRefinance();
+                return true;
+            }
+        }
+
+        /* ============================================================
+           CORE REFINANCE FINANCIAL CALCULATION ENGINE
+           ============================================================ */
+        var currentRefiData = null;
+
+        function calculateRefinance() {
+            var appraisedVal = parseCurrency(document.getElementById('inp-appraised-val').value);
+            var annualTaxes = parseCurrency(document.getElementById('inp-taxes').value);
+            var annualInsurance = parseCurrency(document.getElementById('inp-insurance').value);
+
+            var origMortgage = parseCurrency(document.getElementById('inp-orig-mortgage').value);
+            var origRatePct = parsePercent(document.getElementById('inp-orig-rate').value);
+            var origTermYears = parseInt(document.getElementById('select-orig-term').value, 10) || 30;
+            var origPMI = parseCurrency(document.getElementById('inp-orig-pmi').value);
+            var paymentsMade = parseInt(document.getElementById('inp-payments-made').value, 10);
+
+            var newRatePct = parsePercent(document.getElementById('inp-new-rate').value);
+            var newTermYears = parseInt(document.getElementById('select-new-term').value, 10) || 30;
+            var closingCosts = parseCurrency(document.getElementById('inp-closing-costs').value);
+            var newPMI = parseCurrency(document.getElementById('inp-new-pmi').value);
+
+            // Validation guard
+            if (isNaN(paymentsMade) || paymentsMade < 1) {
+                document.getElementById('error-banner').classList.add('show');
+                document.getElementById('inp-payments-made').classList.add('input-error');
+                document.getElementById('payments-made-tooltip').classList.add('show');
+                return;
+            } else {
+                document.getElementById('error-banner').classList.remove('show');
+                document.getElementById('inp-payments-made').classList.remove('input-error');
+                document.getElementById('payments-made-tooltip').classList.remove('show');
+            }
+
+            var n0 = origTermYears * 12;
+            var r0 = (origRatePct / 100) / 12;
+            paymentsMade = Math.min(paymentsMade, n0 - 1);
+
+            // 1. Original Monthly Payment (Principal & Interest)
+            var m0 = 0;
+            if (r0 > 0 && n0 > 0) {
+                m0 = origMortgage * (r0 * Math.pow(1 + r0, n0)) / (Math.pow(1 + r0, n0) - 1);
+            } else if (n0 > 0) {
+                m0 = origMortgage / n0;
+            }
+
+            // 2. Remaining Balance after paymentsMade
+            var remainingBalance = 0;
+            if (r0 > 0 && n0 > 0) {
+                remainingBalance = origMortgage * (Math.pow(1 + r0, n0) - Math.pow(1 + r0, paymentsMade)) / (Math.pow(1 + r0, n0) - 1);
+            } else if (n0 > 0) {
+                remainingBalance = origMortgage * (1 - (paymentsMade / n0));
+            }
+            remainingBalance = Math.max(0, remainingBalance);
+
+            // Update New Mortgage Balance field
+            document.getElementById('inp-new-balance').textContent = formatCurrency(remainingBalance, 2);
+
+            // Remaining interest on original loan
+            var remainingPaymentsOld = Math.max(0, n0 - paymentsMade);
+            var remainingTotalPaidOld = m0 * remainingPaymentsOld;
+            var remainingInterestOld = Math.max(0, remainingTotalPaidOld - remainingBalance);
+
+            // 3. New Monthly Payment
+            var nNew = newTermYears * 12;
+            var rNew = (newRatePct / 100) / 12;
+            var mNew = 0;
+            if (rNew > 0 && nNew > 0) {
+                mNew = remainingBalance * (rNew * Math.pow(1 + rNew, nNew)) / (Math.pow(1 + rNew, nNew) - 1);
+            } else if (nNew > 0) {
+                mNew = remainingBalance / nNew;
+            }
+
+            var totalPaidNew = mNew * nNew;
+            var totalInterestNew = Math.max(0, totalPaidNew - remainingBalance);
+
+            // Escrow (Taxes & Insurance)
+            var monthlyTaxes = annualTaxes / 12;
+            var monthlyInsurance = annualInsurance / 12;
+
+            // Total monthly payments
+            var totalMonthlyOld = m0 + origPMI + monthlyTaxes + monthlyInsurance;
+            var totalMonthlyNew = mNew + newPMI + monthlyTaxes + monthlyInsurance;
+            var monthlySavings = totalMonthlyOld - totalMonthlyNew;
+
+            // Header payment subheads
+            document.getElementById('hdr-orig-payment').textContent = formatCurrency(totalMonthlyOld, 2);
+            document.getElementById('hdr-new-payment').textContent = formatCurrency(totalMonthlyNew, 2);
+
+            // Break-even period
+            var breakevenMonths = 0;
+            var breakevenYears = 0;
+            var breakevenText = 'N/A';
+            if (monthlySavings > 0) {
+                breakevenMonths = closingCosts / monthlySavings;
+                breakevenYears = breakevenMonths / 12;
+                breakevenText = breakevenMonths.toFixed(1) + ' Months (' + breakevenYears.toFixed(1) + ' Yrs)';
+            } else if (monthlySavings <= 0 && closingCosts === 0) {
+                breakevenText = 'Immediate (No closing costs)';
+            } else {
+                breakevenText = 'Never (No monthly savings)';
+            }
+
+            // Interest difference
+            var netInterestSavings = remainingInterestOld - totalInterestNew;
+
+            // LTV Ratio
+            var ltv = (appraisedVal > 0) ? ((remainingBalance / appraisedVal) * 100) : 0;
+
+            // Update Dynamic Headings (Screenshot 2, 3)
+            var hdrInterest = document.getElementById('hdr-interest-savings');
+            if (netInterestSavings >= 0) {
+                hdrInterest.textContent = 'YOU COULD SAVE ' + formatCurrency(netInterestSavings, 2) + ' IN INTEREST.';
+                hdrInterest.style.color = '#4ade80';
+            } else {
+                hdrInterest.textContent = 'YOU COULD PAY ' + formatCurrency(Math.abs(netInterestSavings), 2) + ' MORE IN INTEREST.';
+                hdrInterest.style.color = '#dfa01e';
+            }
+
+            var hdrPayment = document.getElementById('hdr-monthly-savings');
+            if (monthlySavings > 0) {
+                hdrPayment.textContent = 'YOUR PAYMENT WILL DECREASE BY ' + formatCurrency(monthlySavings, 2) + ' PER MONTH';
+            } else if (monthlySavings < 0) {
+                hdrPayment.textContent = 'YOUR PAYMENT WILL INCREASE BY ' + formatCurrency(Math.abs(monthlySavings), 2) + ' PER MONTH';
+            } else {
+                hdrPayment.textContent = 'YOUR PAYMENT WILL REMAIN THE SAME PER MONTH';
+            }
+
+            // Stat Cards
+            document.getElementById('card-monthly-savings').textContent = formatCurrency(Math.abs(monthlySavings), 2) + (monthlySavings >= 0 ? ' / mo' : ' (higher)');
+            document.getElementById('card-monthly-savings').style.color = monthlySavings >= 0 ? '#4ade80' : '#f87171';
+            document.getElementById('card-breakeven-time').textContent = breakevenText;
+            document.getElementById('card-lifetime-interest').textContent = formatCurrency(Math.abs(netInterestSavings), 2) + (netInterestSavings >= 0 ? ' Saved' : ' More');
+            document.getElementById('card-ltv').textContent = ltv.toFixed(2) + '%';
+
+            // Breakdown Table
+            document.getElementById('tbl-orig-pi').textContent = formatCurrency(m0, 2);
+            document.getElementById('tbl-new-pi').textContent = formatCurrency(mNew, 2);
+            var piDiff = m0 - mNew;
+            document.getElementById('tbl-diff-pi').textContent = (piDiff >= 0 ? '-' : '+') + formatCurrency(Math.abs(piDiff), 2);
+            document.getElementById('tbl-diff-pi').style.color = piDiff >= 0 ? '#4ade80' : '#f87171';
+
+            document.getElementById('tbl-orig-taxes').textContent = formatCurrency(monthlyTaxes, 2);
+            document.getElementById('tbl-new-taxes').textContent = formatCurrency(monthlyTaxes, 2);
+            document.getElementById('tbl-diff-taxes').textContent = '$0.00';
+
+            document.getElementById('tbl-orig-ins').textContent = formatCurrency(monthlyInsurance, 2);
+            document.getElementById('tbl-new-ins').textContent = formatCurrency(monthlyInsurance, 2);
+            document.getElementById('tbl-diff-ins').textContent = '$0.00';
+
+            document.getElementById('tbl-orig-pmi').textContent = formatCurrency(origPMI, 2);
+            document.getElementById('tbl-new-pmi').textContent = formatCurrency(newPMI, 2);
+            var pmiDiff = origPMI - newPMI;
+            document.getElementById('tbl-diff-pmi').textContent = (pmiDiff >= 0 ? '-' : '+') + formatCurrency(Math.abs(pmiDiff), 2);
+
+            document.getElementById('tbl-orig-total').textContent = formatCurrency(totalMonthlyOld, 2);
+            document.getElementById('tbl-new-total').textContent = formatCurrency(totalMonthlyNew, 2);
+            document.getElementById('tbl-diff-total').textContent = (monthlySavings >= 0 ? '-' : '+') + formatCurrency(Math.abs(monthlySavings), 2);
+            document.getElementById('tbl-diff-total').style.color = monthlySavings >= 0 ? '#4ade80' : '#f87171';
+
+            // Store data for Report Modal
+            currentRefiData = {
+                appraisedVal: appraisedVal,
+                annualTaxes: annualTaxes,
+                annualInsurance: annualInsurance,
+                origMortgage: origMortgage,
+                origRatePct: origRatePct,
+                origTermYears: origTermYears,
+                origPMI: origPMI,
+                paymentsMade: paymentsMade,
+                remainingPaymentsOld: remainingPaymentsOld,
+                remainingBalance: remainingBalance,
+                m0: m0,
+                remainingInterestOld: remainingInterestOld,
+                totalMonthlyOld: totalMonthlyOld,
+                newRatePct: newRatePct,
+                newTermYears: newTermYears,
+                closingCosts: closingCosts,
+                newPMI: newPMI,
+                mNew: mNew,
+                totalInterestNew: totalInterestNew,
+                totalMonthlyNew: totalMonthlyNew,
+                monthlySavings: monthlySavings,
+                breakevenMonths: breakevenMonths,
+                breakevenYears: breakevenYears,
+                breakevenText: breakevenText,
+                netInterestSavings: netInterestSavings,
+                ltv: ltv
             };
 
-            // Update UI
-            const bannerText = document.getElementById('banner-text');
-            const statSavings = document.getElementById('stat-monthly-savings');
-            const statBe = document.getElementById('stat-breakeven');
-            const statFiveYr = document.getElementById('stat-5yr-savings');
-
-            document.getElementById('stat-closing-costs').innerText = fmtMoneyCents(closingCosts);
-
-            if (monthlySavings > 0) {
-                bannerText.innerText = `Refinancing saves you ${fmtMoneyCents(monthlySavings)} per month, breaking even in ${breakEvenMonths} months`;
-                statSavings.innerText = `${fmtMoneyCents(monthlySavings)} / mo`;
-                statSavings.style.color = '#4ade80';
-                statBe.innerText = `${breakEvenMonths} Months`;
-                statBe.style.color = '#60a5fa';
-                statFiveYr.innerText = fmtMoneyCents(fiveYearNet);
-                statFiveYr.style.color = fiveYearNet > 0 ? '#dfa01e' : '#ef4444';
-            } else {
-                bannerText.innerText = `New payment is higher by ${fmtMoneyCents(Math.abs(monthlySavings))} per month (Refinance not recommended)`;
-                statSavings.innerText = `-${fmtMoneyCents(Math.abs(monthlySavings))} / mo`;
-                statSavings.style.color = '#ef4444';
-                statBe.innerText = 'No Break-Even';
-                statBe.style.color = '#ef4444';
-                statFiveYr.innerText = fmtMoneyCents(fiveYearNet);
-                statFiveYr.style.color = '#ef4444';
-            }
-
-            renderChart(origPI, newPI);
+            // Redraw Chart
+            drawRefiChart(remainingInterestOld, totalInterestNew);
         }
 
-        function renderChart(origPmt, newPmt) {
-            const container = document.getElementById('refi-svg-container');
-            const maxVal = Math.max(origPmt, newPmt, 1000) * 1.25;
-            const w = 480;
-            const h = 330;
-            const padL = 70;
-            const padR = 30;
-            const padT = 30;
-            const padB = 60;
-            const chartW = w - padL - padR;
-            const chartH = h - padT - padB;
+        /* ============================================================
+           INTERACTIVE HTML5 CANVAS CHART
+           ============================================================ */
+        function drawRefiChart(oldInterest, newInterest) {
+            var canvas = document.getElementById('refiChart');
+            if (!canvas || !canvas.getContext) return;
+            var ctx = canvas.getContext('2d');
 
-            const hOrig = (origPmt / maxVal) * chartH;
-            const hNew = (newPmt / maxVal) * chartH;
+            var dpr = window.devicePixelRatio || 1;
+            var rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = 240 * dpr;
+            ctx.scale(dpr, dpr);
 
-            const yOrig = padT + chartH - hOrig;
-            const yNew = padT + chartH - hNew;
+            var w = rect.width;
+            var h = 240;
 
-            const barW = 85;
-            const xOrig = padL + (chartW / 3) - (barW / 2);
-            const xNew = padL + (2 * chartW / 3) - (barW / 2);
+            // Clear Background
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, w, h);
 
-            let gridLines = '';
-            for (let i = 0; i <= 4; i++) {
-                const val = (maxVal / 4) * i;
-                const y = padT + chartH - (i * chartH / 4);
-                gridLines += `
-                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />
-                    <text x="${padL - 10}" y="${y + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(val).toLocaleString()}</text>
-                `;
-            }
+            // Title
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 13px Montserrat, sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('LIFETIME INTEREST COMPARISON', 24, 28);
 
-            const svgHtml = `
-                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
-                    ${gridLines}
+            var maxVal = Math.max(oldInterest, newInterest, 1000);
+            var barHeight = 36;
+            var maxBarW = w - 280;
 
-                    <!-- Current Payment Bar -->
-                    <rect x="${xOrig}" y="${yOrig}" width="${barW}" height="${hOrig}" fill="#2563eb" rx="4" />
-                    <text x="${xOrig + barW / 2}" y="${Math.max(padT + 15, yOrig - 8)}" fill="#1e3a8a" font-size="12" font-weight="700" text-anchor="middle">
-                        ${fmtMoneyCents(origPmt)}
-                    </text>
-                    <text x="${xOrig + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Current Mortgage
-                    </text>
+            // Bar 1: Current Mortgage Remaining Interest
+            var y1 = 70;
+            var barW1 = Math.max(8, (oldInterest / maxVal) * maxBarW);
+            ctx.fillStyle = '#334155';
+            ctx.font = '600 12px "Open Sans", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('Current Mortgage Remaining Interest', 24, y1 - 8);
 
-                    <!-- New Payment Bar -->
-                    <rect x="${xNew}" y="${yNew}" width="${barW}" height="${hNew}" fill="#16a34a" rx="4" />
-                    <text x="${xNew + barW / 2}" y="${Math.max(padT + 15, yNew - 8)}" fill="#14532d" font-size="12" font-weight="700" text-anchor="middle">
-                        ${fmtMoneyCents(newPmt)}
-                    </text>
-                    <text x="${xNew + barW / 2}" y="${padT + chartH + 20}" fill="#0b172a" font-size="11" font-weight="600" text-anchor="middle">
-                        Refinanced Mortgage
-                    </text>
+            // Bar shadow & fill
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fillRect(24, y1, maxBarW, barHeight);
+            ctx.fillStyle = '#3b82f6';
+            ctx.fillRect(24, y1, barW1, barHeight);
 
-                    <!-- Axis -->
-                    <line x1="${padL}" y1="${padT + chartH}" x2="${w - padR}" y2="${padT + chartH}" stroke="#94a3b8" stroke-width="1.5" />
-                </svg>
-            `;
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 13px "Open Sans", sans-serif';
+            ctx.fillText(formatCurrency(oldInterest, 0), 24 + barW1 + 14, y1 + 23);
 
-            container.innerHTML = svgHtml;
+            // Bar 2: New Mortgage Total Interest
+            var y2 = 145;
+            var barW2 = Math.max(8, (newInterest / maxVal) * maxBarW);
+            ctx.fillStyle = '#334155';
+            ctx.font = '600 12px "Open Sans", sans-serif';
+            ctx.textAlign = 'left';
+            ctx.fillText('New Refinanced Mortgage Total Interest', 24, y2 - 8);
+
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fillRect(24, y2, maxBarW, barHeight);
+            ctx.fillStyle = (newInterest <= oldInterest) ? '#22c55e' : '#dfa01e';
+            ctx.fillRect(24, y2, barW2, barHeight);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 13px "Open Sans", sans-serif';
+            ctx.fillText(formatCurrency(newInterest, 0), 24 + barW2 + 14, y2 + 23);
+
+            // Legend
+            var yLeg = 215;
+            ctx.fillStyle = '#3b82f6';
+            ctx.fillRect(24, yLeg, 14, 14);
+            ctx.fillStyle = '#475569';
+            ctx.font = '11px "Open Sans", sans-serif';
+            ctx.fillText('Current Remaining Interest', 44, yLeg + 11);
+
+            ctx.fillStyle = (newInterest <= oldInterest) ? '#22c55e' : '#dfa01e';
+            ctx.fillRect(220, yLeg, 14, 14);
+            ctx.fillStyle = '#475569';
+            ctx.fillText('New Mortgage Total Interest', 240, yLeg + 11);
         }
 
+        /* ============================================================
+           ACCORDION TOGGLES
+           ============================================================ */
+        function toggleAccordion(id) {
+            var acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
+        }
+
+        function toggleResultAccordion(id) {
+            var acc = document.getElementById(id);
+            if (acc) {
+                acc.classList.toggle('collapsed');
+            }
+        }
+
+        /* ============================================================
+           REPORT MODAL GENERATOR
+           ============================================================ */
         function openReportModal() {
-            const body = document.getElementById('report-modal-body');
-            if (!refiData.origPI) calculateRefi();
+            if (!currentRefiData) calculateRefinance();
+            if (!currentRefiData) return;
 
-            const d = refiData;
+            var d = currentRefiData;
+            var html = '';
 
-            body.innerHTML = `
-                <div style="background: #0b172a; color: #fff; padding: 18px; border-radius: 6px; border: 1px solid rgba(223,160,30,0.4); margin-bottom: 20px;">
-                    <div style="font-size: 11px; text-transform: uppercase; color: #dfa01e; font-weight: 700;">Refinance Recommendation</div>
-                    <div style="font-size: 22px; font-weight: 700; color: #4ade80; margin-top: 4px;">
-                        Monthly Payment Reduction: ${fmtMoneyCents(d.monthlySavings)} / mo
-                    </div>
-                    <div style="font-size: 13px; color: #94a3b8; margin-top: 4px;">
-                        Break-Even Horizon: ${d.breakEvenMonths ? d.breakEvenMonths + ' Months' : 'N/A'} | 5-Year Cumulative Savings: ${fmtMoneyCents(d.fiveYearNet)}
-                    </div>
-                </div>
+            html += '<div style="margin-bottom: 20px; font-size: 13px; color: var(--text-slate);">';
+            html += '<p>This report compares your current mortgage against your refinancing proposal based on current remaining balances and market assumptions.</p>';
+            html += '</div>';
 
-                <table class="report-table">
-                    <thead>
-                        <tr><th colspan="2">Loan Comparison Overview</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Current Outstanding Principal Balance</td><td>${fmtMoneyCents(d.currentBal)}</td></tr>
-                        <tr><td>Current Interest Rate / Term</td><td>${fmtPct(d.origRate * 100)} / ${d.origTermYrs} Years (${d.pmtsMade} payments made)</td></tr>
-                        <tr><td>Current Principal &amp; Interest Payment</td><td style="color: #2563eb; font-weight: 700;">${fmtMoneyCents(d.origPI)} / mo</td></tr>
-                        <tr><td>New Interest Rate / Term</td><td>${fmtPct(d.newRate * 100)} / ${d.newTermYrs} Years</td></tr>
-                        <tr><td>New Principal &amp; Interest Payment</td><td style="color: #16a34a; font-weight: 700;">${fmtMoneyCents(d.newPI)} / mo</td></tr>
-                        <tr><td>Refinance Closing Costs</td><td style="color: #ef4444;">${fmtMoneyCents(d.closingCosts)}</td></tr>
-                        <tr style="background: #eff6ff; font-weight: 700;">
-                            <td>Net Monthly Cash Flow Improvement</td>
-                            <td style="color: #1d4ed8; font-size: 15px;">${fmtMoneyCents(d.monthlySavings)} / mo</td>
-                        </tr>
-                    </tbody>
-                </table>
-            `;
+            html += '<table class="calc-breakdown-table" style="margin-bottom: 24px;">';
+            html += '<thead><tr><th>Loan Metric</th><th>Current Mortgage</th><th>Refinanced Mortgage</th></tr></thead>';
+            html += '<tbody>';
+            html += '<tr><td>Original Loan Amount</td><td>' + formatCurrency(d.origMortgage, 2) + '</td><td>-</td></tr>';
+            html += '<tr><td>Current Remaining Balance</td><td>' + formatCurrency(d.remainingBalance, 2) + '</td><td>' + formatCurrency(d.remainingBalance, 2) + '</td></tr>';
+            html += '<tr><td>Interest Rate</td><td>' + d.origRatePct.toFixed(2) + '%</td><td>' + d.newRatePct.toFixed(2) + '%</td></tr>';
+            html += '<tr><td>Remaining Term</td><td>' + d.remainingPaymentsOld + ' months (' + (d.remainingPaymentsOld / 12).toFixed(1) + ' yrs)</td><td>' + (d.newTermYears * 12) + ' months (' + d.newTermYears + ' yrs)</td></tr>';
+            html += '<tr><td>Monthly Principal &amp; Interest</td><td>' + formatCurrency(d.m0, 2) + '</td><td>' + formatCurrency(d.mNew, 2) + '</td></tr>';
+            html += '<tr><td>Monthly Taxes &amp; Insurance</td><td>' + formatCurrency((d.annualTaxes + d.annualInsurance) / 12, 2) + '</td><td>' + formatCurrency((d.annualTaxes + d.annualInsurance) / 12, 2) + '</td></tr>';
+            html += '<tr><td>Monthly PMI</td><td>' + formatCurrency(d.origPMI, 2) + '</td><td>' + formatCurrency(d.newPMI, 2) + '</td></tr>';
+            html += '<tr class="highlight-row"><td>TOTAL MONTHLY PAYMENT</td><td>' + formatCurrency(d.totalMonthlyOld, 2) + '</td><td>' + formatCurrency(d.totalMonthlyNew, 2) + '</td></tr>';
+            html += '<tr><td>Total Remaining / New Interest</td><td>' + formatCurrency(d.remainingInterestOld, 2) + '</td><td>' + formatCurrency(d.totalInterestNew, 2) + '</td></tr>';
+            html += '</tbody></table>';
 
-            document.getElementById('report-modal').style.display = 'block';
+            html += '<div class="calc-summary-grid" style="margin-top: 10px;">';
+            html += '<div class="calc-summary-card"><div class="calc-summary-card-val">' + formatCurrency(Math.abs(d.monthlySavings), 2) + '</div><div class="calc-summary-card-label">' + (d.monthlySavings >= 0 ? 'Monthly Payment Reduction' : 'Monthly Payment Increase') + '</div></div>';
+            html += '<div class="calc-summary-card"><div class="calc-summary-card-val">' + formatCurrency(d.closingCosts, 2) + '</div><div class="calc-summary-card-label">Out-of-Pocket Closing Costs</div></div>';
+            html += '<div class="calc-summary-card"><div class="calc-summary-card-val">' + d.breakevenText + '</div><div class="calc-summary-card-label">Break-Even Point</div></div>';
+            html += '<div class="calc-summary-card"><div class="calc-summary-card-val">' + formatCurrency(Math.abs(d.netInterestSavings), 2) + '</div><div class="calc-summary-card-label">' + (d.netInterestSavings >= 0 ? 'Total Interest Saved' : 'Total Additional Interest') + '</div></div>';
+            html += '</div>';
+
+            document.getElementById('report-modal-body').innerHTML = html;
+            document.getElementById('reportModal').style.display = 'block';
         }
 
         function closeReportModal() {
-            document.getElementById('report-modal').style.display = 'none';
+            document.getElementById('reportModal').style.display = 'none';
         }
 
-        window.onclick = function(e) {
-            const modal = document.getElementById('report-modal');
-            if (e.target === modal) modal.style.display = 'none';
+        /* ============================================================
+           HELP MODAL & SCROLL
+           ============================================================ */
+        var helpDefinitions = {
+            'appraised-value': { title: 'Appraised Home Value', text: 'Current market value of your home based on recent professional appraisals or local real estate market conditions.' },
+            'property-taxes': { title: 'Annual Property Taxes', text: 'Your estimated annual local property and real estate taxes levied by county or city municipalities.' },
+            'home-insurance': { title: 'Annual Home Insurance', text: "Your annual homeowner's hazard and casualty insurance policy premium." },
+            'orig-loan-amt': { title: 'Original Loan Amount', text: 'Total original mortgage principal borrowed when your existing loan was initially originated.' },
+            'orig-interest-rate': { title: 'Original Interest Rate', text: 'Interest rate of your original mortgage. Please note that the interest rate is different from the Annual Percentage Rate (APR), which includes other expenses such as mortgage insurance, and the origination fee and or point(s).' },
+            'orig-term-years': { title: 'Original Term in Years', text: 'Total number of years of your original mortgage (e.g., 30 years or 15 years).' },
+            'monthly-pmi': { title: 'Monthly PMI', text: 'Monthly cost of Private Mortgage Insurance (PMI). For loans secured with less than 20% down, PMI is estimated at 0.5% of your loan balance each year but can be higher or lower depending on the loan and your credit score.' },
+            'payments-made': { title: 'Number of Payments Made', text: 'The total number of monthly payments you have made on your original mortgage to date (must be between 1 and 360).' },
+            'new-mortgage-balance': { title: 'New Mortgage Balance', text: 'Total amount for your new refinanced mortgage. This amount is equal to your current balance on your original mortgage. Closing costs and prepayment penalties are assumed to be payable at the time of closing.' },
+            'new-interest-rate': { title: 'New Interest Rate', text: 'Interest rate of your new mortgage proposal. Please note that the interest rate is different from the Annual Percentage Rate (APR).' },
+            'new-term-years': { title: 'New Term', text: 'Total number of years of your proposed new refinanced mortgage.' },
+            'closing-costs': { title: 'Closing Costs', text: 'Total fees and other costs associated with the new mortgage, paid at the time of closing. This calculator assumes that all closing costs are paid separately and are not rolled into the new mortgage amount.' },
+            'ltv': { title: 'New Loan-To-Value', text: 'Total loan amount divided by the appraised value of your home.' }
         };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-home-val', 'range-home-val', false, true);
-            setupSync('inp-taxes', 'range-taxes', false, true);
-            setupSync('inp-insurance', 'range-insurance', false, true);
+        function showHelp(key) {
+            var item = helpDefinitions[key];
+            if (item) {
+                document.getElementById('helpModalTitle').textContent = item.title;
+                document.getElementById('helpModalText').textContent = item.text;
+                document.getElementById('helpModal').style.display = 'block';
+            }
+        }
 
-            setupSync('inp-orig-amt', 'range-orig-amt', false, true);
-            setupSync('inp-orig-rate', 'range-orig-rate', true, false);
-            setupSync('inp-orig-term', 'range-orig-term', false, false);
-            setupSync('inp-pmts-made', 'range-pmts-made', false, false);
+        function closeHelpModal() {
+            document.getElementById('helpModal').style.display = 'none';
+        }
 
-            setupSync('inp-new-rate', 'range-new-rate', true, false);
-            setupSync('inp-new-term', 'range-new-term', false, false);
-            setupSync('inp-closing-costs', 'range-closing-costs', false, true);
+        function scrollToDefinitions() {
+            var el = document.getElementById('definitions');
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
-            calculateRefi();
+        /* ============================================================
+           SHARE DROPDOWN & SOCIAL SHARING
+           ============================================================ */
+        function toggleShareDropdown(e) {
+            e.stopPropagation();
+            var dd = document.getElementById('shareDropdown');
+            if (dd) {
+                dd.style.display = (dd.style.display === 'flex') ? 'none' : 'flex';
+            }
+        }
+
+        function shareToSocial(network) {
+            var url = encodeURIComponent(window.location.href);
+            var title = encodeURIComponent(document.title);
+            var shareUrl = '';
+
+            switch (network) {
+                case 'facebook':
+                    shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + url;
+                    break;
+                case 'twitter':
+                    shareUrl = 'https://twitter.com/intent/tweet?url=' + url + '&text=' + title;
+                    break;
+                case 'linkedin':
+                    shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + url;
+                    break;
+                case 'email':
+                    shareUrl = 'mailto:?subject=' + title + '&body=' + url;
+                    break;
+            }
+
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'width=600,height=400');
+            }
+            document.getElementById('shareDropdown').style.display = 'none';
+        }
+
+        // Close dropdowns and modals on outside click
+        window.addEventListener('click', function(e) {
+            var shareDropdown = document.getElementById('shareDropdown');
+            if (shareDropdown && shareDropdown.style.display === 'flex' && !e.target.closest('.calc-share-wrap')) {
+                shareDropdown.style.display = 'none';
+            }
+            var reportModal = document.getElementById('reportModal');
+            if (e.target === reportModal) {
+                reportModal.style.display = 'none';
+            }
+            var helpModal = document.getElementById('helpModal');
+            if (e.target === helpModal) {
+                helpModal.style.display = 'none';
+            }
+        });
+
+        /* ============================================================
+           INITIALIZATION ON LOAD
+           ============================================================ */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Bind all currency inputs to non-linear sliders
+            bindCurrencySlider('inp-appraised-val', 'range-appraised-val', posToDollar1M, dollar1MToPos, 0);
+            bindCurrencySlider('inp-taxes', 'range-taxes', posToDollar100k, dollar100kToPos, 2);
+            bindCurrencySlider('inp-insurance', 'range-insurance', posToDollar100k, dollar100kToPos, 2);
+
+            bindCurrencySlider('inp-orig-mortgage', 'range-orig-mortgage', posToDollar1M, dollar1MToPos, 0);
+            bindRateSlider('inp-orig-rate', 'range-orig-rate');
+            bindCurrencySlider('inp-orig-pmi', 'range-orig-pmi', posToDollar5k, dollar5kToPos, 2);
+            bindPaymentsMadeSlider();
+
+            bindRateSlider('inp-new-rate', 'range-new-rate');
+            bindCurrencySlider('inp-closing-costs', 'range-closing-costs', posToDollar100k, dollar100kToPos, 2);
+            bindCurrencySlider('inp-new-pmi', 'range-new-pmi', posToDollar5k, dollar5kToPos, 2);
+
+            // Run initial calculation
+            calculateRefinance();
+
+            // Resize listener for Canvas responsiveness
+            window.addEventListener('resize', function() {
+                if (currentRefiData) {
+                    drawRefiChart(currentRefiData.remainingInterestOld, currentRefiData.totalInterestNew);
+                }
+            });
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
+
 </html>
