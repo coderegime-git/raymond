@@ -215,7 +215,6 @@
                     </div>
                     <div class="calc-action-status-center">
                         <div class="calc-action-status-line1" id="status-line1">NUA strategy saves you $16,625 in taxes.</div>
-                        <div class="calc-action-status-line2" id="status-line2">Total taxes (PV): NUA ($52,090) vs. IRA Rollover ($68,715).</div>
                     </div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
@@ -494,9 +493,9 @@
 
                 <!-- Net Unrealized Appreciation (NUA) -->
                 <div class="calc-def-item">
-                    <div class="calc-def-term">NET UNREALIZED APPRECIATION (NUA)</div>
+                    <div class="calc-def-term">Net unrealized appreciation (NUA)</div>
                     <p class="calc-def-desc">
-                        The difference between the total purchase price (cost basis) of company stock and its fair market value (FMV) at the time of distribution is Net Unrealized Appreciation (NUA). It is the gain of your company stock over its cost basis to the qualified plan's trust. This amount will be taxed when you eventually sell the stock in your taxable account. If you take a taxable, in-kind distribution of your company stock, your NUA is treated as a long-term capital gain, even if you sell your stock immediately after the distribution. Please note that any appreciation above the FMV of the stock that occurs after your distribution from the plan, will be considered a short-term capital gain if you liquidate your company stock within one year of the distribution date. If the stock is held for at least one year after the distribution date, it is then characterized as a long-term capital gain.
+                        NUA is the excess of the fair market value (FMV) of your company stock at the time of the distribution over its cost basis to the qualified plan's trust. This amount will be taxed when you eventually sell the stock in your taxable account. If you take a taxable, in-kind distribution of your company stock, your NUA is treated as a long-term capital gain, even if you sell your stock immediately after the distribution. Please note that any appreciation above the FMV of the stock that occurs after your distribution from the plan, will be considered a short-term capital gain if you liquidate your company stock within one year of the distribution date. If the stock is held for at least one year after the distribution date, it is then characterized as a long-term capital gain.
                     </p>
                     <p class="calc-def-desc" style="margin-top: 10px;">
                         If you roll over your company stock to an IRA, rather than taking it as a currently taxable, in-kind distribution, the NUA will be subject to taxation at the ordinary income rates, rather than capital gains rates, when it is subsequently withdrawn from the IRA.
@@ -1047,16 +1046,14 @@
 
             // Update Sticky Header Status Box
             const sLine1 = document.getElementById('status-line1');
-            const sLine2 = document.getElementById('status-line2');
-            if (taxSavingsPV > 0) {
-                sLine1.textContent = `NUA strategy saves you ${fmtCurr(taxSavingsPV)} in taxes.`;
-                sLine2.textContent = `Total taxes (PV): NUA (${fmtCurr(totalNuaTaxesPV)}) vs. IRA Rollover (${fmtCurr(totalIraTaxesPV)}).`;
-            } else if (taxSavingsPV < 0) {
-                sLine1.textContent = `IRA Rollover strategy saves you ${fmtCurr(-taxSavingsPV)} in taxes.`;
-                sLine2.textContent = `Total taxes (PV): IRA Rollover (${fmtCurr(totalIraTaxesPV)}) vs. NUA (${fmtCurr(totalNuaTaxesPV)}).`;
-            } else {
-                sLine1.textContent = `Both strategies result in identical estimated taxes.`;
-                sLine2.textContent = `Total taxes (PV): ${fmtCurr(totalNuaTaxesPV)}.`;
+            if (sLine1) {
+                if (taxSavingsPV > 0) {
+                    sLine1.textContent = `NUA strategy saves you ${fmtCurr(taxSavingsPV)} in taxes.`;
+                } else if (taxSavingsPV < 0) {
+                    sLine1.textContent = `IRA Rollover strategy saves you ${fmtCurr(-taxSavingsPV)} in taxes.`;
+                } else {
+                    sLine1.textContent = `Both strategies result in identical estimated taxes.`;
+                }
             }
 
             // Render Stacked Bar Chart

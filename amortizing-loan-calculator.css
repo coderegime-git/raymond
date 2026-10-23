@@ -438,6 +438,61 @@ body.calculator-page {
     transition: color 0.2s ease;
 }
 
+.calc-sec-header-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.calc-sec-collapsed-summary {
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-left: 140px;
+}
+
+@media (max-width: 768px) {
+    .calc-sec-collapsed-summary {
+        margin-left: 0;
+        font-size: 12px;
+    }
+}
+
+.calc-section.collapsed .calc-sec-collapsed-summary {
+    display: block;
+}
+
+#sec-breakdown .calc-sec-header {
+    position: relative;
+    justify-content: center;
+}
+
+#sec-breakdown .calc-sec-chevron {
+    position: absolute;
+    right: 0;
+}
+
+.calc-stacked-chart-card {
+    background: #eeeeee;
+    border-radius: 4px;
+    padding: 16px 12px;
+    margin: 10px 0 24px 0;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.calc-stacked-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
 .calc-sec-header:hover .calc-sec-title {
     color: #dfa01e;
 }

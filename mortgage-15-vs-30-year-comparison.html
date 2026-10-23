@@ -388,6 +388,13 @@
                     <i class="fas fa-chevron-up calc-accordion-icon"></i>
                 </div>
                 <div class="calc-accordion-content">
+                    <!-- Principal Balance Line Chart (Screenshot) -->
+                    <div class="calc-chart-box" id="balance-chart-box" style="background: #ededed !important; border: none !important; padding: 12px 10px !important; border-radius: 4px; box-shadow: none !important; margin-bottom: 24px; overflow: hidden;">
+                        <svg id="balanceLineChart" viewBox="0 0 740 330" style="display: block; width: 100%; height: auto;">
+                            <!-- Injected dynamically via renderBalanceLineChart() -->
+                        </svg>
+                    </div>
+
                     <div class="calc-table-wrap calc-balance-table-wrap">
                         <table class="calc-luxury-table" id="table-balance-schedule">
                             <thead>
@@ -839,11 +846,109 @@
             document.getElementById('card-30-pmt').innerText = formatCurrency(pmt30);
             document.getElementById('card-saved-amt').innerText = formatCurrency(totalSavings);
 
-            // Update SVG Chart
+            // Update SVG Charts
             updateBarChart(pmt15, pmt30);
+            renderBalanceLineChart(principal, sched15, sched30);
 
             // Update Principal Schedule Table
             renderScheduleTable(sched15, sched30);
+        }
+
+        // --- SVG Balance Line Chart Dynamic Render (Screenshot) ---
+        function renderBalanceLineChart(principal, sched15, sched30) {
+            const svg = document.getElementById('balanceLineChart');
+            if (!svg || !sched15 || !sched30) return;
+
+            const svgW = 740;
+            const svgH = 330;
+            const padLeft = 85;
+            const padTop = 25;
+            const plotW = 460;
+            const plotH = 250;
+            const plotX2 = padLeft + plotW; // 545
+            const plotY2 = padTop + plotH; // 275
+            const legendX = 575;
+            const legendY1 = 65;
+            const legendY2 = 98;
+
+            const pThousands = (principal || 350000) / 1000;
+            const step = Math.max(10, Math.ceil((pThousands / 7) / 10) * 10) || 50;
+            const numSteps = 7;
+            const yMax = Math.max(step * numSteps, Math.ceil(pThousands / step) * step);
+
+            let gridHtml = '';
+            // Outer background & white plot box
+            gridHtml += `<rect width="${svgW}" height="${svgH}" fill="#ededed" rx="4" />`;
+            gridHtml += `<rect x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="#ffffff" stroke="#777777" stroke-width="1" />`;
+
+            // Y-axis label (rotated -90deg)
+            gridHtml += `<text x="25" y="${padTop + plotH / 2}" font-family="'Open Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#000000" text-anchor="middle" transform="rotate(-90, 25, ${padTop + plotH / 2})">Thousands of Dollars</text>`;
+
+            // Y-axis ticks and horizontal gridlines
+            for (let i = 0; i <= numSteps; i++) {
+                const val = i * step;
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+                gridHtml += `<line x1="${padLeft - 4}" y1="${yPos}" x2="${padLeft}" y2="${yPos}" stroke="#777777" stroke-width="1" />`;
+                gridHtml += `<text x="${padLeft - 7}" y="${yPos + 4}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="end">$${val}</text>`;
+                if (i > 0 && i < numSteps) {
+                    gridHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${plotX2}" y2="${yPos}" stroke="#cbd5e1" stroke-width="1" />`;
+                }
+            }
+
+            // X-axis ticks (Years 0 to 15)
+            let xTicksHtml = '';
+            const totalYears = 15;
+            const xStep = plotW / totalYears;
+            for (let yr = 0; yr <= totalYears; yr++) {
+                const xPos = padLeft + yr * xStep;
+                xTicksHtml += `
+                    <line x1="${xPos}" y1="${plotY2}" x2="${xPos}" y2="${plotY2 + 4}" stroke="#777777" stroke-width="1" />
+                    <text x="${xPos}" y="${plotY2 + 18}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="middle">${yr}</text>
+                `;
+            }
+            xTicksHtml += `<text x="${padLeft + plotW / 2}" y="${plotY2 + 38}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Year Number</text>`;
+
+            // Points for 15-Year and 30-Year lines (Years 0 to 15)
+            const pts15 = [];
+            const pts30 = [];
+
+            const y0_15 = padTop + plotH - (pThousands / yMax) * plotH;
+            pts15.push(`${padLeft},${y0_15.toFixed(1)}`);
+            pts30.push(`${padLeft},${y0_15.toFixed(1)}`);
+
+            for (let yr = 1; yr <= totalYears; yr++) {
+                const xPos = padLeft + yr * xStep;
+                const b15 = (sched15.find(s => s.year === yr)?.balance || 0) / 1000;
+                const b30 = (sched30.find(s => s.year === yr)?.balance || 0) / 1000;
+
+                const y15 = padTop + plotH - (b15 / yMax) * plotH;
+                const y30 = padTop + plotH - (b30 / yMax) * plotH;
+
+                pts15.push(`${xPos.toFixed(1)},${y15.toFixed(1)}`);
+                pts30.push(`${xPos.toFixed(1)},${y30.toFixed(1)}`);
+            }
+
+            const linesHtml = `
+                <path d="M ${pts15.join(' L ')}" fill="none" stroke="#0000d0" stroke-width="2.5" />
+                <path d="M ${pts30.join(' L ')}" fill="none" stroke="#5c9c4a" stroke-width="2.5" />
+            `;
+
+            // Legend
+            const legendHtml = `
+                <g id="line-legend">
+                    <circle cx="${legendX + 8}" cy="${legendY1}" r="8" fill="#0000d0" stroke="#000000" stroke-width="0.75" />
+                    <text x="${legendX + 26}" y="${legendY1 + 5}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13">15-Year</text>
+                    <circle cx="${legendX + 8}" cy="${legendY2}" r="8" fill="#5c9c4a" stroke="#000000" stroke-width="0.75" />
+                    <text x="${legendX + 26}" y="${legendY2 + 5}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13">30-Year</text>
+                </g>
+            `;
+
+            svg.innerHTML = `
+                ${gridHtml}
+                ${xTicksHtml}
+                ${linesHtml}
+                ${legendHtml}
+            `;
         }
 
         // --- SVG Bar Chart Dynamic Render ---

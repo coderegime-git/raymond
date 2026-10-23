@@ -762,6 +762,18 @@ body {
     border-bottom: 1px solid rgba(223, 160, 30, 0.15);
 }
 
+.calc-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.calc-checkbox-prefix {
+    font-size: 13.5px;
+    color: #e2e8f0;
+    min-width: 65px;
+}
+
 .calc-checkbox-label {
     display: inline-flex;
     align-items: center;
@@ -799,6 +811,27 @@ body {
     font-weight: 900;
     font-size: 11px;
     color: #000000;
+}
+
+/* Disabled State (when single or not applicable) */
+.calc-checkbox-label.disabled,
+.calc-checkbox-row.disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.calc-checkbox-label.disabled {
+    pointer-events: none;
+}
+
+.calc-checkbox-label.disabled .calc-checkbox-custom {
+    background: #475569 !important;
+    border-color: #64748b !important;
+    cursor: not-allowed;
+}
+
+.calc-checkbox-label.disabled .calc-checkbox-text {
+    color: #94a3b8;
 }
 
 /* Deduction Subtotal Displays */

@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css?v=176">
-    <link rel="stylesheet" href="estate-tax-planning.css?v=1">
+    <link rel="stylesheet" href="estate-tax-planning.css?v=2">
 </head>
 
 <body class="calc-white-page">
@@ -1006,18 +1006,18 @@
             </section>
 
             <!-- ============================================================
-             SECTION 6: PROJECTED VALUE OF YOUR ESTATE (COLLAPSED)
+             SECTION 6: PROJECTED VALUE OF YOUR ESTATE
              ============================================================ -->
-            <section class="calc-collapsible-section collapsed" id="sec-projection-chart">
+            <section class="calc-collapsible-section" id="sec-projection-chart">
                 <div class="calc-section-header" onclick="toggleSec('sec-projection-chart')">
                     <h2 class="calc-section-title" id="proj-chart-title">PROJECTED VALUE OF YOUR ESTATE FOR THE NEXT 10 YEARS.</h2>
                     <div class="calc-section-right">
                         <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-section-body">
+                <div class="calc-section-body" style="padding: 16px 20px;">
 
-                    <div class="calc-chart-box" id="proj-bar-chart-container" style="min-height: 320px;">
+                    <div id="proj-bar-chart-container" style="min-height: 320px; background: #ededed !important; border: none !important; padding: 0 !important; border-radius: 4px; box-shadow: none !important; width: 100%; overflow: hidden;">
                         <!-- Injected via JS -->
                     </div>
 
@@ -1709,8 +1709,11 @@
                 const yTax = ySubject * 0.40;
                 const yHeirs = Math.max(0, curAssets - yExpenses - charity - toSpouse - yTax);
 
+                const calYear = 2026 + (y - 1);
+
                 yearlyData.push({
-                    year: y,
+                    year: calYear,
+                    yearNum: y,
                     assets: curAssets,
                     taxable: yTaxable,
                     tax: yTax,
@@ -1810,57 +1813,122 @@
             const container = document.getElementById('proj-bar-chart-container');
             if (!container || !data || data.length === 0) return;
 
-            const width = container.clientWidth || 760;
-            const height = 300;
-            const padLeft = 70;
-            const padRight = 30;
-            const padTop = 30;
-            const padBottom = 40;
+            const svgW = 740;
+            const svgH = 320;
+            const padLeft = 65;
+            const padTop = 24;
+            const plotW = 480;
+            const plotH = 250;
+            const plotX2 = padLeft + plotW; // 545
+            const plotY2 = padTop + plotH; // 274
+            const legendX = 575;
+            const legendY1 = 62;
+            const legendY2 = 94;
 
-            const chartW = width - padLeft - padRight;
-            const chartH = height - padTop - padBottom;
+            const maxDataVal = Math.max(...data.map(d => Math.max(d.assets, d.heirs))) || 0;
+            const isAllZero = maxDataVal <= 0.01;
 
-            const maxVal = Math.max(...data.map(d => Math.max(d.assets, d.heirs, d.tax))) || 100000;
-            let yMax = Math.max(100000, maxVal * 1.15);
+            let yMax = 25;
+            let tickValues = [0, 5, 10, 15, 20, 25];
 
-            let gridHtml = '';
-            const steps = 5;
-            for (let i = 0; i <= steps; i++) {
-                const val = (i / steps) * yMax;
-                const yPos = padTop + chartH - (i / steps) * chartH;
-                gridHtml += `
-                    <line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#cbd5e1" stroke-width="0.75" opacity="0.6"/>
-                    <text x="${padLeft - 10}" y="${yPos + 4}" fill="#64748b" font-size="11" font-family="'Open Sans', sans-serif" text-anchor="end">${fmtMoney(val)}</text>
-                `;
+            if (!isAllZero) {
+                const rawStep = maxDataVal / 5;
+                const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep || 1)));
+                const residual = rawStep / magnitude;
+                let step;
+                if (residual <= 1) step = 1 * magnitude;
+                else if (residual <= 2) step = 2 * magnitude;
+                else if (residual <= 2.5) step = 2.5 * magnitude;
+                else if (residual <= 5) step = 5 * magnitude;
+                else step = 10 * magnitude;
+
+                yMax = step * 5;
+                if (yMax < maxDataVal) {
+                    yMax = step * 6;
+                }
+                const numSteps = Math.round(yMax / step);
+                tickValues = [];
+                for (let i = 0; i <= numSteps; i++) {
+                    tickValues.push(i * step);
+                }
             }
 
+            function fmtTick(val) {
+                if (val === 0) return '$0';
+                if (isAllZero || yMax <= 25) return '$' + Math.round(val);
+                if (yMax >= 1000000) {
+                    if (val % 1000000 === 0) return '$' + (val / 1000000) + 'M';
+                    return '$' + (val / 1000000).toFixed(1) + 'M';
+                }
+                if (yMax >= 1000) {
+                    if (val % 1000 === 0) return '$' + (val / 1000) + 'k';
+                    return '$' + (val / 1000).toFixed(0) + 'k';
+                }
+                return '$' + Math.round(val).toLocaleString('en-US');
+            }
+
+            let gridHtml = '';
+            // Plot white box with 1px border
+            gridHtml += `<rect x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="#ffffff" stroke="#777777" stroke-width="1" />`;
+
+            tickValues.forEach(val => {
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+                // Small tick sticking out to the left
+                gridHtml += `<line x1="${padLeft - 4}" y1="${yPos}" x2="${padLeft}" y2="${yPos}" stroke="#777777" stroke-width="1" />`;
+                // Y-axis tick label
+                gridHtml += `<text x="${padLeft - 7}" y="${yPos + 4}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="end">${fmtTick(val)}</text>`;
+                // Interior horizontal grid line
+                if (val > 0 && val < yMax) {
+                    gridHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${plotX2}" y2="${yPos}" stroke="#cbd5e1" stroke-width="1" />`;
+                }
+            });
+
             const numYears = data.length;
-            const slotW = chartW / numYears;
-            const barW = Math.min(24, slotW * 0.4);
+            const slotW = plotW / numYears;
+            const barW = Math.min(12, slotW * 0.32);
 
             let barsHtml = '';
             data.forEach((d, idx) => {
-                const xCenter = padLeft + idx * slotW + slotW / 2;
+                const slotCenter = padLeft + idx * slotW + slotW / 2;
 
-                // Net to heirs bar (blue)
-                const barH1 = (d.heirs / yMax) * chartH;
-                const yPos1 = padTop + chartH - barH1;
+                // Bar 1: Estate value (Blue #0000d0)
+                const rawH1 = isAllZero ? 2 : Math.max(2, (d.assets / yMax) * plotH);
+                const yPos1 = padTop + plotH - rawH1;
+                const xPos1 = slotCenter - barW - 0.5;
+
+                // Bar 2: Remaining for heirs (Green #5c9c4a)
+                const rawH2 = isAllZero ? 2 : Math.max(2, (d.heirs / yMax) * plotH);
+                const yPos2 = padTop + plotH - rawH2;
+                const xPos2 = slotCenter + 0.5;
 
                 barsHtml += `
-                    <rect x="${xCenter - barW / 2}" y="${yPos1}" width="${barW}" height="${barH1}" fill="#1d4ed8" rx="2">
-                        <title>Year ${d.year} Net to Heirs: ${fmtMoney(d.heirs)}</title>
+                    <rect x="${xPos1}" y="${yPos1}" width="${barW}" height="${rawH1}" fill="#0000d0" stroke="#000088" stroke-width="0.5">
+                        <title>Year ${d.year} Estate value: ${fmtMoney(d.assets)}</title>
                     </rect>
-                    <text x="${xCenter}" y="${height - padBottom + 18}" fill="#64748b" font-size="11" font-weight="600" text-anchor="middle">
+                    <rect x="${xPos2}" y="${yPos2}" width="${barW}" height="${rawH2}" fill="#5c9c4a" stroke="#3d6f31" stroke-width="0.5">
+                        <title>Year ${d.year} Remaining for heirs: ${fmtMoney(d.heirs)}</title>
+                    </rect>
+                    <text x="${slotCenter}" y="${plotY2 + 18}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="middle">
                         ${d.year}
                     </text>
                 `;
             });
 
+            const legendHtml = `
+                <g id="chart-legend">
+                    <circle cx="${legendX + 8}" cy="${legendY1}" r="8" fill="#0000d0" stroke="#000000" stroke-width="0.75" />
+                    <text x="${legendX + 26}" y="${legendY1 + 5}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13">Estate value</text>
+                    <circle cx="${legendX + 8}" cy="${legendY2}" r="8" fill="#5c9c4a" stroke="#000000" stroke-width="0.75" />
+                    <text x="${legendX + 26}" y="${legendY2 + 5}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13">Remaining for heirs</text>
+                </g>
+            `;
+
             container.innerHTML = `
-                <svg width="100%" height="100%" viewBox="0 0 ${width} ${height}">
+                <svg width="100%" height="auto" viewBox="0 0 ${svgW} ${svgH}" style="display: block; width: 100%; height: auto;">
+                    <rect width="${svgW}" height="${svgH}" fill="#ededed" rx="4" />
                     ${gridHtml}
                     ${barsHtml}
-                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${width - padRight}" y2="${padTop + chartH}" stroke="#94a3b8" stroke-width="1.5"/>
+                    ${legendHtml}
                 </svg>
             `;
         }
@@ -1878,7 +1946,7 @@
             res.yearlyData.forEach(item => {
                 rows += `
                     <tr>
-                        <td>Year ${item.year}</td>
+                        <td>${item.year}</td>
                         <td>${fmtMoney(item.assets)}</td>
                         <td>${fmtMoney(item.taxable)}</td>
                         <td style="color: #eab308;">${fmtMoney(item.tax)}</td>

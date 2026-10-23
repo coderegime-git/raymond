@@ -186,8 +186,8 @@
                             <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
-                                <i class="fab fa-x-twitter"></i>
+                            <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on Twitter" aria-label="Share on Twitter" onclick="shareToSocial('twitter', event)">
+                                <i class="fab fa-twitter"></i>
                             </a>
                             <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
                                 <i class="fab fa-linkedin-in"></i>
@@ -297,9 +297,9 @@
                             <label for="inp-retire-age" class="calc-field-label">Age at retirement:*</label>
                             <span class="calc-q-dot" title="Target retirement age">?</span>
                         </div>
-                        <input type="text" id="inp-retire-age" class="calc-text-input" value="65">
+                        <input type="text" id="inp-retire-age" class="calc-text-input" value="90">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-retire-age" class="calc-range-slider" min="10" max="90" step="1" value="65">
+                            <input type="range" id="range-retire-age" class="calc-range-slider" min="10" max="90" step="1" value="90">
                             <div class="calc-tick-labels">
                                 <span>10</span>
                                 <span>37</span>
@@ -315,9 +315,9 @@
                             <label for="inp-fed-tax" class="calc-field-label">Federal income tax rate:*</label>
                             <span class="calc-q-dot" title="Your marginal federal income tax bracket">?</span>
                         </div>
-                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="25%">
+                        <input type="text" id="inp-fed-tax" class="calc-text-input" value="50%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="50" step="1" value="25">
+                            <input type="range" id="range-fed-tax" class="calc-range-slider" min="0" max="50" step="1" value="50">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>17%</span>
@@ -333,9 +333,9 @@
                             <label for="inp-state-tax" class="calc-field-label">State income tax rate:*</label>
                             <span class="calc-q-dot" title="Your state income tax rate">?</span>
                         </div>
-                        <input type="text" id="inp-state-tax" class="calc-text-input" value="5%">
+                        <input type="text" id="inp-state-tax" class="calc-text-input" value="9%">
                         <div class="calc-slider-col">
-                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="20" step="0.5" value="5">
+                            <input type="range" id="range-state-tax" class="calc-range-slider" min="0" max="20" step="0.5" value="9">
                             <div class="calc-tick-labels">
                                 <span>0%</span>
                                 <span>7%</span>
@@ -371,32 +371,17 @@
             <!-- ============================================================
              SECTION 3: TAXES, PENALTIES & LOST INTEREST
              ============================================================ -->
-            <section class="calc-section collapsed" id="sec-breakdown">
+            <section class="calc-section" id="sec-breakdown">
                 <div class="calc-sec-header" onclick="toggleSec('sec-breakdown')">
                     <h2 class="calc-sec-title">TAXES, PENALTIES &amp; LOST INTEREST</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
-                    <table class="calc-breakdown-table">
-                        <tbody>
-                            <tr>
-                                <td>Taxes:</td>
-                                <td id="bk-taxes">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Penalties:</td>
-                                <td id="bk-penalty">$100.00</td>
-                            </tr>
-                            <tr>
-                                <td>Lost interest:</td>
-                                <td id="bk-lost-interest">$10,424.00</td>
-                            </tr>
-                            <tr class="calc-breakdown-total">
-                                <td>Total:</td>
-                                <td id="bk-total">$10,824.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="calc-chart-box">
+                        <svg class="calc-chart-svg" id="breakdown-chart-svg" viewBox="0 0 760 330" preserveAspectRatio="none">
+                            <!-- Injected dynamically via JS -->
+                        </svg>
+                    </div>
                 </div>
             </section>
 
@@ -848,43 +833,42 @@
             const lostInterest = Math.max(0, saveVal - P);
             const totalCost = totalTaxPenalty + lostInterest;
 
-            // Update Breakdown Table
-            document.getElementById('bk-taxes').textContent = fmtCurr(taxesAmount);
-            document.getElementById('bk-penalty').textContent = fmtCurr(penaltyAmount);
-            document.getElementById('bk-lost-interest').textContent = fmtCurr(lostInterest);
-            document.getElementById('bk-total').textContent = fmtCurr(totalCost);
-
+            // Render Both Charts
             renderBarChart(spendVal, saveVal);
+            renderBreakdownChart(taxesAmount, penaltyAmount, lostInterest);
         }
 
         function renderBarChart(spend, save) {
             const svg = document.getElementById('spend-chart-svg');
-            const tip = document.getElementById('chart-tip');
+            if (!svg) return;
             svg.innerHTML = '';
 
             const w = 760;
-            const h = 360;
+            const h = 330;
             const padL = 75;
             const padR = 30;
             const padT = 30;
-            const padB = 55;
+            const padB = 45;
 
             const chartW = w - padL - padR;
             const chartH = h - padT - padB;
 
-            // Maximum value on Y-axis (multiples of $2,000, minimum $14,000)
-            const maxVal = Math.max(14000, Math.ceil(Math.max(spend, save) / 2000) * 2000);
-            const steps = 7;
+            // Maximum value on Y-axis (scale steps of $10,000 up to $70,000 for standard save amount)
+            const maxValRaw = Math.max(spend, save);
+            const stepUnit = maxValRaw > 50000 ? 10000 : (maxValRaw > 20000 ? 5000 : (maxValRaw > 10000 ? 2000 : 1000));
+            const maxVal = Math.max(10000, Math.ceil(maxValRaw / stepUnit) * stepUnit);
+            const steps = Math.round(maxVal / stepUnit);
             const stepVal = maxVal / steps;
 
-            // Plot background rect
+            // Plot background rect (pure white with border matching Raymond James Dinkytown chart)
             const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             plotRect.setAttribute('x', padL);
             plotRect.setAttribute('y', padT);
             plotRect.setAttribute('width', chartW);
             plotRect.setAttribute('height', chartH);
-            plotRect.setAttribute('fill', 'rgba(11, 23, 42, 0.45)');
-            plotRect.setAttribute('rx', '3');
+            plotRect.setAttribute('fill', '#ffffff');
+            plotRect.setAttribute('stroke', '#666666');
+            plotRect.setAttribute('stroke-width', '1');
             svg.appendChild(plotRect);
 
             // Y Grid Lines & Labels
@@ -895,31 +879,30 @@
                 if (i > 0 && i < steps) {
                     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
                     line.setAttribute('x1', padL);
-                    line.setAttribute('x2', w - padR);
+                    line.setAttribute('x2', padL + chartW);
                     line.setAttribute('y1', yPos);
                     line.setAttribute('y2', yPos);
-                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke', '#c4d6bd');
                     line.setAttribute('stroke-width', '1');
                     svg.appendChild(line);
                 }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', padL - 10);
+                text.setAttribute('x', padL - 8);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
-                text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11.5');
-                text.setAttribute('font-weight', '600');
-                text.setAttribute('fill', '#94a3b8');
+                text.setAttribute('font-family', 'Arial, sans-serif');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', '#333333');
                 text.textContent = fmtCurr(val);
                 svg.appendChild(text);
             }
 
             // Two Bars: Spend it & Save it
             const colWidth = chartW / 2;
-            const barW = Math.min(140, colWidth * 0.55);
+            const barW = Math.min(130, colWidth * 0.55);
 
-            // 1. Spend It (Royal Blue - #1d4ed8)
+            // 1. Spend It (Royal Blue - #0011bb)
             const xSpend = padL + colWidth * 0.5;
             const hSpend = (spend / maxVal) * chartH;
             const ySpend = padT + chartH - hSpend;
@@ -928,34 +911,31 @@
             rectSpend.setAttribute('x', xSpend - barW / 2);
             rectSpend.setAttribute('y', ySpend);
             rectSpend.setAttribute('width', barW);
-            rectSpend.setAttribute('height', Math.max(3, hSpend));
-            rectSpend.setAttribute('fill', '#1d4ed8');
-            rectSpend.setAttribute('stroke', '#3b82f6');
-            rectSpend.setAttribute('stroke-width', '1');
-            rectSpend.setAttribute('rx', '2');
+            rectSpend.setAttribute('height', Math.max(2, hSpend));
+            rectSpend.setAttribute('fill', '#0011bb');
+            rectSpend.setAttribute('stroke', '#0011bb');
             rectSpend.setAttribute('cursor', 'pointer');
 
             const txtSpendVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSpendVal.setAttribute('x', xSpend);
-            txtSpendVal.setAttribute('y', Math.max(padT + 16, ySpend - 8));
+            txtSpendVal.setAttribute('y', Math.max(padT + 14, ySpend - 6));
             txtSpendVal.setAttribute('text-anchor', 'middle');
-            txtSpendVal.setAttribute('font-family', 'Montserrat, sans-serif');
-            txtSpendVal.setAttribute('font-size', '13');
-            txtSpendVal.setAttribute('font-weight', '700');
-            txtSpendVal.setAttribute('fill', '#ffffff');
+            txtSpendVal.setAttribute('font-family', 'Arial, sans-serif');
+            txtSpendVal.setAttribute('font-size', '11.5');
+            txtSpendVal.setAttribute('font-weight', 'bold');
+            txtSpendVal.setAttribute('fill', '#222222');
             txtSpendVal.textContent = fmtCurr(spend);
 
             const txtSpendLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSpendLabel.setAttribute('x', xSpend);
-            txtSpendLabel.setAttribute('y', padT + chartH + 26);
+            txtSpendLabel.setAttribute('y', padT + chartH + 18);
             txtSpendLabel.setAttribute('text-anchor', 'middle');
-            txtSpendLabel.setAttribute('font-family', 'Open Sans, sans-serif');
-            txtSpendLabel.setAttribute('font-size', '13');
-            txtSpendLabel.setAttribute('font-weight', '600');
-            txtSpendLabel.setAttribute('fill', '#e2e8f0');
+            txtSpendLabel.setAttribute('font-family', 'Arial, sans-serif');
+            txtSpendLabel.setAttribute('font-size', '12');
+            txtSpendLabel.setAttribute('fill', '#333333');
             txtSpendLabel.textContent = 'Spend it';
 
-            // 2. Save It (Raymond James Muted Green - #5a9e52)
+            // 2. Save It (Foliage Green - #55a049)
             const xSave = padL + colWidth * 1.5;
             const hSave = (save / maxVal) * chartH;
             const ySave = padT + chartH - hSave;
@@ -964,31 +944,28 @@
             rectSave.setAttribute('x', xSave - barW / 2);
             rectSave.setAttribute('y', ySave);
             rectSave.setAttribute('width', barW);
-            rectSave.setAttribute('height', Math.max(3, hSave));
-            rectSave.setAttribute('fill', '#5a9e52');
-            rectSave.setAttribute('stroke', '#6cb763');
-            rectSave.setAttribute('stroke-width', '1');
-            rectSave.setAttribute('rx', '2');
+            rectSave.setAttribute('height', Math.max(2, hSave));
+            rectSave.setAttribute('fill', '#55a049');
+            rectSave.setAttribute('stroke', '#55a049');
             rectSave.setAttribute('cursor', 'pointer');
 
             const txtSaveVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSaveVal.setAttribute('x', xSave);
-            txtSaveVal.setAttribute('y', Math.max(padT + 16, ySave - 8));
+            txtSaveVal.setAttribute('y', Math.max(padT + 14, ySave - 6));
             txtSaveVal.setAttribute('text-anchor', 'middle');
-            txtSaveVal.setAttribute('font-family', 'Montserrat, sans-serif');
-            txtSaveVal.setAttribute('font-size', '13');
-            txtSaveVal.setAttribute('font-weight', '700');
-            txtSaveVal.setAttribute('fill', '#ffffff');
+            txtSaveVal.setAttribute('font-family', 'Arial, sans-serif');
+            txtSaveVal.setAttribute('font-size', '11.5');
+            txtSaveVal.setAttribute('font-weight', 'bold');
+            txtSaveVal.setAttribute('fill', '#222222');
             txtSaveVal.textContent = fmtCurr(save);
 
             const txtSaveLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
             txtSaveLabel.setAttribute('x', xSave);
-            txtSaveLabel.setAttribute('y', padT + chartH + 26);
+            txtSaveLabel.setAttribute('y', padT + chartH + 18);
             txtSaveLabel.setAttribute('text-anchor', 'middle');
-            txtSaveLabel.setAttribute('font-family', 'Open Sans, sans-serif');
-            txtSaveLabel.setAttribute('font-size', '13');
-            txtSaveLabel.setAttribute('font-weight', '600');
-            txtSaveLabel.setAttribute('fill', '#e2e8f0');
+            txtSaveLabel.setAttribute('font-family', 'Arial, sans-serif');
+            txtSaveLabel.setAttribute('font-size', '12');
+            txtSaveLabel.setAttribute('fill', '#333333');
             txtSaveLabel.textContent = 'Save it';
 
             svg.appendChild(rectSpend);
@@ -998,16 +975,148 @@
             svg.appendChild(rectSave);
             svg.appendChild(txtSaveVal);
             svg.appendChild(txtSaveLabel);
+        }
 
-            // Bottom axis line
-            const axisLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            axisLine.setAttribute('x1', padL);
-            axisLine.setAttribute('x2', w - padR);
-            axisLine.setAttribute('y1', padT + chartH);
-            axisLine.setAttribute('y2', padT + chartH);
-            axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.25)');
-            axisLine.setAttribute('stroke-width', '1.5');
-            svg.appendChild(axisLine);
+        function renderBreakdownChart(taxes, penalties, lostInterest) {
+            const svg = document.getElementById('breakdown-chart-svg');
+            if (!svg) return;
+            svg.innerHTML = '';
+
+            const w = 760;
+            const h = 330;
+            const padL = 75;
+            const padR = 120;
+            const padT = 30;
+            const padB = 45;
+
+            const chartW = w - padL - padR;
+            const chartH = h - padT - padB;
+
+            // Maximum value on Y-axis
+            const maxValRaw = Math.max(taxes, penalties, lostInterest);
+            const stepUnit = maxValRaw > 50000 ? 10000 : (maxValRaw > 20000 ? 5000 : (maxValRaw > 10000 ? 2000 : 1000));
+            const maxVal = Math.max(10000, Math.ceil(maxValRaw / stepUnit) * stepUnit);
+            const steps = Math.round(maxVal / stepUnit);
+            const stepVal = maxVal / steps;
+
+            // Plot background rect
+            const plotRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotRect.setAttribute('x', padL);
+            plotRect.setAttribute('y', padT);
+            plotRect.setAttribute('width', chartW);
+            plotRect.setAttribute('height', chartH);
+            plotRect.setAttribute('fill', '#ffffff');
+            plotRect.setAttribute('stroke', '#666666');
+            plotRect.setAttribute('stroke-width', '1');
+            svg.appendChild(plotRect);
+
+            // Y Grid Lines & Labels
+            for (let i = 0; i <= steps; i++) {
+                const val = i * stepVal;
+                const yPos = padT + chartH - (i / steps) * chartH;
+
+                if (i > 0 && i < steps) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', padL);
+                    line.setAttribute('x2', padL + chartW);
+                    line.setAttribute('y1', yPos);
+                    line.setAttribute('y2', yPos);
+                    line.setAttribute('stroke', '#c4d6bd');
+                    line.setAttribute('stroke-width', '1');
+                    svg.appendChild(line);
+                }
+
+                const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                text.setAttribute('x', padL - 8);
+                text.setAttribute('y', yPos + 4);
+                text.setAttribute('text-anchor', 'end');
+                text.setAttribute('font-family', 'Arial, sans-serif');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', '#333333');
+                text.textContent = fmtCurr(val);
+                svg.appendChild(text);
+            }
+
+            // Three contiguous bars centered
+            const barW = 75;
+            const groupCenter = padL + chartW * 0.45;
+            const x1 = groupCenter - barW * 1.5;
+            const x2 = groupCenter - barW * 0.5;
+            const x3 = groupCenter + barW * 0.5;
+
+            const items = [
+                { x: x1, val: taxes, color: '#0011bb', label: 'Taxes' },
+                { x: x2, val: penalties, color: '#55a049', label: 'Penalties' },
+                { x: x3, val: lostInterest, color: '#0088ff', label: 'Lost interest' }
+            ];
+
+            items.forEach(item => {
+                const hBar = (item.val / maxVal) * chartH;
+                const yBar = padT + chartH - hBar;
+
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('x', item.x);
+                rect.setAttribute('y', yBar);
+                rect.setAttribute('width', barW);
+                rect.setAttribute('height', Math.max(2, hBar));
+                rect.setAttribute('fill', item.color);
+                rect.setAttribute('stroke', item.color);
+                rect.setAttribute('cursor', 'pointer');
+                svg.appendChild(rect);
+
+                const txtVal = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                txtVal.setAttribute('x', item.x + barW / 2);
+                txtVal.setAttribute('y', Math.max(padT + 14, yBar - 6));
+                txtVal.setAttribute('text-anchor', 'middle');
+                txtVal.setAttribute('font-family', 'Arial, sans-serif');
+                txtVal.setAttribute('font-size', '11.5');
+                txtVal.setAttribute('font-weight', 'bold');
+                txtVal.setAttribute('fill', '#222222');
+                txtVal.textContent = fmtCurr(item.val);
+                svg.appendChild(txtVal);
+            });
+
+            // Label under the 3 bars on X axis: Cost of Spending it Now
+            const txtGroupLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            txtGroupLabel.setAttribute('x', groupCenter);
+            txtGroupLabel.setAttribute('y', padT + chartH + 18);
+            txtGroupLabel.setAttribute('text-anchor', 'middle');
+            txtGroupLabel.setAttribute('font-family', 'Arial, sans-serif');
+            txtGroupLabel.setAttribute('font-size', '12');
+            txtGroupLabel.setAttribute('font-weight', 'bold');
+            txtGroupLabel.setAttribute('fill', '#222222');
+            txtGroupLabel.textContent = 'Cost of Spending it Now';
+            svg.appendChild(txtGroupLabel);
+
+            // Legend on the right side
+            const legX = padL + chartW + 18;
+            const legY = padT + 30;
+
+            const legendData = [
+                { color: '#0011bb', label: 'Taxes' },
+                { color: '#55a049', label: 'Penalties' },
+                { color: '#0088ff', label: 'Lost interest' }
+            ];
+
+            legendData.forEach((leg, idx) => {
+                const yCircle = legY + idx * 26;
+
+                const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+                circle.setAttribute('cx', legX + 6);
+                circle.setAttribute('cy', yCircle);
+                circle.setAttribute('r', '6');
+                circle.setAttribute('fill', leg.color);
+                svg.appendChild(circle);
+
+                const legText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                legText.setAttribute('x', legX + 18);
+                legText.setAttribute('y', yCircle + 4);
+                legText.setAttribute('font-family', 'Arial, sans-serif');
+                legText.setAttribute('font-size', '12');
+                legText.setAttribute('fill', '#333333');
+                legText.textContent = leg.label;
+                svg.appendChild(legText);
+            });
         }
 
         // View Report Modal

@@ -451,6 +451,14 @@
                     <div style="text-align: center; font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 16px; letter-spacing: 0.5px;">
                         PRINCIPAL BALANCES BY YEAR
                     </div>
+
+                    <!-- Principal Balances Bar Chart (Screenshot) -->
+                    <div class="calc-chart-box" id="term-chart-box" style="background: #ededed !important; border: none !important; padding: 12px 10px !important; border-radius: 4px; box-shadow: none !important; margin-bottom: 24px; overflow: hidden;">
+                        <svg id="termBarChart" viewBox="0 0 740 330" style="display: block; width: 100%; height: auto;">
+                            <!-- Injected dynamically via renderTermBarChart() -->
+                        </svg>
+                    </div>
+
                     <div class="calc-table-wrap calc-balance-table-wrap">
                         <table class="calc-luxury-table" id="table-schedule">
                             <thead>
@@ -905,11 +913,97 @@
             document.getElementById('card-total-principal').innerText = formatCurrency(principal);
             document.getElementById('card-total-interest').innerText = formatCurrency(totalInterest);
 
-            // Update Stacked Bar Chart (Screenshot 3)
+            // Update Charts
             updateStackedChart(principal, totalInterest, totalPayments);
+            renderTermBarChart(principal, yearlySchedule, years);
 
             // Update Schedule Table (Screenshot 3 & 4)
             renderScheduleTable(yearlySchedule);
+        }
+
+        // --- SVG Term Principal Balances Bar Chart (Screenshot) ---
+        function renderTermBarChart(principal, yearlySchedule, years) {
+            const svg = document.getElementById('termBarChart');
+            if (!svg || !yearlySchedule) return;
+
+            const svgW = 740;
+            const svgH = 330;
+            const padLeft = 85;
+            const padTop = 25;
+            const plotW = 625;
+            const plotH = 250;
+            const plotX2 = padLeft + plotW; // 710
+            const plotY2 = padTop + plotH; // 275
+
+            const pThousands = (principal || 350000) / 1000;
+            const step = Math.max(10, Math.ceil((pThousands / 7) / 10) * 10) || 50;
+            const numSteps = 7;
+            const yMax = Math.max(step * numSteps, Math.ceil(pThousands / step) * step);
+
+            let gridHtml = '';
+            // Background & white plot box
+            gridHtml += `<rect width="${svgW}" height="${svgH}" fill="#ededed" rx="4" />`;
+            gridHtml += `<rect x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="#ffffff" stroke="#777777" stroke-width="1" />`;
+
+            // Y-axis label (rotated -90deg)
+            gridHtml += `<text x="25" y="${padTop + plotH / 2}" font-family="'Open Sans', Arial, sans-serif" font-size="12" font-weight="700" fill="#000000" text-anchor="middle" transform="rotate(-90, 25, ${padTop + plotH / 2})">Thousands of Dollars</text>`;
+
+            // Y-axis ticks and horizontal gridlines
+            for (let i = 0; i <= numSteps; i++) {
+                const val = i * step;
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+                gridHtml += `<line x1="${padLeft - 4}" y1="${yPos}" x2="${padLeft}" y2="${yPos}" stroke="#777777" stroke-width="1" />`;
+                gridHtml += `<text x="${padLeft - 7}" y="${yPos + 4}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="end">$${val}</text>`;
+                if (i > 0 && i < numSteps) {
+                    gridHtml += `<line x1="${padLeft}" y1="${yPos}" x2="${plotX2}" y2="${yPos}" stroke="#cbd5e1" stroke-width="1" />`;
+                }
+            }
+
+            // X-axis ticks (Years 0 to years)
+            const totalBars = years + 1; // 0 to years
+            const slotW = plotW / totalBars;
+            const barW = Math.max(4, Math.min(16, slotW * 0.72));
+
+            let barsHtml = '';
+            let xTicksHtml = '';
+
+            for (let yr = 0; yr <= years; yr++) {
+                const xSlotCenter = padLeft + yr * slotW + slotW / 2;
+
+                const isLabeled = (yr % 2 === 0 || yr === years);
+                if (isLabeled) {
+                    xTicksHtml += `
+                        <line x1="${xSlotCenter}" y1="${plotY2}" x2="${xSlotCenter}" y2="${plotY2 + 4}" stroke="#777777" stroke-width="1" />
+                        <text x="${xSlotCenter}" y="${plotY2 + 18}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="12" text-anchor="middle">${yr}</text>
+                    `;
+                }
+
+                let bal = 0;
+                if (yr === 0) {
+                    bal = principal;
+                } else {
+                    const item = yearlySchedule.find(s => s.year === yr);
+                    bal = item ? item.endingBalance : 0;
+                }
+                const bThousands = bal / 1000;
+                const bHeight = Math.max(1, (bThousands / yMax) * plotH);
+                const bY = plotY2 - bHeight;
+                const bX = xSlotCenter - barW / 2;
+
+                barsHtml += `
+                    <rect x="${bX.toFixed(1)}" y="${bY.toFixed(1)}" width="${barW.toFixed(1)}" height="${bHeight.toFixed(1)}" fill="#0000d0" stroke="#000088" stroke-width="0.5">
+                        <title>Year ${yr}: ${formatCurrency(bal)}</title>
+                    </rect>
+                `;
+            }
+
+            xTicksHtml += `<text x="${padLeft + plotW / 2}" y="${plotY2 + 38}" fill="#000000" font-family="'Open Sans', Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">Year Number</text>`;
+
+            svg.innerHTML = `
+                ${gridHtml}
+                ${barsHtml}
+                ${xTicksHtml}
+            `;
         }
 
         // --- Stacked Bar Chart Dynamic Render ---

@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxable vs. Tax Advantaged Investments | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Compare taxable investments against tax-deferred and tax-free accounts. Analyze the compound impact of taxes on your growth and retirement withdrawals.">
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/invest-compare" />
+    <meta property="og:title" content="Taxable vs. Tax Advantaged Investments" />
+    <meta property="og:image" content="https://www.raymondjames.com/-/media/RJ/Common/Resources/Taxes/Check-This-List-Twice-Before-the-Year-Ends.jpg" />
+    <link rel="canonical" href="taxable-vs-tax-advantaged-investments.html" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Dedicated Stylesheet -->
+    <link rel="stylesheet" href="taxable-vs-tax-advantaged-investments.css?v=2">
+</head>
+<body class="calculator-page">
+
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand-wrapper">
+                <a href="index.html" title="The Seiler Group of Raymond James">
+                    <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="brand-logo-img">
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">HOME</a>
+                <div class="nav-dropdown">
+                    <a href="corporate-executive-services.html" class="nav-link">ABOUT US <i class="fas fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="corporate-executive-services.html" class="nav-dropdown-item">Corporate Executives</a>
+                        <a href="counseling-visionaries.html" class="nav-dropdown-item">Counseling Visionaries</a>
+                    </div>
+                </div>
+                <a href="counseling-visionaries.html" class="nav-link">INDIVIDUALS &amp; FAMILIES</a>
+                <a href="resources.html" class="nav-link active">RESOURCES</a>
+                <a href="contact-us.html" class="nav-link">CONTACT US</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="client-access-btn">CLIENT ACCESS</a>
+            </nav>
+            <button class="mobile-hamburger" id="mobile-menu-trigger" aria-label="Open Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close-btn">&times;</button>
+        </div>
+        <div class="drawer-nav">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="corporate-executive-services.html" class="drawer-link">About Us</a>
+            <a href="counseling-visionaries.html" class="drawer-link">Individuals &amp; Families</a>
+            <a href="resources.html" class="drawer-link active">Resources</a>
+            <a href="contact-us.html" class="drawer-link">Contact Us</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" class="client-access-btn" style="text-align: center; margin-top: 14px;">Client Access</a>
+        </div>
+    </div>
+
+    <!-- Floating Prev / Next Navigation -->
+    <a href="student-loan-consolidation-and-debt-payoff.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Student Loan Consolidation and Debt Payoff">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+    <a href="traditional-ira-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Traditional IRA Calculator">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- Main Container -->
+    <main class="calc-main-wrapper">
+
+        <!-- Hero Card -->
+        <div class="calc-hero-card">
+            <div class="calc-hero-img-wrap">
+                <img src="assets/resources/card-54.jpg" alt="Taxable vs. Tax Advantaged Investments - Financial Planning" onerror="this.src='assets/resources/tax-planning-hero.jpg'">
+            </div>
+            <div class="calc-header-box">
+                <div class="calc-breadcrumbs">
+                    <a href="resources.html">Savings &amp; Investments</a>
+                    <span>//</span>
+                    <span>Calculator</span>
+                </div>
+                <h1 class="calc-title">TAXABLE VS. TAX ADVANTAGED INVESTMENTS</h1>
+                <div class="calc-share-bar" onclick="window.print()">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share</span>
+                </div>
+                <p class="calc-desc-text">
+                    How taxes are applied to an investment can make an incredible difference. This calculator is designed to help compare a normal taxable investment to two common tax-advantaged situations: An investment where taxes are deferred until withdrawals are made, and an investment where taxes are paid on money that goes into the account, but all withdrawals are tax free.
+                </p>
+            </div>
+        </div>
+
+        <!-- Top Action Buttons -->
+        <div class="calc-top-actions">
+            <div class="calc-btn-group">
+                <button type="button" class="btn-primary-gold" onclick="calculateTVA()">CALCULATE</button>
+                <button type="button" class="btn-outline-gold" onclick="openReportModal()">VIEW REPORT</button>
+                <button type="button" class="btn-outline-gold" onclick="loadSampleData()" style="border-style: dashed;" title="Load example numbers to test comparison">
+                    <i class="fas fa-magic"></i> SAMPLE PROFILE
+                </button>
+                <button type="button" class="btn-outline-gold" onclick="resetDefaults()" title="Reset to defaults">
+                    <i class="fas fa-redo-alt"></i> RESET
+                </button>
+            </div>
+            <div class="calc-btn-group">
+                <button type="button" class="btn-icon-square" onclick="toggleScheduleAccordion()" title="Toggle Detailed Accounts Table View">
+                    <i class="fas fa-list-alt"></i>
+                    <span class="btn-icon-badge">?</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sub Headline & Required Indicator -->
+        <div class="calc-title-indicator-row">
+            <h2 class="calc-sub-headline">Taxable vs. Tax Advantaged Investments</h2>
+            <span class="calc-required-tag">*indicates required</span>
+        </div>
+
+        <!-- Summary Stat Cards -->
+        <div class="stat-summary-grid">
+            <div class="stat-box">
+                <div class="stat-box-val green" id="stat-tax-free">$0 / yr</div>
+                <div class="stat-box-label">Tax-Free (Roth) After-Tax</div>
+            </div>
+            <div class="stat-box highlight-gold">
+                <div class="stat-box-val gold" id="stat-tax-deferred">$0 / yr</div>
+                <div class="stat-box-label">Tax-Deferred (Traditional)</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-val slate" id="stat-taxable">$0 / yr</div>
+                <div class="stat-box-label">Taxable Account After-Tax</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-val blue" id="stat-advantage">+$0 / yr</div>
+                <div class="stat-box-label">Annual Tax Advantage</div>
+            </div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="accordion-wrapper">
+
+            <!-- ACCORDION 1: INVESTMENT CONTRIBUTIONS AND WITHDRAWALS -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header active" onclick="toggleAccordion('acc-contribs', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">INVESTMENT CONTRIBUTIONS AND WITHDRAWALS:</span>
+                    </div>
+                    <i class="fas fa-chevron-up accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-contribs">
+
+                    <!-- Annual Rate of Return -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-rate-return">
+                            <span>Annual rate of return:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="This is the annual rate of return you expect from your investments after taxes.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-rate-return" class="input-text-dark" value="7%">
+                            <div class="slider-container">
+                                <input type="range" id="range-rate-return" class="range-slider-dark" min="0" max="12" step="0.1" value="7">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>4%</span>
+                                    <span>8%</span>
+                                    <span>12%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Years to Contribute -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-years-contrib">
+                            <span>Years to contribute:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Number of years you plan on making contributions.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-years-contrib" class="input-text-dark" value="10">
+                            <div class="slider-container">
+                                <input type="range" id="range-years-contrib" class="range-slider-dark" min="1" max="100" step="1" value="10">
+                                <div class="slider-tick-labels">
+                                    <span>1</span>
+                                    <span>34</span>
+                                    <span>67</span>
+                                    <span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Years of Withdrawals -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-years-withdraw">
+                            <span>Years of withdrawals:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Number of years you plan on taking distributions. Enter '1' for a lump sum distribution.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-years-withdraw" class="input-text-dark" value="1">
+                            <div class="slider-container">
+                                <input type="range" id="range-years-withdraw" class="range-slider-dark" min="1" max="100" step="1" value="1">
+                                <div class="slider-tick-labels">
+                                    <span>1</span>
+                                    <span>34</span>
+                                    <span>67</span>
+                                    <span>100</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Existing Balance -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-existing-bal">
+                            <span>Existing balance:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Any existing balance for the accounts.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-existing-bal" class="input-text-dark" value="$0.00">
+                            <div class="slider-container">
+                                <input type="range" id="range-existing-bal" class="range-slider-dark" min="0" max="1000000" step="1000" value="0">
+                                <div class="slider-tick-labels">
+                                    <span>$0</span>
+                                    <span>$10k</span>
+                                    <span>$100k</span>
+                                    <span>$1m</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Contributions -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-new-contrib">
+                            <span>New contributions:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your periodic contribution. All contributions are assumed to happen at the beginning of the period.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-new-contrib" class="input-text-dark" value="$0.00">
+                            <div class="slider-container">
+                                <input type="range" id="range-new-contrib" class="range-slider-dark" min="0" max="100000" step="250" value="0">
+                                <div class="slider-tick-labels">
+                                    <span>$0</span>
+                                    <span>$1k</span>
+                                    <span>$10k</span>
+                                    <span>$100k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contribution Frequency -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="sel-contrib-freq">
+                            <span>Contribution frequency:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="The frequency of your contributions: Monthly, Quarterly, or Annually.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <select id="sel-contrib-freq" class="select-dark" onchange="calculateTVA()">
+                                <option value="1" selected>Annual</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12">Monthly</option>
+                            </select>
+                            <span style="font-size: 11px; color: #94a3b8;">Contributions made at beginning of period</span>
+                        </div>
+                    </div>
+
+                    <!-- Withdrawal Frequency -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="sel-withdraw-freq">
+                            <span>Withdrawal frequency:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="The frequency of your distributions: Monthly, Quarterly, or Annually.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <select id="sel-withdraw-freq" class="select-dark" onchange="calculateTVA()">
+                                <option value="1" selected>Annual</option>
+                                <option value="4">Quarterly</option>
+                                <option value="12">Monthly</option>
+                            </select>
+                            <span style="font-size: 11px; color: #94a3b8;">Distributions taken at end of period</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACCORDION 2: INVESTMENT TAXES -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header active" onclick="toggleAccordion('acc-taxes', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">INVESTMENT TAXES:</span>
+                    </div>
+                    <i class="fas fa-chevron-up accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-taxes">
+
+                    <!-- Tax During Contributions -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-tax-contrib">
+                            <span>Tax during contributions:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your estimated marginal tax rate during contribution years.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-tax-contrib" class="input-text-dark" value="25%">
+                            <div class="slider-container">
+                                <input type="range" id="range-tax-contrib" class="range-slider-dark" min="0" max="50" step="1" value="25">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>17%</span>
+                                    <span>33%</span>
+                                    <span>50%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tax During Withdrawals -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-tax-withdraw">
+                            <span>Tax during withdrawals:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your estimated marginal tax rate during retirement / withdrawal years.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-tax-withdraw" class="input-text-dark" value="15%">
+                            <div class="slider-container">
+                                <input type="range" id="range-tax-withdraw" class="range-slider-dark" min="0" max="50" step="1" value="15">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>17%</span>
+                                    <span>33%</span>
+                                    <span>50%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tax Deduction Checkbox -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Tax deduction:</span>
+                            <span class="help-tooltip-icon" title="Assumes contributions to the tax-deferred account are tax-deductible and grossed up.">?</span>
+                        </label>
+                        <div>
+                            <label class="checkbox-label-wrap">
+                                <input type="checkbox" id="chk-deduct-savings" class="checkbox-custom" onchange="calculateTVA()">
+                                <span>Increase tax-deferred contribution by tax deduction savings.</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACCORDION 3: ANNUAL AFTER-TAX WITHDRAWAL (CHART) -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header active" onclick="toggleAccordion('acc-chart-card', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">ANNUAL AFTER-TAX WITHDRAWAL</span>
+                    </div>
+                    <i class="fas fa-chevron-up accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-chart-card">
+                    <div class="chart-box-card">
+                        <div id="chart-annual-withdrawal" class="chart-svg-wrap">
+                            <!-- Dynamically generated SVG Bar Chart -->
+                        </div>
+                        <div class="chart-legend-row">
+                            <div class="legend-item">
+                                <span class="legend-bullet taxable"></span>
+                                <span>Taxable Investment</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-bullet deferred"></span>
+                                <span>Tax-Deferred (Traditional)</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-bullet free"></span>
+                                <span>Tax-Free (Roth)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION 4: ANNUAL BALANCE OF ACCOUNTS -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header" id="header-acc-balance" onclick="toggleAccordion('acc-balance-card', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">ANNUAL BALANCE OF ACCOUNTS</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-balance-card" style="display: none;">
+                    
+                    <!-- Multi-line SVG Balance Progression Chart -->
+                    <div class="chart-box-card" style="margin-bottom: 20px;">
+                        <div style="font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
+                            <i class="fas fa-chart-line"></i> Lifetime Account Balance Trajectory (Accumulation &amp; Distribution)
+                        </div>
+                        <div id="chart-balance-trajectory" style="width: 100%; height: 260px;">
+                            <!-- Dynamically generated SVG Line Chart -->
+                        </div>
+                    </div>
+
+                    <!-- Year by Year Schedule Table -->
+                    <div class="schedule-table-wrap">
+                        <table class="dark-schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Year / Milestone</th>
+                                    <th>Phase</th>
+                                    <th>Taxable Balance</th>
+                                    <th>Tax-Deferred Balance</th>
+                                    <th>Tax-Free Balance</th>
+                                    <th>Net Advantage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-table-body">
+                                <!-- Populated dynamically by calculateTVA() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DEFINITIONS -->
+        <section class="definitions-container">
+            <h3 class="definitions-main-heading">DEFINITIONS</h3>
+
+            <div class="def-group">
+                <div class="def-title">ANNUAL RATE OF RETURN</div>
+                <p class="def-text">
+                    This is the annual rate of return you expect from your investments after taxes. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="def-text" style="margin-top: 10px;">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">YEARS TO CONTRIBUTE</div>
+                <p class="def-text">Number of years you plan on making contributions.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">YEARS OF WITHDRAWS</div>
+                <p class="def-text">
+                    Number of years you plan on taking distributions. Enter '1' for a lump sum distribution. All distributions are assumed to happen at the beginning of the period.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">EXISTING BALANCE</div>
+                <p class="def-text">Any existing balance for the accounts.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">NEW CONTRIBUTIONS</div>
+                <p class="def-text">
+                    Your periodic contribution. All contributions are assumed to happen at the beginning of the period.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">CONTRIBUTION FREQUENCY</div>
+                <p class="def-text">
+                    The frequency of your contributions. The options are Monthly, Quarterly, or Annually. All contributions are assumed to be made at the beginning of the period.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">WITHDRAWAL FREQUENCY</div>
+                <p class="def-text">
+                    The frequency of your distributions. The options are Monthly, Quarterly or Annually. All distributions are assumed to be taken at the end of the period.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">TAX DURING CONTRIBUTIONS / WITHDRAWALS*</div>
+                <p class="def-text">
+                    Your estimated marginal tax rate. Use the 'Filing Status and Federal Income Tax Rates on Taxable Income' table to assist you in estimating your federal tax rate.
+                </p>
+
+                <!-- 2026 Federal Income Tax Rate Schedules -->
+                <div class="tax-bracket-card">
+                    <h4 class="tax-bracket-title">Filing Status and Federal Income Tax Rates on Taxable Income for 2026*</h4>
+                    <table class="tax-bracket-table">
+                        <thead>
+                            <tr>
+                                <th>Tax Rate</th>
+                                <th>Married Filing Jointly or Qualified Widow(er)</th>
+                                <th>Single</th>
+                                <th>Head of Household</th>
+                                <th>Married Filing Separately</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>10%</strong></td>
+                                <td>$0 - $24,800</td>
+                                <td>$0 - $12,400</td>
+                                <td>$0 - $17,700</td>
+                                <td>$0 - $12,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>12%</strong></td>
+                                <td>$24,800 - $100,800</td>
+                                <td>$12,400 - $50,400</td>
+                                <td>$17,700 - $67,450</td>
+                                <td>$12,400 - $50,400</td>
+                            </tr>
+                            <tr>
+                                <td><strong>22%</strong></td>
+                                <td>$100,800 - $211,400</td>
+                                <td>$50,400 - $105,700</td>
+                                <td>$67,450 - $105,700</td>
+                                <td>$50,400 - $105,700</td>
+                            </tr>
+                            <tr>
+                                <td><strong>24%</strong></td>
+                                <td>$211,400 - $403,550</td>
+                                <td>$105,700 - $201,775</td>
+                                <td>$105,700 - $201,750</td>
+                                <td>$105,700 - $201,775</td>
+                            </tr>
+                            <tr>
+                                <td><strong>32%</strong></td>
+                                <td>$403,550 - $512,450</td>
+                                <td>$201,775 - $256,225</td>
+                                <td>$201,750 - $256,200</td>
+                                <td>$201,775 - $256,225</td>
+                            </tr>
+                            <tr>
+                                <td><strong>35%</strong></td>
+                                <td>$512,450 - $768,700</td>
+                                <td>$256,225 - $640,600</td>
+                                <td>$256,200 - $640,600</td>
+                                <td>$256,225 - $384,350</td>
+                            </tr>
+                            <tr>
+                                <td><strong>37%</strong></td>
+                                <td>Over $768,700</td>
+                                <td>Over $640,600</td>
+                                <td>Over $640,600</td>
+                                <td>Over $384,350</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="tax-bracket-note">
+                        *Caution: Do not use these tax rate schedules to figure 2025 taxes. Use only to figure 2026 estimates. Source: Rev. Proc. 2025-32
+                    </div>
+                </div>
+
+                <p class="def-text" style="font-style: italic; color: #94a3b8;">
+                    *Lower maximum tax rates on capital gains and dividends would make the investment return for the taxable investment more favorable, thereby reducing the difference in performance between the hypothetical investments shown. Investors should consider their personal investment horizon and income tax bracket, both current and anticipated, when making an investment decision, as these may further impact the comparison.
+                </p>
+            </div>
+
+            <div class="def-group" style="margin-top: 20px;">
+                <div class="def-title">INCREASE TAX-DEFERRED CONTRIBUTION BY TAX DEDUCTION SAVINGS</div>
+                <p class="def-text">
+                    If you check this box the calculator will assume contributions to the tax-deferred investment are tax-deductible when they are made. The calculator will then increase the contribution amount for the tax-deferred investment by the amount required to make the net contribution equal to the investments that have contributions made on an after-tax basis.
+                </p>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box">
+                Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Comprehensive Analysis Report Modal -->
+    <div class="report-modal-overlay" id="report-modal" onclick="closeReportModal(event)">
+        <div class="report-modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header-row">
+                <div>
+                    <h3 class="modal-title-main">Taxable vs. Tax Advantaged Analysis Report</h3>
+                    <p class="modal-sub-brand">Prepared by The Seiler Group of Raymond James</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div id="report-modal-content">
+                <!-- Dynamically generated modal report -->
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 26px;">
+                <button type="button" class="btn-primary-gold" onclick="window.print()">
+                    <i class="fas fa-print"></i> PRINT REPORT
+                </button>
+                <button type="button" class="btn-outline-gold" onclick="closeReportModal()">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Champion Strip -->
+    <section class="champion-strip">
+        <div class="champ-inner">
+            <div class="champ-brand">
+                <a href="index.html">
+                    <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+                </a>
+                <div class="champ-socials">
+                    <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:theseilergroup@raymondjames.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="champ-quote">
+                Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully complete the organization's initial and ongoing certification requirements to use the certification marks.
+            </div>
+            <div class="champ-cta">
+                <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+                <a href="contact-us.html" class="champ-link">CONNECT WITH US</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-addresses">
+                <div class="addr-col">
+                    <p><strong>The Seiler Group, Raymond James</strong></p>
+                    <p>5 Caufield Place, Suite 201<br>Newtown, PA 18940</p>
+                    <p>T: 215.860.7823 // TF: +1.855.473.4537<br>F: 215.860.7829</p>
+                    <p><a href="maps-and-directions.html?_=37W" target="_blank">Map and Directions</a></p>
+                </div>
+                <div class="addr-col">
+                    <p><strong>Raymond James &amp; Associates</strong></p>
+                    <p>201 East Las Olas Boulevard, Suite 1630<br>Fort Lauderdale, FL 33301</p>
+                    <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map and Directions</a></p>
+                </div>
+                <div class="addr-col">
+                    <p><strong>FtMyersSatNRL-37W02</strong></p>
+                    <p>14541 Hope Center Loop, Suite 100<br>Fort Myers, FL 33912</p>
+                    <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map and Directions</a></p>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
+                <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> | <a href="https://www.raymondjames.com/legal-disclosures" target="_blank">Legal Disclosures</a> | <a href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank">Privacy, Security &amp; Account Protection</a> | <a href="https://www.raymondjames.com/terms-of-use" target="_blank">Terms of Use</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Engine -->
+    <script>
+        // Calculation & Simulation State
+        let calcResults = {
+            taxableAfterTaxAnnual: 0,
+            taxDeferredAfterTaxAnnual: 0,
+            taxFreeAfterTaxAnnual: 0,
+            taxableEndingBalance: 0,
+            taxDeferredEndingBalance: 0,
+            taxFreeEndingBalance: 0,
+            taxAdvantage: 0,
+            schedule: []
+        };
+
+        // Number Parsing Utilities
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(val.toString().replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            const val = Math.round(num || 0);
+            return '$' + val.toLocaleString('en-US');
+        }
+
+        function fmtMoney2(num) {
+            return '$' + (Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        }
+
+        function fmtPct(num) {
+            return (Number(num || 0)).toFixed(num % 1 === 0 ? 0 : 1) + '%';
+        }
+
+        // Accordion Management
+        function toggleAccordion(id, headerEl) {
+            const body = document.getElementById(id);
+            const chevron = headerEl.querySelector('.accordion-chevron');
+            if (body.style.display === 'none' || !body.style.display) {
+                body.style.display = 'block';
+                headerEl.classList.add('active');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+            } else {
+                body.style.display = 'none';
+                headerEl.classList.remove('active');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleScheduleAccordion() {
+            const header = document.getElementById('header-acc-balance');
+            const body = document.getElementById('acc-balance-card');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                header.classList.add('active');
+                const chevron = header.querySelector('.accordion-chevron');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+                header.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                body.style.display = 'none';
+                header.classList.remove('active');
+                const chevron = header.querySelector('.accordion-chevron');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Core Mathematical Calculation (InvestCompare Engine)
+        function calculateTVA() {
+            const ror = parseNum(document.getElementById('inp-rate-return').value) / 100;
+            const yearsContrib = Math.max(1, parseInt(document.getElementById('inp-years-contrib').value) || 10);
+            const yearsWithdraw = Math.max(1, parseInt(document.getElementById('inp-years-withdraw').value) || 1);
+            const existingBal = parseNum(document.getElementById('inp-existing-bal').value);
+            const newContrib = parseNum(document.getElementById('inp-new-contrib').value);
+            const contribFreq = parseInt(document.getElementById('sel-contrib-freq').value) || 1;
+            const withdrawFreq = parseInt(document.getElementById('sel-withdraw-freq').value) || 1;
+            const taxContribRate = parseNum(document.getElementById('inp-tax-contrib').value) / 100;
+            const taxWithdrawRate = parseNum(document.getElementById('inp-tax-withdraw').value) / 100;
+            const deductSavings = document.getElementById('chk-deduct-savings').checked;
+
+            // 1. ACCUMULATION PHASE
+            // For Tax-Deferred: if deductSavings checked, gross up pretax contribution so net cash out equals after-tax contribution
+            const taxDefPeriodicContrib = deductSavings && taxContribRate < 1 
+                ? (newContrib / (1 - taxContribRate)) 
+                : newContrib;
+
+            // Taxable account incurs tax drag on annual earnings
+            const afterTaxRor = ror * (1 - taxContribRate);
+
+            let balTaxFree = existingBal;
+            let balTaxDef = existingBal;
+            let balTaxable = existingBal;
+
+            const schedule = [];
+            schedule.push({
+                year: 0,
+                phase: 'Starting Balance',
+                taxable: balTaxable,
+                taxDef: balTaxDef,
+                taxFree: balTaxFree
+            });
+
+            // Accumulate year by year
+            for (let y = 1; y <= yearsContrib; y++) {
+                // Compound through periods in year (beginning of period contributions)
+                for (let p = 0; p < contribFreq; p++) {
+                    const rPeriod = ror / contribFreq;
+                    const rTaxablePeriod = afterTaxRor / contribFreq;
+
+                    balTaxFree = (balTaxFree + newContrib) * (1 + rPeriod);
+                    balTaxDef = (balTaxDef + taxDefPeriodicContrib) * (1 + rPeriod);
+                    balTaxable = (balTaxable + newContrib) * (1 + rTaxablePeriod);
+                }
+
+                schedule.push({
+                    year: y,
+                    phase: 'Contribution Yr ' + y,
+                    taxable: balTaxable,
+                    taxDef: balTaxDef,
+                    taxFree: balTaxFree
+                });
+            }
+
+            const accumTaxFree = balTaxFree;
+            const accumTaxDef = balTaxDef;
+            const accumTaxable = balTaxable;
+
+            // 2. DISTRIBUTION / WITHDRAWAL PHASE
+            // Calculate annual after-tax withdrawal amount
+            let annualAfterTaxTaxFree = 0;
+            let annualAfterTaxTaxDef = 0;
+            let annualAfterTaxTaxable = 0;
+
+            const nPeriods = yearsWithdraw * withdrawFreq;
+
+            if (yearsWithdraw === 1) {
+                // Lump sum distribution at start of retirement period
+                annualAfterTaxTaxFree = accumTaxFree;
+                annualAfterTaxTaxDef = accumTaxDef * (1 - taxWithdrawRate);
+                annualAfterTaxTaxable = accumTaxable;
+            } else {
+                // Annuity payment formulas during retirement
+                // Tax-Free continues to grow at rate ror tax-free
+                const rFreeWithdraw = ror / withdrawFreq;
+                let pmtFree = 0;
+                if (rFreeWithdraw > 0) {
+                    pmtFree = accumTaxFree * (rFreeWithdraw / (1 - Math.pow(1 + rFreeWithdraw, -nPeriods)));
+                } else {
+                    pmtFree = accumTaxFree / nPeriods;
+                }
+                annualAfterTaxTaxFree = pmtFree * withdrawFreq;
+
+                // Tax-Deferred continues to grow at rate ror tax-free, withdrawals taxed at taxWithdrawRate
+                const rDefWithdraw = ror / withdrawFreq;
+                let pmtDef = 0;
+                if (rDefWithdraw > 0) {
+                    pmtDef = accumTaxDef * (rDefWithdraw / (1 - Math.pow(1 + rDefWithdraw, -nPeriods)));
+                } else {
+                    pmtDef = accumTaxDef / nPeriods;
+                }
+                const grossAnnualDef = pmtDef * withdrawFreq;
+                annualAfterTaxTaxDef = grossAnnualDef * (1 - taxWithdrawRate);
+
+                // Taxable account continues to earn return taxed at retirement tax rate
+                const afterTaxRetireRor = ror * (1 - taxWithdrawRate);
+                const rTaxableWithdraw = afterTaxRetireRor / withdrawFreq;
+                let pmtTaxable = 0;
+                if (rTaxableWithdraw > 0) {
+                    pmtTaxable = accumTaxable * (rTaxableWithdraw / (1 - Math.pow(1 + rTaxableWithdraw, -nPeriods)));
+                } else {
+                    pmtTaxable = accumTaxable / nPeriods;
+                }
+                annualAfterTaxTaxable = pmtTaxable * withdrawFreq;
+            }
+
+            // If balances are 0, force zeroes
+            if (accumTaxFree <= 0.001) {
+                annualAfterTaxTaxFree = 0;
+                annualAfterTaxTaxDef = 0;
+                annualAfterTaxTaxable = 0;
+            }
+
+            // Calculate advantage
+            const bestTaxAdvantaged = Math.max(annualAfterTaxTaxFree, annualAfterTaxTaxDef);
+            const annualAdvantage = Math.max(0, bestTaxAdvantaged - annualAfterTaxTaxable);
+
+            // Store global state
+            calcResults = {
+                taxableAfterTaxAnnual: annualAfterTaxTaxable,
+                taxDeferredAfterTaxAnnual: annualAfterTaxTaxDef,
+                taxFreeAfterTaxAnnual: annualAfterTaxTaxFree,
+                taxableEndingBalance: accumTaxable,
+                taxDeferredEndingBalance: accumTaxDef,
+                taxFreeEndingBalance: accumTaxFree,
+                taxAdvantage: annualAdvantage,
+                schedule: schedule,
+                yearsContrib: yearsContrib,
+                yearsWithdraw: yearsWithdraw
+            };
+
+            // Update UI Stat Cards
+            document.getElementById('stat-tax-free').innerText = fmtMoney(annualAfterTaxTaxFree) + ' / yr';
+            document.getElementById('stat-tax-deferred').innerText = fmtMoney(annualAfterTaxTaxDef) + ' / yr';
+            document.getElementById('stat-taxable').innerText = fmtMoney(annualAfterTaxTaxable) + ' / yr';
+            document.getElementById('stat-advantage').innerText = '+' + fmtMoney(annualAdvantage) + ' / yr';
+
+            // Render Bar Chart (Annual After-Tax Withdrawal)
+            renderBarChart(annualAfterTaxTaxable, annualAfterTaxTaxDef, annualAfterTaxTaxFree);
+
+            // Render Trajectory Line Chart and Schedule Table
+            renderTrajectoryChart(schedule);
+            renderScheduleTable(schedule);
+        }
+
+        // Render SVG Bar Chart
+        function renderBarChart(taxable, taxDeferred, taxFree) {
+            const container = document.getElementById('chart-annual-withdrawal');
+            const w = container.clientWidth || 700;
+            const h = 320;
+            const padL = 70;
+            const padR = 40;
+            const padT = 30;
+            const padB = 60;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            const isAllZero = taxable <= 0.01 && taxDeferred <= 0.01 && taxFree <= 0.01;
+            const maxVal = isAllZero ? 25 : Math.max(taxable, taxDeferred, taxFree, 10) * 1.25;
+
+            // Generate Y-axis gridlines & labels
+            const yTicks = isAllZero ? [0, 5, 10, 15, 20, 25] : [
+                0,
+                maxVal * 0.25,
+                maxVal * 0.5,
+                maxVal * 0.75,
+                maxVal
+            ];
+
+            let gridSvg = '';
+            yTicks.forEach(tick => {
+                const yPos = padT + plotH - (tick / maxVal) * plotH;
+                gridSvg += `
+                    <line x1="${padL}" y1="${yPos}" x2="${w - padR}" y2="${yPos}" stroke="#1e3a66" stroke-width="1" stroke-dasharray="${tick === 0 ? 'none' : '3,3'}" opacity="0.6"/>
+                    <text x="${padL - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="end">${isAllZero ? '$' + tick : fmtMoney(tick)}</text>
+                `;
+            });
+
+            // Bars specifications
+            const barW = Math.min(85, Math.max(35, plotW / 6));
+            const slotW = plotW / 3;
+
+            const items = [
+                { name: 'Taxable', val: taxable, color: '#64748b', x: padL + slotW * 0.5 - barW / 2 },
+                { name: 'Tax-Deferred', val: taxDeferred, color: '#dfa01e', x: padL + slotW * 1.5 - barW / 2 },
+                { name: 'Tax-Free', val: taxFree, color: '#10b981', x: padL + slotW * 2.5 - barW / 2 }
+            ];
+
+            let barsSvg = '';
+            items.forEach(item => {
+                const barH = isAllZero ? 2 : Math.max(3, (item.val / maxVal) * plotH);
+                const barY = padT + plotH - barH;
+                const textVal = isAllZero ? '$0' : fmtMoney(item.val);
+
+                barsSvg += `
+                    <rect x="${item.x}" y="${barY}" width="${barW}" height="${barH}" fill="${item.color}" rx="3" opacity="0.95">
+                        <animate attributeName="height" from="0" to="${barH}" dur="0.4s" fill="freeze" />
+                        <animate attributeName="y" from="${padT + plotH}" to="${barY}" dur="0.4s" fill="freeze" />
+                    </rect>
+                    <text x="${item.x + barW / 2}" y="${barY - 8}" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">${textVal}</text>
+                    <text x="${item.x + barW / 2}" y="${padT + plotH + 22}" fill="#cbd5e1" font-size="12" font-weight="700" text-anchor="middle">${item.name}</text>
+                `;
+            });
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" style="overflow: visible; font-family: 'Open Sans', sans-serif;">
+                    ${gridSvg}
+                    ${barsSvg}
+                    <!-- X Axis Line -->
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                    <!-- Y Axis Line -->
+                    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                </svg>
+            `;
+        }
+
+        // Render SVG Line Trajectory Chart
+        function renderTrajectoryChart(schedule) {
+            const container = document.getElementById('chart-balance-trajectory');
+            if (!container) return;
+            const w = container.clientWidth || 700;
+            const h = 240;
+            const padL = 70;
+            const padR = 30;
+            const padT = 20;
+            const padB = 40;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            let maxVal = 1000;
+            schedule.forEach(row => {
+                if (row.taxFree > maxVal) maxVal = row.taxFree;
+                if (row.taxDef > maxVal) maxVal = row.taxDef;
+                if (row.taxable > maxVal) maxVal = row.taxable;
+            });
+            maxVal *= 1.15;
+
+            const n = schedule.length;
+            const getX = (idx) => padL + (idx / Math.max(1, n - 1)) * plotW;
+            const getY = (val) => padT + plotH - (val / maxVal) * plotH;
+
+            // Generate Path Data
+            let pathFree = '', pathDef = '', pathTaxable = '';
+            schedule.forEach((row, i) => {
+                const x = getX(i);
+                const yFree = getY(row.taxFree);
+                const yDef = getY(row.taxDef);
+                const yTax = getY(row.taxable);
+
+                if (i === 0) {
+                    pathFree = `M ${x} ${yFree}`;
+                    pathDef = `M ${x} ${yDef}`;
+                    pathTaxable = `M ${x} ${yTax}`;
+                } else {
+                    pathFree += ` L ${x} ${yFree}`;
+                    pathDef += ` L ${x} ${yDef}`;
+                    pathTaxable += ` L ${x} ${yTax}`;
+                }
+            });
+
+            // Grid lines
+            let grid = '';
+            for (let j = 0; j <= 3; j++) {
+                const v = (maxVal / 3) * j;
+                const y = getY(v);
+                grid += `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#1e3a66" stroke-dasharray="3,3" opacity="0.5"/>
+                    <text x="${padL - 10}" y="${y + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${fmtMoney(v)}</text>
+                `;
+            }
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" style="overflow: visible; font-family: 'Open Sans', sans-serif;">
+                    ${grid}
+                    <path d="${pathTaxable}" fill="none" stroke="#64748b" stroke-width="2.5" />
+                    <path d="${pathDef}" fill="none" stroke="#dfa01e" stroke-width="2.5" />
+                    <path d="${pathFree}" fill="none" stroke="#10b981" stroke-width="2.5" />
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                    <text x="${w / 2}" y="${padT + plotH + 28}" fill="#cbd5e1" font-size="11" text-anchor="middle">Accumulation Timeline (Years 0 to ${n - 1})</text>
+                </svg>
+            `;
+        }
+
+        // Render Schedule Table
+        function renderScheduleTable(schedule) {
+            const tbody = document.getElementById('schedule-table-body');
+            if (!tbody) return;
+
+            let html = '';
+            schedule.forEach(row => {
+                const best = Math.max(row.taxFree, row.taxDef);
+                const diff = best - row.taxable;
+                html += `
+                    <tr>
+                        <td style="font-weight: 600; color: #ffffff;">${row.year === 0 ? 'Start' : 'Year ' + row.year}</td>
+                        <td style="color: #94a3b8; font-size: 11px;">${row.phase}</td>
+                        <td style="color: #cbd5e1;">${fmtMoney(row.taxable)}</td>
+                        <td style="color: #dfa01e; font-weight: 600;">${fmtMoney(row.taxDef)}</td>
+                        <td style="color: #10b981; font-weight: 600;">${fmtMoney(row.taxFree)}</td>
+                        <td style="color: ${diff > 0 ? '#4ade80' : '#94a3b8'}; font-weight: 700;">+${fmtMoney(diff)}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Two-Way Sync between Input Text & Sliders
+        function setupSync(inputId, sliderId, type) {
+            const input = document.getElementById(inputId);
+            const slider = document.getElementById(sliderId);
+            if (!input || !slider) return;
+
+            input.addEventListener('change', () => {
+                const val = parseNum(input.value);
+                slider.value = val;
+                if (type === 'percent') {
+                    input.value = fmtPct(val);
+                } else if (type === 'currency') {
+                    input.value = fmtMoney2(val);
+                } else {
+                    input.value = val;
+                }
+                calculateTVA();
+            });
+
+            slider.addEventListener('input', () => {
+                const val = parseFloat(slider.value);
+                if (type === 'percent') {
+                    input.value = fmtPct(val);
+                } else if (type === 'currency') {
+                    input.value = fmtMoney2(val);
+                } else {
+                    input.value = val;
+                }
+                calculateTVA();
+            });
+        }
+
+        // Reset to Default Values (Matching Raymond James Source)
+        function resetDefaults() {
+            document.getElementById('inp-rate-return').value = '7%';
+            document.getElementById('range-rate-return').value = '7';
+
+            document.getElementById('inp-years-contrib').value = '10';
+            document.getElementById('range-years-contrib').value = '10';
+
+            document.getElementById('inp-years-withdraw').value = '1';
+            document.getElementById('range-years-withdraw').value = '1';
+
+            document.getElementById('inp-existing-bal').value = '$0.00';
+            document.getElementById('range-existing-bal').value = '0';
+
+            document.getElementById('inp-new-contrib').value = '$0.00';
+            document.getElementById('range-new-contrib').value = '0';
+
+            document.getElementById('sel-contrib-freq').value = '1';
+            document.getElementById('sel-withdraw-freq').value = '1';
+
+            document.getElementById('inp-tax-contrib').value = '25%';
+            document.getElementById('range-tax-contrib').value = '25';
+
+            document.getElementById('inp-tax-withdraw').value = '15%';
+            document.getElementById('range-tax-withdraw').value = '15';
+
+            document.getElementById('chk-deduct-savings').checked = false;
+
+            calculateTVA();
+        }
+
+        // Load Sample Profile to Demonstrate Full Interactive Comparison
+        function loadSampleData() {
+            document.getElementById('inp-rate-return').value = '7%';
+            document.getElementById('range-rate-return').value = '7';
+
+            document.getElementById('inp-years-contrib').value = '15';
+            document.getElementById('range-years-contrib').value = '15';
+
+            document.getElementById('inp-years-withdraw').value = '20';
+            document.getElementById('range-years-withdraw').value = '20';
+
+            document.getElementById('inp-existing-bal').value = '$10,000.00';
+            document.getElementById('range-existing-bal').value = '10000';
+
+            document.getElementById('inp-new-contrib').value = '$5,000.00';
+            document.getElementById('range-new-contrib').value = '5000';
+
+            document.getElementById('sel-contrib-freq').value = '1';
+            document.getElementById('sel-withdraw-freq').value = '1';
+
+            document.getElementById('inp-tax-contrib').value = '25%';
+            document.getElementById('range-tax-contrib').value = '25';
+
+            document.getElementById('inp-tax-withdraw').value = '15%';
+            document.getElementById('range-tax-withdraw').value = '15';
+
+            document.getElementById('chk-deduct-savings').checked = false;
+
+            calculateTVA();
+        }
+
+        // Report Modal Handlers
+        function openReportModal() {
+            calculateTVA();
+            const modal = document.getElementById('report-modal');
+            const content = document.getElementById('report-modal-content');
+
+            const rateStr = document.getElementById('inp-rate-return').value;
+            const contribYrs = document.getElementById('inp-years-contrib').value;
+            const withdrawYrs = document.getElementById('inp-years-withdraw').value;
+            const existingBalStr = document.getElementById('inp-existing-bal').value;
+            const contribAmtStr = document.getElementById('inp-new-contrib').value;
+            const taxContribStr = document.getElementById('inp-tax-contrib').value;
+            const taxWithdrawStr = document.getElementById('inp-tax-withdraw').value;
+            const isDeduct = document.getElementById('chk-deduct-savings').checked ? 'Yes (grossed up)' : 'No';
+
+            content.innerHTML = `
+                <div style="background: #11223d; border-left: 4px solid #dfa01e; padding: 18px; border-radius: 4px; margin-bottom: 22px;">
+                    <div style="font-size: 14px; font-weight: 800; color: #dfa01e; text-transform: uppercase; margin-bottom: 6px;">
+                        Executive Summary of Tax Strategy
+                    </div>
+                    <p style="font-size: 13px; color: #e2e8f0; line-height: 1.6; margin: 0;">
+                        Tax-advantaged vehicles offer an estimated <strong>${fmtMoney(calcResults.taxAdvantage)} per year</strong> in additional after-tax retirement spending compared to a standard taxable investment account over ${withdrawYrs} year(s) of distributions.
+                    </p>
+                </div>
+
+                <h4 style="color: #dfa01e; font-size: 13px; text-transform: uppercase; margin: 18px 0 10px 0;">Portfolio Assumptions &amp; Tax Parameters</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; font-size: 12px;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Expected Annual Return:</span> <strong style="color: #ffffff;">${rateStr}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Contribution Period:</span> <strong style="color: #ffffff;">${contribYrs} years</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Distribution Period:</span> <strong style="color: #ffffff;">${withdrawYrs} years</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Existing Balance:</span> <strong style="color: #ffffff;">${existingBalStr}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Periodic Contribution:</span> <strong style="color: #ffffff;">${contribAmtStr}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Tax Rate (Working / Ret.):</span> <strong style="color: #ffffff;">${taxContribStr} / ${taxWithdrawStr}</strong>
+                    </div>
+                </div>
+
+                <h4 style="color: #dfa01e; font-size: 13px; text-transform: uppercase; margin: 20px 0 10px 0;">Comparative Retirement Distribution Results</h4>
+                <div class="schedule-table-wrap">
+                    <table class="dark-schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Account Structure</th>
+                                <th>Accumulated Value</th>
+                                <th>Annual After-Tax Cash Flow</th>
+                                <th>Total After-Tax (${withdrawYrs} Yrs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: #10b981; font-weight: 700;">Tax-Free (Roth)</td>
+                                <td>${fmtMoney(calcResults.taxFreeEndingBalance)}</td>
+                                <td style="color: #10b981; font-weight: 700;">${fmtMoney(calcResults.taxFreeAfterTaxAnnual)}</td>
+                                <td>${fmtMoney(calcResults.taxFreeAfterTaxAnnual * calcResults.yearsWithdraw)}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #dfa01e; font-weight: 700;">Tax-Deferred (Traditional)</td>
+                                <td>${fmtMoney(calcResults.taxDeferredEndingBalance)}</td>
+                                <td style="color: #dfa01e; font-weight: 700;">${fmtMoney(calcResults.taxDeferredAfterTaxAnnual)}</td>
+                                <td>${fmtMoney(calcResults.taxDeferredAfterTaxAnnual * calcResults.yearsWithdraw)}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 700;">Taxable Account</td>
+                                <td>${fmtMoney(calcResults.taxableEndingBalance)}</td>
+                                <td>${fmtMoney(calcResults.taxableAfterTaxAnnual)}</td>
+                                <td>${fmtMoney(calcResults.taxableAfterTaxAnnual * calcResults.yearsWithdraw)}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 20px; font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                    *All examples are hypothetical and for illustrative purposes. Actual investment returns and taxes may vary depending on capital gains distribution, dividend yield, and changes in federal or state tax laws.
+                </div>
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeReportModal(e) {
+            if (!e || e.target === document.getElementById('report-modal') || e.target.classList.contains('modal-close-btn') || e.target.tagName === 'BUTTON') {
+                document.getElementById('report-modal').style.display = 'none';
+            }
+        }
+
+        // Initialize Everything on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Setup two-way sync for all inputs & sliders
+            setupSync('inp-rate-return', 'range-rate-return', 'percent');
+            setupSync('inp-years-contrib', 'range-years-contrib', 'number');
+            setupSync('inp-years-withdraw', 'range-years-withdraw', 'number');
+            setupSync('inp-existing-bal', 'range-existing-bal', 'currency');
+            setupSync('inp-new-contrib', 'range-new-contrib', 'currency');
+            setupSync('inp-tax-contrib', 'range-tax-contrib', 'percent');
+            setupSync('inp-tax-withdraw', 'range-tax-withdraw', 'percent');
+
+            // Responsive redraw
+            window.addEventListener('resize', () => {
+                calculateTVA();
+            });
+
+            // Mobile menu drawer
+            const trigger = document.getElementById('mobile-menu-trigger');
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const closeBtn = document.getElementById('drawer-close-btn');
+
+            if (trigger && drawer && overlay) {
+                trigger.addEventListener('click', () => {
+                    drawer.classList.add('active');
+                    overlay.classList.add('active');
+                });
+                overlay.addEventListener('click', () => {
+                    drawer.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        drawer.classList.remove('active');
+                        overlay.classList.remove('active');
+                    });
+                }
+            }
+
+            // Run initial calculation with source defaults ($0 contrib, $0 balance)
+            calculateTVA();
+        });
+    </script>
+</body>
+</html>

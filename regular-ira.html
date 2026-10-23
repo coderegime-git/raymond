@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traditional IRA Calculator | The Seiler Group | Raymond James</title>
+    <meta name="description" content="Calculate the growth of your Traditional IRA with tax-deferred compounding and potential tax deduction savings for retirement.">
+    <meta property="og:url" content="https://www.raymondjames.com/theseilergroup/resources/calculators/regular-ira" />
+    <meta property="og:title" content="Traditional IRA Calculator" />
+    <meta property="og:image" content="https://www.raymondjames.com/-/media/RJ/Common/Resources/Retirement/Four-Reasons-to-Consider-a-Roth-IRA.jpg" />
+    <link rel="canonical" href="traditional-ira-calculator.html" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Dedicated Stylesheet -->
+    <link rel="stylesheet" href="traditional-ira-calculator.css?v=2">
+</head>
+<body class="calculator-page">
+
+    <!-- Site Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand-wrapper">
+                <a href="index.html" title="The Seiler Group of Raymond James">
+                    <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="brand-logo-img">
+                </a>
+            </div>
+            <nav class="desktop-nav">
+                <a href="index.html" class="nav-link">HOME</a>
+                <div class="nav-dropdown">
+                    <a href="corporate-executive-services.html" class="nav-link">ABOUT US <i class="fas fa-chevron-down" style="font-size: 10px;"></i></a>
+                    <div class="nav-dropdown-menu">
+                        <a href="corporate-executive-services.html" class="nav-dropdown-item">Corporate Executives</a>
+                        <a href="counseling-visionaries.html" class="nav-dropdown-item">Counseling Visionaries</a>
+                    </div>
+                </div>
+                <a href="counseling-visionaries.html" class="nav-link">INDIVIDUALS &amp; FAMILIES</a>
+                <a href="resources.html" class="nav-link active">RESOURCES</a>
+                <a href="contact-us.html" class="nav-link">CONTACT US</a>
+                <a href="https://clientaccess.rjf.com" target="_blank" class="client-access-btn">CLIENT ACCESS</a>
+            </nav>
+            <button class="mobile-hamburger" id="mobile-menu-trigger" aria-label="Open Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Overlay -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close-btn">&times;</button>
+        </div>
+        <div class="drawer-nav">
+            <a href="index.html" class="drawer-link">Home</a>
+            <a href="corporate-executive-services.html" class="drawer-link">About Us</a>
+            <a href="counseling-visionaries.html" class="drawer-link">Individuals &amp; Families</a>
+            <a href="resources.html" class="drawer-link active">Resources</a>
+            <a href="contact-us.html" class="drawer-link">Contact Us</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" class="client-access-btn" style="text-align: center; margin-top: 14px;">Client Access</a>
+        </div>
+    </div>
+
+    <!-- Floating Prev / Next Navigation -->
+    <a href="taxable-vs-tax-advantaged-investments.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Taxable vs Tax Advantaged Investments">
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
+        <span class="calc-side-nav-label">Prev<br>Calculator</span>
+    </a>
+    <a href="self-employed-retirement-plan-calculator.html" class="calc-side-nav-btn next-btn" title="Next Calculator: Self-Employed Retirement Plan Calculator">
+        <span class="calc-side-nav-label">Next<br>Calculator</span>
+        <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
+    </a>
+
+    <!-- Main Container -->
+    <main class="calc-main-wrapper">
+
+        <!-- Hero Card -->
+        <div class="calc-hero-card">
+            <div class="calc-hero-img-wrap">
+                <img src="assets/resources/card-55.jpg" alt="Traditional IRA Calculator - Robin Nest Egg" onerror="this.src='assets/resources/nest-egg-hero.jpg'">
+            </div>
+            <div class="calc-header-box">
+                <div class="calc-breadcrumbs">
+                    <a href="resources.html">Retirement &amp; Longevity</a>
+                    <span>//</span>
+                    <span>Calculator</span>
+                </div>
+                <h1 class="calc-title">TRADITIONAL IRA CALCULATOR</h1>
+                <div class="calc-share-bar" onclick="window.print()">
+                    <i class="fas fa-share-alt"></i>
+                    <span>Share</span>
+                </div>
+                <p class="calc-desc-text">
+                    Contributing to a traditional IRA can create a current tax deduction, plus it provides for tax-deferred growth. While long-term savings in a Roth IRA may produce better after-tax returns, a traditional IRA may be an excellent alternative if you qualify for the tax deduction.
+                </p>
+            </div>
+        </div>
+
+        <!-- Top Action Buttons -->
+        <div class="calc-top-actions">
+            <div class="calc-btn-group">
+                <button type="button" class="btn-primary-gold" onclick="calculateTIRA()">CALCULATE</button>
+                <button type="button" class="btn-outline-gold" onclick="openReportModal()">VIEW REPORT</button>
+                <button type="button" class="btn-outline-gold" onclick="loadSampleProfile()" style="border-style: dashed;" title="Load example numbers to test comparison">
+                    <i class="fas fa-magic"></i> SAMPLE PROFILE
+                </button>
+                <button type="button" class="btn-outline-gold" onclick="resetDefaults()" title="Reset to defaults">
+                    <i class="fas fa-redo-alt"></i> RESET
+                </button>
+            </div>
+            <div class="calc-btn-group">
+                <button type="button" class="btn-icon-square" onclick="toggleScheduleAccordion()" title="Toggle Detailed Accounts Table View">
+                    <i class="fas fa-list-alt"></i>
+                    <span class="btn-icon-badge">?</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Validation Alert Banner -->
+        <div class="calc-alert-banner" id="calc-validation-alert">
+            <i class="fas fa-exclamation-triangle"></i> <span id="alert-text">Current age can't be less than 15</span>
+        </div>
+
+        <!-- Sub Headline & Required Indicator -->
+        <div class="calc-title-indicator-row">
+            <h2 class="calc-sub-headline">Traditional IRA Savings:</h2>
+            <span class="calc-required-tag">*indicates required</span>
+        </div>
+
+        <!-- Summary Stat Cards -->
+        <div class="stat-summary-grid">
+            <div class="stat-box highlight-gold">
+                <div class="stat-box-val gold" id="stat-ira-pretax">$804,451</div>
+                <div class="stat-box-label">IRA Total Before Taxes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-val green" id="stat-ira-aftertax">$683,783</div>
+                <div class="stat-box-label">IRA Total After Taxes</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-val slate" id="stat-taxable-total">$405,100</div>
+                <div class="stat-box-label">Total Taxable Account</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-box-val blue" id="stat-tax-advantage">+$278,683</div>
+                <div class="stat-box-label">Traditional IRA Advantage</div>
+            </div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="accordion-wrapper">
+
+            <!-- ACCORDION 1: TRADITIONAL IRA SAVINGS -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header active" onclick="toggleAccordion('acc-ira-savings', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">TRADITIONAL IRA SAVINGS:</span>
+                    </div>
+                    <i class="fas fa-chevron-up accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-ira-savings">
+
+                    <!-- Starting Balance -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-starting-bal">
+                            <span>Starting balance:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="The current balance of your traditional IRA.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-starting-bal" class="input-text-dark" value="$0">
+                            <div class="slider-container">
+                                <input type="range" id="range-starting-bal" class="range-slider-dark" min="0" max="500000" step="1000" value="0">
+                                <div class="slider-tick-labels">
+                                    <span>$0</span>
+                                    <span>$10k</span>
+                                    <span>$100k</span>
+                                    <span>$500k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Annual Contribution -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-annual-contrib">
+                            <span>Annual contribution:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="The amount you will contribute to your IRA each year. (2026 limit: $7,500, or $8,600 if age 50+).">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-annual-contrib" class="input-text-dark" value="$5,000">
+                            <div class="slider-container">
+                                <input type="range" id="range-annual-contrib" class="range-slider-dark" min="0" max="10000" step="100" value="5000">
+                                <div class="slider-tick-labels">
+                                    <span>$0</span>
+                                    <span>$1k</span>
+                                    <span>$5k</span>
+                                    <span>$10k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Age -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-current-age">
+                            <span>Current age:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your current age. Must be between 15 and 71.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-current-age" class="input-text-dark" value="29">
+                            <div class="slider-container">
+                                <input type="range" id="range-current-age" class="range-slider-dark" min="15" max="71" step="1" value="29">
+                                <div class="slider-tick-labels">
+                                    <span>15</span>
+                                    <span>34</span>
+                                    <span>52</span>
+                                    <span>71</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Age at Retirement -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-retire-age">
+                            <span>Age at retirement:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Age at which you plan to retire. Must be between 15 and 72.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-retire-age" class="input-text-dark" value="65">
+                            <div class="slider-container">
+                                <input type="range" id="range-retire-age" class="range-slider-dark" min="15" max="72" step="1" value="65">
+                                <div class="slider-tick-labels">
+                                    <span>15</span>
+                                    <span>34</span>
+                                    <span>53</span>
+                                    <span>72</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Adjusted Gross Income -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-agi">
+                            <span>Adjusted gross income:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="What you anticipate your income to be. Used to determine deductibility based on phase-out rules.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-agi" class="input-text-dark" value="$50,000">
+                            <div class="slider-container">
+                                <input type="range" id="range-agi" class="range-slider-dark" min="0" max="500000" step="1000" value="50000">
+                                <div class="slider-tick-labels">
+                                    <span>$0</span>
+                                    <span>$10k</span>
+                                    <span>$100k</span>
+                                    <span>$500k</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Maximize Contributions Checkbox -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Maximize contributions:</span>
+                            <span class="help-tooltip-icon" title="Check this box to contribute the maximum allowed to your account each year ($7,500, or $8,600 if 50+).">?</span>
+                        </label>
+                        <div>
+                            <label class="checkbox-label-wrap">
+                                <input type="checkbox" id="chk-maximize-contrib" class="checkbox-custom" onchange="calculateTIRA()">
+                                <span>Increase future contributions to the maximum allowed</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Total Contributions (Computed) -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Total contributions:</span>
+                            <span class="help-tooltip-icon" title="The total amount contributed to this IRA over all working years.">?</span>
+                        </label>
+                        <div>
+                            <div class="computed-value-display" id="disp-total-contrib">$180,000</div>
+                        </div>
+                    </div>
+
+                    <!-- Non-deductible Contributions (Computed) -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Non-deductible contributions:</span>
+                            <span class="help-tooltip-icon" title="The portion of your contributions made without a tax deduction due to employer plan phase-outs.">?</span>
+                        </label>
+                        <div>
+                            <div class="computed-value-display" id="disp-non-deductible" style="color: #cbd5e1;">$0.00</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACCORDION 2: INVESTMENT RETURN, TAXES, EMPLOYMENT AND MARITAL STATUS -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header" id="header-acc-taxes" onclick="toggleAccordion('acc-tax-profile', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">INVESTMENT RETURN, TAXES, EMPLOYMENT AND MARITAL STATUS:</span>
+                        <span class="accordion-sub-meta" id="tax-profile-summary">7% RETURN, 25% TAX, 15% TAX DURING RETIREMENT, NOT MARRIED, NO EMPLOYER PLAN</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-tax-profile" style="display: none;">
+
+                    <!-- Expected Rate of Return -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-ror">
+                            <span>Expected rate of return:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="The annual compounded rate of return for your IRA.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-ror" class="input-text-dark" value="7%">
+                            <div class="slider-container">
+                                <input type="range" id="range-ror" class="range-slider-dark" min="0" max="12" step="0.1" value="7">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>4%</span>
+                                    <span>8%</span>
+                                    <span>12%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Current Tax Rate -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-tax-current">
+                            <span>Current tax rate:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your estimated combined marginal income tax rate during working years.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-tax-current" class="input-text-dark" value="25%">
+                            <div class="slider-container">
+                                <input type="range" id="range-tax-current" class="range-slider-dark" min="0" max="50" step="1" value="25">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>17%</span>
+                                    <span>33%</span>
+                                    <span>50%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tax Rate at Retirement -->
+                    <div class="form-input-row">
+                        <label class="form-input-label" for="inp-tax-retire">
+                            <span>Tax rate at retirement:</span>
+                            <span class="req-star">*</span>
+                            <span class="help-tooltip-icon" title="Your estimated combined marginal income tax rate in retirement.">?</span>
+                        </label>
+                        <div class="form-input-controls">
+                            <input type="text" id="inp-tax-retire" class="input-text-dark" value="15%">
+                            <div class="slider-container">
+                                <input type="range" id="range-tax-retire" class="range-slider-dark" min="0" max="50" step="1" value="15">
+                                <div class="slider-tick-labels">
+                                    <span>0%</span>
+                                    <span>17%</span>
+                                    <span>33%</span>
+                                    <span>50%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Married Yes/No -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Are you married?:</span>
+                            <span class="help-tooltip-icon" title="Select Yes if filing jointly, or No if single / head of household.">?</span>
+                        </label>
+                        <div>
+                            <div class="radio-pill-group">
+                                <label class="radio-pill-label">
+                                    <input type="radio" name="rad-married" id="rad-married-no" value="no" checked onchange="calculateTIRA()">
+                                    <span>No</span>
+                                </label>
+                                <label class="radio-pill-label">
+                                    <input type="radio" name="rad-married" id="rad-married-yes" value="yes" onchange="calculateTIRA()">
+                                    <span>Yes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Covered by Employer Plan -->
+                    <div class="form-input-row">
+                        <label class="form-input-label">
+                            <span>Covered by employer plan?:</span>
+                            <span class="help-tooltip-icon" title="Whether you are covered by an employer retirement plan like a 401(k), 403(b), etc.">?</span>
+                        </label>
+                        <div>
+                            <div class="radio-pill-group">
+                                <label class="radio-pill-label">
+                                    <input type="radio" name="rad-employer" id="rad-employer-no" value="no" checked onchange="calculateTIRA()">
+                                    <span>No</span>
+                                </label>
+                                <label class="radio-pill-label">
+                                    <input type="radio" name="rad-employer" id="rad-employer-yes" value="yes" onchange="calculateTIRA()">
+                                    <span>Yes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ACCORDION 3: TOTALS AT RETIREMENT (CHART) -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header active" onclick="toggleAccordion('acc-totals-chart', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">TOTALS AT RETIREMENT</span>
+                    </div>
+                    <i class="fas fa-chevron-up accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-totals-chart">
+                    <div class="chart-box-card">
+                        <div id="chart-retirement-totals" class="chart-svg-wrap">
+                            <!-- Dynamically generated SVG Bar Chart -->
+                        </div>
+                        <div class="chart-legend-row">
+                            <div class="legend-item">
+                                <span class="legend-bullet pretax"></span>
+                                <span>IRA Total Before Taxes</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-bullet aftertax"></span>
+                                <span>IRA Total After Taxes</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-bullet taxable"></span>
+                                <span>Total Taxable Account</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACCORDION 4: TRADITIONAL IRA VS. TAXABLE ACCOUNT (SCHEDULE) -->
+            <div class="calc-accordion-card">
+                <div class="calc-accordion-header" id="header-acc-compare" onclick="toggleAccordion('acc-compare-body', this)">
+                    <div class="accordion-title-wrap">
+                        <span class="accordion-title-text">TRADITIONAL IRA VS. TAXABLE ACCOUNT</span>
+                    </div>
+                    <i class="fas fa-chevron-down accordion-chevron"></i>
+                </div>
+                <div class="calc-accordion-body" id="acc-compare-body" style="display: none;">
+
+                    <!-- Multi-line SVG Balance Growth Chart -->
+                    <div class="chart-box-card" style="margin-bottom: 20px;">
+                        <div style="font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
+                            <i class="fas fa-chart-line"></i> Growth Trajectory from Age <span id="disp-age-start">29</span> to Retirement at Age <span id="disp-age-end">65</span>
+                        </div>
+                        <div id="chart-ira-trajectory" style="width: 100%; height: 260px;">
+                            <!-- Dynamically generated SVG Line Chart -->
+                        </div>
+                    </div>
+
+                    <!-- Year by Year Schedule Table -->
+                    <div class="schedule-table-wrap">
+                        <table class="dark-schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Age</th>
+                                    <th>Year</th>
+                                    <th>Annual Contribution</th>
+                                    <th>Tax Savings</th>
+                                    <th>IRA Pre-Tax Value</th>
+                                    <th>IRA After-Tax Value</th>
+                                    <th>Taxable Account</th>
+                                    <th>Net Advantage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-table-body">
+                                <!-- Populated dynamically by calculateTIRA() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- DEFINITIONS -->
+        <section class="definitions-container">
+            <h3 class="definitions-main-heading">DEFINITIONS</h3>
+
+            <div class="def-group">
+                <div class="def-title">STARTING BALANCE</div>
+                <p class="def-text">The current balance of your traditional IRA.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">ANNUAL CONTRIBUTION</div>
+                <p class="def-text">
+                    The amount you will contribute to your IRA each year. This calculator assumes that you make your contribution at the beginning of each year. For 2026, the maximum annual IRA contribution is $7,500 which is $500 more than 2025. It is important to note that this is the maximum total contributed to all of your IRA accounts. The contribution limit increases with inflation in $500 increments. An annual change to the contribution limit only occurs if the cumulative effect of inflation since the last adjustment is $500 or more.
+                </p>
+                <p class="def-text" style="margin-top: 10px;">
+                    If you are 50 or older you can make an additional 'catch-up' contribution of $1,100. The 'catch-up' contribution is $100 more than 2025. It is adjusted annually for inflation in $100 increments. In order to qualify for the 'catch-up' contribution, you must turn 50 by the end of the year in which you are making the contribution.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">CURRENT AGE</div>
+                <p class="def-text">
+                    The current age of the account owner must be 71 or less for this calculator. Although it is possible to make contributions to an IRA at any age when you have eligible income, this calculator does not take Required Minimum Distributions (RMD) into account, which begin at age 75 (or 70 1/2 if you were born before 7/1/1949, 72 if you were born 7/1/1949 to 12/31/1951, 73 if you were born 1/1/1951 to 1/1/1960) and is not designed for individuals that are required to make these distributions.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">AGE AT RETIREMENT</div>
+                <p class="def-text">
+                    Age at which you plan to retire. The age at retirement of the account owner must be 72 or less for this calculator. Although it is possible to make contributions to an IRA at any age when you have eligible income, this calculator does not take Required Minimum Distributions (RMD) into account, which begin at age 75 (or 70 1/2 if you were born before 7/1/1949, 72 if you were born 7/1/1949 to 12/31/1951, 73 if you were born 1/1/1951 to 1/1/1960) and is not designed for individuals that are required to make these distributions.
+                </p>
+                <p class="def-text" style="margin-top: 10px;">
+                    This calculator assumes that the year you retire, you do not make any contributions to your IRA. For example, if you retire at age 65, your last contribution occurs when you are actually age 64.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">ADJUSTED GROSS INCOME</div>
+                <p class="def-text">
+                    What you anticipate your income to be. This is used to calculate whether you are able to deduct your annual contributions from your taxes. It is important to note that there are no income limits preventing you from contributing to a traditional IRA. Annual income only affects your ability to make a tax-deductible contribution.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">MAXIMIZE CONTRIBUTIONS</div>
+                <p class="def-text">
+                    Check this box to contribute the maximum allowed to your account each year. This includes the additional catch-up contribution available when you are age 50 or over.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">TOTAL NON-DEDUCTIBLE CONTRIBUTIONS</div>
+                <p class="def-text">
+                    The total of your traditional IRA contributions that were made without a tax deduction. Traditional IRA contributions are often tax-deductible. However, if you have an employer-sponsored retirement plan at work, such as a 401(k), your tax deduction is limited based on your income. This calculator automatically determines if your tax deduction is limited by your income.
+                </p>
+
+                <!-- 2026 Phase-Out Table -->
+                <div class="phase-out-card">
+                    <h4 class="phase-out-title">2026 Traditional IRA Deduction Phase-Out Ranges</h4>
+                    <table class="phase-out-table">
+                        <thead>
+                            <tr>
+                                <th>Tax Filing Status</th>
+                                <th>Income Phase-Out Range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Married filing jointly</td>
+                                <td>$129,000 - $149,000</td>
+                            </tr>
+                            <tr>
+                                <td>Single, Head of Household or Married Filing Separately (and have not lived with spouse for last year)*</td>
+                                <td>$81,000 - $91,000</td>
+                            </tr>
+                            <tr>
+                                <td>Married filing separately*</td>
+                                <td>$0 - $10,000</td>
+                            </tr>
+                            <tr>
+                                <td>Married filing jointly (spouse has employer plan, IRA owner does not)**</td>
+                                <td>$242,000 - $252,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="phase-out-note">
+                        *Married filing separately can use the limits for single individuals if they have not lived with their spouse in the past year. This calculator assumes you are not required to use the lower "Married filing separately" limits. If you are "Married filing separately" and have not lived with your spouse for the last year, you should uncheck the "married" check box.
+                    </div>
+                    <div class="phase-out-note" style="margin-top: 6px;">
+                        **This calculator does not account for the special situation where your spouse has an employer-sponsored retirement plan but you do not.
+                    </div>
+                </div>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">TOTAL CONTRIBUTIONS</div>
+                <p class="def-text">The total amount contributed to this IRA.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">IRA TOTAL BEFORE TAXES</div>
+                <p class="def-text">Total value of your IRA at retirement before taxes.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">IRA TOTAL AFTER TAXES</div>
+                <p class="def-text">Total value of your IRA at retirement after taxes are paid.</p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">TOTAL TAXABLE ACCOUNT</div>
+                <p class="def-text">
+                    Total value of your savings, at retirement, if the after-tax contribution amount is deposited into a taxable account. This value, your 'Taxable Account Deposit', is calculated by assuming you could save an amount equal to the after-tax cost of contributing to a traditional IRA. Your 'Taxable Account Deposit' is equal to your traditional IRA contribution minus any tax savings. For example, assume you have a 30% combined state and federal tax rate. If you contribute $2,000 to a traditional IRA and qualify for the full $2,000 tax deduction, the value of your tax deduction is $2,000 X 30% or $600. The after-tax cost of contributing to your traditional IRA would then be $2,000 minus $600 or $1,400. If you do not qualify for tax-deductible traditional IRA contributions, your 'Taxable Account Deposit' will be the same as your traditional IRA contribution.
+                </p>
+                <p class="def-text" style="margin-top: 10px;">
+                    In addition, all earnings in your taxable account are assumed to be taxable in the year they are earned.
+                </p>
+            </div>
+
+            <div class="def-group">
+                <div class="def-title">EXPECTED RATE OF RETURN</div>
+                <p class="def-text">
+                    The annual rate of return for your IRA. This calculator assumes that your return is compounded annually and your contributions are made at the beginning of each year. The actual rate of return is largely dependent on the types of investments you select. The Standard &amp; Poor's 500® (S&amp;P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&amp;P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.
+                </p>
+                <p class="def-text" style="margin-top: 10px;">
+                    It is important to remember that these scenarios are hypothetical and that future rates of return can't be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.
+                </p>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box">
+                Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Comprehensive Analysis Report Modal -->
+    <div class="report-modal-overlay" id="report-modal" onclick="closeReportModal(event)">
+        <div class="report-modal-card" onclick="event.stopPropagation()">
+            <div class="modal-header-row">
+                <div>
+                    <h3 class="modal-title-main">Traditional IRA Analysis Report</h3>
+                    <p class="modal-sub-brand">Prepared by The Seiler Group of Raymond James</p>
+                </div>
+                <button type="button" class="modal-close-btn" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div id="report-modal-content">
+                <!-- Dynamically generated modal report -->
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 26px;">
+                <button type="button" class="btn-primary-gold" onclick="window.print()">
+                    <i class="fas fa-print"></i> PRINT REPORT
+                </button>
+                <button type="button" class="btn-outline-gold" onclick="closeReportModal()">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Champion Strip -->
+    <section class="champion-strip">
+        <div class="champ-inner">
+            <div class="champ-brand">
+                <a href="index.html">
+                    <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+                </a>
+                <div class="champ-socials">
+                    <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:theseilergroup@raymondjames.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <div class="champ-quote">
+                Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully complete the organization's initial and ongoing certification requirements to use the certification marks.
+            </div>
+            <div class="champ-cta">
+                <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
+                <a href="contact-us.html" class="champ-link">CONNECT WITH US</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-addresses">
+                <div class="addr-col">
+                    <p><strong>The Seiler Group, Raymond James</strong></p>
+                    <p>5 Caufield Place, Suite 201<br>Newtown, PA 18940</p>
+                    <p>T: 215.860.7823 // TF: +1.855.473.4537<br>F: 215.860.7829</p>
+                    <p><a href="maps-and-directions.html?_=37W" target="_blank">Map and Directions</a></p>
+                </div>
+                <div class="addr-col">
+                    <p><strong>Raymond James &amp; Associates</strong></p>
+                    <p>201 East Las Olas Boulevard, Suite 1630<br>Fort Lauderdale, FL 33301</p>
+                    <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map and Directions</a></p>
+                </div>
+                <div class="addr-col">
+                    <p><strong>FtMyersSatNRL-37W02</strong></p>
+                    <p>14541 Hope Center Loop, Suite 100<br>Fort Myers, FL 33912</p>
+                    <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map and Directions</a></p>
+                </div>
+            </div>
+            <div class="footer-legal">
+                <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
+                <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> | <a href="https://www.raymondjames.com/legal-disclosures" target="_blank">Legal Disclosures</a> | <a href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank">Privacy, Security &amp; Account Protection</a> | <a href="https://www.raymondjames.com/terms-of-use" target="_blank">Terms of Use</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Engine -->
+    <script>
+        // Global Calculation State
+        let tiraResults = {
+            iraPretax: 0,
+            iraAftertax: 0,
+            taxableTotal: 0,
+            totalContrib: 0,
+            totalNonDeductible: 0,
+            totalTaxSavings: 0,
+            netAdvantage: 0,
+            schedule: [],
+            currentAge: 29,
+            retireAge: 65
+        };
+
+        // Formatting Helpers
+        function parseNum(val) {
+            if (!val) return 0;
+            return parseFloat(val.toString().replace(/[^0-9.-]+/g, '')) || 0;
+        }
+
+        function fmtMoney(num) {
+            return '$' + Math.round(num || 0).toLocaleString('en-US');
+        }
+
+        function fmtMoney2(num) {
+            return '$' + (Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        }
+
+        function fmtPct(num) {
+            return (Number(num || 0)).toFixed(num % 1 === 0 ? 0 : 1) + '%';
+        }
+
+        // Accordion Management
+        function toggleAccordion(id, headerEl) {
+            const body = document.getElementById(id);
+            const chevron = headerEl.querySelector('.accordion-chevron');
+            if (body.style.display === 'none' || !body.style.display) {
+                body.style.display = 'block';
+                headerEl.classList.add('active');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+            } else {
+                body.style.display = 'none';
+                headerEl.classList.remove('active');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleScheduleAccordion() {
+            const header = document.getElementById('header-acc-compare');
+            const body = document.getElementById('acc-compare-body');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                header.classList.add('active');
+                const chevron = header.querySelector('.accordion-chevron');
+                if (chevron) chevron.style.transform = 'rotate(180deg)';
+                header.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                body.style.display = 'none';
+                header.classList.remove('active');
+                const chevron = header.querySelector('.accordion-chevron');
+                if (chevron) chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Show/hide validation alert
+        function showAlert(msg) {
+            const banner = document.getElementById('calc-validation-alert');
+            const text = document.getElementById('alert-text');
+            if (msg) {
+                text.innerText = msg;
+                banner.style.display = 'block';
+            } else {
+                banner.style.display = 'none';
+            }
+        }
+
+        // Core Calculation Engine (RegularIRA.js)
+        function calculateTIRA() {
+            const startBal = parseNum(document.getElementById('inp-starting-bal').value);
+            let userContrib = parseNum(document.getElementById('inp-annual-contrib').value);
+            const currentAge = parseInt(document.getElementById('inp-current-age').value) || 29;
+            const retireAge = parseInt(document.getElementById('inp-retire-age').value) || 65;
+            const agi = parseNum(document.getElementById('inp-agi').value);
+            const maximize = document.getElementById('chk-maximize-contrib').checked;
+
+            const ror = parseNum(document.getElementById('inp-ror').value) / 100;
+            const taxCurrent = parseNum(document.getElementById('inp-tax-current').value) / 100;
+            const taxRetire = parseNum(document.getElementById('inp-tax-retire').value) / 100;
+            const isMarried = document.getElementById('rad-married-yes').checked;
+            const isCovered = document.getElementById('rad-employer-yes').checked;
+
+            // Update sub-header meta summary
+            const marriedStr = isMarried ? 'MARRIED' : 'NOT MARRIED';
+            const employerStr = isCovered ? 'EMPLOYER PLAN' : 'NO EMPLOYER PLAN';
+            document.getElementById('tax-profile-summary').innerText = 
+                `${fmtPct(ror * 100)} RETURN, ${fmtPct(taxCurrent * 100)} TAX, ${fmtPct(taxRetire * 100)} TAX DURING RETIREMENT, ${marriedStr}, ${employerStr}`;
+
+            // Validation Checks (matching Raymond James limits)
+            if (currentAge < 15) {
+                showAlert("Current age can't be less than 15");
+                document.getElementById('inp-current-age').classList.add('error-state');
+                return;
+            } else if (currentAge > 71) {
+                showAlert("Current age must be 71 or less");
+                document.getElementById('inp-current-age').classList.add('error-state');
+                return;
+            } else {
+                document.getElementById('inp-current-age').classList.remove('error-state');
+            }
+
+            if (retireAge <= currentAge) {
+                showAlert("Age at retirement must be greater than current age");
+                document.getElementById('inp-retire-age').classList.add('error-state');
+                return;
+            } else if (retireAge > 72) {
+                showAlert("Age at retirement must be 72 or less");
+                document.getElementById('inp-retire-age').classList.add('error-state');
+                return;
+            } else {
+                document.getElementById('inp-retire-age').classList.remove('error-state');
+            }
+
+            showAlert(""); // Clear error
+
+            // Calculation Years
+            const totalYears = retireAge - currentAge;
+
+            let balIRA = startBal;
+            let balTaxable = startBal;
+            let totalContributions = 0;
+            let totalNonDeductible = 0;
+            let totalTaxSavings = 0;
+
+            const schedule = [];
+            schedule.push({
+                age: currentAge,
+                year: 0,
+                contrib: 0,
+                taxSavings: 0,
+                iraPretax: balIRA,
+                iraAftertax: balIRA * (1 - taxRetire),
+                taxable: balTaxable,
+                advantage: 0
+            });
+
+            // After-tax return on taxable account
+            const afterTaxRor = ror * (1 - taxCurrent);
+
+            for (let y = 1; y <= totalYears; y++) {
+                const ageThisYear = currentAge + (y - 1);
+
+                // 2026 IRA Contribution Limits
+                const baseLimit = 7500;
+                const catchup = 1100;
+                const maxAllowed = ageThisYear >= 50 ? (baseLimit + catchup) : baseLimit;
+
+                let contribThisYear = maximize ? maxAllowed : Math.min(userContrib, maxAllowed);
+                totalContributions += contribThisYear;
+
+                // Determine deductibility based on 2026 Phase-Out rules
+                let deductibleFraction = 1.0;
+                if (isCovered) {
+                    if (isMarried) {
+                        // Married Filing Jointly: $129,000 - $149,000
+                        if (agi <= 129000) deductibleFraction = 1.0;
+                        else if (agi >= 149000) deductibleFraction = 0.0;
+                        else deductibleFraction = (149000 - agi) / 20000;
+                    } else {
+                        // Single: $81,000 - $91,000
+                        if (agi <= 81000) deductibleFraction = 1.0;
+                        else if (agi >= 91000) deductibleFraction = 0.0;
+                        else deductibleFraction = (91000 - agi) / 10000;
+                    }
+                }
+
+                const deductibleAmount = contribThisYear * deductibleFraction;
+                const nonDeductibleAmount = contribThisYear - deductibleAmount;
+                totalNonDeductible += nonDeductibleAmount;
+
+                // Tax savings this year = deductible contribution * current tax rate
+                const taxSavingsThisYear = deductibleAmount * taxCurrent;
+                totalTaxSavings += taxSavingsThisYear;
+
+                // Traditional IRA Growth (Beginning of year deposit, tax-deferred compounding)
+                balIRA = (balIRA + contribThisYear) * (1 + ror);
+
+                // Taxable Account Growth (Deposit = IRA contrib minus tax savings)
+                const taxableDeposit = contribThisYear - taxSavingsThisYear;
+                balTaxable = (balTaxable + taxableDeposit) * (1 + afterTaxRor);
+
+                // IRA After-Tax Value at this milestone
+                // Only deductible contributions & earnings are taxed at retirement tax rate.
+                // Basis (non-deductible) is returned tax-free.
+                const taxablePortion = Math.max(0, balIRA - totalNonDeductible);
+                const taxPaid = taxablePortion * taxRetire;
+                const iraAftertax = balIRA - taxPaid;
+
+                const advantage = iraAftertax - balTaxable;
+
+                schedule.push({
+                    age: ageThisYear + 1,
+                    year: y,
+                    contrib: contribThisYear,
+                    taxSavings: taxSavingsThisYear,
+                    iraPretax: balIRA,
+                    iraAftertax: iraAftertax,
+                    taxable: balTaxable,
+                    advantage: advantage
+                });
+            }
+
+            // Final Retirement Values
+            const finalIraPretax = balIRA;
+            const finalTaxablePortion = Math.max(0, finalIraPretax - totalNonDeductible);
+            const finalTaxPaid = finalTaxablePortion * taxRetire;
+            const finalIraAftertax = finalIraPretax - finalTaxPaid;
+            const finalTaxableTotal = balTaxable;
+            const netAdvantage = finalIraAftertax - finalTaxableTotal;
+
+            // Update UI State
+            tiraResults = {
+                iraPretax: finalIraPretax,
+                iraAftertax: finalIraAftertax,
+                taxableTotal: finalTaxableTotal,
+                totalContrib: totalContributions,
+                totalNonDeductible: totalNonDeductible,
+                totalTaxSavings: totalTaxSavings,
+                netAdvantage: netAdvantage,
+                schedule: schedule,
+                currentAge: currentAge,
+                retireAge: retireAge,
+                totalYears: totalYears
+            };
+
+            // Update Stat Cards & Computed Fields
+            document.getElementById('stat-ira-pretax').innerText = fmtMoney(finalIraPretax);
+            document.getElementById('stat-ira-aftertax').innerText = fmtMoney(finalIraAftertax);
+            document.getElementById('stat-taxable-total').innerText = fmtMoney(finalTaxableTotal);
+            document.getElementById('stat-tax-advantage').innerText = (netAdvantage >= 0 ? '+' : '') + fmtMoney(netAdvantage);
+
+            document.getElementById('disp-total-contrib').innerText = fmtMoney(totalContributions);
+            document.getElementById('disp-non-deductible').innerText = fmtMoney(totalNonDeductible);
+            document.getElementById('disp-age-start').innerText = currentAge;
+            document.getElementById('disp-age-end').innerText = retireAge;
+
+            // Render Charts & Table
+            renderBarChart(finalIraPretax, finalIraAftertax, finalTaxableTotal);
+            renderTrajectoryChart(schedule);
+            renderScheduleTable(schedule);
+        }
+
+        // Render Totals at Retirement Bar Chart
+        function renderBarChart(pretax, aftertax, taxable) {
+            const container = document.getElementById('chart-retirement-totals');
+            const w = container.clientWidth || 700;
+            const h = 320;
+            const padL = 75;
+            const padR = 40;
+            const padT = 30;
+            const padB = 60;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            const isAllZero = pretax <= 0.01 && aftertax <= 0.01 && taxable <= 0.01;
+            const maxVal = isAllZero ? 25 : Math.max(pretax, aftertax, taxable, 100) * 1.25;
+
+            // Generate Y-axis gridlines
+            const yTicks = [
+                0,
+                maxVal * 0.25,
+                maxVal * 0.5,
+                maxVal * 0.75,
+                maxVal
+            ];
+
+            let gridSvg = '';
+            yTicks.forEach(tick => {
+                const yPos = padT + plotH - (tick / maxVal) * plotH;
+                gridSvg += `
+                    <line x1="${padL}" y1="${yPos}" x2="${w - padR}" y2="${yPos}" stroke="#1e3a66" stroke-width="1" stroke-dasharray="${tick === 0 ? 'none' : '3,3'}" opacity="0.6"/>
+                    <text x="${padL - 10}" y="${yPos + 4}" fill="#94a3b8" font-size="11" font-weight="600" text-anchor="end">${fmtMoney(tick)}</text>
+                `;
+            });
+
+            // Bars specifications
+            const barW = Math.min(85, Math.max(35, plotW / 6));
+            const slotW = plotW / 3;
+
+            const items = [
+                { name: 'IRA Before Taxes', val: pretax, color: '#dfa01e', x: padL + slotW * 0.5 - barW / 2 },
+                { name: 'IRA After Taxes', val: aftertax, color: '#10b981', x: padL + slotW * 1.5 - barW / 2 },
+                { name: 'Taxable Account', val: taxable, color: '#64748b', x: padL + slotW * 2.5 - barW / 2 }
+            ];
+
+            let barsSvg = '';
+            items.forEach(item => {
+                const barH = isAllZero ? 2 : Math.max(3, (item.val / maxVal) * plotH);
+                const barY = padT + plotH - barH;
+                const textVal = fmtMoney(item.val);
+
+                barsSvg += `
+                    <rect x="${item.x}" y="${barY}" width="${barW}" height="${barH}" fill="${item.color}" rx="3" opacity="0.95">
+                        <animate attributeName="height" from="0" to="${barH}" dur="0.4s" fill="freeze" />
+                        <animate attributeName="y" from="${padT + plotH}" to="${barY}" dur="0.4s" fill="freeze" />
+                    </rect>
+                    <text x="${item.x + barW / 2}" y="${barY - 8}" fill="#ffffff" font-size="12" font-weight="700" text-anchor="middle">${textVal}</text>
+                    <text x="${item.x + barW / 2}" y="${padT + plotH + 22}" fill="#cbd5e1" font-size="12" font-weight="700" text-anchor="middle">${item.name}</text>
+                `;
+            });
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" style="overflow: visible; font-family: 'Open Sans', sans-serif;">
+                    ${gridSvg}
+                    ${barsSvg}
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                </svg>
+            `;
+        }
+
+        // Render Trajectory Line Chart
+        function renderTrajectoryChart(schedule) {
+            const container = document.getElementById('chart-ira-trajectory');
+            if (!container) return;
+            const w = container.clientWidth || 700;
+            const h = 240;
+            const padL = 75;
+            const padR = 30;
+            const padT = 20;
+            const padB = 40;
+            const plotW = w - padL - padR;
+            const plotH = h - padT - padB;
+
+            let maxVal = 1000;
+            schedule.forEach(row => {
+                if (row.iraPretax > maxVal) maxVal = row.iraPretax;
+                if (row.iraAftertax > maxVal) maxVal = row.iraAftertax;
+                if (row.taxable > maxVal) maxVal = row.taxable;
+            });
+            maxVal *= 1.15;
+
+            const n = schedule.length;
+            const getX = (idx) => padL + (idx / Math.max(1, n - 1)) * plotW;
+            const getY = (val) => padT + plotH - (val / maxVal) * plotH;
+
+            let pathPre = '', pathAfter = '', pathTax = '';
+            schedule.forEach((row, i) => {
+                const x = getX(i);
+                const yPre = getY(row.iraPretax);
+                const yAfter = getY(row.iraAftertax);
+                const yTax = getY(row.taxable);
+
+                if (i === 0) {
+                    pathPre = `M ${x} ${yPre}`;
+                    pathAfter = `M ${x} ${yAfter}`;
+                    pathTax = `M ${x} ${yTax}`;
+                } else {
+                    pathPre += ` L ${x} ${yPre}`;
+                    pathAfter += ` L ${x} ${yAfter}`;
+                    pathTax += ` L ${x} ${yTax}`;
+                }
+            });
+
+            // Grid lines
+            let grid = '';
+            for (let j = 0; j <= 3; j++) {
+                const v = (maxVal / 3) * j;
+                const y = getY(v);
+                grid += `
+                    <line x1="${padL}" y1="${y}" x2="${w - padR}" y2="${y}" stroke="#1e3a66" stroke-dasharray="3,3" opacity="0.5"/>
+                    <text x="${padL - 10}" y="${y + 4}" fill="#94a3b8" font-size="10" text-anchor="end">${fmtMoney(v)}</text>
+                `;
+            }
+
+            container.innerHTML = `
+                <svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" style="overflow: visible; font-family: 'Open Sans', sans-serif;">
+                    ${grid}
+                    <path d="${pathTax}" fill="none" stroke="#64748b" stroke-width="2.5" />
+                    <path d="${pathAfter}" fill="none" stroke="#10b981" stroke-width="2.5" />
+                    <path d="${pathPre}" fill="none" stroke="#dfa01e" stroke-width="2.5" />
+                    <line x1="${padL}" y1="${padT + plotH}" x2="${w - padR}" y2="${padT + plotH}" stroke="#64748b" stroke-width="1.5" />
+                    <text x="${w / 2}" y="${padT + plotH + 28}" fill="#cbd5e1" font-size="11" text-anchor="middle">Age Progression Timeline</text>
+                </svg>
+            `;
+        }
+
+        // Render Schedule Table
+        function renderScheduleTable(schedule) {
+            const tbody = document.getElementById('schedule-table-body');
+            if (!tbody) return;
+
+            let html = '';
+            schedule.forEach(row => {
+                html += `
+                    <tr>
+                        <td style="font-weight: 600; color: #ffffff;">Age ${row.age}</td>
+                        <td style="color: #94a3b8;">${row.year === 0 ? 'Start' : 'Yr ' + row.year}</td>
+                        <td style="color: #cbd5e1;">${row.contrib ? fmtMoney(row.contrib) : '-'}</td>
+                        <td style="color: #4ade80;">${row.taxSavings ? '+' + fmtMoney(row.taxSavings) : '-'}</td>
+                        <td style="color: #dfa01e; font-weight: 600;">${fmtMoney(row.iraPretax)}</td>
+                        <td style="color: #10b981; font-weight: 600;">${fmtMoney(row.iraAftertax)}</td>
+                        <td style="color: #cbd5e1;">${fmtMoney(row.taxable)}</td>
+                        <td style="color: ${row.advantage >= 0 ? '#4ade80' : '#ef4444'}; font-weight: 700;">${row.advantage >= 0 ? '+' : ''}${fmtMoney(row.advantage)}</td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        }
+
+        // Two-way synchronization
+        function setupSync(inputId, sliderId, type) {
+            const input = document.getElementById(inputId);
+            const slider = document.getElementById(sliderId);
+            if (!input || !slider) return;
+
+            input.addEventListener('change', () => {
+                const val = parseNum(input.value);
+                slider.value = val;
+                if (type === 'percent') {
+                    input.value = fmtPct(val);
+                } else if (type === 'currency') {
+                    input.value = fmtMoney(val);
+                } else {
+                    input.value = val;
+                }
+                calculateTIRA();
+            });
+
+            slider.addEventListener('input', () => {
+                const val = parseFloat(slider.value);
+                if (type === 'percent') {
+                    input.value = fmtPct(val);
+                } else if (type === 'currency') {
+                    input.value = fmtMoney(val);
+                } else {
+                    input.value = val;
+                }
+                calculateTIRA();
+            });
+        }
+
+        // Reset to Default Values (Raymond James parameters)
+        function resetDefaults() {
+            document.getElementById('inp-starting-bal').value = '$0';
+            document.getElementById('range-starting-bal').value = '0';
+
+            document.getElementById('inp-annual-contrib').value = '$5,000';
+            document.getElementById('range-annual-contrib').value = '5000';
+
+            document.getElementById('inp-current-age').value = '29';
+            document.getElementById('range-current-age').value = '29';
+
+            document.getElementById('inp-retire-age').value = '65';
+            document.getElementById('range-retire-age').value = '65';
+
+            document.getElementById('inp-agi').value = '$50,000';
+            document.getElementById('range-agi').value = '50000';
+
+            document.getElementById('chk-maximize-contrib').checked = false;
+
+            document.getElementById('inp-ror').value = '7%';
+            document.getElementById('range-ror').value = '7';
+
+            document.getElementById('inp-tax-current').value = '25%';
+            document.getElementById('range-tax-current').value = '25';
+
+            document.getElementById('inp-tax-retire').value = '15%';
+            document.getElementById('range-tax-retire').value = '15';
+
+            document.getElementById('rad-married-no').checked = true;
+            document.getElementById('rad-employer-no').checked = true;
+
+            calculateTIRA();
+        }
+
+        // Load Sample Profile
+        function loadSampleProfile() {
+            document.getElementById('inp-starting-bal').value = '$15,000';
+            document.getElementById('range-starting-bal').value = '15000';
+
+            document.getElementById('inp-annual-contrib').value = '$7,500';
+            document.getElementById('range-annual-contrib').value = '7500';
+
+            document.getElementById('inp-current-age').value = '35';
+            document.getElementById('range-current-age').value = '35';
+
+            document.getElementById('inp-retire-age').value = '65';
+            document.getElementById('range-retire-age').value = '65';
+
+            document.getElementById('inp-agi').value = '$75,000';
+            document.getElementById('range-agi').value = '75000';
+
+            document.getElementById('chk-maximize-contrib').checked = true;
+
+            document.getElementById('inp-ror').value = '7%';
+            document.getElementById('range-ror').value = '7';
+
+            document.getElementById('inp-tax-current').value = '25%';
+            document.getElementById('range-tax-current').value = '25';
+
+            document.getElementById('inp-tax-retire').value = '15%';
+            document.getElementById('range-tax-retire').value = '15';
+
+            document.getElementById('rad-married-yes').checked = true;
+            document.getElementById('rad-employer-yes').checked = true;
+
+            calculateTIRA();
+        }
+
+        // Report Modal Handlers
+        function openReportModal() {
+            calculateTIRA();
+            const modal = document.getElementById('report-modal');
+            const content = document.getElementById('report-modal-content');
+
+            content.innerHTML = `
+                <div style="background: #11223d; border-left: 4px solid #dfa01e; padding: 18px; border-radius: 4px; margin-bottom: 22px;">
+                    <div style="font-size: 14px; font-weight: 800; color: #dfa01e; text-transform: uppercase; margin-bottom: 6px;">
+                        Traditional IRA Growth &amp; Tax Deduction Analysis
+                    </div>
+                    <p style="font-size: 13px; color: #e2e8f0; line-height: 1.6; margin: 0;">
+                        By contributing to a Traditional IRA from age ${tiraResults.currentAge} to ${tiraResults.retireAge}, your accumulated balance is projected to reach <strong>${fmtMoney(tiraResults.iraPretax)}</strong> before taxes. After accounting for estimated taxes at retirement, you will have <strong>${fmtMoney(tiraResults.iraAftertax)}</strong>, outperforming a taxable account by <strong>${fmtMoney(tiraResults.netAdvantage)}</strong>.
+                    </p>
+                </div>
+
+                <h4 style="color: #dfa01e; font-size: 13px; text-transform: uppercase; margin: 18px 0 10px 0;">Portfolio Assumptions &amp; Tax Status</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; font-size: 12px;">
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Current Age / Retirement Age:</span> <strong style="color: #ffffff;">${tiraResults.currentAge} / ${tiraResults.retireAge}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Expected Rate of Return:</span> <strong style="color: #ffffff;">${document.getElementById('inp-ror').value}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Total Cumulative Contributions:</span> <strong style="color: #ffffff;">${fmtMoney(tiraResults.totalContrib)}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Total Lifetime Tax Savings:</span> <strong style="color: #4ade80;">${fmtMoney(tiraResults.totalTaxSavings)}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Current Tax Rate / Retirement:</span> <strong style="color: #ffffff;">${document.getElementById('inp-tax-current').value} / ${document.getElementById('inp-tax-retire').value}</strong>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); padding: 10px 14px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.06);">
+                        <span style="color: #94a3b8;">Non-Deductible Contributions:</span> <strong style="color: #ffffff;">${fmtMoney(tiraResults.totalNonDeductible)}</strong>
+                    </div>
+                </div>
+
+                <h4 style="color: #dfa01e; font-size: 13px; text-transform: uppercase; margin: 20px 0 10px 0;">Retirement Values Comparison</h4>
+                <div class="schedule-table-wrap">
+                    <table class="dark-schedule-table">
+                        <thead>
+                            <tr>
+                                <th>Account Structure</th>
+                                <th>Pre-Tax Balance</th>
+                                <th>After-Tax Net Value</th>
+                                <th>Net Tax Advantage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="color: #dfa01e; font-weight: 700;">Traditional IRA</td>
+                                <td>${fmtMoney(tiraResults.iraPretax)}</td>
+                                <td style="color: #10b981; font-weight: 700;">${fmtMoney(tiraResults.iraAftertax)}</td>
+                                <td style="color: #4ade80; font-weight: 700;">+${fmtMoney(tiraResults.netAdvantage)}</td>
+                            </tr>
+                            <tr>
+                                <td style="color: #64748b; font-weight: 700;">Taxable Account</td>
+                                <td>${fmtMoney(tiraResults.taxableTotal)}</td>
+                                <td>${fmtMoney(tiraResults.taxableTotal)}</td>
+                                <td style="color: #94a3b8;">Baseline</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top: 20px; font-size: 11px; color: #94a3b8; line-height: 1.5;">
+                    *All examples are hypothetical and for illustrative purposes. Actual returns, taxes, and deductibility may vary based on future legislation, state taxes, and inflation-indexed phase-outs.
+                </div>
+            `;
+
+            modal.style.display = 'flex';
+        }
+
+        function closeReportModal(e) {
+            if (!e || e.target === document.getElementById('report-modal') || e.target.classList.contains('modal-close-btn') || e.target.tagName === 'BUTTON') {
+                document.getElementById('report-modal').style.display = 'none';
+            }
+        }
+
+        // Initialize on DOM Ready
+        window.addEventListener('DOMContentLoaded', () => {
+            setupSync('inp-starting-bal', 'range-starting-bal', 'currency');
+            setupSync('inp-annual-contrib', 'range-annual-contrib', 'currency');
+            setupSync('inp-current-age', 'range-current-age', 'number');
+            setupSync('inp-retire-age', 'range-retire-age', 'number');
+            setupSync('inp-agi', 'range-agi', 'currency');
+            setupSync('inp-ror', 'range-ror', 'percent');
+            setupSync('inp-tax-current', 'range-tax-current', 'percent');
+            setupSync('inp-tax-retire', 'range-tax-retire', 'percent');
+
+            // Responsive redraw
+            window.addEventListener('resize', () => {
+                calculateTIRA();
+            });
+
+            // Mobile menu drawer
+            const trigger = document.getElementById('mobile-menu-trigger');
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            const closeBtn = document.getElementById('drawer-close-btn');
+
+            if (trigger && drawer && overlay) {
+                trigger.addEventListener('click', () => {
+                    drawer.classList.add('active');
+                    overlay.classList.add('active');
+                });
+                overlay.addEventListener('click', () => {
+                    drawer.classList.remove('active');
+                    overlay.classList.remove('active');
+                });
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', () => {
+                        drawer.classList.remove('active');
+                        overlay.classList.remove('active');
+                    });
+                }
+            }
+
+            // Run initial calculation
+            calculateTIRA();
+        });
+    </script>
+</body>
+</html>

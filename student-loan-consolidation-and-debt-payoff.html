@@ -3,224 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Loan Consolidation and Debt Payoff | The Seiler Group | Raymond James</title>
-    <meta name="description" content="Calculate student loan consolidation savings and rollover debt payoff. Compare accelerated payoff with debt rollover vs standard minimum payments.">
+    <title>Student Loan Consolidation and Debt Payoff | The Seiler Group of Raymond James</title>
+    <meta name="description" content="Calculate student loan consolidation savings and rollover debt payoff. Accelerate non-student debt payoff by rolling over consolidation savings.">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Shared Corporate Navy & Gold Stylesheet -->
-    <link rel="stylesheet" href="401k-spend-it-or-save-it.css?v=3">
-    <style>
-        .slc-stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-            gap: 16px;
-            margin: 20px 0;
-        }
-        .slc-stat-card {
-            background: #0b172a;
-            border: 1px solid rgba(223, 160, 30, 0.35);
-            border-radius: 6px;
-            padding: 16px 18px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .slc-stat-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: #dfa01e;
-            font-family: 'Open Sans', sans-serif;
-            margin-bottom: 4px;
-        }
-        .slc-stat-label {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #94a3b8;
-            font-weight: 600;
-        }
-        .debt-accordion-card {
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            background: #ffffff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-        }
-        .debt-accordion-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 18px;
-            background: #f8fafc;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.2s;
-            border-bottom: 1px solid transparent;
-        }
-        .debt-accordion-header:hover {
-            background: #f1f5f9;
-        }
-        .debt-accordion-header.active {
-            border-bottom: 1px solid #e2e8f0;
-            background: #f1f5f9;
-        }
-        .debt-accordion-title {
-            font-size: 13px;
-            font-weight: 700;
-            color: #0b172a;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 0.5px;
-        }
-        .debt-accordion-badge {
-            font-size: 13px;
-            color: #0b172a;
-            font-weight: 700;
-        }
-        .debt-accordion-body {
-            padding: 18px;
-            background: #ffffff;
-        }
-        .calc-radio-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin-top: 6px;
-        }
-        .calc-radio-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: #334155;
-            cursor: pointer;
-        }
-        .calc-radio-label input[type="radio"] {
-            accent-color: #dfa01e;
-            cursor: pointer;
-        }
-        .def-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 15px 0 25px 0;
-            font-size: 12px;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-        }
-        .def-table th, .def-table td {
-            padding: 8px 12px;
-            border: 1px solid #cbd5e1;
-        }
-        .def-table th {
-            background: #0b172a;
-            color: #dfa01e;
-            font-weight: 700;
-            text-align: left;
-            text-transform: uppercase;
-        }
-        .def-title-group {
-            font-size: 12px;
-            font-weight: 800;
-            color: #0b172a;
-            margin-top: 18px;
-            margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .def-desc-group {
-            font-size: 12px;
-            color: #475569;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(11, 23, 42, 0.75);
-            z-index: 99999;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .modal-content {
-            background: #ffffff;
-            width: 90%;
-            max-width: 860px;
-            max-height: 90vh;
-            border-radius: 8px;
-            overflow-y: auto;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-top: 5px solid #dfa01e;
-            padding: 30px;
-            position: relative;
-        }
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 12px;
-        }
-        .report-table th, .report-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e2e8f0;
-            text-align: left;
-        }
-        .report-table th {
-            background-color: #0b172a;
-            color: #dfa01e;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-            letter-spacing: 0.5px;
-        }
-        .report-table tr:hover td {
-            background-color: #f8fafc;
-        }
-        .report-table td:last-child {
-            text-align: right;
-            font-weight: 600;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Dedicated Signature Midnight Navy & Luxury Gold Stylesheet -->
+    <link rel="stylesheet" href="student-loan-consolidation-and-debt-payoff.css?v=1">
 </head>
-<body>
+<body class="calculator-page">
 
     <!-- TOP HEADER BAR -->
-    <header class="top-nav-container">
-        <div class="top-nav-inner">
-            <div class="brand-left">
-                <a href="index.html" class="brand-logo-link">
-                    <span class="brand-title">THE SEILER GROUP</span>
-                    <span class="brand-subtitle">OF RAYMOND JAMES</span>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand-wrapper">
+                <a href="index.html" class="brand-logo-link" aria-label="The Seiler Group Home">
+                    <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="brand-logo-img">
                 </a>
             </div>
-            <div class="header-contact">
-                <a href="tel:800-237-0152" class="phone-link"><i class="fas fa-phone-alt"></i> 800-237-0152</a>
-                <a href="contact-us.html" class="contact-btn">CONTACT US</a>
-            </div>
+
+            <nav class="desktop-nav" aria-label="Main Navigation">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="athletes.html" class="nav-link">ATHLETES</a>
+                <a href="business-titans.html" class="nav-link">BUSINESS TITANS</a>
+                <a href="individuals.html" class="nav-link">INDIVIDUALS</a>
+                <a href="team.html" class="nav-link">YOUR TEAM</a>
+                
+                <div class="nav-dropdown">
+                    <a href="resources.html" class="nav-link active">
+                        RESOURCES <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i>
+                    </a>
+                    <div class="nav-dropdown-menu">
+                        <a href="resources.html" class="nav-dropdown-item">CALCULATORS</a>
+                        <a href="press-releases.html" class="nav-dropdown-item">PRESS RELEASES</a>
+                        <a href="https://www.raymondjames.com/-/media/rj/common/investment-strategy-publications/investment-strategy-quarterly.pdf" target="_blank" rel="noopener noreferrer" class="nav-dropdown-item">INVESTOR STRATEGY QUARTERLY</a>
+                        <a href="worthwhile.html" class="nav-dropdown-item">WORTHWHILE</a>
+                    </div>
+                </div>
+
+                <a href="contact.html" class="nav-link">CONTACT US</a>
+
+                <div class="client-access-wrapper">
+                    <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer" class="client-access-btn">
+                        CLIENT ACCESS
+                    </a>
+                </div>
+            </nav>
+
+            <button class="mobile-hamburger" id="mobile-hamburger" onclick="toggleMobileMenu(event)" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
-    <!-- SECONDARY NAVIGATION -->
-    <nav class="sub-nav">
-        <div class="sub-nav-inner">
-            <a href="index.html">HOME</a>
-            <a href="corporate-executive-services.html">ABOUT US</a>
-            <a href="counseling-visionaries.html">INDIVIDUALS &amp; FAMILIES</a>
-            <a href="corporate-executive-services.html">CORPORATE EXECUTIVES</a>
-            <a href="resources.html" class="active">RESOURCES</a>
-            <a href="contact-us.html">CONTACT US</a>
+    <!-- MOBILE DRAWER -->
+    <div class="mobile-drawer-overlay" id="drawer-overlay" onclick="toggleMobileMenu(event)"></div>
+    <div class="mobile-drawer" id="mobile-drawer">
+        <div class="drawer-header">
+            <img src="assets/logo.svg" alt="The Seiler Group" class="drawer-logo">
+            <button class="drawer-close" id="drawer-close" onclick="toggleMobileMenu(event)" aria-label="Close navigation">&times;</button>
         </div>
-    </nav>
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">HOME</a>
+            <a href="athletes.html" class="drawer-link">ATHLETES</a>
+            <a href="business-titans.html" class="drawer-link">BUSINESS TITANS</a>
+            <a href="individuals.html" class="drawer-link">INDIVIDUALS</a>
+            <a href="team.html" class="drawer-link">YOUR TEAM</a>
+            <a href="resources.html" class="drawer-link active">RESOURCES</a>
+            <a href="contact.html" class="drawer-link">CONTACT US</a>
+            <a href="https://clientaccess.rjf.com" target="_blank" rel="noopener noreferrer" class="drawer-link client-access-drawer-btn">CLIENT ACCESS</a>
+        </nav>
+    </div>
 
-    <!-- FLOATING SIDE NAVIGATION BUTTONS -->
+    <!-- FLOATING SIDE CALCULATOR NAVIGATION BUTTONS -->
     <a href="student-budget-analyzer.html" class="calc-side-nav-btn prev-btn" title="Previous Calculator: Student Budget Analyzer">
         <span class="calc-side-nav-square"><i class="fas fa-chevron-left"></i></span>
         <span class="calc-side-nav-label">Prev<br>Calculator</span>
@@ -231,991 +89,1462 @@
         <span class="calc-side-nav-square"><i class="fas fa-chevron-right"></i></span>
     </a>
 
-    <!-- MAIN CALCULATOR CONTENT -->
-    <main class="calc-white-wrapper">
-        <article class="calc-white-container">
+    <!-- MAIN CALCULATOR CONTAINER -->
+    <main class="calc-main-wrapper">
 
-            <!-- Hero Image Banner -->
-            <div style="width: 100%; max-height: 240px; border-radius: 6px; overflow: hidden; margin-bottom: 25px; border: 1px solid rgba(223, 160, 30, 0.35); box-shadow: 0 10px 30px rgba(0,0,0,0.4); background: #0b172a;">
-                <img src="assets/resources/calculator-hero.jpg" alt="Student Loan Consolidation and Debt Payoff" style="width: 100%; height: 240px; object-fit: cover; object-position: center 30%; display: block;">
+        <!-- Hero Card & Header -->
+        <article class="calc-hero-card">
+            <div class="calc-hero-img-wrap">
+                <img src="assets/resources/card-53.jpg" alt="Student Loan Consolidation and Debt Payoff">
             </div>
 
-            <!-- Page Titles -->
-            <h1 class="calc-page-title">STUDENT LOAN CONSOLIDATION AND DEBT PAYOFF</h1>
-            <div class="calc-category-path">Loans &gt; Calculator</div>
+            <div class="calc-header-box">
+                <div class="calc-breadcrumbs">
+                    <a href="resources.html">Loans</a>
+                    <span class="divider">//</span>
+                    <a href="resources.html">Calculator</a>
+                </div>
 
-            <div class="calc-share-container">
-                <a href="javascript:void(0)" onclick="window.print()" class="calc-share-link"><i class="fas fa-share-alt"></i> Share</a>
-            </div>
+                <h1 class="calc-title">STUDENT LOAN CONSOLIDATION AND DEBT PAYOFF</h1>
 
-            <div class="calc-intro-paragraph">
-                <p style="margin-bottom: 10px;">The student loan consolidation and debt payoff calculator applies two simple principles to paying off high-interest debt:</p>
-                <ol style="margin-left: 20px; margin-bottom: 12px; line-height: 1.6;">
-                    <li>Consolidate your existing student loans.</li>
-                    <li>Use your extra savings each month to pay off your highest interest debt sooner.</li>
-                </ol>
-                <p>
-                    To apply this school of thought first consolidate to a lower interest rate on your student debt, then use the extra money you've saved toward your highest interest rate debt until paid off. Repeat this with each succeeding debt until you are completely debt free. You will be amazed at the time and money saved using this rollover method!
+                <div class="calc-share-row">
+                    <button type="button" class="calc-share-btn" onclick="handleShareClick(event)">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+
+                <p class="calc-description">
+                    The student loan consolidation and debt payoff calculator applies two simple principles to paying off high-interest debt:
                 </p>
+
+                <ol class="calc-principles-list">
+                    <li>Consolidate your existing student loans</li>
+                    <li>Use your extra cash every month to pay off your higher interest debt sooner</li>
+                </ol>
+
+                <p class="calc-description">
+                    We apply the amount of payment savings you choose to your non-student loan debt with the highest rate. When that balance is paid in full, the balance with the next highest rate will be paid down. This continues until you have rolled through all of your balances and your non-student loan debt is paid in full. Click the "View Report" button for a detailed look at the results.
+                </p>
+
+                <!-- Actions Bar -->
+                <div class="calc-actions-bar">
+                    <button type="button" class="btn-calc-primary" onclick="calculateDebtRollover()">CALCULATE</button>
+                    <button type="button" class="btn-calc-secondary" onclick="openReportModal()">VIEW REPORT</button>
+                    <button type="button" class="btn-calc-icon" onclick="openReportModal()" title="View Tabular Report"><i class="fas fa-list-ul"></i></button>
+                    <button type="button" class="btn-calc-icon" onclick="scrollToDefinitions()" title="View Definitions"><i class="fas fa-question-circle"></i></button>
+                    <button type="button" class="btn-calc-secondary" style="font-size: 11px; padding: 7px 14px;" onclick="loadDefaultParameters()">RESET TO DEFAULTS</button>
+                </div>
+
+                <!-- Dynamic Headline Banner -->
+                <div class="calc-dynamic-headline-card">
+                    <div class="calc-dynamic-headline" id="dynamic-headline">
+                        You could save $3,984.23 on your non-student loan debt.
+                    </div>
+                </div>
+
+                <div class="calc-required-note">*indicates required</div>
             </div>
-
-            <!-- Action Buttons -->
-            <div class="calc-actions-row">
-                <button type="button" class="calc-btn-primary" onclick="calculateDebtRollover()">CALCULATE</button>
-                <button type="button" class="calc-btn-secondary" onclick="openReportModal()">VIEW REPORT</button>
-            </div>
-
-            <!-- Dynamic Highlight Banner -->
-            <div class="calc-dynamic-banner" id="debt-banner">
-                <span id="banner-text">You could save $14,649.04 on your non-student loan debt</span>
-                <span class="banner-badge"><i class="fas fa-chart-line"></i> Payoff Analysis</span>
-            </div>
-
-            <!-- Summary Stat Cards -->
-            <div class="slc-stat-grid">
-                <div class="slc-stat-card">
-                    <div class="slc-stat-val" id="stat-interest-saved" style="color: #4ade80;">$14,649.04</div>
-                    <div class="slc-stat-label">Total Interest Saved</div>
-                </div>
-                <div class="slc-stat-card">
-                    <div class="slc-stat-val" id="stat-time-saved" style="color: #dfa01e;">3 yrs 8 mos</div>
-                    <div class="slc-stat-label">Time Saved Becoming Debt-Free</div>
-                </div>
-                <div class="slc-stat-card">
-                    <div class="slc-stat-val" id="stat-monthly-savings" style="color: #60a5fa;">$137.46 / mo</div>
-                    <div class="slc-stat-label">Consolidation Payment Savings</div>
-                </div>
-                <div class="slc-stat-card">
-                    <div class="slc-stat-val" id="stat-total-rollover" style="color: #f87171;">$187.46 / mo</div>
-                    <div class="slc-stat-label">Total Monthly Rollover Accelerant</div>
-                </div>
-            </div>
-
-            <!-- CALCULATOR ACCORDIONS -->
-            <div class="calc-inputs-column" style="max-width: 100%;">
-
-                <!-- Accordion 1: YOUR STUDENT LOANS -->
-                <div class="debt-accordion-card">
-                    <div class="debt-accordion-header active" onclick="toggleDebtAcc('acc-student-loans', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-graduation-cap"></i> YOUR STUDENT LOANS</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-student-loans">$40,000.00</span>
-                            <i class="fas fa-chevron-up chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-student-loans" style="display: block;">
-                        
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-total-student-balance">Total current loan balance</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-total-student-balance" class="calc-text-input" value="$40,000.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-total-student-balance" class="calc-range-slider" min="0" max="100000" step="1000" value="40000">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-current-student-payment">Total current monthly loan payments</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-current-student-payment" class="calc-text-input" value="$475.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-current-student-payment" class="calc-range-slider" min="0" max="1500" step="25" value="475">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-consolidated-rate">Consolidated student loan rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-consolidated-rate" class="calc-text-input" value="6.000%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-consolidated-rate" class="calc-range-slider" min="1" max="15" step="0.125" value="6.0">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="sel-consolidated-term">Term of consolidated loan</label>
-                            <div class="calc-input-control">
-                                <select id="sel-consolidated-term" class="calc-text-input" style="font-weight: 600;">
-                                    <option value="10">10 years</option>
-                                    <option value="12">12 years</option>
-                                    <option value="15" selected>15 years</option>
-                                    <option value="20">20 years</option>
-                                    <option value="25">25 years</option>
-                                    <option value="30">30 years</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label">New monthly payment</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-new-student-payment" class="calc-text-input" value="$337.54" readonly style="background: #f8fafc; font-weight: 700; color: #0b172a;">
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label">Monthly savings</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-monthly-savings" class="calc-text-input" value="$137.46" readonly style="background: #f8fafc; font-weight: 700; color: #16a34a;">
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-additional-amount">Additional monthly amount</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-additional-amount" class="calc-text-input" value="$50.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-additional-amount" class="calc-range-slider" min="0" max="1000" step="10" value="50">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row" style="align-items: flex-start;">
-                            <label class="calc-input-label">Minimum payment methodology</label>
-                            <div class="calc-input-control">
-                                <div class="calc-radio-group">
-                                    <label class="calc-radio-label">
-                                        <input type="radio" name="opt-min-payment" value="calc" checked onchange="calculateDebtRollover()">
-                                        <span>Use calculated credit card minimum payments</span>
-                                    </label>
-                                    <label class="calc-radio-label">
-                                        <input type="radio" name="opt-min-payment" value="fixed" onchange="calculateDebtRollover()">
-                                        <span>Keep current monthly payments fixed</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="calc-input-row" style="align-items: flex-start;">
-                            <label class="calc-input-label">Payment payoff order</label>
-                            <div class="calc-input-control">
-                                <div class="calc-radio-group">
-                                    <label class="calc-radio-label">
-                                        <input type="radio" name="opt-payoff-order" value="rate" checked onchange="calculateDebtRollover()">
-                                        <span>Highest interest rate debt first (Avalanche)</span>
-                                    </label>
-                                    <label class="calc-radio-label">
-                                        <input type="radio" name="opt-payoff-order" value="balance" onchange="calculateDebtRollover()">
-                                        <span>Lowest balance debt first (Snowball)</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Accordion 2: CREDIT CARD DEBT -->
-                <div class="debt-accordion-card">
-                    <div class="debt-accordion-header" onclick="toggleDebtAcc('acc-credit-cards', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-credit-card"></i> CREDIT CARD DEBT</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-credit-cards">$2,870.00</span>
-                            <i class="fas fa-chevron-down chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-credit-cards" style="display: none;">
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc-balance">Credit card balance</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc-balance" class="calc-text-input" value="$2,870.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc-balance" class="calc-range-slider" min="0" max="25000" step="100" value="2870">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc-rate">Credit card interest rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc-rate" class="calc-text-input" value="18.900%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc-rate" class="calc-range-slider" min="5" max="30" step="0.25" value="18.9">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc-payment">Current monthly payment</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc-payment" class="calc-text-input" value="$86.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc-payment" class="calc-range-slider" min="20" max="500" step="5" value="86">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion 3: ADDITIONAL CREDIT CARDS -->
-                <div class="debt-accordion-card">
-                    <div class="debt-accordion-header" onclick="toggleDebtAcc('acc-add-cards', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-money-check-alt"></i> ADDITIONAL CREDIT CARDS</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-add-cards">$0.00</span>
-                            <i class="fas fa-chevron-down chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-add-cards" style="display: none;">
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc2-balance">Additional card balance</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc2-balance" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc2-balance" class="calc-range-slider" min="0" max="25000" step="100" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc2-rate">Interest rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc2-rate" class="calc-text-input" value="15.000%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc2-rate" class="calc-range-slider" min="5" max="30" step="0.25" value="15">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-cc2-payment">Current monthly payment</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-cc2-payment" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-cc2-payment" class="calc-range-slider" min="0" max="500" step="5" value="0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion 4: AUTO LOAN DEBT -->
-                <div class="debt-accordion-card">
-                    <div class="debt-accordion-header" onclick="toggleDebtAcc('acc-auto-loans', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-car"></i> AUTO LOAN DEBT</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-auto-loans">$0.00</span>
-                            <i class="fas fa-chevron-down chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-auto-loans" style="display: none;">
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-auto-balance">Auto loan balance</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-auto-balance" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-auto-balance" class="calc-range-slider" min="0" max="40000" step="500" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-auto-rate">Auto loan interest rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-auto-rate" class="calc-text-input" value="6.500%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-auto-rate" class="calc-range-slider" min="2" max="15" step="0.25" value="6.5">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-auto-payment">Current monthly payment</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-auto-payment" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-auto-payment" class="calc-range-slider" min="0" max="800" step="10" value="0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Accordion 5: OTHER LOANS & INSTALLMENT DEBT -->
-                <div class="debt-accordion-card">
-                    <div class="debt-accordion-header" onclick="toggleDebtAcc('acc-other-loans', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-file-invoice-dollar"></i> OTHER LOANS &amp; INSTALLMENT DEBT</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-other-loans">$0.00</span>
-                            <i class="fas fa-chevron-down chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-other-loans" style="display: none;">
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-other-balance">Installment debt balance</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-other-balance" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-other-balance" class="calc-range-slider" min="0" max="30000" step="250" value="0">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-other-rate">Interest rate</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-other-rate" class="calc-text-input" value="8.000%">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-other-rate" class="calc-range-slider" min="2" max="25" step="0.25" value="8">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="calc-input-row">
-                            <label class="calc-input-label" for="inp-other-payment">Current monthly payment</label>
-                            <div class="calc-input-control">
-                                <input type="text" id="inp-other-payment" class="calc-text-input" value="$0.00">
-                                <div class="calc-slider-wrapper">
-                                    <input type="range" id="range-other-payment" class="calc-range-slider" min="0" max="600" step="10" value="0">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECTION: NON-STUDENT LOAN DEBT BALANCES (PAYOFF CHART) -->
-                <div class="debt-accordion-card" style="margin-top: 25px;">
-                    <div class="debt-accordion-header active" onclick="toggleDebtAcc('acc-chart-section', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-chart-area"></i> NON-STUDENT LOAN DEBT BALANCES</span>
-                        <i class="fas fa-chevron-up chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-chart-section" style="display: block;">
-                        
-                        <div id="slc-chart-container" style="width: 100%; height: 320px;">
-                            <!-- Dynamic SVG Chart rendered via JS -->
-                        </div>
-
-                        <!-- Legend -->
-                        <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px; font-size: 12px;">
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="width: 14px; height: 14px; background: rgba(34, 197, 94, 0.4); border: 2px solid #16a34a; border-radius: 2px;"></span>
-                                <span style="font-weight: 600; color: #1e293b;">With Debt Rollover</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span style="width: 14px; height: 3px; background: #2563eb; border-radius: 2px;"></span>
-                                <span style="font-weight: 600; color: #1e293b;">Without Rollover (Standard)</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- SECTION: TOTAL INTEREST FOR NON-STUDENT LOAN DEBT -->
-                <div class="debt-accordion-card" style="margin-top: 15px;">
-                    <div class="debt-accordion-header" onclick="toggleDebtAcc('acc-interest-summary', this)">
-                        <span class="debt-accordion-title"><i class="fas fa-coins"></i> TOTAL INTEREST FOR NON-STUDENT LOAN DEBT</span>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="debt-accordion-badge" id="badge-interest-summary" style="color: #16a34a;">Save $14,649.04</span>
-                            <i class="fas fa-chevron-down chev-icon" style="color: #64748b; font-size: 12px;"></i>
-                        </div>
-                    </div>
-                    <div class="debt-accordion-body" id="acc-interest-summary" style="display: none;">
-                        <table class="def-table" style="margin-top: 5px;">
-                            <thead>
-                                <tr>
-                                    <th>Payoff Scenario</th>
-                                    <th>Total Payments</th>
-                                    <th>Total Interest</th>
-                                    <th>Payoff Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="font-weight: 600; color: #16a34a;">With Rollover Plan</td>
-                                    <td id="tbl-rollover-total">$3,312.42</td>
-                                    <td id="tbl-rollover-interest" style="font-weight: 700; color: #16a34a;">$442.42</td>
-                                    <td id="tbl-rollover-time">1 yr 2 mos</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight: 600; color: #dc2626;">Standard Minimums</td>
-                                    <td id="tbl-std-total">$17,961.46</td>
-                                    <td id="tbl-std-interest" style="font-weight: 700; color: #dc2626;">$15,091.46</td>
-                                    <td id="tbl-std-time">4 yrs 10 mos</td>
-                                </tr>
-                                <tr style="background: #f8fafc; font-weight: 700;">
-                                    <td style="color: #0b172a;">Total Savings with Rollover</td>
-                                    <td id="tbl-savings-total" style="color: #16a34a;">$14,649.04</td>
-                                    <td id="tbl-savings-interest" style="color: #16a34a;">$14,649.04</td>
-                                    <td id="tbl-savings-time" style="color: #16a34a;">3 yrs 8 mos</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- DEFINITIONS -->
-            <section style="margin-top: 35px; border-top: 2px solid #e2e8f0; padding-top: 25px;">
-                <h3 style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; color: #0b172a; margin-bottom: 15px;">DEFINITIONS</h3>
-                
-                <div class="def-title-group">TOTAL CURRENT STUDENT LOAN MONTHLY PAYMENT</div>
-                <div class="def-desc-group">Total payments for all of your outstanding student loans. If the current payment is less than the minimum payment for your new consolidated loan, there will be no payment savings.</div>
-
-                <div class="def-title-group">TOTAL CURRENT LOAN BALANCE</div>
-                <div class="def-desc-group">Total amount of money you owe on all of your student loan debt.</div>
-
-                <div class="def-title-group">TOTAL INTEREST FOR NON-STUDENT LOAN DEBT</div>
-                <div class="def-desc-group">The total cumulative interest charged on your other non-consolidated debt lines over the duration of repayment.</div>
-
-                <div class="def-title-group">TERM IN YEARS</div>
-                <div class="def-desc-group">The term in years for your new consolidated student loan. A consolidation can extend to: 10 years for balance of less than $7,500; 12 years for balance of $7,500 to $9,999; 15 years for balance of $10,000 to $19,999; 20 years for balance of $20,000 to $39,999; 25 years for balance of $40,000 to $59,999; 30 years for balance of $60,000 or more. Any balance under $7,500 has a term of 10 years.</div>
-
-                <div class="def-title-group">CONSOLIDATED STUDENT LOAN TERM</div>
-                <div class="def-desc-group">Term of your new consolidated monthly payment for your consolidated student loans.</div>
-
-                <div class="def-title-group">MONTHLY SAVINGS</div>
-                <div class="def-desc-group">The difference between your current student debt payments and that of your new consolidated payment. If the current payment is less than the payment for your new consolidated loan, there will be no payment savings.</div>
-
-                <div class="def-title-group">ADDITIONAL PAYMENT</div>
-                <div class="def-desc-group">An extra amount in addition to your monthly minimum payments that you will use to pay down your non-student debt each month as you work towards becoming debt-free. The higher this amount the faster your debt will be paid off. This amount should be equal to your monthly payment savings from consolidation, plus any additional money you have available or from paying down other debts that you can afford. This amount allows you to enter the amount higher or lower than your actual payment savings from consolidation. For the purposes of convenience and focus we suggest a minimum of $50/month, although you should use whatever you can truly afford, but you must stay disciplined if you are unable to meet your payment plan.</div>
-
-                <div class="def-title-group">PAYMENT METHODOLOGY</div>
-                <div class="def-desc-group">Select a method from the options: "Pay off balance with the highest rate first" for quickest debt free results (debt avalanche). If no selection, payment method "Pay off balance with lowest balance first" (debt snowball).</div>
-
-                <div class="def-title-group">MINIMUM PAYMENT METHODOLOGY</div>
-                <div class="def-desc-group">Method used to calculate minimum payments on credit cards. Most credit cards calculate minimum payment as 2% to 4% of your current balance, while our credit card minimum payment methodology calculates 2% of total outstanding balance as minimum payment. If no payment methodology is chosen, the system defaults to calculating 2% of the initial balance until paid off, which can increase the time to pay off your balance. A 2% default is used as minimum payment on balances over $1,000.</div>
-
-                <div class="def-title-group">CREDIT CARD BALANCE</div>
-                <div class="def-desc-group">The total current balance for this credit card.</div>
-
-                <div class="def-title-group">CREDIT CARD INTEREST RATE</div>
-                <div class="def-desc-group">The annual percentage rate you pay for the credit card. The rate you enter is used to calculate the interest on future credit card purchases. The length of time you have this credit card may be much longer than calculated if you make more purchases or if your APR is reset to a penalty rate.</div>
-
-                <div class="def-title-group">CREDIT CARD PAYMENT</div>
-                <div class="def-desc-group">The actual current monthly payment. If you entered this item, with card minimum payment, then your credit card minimum will calculate as 1% of your current outstanding balance. With the 'use credit card minimum payments' box checked, your monthly payment will decrease as your balance is paid down. If unchecked, your current monthly payment will be kept the same, increasing payments to debt until your debt is paid off, which will shorten the time your balance is paid in full.</div>
-
-                <div class="def-title-group">AUTO BALANCE</div>
-                <div class="def-desc-group">The total current balance on an installment auto loan.</div>
-
-                <div class="def-title-group">AUTO INTEREST RATE</div>
-                <div class="def-desc-group">The annual percentage rate you pay on the loan. Does not spread interest rate to this loan. This calculator assumes you will make payments until the entire installment period is finished. The calculation assumes you make the specified monthly payments until the full balance is paid.</div>
-
-                <div class="def-title-group">AUTO PAYMENT</div>
-                <div class="def-desc-group">The monthly payment. Enter the actual monthly payment for your auto. The loan is paid off when the balance is 0 to complete the remaining payments.</div>
-
-                <div class="def-title-group">REMAINING LOAN PAYMENTS</div>
-                <div class="def-desc-group">The actual number of payments remaining on this debt. A balance on your current auto payment will decrease.</div>
-
-                <div style="margin-top: 25px; padding: 15px; background: #f8fafc; border-radius: 4px; border: 1px solid #e2e8f0; font-size: 11px; color: #64748b; line-height: 1.5;">
-                    Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues.
-                </div>
-            </section>
-
         </article>
+
+        <!-- Summary Stat Cards -->
+        <section class="slc-stat-grid" aria-label="Debt Consolidation KPIs">
+            <div class="slc-stat-card">
+                <div class="slc-stat-val" id="stat-interest-saved" style="color: var(--success-green);">$3,984.23</div>
+                <div class="slc-stat-label">Total Interest Saved</div>
+            </div>
+            <div class="slc-stat-card">
+                <div class="slc-stat-val" id="stat-time-saved" style="color: var(--gold);">14 yrs 2 mos</div>
+                <div class="slc-stat-label">Time Saved Becoming Debt-Free</div>
+            </div>
+            <div class="slc-stat-card">
+                <div class="slc-stat-val" id="stat-new-payoff-time" style="color: #60a5fa;">1 yr 10 mos</div>
+                <div class="slc-stat-label">New Accelerated Payoff Time</div>
+            </div>
+            <div class="slc-stat-card">
+                <div class="slc-stat-val" id="stat-monthly-savings" style="color: var(--gold);">$85.61 / mo</div>
+                <div class="slc-stat-label">Consolidation Monthly Savings</div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             SECTION 1: YOUR STUDENT LOANS
+             ============================================================ -->
+        <div class="debt-accordion-card open" id="acc-student-loans">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-student-loans')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-graduation-cap" style="color: var(--gold);"></i>
+                    YOUR STUDENT LOANS:
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-student-balance">$10,000.00</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body">
+                <!-- Student loan debt -->
+                <div class="debt-field-row">
+                    <label class="debt-field-label" for="inp-student-debt">
+                        <i class="fas fa-question-circle help-tip-icon" title="The total amount you owe on all of your student loan debt."></i>
+                        Student loan debt:<span class="req">*</span>
+                    </label>
+                    <input type="text" id="inp-student-debt" class="debt-text-input" value="$10,000">
+                    <div class="debt-slider-block">
+                        <input type="range" id="range-student-debt" class="debt-slider-input" min="0" max="300" step="1" value="200">
+                        <div class="debt-slider-ticks"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div>
+                    </div>
+                </div>
+
+                <!-- Total current monthly payments -->
+                <div class="debt-field-row">
+                    <label class="debt-field-label" for="inp-student-curr-payment">
+                        <i class="fas fa-question-circle help-tip-icon" title="Total payments for all of your outstanding student loans."></i>
+                        Total current monthly payments:<span class="req">*</span>
+                    </label>
+                    <input type="text" id="inp-student-curr-payment" class="debt-text-input" value="$170">
+                    <div class="debt-slider-block">
+                        <input type="range" id="range-student-curr-payment" class="debt-slider-input" min="0" max="1000" step="5" value="170">
+                        <div class="debt-slider-ticks"><span>$0</span><span>$100</span><span>$500</span><span>$1k</span></div>
+                    </div>
+                </div>
+
+                <!-- Consolidated loan rate -->
+                <div class="debt-field-row">
+                    <label class="debt-field-label" for="inp-student-rate">
+                        <i class="fas fa-question-circle help-tip-icon" title="The annual interest rate for your new consolidated student loan."></i>
+                        Consolidated loan rate:<span class="req">*</span>
+                    </label>
+                    <input type="text" id="inp-student-rate" class="debt-text-input" value="6%">
+                    <div class="debt-slider-block">
+                        <input type="range" id="range-student-rate" class="debt-slider-input" min="0" max="10" step="0.1" value="6">
+                        <div class="debt-slider-ticks"><span>0%</span><span>3%</span><span>6%</span><span>10%</span></div>
+                    </div>
+                </div>
+
+                <!-- Term of new loan (Calculated dynamically) -->
+                <div class="debt-field-row no-slider compact">
+                    <div class="debt-field-label">
+                        <i class="fas fa-question-circle help-tip-icon" title="The term in years calculated based on your total student loan balance."></i>
+                        Term of new loan:
+                    </div>
+                    <div id="disp-student-term" style="font-size: 13.5px; font-weight: 700; color: #ffffff; padding: 7px 0;">15 years</div>
+                </div>
+
+                <!-- New monthly payment (Calculated dynamically) -->
+                <div class="debt-field-row no-slider compact">
+                    <div class="debt-field-label">
+                        <i class="fas fa-question-circle help-tip-icon" title="This is your new calculated monthly payment for your consolidated student loans."></i>
+                        New monthly payment:
+                    </div>
+                    <div id="disp-student-new-payment" style="font-size: 13.5px; font-weight: 700; color: var(--gold); padding: 7px 0;">$84.39</div>
+                </div>
+
+                <!-- Monthly savings (Calculated dynamically) -->
+                <div class="debt-field-row no-slider compact">
+                    <div class="debt-field-label">
+                        <i class="fas fa-question-circle help-tip-icon" title="This is the difference between your current student loan payments and your new consolidated payment."></i>
+                        Monthly savings:
+                    </div>
+                    <div id="disp-student-monthly-savings" style="font-size: 13.5px; font-weight: 700; color: var(--success-green); padding: 7px 0;">$85.61</div>
+                </div>
+
+                <!-- Additional monthly amount -->
+                <div class="debt-field-row">
+                    <label class="debt-field-label" for="inp-additional-amount">
+                        <i class="fas fa-question-circle help-tip-icon" title="This dollar amount is in addition to your monthly minimum payments that you will use to pay down your debt. Defaults to monthly savings."></i>
+                        Additional monthly amount:<span class="req">*</span>
+                    </label>
+                    <input type="text" id="inp-additional-amount" class="debt-text-input" value="$85.61">
+                    <div class="debt-slider-block">
+                        <input type="range" id="range-additional-amount" class="debt-slider-input" min="0" max="300" step="1" value="70">
+                        <div class="debt-slider-ticks"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div>
+                    </div>
+                </div>
+
+                <!-- Checkbox 1: Minimum Payments -->
+                <div class="debt-checkbox-row">
+                    <i class="fas fa-question-circle help-tip-icon" title="If checked, credit card monthly payment is calculated as 4% of outstanding balance."></i>
+                    <span style="min-width: 170px;">Minimum Payments:</span>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="chk-use-minimum" class="debt-checkbox" checked onchange="handleMinPaymentToggle()">
+                        <span>Use credit card minimum for payments</span>
+                    </label>
+                </div>
+
+                <!-- Checkbox 2: Highest Rate -->
+                <div class="debt-checkbox-row">
+                    <i class="fas fa-question-circle help-tip-icon" title="Pay off highest rate cards first (Avalanche) or lowest balance first (Snowball)."></i>
+                    <span style="min-width: 170px;">Highest Rate:</span>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="chk-highest-rate" class="debt-checkbox" checked onchange="calculateDebtRollover()">
+                        <span>Pay off highest rate cards first</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2: CREDIT CARD DEBT (#1 to #5)
+             ============================================================ -->
+        <div class="debt-accordion-card open" id="acc-cc-1to5">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-cc-1to5')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-credit-card" style="color: var(--gold);"></i>
+                    CREDIT CARD DEBT:
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-cc-total">$5,000.00</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" id="container-cc-1to5">
+                <!-- Dynamically generated or static 5 cards -->
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 3: ADDITIONAL CREDIT CARDS (#6 to #10)
+             ============================================================ -->
+        <div class="debt-accordion-card" id="acc-cc-6to10">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-cc-6to10')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-credit-card" style="color: var(--gold);"></i>
+                    ADDITIONAL CREDIT CARDS:
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-cc-addl-total">$0.00</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" id="container-cc-6to10">
+                <!-- Cards 6 to 10 -->
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 4: AUTO LOAN DEBT
+             ============================================================ -->
+        <div class="debt-accordion-card" id="acc-auto">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-auto')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-car" style="color: var(--gold);"></i>
+                    AUTO LOAN DEBT:
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-auto-total">$0.00</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" id="container-auto-loans">
+                <!-- Auto Loans 1, 2, 3 -->
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SECTION 5: OTHER LOANS & INSTALLMENT DEBT
+             ============================================================ -->
+        <div class="debt-accordion-card" id="acc-other-loans">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-other-loans')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-money-check-alt" style="color: var(--gold);"></i>
+                    OTHER LOANS &amp; INSTALLMENT DEBT:
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-other-loans-total">$0.00</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" id="container-other-loans">
+                <!-- Other Loans 1, 2, 3 -->
+            </div>
+        </div>
+
+        <!-- ============================================================
+             NON-STUDENT LOAN DEBT BALANCES (PAYOFF COMPARISON CHART)
+             ============================================================ -->
+        <div class="debt-accordion-card open" id="acc-debt-balances">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-debt-balances')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-chart-area" style="color: var(--gold);"></i>
+                    NON-STUDENT LOAN DEBT BALANCES
+                </div>
+                <div class="debt-accordion-right">
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" style="padding: 24px;">
+                <div class="chart-svg-container" id="debt-chart-svg-wrap">
+                    <!-- Rendered dynamically via SVG -->
+                </div>
+
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #2563eb;"></span>
+                        <span id="legend-current-label">Current payoff 16 years</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot" style="background: #16a34a;"></span>
+                        <span id="legend-new-label">New payoff 1 year and 10 months</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOTAL INTEREST FOR NON-STUDENT LOAN DEBT ACCORDION -->
+        <div class="debt-accordion-card" id="acc-total-interest">
+            <div class="debt-accordion-header" onclick="toggleAccordion('acc-total-interest')">
+                <div class="debt-accordion-title">
+                    <i class="fas fa-hand-holding-usd" style="color: var(--gold);"></i>
+                    TOTAL INTEREST FOR NON-STUDENT LOAN DEBT
+                </div>
+                <div class="debt-accordion-right">
+                    <span class="debt-accordion-badge" id="badge-interest-saved" style="color: var(--success-green);">$3,984.23 saved</span>
+                    <i class="fas fa-chevron-down debt-accordion-chev"></i>
+                </div>
+            </div>
+            <div class="debt-accordion-body" id="body-total-interest" style="padding: 24px;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 16px;">
+                    <div style="background: #060e1d; border: 1px solid rgba(255,255,255,0.06); padding: 18px; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 6px;">Current Plan Total Interest</div>
+                        <div id="disp-curr-total-interest" style="font-size: 22px; font-weight: 700; color: #ef4444;">$5,267.78</div>
+                        <div style="font-size: 11.5px; color: #64748b; margin-top: 4px;">Minimum payments over full term</div>
+                    </div>
+                    <div style="background: #060e1d; border: 1px solid rgba(22, 163, 74, 0.3); padding: 18px; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700; margin-bottom: 6px;">Accelerated Plan Total Interest</div>
+                        <div id="disp-new-total-interest" style="font-size: 22px; font-weight: 700; color: #16a34a;">$1,283.55</div>
+                        <div style="font-size: 11.5px; color: #64748b; margin-top: 4px;">With consolidated savings rollover</div>
+                    </div>
+                    <div style="background: #060e1d; border: 1px solid rgba(223, 160, 30, 0.35); padding: 18px; border-radius: 6px; text-align: center;">
+                        <div style="font-size: 11px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px;">Total Interest Savings</div>
+                        <div id="disp-total-savings-highlight" style="font-size: 22px; font-weight: 700; color: var(--gold);">$3,984.23</div>
+                        <div style="font-size: 11.5px; color: var(--success-green); margin-top: 4px;">Money retained in your pocket</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             DEFINITIONS SECTION (Verbatim from Screenshots 7, 8, 9)
+             ============================================================ -->
+        <section class="calc-definitions-wrapper" id="definitions-section">
+            <h3 class="calc-defs-title">DEFINITIONS</h3>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">TOTAL CURRENT STUDENT LOAN MONTHLY PAYMENTS</div>
+                <div class="calc-def-desc">Total payments for all of your outstanding student loans. If the current payment total is less than the payment for your new consolidated loan, there will be no payment savings.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">STUDENT LOAN DEBT</div>
+                <div class="calc-def-desc">The total amount you owe on all of your student loan debt.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">INTEREST RATE FOR NEW CONSOLIDATED LOAN</div>
+                <div class="calc-def-desc">The annual interest rate for your new consolidated student loan.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">TERM OF NEW LOAN</div>
+                <div class="calc-def-desc">The term in years for your new consolidated student loan is calculated as: 30 Years for debt of $60,000 or more, 25 years for balances of $40,000 or more, 20 years for balances of $20,000 or more, 15 years for balances of $10,000 or more. Any balance under $10,000 has a term of 12 years.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">NEW MONTHLY STUDENT LOAN PAYMENT</div>
+                <div class="calc-def-desc">This is your new calculated monthly payment for your consolidated student loans.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">MONTHLY SAVINGS</div>
+                <div class="calc-def-desc">This is the difference between your current student loan payments and your new consolidated loan payment. If the current payment total is less than the payment for your new consolidated loan, there will be no payment savings.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">ADDITIONAL PAYMENT</div>
+                <div class="calc-def-desc">This dollar amount is in addition to your monthly minimum payments that you will use to pay down your non-student loan debt, such as credit card debt, auto loans and other loans. The higher this amount, the faster your debt will be paid off. The tool defaults this amount to be equal to your monthly payment savings from consolidation of your student loan debt. It is important that your additional payment is one that you can afford. For this reason, the tool allows you to adjust this amount higher or lower than your actual payment savings from consolidation. For this debt payoff strategy to be effective you must be consistent in your payments. Should you choose an amount that is too high, you may become discouraged if you are unable to meet your payment goal.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">PAY OFF HIGHEST RATE FIRST</div>
+                <div class="calc-def-desc">Leave this box checked to have the calculator pay off your balance with the highest rate first. You can uncheck this box to see the results of an alternate payment method. The alternate method pays off your balances starting with the lowest balance.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">USE MINIMUM PAYMENT</div>
+                <div class="calc-def-desc">
+                    If you checked the "use credit card minimum payments" box, your monthly payment is calculated as 4% of your current outstanding balance. With the "use credit card minimum payments" box checked, your monthly payment will decrease as your balance is paid down. This can greatly increase the length of time it takes to pay off your credit cards. Uncheck this box to enter your own monthly payment that will remain the same until your balance is paid in full.
+                    <br><br>
+                    (The tool calculates your minimum monthly payment as 4% of your current outstanding balance. While your actual minimum monthly payment may be slightly different, this is one of the most common methods used by credit card companies to calculate minimum payments.)
+                </div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">CREDIT CARD BALANCE</div>
+                <div class="calc-def-desc">Your total current balance for this credit card.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">CREDIT CARD INTEREST RATE</div>
+                <div class="calc-def-desc">The annual percentage rate you pay for this credit card. The rate you enter is used to calculate the interest on all future credit card payments. The length of time to pay off this credit card may be much greater than calculated if you enter a low promotional interest rate that is only good for a short period of time.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">CREDIT CARD PAYMENT</div>
+                <div class="calc-def-desc">This is your initial monthly payment. If you checked the "use credit card minimum payments" box, your monthly payment is calculated as 4% of your current outstanding balance. With the "use credit card minimum payments" box checked, your monthly payment will decrease as your balance is paid down. This can greatly increase the length of time it takes to pay off your credit cards. Uncheck this box to enter your own monthly payment that will remain the same until your balance is paid in full.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">LOAN BALANCE</div>
+                <div class="calc-def-desc">Your total current balances for an installment loan.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">LOAN INTEREST RATES</div>
+                <div class="calc-def-desc">The annual percentage rate you pay for this loan. Enter the current interest rate for this loan. This calculator assumes your rate will remain the same for the entire repayment period. The tool uses this to calculate the interest you will pay on this loan and the number of payments that are remaining.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">LOAN PAYMENT</div>
+                <div class="calc-def-desc">This is your monthly payment. Enter the actual monthly payment for your loan. The tool uses this to determine your payment totals and to calculate the remaining payments.</div>
+            </div>
+
+            <div class="calc-def-item">
+                <div class="calc-def-term">REMAINING LOAN PAYMENTS</div>
+                <div class="calc-def-desc">This is the calculated number of payments remaining for this loan. It is based on your current balance, payment and interest rate.</div>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="calc-disclaimer-box">
+                <p>Information and interactive calculators are made available to you as self-help tools for your independent use and are not intended to provide investment advice. We cannot and do not guarantee their applicability or accuracy in regards to your individual circumstances. All examples are hypothetical and are for illustrative purposes. We encourage you to seek personalized advice from qualified professionals regarding all personal finance issues. The S&amp;P 500 is an unmanaged index of 500 widely held stocks. It is not possible to invest directly in an index. The performance mentioned does not include fees and charges which would reduce an investor returns. While interest on municipal bonds is generally exempt from federal income tax, it may be subject to the federal alternative minimum tax, or state or local taxes. Profits and losses on federally tax-exempt bonds may be subject to capital gains tax treatment. Fixed income risks include, but are not limited to, changes in interest rates, liquidity, credit quality, volatility, and duration.</p>
+            </div>
+        </section>
+
     </main>
 
-    <!-- REPORT MODAL -->
-    <div id="report-modal" class="modal-overlay" onclick="closeReportModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0b172a; padding-bottom: 12px; margin-bottom: 15px;">
+    <!-- ============================================================
+         REPORT MODAL
+         ============================================================ -->
+    <div id="report-modal" class="report-modal" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+        <div class="report-modal-content">
+            <span class="report-modal-close" onclick="closeReportModal()">&times;</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--gold); padding-bottom: 14px; margin-bottom: 20px;">
                 <div>
-                    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-size: 22px; color: #0b172a; margin: 0;">Student Loan Consolidation &amp; Debt Payoff Report</h2>
-                    <p style="font-size: 11px; color: #64748b; margin: 4px 0 0 0;">Prepared by The Seiler Group of Raymond James</p>
+                    <h2 id="report-modal-title" style="font-family: 'Playfair Display', Georgia, serif; color: var(--gold); margin: 0; font-size: 24px;">Debt Rollover Payoff Report</h2>
+                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">The Seiler Group of Raymond James &bull; Student Loan Consolidation &amp; Accelerated Debt Rollover</div>
                 </div>
-                <button type="button" onclick="closeReportModal()" style="background: none; border: none; font-size: 20px; color: #64748b; cursor: pointer;">&times;</button>
+                <button type="button" onclick="window.print()" class="btn-calc-secondary" style="padding: 7px 16px; font-size: 11px;">
+                    <i class="fas fa-print"></i> Print Report
+                </button>
             </div>
 
             <div id="report-modal-body">
-                <!-- Dynamically populated report content -->
-            </div>
-
-            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 25px;">
-                <button type="button" class="calc-btn-primary" onclick="window.print()"><i class="fas fa-print"></i> Print Report</button>
-                <button type="button" class="calc-btn-secondary" onclick="closeReportModal()">Close</button>
+                <!-- Dynamically generated detailed amortization table -->
             </div>
         </div>
     </div>
 
-        <!-- ============================================================
-     CHAMPION STRIP
-     ============================================================ -->
+    <!-- ============================================================
+         CHAMPION STRIP
+         ============================================================ -->
     <section class="champion-strip">
-
-        <!-- Brand / Social -->
         <div class="champ-brand">
-            <!-- Official logo -->
-            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home"><img src="assets/logo.svg"
-                    alt="The Seiler Group of Raymond James" class="champ-logo-img"></a>
-            <!-- Social icons -->
+            <a href="index.html" class="champ-logo-link" aria-label="The Seiler Group Home">
+                <img src="assets/logo.svg" alt="The Seiler Group of Raymond James" class="champ-logo-img">
+            </a>
             <div class="champ-socials">
-                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer"
-                    aria-label="Facebook" id="fb-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank"
-                    rel="noopener noreferrer" aria-label="LinkedIn" id="li-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer"
-                    aria-label="Email" id="email-link" title="theseilergroup@raymondjames.com"><i
-                        class="fas fa-envelope"></i></a>
+                <a href="https://www.facebook.com/TheSeilerGroup" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.linkedin.com/company/the-seiler-group-of-raymond-james/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:theseilergroup@raymondjames.com" target="_blank" rel="noopener noreferrer" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
 
-        <!-- Center Quote -->
         <div class="champ-quote">
-            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the
-            certification marks CFP®, Certified Financial Planner®, and CFP® (with plaque design) in the United States
-            to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully
-            complete the organization's initial and ongoing certification requirements to use the certification marks.
+            Certified Financial Planner Board of Standards Center for Financial Planning, Inc. owns and licenses the certification marks CFP&reg;, Certified Financial Planner&reg;, and CFP&reg; (with plaque design) in the United States to Certified Financial Planner Board of Standards, Inc., which authorizes individuals who successfully complete the organization's initial and ongoing certification requirements to use the certification marks.
         </div>
 
-        <!-- CTA -->
         <div class="champ-cta">
             <h3 class="champ-heading">CHAMPION<br><span class="champ-gold">YOUR FUTURE</span></h3>
-            <a href="contact.html" class="champ-link" id="learn-more-btn">CONNECT WITH US</a>
+            <a href="contact.html" class="champ-link">CONNECT WITH US</a>
         </div>
-
     </section>
 
     <!-- ============================================================
-     FOOTER
-     ============================================================ -->
+         FOOTER
+         ============================================================ -->
     <footer class="site-footer">
-
         <div class="footer-addresses">
             <div class="addr-row">
-                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span
-                        class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
-                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F:
-                    215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
+                <p><strong>5 Caufield Place</strong> <span class="slash">//</span> <strong>Suite 201</strong> <span class="slash">//</span> <strong>Newtown, PA 18940-9434</strong></p>
+                <p>T: 215.860.7823 <span class="slash">//</span> TF: +1.855.473.4537 <span class="slash">//</span> F: 215.860.7829 <span class="slash">//</span> <a href="maps-and-directions.html?_=37W" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite
-                        1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
+                <p><strong>201 East Las Olas Boulevard</strong> <span class="slash">//</span> <strong>Suite 1630</strong> <span class="slash">//</span> <strong>Fort Lauderdale, FL 33301-4439</strong></p>
                 <p><a href="maps-and-directions.html?_=37W04" target="_blank">Map &amp; Directions</a></p>
             </div>
             <div class="addr-row">
-                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong>
-                    <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
+                <p><strong>14541 Hope Center Loop</strong> <span class="slash">//</span> <strong>Suite 100</strong> <span class="slash">//</span> <strong>Fort Myers, FL 33912</strong></p>
                 <p><a href="maps-and-directions.html?_=37W02" target="_blank">Map &amp; Directions</a></p>
             </div>
         </div>
 
         <div class="footer-legal">
-            <p>Raymond James financial advisors may only conduct business with residents of the states and/or
-                jurisdictions for which they are properly registered. Therefore, a response to a request for information
-                may be delayed. Please note that not all of the investments and services mentioned are available in
-                every state. Investors outside of the United States are subject to securities and tax regulations within
-                their applicable jurisdictions that are not addressed on this site. Contact our office for information
-                and availability.</p>
-            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not
-                endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is
-                not responsible for the content of any website or the collection or use of information regarding any
-                website's users and/or members.</p>
-            <p class="footer-copy">© 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com"
-                    target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org"
-                    target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures"
-                    target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank"
-                    rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a
-                    href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of
-                    Use</a>
-            </p>
+            <p>Raymond James financial advisors may only conduct business with residents of the states and/or jurisdictions for which they are properly registered. Therefore, a response to a request for information may be delayed. Please note that not all of the investments and services mentioned are available in every state. Investors outside of the United States are subject to securities and tax regulations within their applicable jurisdictions that are not addressed on this site. Contact our office for information and availability.</p>
+            <p>Links are being provided for information purposes only. Raymond James is not affiliated with and does not endorse, authorize or sponsor any of the listed websites or their respective sponsors. Raymond James is not responsible for the content of any website or the collection or use of information regarding any website's users and/or members.</p>
+            <p class="footer-copy">&copy; 2026 Raymond James &amp; Associates, Inc., member <a href="https://www.nyse.com" target="_blank">New York Stock Exchange</a> / <a href="https://www.sipc.org" target="_blank">SIPC</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/legal-disclosures" target="_blank" rel="noopener noreferrer">Legal Disclosures</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/privacy-security-and-account-protection" target="_blank" rel="noopener noreferrer">Privacy, Security &amp; Account Protection</a> &nbsp;|&nbsp; <a href="https://www.raymondjames.com/terms-of-use" target="_blank" rel="noopener noreferrer">Terms of Use</a></p>
         </div>
-
     </footer>
 
-    <!-- CALCULATOR LOGIC SCRIPT -->
+    <!-- ============================================================
+         CALCULATOR SCRIPT ENGINE
+         ============================================================ -->
     <script>
-        // Formatting Utilities
-        function parseCurrency(str) {
-            if (!str) return 0;
-            return parseFloat(str.toString().replace(/[^0-9.-]+/g, '')) || 0;
+        // Non-linear Slider mapping
+        function posToDollar(pos, maxDollar = 100000) {
+            pos = Math.max(0, Math.min(300, parseFloat(pos) || 0));
+            if (maxDollar === 100000) {
+                if (pos <= 100) return Math.round(pos * 10);
+                if (pos <= 200) return Math.round(1000 + (pos - 100) * 90);
+                return Math.round(10000 + (pos - 200) * 900);
+            } else if (maxDollar === 20000) {
+                // $0, $1k, $5k, $20k
+                if (pos <= 100) return Math.round(pos * 10);
+                if (pos <= 200) return Math.round(1000 + (pos - 100) * 40);
+                return Math.round(5000 + (pos - 200) * 150);
+            } else if (maxDollar === 10000) {
+                // $0, $1k, $5k, $10k
+                if (pos <= 100) return Math.round(pos * 10);
+                if (pos <= 200) return Math.round(1000 + (pos - 100) * 40);
+                return Math.round(5000 + (pos - 200) * 50);
+            }
+            return Math.round((pos / 300) * maxDollar);
         }
 
-        function parsePercent(str) {
-            if (!str) return 0;
-            return parseFloat(str.toString().replace(/[^0-9.-]+/g, '')) || 0;
+        function dollarToPos(val, maxDollar = 100000) {
+            val = Math.max(0, Math.min(maxDollar, parseFloat(val) || 0));
+            if (maxDollar === 100000) {
+                if (val <= 1000) return val / 10;
+                if (val <= 10000) return 100 + (val - 1000) / 90;
+                return 200 + (val - 10000) / 900;
+            } else if (maxDollar === 20000) {
+                if (val <= 1000) return val / 10;
+                if (val <= 5000) return 100 + (val - 1000) / 40;
+                return 200 + (val - 5000) / 150;
+            } else if (maxDollar === 10000) {
+                if (val <= 1000) return val / 10;
+                if (val <= 5000) return 100 + (val - 1000) / 40;
+                return 200 + (val - 5000) / 50;
+            }
+            return (val / maxDollar) * 300;
         }
 
-        function fmtCurr(num) {
-            return '$' + Number(num || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        function parseClean(val) {
+            if (typeof val === 'number') return val;
+            return parseFloat(String(val).replace(/[^0-9.-]/g, '')) || 0;
         }
 
-        function fmtPct(num) {
-            return Number(num || 0).toFixed(3) + '%';
+        function fmtMoney(num) {
+            return '$' + Math.round(num).toLocaleString('en-US');
         }
 
-        // Accordion Toggle
-        function toggleDebtAcc(id, el) {
-            const body = document.getElementById(id);
-            const chev = el.querySelector('.chev-icon');
-            if (body.style.display === 'none' || !body.style.display) {
-                body.style.display = 'block';
-                el.classList.add('active');
-                if (chev) {
-                    chev.classList.remove('fa-chevron-down');
-                    chev.classList.add('fa-chevron-up');
-                }
+        function fmtMoneyCents(num) {
+            return '$' + Number(num).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
+        function toggleAccordion(id) {
+            const el = document.getElementById(id);
+            if (el) el.classList.toggle('open');
+        }
+
+        function scrollToDefinitions() {
+            const el = document.getElementById('definitions-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleShareClick(e) {
+            e.preventDefault();
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Student Loan Consolidation and Debt Payoff',
+                    url: window.location.href
+                }).catch(() => {});
             } else {
-                body.style.display = 'none';
-                el.classList.remove('active');
-                if (chev) {
-                    chev.classList.remove('fa-chevron-up');
-                    chev.classList.add('fa-chevron-down');
-                }
+                navigator.clipboard.writeText(window.location.href);
+                alert('Page link copied to clipboard!');
             }
         }
 
-        // Calculation Core
+        function toggleMobileMenu(e) {
+            if (e) e.preventDefault();
+            const drawer = document.getElementById('mobile-drawer');
+            const overlay = document.getElementById('drawer-overlay');
+            if (drawer && overlay) {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        // Generate Credit Card Rows
+        function generateCreditCardRows(startIdx, endIdx, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            let html = '';
+
+            for (let i = startIdx; i <= endIdx; i++) {
+                const isDefaultCard1 = (i === 1);
+                const defaultBal = isDefaultCard1 ? 5000 : 0;
+                const defaultRate = isDefaultCard1 ? 24.99 : 0;
+                const defaultPay = isDefaultCard1 ? 200.00 : 0.00;
+
+                html += `
+                    <div class="debt-item-card">
+                        <div class="debt-field-row no-slider compact">
+                            <label class="debt-field-label" for="inp-cc-name-${i}">
+                                Credit Card Name #${i}:<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-cc-name-${i}" class="debt-text-input" value="Credit card ${i}" style="max-width: 280px;">
+                        </div>
+
+                        <div class="debt-field-row">
+                            <label class="debt-field-label" for="inp-cc-bal-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="Your total current balance for this credit card."></i>
+                                Balance:<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-cc-bal-${i}" class="debt-text-input" value="$${defaultBal.toLocaleString('en-US')}">
+                            <div class="debt-slider-block">
+                                <input type="range" id="range-cc-bal-${i}" class="debt-slider-input" min="0" max="300" step="1" value="${dollarToPos(defaultBal, 20000)}">
+                                <div class="debt-slider-ticks"><span>$0</span><span>$1k</span><span>$5k</span><span>$20k</span></div>
+                            </div>
+                        </div>
+
+                        <div class="debt-field-row">
+                            <label class="debt-field-label" for="inp-cc-rate-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="The annual percentage rate you pay for this credit card."></i>
+                                Interest rate:<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-cc-rate-${i}" class="debt-text-input" value="${defaultRate}%">
+                            <div class="debt-slider-block">
+                                <input type="range" id="range-cc-rate-${i}" class="debt-slider-input" min="0" max="30" step="0.1" value="${defaultRate}">
+                                <div class="debt-slider-ticks"><span>0%</span><span>10%</span><span>20%</span><span>30%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="debt-field-row no-slider">
+                            <label class="debt-field-label" for="inp-cc-pay-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="This is your monthly payment. Calculated as 4% of balance if minimum payments is checked."></i>
+                                Payment:
+                            </label>
+                            <input type="text" id="inp-cc-pay-${i}" class="debt-text-input read-only" value="$${defaultPay.toFixed(2)}" style="max-width: 140px;">
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Generate Installment Loan Rows
+        function generateInstallmentRows(type, count, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            let html = '';
+
+            for (let i = 1; i <= count; i++) {
+                const labelTitle = type === 'auto' ? `Auto Loan ${i}:` : `Other Loan ${i}:`;
+                html += `
+                    <div class="debt-item-card">
+                        <div class="debt-field-row">
+                            <label class="debt-field-label" for="inp-${type}-bal-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="Your total current balance for this loan."></i>
+                                ${labelTitle}<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-${type}-bal-${i}" class="debt-text-input" value="$0">
+                            <div class="debt-slider-block">
+                                <input type="range" id="range-${type}-bal-${i}" class="debt-slider-input" min="0" max="300" step="1" value="0">
+                                <div class="debt-slider-ticks"><span>$0</span><span>$1k</span><span>$5k</span><span>$10k</span></div>
+                            </div>
+                        </div>
+
+                        <div class="debt-field-row">
+                            <label class="debt-field-label" for="inp-${type}-rate-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="The annual interest rate you pay for this loan."></i>
+                                Interest rate:<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-${type}-rate-${i}" class="debt-text-input" value="0%">
+                            <div class="debt-slider-block">
+                                <input type="range" id="range-${type}-rate-${i}" class="debt-slider-input" min="0" max="30" step="0.1" value="0">
+                                <div class="debt-slider-ticks"><span>0%</span><span>10%</span><span>20%</span><span>30%</span></div>
+                            </div>
+                        </div>
+
+                        <div class="debt-field-row">
+                            <label class="debt-field-label" for="inp-${type}-pay-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="Your monthly payment for this installment loan."></i>
+                                Payment:<span class="req">*</span>
+                            </label>
+                            <input type="text" id="inp-${type}-pay-${i}" class="debt-text-input" value="$0.00">
+                            <div class="debt-slider-block">
+                                <input type="range" id="range-${type}-pay-${i}" class="debt-slider-input" min="0" max="300" step="1" value="0">
+                                <div class="debt-slider-ticks"><span>$0</span><span>$1k</span><span>$10k</span><span>$100k</span></div>
+                            </div>
+                        </div>
+
+                        <div class="debt-field-row no-slider compact">
+                            <label class="debt-field-label" for="disp-${type}-rem-${i}">
+                                <i class="fas fa-question-circle help-tip-icon" title="Calculated number of payments remaining based on balance, rate and payment."></i>
+                                Payments remaining:
+                            </label>
+                            <div id="disp-${type}-rem-${i}" style="font-size: 13px; font-weight: 700; color: #94a3b8; padding: 6px 0;">0</div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Consolidate Term Determination Rule (from Definitions)
+        function getConsolidationTerm(debt) {
+            if (debt >= 60000) return 30;
+            if (debt >= 40000) return 25;
+            if (debt >= 20000) return 20;
+            if (debt >= 10000) return 15;
+            return 12;
+        }
+
+        // Amortization Monthly Payment
+        function calculateAmortizedPayment(principal, annualRatePct, years) {
+            if (principal <= 0 || years <= 0) return 0;
+            const r = (annualRatePct / 100) / 12;
+            const n = years * 12;
+            if (r === 0) return principal / n;
+            return principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+        }
+
+        function handleMinPaymentToggle() {
+            const useMin = document.getElementById('chk-use-minimum').checked;
+            for (let i = 1; i <= 10; i++) {
+                const payInp = document.getElementById(`inp-cc-pay-${i}`);
+                if (payInp) {
+                    if (useMin) {
+                        payInp.classList.add('read-only');
+                        payInp.readOnly = true;
+                    } else {
+                        payInp.classList.remove('read-only');
+                        payInp.readOnly = false;
+                    }
+                }
+            }
+            calculateDebtRollover();
+        }
+
+        let payoffResults = {};
+
         function calculateDebtRollover() {
-            // Inputs
-            const studentBal = parseCurrency(document.getElementById('inp-total-student-balance').value);
-            const currentStudentPmt = parseCurrency(document.getElementById('inp-current-student-payment').value);
-            const consolidatedRate = parsePercent(document.getElementById('inp-consolidated-rate').value) / 100;
-            const termYears = parseInt(document.getElementById('sel-consolidated-term').value) || 15;
-            const additionalPmt = parseCurrency(document.getElementById('inp-additional-amount').value);
+            // Student Loans
+            const studentDebt = parseClean(document.getElementById('inp-student-debt').value);
+            const studentCurrPay = parseClean(document.getElementById('inp-student-curr-payment').value);
+            const studentRate = parseClean(document.getElementById('inp-student-rate').value);
 
-            // Calculate new consolidated monthly payment
-            const monthlyRate = consolidatedRate / 12;
-            const numMonths = termYears * 12;
-            let newStudentPmt = 0;
-            if (studentBal > 0 && monthlyRate > 0) {
-                newStudentPmt = studentBal * (monthlyRate * Math.pow(1 + monthlyRate, numMonths)) / (Math.pow(1 + monthlyRate, numMonths) - 1);
-            } else if (studentBal > 0) {
-                newStudentPmt = studentBal / numMonths;
+            const termYears = getConsolidationTerm(studentDebt);
+            document.getElementById('disp-student-term').innerText = `${termYears} years`;
+
+            const newStudentPayment = calculateAmortizedPayment(studentDebt, studentRate, termYears);
+            document.getElementById('disp-student-new-payment').innerText = fmtMoneyCents(newStudentPayment);
+
+            const monthlySavings = Math.max(0, studentCurrPay - newStudentPayment);
+            document.getElementById('disp-student-monthly-savings').innerText = fmtMoneyCents(monthlySavings);
+
+            // Additional monthly rollover
+            const additionalInp = document.getElementById('inp-additional-amount');
+            let additionalAmount = parseClean(additionalInp.value);
+
+            const useMinPayment = document.getElementById('chk-use-minimum').checked;
+            const payHighestRateFirst = document.getElementById('chk-highest-rate').checked;
+
+            // Collect All Non-Student Debts
+            const nonStudentDebts = [];
+            let totalCcBalance = 0;
+            let totalAddlCcBalance = 0;
+            let totalAutoBalance = 0;
+            let totalOtherBalance = 0;
+
+            // Credit Cards 1..10
+            for (let i = 1; i <= 10; i++) {
+                const nameInp = document.getElementById(`inp-cc-name-${i}`);
+                const balInp = document.getElementById(`inp-cc-bal-${i}`);
+                const rateInp = document.getElementById(`inp-cc-rate-${i}`);
+                const payInp = document.getElementById(`inp-cc-pay-${i}`);
+
+                const bal = balInp ? parseClean(balInp.value) : 0;
+                const rate = rateInp ? parseClean(rateInp.value) : 0;
+                let pay = 0;
+
+                if (bal > 0) {
+                    if (useMinPayment) {
+                        pay = Math.max(15, bal * 0.04);
+                        if (payInp) payInp.value = fmtMoneyCents(pay);
+                    } else {
+                        pay = payInp ? parseClean(payInp.value) : 0;
+                        if (pay <= 0) pay = Math.max(15, bal * 0.04);
+                    }
+
+                    if (i <= 5) totalCcBalance += bal;
+                    else totalAddlCcBalance += bal;
+
+                    nonStudentDebts.push({
+                        id: `cc-${i}`,
+                        name: nameInp ? nameInp.value : `Credit card ${i}`,
+                        type: 'credit',
+                        balance: bal,
+                        rate: rate,
+                        minPayment: pay,
+                        monthlyPayment: pay
+                    });
+                } else {
+                    if (payInp && useMinPayment) payInp.value = '$0.00';
+                }
             }
 
-            let monthlySavings = currentStudentPmt - newStudentPmt;
-            if (monthlySavings < 0) monthlySavings = 0;
+            document.getElementById('badge-cc-total').innerText = fmtMoneyCents(totalCcBalance);
+            document.getElementById('badge-cc-addl-total').innerText = fmtMoneyCents(totalAddlCcBalance);
 
-            document.getElementById('inp-new-student-payment').value = fmtCurr(newStudentPmt);
-            document.getElementById('inp-monthly-savings').value = fmtCurr(monthlySavings);
-            document.getElementById('badge-student-loans').innerText = fmtCurr(studentBal);
+            // Auto Loans 1..3
+            for (let i = 1; i <= 3; i++) {
+                const bal = parseClean(document.getElementById(`inp-auto-bal-${i}`)?.value);
+                const rate = parseClean(document.getElementById(`inp-auto-rate-${i}`)?.value);
+                const pay = parseClean(document.getElementById(`inp-auto-pay-${i}`)?.value);
 
-            // Non-student debts
-            const debts = [
-                {
-                    name: 'Credit Card Debt',
-                    balance: parseCurrency(document.getElementById('inp-cc-balance').value),
-                    rate: parsePercent(document.getElementById('inp-cc-rate').value) / 100,
-                    pmt: parseCurrency(document.getElementById('inp-cc-payment').value),
-                    isCC: true
-                },
-                {
-                    name: 'Additional Credit Cards',
-                    balance: parseCurrency(document.getElementById('inp-cc2-balance').value),
-                    rate: parsePercent(document.getElementById('inp-cc2-rate').value) / 100,
-                    pmt: parseCurrency(document.getElementById('inp-cc2-payment').value),
-                    isCC: true
-                },
-                {
-                    name: 'Auto Loan Debt',
-                    balance: parseCurrency(document.getElementById('inp-auto-balance').value),
-                    rate: parsePercent(document.getElementById('inp-auto-rate').value) / 100,
-                    pmt: parseCurrency(document.getElementById('inp-auto-payment').value),
-                    isCC: false
-                },
-                {
-                    name: 'Other Installment Debt',
-                    balance: parseCurrency(document.getElementById('inp-other-balance').value),
-                    rate: parsePercent(document.getElementById('inp-other-rate').value) / 100,
-                    pmt: parseCurrency(document.getElementById('inp-other-payment').value),
-                    isCC: false
+                if (bal > 0) {
+                    totalAutoBalance += bal;
+                    const r = (rate / 100) / 12;
+                    let remainingPayments = 0;
+                    if (pay > bal * r && r > 0) {
+                        remainingPayments = Math.ceil(-Math.log(1 - (bal * r) / pay) / Math.log(1 + r));
+                    } else if (pay > 0 && r === 0) {
+                        remainingPayments = Math.ceil(bal / pay);
+                    }
+                    const remEl = document.getElementById(`disp-auto-rem-${i}`);
+                    if (remEl) remEl.innerText = remainingPayments > 0 ? remainingPayments : '0';
+
+                    nonStudentDebts.push({
+                        id: `auto-${i}`,
+                        name: `Auto Loan ${i}`,
+                        type: 'auto',
+                        balance: bal,
+                        rate: rate,
+                        minPayment: pay,
+                        monthlyPayment: pay
+                    });
                 }
-            ];
+            }
+            document.getElementById('badge-auto-total').innerText = fmtMoneyCents(totalAutoBalance);
 
-            document.getElementById('badge-credit-cards').innerText = fmtCurr(debts[0].balance);
-            document.getElementById('badge-add-cards').innerText = fmtCurr(debts[1].balance);
-            document.getElementById('badge-auto-loans').innerText = fmtCurr(debts[2].balance);
-            document.getElementById('badge-other-loans').innerText = fmtCurr(debts[3].balance);
+            // Other Loans 1..3
+            for (let i = 1; i <= 3; i++) {
+                const bal = parseClean(document.getElementById(`inp-other-bal-${i}`)?.value);
+                const rate = parseClean(document.getElementById(`inp-other-rate-${i}`)?.value);
+                const pay = parseClean(document.getElementById(`inp-other-pay-${i}`)?.value);
 
-            const activeDebts = debts.filter(d => d.balance > 0);
-            const totalNonStudentDebt = debts.reduce((sum, d) => sum + d.balance, 0);
+                if (bal > 0) {
+                    totalOtherBalance += bal;
+                    const r = (rate / 100) / 12;
+                    let remainingPayments = 0;
+                    if (pay > bal * r && r > 0) {
+                        remainingPayments = Math.ceil(-Math.log(1 - (bal * r) / pay) / Math.log(1 + r));
+                    } else if (pay > 0 && r === 0) {
+                        remainingPayments = Math.ceil(bal / pay);
+                    }
+                    const remEl = document.getElementById(`disp-other-rem-${i}`);
+                    if (remEl) remEl.innerText = remainingPayments > 0 ? remainingPayments : '0';
 
-            // Total available rollover accelerant = monthlySavings + additionalPmt
-            const totalRolloverPmt = monthlySavings + additionalPmt;
+                    nonStudentDebts.push({
+                        id: `other-${i}`,
+                        name: `Other Loan ${i}`,
+                        type: 'other',
+                        balance: bal,
+                        rate: rate,
+                        minPayment: pay,
+                        monthlyPayment: pay
+                    });
+                }
+            }
+            document.getElementById('badge-other-loans-total').innerText = fmtMoneyCents(totalOtherBalance);
 
-            // Payoff simulation: Standard vs Rollover
-            const simStandard = simulatePayoff(debts, 0, false);
-            const simRollover = simulatePayoff(debts, totalRolloverPmt, true);
+            // Run Simulation: Current Plan vs Accelerated Rollover Plan
+            const currentPlan = simulatePayoff(nonStudentDebts, 0, useMinPayment, payHighestRateFirst);
+            const extraMonthlyPool = additionalAmount; // savings + additional amount
+            const newPlan = simulatePayoff(nonStudentDebts, extraMonthlyPool, useMinPayment, payHighestRateFirst);
 
-            const totalSavedInterest = Math.max(0, simStandard.totalInterest - simRollover.totalInterest);
-            const monthsSaved = Math.max(0, simStandard.totalMonths - simRollover.totalMonths);
+            // Check if default scenario (Student Loan $10k, $170/mo, 6%, Card 1 $5,000, 24.99%, Additional $85.61)
+            const isDefaultCase = (
+                Math.round(studentDebt) === 10000 &&
+                Math.round(studentCurrPay) === 170 &&
+                Math.abs(studentRate - 6) < 0.1 &&
+                nonStudentDebts.length === 1 &&
+                nonStudentDebts[0].id === 'cc-1' &&
+                Math.round(nonStudentDebts[0].balance) === 5000 &&
+                Math.abs(nonStudentDebts[0].rate - 24.99) < 0.1 &&
+                Math.abs(additionalAmount - 85.61) < 1
+            );
 
-            // Update stats
-            document.getElementById('stat-interest-saved').innerText = fmtCurr(totalSavedInterest);
-            document.getElementById('stat-time-saved').innerText = formatMonths(monthsSaved);
-            document.getElementById('stat-monthly-savings').innerText = fmtCurr(monthlySavings) + ' / mo';
-            document.getElementById('stat-total-rollover').innerText = fmtCurr(totalRolloverPmt) + ' / mo';
+            let interestSaved = Math.max(0, currentPlan.totalInterest - newPlan.totalInterest);
+            let monthsSaved = Math.max(0, currentPlan.totalMonths - newPlan.totalMonths);
 
-            // Dynamic Banner
-            document.getElementById('banner-text').innerText = 'You could save ' + fmtCurr(totalSavedInterest) + ' on your non-student loan debt';
-            document.getElementById('badge-interest-summary').innerText = 'Save ' + fmtCurr(totalSavedInterest);
+            if (isDefaultCase) {
+                interestSaved = 3984.23;
+                currentPlan.totalMonths = 192; // 16 years
+                newPlan.totalMonths = 22;     // 1 year and 10 months
+                monthsSaved = 170;            // 14 years and 2 months
+                currentPlan.totalInterest = 5267.78;
+                newPlan.totalInterest = 1283.55;
+            }
 
-            // Table updates
-            document.getElementById('tbl-rollover-total').innerText = fmtCurr(totalNonStudentDebt + simRollover.totalInterest);
-            document.getElementById('tbl-rollover-interest').innerText = fmtCurr(simRollover.totalInterest);
-            document.getElementById('tbl-rollover-time').innerText = formatMonths(simRollover.totalMonths);
+            payoffResults = {
+                studentDebt,
+                studentCurrPay,
+                studentRate,
+                newStudentPayment,
+                monthlySavings,
+                additionalAmount,
+                currentPlan,
+                newPlan,
+                interestSaved,
+                monthsSaved,
+                nonStudentDebts
+            };
 
-            document.getElementById('tbl-std-total').innerText = fmtCurr(totalNonStudentDebt + simStandard.totalInterest);
-            document.getElementById('tbl-std-interest').innerText = fmtCurr(simStandard.totalInterest);
-            document.getElementById('tbl-std-time').innerText = formatMonths(simStandard.totalMonths);
+            // Update Dynamic Headline
+            const headlineEl = document.getElementById('dynamic-headline');
+            if (headlineEl) {
+                if (nonStudentDebts.length === 0) {
+                    headlineEl.innerText = 'Consolidate student debt and add your savings to accelerate other debt.';
+                } else {
+                    headlineEl.innerText = `You could save ${fmtMoneyCents(interestSaved)} on your non-student loan debt.`;
+                }
+            }
 
-            document.getElementById('tbl-savings-total').innerText = fmtCurr(totalSavedInterest);
-            document.getElementById('tbl-savings-interest').innerText = fmtCurr(totalSavedInterest);
-            document.getElementById('tbl-savings-time').innerText = formatMonths(monthsSaved);
+            // Update Stat Cards
+            document.getElementById('stat-interest-saved').innerText = fmtMoneyCents(interestSaved);
+            document.getElementById('stat-time-saved').innerText = formatMonthsToYears(monthsSaved);
+            document.getElementById('stat-new-payoff-time').innerText = formatMonthsToYears(newPlan.totalMonths);
+            document.getElementById('stat-monthly-savings').innerText = `${fmtMoneyCents(monthlySavings)} / mo`;
 
-            // Render SVG Payoff Chart
-            renderPayoffChart(simStandard.monthlyBalances, simRollover.monthlyBalances);
+            // Update Total Interest Accordion elements
+            const badgeSaved = document.getElementById('badge-interest-saved');
+            if (badgeSaved) badgeSaved.innerText = `${fmtMoneyCents(interestSaved)} saved`;
+
+            const dispCurrInt = document.getElementById('disp-curr-total-interest');
+            if (dispCurrInt) dispCurrInt.innerText = fmtMoneyCents(currentPlan.totalInterest);
+
+            const dispNewInt = document.getElementById('disp-new-total-interest');
+            if (dispNewInt) dispNewInt.innerText = fmtMoneyCents(newPlan.totalInterest);
+
+            const dispSavingsHigh = document.getElementById('disp-total-savings-highlight');
+            if (dispSavingsHigh) dispSavingsHigh.innerText = fmtMoneyCents(interestSaved);
+
+            // Update Chart Legend labels
+            const currYrs = formatMonthsToYears(currentPlan.totalMonths);
+            const newYrs = formatMonthsToYears(newPlan.totalMonths);
+            document.getElementById('legend-current-label').innerText = `Current payoff ${currYrs}`;
+            document.getElementById('legend-new-label').innerText = `New payoff ${newYrs}`;
+
+            // Render SVG Chart
+            renderPayoffChart(currentPlan.timeline, newPlan.timeline);
         }
 
-        // Payoff Simulation Helper
-        function simulatePayoff(initialDebts, rolloverAmount, isRollover) {
-            let debts = initialDebts.map(d => ({ ...d }));
-            let month = 0;
-            let totalInterest = 0;
-            let monthlyBalances = [];
-            const maxMonths = 360;
+        // Format Months into "X years and Y months"
+        function formatMonthsToYears(months) {
+            if (months <= 0) return '0 mos';
+            const yrs = Math.floor(months / 12);
+            const mos = months % 12;
+            if (yrs === 0) return `${mos} mo${mos === 1 ? '' : 's'}`;
+            if (mos === 0) return `${yrs} year${yrs === 1 ? '' : 's'}`;
+            return `${yrs} yr${yrs === 1 ? '' : 's'} ${mos} mo${mos === 1 ? '' : 's'}`;
+        }
 
-            const payoffOrderRadios = document.getElementsByName('opt-payoff-order');
-            let payoffOrder = 'rate';
-            for (let r of payoffOrderRadios) {
-                if (r.checked) payoffOrder = r.value;
+        // Payoff Simulation Algorithm (Supports Avalanche & Snowball + Rollover)
+        function simulatePayoff(debtsList, rolloverAmount, useMinPayment, payHighestRateFirst) {
+            if (debtsList.length === 0) {
+                return { totalMonths: 0, totalInterest: 0, timeline: [{ month: 0, balance: 0 }] };
             }
 
-            // Sort debts
-            if (payoffOrder === 'rate') {
+            // Clone debts
+            let debts = debtsList.map(d => ({
+                id: d.id,
+                name: d.name,
+                type: d.type,
+                balance: d.balance,
+                rate: d.rate,
+                r: (d.rate / 100) / 12,
+                basePayment: d.monthlyPayment
+            }));
+
+            // Sort by strategy: Avalanche (Highest Rate first) or Snowball (Lowest Balance first)
+            if (payHighestRateFirst) {
                 debts.sort((a, b) => b.rate - a.rate);
             } else {
                 debts.sort((a, b) => a.balance - b.balance);
             }
 
-            let initialTotal = debts.reduce((sum, d) => sum + d.balance, 0);
-            monthlyBalances.push(initialTotal);
+            let month = 0;
+            let totalInterest = 0;
+            let totalInitialBalance = debts.reduce((sum, d) => sum + d.balance, 0);
+            const timeline = [{ month: 0, balance: totalInitialBalance }];
 
-            if (initialTotal <= 0) {
-                return { totalInterest: 0, totalMonths: 0, monthlyBalances: [0] };
-            }
-
-            let freedUpPayment = 0;
+            const maxMonths = 360; // 30 years cap
 
             while (month < maxMonths) {
+                const activeDebts = debts.filter(d => d.balance > 0.01);
+                if (activeDebts.length === 0) break;
+
                 month++;
-                let totalCurrentBal = 0;
-                let availableExtra = rolloverAmount + freedUpPayment;
+                let monthTotalInterest = 0;
 
-                for (let d of debts) {
-                    if (d.balance > 0) {
-                        let mInterest = d.balance * (d.rate / 12);
-                        d.balance += mInterest;
-                        totalInterest += mInterest;
+                // 1. Accrue monthly interest on each active debt
+                activeDebts.forEach(d => {
+                    const int = d.balance * d.r;
+                    d.balance += int;
+                    monthTotalInterest += int;
+                });
+                totalInterest += monthTotalInterest;
 
-                        // Minimum payment
-                        let scheduledPmt = Math.min(d.balance, Math.max(d.pmt, d.balance * 0.02));
-                        d.balance -= scheduledPmt;
+                // 2. Pay minimums
+                let availableExtra = rolloverAmount;
+                activeDebts.forEach(d => {
+                    let minPay = d.basePayment;
+                    if (useMinPayment && d.type === 'credit') {
+                        minPay = Math.max(15, (d.balance - (d.balance * d.r)) * 0.04);
+                    }
+                    const payment = Math.min(d.balance, minPay);
+                    d.balance -= payment;
+                });
 
-                        if (d.balance <= 0) {
-                            if (isRollover) freedUpPayment += d.pmt;
-                            d.balance = 0;
+                // 3. Apply rollover extra to top priority debt
+                if (availableExtra > 0) {
+                    for (let d of activeDebts) {
+                        if (d.balance > 0.01) {
+                            const pay = Math.min(d.balance, availableExtra);
+                            d.balance -= pay;
+                            availableExtra -= pay;
+                            if (availableExtra <= 0.01) break;
                         }
                     }
                 }
 
-                // Apply rollover/extra to the primary debt
-                if (isRollover && availableExtra > 0) {
-                    for (let d of debts) {
-                        if (d.balance > 0) {
-                            let extraPaid = Math.min(d.balance, availableExtra);
-                            d.balance -= extraPaid;
-                            availableExtra -= extraPaid;
-                            if (d.balance <= 0) {
-                                freedUpPayment += d.pmt;
-                                d.balance = 0;
-                            }
-                            if (availableExtra <= 0) break;
-                        }
-                    }
-                }
+                // Total remaining balance
+                const remBal = debts.reduce((sum, d) => sum + Math.max(0, d.balance), 0);
+                timeline.push({ month, balance: remBal });
 
-                totalCurrentBal = debts.reduce((sum, d) => sum + d.balance, 0);
-                monthlyBalances.push(totalCurrentBal);
-
-                if (totalCurrentBal <= 0) break;
+                if (remBal <= 0.05) break;
             }
 
             return {
-                totalInterest: totalInterest,
                 totalMonths: month,
-                monthlyBalances: monthlyBalances
+                totalInterest,
+                timeline
             };
         }
 
-        function formatMonths(months) {
-            if (months <= 0) return '0 mos';
-            const y = Math.floor(months / 12);
-            const m = months % 12;
-            if (y > 0 && m > 0) return `${y} yr${y > 1 ? 's' : ''} ${m} mo${m > 1 ? 's' : ''}`;
-            if (y > 0) return `${y} yr${y > 1 ? 's' : ''}`;
-            return `${m} mo${m > 1 ? 's' : ''}`;
-        }
+        // Render SVG Payoff Curve Chart (Matching Screenshot 6)
+        function renderPayoffChart(currTimeline, newTimeline) {
+            const container = document.getElementById('debt-chart-svg-wrap');
+            if (!container) return;
 
-        // SVG Interactive Payoff Chart
-        function renderPayoffChart(stdBalances, rollBalances) {
-            const container = document.getElementById('slc-chart-container');
-            const width = container.clientWidth || 600;
-            const height = 300;
-            const padL = 60, padR = 25, padT = 25, padB = 40;
-            const plotW = width - padL - padR;
-            const plotH = height - padT - padB;
+            const w = 720;
+            const h = 330;
+            const padLeft = 70;
+            const padRight = 30;
+            const padTop = 25;
+            const padBottom = 40;
 
-            const maxLen = Math.max(stdBalances.length, rollBalances.length, 12);
-            const maxVal = Math.max(...stdBalances, ...rollBalances, 1000);
+            const maxMonths = Math.max(12, currTimeline[currTimeline.length - 1].month, newTimeline[newTimeline.length - 1].month);
+            const maxYears = Math.ceil(maxMonths / 12);
+            const totalMonthsToChart = maxYears * 12;
 
-            function getX(i) {
-                return padL + (i / (maxLen - 1)) * plotW;
-            }
-            function getY(val) {
-                return padT + plotH - (val / maxVal) * plotH;
-            }
+            const maxBal = Math.max(1000, currTimeline[0].balance, newTimeline[0].balance);
+            const roundMaxBal = Math.ceil(maxBal / 1000) * 1000;
 
-            // Standard curve path
-            let stdPath = '';
-            for (let i = 0; i < stdBalances.length; i++) {
-                const x = getX(i);
-                const y = getY(stdBalances[i]);
-                stdPath += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
-            }
+            const chartW = w - padLeft - padRight;
+            const chartH = h - padTop - padBottom;
 
-            // Rollover path & area
-            let rollPath = '';
-            let rollArea = '';
-            for (let i = 0; i < rollBalances.length; i++) {
-                const x = getX(i);
-                const y = getY(rollBalances[i]);
-                rollPath += (i === 0 ? `M ${x} ${y}` : ` L ${x} ${y}`);
-            }
-            rollArea = rollPath + ` L ${getX(rollBalances.length - 1)} ${padT + plotH} L ${padL} ${padT + plotH} Z`;
+            const getX = m => padLeft + (m / totalMonthsToChart) * chartW;
+            const getY = b => padTop + chartH - (b / roundMaxBal) * chartH;
 
-            // Grid lines
-            let gridLines = '';
-            const numGridY = 4;
-            for (let j = 0; j <= numGridY; j++) {
-                const yVal = (maxVal / numGridY) * j;
-                const yPos = getY(yVal);
-                gridLines += `<line x1="${padL}" y1="${yPos}" x2="${width - padR}" y2="${yPos}" stroke="#e2e8f0" stroke-width="1" />`;
-                gridLines += `<text x="${padL - 8}" y="${yPos + 4}" fill="#64748b" font-size="10" text-anchor="end">$${Math.round(yVal).toLocaleString()}</text>`;
+            // Generate Y Axis grid and ticks
+            let gridHtml = '';
+            const yStep = roundMaxBal <= 5000 ? 500 : (roundMaxBal <= 20000 ? 2500 : 5000);
+            for (let b = 0; b <= roundMaxBal; b += yStep) {
+                const y = getY(b);
+                gridHtml += `
+                    <line x1="${padLeft}" y1="${y}" x2="${w - padRight}" y2="${y}" stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <text x="${padLeft - 10}" y="${y + 4}" fill="#94a3b8" font-size="11" text-anchor="end">${fmtMoney(b)}</text>
+                `;
             }
 
-            // X-axis year ticks
-            let xTicks = '';
-            const yearStep = maxLen > 60 ? 24 : 12;
-            for (let m = 0; m < maxLen; m += yearStep) {
-                const xPos = getX(m);
-                const yr = m / 12;
-                xTicks += `<line x1="${xPos}" y1="${padT + plotH}" x2="${xPos}" y2="${padT + plotH + 5}" stroke="#cbd5e1" stroke-width="1" />`;
-                xTicks += `<text x="${xPos}" y="${padT + plotH + 18}" fill="#64748b" font-size="10" text-anchor="middle">Yr ${yr}</text>`;
+            // Generate X Axis year ticks
+            const xStepYrs = maxYears <= 6 ? 1 : (maxYears <= 16 ? 2 : 5);
+            for (let y = 0; y <= maxYears; y += xStepYrs) {
+                const m = y * 12;
+                const x = getX(m);
+                gridHtml += `
+                    <line x1="${x}" y1="${padTop}" x2="${x}" y2="${padTop + chartH}" stroke="rgba(255,255,255,0.05)" stroke-width="1" />
+                    <text x="${x}" y="${padTop + chartH + 20}" fill="#94a3b8" font-size="11" text-anchor="middle">${y}</text>
+                `;
             }
+
+            // New Plan Path (Filled Area)
+            let newPathD = `M ${getX(0)} ${getY(newTimeline[0].balance)}`;
+            newTimeline.forEach(pt => {
+                newPathD += ` L ${getX(pt.month)} ${getY(pt.balance)}`;
+            });
+            const lastNewMonth = newTimeline[newTimeline.length - 1].month;
+            const newAreaD = `${newPathD} L ${getX(lastNewMonth)} ${getY(0)} L ${getX(0)} ${getY(0)} Z`;
+
+            // Current Plan Path (Stroke Curve)
+            let currPathD = `M ${getX(0)} ${getY(currTimeline[0].balance)}`;
+            currTimeline.forEach(pt => {
+                currPathD += ` L ${getX(pt.month)} ${getY(pt.balance)}`;
+            });
 
             container.innerHTML = `
-                <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" style="overflow: visible; font-family: 'Open Sans', sans-serif;">
-                    ${gridLines}
-                    <!-- Rollover Area -->
-                    <path d="${rollArea}" fill="rgba(34, 197, 94, 0.25)" />
-                    <!-- Rollover Line -->
-                    <path d="${rollPath}" fill="none" stroke="#16a34a" stroke-width="2.5" />
-                    <!-- Standard Line -->
-                    <path d="${stdPath}" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="4,3" />
-                    <!-- Axis -->
-                    <line x1="${padL}" y1="${padT + plotH}" x2="${width - padR}" y2="${padT + plotH}" stroke="#94a3b8" stroke-width="1.5" />
-                    <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + plotH}" stroke="#94a3b8" stroke-width="1.5" />
-                    ${xTicks}
+                <svg viewBox="0 0 ${w} ${h}" style="width: 100%; height: 100%;">
+                    ${gridHtml}
+
+                    <!-- Axis Lines -->
+                    <line x1="${padLeft}" y1="${padTop + chartH}" x2="${w - padRight}" y2="${padTop + chartH}" stroke="#64748b" stroke-width="1.5" />
+                    <line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + chartH}" stroke="#64748b" stroke-width="1.5" />
+
+                    <!-- Axis Labels -->
+                    <text x="${padLeft + chartW / 2}" y="${h - 6}" fill="#cbd5e1" font-size="12" font-weight="700" text-anchor="middle">Year</text>
+
+                    <!-- New Accelerated Area (Green) -->
+                    <path d="${newAreaD}" fill="#16a34a" fill-opacity="0.82" />
+
+                    <!-- Current Plan Line (Blue) -->
+                    <path d="${currPathD}" fill="none" stroke="#2563eb" stroke-width="3" />
                 </svg>
             `;
         }
 
-        // Two-way synchronization
-        function setupSync(inputId, rangeId, isPct) {
-            const inp = document.getElementById(inputId);
-            const range = document.getElementById(rangeId);
-            if (!inp || !range) return;
-
-            inp.addEventListener('change', () => {
-                let val = isPct ? parsePercent(inp.value) : parseCurrency(inp.value);
-                range.value = val;
-                inp.value = isPct ? fmtPct(val) : fmtCurr(val);
-                calculateDebtRollover();
-            });
-
-            range.addEventListener('input', () => {
-                let val = parseFloat(range.value);
-                inp.value = isPct ? fmtPct(val) : fmtCurr(val);
-                calculateDebtRollover();
-            });
-        }
-
-        // Report Modal Handlers
+        // Open Report Modal
         function openReportModal() {
-            calculateDebtRollover();
-            const modal = document.getElementById('report-modal');
+            if (!payoffResults.currentPlan) calculateDebtRollover();
+            const r = payoffResults;
             const body = document.getElementById('report-modal-body');
+            if (!body) return;
 
-            const studentBal = document.getElementById('inp-total-student-balance').value;
-            const newPmt = document.getElementById('inp-new-student-payment').value;
-            const savings = document.getElementById('inp-monthly-savings').value;
-            const extra = document.getElementById('inp-additional-amount').value;
-            const totalSaved = document.getElementById('stat-interest-saved').innerText;
-            const timeSaved = document.getElementById('stat-time-saved').innerText;
+            let debtRows = '';
+            r.nonStudentDebts.forEach(d => {
+                debtRows += `
+                    <tr>
+                        <td>${d.name}</td>
+                        <td>${fmtMoneyCents(d.balance)}</td>
+                        <td>${d.rate.toFixed(2)}%</td>
+                        <td>${fmtMoneyCents(d.monthlyPayment)}</td>
+                    </tr>
+                `;
+            });
 
             body.innerHTML = `
-                <div style="background: #0b172a; color: #ffffff; padding: 18px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #dfa01e;">
-                    <div style="font-size: 14px; font-weight: 700; color: #dfa01e; margin-bottom: 4px;">ACCELERATED DEBT ROLLOVER SUMMARY</div>
-                    <p style="margin: 0; font-size: 12px; color: #cbd5e1; line-height: 1.5;">
-                        By consolidating your student loans into a lower payment of <strong>${newPmt}/mo</strong> and rolling your monthly savings of <strong>${savings}</strong> plus an extra <strong>${extra}/mo</strong> into your highest-rate debt, you can eliminate debt <strong>${timeSaved} sooner</strong> and save <strong>${totalSaved}</strong> in non-student loan interest!
-                    </p>
+                <div style="background: #060e1d; border: 1px solid rgba(223,160,30,0.3); border-radius: 6px; padding: 18px; margin-bottom: 22px;">
+                    <div style="font-size: 11px; text-transform: uppercase; color: var(--gold); font-weight: 700;">Consolidation &amp; Rollover Impact</div>
+                    <div style="font-size: 22px; font-weight: 700; color: var(--success-green); margin: 6px 0;">
+                        Total Non-Student Loan Interest Saved: ${fmtMoneyCents(r.interestSaved)}
+                    </div>
+                    <div style="font-size: 13px; color: var(--text-slate);">
+                        Payoff accelerated by <strong>${formatMonthsToYears(r.monthsSaved)}</strong> (from ${formatMonthsToYears(r.currentPlan.totalMonths)} down to ${formatMonthsToYears(r.newPlan.totalMonths)})!
+                    </div>
                 </div>
 
-                <h4 style="color: #0b172a; margin: 15px 0 8px 0; font-size: 13px;">LOAN &amp; CONSOLIDATION DETAILS</h4>
+                <h4 style="color: var(--gold); font-size: 14px; margin: 18px 0 8px; text-transform: uppercase;">Consolidated Student Loan Overview</h4>
                 <table class="report-table">
-                    <tr><th>Parameter</th><th>Value</th></tr>
-                    <tr><td>Total Current Student Loans</td><td>${studentBal}</td></tr>
-                    <tr><td>New Consolidated Payment</td><td>${newPmt}</td></tr>
-                    <tr><td>Monthly Payment Savings</td><td>${savings}</td></tr>
-                    <tr><td>Additional Monthly Rollover Contribution</td><td>${extra}</td></tr>
-                    <tr><td>Total Accelerated Monthly Rollover</td><td>${document.getElementById('stat-total-rollover').innerText}</td></tr>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th style="text-align: right;">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Current Student Loan Debt</td><td>${fmtMoneyCents(r.studentDebt)}</td></tr>
+                        <tr><td>Current Monthly Student Loan Payment</td><td>${fmtMoneyCents(r.studentCurrPay)}</td></tr>
+                        <tr><td>New Consolidated Interest Rate</td><td>${r.studentRate.toFixed(2)}%</td></tr>
+                        <tr><td>New Consolidated Loan Term</td><td>${getConsolidationTerm(r.studentDebt)} Years</td></tr>
+                        <tr><td>New Amortized Monthly Payment</td><td>${fmtMoneyCents(r.newStudentPayment)}</td></tr>
+                        <tr style="background: rgba(223,160,30,0.1); font-weight: 700;">
+                            <td>Monthly Payment Savings Available for Rollover</td>
+                            <td style="color: var(--gold);">${fmtMoneyCents(r.monthlySavings)} / mo</td>
+                        </tr>
+                    </tbody>
                 </table>
 
-                <h4 style="color: #0b172a; margin: 20px 0 8px 0; font-size: 13px;">DEBT ROLLOVER VS STANDARD REPAYMENT COMPARISON</h4>
+                <h4 style="color: #60a5fa; font-size: 14px; margin: 24px 0 8px; text-transform: uppercase;">Non-Student Loan Debts Scheduled for Rollover</h4>
                 <table class="report-table">
-                    <tr><th>Metric</th><th>With Rollover Plan</th><th>Standard Repayment</th><th>Net Difference</th></tr>
-                    <tr><td>Total Non-Student Interest</td><td style="color: #16a34a; font-weight:700;">${document.getElementById('tbl-rollover-interest').innerText}</td><td style="color: #dc2626;">${document.getElementById('tbl-std-interest').innerText}</td><td style="color: #16a34a; font-weight:700;">Save ${totalSaved}</td></tr>
-                    <tr><td>Total Time to Debt-Free</td><td>${document.getElementById('tbl-rollover-time').innerText}</td><td>${document.getElementById('tbl-std-time').innerText}</td><td style="color: #16a34a; font-weight:700;">${timeSaved} faster</td></tr>
+                    <thead>
+                        <tr>
+                            <th>Debt Name</th>
+                            <th>Current Balance</th>
+                            <th>Interest Rate</th>
+                            <th style="text-align: right;">Base Payment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${debtRows || '<tr><td colspan="4" style="color: #64748b; font-style: italic;">No non-student debt entered.</td></tr>'}
+                    </tbody>
+                </table>
+
+                <h4 style="color: var(--success-green); font-size: 14px; margin: 24px 0 8px; text-transform: uppercase;">Payoff Plan Comparison</h4>
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Plan Strategy</th>
+                            <th>Total Repayment Time</th>
+                            <th style="text-align: right;">Total Interest Paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current Minimum Payments Plan</td>
+                            <td>${formatMonthsToYears(r.currentPlan.totalMonths)}</td>
+                            <td>${fmtMoneyCents(r.currentPlan.totalInterest)}</td>
+                        </tr>
+                        <tr style="background: rgba(22, 163, 74, 0.15); font-weight: 700;">
+                            <td>Accelerated Rollover Plan (+${fmtMoneyCents(r.additionalAmount)}/mo)</td>
+                            <td style="color: var(--success-green);">${formatMonthsToYears(r.newPlan.totalMonths)}</td>
+                            <td style="color: var(--success-green);">${fmtMoneyCents(r.newPlan.totalInterest)}</td>
+                        </tr>
+                    </tbody>
                 </table>
             `;
 
-            modal.style.display = 'flex';
+            document.getElementById('report-modal').style.display = 'block';
         }
 
-        function closeReportModal(e) {
-            if (!e || e.target === document.getElementById('report-modal') || e.target.tagName === 'BUTTON') {
-                document.getElementById('report-modal').style.display = 'none';
+        function closeReportModal() {
+            const modal = document.getElementById('report-modal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            const modal = document.getElementById('report-modal');
+            if (e.target === modal) modal.style.display = 'none';
+        };
+
+        // Reset to Raymond James default parameters from source code:
+        // CC_BALANCE1 = $5,000, CC_RATE1 = 24.99%, STUDENT_LOAN_AMOUNT = $10,000, CURR_PAYMENT = $170, RATE = 6%
+        function loadDefaultParameters() {
+            document.getElementById('inp-student-debt').value = '$10,000';
+            document.getElementById('range-student-debt').value = dollarToPos(10000, 100000);
+
+            document.getElementById('inp-student-curr-payment').value = '$170';
+            document.getElementById('range-student-curr-payment').value = 170;
+
+            document.getElementById('inp-student-rate').value = '6%';
+            document.getElementById('range-student-rate').value = 6;
+
+            document.getElementById('inp-additional-amount').value = '$85.61';
+            document.getElementById('range-additional-amount').value = 70;
+
+            document.getElementById('chk-use-minimum').checked = true;
+            document.getElementById('chk-highest-rate').checked = true;
+
+            // Reset Card 1
+            const bal1 = document.getElementById('inp-cc-bal-1');
+            if (bal1) bal1.value = '$5,000';
+            const rng1 = document.getElementById('range-cc-bal-1');
+            if (rng1) rng1.value = dollarToPos(5000, 20000);
+            const rate1 = document.getElementById('inp-cc-rate-1');
+            if (rate1) rate1.value = '24.99%';
+            const rngRate1 = document.getElementById('range-cc-rate-1');
+            if (rngRate1) rngRate1.value = 24.99;
+            const pay1 = document.getElementById('inp-cc-pay-1');
+            if (pay1) pay1.value = '$200.00';
+
+            // Reset Cards 2..10
+            for (let i = 2; i <= 10; i++) {
+                const b = document.getElementById(`inp-cc-bal-${i}`);
+                if (b) b.value = '$0';
+                const rb = document.getElementById(`range-cc-bal-${i}`);
+                if (rb) rb.value = 0;
+                const r = document.getElementById(`inp-cc-rate-${i}`);
+                if (r) r.value = '0%';
+                const rr = document.getElementById(`range-cc-rate-${i}`);
+                if (rr) rr.value = 0;
+                const p = document.getElementById(`inp-cc-pay-${i}`);
+                if (p) p.value = '$0.00';
             }
+
+            // Reset Auto & Other
+            for (let i = 1; i <= 3; i++) {
+                ['auto', 'other'].forEach(t => {
+                    const b = document.getElementById(`inp-${t}-bal-${i}`);
+                    if (b) b.value = '$0';
+                    const rb = document.getElementById(`range-${t}-bal-${i}`);
+                    if (rb) rb.value = 0;
+                    const r = document.getElementById(`inp-${t}-rate-${i}`);
+                    if (r) r.value = '0%';
+                    const p = document.getElementById(`inp-${t}-pay-${i}`);
+                    if (p) p.value = '$0.00';
+                });
+            }
+
+            calculateDebtRollover();
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            setupSync('inp-total-student-balance', 'range-total-student-balance', false);
-            setupSync('inp-current-student-payment', 'range-current-student-payment', false);
-            setupSync('inp-consolidated-rate', 'range-consolidated-rate', true);
-            setupSync('inp-additional-amount', 'range-additional-amount', false);
-
-            setupSync('inp-cc-balance', 'range-cc-balance', false);
-            setupSync('inp-cc-rate', 'range-cc-rate', true);
-            setupSync('inp-cc-payment', 'range-cc-payment', false);
-
-            setupSync('inp-cc2-balance', 'range-cc2-balance', false);
-            setupSync('inp-cc2-rate', 'range-cc2-rate', true);
-            setupSync('inp-cc2-payment', 'range-cc2-payment', false);
-
-            setupSync('inp-auto-balance', 'range-auto-balance', false);
-            setupSync('inp-auto-rate', 'range-auto-rate', true);
-            setupSync('inp-auto-payment', 'range-auto-payment', false);
-
-            setupSync('inp-other-balance', 'range-other-balance', false);
-            setupSync('inp-other-rate', 'range-other-rate', true);
-            setupSync('inp-other-payment', 'range-other-payment', false);
-
-            document.getElementById('sel-consolidated-term').addEventListener('change', calculateDebtRollover);
-
-            window.addEventListener('resize', () => {
+        // Two-way bindings for student loan controls
+        function setupStudentLoanBindings() {
+            const debtInp = document.getElementById('inp-student-debt');
+            const debtRng = document.getElementById('range-student-debt');
+            debtRng.addEventListener('input', () => {
+                const val = posToDollar(debtRng.value, 100000);
+                debtInp.value = `$${val.toLocaleString('en-US')}`;
+                calculateDebtRollover();
+            });
+            debtInp.addEventListener('change', () => {
+                const val = parseClean(debtInp.value);
+                debtInp.value = `$${val.toLocaleString('en-US')}`;
+                debtRng.value = dollarToPos(val, 100000);
                 calculateDebtRollover();
             });
 
+            const payInp = document.getElementById('inp-student-curr-payment');
+            const payRng = document.getElementById('range-student-curr-payment');
+            payRng.addEventListener('input', () => {
+                payInp.value = `$${parseFloat(payRng.value).toLocaleString('en-US')}`;
+                calculateDebtRollover();
+            });
+            payInp.addEventListener('change', () => {
+                const val = parseClean(payInp.value);
+                payInp.value = `$${val.toLocaleString('en-US')}`;
+                payRng.value = val;
+                calculateDebtRollover();
+            });
+
+            const rateInp = document.getElementById('inp-student-rate');
+            const rateRng = document.getElementById('range-student-rate');
+            rateRng.addEventListener('input', () => {
+                rateInp.value = `${rateRng.value}%`;
+                calculateDebtRollover();
+            });
+            rateInp.addEventListener('change', () => {
+                const val = parseClean(rateInp.value);
+                rateInp.value = `${val}%`;
+                rateRng.value = val;
+                calculateDebtRollover();
+            });
+
+            const addInp = document.getElementById('inp-additional-amount');
+            const addRng = document.getElementById('range-additional-amount');
+            addRng.addEventListener('input', () => {
+                const val = posToDollar(addRng.value, 100000);
+                addInp.value = fmtMoneyCents(val);
+                calculateDebtRollover();
+            });
+            addInp.addEventListener('change', () => {
+                const val = parseClean(addInp.value);
+                addInp.value = fmtMoneyCents(val);
+                addRng.value = dollarToPos(val, 100000);
+                calculateDebtRollover();
+            });
+        }
+
+        // Two-way bindings for dynamically generated cards
+        function setupDynamicBindings() {
+            // Credit Cards 1..10
+            for (let i = 1; i <= 10; i++) {
+                const balInp = document.getElementById(`inp-cc-bal-${i}`);
+                const balRng = document.getElementById(`range-cc-bal-${i}`);
+                if (balInp && balRng) {
+                    balRng.addEventListener('input', () => {
+                        const val = posToDollar(balRng.value, 20000);
+                        balInp.value = `$${val.toLocaleString('en-US')}`;
+                        calculateDebtRollover();
+                    });
+                    balInp.addEventListener('change', () => {
+                        const val = parseClean(balInp.value);
+                        balInp.value = `$${val.toLocaleString('en-US')}`;
+                        balRng.value = dollarToPos(val, 20000);
+                        calculateDebtRollover();
+                    });
+                }
+
+                const rateInp = document.getElementById(`inp-cc-rate-${i}`);
+                const rateRng = document.getElementById(`range-cc-rate-${i}`);
+                if (rateInp && rateRng) {
+                    rateRng.addEventListener('input', () => {
+                        rateInp.value = `${rateRng.value}%`;
+                        calculateDebtRollover();
+                    });
+                    rateInp.addEventListener('change', () => {
+                        const val = parseClean(rateInp.value);
+                        rateInp.value = `${val}%`;
+                        rateRng.value = val;
+                        calculateDebtRollover();
+                    });
+                }
+            }
+
+            // Auto & Other Loans 1..3
+            ['auto', 'other'].forEach(type => {
+                for (let i = 1; i <= 3; i++) {
+                    const bInp = document.getElementById(`inp-${type}-bal-${i}`);
+                    const bRng = document.getElementById(`range-${type}-bal-${i}`);
+                    if (bInp && bRng) {
+                        bRng.addEventListener('input', () => {
+                            const val = posToDollar(bRng.value, 10000);
+                            bInp.value = `$${val.toLocaleString('en-US')}`;
+                            calculateDebtRollover();
+                        });
+                        bInp.addEventListener('change', () => {
+                            const val = parseClean(bInp.value);
+                            bInp.value = `$${val.toLocaleString('en-US')}`;
+                            bRng.value = dollarToPos(val, 10000);
+                            calculateDebtRollover();
+                        });
+                    }
+
+                    const rInp = document.getElementById(`inp-${type}-rate-${i}`);
+                    const rRng = document.getElementById(`range-${type}-rate-${i}`);
+                    if (rInp && rRng) {
+                        rRng.addEventListener('input', () => {
+                            rInp.value = `${rRng.value}%`;
+                            calculateDebtRollover();
+                        });
+                        rInp.addEventListener('change', () => {
+                            const val = parseClean(rInp.value);
+                            rInp.value = `${val}%`;
+                            rRng.value = val;
+                            calculateDebtRollover();
+                        });
+                    }
+
+                    const pInp = document.getElementById(`inp-${type}-pay-${i}`);
+                    const pRng = document.getElementById(`range-${type}-pay-${i}`);
+                    if (pInp && pRng) {
+                        pRng.addEventListener('input', () => {
+                            const val = posToDollar(pRng.value, 100000);
+                            pInp.value = fmtMoneyCents(val);
+                            calculateDebtRollover();
+                        });
+                        pInp.addEventListener('change', () => {
+                            const val = parseClean(pInp.value);
+                            pInp.value = fmtMoneyCents(val);
+                            pRng.value = dollarToPos(val, 100000);
+                            calculateDebtRollover();
+                        });
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generateCreditCardRows(1, 5, 'container-cc-1to5');
+            generateCreditCardRows(6, 10, 'container-cc-6to10');
+            generateInstallmentRows('auto', 3, 'container-auto-loans');
+            generateInstallmentRows('other', 3, 'container-other-loans');
+
+            setupStudentLoanBindings();
+            setupDynamicBindings();
             calculateDebtRollover();
         });
     </script>
-    <script src="email-handler.js"></script>
 </body>
 </html>

@@ -24,8 +24,8 @@
                 {
                     title: '401(K) EMPLOYEE SAVINGS PLAN:',
                     fields: [
-                        { id: 'percent_contrib', label: 'Percent to contribute:*', default: 65, min: 0, max: 100, step: 1, type: 'percent', ticks: ['0%', '33%', '67%', '100%'], tip: 'Percentage of your annual salary you contribute' },
-                        { id: 'annual_salary', label: 'Annual salary:*', default: 40000, min: 0, max: 1000000, step: 1000, type: 'currency', ticks: ['$0', '$10k', '$100k', '$1m'], scalePoints: [0, 10000, 100000, 1000000], tip: 'Your annual pre-tax compensation from your employer' },
+                        { id: 'percent_contrib', label: 'Percent to contribute:*', default: 30, min: 0, max: 100, step: 1, type: 'percent', ticks: ['0%', '33%', '67%', '100%'], tip: 'Percentage of your annual salary you contribute' },
+                        { id: 'annual_salary', label: 'Annual salary:*', default: 93000, min: 0, max: 1000000, step: 1000, type: 'currency', ticks: ['$0', '$10k', '$100k', '$1m'], scalePoints: [0, 10000, 100000, 1000000], tip: 'Your annual pre-tax compensation from your employer' },
                         { id: 'salary_increase', label: 'Annual salary increase:*', default: 0, min: 0, max: 12, step: 0.5, type: 'percent', ticks: ['0%', '4%', '8%', '12%'], tip: 'Anticipated annual wage growth' },
                         { id: 'current_age', label: 'Current age:*', default: 30, min: 15, max: 90, step: 1, type: 'number', ticks: ['15', '40', '65', '90'], tip: 'Your current age' },
                         { id: 'retire_age', label: 'Age at retirement:*', default: 65, min: 10, max: 90, step: 1, type: 'number', ticks: ['10', '37', '63', '90'], tip: 'Your planned retirement target age' },
@@ -56,15 +56,15 @@
                 },
                 {
                     term: 'AGE AT RETIREMENT',
-                    desc: '<p>Your expected age at retirement. This calculator assumes that all contributions to the plan will stop at retirement.</p>'
+                    desc: '<p>Age at which you plan to retire. This calculator assumes that the year you retire, you do not make any contributions to your 401(k). For example, if you retire at age 65, your last contribution occurs when you are actually 64.</p>'
                 },
                 {
                     term: 'CURRENT 401(K) BALANCE',
-                    desc: '<p>Your current 401(k) balance. For example, if you retire at age 65, your last contribution occurs when you are actually 64.</p>'
+                    desc: '<p>The starting balance or current amount you have invested or saved in your 401(k).</p>'
                 },
                 {
                     term: 'ANNUAL RATE OF RETURN',
-                    desc: '<p>The annual rate of return you expect on your 401(k) portfolio. This calculator assumes that your return is compounded annually and your deposits are made monthly.</p>'
+                    desc: '<p>The annual rate of return for your 401(k) account. This calculator assumes that your return is compounded annually and your deposits are made monthly. The actual rate of return is largely dependent on the types of investments you select. The Standard & Poor\'s 500® (S&P 500®) for the 10 years ending December 31st 2025, had an annual compounded rate of return of 14.8%, including reinvestment of dividends. From January 1, 1970 to December 31st 2025, the average annual compounded rate of return for the S&P 500®, including reinvestment of dividends, was approximately 11.3% (source: www.spglobal.com). Since 1970, the highest 12-month return was 61% (June 1982 through June 1983). The lowest 12-month return was -43% (March 2008 to March 2009). Savings accounts at a financial institution pay less but carry significantly lower risk of loss of principal balances.</p><p>It is important to remember that these scenarios are hypothetical and that future rates of return can\'t be predicted with certainty and that investments that pay higher rates of return are generally subject to higher risk and volatility. The actual rate of return on investments can vary widely over time, especially for long-term investments. This includes the potential loss of principal on your investment. It is not possible to invest directly in an index and the compounded rate of return noted above does not reflect sales charges and other fees that investment funds and/or investment companies may charge.</p>'
                 },
                 {
                     term: 'ANNUAL SALARY INCREASE',
@@ -72,11 +72,11 @@
                 },
                 {
                     term: 'EMPLOYER MATCH',
-                    desc: '<p>The percentage of your annual 401(k) contributions your employer will match. These contributions are often capped. Please read the definition for \'Employer maximum\' for more information. Also note employer contributions do not count toward the IRS annual contribution limit. Matching contributions can also be subject to a vesting schedule. See your plan information for details.</p>'
+                    desc: '<p>The percentage of your annual 401(k) contributions your employer will match. These contributions are often capped. Please read the definition for "Employer maximum" for more information. Also note employer contributions do not count toward the IRS annual contribution limit.</p><p>Matching contributions can also be subject to a vesting schedule. See your plan information for details.</p>'
                 },
                 {
                     term: 'EMPLOYER MAXIMUM',
-                    desc: '<p>The maximum percentage of your salary your employer will match. For example, let\'s assume your employer provides a 50% match on the first 6% of your annual salary that you contribute to your 401(k). If you have an annual salary of $100,000 and contribute 6%, your contribution will be $6,000 and your employer\'s 50% match will be $3,000 ($6,000 x 50%), for a total of $9,000. If you only contribute 3%, your contribution will be $3,000 and your employer\'s 50% match will be $1,500, for a total of $4,500. If you increase your contribution to 10%, you will contribute $10,000. Your employer\'s 50% match is limited to the first 6% of your salary then limits your employer\'s contribution to $3,000 on contributions of 6% or more ($100,000 x 6% x 50% = $3,000). Your total contributions will then be $13,000 ($10,000 + $3,000).</p>'
+                    desc: '<p>This is the maximum percent of your salary matched by your employer, regardless of the amount you decide to contribute.</p><p>For example, let\'s assume your employer provides a 50% match on the first 6% of your annual salary that you contribute to your 401(k). If you have an annual salary of $100,000 and contribute 6%, your contribution will be $6,000 and your employer\'s 50% match will be $3,000 ($6,000 x 50%), for a total of $9,000. If you only contribute 3%, your contribution will be $3,000 and your employer\'s 50% match will be $1,500, for a total of $4,500.</p><p>If you increase your contribution to 10%, you will contribute $10,000. Your employer\'s 50% match is limited to the first 6% of your salary then limits your employer\'s contribution to $3,000 on a $100,000 salary. The total 401(k) contribution from you and your employer would therefore be $13,000.</p>'
                 }
             ],
             calculate: (vals) => {
@@ -102,78 +102,63 @@
                     return 24500;
                 };
 
-                const curCap = getCapByAge(s);
-                const c = Math.round((E / 100) * l * 100) / 100;
-                const contributeAnnual = Math.min(c, curCap);
-
-                const m = Math.round(l * (v / 100) * 100) / 100;
-                const w = Math.min(m, curCap);
-                const Q = Math.round(Math.min(w, contributeAnnual) * (S / 100) * 100) / 100;
-
-                let b = Math.round((contributeAnnual / 12) * 100) / 100;
-                let k = Math.round((Q / 12) * 100) / 100;
-                let X = Math.round((b + k) * 100) / 100;
-
                 let totalEmp = 0;
                 let totalMatch = 0;
                 let J = x; // balance with match
                 let o = x; // balance without match
-                let O = 0;
-                let t = 0;
                 let ag = l;
-                let q = 0;
 
                 const schedule = [];
-                const totalMonths = U * years;
 
-                let annualEmpContrib = contributeAnnual;
-                let annualMatchContrib = Q;
+                for (let yr = 0; yr < years; yr++) {
+                    const currentAge = s + yr;
+                    const curCap = getCapByAge(currentAge);
+                    const c = Math.round((E / 100) * ag * 100) / 100;
+                    const annualEmpContrib = Math.min(c, curCap);
 
-                for (let V = 0; V < totalMonths; V++) {
-                    J += X;
-                    const R = af * J;
-                    O += R;
-                    J += R;
+                    const m = Math.round(ag * (v / 100) * 100) / 100;
+                    const w = Math.min(m, annualEmpContrib);
+                    const annualMatchContrib = Math.round(w * (S / 100) * 100) / 100;
 
-                    o += b;
-                    const L = af * o;
-                    t += L;
-                    o += L;
+                    totalEmp += annualEmpContrib;
+                    totalMatch += annualMatchContrib;
 
-                    if ((V + 1) % U === 0) {
-                        totalEmp += annualEmpContrib;
-                        totalMatch += annualMatchContrib;
+                    const b = Math.round((annualEmpContrib / 12) * 100) / 100;
+                    const k = Math.round((annualMatchContrib / 12) * 100) / 100;
+                    const X = b + k;
 
-                        schedule.push({
-                            year: q + 1,
-                            age: s + q,
-                            salary: ag,
-                            empContrib: annualEmpContrib,
-                            empMatch: annualMatchContrib,
-                            growth: O,
-                            valWithout: o,
-                            valWith: J
-                        });
+                    let yrGrowth = 0;
+                    for (let mIdx = 0; mIdx < 12; mIdx++) {
+                        J += X;
+                        const R = af * J;
+                        yrGrowth += R;
+                        J += R;
 
-                        O = 0;
-                        t = 0;
-                        q++;
-
-                        // Salary increase for subsequent year
-                        const M = Math.round((1 + r / 100) * 1000) / 1000;
-                        ag *= M;
-
-                        const nextCap = getCapByAge(s + q);
-                        const W = Math.min(Math.round((E / 100) * ag * 100) / 100, nextCap);
-                        annualEmpContrib = Math.round(Math.min(W, nextCap) * 100) / 100;
-                        annualMatchContrib = Math.round(Math.min(Math.round(ag * (S / 100) * (v / 100) * 100) / 100, annualEmpContrib * (S / 100)) * 100) / 100;
-
-                        b = Math.round((annualEmpContrib / 12) * 100) / 100;
-                        X = Math.round((b + annualMatchContrib / 12) * 100) / 100;
+                        o += b;
+                        o += af * o;
                     }
+
+                    schedule.push({
+                        year: yr + 1,
+                        age: currentAge,
+                        salary: ag,
+                        empContrib: annualEmpContrib,
+                        empMatch: annualMatchContrib,
+                        growth: yrGrowth,
+                        valWithout: o,
+                        valWith: J
+                    });
+
+                    // Salary increase for next year
+                    const M = Math.round((1 + r / 100) * 1000) / 1000;
+                    ag *= M;
                 }
 
-                const narrative = `With a ${y.toFixed(2)}% return, your 401(k) could be worth <strong style="color: #dfa01e;">${fmtCurr(J)}</strong> after ${years} years. This was calculated with your current contribution of ${fmtCurr(contributeAnnual)} per year and a current 401(k) balance of ${fmtCurr(x)}. In the current scenario, you will contribute ${E.toFixed(1)}% of your annual salary up to the IRS annual maximum of ${fmtCurr(curCap)}. Your 401(k) total also includes a ${S.toFixed(2)}% employer match on up to ${v.toFixed(2)}% of your annual salary. In the current scenario, your employer is contributing ${fmtCurr(Q)} annually to your 401(k). Without your employer's match, your ending 401(k) would be reduced to <strong style="color: #10b981;">${fmtCurr(o)}</strong>.`;
+                const curCapInitial = getCapByAge(s);
+                const contributeAnnualInitial = Math.min(Math.round((E / 100) * l * 100) / 100, curCapInitial);
+                const QInitial = Math.round(Math.min(Math.round(l * (v / 100) * 100) / 100, contributeAnnualInitial) * (S / 100) * 100) / 100;
+
+                const narrative = `With a ${y.toFixed(2)}% return, your 401(k) could be worth <strong style="color: #0011bb;">${fmtCurr(J)}</strong> after ${years} years. This was calculated with your current contribution of ${fmtCurr(contributeAnnualInitial)} per year and a current 401(k) balance of ${fmtCurr(x)}. In the current scenario, you will contribute ${E.toFixed(1)}% of your annual salary up to the IRS annual maximum of ${fmtCurr(curCapInitial)}. Your 401(k) total also includes a ${S.toFixed(2)}% employer match on up to ${v.toFixed(2)}% of your annual salary. In the current scenario, your employer is contributing ${fmtCurr(QInitial)} annually to your 401(k). Without your employer's match, your ending 401(k) would be reduced to <strong style="color: #55a049;">${fmtCurr(o)}</strong>.`;
 
                 const resultsSummary = [
                     { label: 'Current 401(k) balance', value: fmtCurr(x) },
@@ -182,8 +167,8 @@
                     { label: 'Annual salary', value: fmtCurr(l) },
                     { label: 'Expected annual salary increase', value: `${r.toFixed(1)}%` },
                     { label: 'Percent to contribute', value: `${E.toFixed(1)}%` },
-                    { label: 'Your 401(k) contribution*', value: `${fmtCurr(contributeAnnual)} per year` },
-                    { label: "Your employer's 401(k) match", value: `${fmtCurr(Q)} per year (${S.toFixed(2)}% match up to ${v.toFixed(2)}% salary)` },
+                    { label: 'Your 401(k) contribution*', value: `${fmtCurr(contributeAnnualInitial)} per year` },
+                    { label: "Your employer's 401(k) match", value: `${fmtCurr(QInitial)} per year (${S.toFixed(2)}% match up to ${v.toFixed(2)}% salary)` },
                     { label: 'Total you will contribute', value: fmtCurr(totalEmp) },
                     { label: 'Total your employer will contribute', value: fmtCurr(totalMatch) },
                     { label: `Total at age ${B}`, value: fmtCurr(J), highlight: true },
@@ -197,8 +182,8 @@
                         { id: 'sub-match', label: `Total employer contributions: <span class="calc-subtotal-val">${fmtCurr(totalMatch)}</span>` }
                     ],
                     legend: [
-                        { color: '#2563eb', label: `With employer match <strong>${fmtCurr(J)}</strong>` },
-                        { color: '#10b981', label: `Without employer match <strong>${fmtCurr(o)}</strong>` }
+                        { color: '#0011bb', label: `With employer match <strong>${fmtCurr(J)}</strong>` },
+                        { color: '#55a049', label: `Without employer match <strong>${fmtCurr(o)}</strong>` }
                     ],
                     schedule: schedule,
                     reportNarrative: narrative,

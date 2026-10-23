@@ -266,8 +266,8 @@
                                     <a href="javascript:void(0)" class="calc-share-item" id="share-fb" title="Share on Facebook" aria-label="Share on Facebook" onclick="shareToSocial('facebook', event)">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
-                                    <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
-                                        <i class="fab fa-x-twitter"></i>
+                                    <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on Twitter" aria-label="Share on Twitter" onclick="shareToSocial('twitter', event)">
+                                        <i class="fab fa-twitter"></i>
                                     </a>
                                     <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
                                         <i class="fab fa-linkedin-in"></i>
@@ -291,7 +291,7 @@
                         <button type="button" class="calc-top-btn calc-secondary-btn" id="btn-view-report">VIEW REPORT</button>
                     </div>
                     <div class="calc-total-banner" id="calc-summary-text">
-                        Your total is <span class="highlight-val" id="total-val">$3,735,791.83</span> after <span id="years-val">35</span> years.
+                        Your total is <span class="highlight-val" id="total-val">$4,013,372.01</span> after <span id="years-val">35</span> years.
                     </div>
                     <div class="calc-sub-bar">
                         <button type="button" class="calc-icon-btn" id="btn-help-summary" title="Definitions & Help" onclick="document.querySelector('.calc-definitions-section').scrollIntoView({behavior: 'smooth'})">
@@ -332,11 +332,11 @@
                         <div class="calc-chart-legend" id="chart-legend-container">
                             <div class="legend-item">
                                 <span class="legend-dot dot-blue"></span>
-                                <span id="legend-with-match">With employer match <strong>$3,735,791.83</strong></span>
+                                <span id="legend-with-match">With employer match <strong>$4,013,372.01</strong></span>
                             </div>
                             <div class="legend-item">
                                 <span class="legend-dot dot-green"></span>
-                                <span id="legend-without-match">Without employer match <strong>$3,563,682.81</strong></span>
+                                <span id="legend-without-match">Without employer match <strong>$3,613,218.53</strong></span>
                             </div>
                         </div>
                     </div>
@@ -876,10 +876,10 @@
             const chartH = h - padT - padB;
 
             const maxValRaw = Math.max(...data.map(d => Math.max(d.valWith || 0, d.valWithout || 0)));
-            // Align with steps of 500,000 to produce exact $4,000 top tick matching Screenshot 4
+            // Align with steps of 500,000 to produce exact $4,500 top tick matching Screenshot
             const stepUnit = maxValRaw > 2000000 ? 500000 : 100000;
             const maxVal = Math.max(10000, Math.ceil(maxValRaw / stepUnit) * stepUnit);
-            const intervals = Math.min(8, Math.max(4, Math.round(maxVal / stepUnit)));
+            const intervals = Math.round(maxVal / stepUnit);
             const yStep = maxVal / intervals;
 
             // Plot background rectangle with border
@@ -888,10 +888,9 @@
             plotRect.setAttribute('y', padT);
             plotRect.setAttribute('width', chartW);
             plotRect.setAttribute('height', chartH);
-            plotRect.setAttribute('fill', '#07101e');
-            plotRect.setAttribute('stroke', 'rgba(223, 160, 30, 0.35)');
+            plotRect.setAttribute('fill', '#ffffff');
+            plotRect.setAttribute('stroke', '#666666');
             plotRect.setAttribute('stroke-width', '1');
-            plotRect.setAttribute('rx', '3');
             svg.appendChild(plotRect);
 
             // Draw Y-axis grid lines and labels
@@ -905,19 +904,18 @@
                     line.setAttribute('x2', padL + chartW);
                     line.setAttribute('y1', yPos);
                     line.setAttribute('y2', yPos);
-                    line.setAttribute('stroke', 'rgba(255, 255, 255, 0.08)');
+                    line.setAttribute('stroke', '#c4d6bd');
                     line.setAttribute('stroke-width', '1');
                     svg.appendChild(line);
                 }
 
                 const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text.setAttribute('x', padL - 10);
+                text.setAttribute('x', padL - 8);
                 text.setAttribute('y', yPos + 4);
                 text.setAttribute('text-anchor', 'end');
-                text.setAttribute('font-family', 'Open Sans, sans-serif');
-                text.setAttribute('font-size', '11.5');
-                text.setAttribute('font-weight', '600');
-                text.setAttribute('fill', '#94a3b8');
+                text.setAttribute('font-family', 'Arial, sans-serif');
+                text.setAttribute('font-size', '11');
+                text.setAttribute('fill', '#333333');
                 text.textContent = `$${Math.round(val / 1000).toLocaleString('en-US')}`;
                 svg.appendChild(text);
             }
@@ -928,17 +926,17 @@
             yTitle.setAttribute('y', 16);
             yTitle.setAttribute('transform', 'rotate(-90)');
             yTitle.setAttribute('text-anchor', 'middle');
-            yTitle.setAttribute('font-family', 'Montserrat, sans-serif');
+            yTitle.setAttribute('font-family', 'Arial, sans-serif');
             yTitle.setAttribute('font-size', '12');
-            yTitle.setAttribute('font-weight', '700');
-            yTitle.setAttribute('fill', '#dfa01e');
+            yTitle.setAttribute('font-weight', 'bold');
+            yTitle.setAttribute('fill', '#222222');
             yTitle.textContent = 'Thousands of Dollars';
             svg.appendChild(yTitle);
 
             // Draw Bars
             const n = data.length;
             const slotW = chartW / n;
-            const barW = Math.max(2, Math.min(10, (slotW - 3) / 2));
+            const barW = Math.max(2, Math.min(10, (slotW - 2) / 2));
 
             data.forEach((d, idx) => {
                 const xCenter = padL + (idx + 0.5) * slotW;
@@ -949,22 +947,20 @@
 
                 // Primary Bar (Blue - With match)
                 const rectBlue = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectBlue.setAttribute('x', xCenter - barW - 0.5);
+                rectBlue.setAttribute('x', xCenter - barW);
                 rectBlue.setAttribute('y', yWith);
                 rectBlue.setAttribute('width', barW);
                 rectBlue.setAttribute('height', Math.max(1, hWith));
-                rectBlue.setAttribute('fill', '#2563eb');
-                rectBlue.setAttribute('rx', '2');
+                rectBlue.setAttribute('fill', '#0011bb');
                 rectBlue.setAttribute('cursor', 'pointer');
 
                 // Secondary Bar (Green - Without match)
                 const rectGreen = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-                rectGreen.setAttribute('x', xCenter + 0.5);
+                rectGreen.setAttribute('x', xCenter);
                 rectGreen.setAttribute('y', yWithout);
                 rectGreen.setAttribute('width', barW);
                 rectGreen.setAttribute('height', Math.max(1, hWithout));
-                rectGreen.setAttribute('fill', '#10b981');
-                rectGreen.setAttribute('rx', '2');
+                rectGreen.setAttribute('fill', '#55a049');
                 rectGreen.setAttribute('cursor', 'pointer');
 
                 function showTip(e, text) {
@@ -978,12 +974,12 @@
                 }
 
                 rectBlue.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Age ${d.age} (Year ${d.year}): <strong style="color: #dfa01e;">${fmtCurr(d.valWith)}</strong>`);
+                    showTip(e, `Age ${d.age} (Year ${d.year}): <strong style="color: #0011bb;">${fmtCurr(d.valWith)}</strong>`);
                 });
                 rectBlue.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 
                 rectGreen.addEventListener('mouseenter', (e) => {
-                    showTip(e, `Age ${d.age} Without Match: <strong style="color: #10b981;">${fmtCurr(d.valWithout)}</strong>`);
+                    showTip(e, `Age ${d.age} Without Match: <strong style="color: #55a049;">${fmtCurr(d.valWithout)}</strong>`);
                 });
                 rectGreen.addEventListener('mouseleave', () => { tooltip.style.display = 'none'; });
 
@@ -994,11 +990,11 @@
                 if (d.age % 2 === 0) {
                     const xLabel = document.createElementNS('http://www.w3.org/2000/svg', 'text');
                     xLabel.setAttribute('x', xCenter);
-                    xLabel.setAttribute('y', padT + chartH + 18);
+                    xLabel.setAttribute('y', padT + chartH + 16);
                     xLabel.setAttribute('text-anchor', 'middle');
-                    xLabel.setAttribute('font-family', 'Open Sans, sans-serif');
+                    xLabel.setAttribute('font-family', 'Arial, sans-serif');
                     xLabel.setAttribute('font-size', '11');
-                    xLabel.setAttribute('fill', '#94a3b8');
+                    xLabel.setAttribute('fill', '#333333');
                     xLabel.textContent = d.age;
                     svg.appendChild(xLabel);
                 }

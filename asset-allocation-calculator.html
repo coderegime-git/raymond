@@ -247,7 +247,6 @@
                         <button type="button" class="calc-btn" id="btn-calculate" onclick="calculate()">CALCULATE</button>
                         <button type="button" class="calc-btn" id="btn-view-report" onclick="openReportModal()">VIEW REPORT</button>
                     </div>
-                    <div class="calc-action-subtitle" id="sticky-subtitle">Asset Allocator</div>
                     <div class="calc-action-right-icons">
                         <button type="button" class="calc-icon-btn" onclick="document.querySelector('.calc-def-wrap').scrollIntoView({behavior: 'smooth'})" title="Definitions">
                             <i class="fas fa-question-circle"></i>
@@ -975,8 +974,6 @@
             document.getElementById('leg-stocks').textContent = `${stockPct}%`;
             document.getElementById('leg-bonds').textContent = `${bondPct}%`;
             document.getElementById('leg-cash').textContent = `${cashPct}%`;
-
-            document.getElementById('sticky-subtitle').textContent = `Suggested Mix: ${stockPct}% Stocks, ${bondPct}% Bonds, ${cashPct}% Cash`;
 
             drawPieChart(stockPct, bondPct, cashPct);
         }

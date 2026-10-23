@@ -694,16 +694,6 @@
                 </div>
                 <div class="calc-section-body">
                     <div class="calc-chart-box">
-                        <div class="calc-chart-legend">
-                            <div class="legend-item">
-                                <span class="legend-dot-blue"></span>
-                                <span>Balance</span>
-                            </div>
-                            <div class="legend-item">
-                                <span class="legend-dot-green"></span>
-                                <span>Expenses</span>
-                            </div>
-                        </div>
                         <div style="width: 100%; overflow-x: auto;">
                             <svg class="calc-svg-chart" id="college-svg" viewBox="0 0 760 380"
                                 preserveAspectRatio="xMidYMid meet">
@@ -717,17 +707,21 @@
             <!-- ============================================================
              SECTION 7: TOTAL COSTS BY CHILD matching Screenshot 4
              ============================================================ -->
-            <div class="calc-collapsible-section collapsed" id="sec-costs-child">
+            <div class="calc-collapsible-section" id="sec-costs-child">
                 <div class="calc-section-header" onclick="toggleSec('sec-costs-child')">
                     <h2 class="calc-section-title">TOTAL COSTS BY CHILD</h2>
                     <div class="calc-section-right">
-                        <i class="fas fa-chevron-up calc-section-chevron collapsed"></i>
+                        <i class="fas fa-chevron-up calc-section-chevron"></i>
                     </div>
                 </div>
-                <div class="calc-section-body collapsed">
-                    <div id="costs-by-child-summary"
-                        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 6px;">
-                        <!-- Injected dynamically via JavaScript -->
+                <div class="calc-section-body">
+                    <div class="calc-chart-box">
+                        <div style="width: 100%; overflow-x: auto;">
+                            <svg class="calc-svg-chart" id="costs-by-child-svg" viewBox="0 0 760 380"
+                                preserveAspectRatio="xMidYMid meet">
+                                <!-- Injected dynamically via JavaScript -->
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1100,6 +1094,50 @@
 
         let lastCollegeResult = null;
 
+        // Exact Dinkytown Math Helper Functions
+        function rorPeriod(a, b) {
+            return Math.pow(1 + a, 1 / b) - 1;
+        }
+
+        function fvAmt(b, c, a) {
+            if (b === 0) return a;
+            return a / Math.pow(1 + b, -c);
+        }
+
+        function fvBegin(a, c, b) {
+            if (a === 0) return c * b;
+            return (b / a) * (Math.pow(1 + a, c + 1) - 1) - b;
+        }
+
+        function getBalance(g, l, p, f, k, children) {
+            let a = p;
+            for (let d = 0; d < k; d++) {
+                a = fvBegin(rorPeriod(g, 12), 12, l) + a * (1 + g);
+                for (let h = 0; h < children.length; h++) {
+                    const c = children[h];
+                    if (c.totalPerYear > 0 && d >= c.startYears && d < c.startYears + 4) {
+                        a -= fvAmt(f, d, c.totalPerYear);
+                    }
+                }
+            }
+            return a;
+        }
+
+        function getMonthlySavings(d, b, e, a, children) {
+            let f = 10000;
+            let h = 5000;
+            let c = 0;
+            if (getBalance(d, 0, b, e, a, children) >= 0) return 0;
+            for (let g = 1; g < 50; g++) {
+                c = getBalance(d, f, b, e, a, children);
+                if (c === 0) return f;
+                else if (c > 0) f -= h;
+                else f += h;
+                h = h / 2;
+            }
+            return f;
+        }
+
         // Core College Savings Math Engine (Dinkytown CollegeSavingsCalc algorithm)
         function calculateCollege() {
             const inflation = parseNum(document.getElementById('inp-inflation').value) / 100;
@@ -1107,141 +1145,97 @@
             const monthlyContrib = parseNum(document.getElementById('inp-monthly-contrib').value);
             const annualROR = parseNum(document.getElementById('inp-ror').value) / 100;
 
-            const monthlyROR = annualROR / 12;
-
             // Children specs
             const children = [];
             let maxHorizonYears = 0;
+            const names = ['Child one', 'Child two', 'Child three', 'Child four'];
 
             for (let i = 1; i <= 4; i++) {
                 const age = parseInt(document.getElementById(`inp-age-c${i}`).value) || 0;
                 const startAge = parseInt(document.getElementById(`inp-start-c${i}`).value) || 18;
                 const tuition = parseNum(document.getElementById(`inp-tuition-c${i}`).value);
                 const room = parseNum(document.getElementById(`inp-room-c${i}`).value);
-                const annualBaseCost = tuition + room;
-
-                const yearsUntilStart = Math.max(0, startAge - age);
-                const collegeDuration = annualBaseCost > 0 ? 4 : 0;
-                const finishYear = yearsUntilStart + collegeDuration;
-                if (finishYear > maxHorizonYears) maxHorizonYears = finishYear;
+                const totalPerYear = tuition + room;
+                const startYears = Math.max(0, startAge - age);
+                if (totalPerYear > 0) {
+                    const finishYear = startYears + 4;
+                    if (finishYear > maxHorizonYears) maxHorizonYears = finishYear;
+                }
 
                 children.push({
                     index: i,
+                    name: names[i - 1],
                     age,
                     startAge,
                     tuition,
                     room,
-                    annualBaseCost,
-                    yearsUntilStart,
-                    collegeDuration,
-                    totalExpenses: 0,
-                    yearlyExpenses: {}
+                    totalPerYear,
+                    startYears,
+                    totalCost: 0
                 });
             }
 
-            // In Dinkytown, default horizon is up to the last college year (e.g. 13 years for child 1 starting in 9 years + 4 years college = 13)
             if (maxHorizonYears < 13) maxHorizonYears = 13;
 
-            // Calculate yearly expenses per child (expenses due at end of year with inflation)
-            let grandTotalExpenses = 0;
-            const expensesByYear = new Array(maxHorizonYears + 1).fill(0);
-
-            children.forEach(c => {
-                if (c.annualBaseCost > 0) {
-                    let childSum = 0;
-                    for (let yr = 1; yr <= 4; yr++) {
-                        const expenseYearIndex = c.yearsUntilStart + yr; // e.g. year 10, 11, 12, 13 or 9, 10, 11, 12
-                        // Inflate cost from year 0 to expenseYearIndex
-                        const inflatedCost = c.annualBaseCost * Math.pow(1 + inflation, expenseYearIndex);
-                        c.yearlyExpenses[expenseYearIndex] = inflatedCost;
-                        childSum += inflatedCost;
-                        if (expenseYearIndex <= maxHorizonYears) {
-                            expensesByYear[expenseYearIndex] += inflatedCost;
-                        }
-                    }
-                    c.totalExpenses = childSum;
-                    grandTotalExpenses += childSum;
-                }
-                const badge = document.getElementById(`badge-child${c.index}`);
-                if (badge) badge.innerText = fmtCurr(c.totalExpenses);
-            });
-
-            document.getElementById('badge-total-expenses').innerText = `Total expenses ${fmtCurr(grandTotalExpenses)}`;
-
-            // Yearly cash flow simulation with current savings and contributions
-            const timeline = [];
+            // Yearly simulation using exact Dinkytown logic
             let runningBal = currentSavings;
-            let cumulativeExpenses = 0;
+            let grandTotalExpenses = 0;
+            const timeline = [];
 
-            for (let y = 1; y <= maxHorizonYears; y++) {
+            for (let d = 0; d < maxHorizonYears; d++) {
                 const startBal = runningBal;
-                // 12 monthly contributions added at start of each month
-                let balanceInYear = startBal;
-                let annualContrib = 0;
-                let annualInterest = 0;
+                let yrExpenses = 0;
+                const balBeforeExp = fvBegin(rorPeriod(annualROR, 12), 12, monthlyContrib) + startBal * (1 + annualROR);
 
-                for (let m = 0; m < 12; m++) {
-                    balanceInYear += monthlyContrib;
-                    annualContrib += monthlyContrib;
-                    const monthInterest = balanceInYear * monthlyROR;
-                    annualInterest += monthInterest;
-                    balanceInYear += monthInterest;
+                for (let k = 0; k < children.length; k++) {
+                    const ch = children[k];
+                    if (ch.totalPerYear > 0 && d >= ch.startYears && d < ch.startYears + 4) {
+                        const m = fvAmt(inflation, d, ch.totalPerYear);
+                        yrExpenses += m;
+                        ch.totalCost += m;
+                    }
                 }
 
-                const yrExpenses = expensesByYear[y] || 0;
-                cumulativeExpenses += yrExpenses;
-                // Expenses paid at end of year
-                const endBal = balanceInYear - yrExpenses;
+                grandTotalExpenses += yrExpenses;
+                const endBal = balBeforeExp - yrExpenses;
+                const annualContrib = monthlyContrib * 12;
+                const interestEarned = balBeforeExp - startBal - annualContrib;
                 runningBal = endBal;
 
                 timeline.push({
-                    year: y,
+                    year: d + 1,
                     startBal,
                     annualContrib,
-                    annualInterest,
+                    interestEarned,
                     expenses: yrExpenses,
-                    cumulativeExpenses,
-                    endBal
+                    endBal,
+                    chartBalance: endBal < 0 ? 0 : endBal
                 });
             }
 
-            // Calculate required monthly contribution to reach $0 ending balance at last college year
-            // Present Value of all college expenses discounted at monthly rate
-            let pvExpenses = 0;
-            for (let y = 1; y <= maxHorizonYears; y++) {
-                const exp = expensesByYear[y] || 0;
-                if (exp > 0) {
-                    // Due at month y * 12
-                    pvExpenses += exp / Math.pow(1 + monthlyROR, y * 12);
-                }
-            }
+            // Update subtotal badges
+            children.forEach(c => {
+                const badge = document.getElementById(`badge-child${c.index}`);
+                if (badge) badge.innerText = fmtCurr(c.totalCost);
+            });
+            document.getElementById('badge-total-expenses').innerText = `Total expenses ${fmtCurr(grandTotalExpenses)}`;
 
-            // Future Value of current savings at end of horizon
-            // Required PMT so that: CurrentSavings*(1+i)^N + PMT * [((1+i)^N - 1)/i] * (1+i) >= Total FV of expenses
-            // Or in PV terms: PV(PMT annuity due) = pvExpenses - currentSavings
-            const N = maxHorizonYears * 12;
-            const netPvNeeded = pvExpenses - currentSavings;
-            let reqMonthly = 0;
-
-            if (netPvNeeded > 0 && N > 0 && monthlyROR > 0) {
-                // Annuity due PV factor = (1 - (1+i)^(-N)) / i * (1+i)
-                const pvFactor = ((1 - Math.pow(1 + monthlyROR, -N)) / monthlyROR) * (1 + monthlyROR);
-                reqMonthly = netPvNeeded / pvFactor;
-            }
-
-            // Rounding up to clean dollar value (in live RJ Dinkytown: $1,579.00)
-            const finalReqMonthly = Math.round(reqMonthly);
+            // Calculate required monthly contribution to reach $0 ending balance
+            const reqMonthly = Math.ceil(getMonthlySavings(annualROR, currentSavings, inflation, maxHorizonYears, children));
 
             // Update Status Center Text
             const line1 = document.getElementById('status-line1');
             const line2 = document.getElementById('status-line2');
 
-            if (runningBal < 0 || monthlyContrib < finalReqMonthly) {
+            if (monthlyContrib < reqMonthly) {
                 line1.innerText = 'You may need to make a few changes.';
-                line2.innerText = `You should increase your monthly savings to ${fmtCurr(finalReqMonthly)}.`;
+                line2.innerText = `You should increase your monthly savings to ${fmtCurr(reqMonthly)}.`;
+            } else if (monthlyContrib > reqMonthly) {
+                line1.innerText = 'You will exceed your savings goal!';
+                line2.innerText = `You could decrease your monthly savings to ${fmtCurr(reqMonthly)}.`;
             } else {
-                line1.innerText = 'Congratulations!';
-                line2.innerText = `Your college savings plan is on track with an estimated surplus of ${fmtCurr(runningBal)}.`;
+                line1.innerText = 'You will meet your savings goal!';
+                line2.innerText = `You should keep your monthly savings at ${fmtCurr(reqMonthly)}.`;
             }
 
             lastCollegeResult = {
@@ -1250,7 +1244,7 @@
                 monthlyContrib,
                 annualROR,
                 grandTotalExpenses,
-                finalReqMonthly,
+                finalReqMonthly: reqMonthly,
                 timeline,
                 children,
                 maxHorizonYears
@@ -1277,8 +1271,8 @@
             // Maximum dollar amount in timeline (thousands)
             let maxVal = 100000;
             timeline.forEach(t => {
-                if (t.endBal > maxVal) maxVal = t.endBal;
-                if (t.cumulativeExpenses > maxVal) maxVal = t.cumulativeExpenses;
+                if (t.chartBalance > maxVal) maxVal = t.chartBalance;
+                if (t.expenses > maxVal) maxVal = t.expenses;
             });
 
             // Target Y-axis max in thousands
@@ -1290,24 +1284,34 @@
 
             let svgContent = '';
 
+            // Outer grey background matching Screenshot 4
+            svgContent += `<rect x="0" y="0" width="${width}" height="${height}" fill="#ededed" />`;
+
+            // Inner white plot area with thin border
+            svgContent += `<rect x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="#ffffff" stroke="#999999" stroke-width="1" />`;
+
             // Grid lines and Y-axis tick labels
             for (let i = 0; i <= numTicks; i++) {
                 const valK = i * stepK;
                 const val = valK * 1000;
                 const yPos = padTop + plotH - (val / yMax) * plotH;
 
-                svgContent += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" class="chart-grid-line" />`;
-                svgContent += `<text x="${padLeft - 10}" y="${yPos + 4}" class="chart-axis-text" text-anchor="end">$${Math.round(valK)}</text>`;
+                svgContent += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#d6d6d6" stroke-width="1" />`;
+                svgContent += `<text x="${padLeft - 10}" y="${yPos + 4}" font-family="'Open Sans', sans-serif" font-size="12" fill="#333333" text-anchor="end">$${Math.round(valK)}</text>`;
             }
 
             // Y-axis label: "Thousands of Dollars"
             svgContent += `
-                <text x="${20}" y="${padTop + plotH / 2}" class="chart-axis-title" text-anchor="middle" transform="rotate(-90, 20, ${padTop + plotH / 2})">Thousands of Dollars</text>
+                <text x="22" y="${padTop + plotH / 2}" font-family="'Montserrat', sans-serif" font-size="12" font-weight="700" fill="#333333" text-anchor="middle" transform="rotate(-90, 22, ${padTop + plotH / 2})">Thousands of Dollars</text>
             `;
 
-            // Axis borders
-            svgContent += `<line x1="${padLeft}" y1="${padTop}" x2="${padLeft}" y2="${padTop + plotH}" class="chart-axis-line" />`;
-            svgContent += `<line x1="${padLeft}" y1="${padTop + plotH}" x2="${width - padRight}" y2="${padTop + plotH}" class="chart-axis-line" />`;
+            // Legend inside inner plot area (top-left) matching Screenshot 4
+            svgContent += `
+                <circle cx="95" cy="55" r="7" fill="#0000d0" />
+                <text x="110" y="60" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#333333">Balance</text>
+                <circle cx="95" cy="80" r="7" fill="#4caf50" />
+                <text x="110" y="85" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#333333">Expenses</text>
+            `;
 
             const numPoints = timeline.length;
             let balancePoints = '';
@@ -1315,57 +1319,110 @@
 
             timeline.forEach((item, idx) => {
                 const x = padLeft + (idx / Math.max(1, numPoints - 1)) * plotW;
-                // Clip negative balances to 0 for chart line
-                const balClean = Math.max(0, item.endBal);
-                const yBal = padTop + plotH - (balClean / yMax) * plotH;
-                const yExp = padTop + plotH - (item.cumulativeExpenses / yMax) * plotH;
+                const yBal = padTop + plotH - (item.chartBalance / yMax) * plotH;
+                const yExp = padTop + plotH - (item.expenses / yMax) * plotH;
 
                 balancePoints += `${x.toFixed(1)},${yBal.toFixed(1)} `;
                 expensesPoints += `${x.toFixed(1)},${yExp.toFixed(1)} `;
 
                 // X-axis ticks (Year number)
                 svgContent += `
-                    <line x1="${x}" y1="${padTop + plotH}" x2="${x}" y2="${padTop + plotH + 5}" class="chart-axis-line" />
-                    <text x="${x}" y="${padTop + plotH + 20}" class="chart-axis-text" text-anchor="middle">${item.year}</text>
+                    <line x1="${x}" y1="${padTop + plotH}" x2="${x}" y2="${padTop + plotH + 5}" stroke="#999999" stroke-width="1" />
+                    <text x="${x}" y="${padTop + plotH + 20}" font-family="'Open Sans', sans-serif" font-size="12" fill="#333333" text-anchor="middle">${item.year}</text>
                 `;
             });
 
             // X-axis label: "Year number"
             svgContent += `
-                <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 46}" class="chart-axis-title" text-anchor="middle">Year number</text>
+                <text x="${padLeft + plotW / 2}" y="${padTop + plotH + 46}" font-family="'Montserrat', sans-serif" font-size="12" font-weight="700" fill="#333333" text-anchor="middle">Year number</text>
             `;
 
             // Draw Blue Line (Balance)
-            svgContent += `<polyline points="${balancePoints.trim()}" class="chart-line-balance" />`;
+            svgContent += `<polyline points="${balancePoints.trim()}" fill="none" stroke="#0000d0" stroke-width="2.5" />`;
 
             // Draw Green Line (Expenses)
-            svgContent += `<polyline points="${expensesPoints.trim()}" class="chart-line-expenses" />`;
+            svgContent += `<polyline points="${expensesPoints.trim()}" fill="none" stroke="#4caf50" stroke-width="2.5" />`;
 
             svg.innerHTML = svgContent;
         }
 
-        // Render Total Costs By Child Breakdown
+        // Render Total Costs By Child Interactive SVG Bar Chart matching Screenshot 4
         function renderCostsByChild(children) {
-            const container = document.getElementById('costs-by-child-summary');
-            if (!container) return;
+            const svg = document.getElementById('costs-by-child-svg');
+            if (!svg) return;
 
-            let html = '';
-            children.forEach(c => {
-                if (c.totalExpenses > 0) {
-                    html += `
-                        <div style="background: #0d1b31; border: 1px solid rgba(223,160,30,0.3); border-radius: 6px; padding: 14px;">
-                            <div style="color: #dfa01e; font-weight: 700; font-size: 13px; margin-bottom: 4px;">CHILD ${c.index}</div>
-                            <div style="font-size: 18px; font-weight: 800; color: #ffffff;">${fmtCurr(c.totalExpenses)}</div>
-                            <div style="font-size: 11.5px; color: #94a3b8; margin-top: 4px;">Starts at age ${c.startAge} (in ${c.yearsUntilStart} yrs)</div>
-                        </div>
-                    `;
-                }
+            const width = 760;
+            const height = 380;
+            const padLeft = 70;
+            const padRight = 30;
+            const padTop = 30;
+            const padBottom = 60;
+            const plotW = width - padLeft - padRight;
+            const plotH = height - padTop - padBottom;
+
+            // Children with expenses > 0
+            let activeChildren = children.filter(c => c.totalCost > 0);
+            if (activeChildren.length === 0) {
+                activeChildren = [children[0]];
+            }
+
+            let maxCost = 0;
+            activeChildren.forEach(c => {
+                if (c.totalCost > maxCost) maxCost = c.totalCost;
             });
 
-            if (!html) {
-                html = '<div style="color: #94a3b8; font-style: italic;">No college expenses entered for any child.</div>';
+            // Target Y-axis max in thousands (default 400k as in screenshot 4)
+            let yMaxK = Math.ceil((maxCost / 1000) / 50) * 50;
+            if (yMaxK < 400) yMaxK = 400;
+            const yMax = yMaxK * 1000;
+            const numTicks = 8;
+            const stepK = yMaxK / numTicks;
+
+            let svgContent = '';
+
+            // Outer grey background matching Screenshot 4
+            svgContent += `<rect x="0" y="0" width="${width}" height="${height}" fill="#ededed" />`;
+
+            // Inner white plot area with thin border
+            svgContent += `<rect x="${padLeft}" y="${padTop}" width="${plotW}" height="${plotH}" fill="#ffffff" stroke="#999999" stroke-width="1" />`;
+
+            // Grid lines and Y-axis tick labels
+            for (let i = 0; i <= numTicks; i++) {
+                const valK = i * stepK;
+                const val = valK * 1000;
+                const yPos = padTop + plotH - (val / yMax) * plotH;
+
+                svgContent += `<line x1="${padLeft}" y1="${yPos}" x2="${width - padRight}" y2="${yPos}" stroke="#d6d6d6" stroke-width="1" />`;
+                svgContent += `<text x="${padLeft - 10}" y="${yPos + 4}" font-family="'Open Sans', sans-serif" font-size="12" fill="#333333" text-anchor="end">$${Math.round(valK)}</text>`;
             }
-            container.innerHTML = html;
+
+            // Y-axis label: "Thousands of Dollars"
+            svgContent += `
+                <text x="22" y="${padTop + plotH / 2}" font-family="'Montserrat', sans-serif" font-size="12" font-weight="700" fill="#333333" text-anchor="middle" transform="rotate(-90, 22, ${padTop + plotH / 2})">Thousands of Dollars</text>
+            `;
+
+            // Plot bars
+            const nBars = activeChildren.length;
+            const slotW = plotW / nBars;
+            const barW = Math.min(240, slotW * 0.55);
+
+            activeChildren.forEach((c, idx) => {
+                const xCenter = padLeft + idx * slotW + slotW / 2;
+                const xBar = xCenter - barW / 2;
+                const barH = (c.totalCost / yMax) * plotH;
+                const yBar = padTop + plotH - barH;
+
+                if (c.totalCost > 0) {
+                    svgContent += `<rect x="${xBar}" y="${yBar}" width="${barW}" height="${barH}" fill="#0000d0" />`;
+                    // Centered top label matching Screenshot 4
+                    svgContent += `<text x="${xCenter}" y="${yBar - 8}" font-family="'Open Sans', sans-serif" font-size="12" font-weight="600" fill="#000000" text-anchor="middle">$${Math.round(c.totalCost).toLocaleString('en-US')}</text>`;
+                }
+
+                // X-axis label centered under bar
+                svgContent += `<text x="${xCenter}" y="${padTop + plotH + 24}" font-family="'Open Sans', sans-serif" font-size="12" fill="#333333" text-anchor="middle">${c.name}</text>`;
+            });
+
+            svg.innerHTML = svgContent;
         }
 
         // View Report Modal
@@ -1395,7 +1452,7 @@
                         <td>Year ${item.year}</td>
                         <td>${fmtCurr(item.startBal)}</td>
                         <td>${fmtCurr(item.annualContrib)}</td>
-                        <td>${fmtCurr(item.annualInterest)}</td>
+                        <td>${fmtCurr(item.interestEarned)}</td>
                         <td style="color: ${item.expenses > 0 ? '#f87171' : 'inherit'};">${fmtCurr(item.expenses)}</td>
                         <td><strong>${fmtCurr(item.endBal)}</strong></td>
                     </tr>

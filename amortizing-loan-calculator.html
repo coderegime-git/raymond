@@ -196,7 +196,7 @@
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                             <a href="javascript:void(0)" class="calc-share-item" id="share-tw" title="Share on X" aria-label="Share on X" onclick="shareToSocial('twitter', event)">
-                                <i class="fab fa-x-twitter"></i>
+                                <i class="fab fa-twitter"></i>
                             </a>
                             <a href="javascript:void(0)" class="calc-share-item" id="share-li" title="Share on LinkedIn" aria-label="Share on LinkedIn" onclick="shareToSocial('linkedin', event)">
                                 <i class="fab fa-linkedin-in"></i>
@@ -241,7 +241,10 @@
              ============================================================ -->
             <section class="calc-section" id="sec-loan-inputs">
                 <div class="calc-sec-header" onclick="toggleSec('sec-loan-inputs')">
-                    <h2 class="calc-sec-title">LOAN INPUTS:</h2>
+                    <div class="calc-sec-header-left">
+                        <h2 class="calc-sec-title">LOAN INPUTS:</h2>
+                        <div class="calc-sec-collapsed-summary" id="loan-inputs-collapsed-summary">$20,000 AT 13.24% WITH 60 MONTHLY PAYMENTS OF $457.52.</div>
+                    </div>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
@@ -371,54 +374,20 @@
             <!-- ============================================================
              SECTION 3: TOTAL PRINCIPAL AND INTEREST BY PAYMENT
              ============================================================ -->
-            <section class="calc-section collapsed" id="sec-breakdown">
+            <section class="calc-section" id="sec-breakdown">
                 <div class="calc-sec-header" onclick="toggleSec('sec-breakdown')">
                     <h2 class="calc-sec-title">TOTAL PRINCIPAL AND INTEREST BY PAYMENT</h2>
                     <i class="fas fa-chevron-up calc-sec-chevron"></i>
                 </div>
                 <div class="calc-sec-body">
 
-                    <!-- Visual Comparison Bar -->
-                    <div class="calc-bar-container">
-                        <div class="calc-bar-labels">
-                            <span style="color: #2563eb;" id="bar-lbl-principal">Principal: $20,000.00 (72.9%)</span>
-                            <span style="color: #dfa01e;" id="bar-lbl-interest">Interest: $7,451.42 (27.1%)</span>
-                        </div>
-                        <div class="calc-bar-strip">
-                            <div class="calc-bar-fill-pri" id="bar-fill-principal" style="width: 72.9%;"></div>
-                            <div class="calc-bar-fill-int" id="bar-fill-interest" style="width: 27.1%;"></div>
-                        </div>
+                    <!-- Stacked Bar Chart Matching Exact Raymond James Screenshot -->
+                    <div class="calc-stacked-chart-card">
+                        <div class="calc-tip-box" id="stacked-chart-tip"></div>
+                        <svg class="calc-stacked-svg" id="stacked-chart-svg" viewBox="0 0 740 340" preserveAspectRatio="xMidYMid meet">
+                            <!-- Injected dynamically via JS -->
+                        </svg>
                     </div>
-
-                    <!-- Summary Table -->
-                    <table class="calc-breakdown-table">
-                        <tbody>
-                            <tr>
-                                <td>Original Loan Principal:</td>
-                                <td id="tbl-principal" style="text-align: right; font-weight: 700; color: #ffffff;">$20,000.00</td>
-                            </tr>
-                            <tr>
-                                <td>Total Interest Charges:</td>
-                                <td id="tbl-interest" style="text-align: right; font-weight: 700; color: #dfa01e;">$7,451.42</td>
-                            </tr>
-                            <tr>
-                                <td>Monthly Payment:</td>
-                                <td id="tbl-monthly-pmt" style="text-align: right; font-weight: 700; color: #3b82f6;">$457.52</td>
-                            </tr>
-                            <tr>
-                                <td>Annual Interest Rate:</td>
-                                <td id="tbl-rate" style="text-align: right;">13.24%</td>
-                            </tr>
-                            <tr>
-                                <td>Total Loan Payments:</td>
-                                <td id="tbl-total" style="text-align: right; font-weight: 800; color: #ffffff;">$27,451.42</td>
-                            </tr>
-                            <tr>
-                                <td>Payoff Period:</td>
-                                <td id="tbl-term" style="text-align: right;">60 months (5.0 years)</td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </div>
             </section>
@@ -887,23 +856,39 @@
             document.getElementById('sticky-subtitle').textContent = `Monthly loan payment is ${fmtCurr(pmtRounded)} for ${n} payments at ${currentSummary.ratePercent}%.`;
             document.getElementById('chart-heading').textContent = `BALANCES FOR A ${fmtCurr(P)} LOAN`;
 
-            // Update Breakdown Bar & Summary Table
+            // Update Breakdown Bar & Summary Table if present
             const pctPrincipal = totalPayments > 0 ? (P / totalPayments) * 100 : 100;
             const pctInterest = totalPayments > 0 ? (totalInterest / totalPayments) * 100 : 0;
 
-            document.getElementById('bar-lbl-principal').textContent = `Principal: ${fmtCurr(P)} (${pctPrincipal.toFixed(1)}%)`;
-            document.getElementById('bar-lbl-interest').textContent = `Interest: ${fmtCurr(totalInterest)} (${pctInterest.toFixed(1)}%)`;
-            document.getElementById('bar-fill-principal').style.width = `${pctPrincipal}%`;
-            document.getElementById('bar-fill-interest').style.width = `${pctInterest}%`;
+            const barLblPri = document.getElementById('bar-lbl-principal');
+            if (barLblPri) barLblPri.textContent = `Principal: ${fmtCurr(P)} (${pctPrincipal.toFixed(1)}%)`;
+            const barLblInt = document.getElementById('bar-lbl-interest');
+            if (barLblInt) barLblInt.textContent = `Interest: ${fmtCurr(totalInterest)} (${pctInterest.toFixed(1)}%)`;
+            const barFillPri = document.getElementById('bar-fill-principal');
+            if (barFillPri) barFillPri.style.width = `${pctPrincipal}%`;
+            const barFillInt = document.getElementById('bar-fill-interest');
+            if (barFillInt) barFillInt.style.width = `${pctInterest}%`;
 
-            document.getElementById('tbl-principal').textContent = fmtCurr(P);
-            document.getElementById('tbl-interest').textContent = fmtCurr(totalInterest);
-            document.getElementById('tbl-monthly-pmt').textContent = fmtCurr(pmtRounded);
-            document.getElementById('tbl-rate').textContent = `${currentSummary.ratePercent}%`;
-            document.getElementById('tbl-total').textContent = fmtCurr(totalPayments);
-            document.getElementById('tbl-term').textContent = `${n} months (${(n / 12).toFixed(1)} years)`;
+            const tblPri = document.getElementById('tbl-principal');
+            if (tblPri) tblPri.textContent = fmtCurr(P);
+            const tblInt = document.getElementById('tbl-interest');
+            if (tblInt) tblInt.textContent = fmtCurr(totalInterest);
+            const tblPmt = document.getElementById('tbl-monthly-pmt');
+            if (tblPmt) tblPmt.textContent = fmtCurr(pmtRounded);
+            const tblRate = document.getElementById('tbl-rate');
+            if (tblRate) tblRate.textContent = `${currentSummary.ratePercent}%`;
+            const tblTot = document.getElementById('tbl-total');
+            if (tblTot) tblTot.textContent = fmtCurr(totalPayments);
+            const tblTerm = document.getElementById('tbl-term');
+            if (tblTerm) tblTerm.textContent = `${n} months (${(n / 12).toFixed(1)} years)`;
+
+            // Update collapsed summary for Section 1
+            const summaryText = `${fmtCurrWhole(P)} AT ${currentSummary.ratePercent}% WITH ${n} MONTHLY PAYMENTS OF ${fmtCurr(pmtRounded)}.`;
+            const summEl = document.getElementById('loan-inputs-collapsed-summary');
+            if (summEl) summEl.textContent = summaryText;
 
             renderChart(P, currentSchedule);
+            renderStackedChart(pmtRounded, currentSchedule);
         }
 
         // Render Area Chart for Declining Balance
@@ -1066,6 +1051,234 @@
             axisLine.setAttribute('stroke', 'rgba(255, 255, 255, 0.2)');
             axisLine.setAttribute('stroke-width', '1.5');
             svg.appendChild(axisLine);
+        }
+
+        // Render Stacked Bar Chart (Total Principal & Interest by Payment)
+        function renderStackedChart(monthlyPmt, data) {
+            const svg = document.getElementById('stacked-chart-svg');
+            const tip = document.getElementById('stacked-chart-tip');
+            if (!svg || !data || !data.length) return;
+            svg.innerHTML = '';
+
+            const w = 740;
+            const h = 340;
+            const padL = 75;
+            const padR = 125;
+            const padT = 25;
+            const padB = 50;
+
+            const plotW = w - padL - padR; // 540
+            const plotH = h - padT - padB; // 265
+
+            // Y Axis Scale:
+            // Standard nice scale matching $0 to $500 with $50 step for $457.52
+            const roughStep = monthlyPmt / 8;
+            const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep || 1)));
+            let step = magnitude;
+            const normalized = roughStep / magnitude;
+            if (normalized <= 1.5) step = 1 * magnitude;
+            else if (normalized <= 3) step = 2.5 * magnitude;
+            else if (normalized <= 7) step = 5 * magnitude;
+            else step = 10 * magnitude;
+            if (step < 1) step = 1;
+            const yMax = Math.max(step * 4, Math.ceil(monthlyPmt / step) * step);
+            const yTicksCount = Math.round(yMax / step);
+
+            // Plot Background (White Box with clean border)
+            const plotBg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            plotBg.setAttribute('x', padL);
+            plotBg.setAttribute('y', padT);
+            plotBg.setAttribute('width', plotW);
+            plotBg.setAttribute('height', plotH);
+            plotBg.setAttribute('fill', '#ffffff');
+            plotBg.setAttribute('stroke', '#666666');
+            plotBg.setAttribute('stroke-width', '1');
+            svg.appendChild(plotBg);
+
+            // Y-Axis Ticks & Labels
+            for (let i = 0; i <= yTicksCount; i++) {
+                const val = i * step;
+                const yPos = padT + plotH - (val / yMax) * plotH;
+
+                // Tick mark extending left outside the plot box
+                const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                tick.setAttribute('x1', padL - 5);
+                tick.setAttribute('x2', padL);
+                tick.setAttribute('y1', yPos);
+                tick.setAttribute('y2', yPos);
+                tick.setAttribute('stroke', '#000000');
+                tick.setAttribute('stroke-width', '1');
+                svg.appendChild(tick);
+
+                // Label
+                const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                txt.setAttribute('x', padL - 8);
+                txt.setAttribute('y', yPos + 4);
+                txt.setAttribute('text-anchor', 'end');
+                txt.setAttribute('font-family', 'Arial, sans-serif');
+                txt.setAttribute('font-size', '11.5');
+                txt.setAttribute('fill', '#000000');
+                txt.textContent = `$${Math.round(val).toLocaleString()}`;
+                svg.appendChild(txt);
+            }
+
+            const n = data.length;
+            const slotW = plotW / n;
+            const barW = Math.max(1, slotW - 2.5);
+
+            // Render Stacked Bars (Interest: Green, Principal: Blue)
+            data.forEach((d, idx) => {
+                const barX = padL + idx * slotW + (slotW - barW) / 2;
+                const intH = Math.max(0, (d.interest / yMax) * plotH);
+                const priH = Math.max(0, (d.principal / yMax) * plotH);
+                const totH = intH + priH;
+
+                // Interest Bar (Bottom - Green #5c9f50)
+                const intRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                intRect.setAttribute('x', barX);
+                intRect.setAttribute('y', padT + plotH - intH);
+                intRect.setAttribute('width', barW);
+                intRect.setAttribute('height', intH);
+                intRect.setAttribute('fill', '#5c9f50');
+                svg.appendChild(intRect);
+
+                // Principal Bar (Top - Blue #001fd6)
+                const priRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                priRect.setAttribute('x', barX);
+                priRect.setAttribute('y', padT + plotH - totH);
+                priRect.setAttribute('width', barW);
+                priRect.setAttribute('height', priH);
+                priRect.setAttribute('fill', '#001fd6');
+                svg.appendChild(priRect);
+
+                // Hover overlay on the bar slot for tooltip
+                const hitRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                hitRect.setAttribute('x', padL + idx * slotW);
+                hitRect.setAttribute('y', padT);
+                hitRect.setAttribute('width', slotW);
+                hitRect.setAttribute('height', plotH);
+                hitRect.setAttribute('fill', 'transparent');
+                hitRect.style.cursor = 'pointer';
+
+                hitRect.addEventListener('mouseenter', () => {
+                    if (tip) {
+                        tip.innerHTML = `<strong>Payment #${d.month}</strong><br>Principal: ${fmtCurr(d.principal)}<br>Interest: ${fmtCurr(d.interest)}<br>Balance: ${fmtCurr(d.balance)}`;
+                        tip.style.display = 'block';
+                    }
+                    intRect.setAttribute('fill', '#48853e');
+                    priRect.setAttribute('fill', '#0017a6');
+                });
+                hitRect.addEventListener('mousemove', (e) => {
+                    if (tip) {
+                        const rectSvg = svg.getBoundingClientRect();
+                        const xRel = ((padL + idx * slotW + slotW / 2) / w) * rectSvg.width;
+                        const yVal = padT + plotH - totH;
+                        const yRel = (yVal / h) * rectSvg.height;
+                        tip.style.left = `${xRel}px`;
+                        tip.style.top = `${yRel - 12}px`;
+                    }
+                });
+                hitRect.addEventListener('mouseleave', () => {
+                    if (tip) tip.style.display = 'none';
+                    intRect.setAttribute('fill', '#5c9f50');
+                    priRect.setAttribute('fill', '#001fd6');
+                });
+
+                svg.appendChild(hitRect);
+            });
+
+            // X-Axis Ticks & Labels:
+            // Match screenshot: 1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58, 60
+            const xStep = n <= 60 ? 3 : (n <= 120 ? 6 : (n <= 240 ? 12 : 24));
+            const tickIndices = [];
+            for (let p = 1; p <= n; p += xStep) {
+                tickIndices.push(p);
+            }
+            if (tickIndices[tickIndices.length - 1] !== n) {
+                if (n - tickIndices[tickIndices.length - 1] < Math.floor(xStep / 2)) {
+                    tickIndices[tickIndices.length - 1] = n;
+                } else {
+                    tickIndices.push(n);
+                }
+            }
+
+            tickIndices.forEach(pNum => {
+                const idx = pNum - 1;
+                const xPos = padL + idx * slotW + slotW / 2;
+
+                const tick = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                tick.setAttribute('x1', xPos);
+                tick.setAttribute('x2', xPos);
+                tick.setAttribute('y1', padT + plotH);
+                tick.setAttribute('y2', padT + plotH + 5);
+                tick.setAttribute('stroke', '#000000');
+                tick.setAttribute('stroke-width', '1');
+                svg.appendChild(tick);
+
+                const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+                txt.setAttribute('x', xPos);
+                txt.setAttribute('y', padT + plotH + 18);
+                txt.setAttribute('text-anchor', 'middle');
+                txt.setAttribute('font-family', 'Arial, sans-serif');
+                txt.setAttribute('font-size', '11.5');
+                txt.setAttribute('fill', '#000000');
+                txt.textContent = pNum;
+                svg.appendChild(txt);
+            });
+
+            // X-Axis Title: Payment Number
+            const xTitle = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            xTitle.setAttribute('x', padL + plotW / 2);
+            xTitle.setAttribute('y', padT + plotH + 37);
+            xTitle.setAttribute('text-anchor', 'middle');
+            xTitle.setAttribute('font-family', 'Arial, sans-serif');
+            xTitle.setAttribute('font-size', '13');
+            xTitle.setAttribute('font-weight', '700');
+            xTitle.setAttribute('fill', '#000000');
+            xTitle.textContent = 'Payment Number';
+            svg.appendChild(xTitle);
+
+            // Legend on the right side matching screenshot
+            const legendX = padL + plotW + 22;
+            const legendY = padT + plotH / 2 - 20;
+
+            // Principal (Blue)
+            const priCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            priCircle.setAttribute('cx', legendX + 9);
+            priCircle.setAttribute('cy', legendY + 8);
+            priCircle.setAttribute('r', '9');
+            priCircle.setAttribute('fill', '#001fd6');
+            priCircle.setAttribute('stroke', '#000000');
+            priCircle.setAttribute('stroke-width', '1.2');
+            svg.appendChild(priCircle);
+
+            const priText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            priText.setAttribute('x', legendX + 26);
+            priText.setAttribute('y', legendY + 12);
+            priText.setAttribute('font-family', 'Arial, sans-serif');
+            priText.setAttribute('font-size', '13');
+            priText.setAttribute('fill', '#000000');
+            priText.textContent = 'Principal';
+            svg.appendChild(priText);
+
+            // Interest (Green)
+            const intCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            intCircle.setAttribute('cx', legendX + 9);
+            intCircle.setAttribute('cy', legendY + 36);
+            intCircle.setAttribute('r', '9');
+            intCircle.setAttribute('fill', '#5c9f50');
+            intCircle.setAttribute('stroke', '#000000');
+            intCircle.setAttribute('stroke-width', '1.2');
+            svg.appendChild(intCircle);
+
+            const intText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            intText.setAttribute('x', legendX + 26);
+            intText.setAttribute('y', legendY + 40);
+            intText.setAttribute('font-family', 'Arial, sans-serif');
+            intText.setAttribute('font-size', '13');
+            intText.setAttribute('fill', '#000000');
+            intText.textContent = 'Interest';
+            svg.appendChild(intText);
         }
 
         // View Report Modal

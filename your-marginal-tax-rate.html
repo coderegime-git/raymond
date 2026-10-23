@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="your-marginal-tax-rate.css?v=2">
+    <link rel="stylesheet" href="your-marginal-tax-rate.css?v=3">
 </head>
 
 <body>
@@ -306,16 +306,22 @@
 
                     <!-- Checkboxes: 65 or older -->
                     <div class="calc-checkbox-group">
-                        <label class="calc-checkbox-label">
-                            <input type="checkbox" id="chk-age-self" onchange="calculateTaxes(false)">
-                            <span class="calc-checkbox-custom"></span>
-                            <span>Check if: You are 65 or older</span>
-                        </label>
-                        <label class="calc-checkbox-label" id="lbl-spouse-65">
-                            <input type="checkbox" id="chk-age-spouse" onchange="calculateTaxes(false)">
-                            <span class="calc-checkbox-custom"></span>
-                            <span>Check if: Spouse is 65 or older</span>
-                        </label>
+                        <div class="calc-checkbox-row">
+                            <span class="calc-checkbox-prefix">Check if:</span>
+                            <label class="calc-checkbox-label">
+                                <input type="checkbox" id="chk-age-self" onchange="calculateTaxes(false)">
+                                <span class="calc-checkbox-custom"></span>
+                                <span class="calc-checkbox-text">You are 65 or older</span>
+                            </label>
+                        </div>
+                        <div class="calc-checkbox-row" id="row-spouse-65">
+                            <span class="calc-checkbox-prefix">Check if:</span>
+                            <label class="calc-checkbox-label" id="lbl-spouse-65">
+                                <input type="checkbox" id="chk-age-spouse" onchange="calculateTaxes(false)">
+                                <span class="calc-checkbox-custom"></span>
+                                <span class="calc-checkbox-text">Spouse is 65 or older</span>
+                            </label>
+                        </div>
                     </div>
 
                     <!-- Standard deduction subtotal -->
@@ -1094,13 +1100,28 @@
         function onFilingStatusChange() {
             const status = document.getElementById('sel-filing-status').value;
             const spouseCheckLabel = document.getElementById('lbl-spouse-65');
+            const spouseCheckRow = document.getElementById('row-spouse-65');
             const spouseCheckbox = document.getElementById('chk-age-spouse');
 
-            if (status === 'mfj' || status === 'qss') {
-                if (spouseCheckLabel) spouseCheckLabel.style.display = 'inline-flex';
-            } else {
-                if (spouseCheckLabel) spouseCheckLabel.style.display = 'none';
-                if (spouseCheckbox) spouseCheckbox.checked = false;
+            const isMarried = (status === 'mfj' || status === 'qss');
+
+            if (spouseCheckbox) {
+                spouseCheckbox.disabled = !isMarried;
+                if (!isMarried) spouseCheckbox.checked = false;
+            }
+            if (spouseCheckLabel) {
+                if (isMarried) {
+                    spouseCheckLabel.classList.remove('disabled');
+                } else {
+                    spouseCheckLabel.classList.add('disabled');
+                }
+            }
+            if (spouseCheckRow) {
+                if (isMarried) {
+                    spouseCheckRow.classList.remove('disabled');
+                } else {
+                    spouseCheckRow.classList.add('disabled');
+                }
             }
 
             calculateTaxes(false);
